@@ -3,6 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525" xmlns:my="clr-namespace:ordermanager.Views.CommonControls">
     <Grid>
-        <my:InLineComboBox HorizontalAlignment="Left" Margin="74,63,0,0" x:Name="inLineComboBox1" VerticalAlignment="Top" Height="43" Width="293" />
+        <my:InLineComboBox HorizontalAlignment="Left" Margin="92,117,0,165" x:Name="inLineComboBox1" Width="366" />
     </Grid>
 </Window>

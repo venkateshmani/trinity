@@ -16,5 +16,5 @@ D:\trinity\ordermanager\App.xaml
 15-907139155
 MainWindow.xaml;Views\CommonControls\BackForwardButton.xaml;Views\CommonControls\InLineComboBox.xaml;Views\CommonControls\OMbutton.xaml;Views\CommonControls\OrdersListView.xaml;Views\CommonControls\ProductsListView.xaml;Views\UserControls\OrderWorkBench.xaml;Views\UserControls\ViewOrders.xaml;
 
-False
+True
 

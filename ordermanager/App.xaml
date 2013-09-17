@@ -5,7 +5,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Styles/ButtonStyles.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Light/Metro.MSControls.Core.Implicit.xaml" />
+                <!--<ResourceDictionary Source="Resources/Styles/Light/Metro.MSControls.Toolkit.Implicit.xaml" />-->
+                <ResourceDictionary Source="Resources/Styles/Light/Styles.Shared.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Light/Styles.WPF.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Light/Theme.Colors.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

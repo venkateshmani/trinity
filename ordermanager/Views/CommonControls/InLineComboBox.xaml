@@ -163,7 +163,7 @@
                         Background="White"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="1"
-                        Cursor="Hand"/>
+                        />
                 <Border 
                         Grid.Column="0"
                         CornerRadius="2,0,0,2" 
@@ -171,12 +171,14 @@
                         Background="{StaticResource WindowBackgroundBrush}" 
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="0,0,0,0" />
+                
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
                                             Orientation="Horizontal">
                     <Button x:Name="inlineAddBtn" Content=" Add "
-                            Margin="0,3,3,3" Style="{StaticResource MetroButton}"
-                            FontSize="12" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"> </Button>
+                            Margin="0,3,3,3"
+                            FontSize="12" VerticalContentAlignment="Center" Cursor="Hand" HorizontalContentAlignment="Center"
+                            VerticalAlignment="Stretch" HorizontalAlignment="Stretch"> </Button>
                     <Path 
                             Width="20"
                             x:Name="Arrow"
@@ -191,10 +193,10 @@
             
             <ControlTemplate.Triggers>
                 <Trigger Property="ToggleButton.IsMouseOver" Value="true">
-                    <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource GylpMouseOverBrush}" />
+                    <!--<Setter TargetName="Arrow" Property="Fill" Value="{StaticResource GylpMouseOverBrush}" />-->
                 </Trigger>
                 <Trigger Property="ToggleButton.IsChecked" Value="true">
-                    <Setter TargetName="Arrow" Property="Fill" Value="{StaticResource GylpCheckedColor}" />
+                    <!--<Setter TargetName="Arrow" Property="Fill" Value="{StaticResource GylpCheckedColor}" />-->
                 </Trigger>
                 <Trigger Property="IsEnabled" Value="False">
                     <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
@@ -302,15 +304,15 @@
 
     </UserControl.Resources>
     <Grid>
-        <ComboBox x:Name="comboxBox" Margin="8"
+        <ComboBox x:Name="comboxBox" 
                   IsEditable="True"
+                  FontFamily="Segoe UI"
+                  FontSize="14" 
                   VerticalContentAlignment="Center"
                   HorizontalContentAlignment="Left" 
                   VerticalAlignment="Stretch" 
                   HorizontalAlignment="Stretch"
                   Cursor="IBeam"
-                  BorderBrush="Gray"
-                  BorderThickness="0.5"
                   Text="Type Here"
                   PreviewKeyDown="ComboBox_PreviewKeyDown" >
             <ComboBoxItem Content="First Normal Item 1" />
