@@ -1,0 +1,11 @@
+D:\trinity\ordermanager\bin\Release\ordermanager.exe
+D:\trinity\ordermanager\bin\Release\ordermanager.pdb
+D:\trinity\ordermanager\obj\x86\Release\MainWindow.baml
+D:\trinity\ordermanager\obj\x86\Release\MainWindow.g.cs
+D:\trinity\ordermanager\obj\x86\Release\App.g.cs
+D:\trinity\ordermanager\obj\x86\Release\ordermanager_MarkupCompile.cache
+D:\trinity\ordermanager\obj\x86\Release\ordermanager.g.resources
+D:\trinity\ordermanager\obj\x86\Release\ordermanager.Properties.Resources.resources
+D:\trinity\ordermanager\obj\x86\Release\ordermanager.csproj.GenerateResource.Cache
+D:\trinity\ordermanager\obj\x86\Release\ordermanager.exe
+D:\trinity\ordermanager\obj\x86\Release\ordermanager.pdb
