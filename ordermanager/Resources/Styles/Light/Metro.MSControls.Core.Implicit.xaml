@@ -432,16 +432,16 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ProgressBar}">
 					<Grid x:Name="TemplateRoot" SnapsToDevicePixels="true">
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Determinate" />
-								<VisualState x:Name="Indeterminate">
+						<vsm:VisualStateManager.VisualStateGroups>
+							<vsm:VisualStateGroup x:Name="CommonStates">
+								<vsm:VisualState x:Name="Determinate" />
+								<vsm:VisualState x:Name="Indeterminate">
 									<Storyboard RepeatBehavior="Forever">
 										<DoubleAnimation Duration="00:00:.5" From="0" To="20" Storyboard.TargetProperty="(Shape.Fill).(LinearGradientBrush.Transform).(TransformGroup.Children)[0].X" Storyboard.TargetName="IndeterminateGradientFill" />
 									</Storyboard>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
+								</vsm:VisualState>
+							</vsm:VisualStateGroup>
+						</vsm:VisualStateManager.VisualStateGroups>
 						<Border x:Name="ProgressBarTrack" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" />
 						<Rectangle x:Name="PART_Track" Margin="{TemplateBinding BorderThickness}" />
 						<Decorator x:Name="PART_Indicator" HorizontalAlignment="Left" Margin="{TemplateBinding BorderThickness}">
@@ -784,10 +784,10 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ToggleButton}">
 					<Grid>
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="MouseOver">
+						<vsm:VisualStateManager.VisualStateGroups>
+							<vsm:VisualStateGroup x:Name="CommonStates">
+								<vsm:VisualState x:Name="Normal" />
+								<vsm:VisualState x:Name="MouseOver">
 									<Storyboard>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonHoverBackgroundBrush}" />
@@ -796,8 +796,8 @@
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonHoverBorderBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
-								</VisualState>
-								<VisualState x:Name="Pressed">
+								</vsm:VisualState>
+								<vsm:VisualState x:Name="Pressed">
 									<Storyboard>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonPressedBackgroundBrush}" />
@@ -809,8 +809,8 @@
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource LightForegroundBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
-								</VisualState>
-								<VisualState x:Name="Disabled">
+								</vsm:VisualState>
+								<vsm:VisualState x:Name="Disabled">
 									<Storyboard>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="DisabledVisualElement">
 											<DiscreteObjectKeyFrame KeyTime="0">
@@ -820,10 +820,10 @@
 											</DiscreteObjectKeyFrame>
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
-								</VisualState>
-							</VisualStateGroup>
-							<VisualStateGroup x:Name="CheckStates">
-								<VisualState x:Name="Checked">
+								</vsm:VisualState>
+							</vsm:VisualStateGroup>
+							<vsm:VisualStateGroup x:Name="CheckStates">
+								<vsm:VisualState x:Name="Checked">
 									<Storyboard>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="checked">
 											<DiscreteObjectKeyFrame KeyTime="0">
@@ -836,12 +836,12 @@
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource LightForegroundBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
-								</VisualState>
-								<VisualState x:Name="Unchecked" />
-								<VisualState x:Name="Indeterminate" />
-							</VisualStateGroup>
-							<VisualStateGroup x:Name="FocusStates">
-								<VisualState x:Name="Focused">
+								</vsm:VisualState>
+								<vsm:VisualState x:Name="Unchecked" />
+								<vsm:VisualState x:Name="Indeterminate" />
+							</vsm:VisualStateGroup>
+							<vsm:VisualStateGroup x:Name="FocusStates">
+								<vsm:VisualState x:Name="Focused">
 									<Storyboard>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="FocusedVisualElement">
 											<DiscreteObjectKeyFrame KeyTime="0">
@@ -851,10 +851,10 @@
 											</DiscreteObjectKeyFrame>
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
-								</VisualState>
-								<VisualState x:Name="Unfocused" />
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
+								</vsm:VisualState>
+								<vsm:VisualState x:Name="Unfocused" />
+							</vsm:VisualStateGroup>
+						</vsm:VisualStateManager.VisualStateGroups>
 						<Rectangle x:Name="Bd" Fill="{StaticResource ButtonBackgroundBrush}" Stroke="{StaticResource ButtonBorderBrush}" StrokeThickness="1" />
 						<Rectangle x:Name="checked" Fill="{StaticResource ButtonPressedBackgroundBrush}" Stroke="{StaticResource ButtonPressedBorderBrush}" StrokeThickness="1" Visibility="Collapsed" />
 						<ContentControl x:Name="ContentControl" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">

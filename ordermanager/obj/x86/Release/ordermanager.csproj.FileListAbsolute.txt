@@ -27,3 +27,4 @@ D:\trinity\ordermanager\obj\x86\Release\GeneratedInternalTypeHelper.g.cs
 D:\trinity\ordermanager\obj\x86\Release\ordermanager_MarkupCompile.lref
 D:\trinity\ordermanager\obj\x86\Release\App.baml
 D:\trinity\ordermanager\bin\Release\ordermanager.exe.config
+D:\trinity\ordermanager\obj\x86\Release\ordermanager.csprojResolveAssemblyReference.cache
