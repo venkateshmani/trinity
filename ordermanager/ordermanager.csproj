@@ -100,6 +100,7 @@
     <Folder Include="Resources\Styles\" />
     <Folder Include="ThirdParty\" />
     <Folder Include="ValueConverters\" />
+    <Folder Include="Views\CommonControls\" />
     <Folder Include="Views\PopUps\" />
     <Folder Include="Views\UserControls\" />
   </ItemGroup>
