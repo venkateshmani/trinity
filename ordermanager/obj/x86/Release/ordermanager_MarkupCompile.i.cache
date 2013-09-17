@@ -10,11 +10,11 @@ none
 false
 TRACE
 D:\trinity\ordermanager\App.xaml
-3-713343021
+7-2079288423
 
-8-300887858
+12-1003936401
 12-1381780322
-MainWindow.xaml;Views\UserControls\OrderWorkBench.xaml;Views\UserControls\ViewOrders.xaml;
+MainWindow.xaml;Views\CommonControls\BackForwardButton.xaml;Views\CommonControls\OMbutton.xaml;Views\CommonControls\OrdersListView.xaml;Views\CommonControls\ProductsListView.xaml;Views\UserControls\OrderWorkBench.xaml;Views\UserControls\ViewOrders.xaml;
 
 False
 
