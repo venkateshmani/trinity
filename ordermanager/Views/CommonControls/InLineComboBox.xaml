@@ -125,7 +125,7 @@
 
         <SolidColorBrush x:Key="LightColorBrush" Color="#DDD" />
 
-        <Style x:Key="WaterMarkTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Style x:Key="InLineComboBoxTextBoxStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
@@ -178,7 +178,10 @@
                     <Button x:Name="inlineAddBtn" Content=" Add "
                             Margin="0,3,3,3"
                             FontSize="12" VerticalContentAlignment="Center" Cursor="Hand" HorizontalContentAlignment="Center"
-                            VerticalAlignment="Stretch" HorizontalAlignment="Stretch"> </Button>
+                            VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                            PreviewMouseLeftButtonDown="inlineAddBtn_PreviewMouseLeftButtonDown"
+                            Visibility="Collapsed"
+                            > </Button>
                     <Path 
                             Width="20"
                             x:Name="Arrow"
@@ -241,7 +244,7 @@
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left" />
                             <TextBox x:Name="PART_EditableTextBox"
-                                    Style="{StaticResource WaterMarkTextBoxStyle}" 
+                                    Style="{StaticResource InLineComboBoxTextBoxStyle}"
                                     Template="{StaticResource ComboBoxTextBox}" 
                                     HorizontalAlignment="Left" 
                                     VerticalAlignment="Center" 
@@ -302,6 +305,7 @@
             </Style.Triggers>
         </Style>
 
+        <CollectionViewSource x:Key="suggestableItemsViewSource" />
     </UserControl.Resources>
     <Grid>
         <ComboBox x:Name="comboxBox" 
@@ -313,30 +317,8 @@
                   VerticalAlignment="Stretch" 
                   HorizontalAlignment="Stretch"
                   Cursor="IBeam"
-                  Text="Type Here"
-                  PreviewKeyDown="ComboBox_PreviewKeyDown" >
-            <ComboBoxItem Content="First Normal Item 1" />
-            <ComboBoxItem Content="First Normal Item 2" />
-            <ComboBoxItem Content="First Normal Item 3" />
-            <ComboBoxItem Content="First Normal Item 4" />
-            <ComboBoxItem Content="First Normal Item 5" />
-            <ComboBoxItem Content="First Normal Item 6" />
-            <ComboBoxItem Content="First Normal Item 7" />
-            <ComboBoxItem Content="First Normal Item 8" />
-            <ComboBoxItem Content="First Normal Item 9" />
-            <ComboBoxItem Content="First Normal Item 10" />
-            <ComboBoxItem Content="Second Normal Item 11" />
-            <ComboBoxItem Content="Third Normal Item 12" />
-            <ComboBoxItem Content="Fourth Normal Item 13" />
-            <ComboBoxItem Content="Fifth Normal Item 14" />
-            <ComboBoxItem Content="Fourth Normal Item 15" />
-            <ComboBoxItem Content="Fifth Normal Item 16" />
-            <ComboBoxItem Content="Fourth Normal Item 17" />
-            <ComboBoxItem Content="Fifth Normal Item 18" />
-            <ComboBoxItem Content="Fourth Normal Item 19" />
-            <ComboBoxItem Content="Fifth Normal Item 20" />
-            <ComboBoxItem Content="Fourth Normal Item 21" />
-            <ComboBoxItem Content="Fifth Normal Item 22" />
+                  TextBoxBase.TextChanged="comboxBox_TextChanged"
+                  >
         </ComboBox>
     </Grid>
 </UserControl>

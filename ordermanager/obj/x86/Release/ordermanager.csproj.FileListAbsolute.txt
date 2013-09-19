@@ -28,3 +28,5 @@ D:\trinity\ordermanager\obj\x86\Release\ordermanager_MarkupCompile.lref
 D:\trinity\ordermanager\obj\x86\Release\App.baml
 D:\trinity\ordermanager\bin\Release\ordermanager.exe.config
 D:\trinity\ordermanager\obj\x86\Release\ordermanager.csprojResolveAssemblyReference.cache
+D:\trinity\ordermanager\obj\x86\Release\TestWindow.baml
+D:\trinity\ordermanager\obj\x86\Release\TestWindow.g.cs

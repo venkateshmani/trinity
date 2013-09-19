@@ -1,0 +1,17 @@
+﻿<Window x:Class="ordermanager.TestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TestWindow" Height="353" Width="634">
+    <Grid>
+        <TabControl Height="143" HorizontalAlignment="Left" Margin="108,57,0,0" VerticalAlignment="Top" Width="291">
+            <TabItem Header="First">
+                <Grid />
+            </TabItem>
+            <TabItem Header="Second">
+                <Grid />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
+
+    

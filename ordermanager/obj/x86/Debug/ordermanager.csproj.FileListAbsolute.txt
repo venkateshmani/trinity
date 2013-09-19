@@ -27,3 +27,6 @@ D:\trinity\ordermanager\obj\x86\Debug\ordermanager.exe
 D:\trinity\ordermanager\obj\x86\Debug\ordermanager.pdb
 D:\trinity\ordermanager\obj\x86\Debug\App.baml
 D:\trinity\ordermanager\bin\Debug\ordermanager.exe.config
+D:\trinity\ordermanager\obj\x86\Debug\ordermanager.csprojResolveAssemblyReference.cache
+D:\trinity\ordermanager\obj\x86\Debug\TestWindow.baml
+D:\trinity\ordermanager\obj\x86\Debug\TestWindow.g.cs

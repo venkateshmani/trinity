@@ -4,8 +4,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="619" d:DesignWidth="1068">
     <Grid>
-            
+        <TabControl>
+            <TabItem Header="Details">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.40*"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <ListView x:Name="productsList" Grid.Column="0">
+                        <ListBoxItem Content="First"/>
+                        <ListBoxItem Content="First"/>
+                        <ListBoxItem Content="First"/>
+                        <ListBoxItem Content="First"/>
+                        <ListBoxItem Content="First"/>
+                    </ListView>
+
+                    <GridSplitter Grid.Column="1"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      Background="LightGray" 
+                      ShowsPreview="True"
+                      Width="5"
+                      />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Status">
+             
+            </TabItem>
+            <TabItem Header="Purchase Orders">
+
+            </TabItem>
+            <TabItem Header="Change History">
+
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>

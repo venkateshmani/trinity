@@ -23,5 +23,20 @@ namespace ordermanager
         {
             InitializeComponent();
         }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (this.WindowState == System.Windows.WindowState.Maximized)
+                this.WindowState = System.Windows.WindowState.Normal;
+            else
+                this.WindowState = System.Windows.WindowState.Maximized;
+        }
+       
     }
 }
