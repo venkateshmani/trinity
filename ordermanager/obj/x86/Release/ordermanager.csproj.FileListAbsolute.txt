@@ -10,13 +10,11 @@ D:\trinity\ordermanager\obj\x86\Release\ordermanager.csproj.GenerateResource.Cac
 D:\trinity\ordermanager\obj\x86\Release\ordermanager.exe
 D:\trinity\ordermanager\obj\x86\Release\ordermanager.pdb
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\BackForwardButton.baml
-D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\InLineComboBox.baml
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\OMbutton.baml
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\OrdersListView.baml
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\ProductsListView.baml
 D:\trinity\ordermanager\obj\x86\Release\Views\UserControls\OrderWorkBench.baml
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\BackForwardButton.g.cs
-D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\InLineComboBox.g.cs
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\OMbutton.g.cs
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\OrdersListView.g.cs
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\ProductsListView.g.cs
@@ -33,3 +31,7 @@ D:\trinity\ordermanager\bin\Release\MahApps.Metro.dll
 D:\trinity\ordermanager\bin\Release\System.Windows.Interactivity.dll
 D:\trinity\ordermanager\obj\x86\Release\Views\UserControls\ViewOrdersControl.baml
 D:\trinity\ordermanager\obj\x86\Release\Views\UserControls\ViewOrdersControl.g.cs
+D:\trinity\ordermanager\obj\x86\Release\Views\PopUps\NewEnquiryForm.baml
+D:\trinity\ordermanager\obj\x86\Release\Views\PopUps\NewEnquiryForm.g.cs
+D:\trinity\ordermanager\obj\x86\Release\Views\PopUps\NewEnquiryFormUserControl.baml
+D:\trinity\ordermanager\obj\x86\Release\Views\PopUps\NewEnquiryFormUserControl.g.cs

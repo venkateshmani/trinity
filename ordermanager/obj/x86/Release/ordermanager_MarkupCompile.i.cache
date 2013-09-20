@@ -10,11 +10,11 @@ none
 false
 TRACE
 D:\trinity\ordermanager\App.xaml
-91792724010
+10-1453203769
 
-19-1076102675
+202040876251
 171605744215
-MainWindow.xaml;Views\UserControls\ViewOrdersControl.xaml;TestWindow.xaml;Views\CommonControls\BackForwardButton.xaml;Views\CommonControls\InLineComboBox.xaml;Views\CommonControls\OMbutton.xaml;Views\CommonControls\OrdersListView.xaml;Views\CommonControls\ProductsListView.xaml;Views\UserControls\OrderWorkBench.xaml;
+MainWindow.xaml;Views\PopUps\NewEnquiryForm.xaml;Views\PopUps\NewEnquiryFormUserControl.xaml;Views\UserControls\ViewOrdersControl.xaml;TestWindow.xaml;Views\CommonControls\BackForwardButton.xaml;Views\CommonControls\OMbutton.xaml;Views\CommonControls\OrdersListView.xaml;Views\CommonControls\ProductsListView.xaml;Views\UserControls\OrderWorkBench.xaml;
 
-True
+False
 

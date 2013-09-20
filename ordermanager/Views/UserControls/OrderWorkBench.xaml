@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ordermanager.Views.UserControls.OrderWorkBench"
+﻿<UserControl xmlns:PopUps="clr-namespace:ordermanager.Views.PopUps"  x:Class="ordermanager.Views.UserControls.OrderWorkBench"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -44,7 +44,7 @@
                 </TabItem.Header>
             </TabItem>
             <TabItem Header="Enquiry">
-                
+                <PopUps:NewEnquiryFormUserControl Margin="20" />
             </TabItem>
             <TabItem Header="Details">
                 <Grid>

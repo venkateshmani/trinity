@@ -83,9 +83,6 @@
     <Compile Include="Views\CommonControls\BackForwardButton.xaml.cs">
       <DependentUpon>BackForwardButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CommonControls\InLineComboBox.xaml.cs">
-      <DependentUpon>InLineComboBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\CommonControls\OMbutton.xaml.cs">
       <DependentUpon>OMbutton.xaml</DependentUpon>
     </Compile>
@@ -96,6 +93,12 @@
       <DependentUpon>ProductsListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Extensions\WaterMarkText.cs" />
+    <Compile Include="Views\PopUps\NewEnquiryForm.xaml.cs">
+      <DependentUpon>NewEnquiryForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopUps\NewEnquiryFormUserControl.xaml.cs">
+      <DependentUpon>NewEnquiryFormUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\OrderWorkBench.xaml.cs">
       <DependentUpon>OrderWorkBench.xaml</DependentUpon>
     </Compile>
@@ -114,6 +117,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\PopUps\NewEnquiryForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopUps\NewEnquiryFormUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\ViewOrdersControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,10 +154,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CommonControls\BackForwardButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CommonControls\InLineComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,7 +206,6 @@
     <Folder Include="Resources\Images\" />
     <Folder Include="ThirdParty\" />
     <Folder Include="ValueConverters\" />
-    <Folder Include="Views\PopUps\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="MahApps.Metro\MahApps.Metro.NET45.csproj">

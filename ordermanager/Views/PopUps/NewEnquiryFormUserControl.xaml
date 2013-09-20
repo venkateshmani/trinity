@@ -1,0 +1,102 @@
+﻿<UserControl xmlns:CommonControls="clr-namespace:ordermanager.Views.CommonControls"  x:Class="ordermanager.Views.PopUps.NewEnquiryFormUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" Height="712.961" Width="1377.959">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Metro.Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Customer"  Grid.Row="0" Grid.Column="0" />
+                <ComboBox x:Name="customerComboBox" Grid.Row="0" Grid.Column="1" Width="300"/>
+
+                <TextBlock Text="Country"  Grid.Row="1" Grid.Column="0" />
+                <ComboBox x:Name="countryCombox" Grid.Row="1" Grid.Column="1" Width="300"/>
+                
+                <TextBlock Text="Order Date" Grid.Row="2" />
+                <DatePicker Width="150" Grid.Row="2" Grid.Column="1"
+                                    Controls:TextboxHelper.Watermark="Select a date" />
+                
+                <TextBlock Text="Expected Delivery Date" Grid.Row="3"/>
+                <DatePicker Width="150" Grid.Row="3" Grid.Column="1"
+                                    Controls:TextboxHelper.Watermark="Select a date" />
+                
+                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Order By"/>
+                    <ComboBox Width="200" />
+                    <TextBlock Text="Order Through" />
+                    <ComboBox Width="100" />
+                </StackPanel>
+
+                <TextBlock Text="Commision" Grid.Row="5"/>
+                <StackPanel  Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
+                    <TextBox/>
+                    <ComboBox Width="50" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="productsRequired" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  AutoGenerateColumns="False"
+                      >
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn x:Name="productColumn" Header="Product">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn x:Name="quantityColumn" Header="Quantity" />
+                    <DataGridTextColumn x:Name="unitOfMeasurementColumn" Header="UOM"/>
+                    <DataGridComboBoxColumn x:Name="ComboBoxColumn" Header="Currency"/>
+                    
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Margin="3,3,10,10">
+                <Button x:Name="positiveDecisionBtn" Content="Create" Width="150" Height="35"/>
+                <Button x:Name="negativeDecisionBtn" Content="Discard" Width="100" Height="35" Margin="15,0,0,0"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
