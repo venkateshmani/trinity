@@ -19,9 +19,30 @@ namespace ordermanager.Views.UserControls
     /// </summary>
     public partial class OrderWorkBench : UserControl
     {
+        public event OnGoBackDelegate OnGoBack = null;
         public OrderWorkBench()
         {
             InitializeComponent();
         }
+
+        private void GoBack_MouseDown_1(object sender, MouseButtonEventArgs e)
+        {
+            if (OnGoBack != null)
+            {
+                OnGoBack();
+            }
+        }
+
+        private void TabControl_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+           
+        }
+
+        private void Button_PreviewMouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
+        {
+            if (OnGoBack != null)
+                OnGoBack();
+        }
+
     }
 }

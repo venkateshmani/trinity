@@ -17,7 +17,7 @@ namespace ordermanager
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow 
     {
         public MainWindow()
         {
@@ -36,6 +36,18 @@ namespace ordermanager
                 this.WindowState = System.Windows.WindowState.Normal;
             else
                 this.WindowState = System.Windows.WindowState.Maximized;
+        }
+
+        private void ViewOrdersControl_OnOrderClick()
+        {
+            viewOrdersTabControl.Visibility = System.Windows.Visibility.Collapsed;
+            orderWorkBench.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        private void orderWorkBench_OnGoBack_1()
+        {
+            viewOrdersTabControl.Visibility = System.Windows.Visibility.Visible;
+            orderWorkBench.Visibility = System.Windows.Visibility.Collapsed;
         }
        
     }

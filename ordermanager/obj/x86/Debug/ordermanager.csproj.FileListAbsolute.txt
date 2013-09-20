@@ -30,3 +30,6 @@ D:\trinity\ordermanager\bin\Debug\ordermanager.exe.config
 D:\trinity\ordermanager\obj\x86\Debug\ordermanager.csprojResolveAssemblyReference.cache
 D:\trinity\ordermanager\obj\x86\Debug\TestWindow.baml
 D:\trinity\ordermanager\obj\x86\Debug\TestWindow.g.cs
+D:\trinity\ordermanager\bin\Debug\FirstFloor.ModernUI.dll
+D:\trinity\ordermanager\bin\Debug\Microsoft.Windows.Shell.dll
+D:\trinity\ordermanager\bin\Debug\FirstFloor.ModernUI.xml

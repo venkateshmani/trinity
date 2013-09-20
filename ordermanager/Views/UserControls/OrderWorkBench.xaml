@@ -5,17 +5,68 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="619" d:DesignWidth="1068">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Metro.Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        <TabControl>
+        <TabControl x:Name="tabControl" SelectionChanged="TabControl_SelectionChanged_1" SelectedIndex="1">
+            <TabItem x:Name="GoBackTab">
+                <TabItem.Header>
+                    <Button Width="40"
+                        Height="40"
+                        Margin="0, 2, 0, 0"
+                        HorizontalAlignment="Left"
+                        Grid.Row="0"
+                        Cursor="Hand"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        PreviewMouseLeftButtonUp="Button_PreviewMouseLeftButtonUp_1">
+                        <Rectangle Width="15" Height="15">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_arrow_left}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                </TabItem.Header>
+            </TabItem>
+            <TabItem Header="Enquiry">
+                
+            </TabItem>
             <TabItem Header="Details">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.40*"/>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+                    
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Products" FontSize="14" Margin="4" />
+                    </Grid>
 
-                    <ListView x:Name="productsList" Grid.Column="0">
+                    <Grid Grid.Row="0" Grid.Column="2">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Product Details" FontSize="14" Margin="4" Grid.Row="0" />
+                    </Grid>
+                    
+                    <ListView x:Name="productsList" Grid.Row="1" Grid.Column="0">
                         <ListBoxItem Content="First"/>
                         <ListBoxItem Content="First"/>
                         <ListBoxItem Content="First"/>
@@ -28,8 +79,7 @@
                       VerticalAlignment="Stretch"
                       Background="LightGray" 
                       ShowsPreview="True"
-                      Width="5"
-                      />
+                      Width="5" Grid.RowSpan="2" />
                 </Grid>
             </TabItem>
             <TabItem Header="Status">

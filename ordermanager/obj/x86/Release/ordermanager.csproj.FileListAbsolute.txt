@@ -15,14 +15,12 @@ D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\OMbutton.baml
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\OrdersListView.baml
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\ProductsListView.baml
 D:\trinity\ordermanager\obj\x86\Release\Views\UserControls\OrderWorkBench.baml
-D:\trinity\ordermanager\obj\x86\Release\Views\UserControls\ViewOrders.baml
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\BackForwardButton.g.cs
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\InLineComboBox.g.cs
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\OMbutton.g.cs
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\OrdersListView.g.cs
 D:\trinity\ordermanager\obj\x86\Release\Views\CommonControls\ProductsListView.g.cs
 D:\trinity\ordermanager\obj\x86\Release\Views\UserControls\OrderWorkBench.g.cs
-D:\trinity\ordermanager\obj\x86\Release\Views\UserControls\ViewOrders.g.cs
 D:\trinity\ordermanager\obj\x86\Release\GeneratedInternalTypeHelper.g.cs
 D:\trinity\ordermanager\obj\x86\Release\ordermanager_MarkupCompile.lref
 D:\trinity\ordermanager\obj\x86\Release\App.baml
@@ -30,3 +28,8 @@ D:\trinity\ordermanager\bin\Release\ordermanager.exe.config
 D:\trinity\ordermanager\obj\x86\Release\ordermanager.csprojResolveAssemblyReference.cache
 D:\trinity\ordermanager\obj\x86\Release\TestWindow.baml
 D:\trinity\ordermanager\obj\x86\Release\TestWindow.g.cs
+D:\trinity\ordermanager\bin\Release\Microsoft.Windows.Shell.dll
+D:\trinity\ordermanager\bin\Release\MahApps.Metro.dll
+D:\trinity\ordermanager\bin\Release\System.Windows.Interactivity.dll
+D:\trinity\ordermanager\obj\x86\Release\Views\UserControls\ViewOrdersControl.baml
+D:\trinity\ordermanager\obj\x86\Release\Views\UserControls\ViewOrdersControl.g.cs
