@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             mc:Ignorable="d" Height="712.961" Width="1377.959">
+             mc:Ignorable="d" d:DesignHeight="619" d:DesignWidth="1068" Background="White">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,12 +21,22 @@
                 <Setter Property="FontSize" Value="22" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
+
+            <Style x:Key="inLineTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+            
         </ResourceDictionary>
+        
+        
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -43,40 +53,96 @@
                     <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Customer"  Grid.Row="0" Grid.Column="0" />
-                <ComboBox x:Name="customerComboBox" Grid.Row="0" Grid.Column="1" Width="300"/>
-
-                <TextBlock Text="Country"  Grid.Row="1" Grid.Column="0" />
-                <ComboBox x:Name="countryCombox" Grid.Row="1" Grid.Column="1" Width="300"/>
-                
-                <TextBlock Text="Order Date" Grid.Row="2" />
-                <DatePicker Width="150" Grid.Row="2" Grid.Column="1"
-                                    Controls:TextboxHelper.Watermark="Select a date" />
-                
-                <TextBlock Text="Expected Delivery Date" Grid.Row="3"/>
-                <DatePicker Width="150" Grid.Row="3" Grid.Column="1"
-                                    Controls:TextboxHelper.Watermark="Select a date" />
-                
-                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="Order By"/>
-                    <ComboBox Width="200" />
-                    <TextBlock Text="Order Through" />
-                    <ComboBox Width="100" />
+                <TextBlock Text="Customer"  Style="{StaticResource inLineTextBlockStyle}" Grid.Row="0" Grid.Column="0" />
+                <StackPanel  Grid.Row="0" Grid.Column="1" Margin="5" Orientation="Horizontal">
+                    <ComboBox x:Name="customerComboBox" Width="300" />
+                    <Button Width="28"
+                        Height="28"
+                        Margin="0, 2, 0, 0"
+                        HorizontalAlignment="Left"
+                        Grid.Row="0"
+                        Cursor="Hand"
+                        x:Name="addNewCustomerBtn"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        ToolTip="Add New Customer" Click="addNewCustomerBtn_Click">
+                        <Rectangle Width="10" Height="10">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
                 </StackPanel>
 
-                <TextBlock Text="Commision" Grid.Row="5"/>
-                <StackPanel  Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
-                    <TextBox/>
-                    <ComboBox Width="50" />
+                <TextBlock Text="Country"  Style="{StaticResource inLineTextBlockStyle}" Grid.Row="1" Grid.Column="0" />
+                <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="1" Margin="5" >
+                    <ComboBox x:Name="countryCombox" Width="300" HorizontalAlignment="Left"/>
+                    <Button Width="28"
+                        Height="28"
+                        Margin="0, 2, 0, 0"
+                        HorizontalAlignment="Left"
+                        Grid.Row="0"
+                        Cursor="Hand"
+                        x:Name="addNewCountryBtn"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        ToolTip="Add New Country">
+                        <Rectangle Width="10" Height="10">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                </StackPanel>
+
+                <TextBlock Text="Order Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" />
+                <DatePicker Width="150" Grid.Row="2" Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    Controls:TextboxHelper.Watermark="Select a date" Margin="5" />
+
+                <TextBlock Text="Expected Delivery Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="3"/>
+                <StackPanel Grid.Row="3" Grid.Column="1" Margin="5" Orientation="Horizontal">
+                    <DatePicker Width="150" 
+                                    HorizontalAlignment="Left"
+                                    Controls:TextboxHelper.Watermark="Select a date"/>
+                    <TextBlock x:Name="numberOfDays" Text="##" Style="{StaticResource inLineTextBlockStyle}" />
+                    <TextBlock Text="Days" VerticalAlignment="Center" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Order By" Style="{StaticResource inLineTextBlockStyle}"/>
+                    <ComboBox Width="200"  Margin="5"/>
+                    <Button Width="28"
+                        Height="28"
+                        Margin="0, 2, 0, 0"
+                        HorizontalAlignment="Left"
+                        Grid.Row="0"
+                        Cursor="Hand"
+                        x:Name="addNewAgentBtn"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        ToolTip="Add New Agent">
+                        <Rectangle Width="10" Height="10">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <TextBlock Text="through" Style="{StaticResource inLineTextBlockStyle}" Margin="10,5,5,5" />
+                    <ComboBox Width="100" Margin="5"/>
+                </StackPanel>
+
+                <TextBlock Text="Commision" Grid.Row="5" Style="{StaticResource inLineTextBlockStyle}"/>
+                <StackPanel  Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5">
+                    <TextBox Width="60" BorderBrush="LightGray" HorizontalContentAlignment="Right"  Controls:TextboxHelper.Watermark="0"/>
+                    <ComboBox Width="50" Margin="5,0,0,0" />
                 </StackPanel>
             </Grid>
         </Grid>
         
         <Grid Grid.Row="1">
-            <DataGrid x:Name="productsRequired" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  AutoGenerateColumns="False"
-                      >
+            <DataGrid x:Name="productsRequired" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1"
+                      CanUserAddRows="True" CanUserDeleteRows="True" CanUserResizeRows="True"  CanUserSortColumns="True" GridLinesVisibility="All"
+                       ColumnWidth="Auto">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn x:Name="productColumn" Header="Product">
+                    <DataGridTemplateColumn x:Name="productColumn" Header="Product" Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ComboBox />
@@ -84,16 +150,36 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTextColumn x:Name="quantityColumn" Header="Quantity" />
-                    <DataGridTextColumn x:Name="unitOfMeasurementColumn" Header="UOM"/>
-                    <DataGridComboBoxColumn x:Name="ComboBoxColumn" Header="Currency"/>
-                    
+                    <DataGridTextColumn x:Name="quantityColumn" Header="Expected Order Quantity"/>
+                    <DataGridTextColumn x:Name="unitOfMeasurementColumn" Header="UOM" />
+                    <DataGridComboBoxColumn x:Name="ComboBoxColumn" Header="Currency" />
+                    <DataGridTextColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price"/>
+                    <DataGridTextColumn x:Name="orderValueColumn" Header="Order Value"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
         
-        <Grid Grid.Row="2">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Margin="3,3,10,10">
+        <Grid Grid.Row="2" Margin="5">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Label Content="Total Number Of Products "  Style="{StaticResource DescriptionHeaderStyle}"/>
+                <Label x:Name="totalNumberOfItems" Content="### "  Style="{StaticResource DescriptionHeaderStyle}" FontWeight="Bold">
+                    <Label.Foreground>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </Label.Foreground>
+                </Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Label Content="Total Order Value "  Style="{StaticResource DescriptionHeaderStyle}"/>
+                <Label x:Name="totalOrderValueLabel" Content="### "  Style="{StaticResource DescriptionHeaderStyle}" FontWeight="Bold">
+                    <Label.Foreground>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </Label.Foreground>
+                </Label>
+            </StackPanel>
+        </Grid>
+        
+        <Grid Grid.Row="3">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Margin="5,5,10,10">
                 <Button x:Name="positiveDecisionBtn" Content="Create" Width="150" Height="35"/>
                 <Button x:Name="negativeDecisionBtn" Content="Discard" Width="100" Height="35" Margin="15,0,0,0"/>
             </StackPanel>

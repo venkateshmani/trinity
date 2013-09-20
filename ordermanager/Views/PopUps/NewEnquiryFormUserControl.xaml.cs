@@ -24,5 +24,10 @@ namespace ordermanager.Views.PopUps
         {
             InitializeComponent();
         }
+
+        private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
