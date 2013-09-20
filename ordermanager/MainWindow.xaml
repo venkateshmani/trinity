@@ -30,12 +30,33 @@
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
         </ResourceDictionary>
+
+        
     </Window.Resources>
 
+    
     <Controls:MetroWindow.GlowBrush>
         <SolidColorBrush Color="{DynamicResource AccentColor}" />
     </Controls:MetroWindow.GlowBrush>
-    
+
+    <Controls:MetroWindow.WindowCommands>
+        <Controls:WindowCommands>
+            <Button Click="LaunchSettings">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Width="15" Height="15">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Margin="5,0,0,0" Text="Settings" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.WindowCommands>
+
+
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

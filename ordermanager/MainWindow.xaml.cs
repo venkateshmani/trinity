@@ -49,6 +49,11 @@ namespace ordermanager
             viewOrdersTabControl.Visibility = System.Windows.Visibility.Visible;
             orderWorkBench.Visibility = System.Windows.Visibility.Collapsed;
         }
+
+        private void LaunchSettings(object sender, RoutedEventArgs e)
+        {
+
+        }
        
     }
 }

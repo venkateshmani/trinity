@@ -23,6 +23,16 @@ namespace ordermanager.Views.UserControls
         public OrderWorkBench()
         {
             InitializeComponent();
+            this.Loaded += OrderWorkBench_Loaded;
+        }
+
+        void OrderWorkBench_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<ProductDetails> productDetails = new List<ProductDetails>();
+            productDetails.Add(new ProductDetails { ProductName = "T-Shirt", OrderValue = "100$" });
+            productDetails.Add(new ProductDetails { ProductName = "Trousers", OrderValue = "200$" });
+            productDetails.Add(new ProductDetails { ProductName = "Briefs", OrderValue = "250$" });
+            productsList.ItemsSource = productDetails;
         }
 
         private void GoBack_MouseDown_1(object sender, MouseButtonEventArgs e)
@@ -44,5 +54,15 @@ namespace ordermanager.Views.UserControls
                 OnGoBack();
         }
 
+        public class ProductDetails
+        {
+            public string ProductName {get;set;}
+            public string OrderValue { get; set; }
+        }
+
+        private void productsList_SizeChanged_1(object sender, SizeChangedEventArgs e)
+        {
+            productColumn.Width = productsList.ActualWidth - 5;  //5 for Border
+        }
     }
 }
