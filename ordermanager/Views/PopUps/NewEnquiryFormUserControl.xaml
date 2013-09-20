@@ -27,10 +27,10 @@
                 <Setter Property="HorizontalAlignment" Value="Right" />
                 <Setter Property="Margin" Value="5" />
             </Style>
-            
+
         </ResourceDictionary>
-        
-        
+
+
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -39,23 +39,25 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.8*" />
+                <ColumnDefinition Width="0.4*" />
+            </Grid.ColumnDefinitions>
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.5*"/>
-                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+
                 <TextBlock Text="Customer"  Style="{StaticResource inLineTextBlockStyle}" Grid.Row="0" Grid.Column="0" />
-                <StackPanel  Grid.Row="0" Grid.Column="1" Margin="5" Orientation="Horizontal">
-                    <ComboBox x:Name="customerComboBox" Width="300" />
+                <StackPanel  Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                    <ComboBox x:Name="customerComboBox" Width="300" Margin="5" />
                     <Button Width="28"
                         Height="28"
                         Margin="0, 2, 0, 0"
@@ -73,43 +75,26 @@
                     </Button>
                 </StackPanel>
 
-                <TextBlock Text="Country"  Style="{StaticResource inLineTextBlockStyle}" Grid.Row="1" Grid.Column="0" />
-                <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="1" Margin="5" >
-                    <ComboBox x:Name="countryCombox" Width="300" HorizontalAlignment="Left"/>
-                    <Button Width="28"
-                        Height="28"
-                        Margin="0, 2, 0, 0"
-                        HorizontalAlignment="Left"
-                        Grid.Row="0"
-                        Cursor="Hand"
-                        x:Name="addNewCountryBtn"
-                        Style="{DynamicResource MetroCircleButtonStyle}"
-                        ToolTip="Add New Country">
-                        <Rectangle Width="10" Height="10">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
-                </StackPanel>
-
-                <TextBlock Text="Order Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" />
-                <DatePicker Width="150" Grid.Row="2" Grid.Column="1"
+                <TextBlock Text="Order Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="1" />
+                <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Orientation="Horizontal">
+                    <DatePicker Width="150" 
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date" Margin="5" />
 
-                <TextBlock Text="Expected Delivery Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="3"/>
-                <StackPanel Grid.Row="3" Grid.Column="1" Margin="5" Orientation="Horizontal">
-                    <DatePicker Width="150" 
+                    <TextBlock Text="Expected Delivery Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="3" Margin="10,0,0,0"/>
+                    <StackPanel Grid.Row="3" Grid.Column="1" Margin="5" Orientation="Horizontal">
+                        <DatePicker Width="150" 
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date"/>
-                    <TextBlock x:Name="numberOfDays" Text="##" Style="{StaticResource inLineTextBlockStyle}" />
-                    <TextBlock Text="Days" VerticalAlignment="Center" />
+                        <TextBlock x:Name="numberOfDays" Text="##" Style="{StaticResource inLineTextBlockStyle}" />
+                        <TextBlock Text="Days" VerticalAlignment="Center" />
+                    </StackPanel>
+
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="Order By" Style="{StaticResource inLineTextBlockStyle}"/>
-                    <ComboBox Width="200"  Margin="5"/>
+                <TextBlock Text="Order By" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <ComboBox Width="200" Margin="5"/>
                     <Button Width="28"
                         Height="28"
                         Margin="0, 2, 0, 0"
@@ -127,17 +112,23 @@
                     </Button>
                     <TextBlock Text="through" Style="{StaticResource inLineTextBlockStyle}" Margin="10,5,5,5" />
                     <ComboBox Width="100" Margin="5"/>
+                    <TextBlock Text="and commision is" Grid.Row="5" Style="{StaticResource inLineTextBlockStyle}"/>
+                    <StackPanel  Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5">
+                        <TextBox Width="60" BorderBrush="LightGray" HorizontalContentAlignment="Right"  Controls:TextboxHelper.Watermark="0"/>
+                        <ComboBox Width="50" Margin="5,0,0,0" />
+                    </StackPanel>
                 </StackPanel>
 
-                <TextBlock Text="Commision" Grid.Row="5" Style="{StaticResource inLineTextBlockStyle}"/>
-                <StackPanel  Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5">
-                    <TextBox Width="60" BorderBrush="LightGray" HorizontalContentAlignment="Right"  Controls:TextboxHelper.Watermark="0"/>
-                    <ComboBox Width="50" Margin="5,0,0,0" />
-                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Rectangle Width="1" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="10" Fill="Gray"/>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Company Full Address" />
             </Grid>
         </Grid>
-        
-        <Grid Grid.Row="1">
+
+        <Grid Grid.Row="1" Margin="10">
             <DataGrid x:Name="productsRequired" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1"
                       CanUserAddRows="True" CanUserDeleteRows="True" CanUserResizeRows="True"  CanUserSortColumns="True" GridLinesVisibility="All"
                        ColumnWidth="Auto">
@@ -158,7 +149,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        
+
         <Grid Grid.Row="2" Margin="5">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <Label Content="Total Number Of Products "  Style="{StaticResource DescriptionHeaderStyle}"/>
@@ -177,7 +168,7 @@
                 </Label>
             </StackPanel>
         </Grid>
-        
+
         <Grid Grid.Row="3">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Margin="5,5,10,10">
                 <Button x:Name="positiveDecisionBtn" Content="Create" Width="150" Height="35"/>
