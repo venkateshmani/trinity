@@ -93,6 +93,9 @@
     <Compile Include="Views\CommonControls\ProductsListView.xaml.cs">
       <DependentUpon>ProductsListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CommonControls\PurchaseOrderControl.xaml.cs">
+      <DependentUpon>PurchaseOrderControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Extensions\WaterMarkText.cs" />
     <Compile Include="Views\PopUps\NewEnquiryForm.xaml.cs">
       <DependentUpon>NewEnquiryForm.xaml</DependentUpon>
@@ -118,6 +121,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CommonControls\PurchaseOrderControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\PopUps\NewEnquiryForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
