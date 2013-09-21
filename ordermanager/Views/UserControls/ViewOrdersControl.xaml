@@ -20,7 +20,10 @@
             <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="22" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
-            </Style>
+            </Style>       
+        <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
         </ResourceDictionary>
     </UserControl.Resources>        
     <Grid>
@@ -35,16 +38,47 @@
                             Controls:TextboxHelper.Watermark="Search"
                             Controls:TextboxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}"
                             Style="{DynamicResource SearchMetroTextBox}" />
-            </Grid>
-            <ListBox x:Name="orderList" Grid.Row="1"
-                    Margin="1"
-                    IsEnabled="True"
-                    SelectedIndex="0"
-                    SelectionChanged="orderList_SelectionChanged_1">
-                <ListBoxItem Content="Item 1" />
-                <ListBoxItem Content="Item 2" />
-                <ListBoxItem Content="Item 3" />
-            </ListBox>
+            </Grid>           
+            <ListView Name="lvOrders" SelectionChanged="orderList_SelectionChanged">
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
+                        <GridViewColumn Header="OrderID">                            
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="25,5,10,5" TextAlignment="Right" Text="{Binding Path=OrderID}"  FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="CustomeName">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="10,5,10,5" VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                        <TextBlock TextAlignment="Center" Text="{Binding Path=CustomerName}"  FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" HorizontalAlignment="Center"/>
+                                        <TextBlock TextAlignment="Center" Text="{Binding Path=CustomerLocation}"  FontSize="10" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Name2">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Margin="10,5,10,5" VerticalAlignment="Center">
+                                        <TextBlock TextAlignment="Right" Text="{Binding Path=Status}"   FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" HorizontalAlignment="Center"/>
+                                        <TextBlock TextAlignment="Right" Text="{Binding Path=OrderDate}"  FontSize="10" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="OrderValue" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Margin="10,5,10,5" TextAlignment="Right" Text="{Binding Path=OrderValue}"  FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>    
+            </ListView>
         </Grid>
     </Grid>
 </UserControl>

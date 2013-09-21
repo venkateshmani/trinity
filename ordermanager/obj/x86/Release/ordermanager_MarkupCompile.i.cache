@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\trinity\ordermanager\obj\x86\Release\
+D:\Work\trinity\ordermanager\obj\x86\Release\
 ordermanager
 none
 false
 TRACE
-D:\trinity\ordermanager\App.xaml
+D:\Work\trinity\ordermanager\App.xaml
 10-1453203769
 
-202040876251
-171605744215
+20-1847338041
+17-1521735133
 MainWindow.xaml;Views\PopUps\NewEnquiryForm.xaml;Views\PopUps\NewEnquiryFormUserControl.xaml;Views\UserControls\ViewOrdersControl.xaml;TestWindow.xaml;Views\CommonControls\BackForwardButton.xaml;Views\CommonControls\OMbutton.xaml;Views\CommonControls\OrdersListView.xaml;Views\CommonControls\ProductsListView.xaml;Views\UserControls\OrderWorkBench.xaml;
 
 False
