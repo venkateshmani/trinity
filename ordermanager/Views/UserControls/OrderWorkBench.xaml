@@ -47,7 +47,7 @@
     </UserControl.Resources>
     
     <Grid>
-        <TabControl x:Name="tabControl" SelectionChanged="TabControl_SelectionChanged_1" SelectedIndex="1">
+        <TabControl x:Name="tabControl" SelectionChanged="TabControl_SelectionChanged_1" SelectedIndex="2">
             <TabItem x:Name="GoBackTab">
                 <TabItem.Header>
                     <Button Width="40"

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="600">
+             mc:Ignorable="d" d:DesignHeight="593.4" d:DesignWidth="1416">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -24,6 +24,13 @@
         <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Visibility" Value="Collapsed" />
         </Style>
+            <Style x:Key="ProductInfoStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>        
     <Grid>
@@ -33,12 +40,44 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                   
+                    <Rectangle Width="15" Height="15" ToolTip="Filters">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_filter}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <TextBlock Text="Company Name"  Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
+                    <ComboBox Width="200" Height="5" Margin="5,0,25,0" ToolTip="Filter by Company Name"/>
+                    <TextBlock Text="From" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
+                    <DatePicker Width="150" 
+                                    HorizontalAlignment="Left"
+                                    Controls:TextboxHelper.Watermark="Select a date" Margin="5" />
+                    <TextBlock Text="To" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
+                    <DatePicker Width="150" 
+                                    HorizontalAlignment="Left"
+                                    Controls:TextboxHelper.Watermark="Select a date" Margin="5,5,25,5" />
                     <TextBox VerticalAlignment="Center" HorizontalAlignment="Right"
                                 Width="200"
+                                Foreground="Gray"
                                 Controls:TextboxHelper.Watermark="Search"
                                 Controls:TextboxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}"
                                 Style="{DynamicResource SearchMetroTextBox}"  Margin="5"/>
+                    <Button Width="28"
+                        Height="28"
+                        Margin="0, 2, 10, 0"
+                        HorizontalAlignment="Left"
+                        Grid.Row="0"
+                        Cursor="Hand"
+                        x:Name="addNewCustomerBtn"
+                            BorderBrush="Transparent"
+                        ToolTip="Clear All Filters">
+                        <Rectangle Width="10" Height="10">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_close}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
                 </StackPanel>
             </Grid>           
             <ListView Name="lvOrders" SelectionChanged="orderList_SelectionChanged" Grid.Row="1">
