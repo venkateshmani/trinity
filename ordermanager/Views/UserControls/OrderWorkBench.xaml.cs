@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -33,6 +35,10 @@ namespace ordermanager.Views.UserControls
             productDetails.Add(new ProductDetails { ItemIndexNumber = 2, ProductName = "Trousers", Quantity = "100 Pieces" });
             productDetails.Add(new ProductDetails { ItemIndexNumber = 3, ProductName = "Briefs", Quantity = "500 Pieces" });
             productsList.ItemsSource = productDetails;
+
+            List<MaterialDetails> materialDetails = new List<MaterialDetails>();
+            materialDetails.Add(new MaterialDetails{MaterialName="Material 1", CostPerUnit="$10", Consumption="100" , UOM="1 KG", ConsumptionCost="1000" });
+            materialsGrid.ItemsSource = materialDetails;
         }
 
         private void GoBack_MouseDown_1(object sender, MouseButtonEventArgs e)
@@ -54,6 +60,16 @@ namespace ordermanager.Views.UserControls
                 OnGoBack();
         }
 
+
+        public class MaterialDetails
+        {
+            public string MaterialName { get; set; }
+            public string CostPerUnit { get; set; }
+            public string UOM { get; set; }
+            public string Consumption { get; set; }
+            public string ConsumptionCost { get; set; }
+        }
+
         public class ProductDetails
         {
             public string ProductName {get;set;}
@@ -64,6 +80,34 @@ namespace ordermanager.Views.UserControls
         private void productsList_SizeChanged_1(object sender, SizeChangedEventArgs e)
         {
             productColumn.Width = productsList.ActualWidth - 5;  //5 for Border
+        }
+    }
+
+    public class MaterialsProvider
+    {
+        private ObservableCollection<ComboBoxItem> dtMaterialsProvider = null;
+        public MaterialsProvider()
+        {
+            dtMaterialsProvider = new ObservableCollection<ComboBoxItem>();
+            dtMaterialsProvider.Add(new ComboBoxItem { Content ="Materials 1"});
+            dtMaterialsProvider.Add(new ComboBoxItem { Content = "Materials 2" });
+            dtMaterialsProvider.Add(new ComboBoxItem { Content = "Materials 3" });
+            //dtMaterialsProvider.Add("Materials 1");
+            //dtMaterialsProvider.Add("Materials 2");
+            //dtMaterialsProvider.Add("Materials 3");
+            //dtMaterialsProvider.Add("Materials 4");
+            //dtMaterialsProvider.Add("Materials 4");   
+            //dtMaterialsProvider.Add("Materials 4");
+            //dtMaterialsProvider.Add("Materials 4");
+            //dtMaterialsProvider.Add("Materials 4");
+        }
+
+        public ObservableCollection<ComboBoxItem> AvailableMaterials
+        {
+            get
+            {
+                return dtMaterialsProvider;
+            }
         }
     }
 }
