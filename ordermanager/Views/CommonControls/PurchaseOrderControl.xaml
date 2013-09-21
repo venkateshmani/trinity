@@ -47,7 +47,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.40*"/>
+            <ColumnDefinition Width="0.6*"/>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -65,25 +65,27 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="2">
-            <StackPanel Name="spBase">
-                <ItemsControl Name="items" ItemsSource="{Binding PurchaseOrderItems}" >
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Expander Header="{Binding Path= Key}" Margin="10" Background="WhiteSmoke"  FontSize="{StaticResource NormalFontSize}" FontWeight="SemiBold">
-                                <DataGrid  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" AutoGenerateColumns="False" ItemsSource="{Binding Path= Value}" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="Gainsboro" Background="WhiteSmoke">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Item Name"  Binding="{Binding ItemName}"/>
-                                        <DataGridTextColumn Header="Alias" Binding="{Binding Alias}" />
-                                        <DataGridTextColumn Header="Quantity"  Binding="{Binding Quantity}"/>
-                                        <DataGridComboBoxColumn Header="Currency"  DisplayMemberPath="{Binding Currency}"/>
-                                        <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" />
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                            </Expander>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </StackPanel>
+            <ScrollViewer>
+                <StackPanel Name="spBase">
+                    <ItemsControl Name="items" ItemsSource="{Binding PurchaseOrderItems}" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Expander Header="{Binding Path= Key}" Margin="10" Background="WhiteSmoke"  FontSize="{StaticResource NormalFontSize}" FontWeight="SemiBold">
+                                    <DataGrid  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" AutoGenerateColumns="False" ItemsSource="{Binding Path= Value}" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="Gainsboro" Background="WhiteSmoke">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Item Name"  Binding="{Binding ItemName}"/>
+                                            <DataGridTextColumn Header="Alias" Binding="{Binding Alias}" />
+                                            <DataGridTextColumn Header="Quantity"  Binding="{Binding Quantity}"/>
+                                            <DataGridComboBoxColumn Header="Currency"  DisplayMemberPath="{Binding Currency}"/>
+                                            <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" />
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Expander>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
 
         <GridSplitter Grid.Row="0" Grid.Column="1"
