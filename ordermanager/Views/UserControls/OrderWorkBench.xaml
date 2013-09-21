@@ -28,6 +28,16 @@
             <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
                 <Setter Property="Visibility" Value="Collapsed" />
             </Style>
+            <Style x:Key="ProductsListContentStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+            <Style x:Key="ProductInfoStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
+            </Style>
             <Converters:StarWidthConverter x:Key="starWidthConverter"></Converters:StarWidthConverter>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -52,17 +62,19 @@
                     </Button>
                 </TabItem.Header>
             </TabItem>
-            <TabItem Header="View Enquiry">
+            <TabItem Header="View Enquiry" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
-                    <PopUps:NewEnquiryFormUserControl Margin="20" />
+                    <PopUps:NewEnquiryFormUserControl Margin="20,10,10,0" />
                 </Border>
             </TabItem>
-            <TabItem Header="Details">
+            <TabItem Header="Materials" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0.40*"/>
@@ -71,49 +83,121 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid Grid.Row="0" Grid.Column="0">
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Products" FontSize="14" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
+                            <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Products" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
+                            </Border>
                         </Grid>
 
                         <Grid Grid.Row="0" Grid.Column="2">
-                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Product Details" FontSize="14" Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
+                            <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+                                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Materials"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
+                            </Border>
                         </Grid>
 
-                        <ListView x:Name="productsList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" SizeChanged="productsList_SizeChanged_1">
+                        <Grid Grid.Row="1" Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                <TextBlock Text="Product Name" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
+                                <TextBlock Text="********************" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
+                                <TextBlock Text="Quantity" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
+                                <TextBlock Text="**********" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right">
+                                <TextBlock Text="Order Value" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
+                                <TextBlock Text="*******" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" >
+                                    <TextBlock.Foreground>
+                                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </StackPanel>
+                            
+                        </Grid>
+
+                        <ListView x:Name="productsList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" SizeChanged="productsList_SizeChanged_1" Margin="2">
                             <ListView.View>
-                                <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
-                                    <GridViewColumn x:Name="productColumn" Header="Product">
+                                <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}"> 
+                                    <GridViewColumn x:Name="productColumn" Header="Product" >
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                                    <TextBlock HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=ProductName}"  FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"/>
-                                                    <TextBlock HorizontalAlignment="Right" TextAlignment="Left" Text="{Binding Path=OrderValue}"  FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"/>
+                                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock HorizontalAlignment="Left" Text="{Binding ItemIndexNumber}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
+                                                        <TextBlock HorizontalAlignment="Left" Text=".  "   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
+                                                        <TextBlock HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=ProductName}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" />
+                                                    </StackPanel>
+                                                    <TextBlock HorizontalAlignment="Right" TextAlignment="Left" Text="{Binding Path=Quantity}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" />
                                                 </Grid>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-
                                 </GridView>
                             </ListView.View>
                         </ListView>
 
-                        <GridSplitter Grid.Column="1"
+                        <GridSplitter Grid.Row="0" Grid.Column="1"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"
                       Background="LightGray" 
                       ShowsPreview="True"
                       Width="5" Grid.RowSpan="2" />
+
+                        <Grid Grid.Row="2" Grid.ColumnSpan="3">
+                            <Rectangle Height="1" Fill="Gray" />
+                        </Grid>
+
+                        <Grid Grid.Row="3" Grid.ColumnSpan="3">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Button x:Name="sendBackBtn" Content="Send Back"  Margin="5" Width="150" Height="35" Foreground="White"
+                                        ToolTip="Send back to previous level">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                    </Button.Background>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
+                                        ToolTip="Save Changes">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                    </Button.Background>
+                                </Button>
+                                <Button x:Name="submitBtn" Content="Submit" Margin="5" Width="150" Height="35" Foreground="White"
+                                        ToolTip="Submit to next level">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                    </Button.Background>
+                                </Button>
+                                <Button x:Name="discardBtn" Content="Discard Changes" Margin="5" Width="150" Height="35" Foreground="White"
+                                        ToolTip="Discard the Changes">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
+                                    </Button.Background>
+                                </Button>
+                            </StackPanel>    
+                        </Grid>
                     </Grid>
                 </Border>
             </TabItem>
-            <TabItem Header="Status">
+            <TabItem Header="Purchase Order" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
                 </Border>
             </TabItem>
-            <TabItem Header="Purchase Orders">
-                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
-                </Border>
-            </TabItem>
-            <TabItem Header="Change History">
+            <TabItem Header="Change History" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
                 </Border>
             </TabItem>

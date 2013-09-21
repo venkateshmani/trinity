@@ -33,13 +33,15 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <TextBox VerticalAlignment="Center" HorizontalAlignment="Right"
-                            Width="200"
-                            Controls:TextboxHelper.Watermark="Search"
-                            Controls:TextboxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}"
-                            Style="{DynamicResource SearchMetroTextBox}" />
+                <StackPanel>
+                    <TextBox VerticalAlignment="Center" HorizontalAlignment="Right"
+                                Width="200"
+                                Controls:TextboxHelper.Watermark="Search"
+                                Controls:TextboxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}"
+                                Style="{DynamicResource SearchMetroTextBox}"  Margin="5"/>
+                </StackPanel>
             </Grid>           
-            <ListView Name="lvOrders" SelectionChanged="orderList_SelectionChanged">
+            <ListView Name="lvOrders" SelectionChanged="orderList_SelectionChanged" Grid.Row="1">
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
                         <GridViewColumn Header="OrderID">                            

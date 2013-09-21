@@ -29,9 +29,9 @@ namespace ordermanager.Views.UserControls
         void OrderWorkBench_Loaded(object sender, RoutedEventArgs e)
         {
             List<ProductDetails> productDetails = new List<ProductDetails>();
-            productDetails.Add(new ProductDetails { ProductName = "T-Shirt", OrderValue = "100$" });
-            productDetails.Add(new ProductDetails { ProductName = "Trousers", OrderValue = "200$" });
-            productDetails.Add(new ProductDetails { ProductName = "Briefs", OrderValue = "250$" });
+            productDetails.Add(new ProductDetails { ItemIndexNumber= 1, ProductName = "T-Shirt", Quantity = "200 Pieces" });
+            productDetails.Add(new ProductDetails { ItemIndexNumber = 2, ProductName = "Trousers", Quantity = "100 Pieces" });
+            productDetails.Add(new ProductDetails { ItemIndexNumber = 3, ProductName = "Briefs", Quantity = "500 Pieces" });
             productsList.ItemsSource = productDetails;
         }
 
@@ -57,7 +57,8 @@ namespace ordermanager.Views.UserControls
         public class ProductDetails
         {
             public string ProductName {get;set;}
-            public string OrderValue { get; set; }
+            public string Quantity { get; set; }
+            public int ItemIndexNumber { get; set; }
         }
 
         private void productsList_SizeChanged_1(object sender, SizeChangedEventArgs e)
