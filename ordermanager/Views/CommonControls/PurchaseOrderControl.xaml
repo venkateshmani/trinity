@@ -19,26 +19,99 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <local:PurchaseOrderControl x:Key="priorityProvider"/>
-        </ResourceDictionary>      
+            <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Style>
+            <Style x:Key="ProductsListContentStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+            <Style x:Key="ProductInfoStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
+            </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
-    <StackPanel Name="spBase">
-        <ItemsControl Name="items" ItemsSource="{Binding PurchaseOrderItems}" >
-            <ItemsControl.ItemTemplate>
-              <DataTemplate>                   
-                    <Expander Header="{Binding Path= Key}" Margin="10">
-                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path= Value}">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Item Name"  Binding="{Binding ItemName}"/>
-                                <DataGridTextColumn Header="Alias" Binding="{Binding Alias}" />
-                                <DataGridTextColumn Header="Quantity"  Binding="{Binding Quantity}"/>
-                                <DataGridComboBoxColumn Header="Currency"  DisplayMemberPath="{Binding Currency}"/>
-                                <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" />
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Expander>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.40*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Order Quantity" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.Column="2">
+            <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Purchase Order Materials Details"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="2">
+            <StackPanel Name="spBase">
+                <ItemsControl Name="items" ItemsSource="{Binding PurchaseOrderItems}" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Expander Header="{Binding Path= Key}" Margin="10" Background="WhiteSmoke"  FontSize="{StaticResource NormalFontSize}" FontWeight="SemiBold">
+                                <DataGrid  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" AutoGenerateColumns="False" ItemsSource="{Binding Path= Value}" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="Gainsboro" Background="WhiteSmoke">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Item Name"  Binding="{Binding ItemName}"/>
+                                        <DataGridTextColumn Header="Alias" Binding="{Binding Alias}" />
+                                        <DataGridTextColumn Header="Quantity"  Binding="{Binding Quantity}"/>
+                                        <DataGridComboBoxColumn Header="Currency"  DisplayMemberPath="{Binding Currency}"/>
+                                        <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Expander>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Grid>
+
+        <GridSplitter Grid.Row="0" Grid.Column="1"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      Background="LightGray" 
+                      ShowsPreview="True"
+                      Width="5" Grid.RowSpan="2" />
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="3">
+            <Rectangle Height="1" Fill="Gray" />
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.ColumnSpan="3">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
+                                        ToolTip="Save Changes">
+                    <Button.Background>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </Button.Background>
+                </Button>
+                <Button x:Name="submitBtn" Content="Submit" Margin="5" Width="150" Height="35" Foreground="White"
+                                        ToolTip="Submit to next level">
+                    <Button.Background>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
 </UserControl>

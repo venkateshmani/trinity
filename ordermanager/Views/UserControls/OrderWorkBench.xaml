@@ -255,6 +255,7 @@
             </TabItem>
             <TabItem Header="Purchase Order" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
+                    <local:PurchaseOrderControl VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
                 </Border>
             </TabItem>
             <TabItem Header="Change History" Cursor="Hand">

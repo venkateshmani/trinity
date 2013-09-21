@@ -23,7 +23,7 @@ namespace ordermanager.Views.UserControls
     {
         // private ObservableCollection<KeyValueCollection> m_Items = new ObservableCollection<KeyValueCollection>();
         Dictionary<string, List<PurchaseOrder>> m_Items = new Dictionary<string, List<PurchaseOrder>>();
-         List<string> m_Currency = null;
+        List<string> m_Currency = null;
         public PurchaseOrderControl()
         {
             List<PurchaseOrder> items = new List<PurchaseOrder>();
@@ -40,8 +40,8 @@ namespace ordermanager.Views.UserControls
             CategoryGroup.Add("Yarn");
             CategoryGroup.Add("Fabric");
             CategoryGroup.Add("Accessories");
-            CategoryGroup.Add("Packing Materials");            
-      
+            CategoryGroup.Add("Packing Materials");
+
             m_Currency = new List<string>(3);
             m_Currency.Add("INR");
             m_Currency.Add("USD");
@@ -51,7 +51,7 @@ namespace ordermanager.Views.UserControls
             {
                 List<PurchaseOrder> queryItems = (from item in items where item.Category == grp select item).ToList<PurchaseOrder>();
                 // m_Items.Add(new KeyValueCollection(){Key=grp, Value=queryItems});
-                m_Items.Add(grp, queryItems);               
+                m_Items.Add(grp, queryItems);
             }
             InitializeComponent();
             this.DataContext = this;
