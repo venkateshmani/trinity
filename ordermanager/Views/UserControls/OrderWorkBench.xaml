@@ -66,12 +66,12 @@
                     </Button>
                 </TabItem.Header>
             </TabItem>
-            <TabItem Header="View Enquiry" Cursor="Hand">
+            <TabItem Header="  View Enquiry  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
                     <PopUps:NewEnquiryFormUserControl Margin="20,10,10,0" />
                 </Border>
             </TabItem>
-            <TabItem Header="Materials" Cursor="Hand">
+            <TabItem Header="  Materials  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -253,12 +253,12 @@
                     </Grid>
                 </Border>
             </TabItem>
-            <TabItem Header="Purchase Order" Cursor="Hand">
+            <TabItem Header="  Purchase Order  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
                     <local:PurchaseOrderControl VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
                 </Border>
             </TabItem>
-            <TabItem Header="Change History" Cursor="Hand">
+            <TabItem Header="  Change History  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
                 </Border>
             </TabItem>
