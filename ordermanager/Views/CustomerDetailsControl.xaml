@@ -1,0 +1,78 @@
+﻿<Window x:Class="ordermanager.Views.CustomerDetailsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" Height="456.184" Width="356.042">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Metro.Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Style>
+            <Style x:Key="ProductInfoStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <StackPanel Margin="5">
+        <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+            <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Customer Details"  Style="{StaticResource DescriptionHeaderStyle}" />
+        </Border>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"    Margin="0,5,0,0"  Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="Customer Name" ToolTip="Customer name"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"    Margin="0,5,0,0"  Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="Alias Name" ToolTip="Alias name"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"  Margin="0,5,0,0" Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="Street/Road #" ToolTip="Customer address - Street/Road #"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0" Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="Area" ToolTip="Customer address - Area"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"  Margin="0,5,0,0"  Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="City" ToolTip="City name"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"  Margin="0,5,0,0"  Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="State" ToolTip="State name"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="Country" ToolTip="Country name"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="Telephone Work" ToolTip="Work telephone number"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="Telephone Fax" ToolTip="Fax number"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="Mobile" ToolTip="Mobile number"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="Email" ToolTip="Customer email ID"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Button x:Name="btnReset" Content="Reset"  Margin="5,10,0,5" Width="75" Height="20" Foreground="White"
+                                        ToolTip="Save Changes" HorizontalAlignment="Right">
+                <Button.Background>
+                    <SolidColorBrush Color="{StaticResource Gray1}" />
+                </Button.Background>
+            </Button>
+            <Button x:Name="btnSave" Content="Save"  Margin="5,10,0,5" Width="75" Height="20" Foreground="White"
+                                        ToolTip="Save Changes" HorizontalAlignment="Right">
+                <Button.Background>
+                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        
+    </StackPanel>
+</Window>
