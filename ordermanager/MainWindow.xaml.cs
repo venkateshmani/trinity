@@ -18,12 +18,20 @@ namespace ordermanager
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow 
+    public partial class MainWindow
     {
-        
+        LoginScreen m_LoginScreen;
         public MainWindow()
         {
             InitializeComponent();
+            this.Closing += MainWindow_Closing;
+        }
+
+        public MainWindow(LoginScreen loginScreen)
+            : this()
+        {
+            m_LoginScreen = loginScreen;
+            m_LoginScreen.Hide();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -56,6 +64,22 @@ namespace ordermanager
         {
 
         }
-       
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_LoginScreen != null)
+            {
+                this.Closing -= MainWindow_Closing;
+                this.Close();
+                m_LoginScreen.ShowDialog();
+            }
+            else
+                Application.Current.Shutdown();
+        }
+
+        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
