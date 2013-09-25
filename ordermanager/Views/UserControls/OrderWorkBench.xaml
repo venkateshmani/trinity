@@ -27,7 +27,7 @@
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
-            
+
             <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
                 <Setter Property="Visibility" Value="Collapsed" />
             </Style>
@@ -45,7 +45,7 @@
             <local:MaterialsProvider x:Key="materialsProvider" />
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <Grid>
         <TabControl x:Name="tabControl" SelectionChanged="TabControl_SelectionChanged_1" SelectedIndex="2">
             <TabItem x:Name="GoBackTab">
@@ -111,7 +111,7 @@
                                     </TextBlock.Foreground>
                                 </TextBlock>
                             </StackPanel>
-                            
+
                             <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
                                 <TextBlock Text="Quantity" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
                                 <TextBlock Text="**********" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
@@ -120,7 +120,7 @@
                                     </TextBlock.Foreground>
                                 </TextBlock>
                             </StackPanel>
-                            
+
                             <Grid  VerticalAlignment="Stretch" Grid.Row="0" HorizontalAlignment="Right">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -143,9 +143,7 @@
                                     </TextBlock.Foreground>
                                 </TextBlock>
                             </Grid>
-                                
-                            
-                            
+
                             <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
@@ -153,19 +151,27 @@
                                 </Grid.RowDefinitions>
                                 <Border BorderBrush="Gray" BorderThickness="1" Margin="10" Grid.Row="0">
                                     <DataGrid x:Name="materialsGrid" VerticalAlignment="Stretch" HorizontalAlignment='Stretch'
-                                              GridLinesVisibility="All" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True">
-                                        <DataGrid.Columns>  
+                                              GridLinesVisibility="All" AutoGenerateColumns="False" CanUserAddRows="True" CanUserDeleteRows="True"
+                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro">
+                                        <DataGrid.Columns>
                                             <DataGridTemplateColumn x:Name="materialColumn" Header="Material Name" Width="0.3*">
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Grid Margin="3">
-                                                            <ComboBox x:Name="materialsComboBox" 
+                                                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                                <ComboBox x:Name="materialsComboBox" 
                                                                       IsEditable="True"
-                                                                      DisplayMemberPath="MaterialName"
-                                                                      SelectedValuePath="MaterialName"
-                                                                      SelectedValue="{Binding Path=MaterialName}"
+                                                                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                                      SelectedItem="{Binding Path=MaterialName}"
                                                                       Height="20"
                                                                       ItemsSource="{Binding AvailableMaterials, Source={StaticResource materialsProvider}}" />
+                                                                <Button x:Name="saveBtn" Content="Add"  Margin="5" Width="50" Foreground="White"
+                                                                    ToolTip="Add to Database" Visibility="Collapsed">
+                                                                    <Button.Background>
+                                                                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                                                    </Button.Background>
+                                                                </Button>
+                                                            </StackPanel>
                                                         </Grid>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
@@ -190,7 +196,7 @@
 
                         <ListView x:Name="productsList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" SizeChanged="productsList_SizeChanged_1" Margin="2">
                             <ListView.View>
-                                <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}"> 
+                                <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
                                     <GridViewColumn x:Name="productColumn" Header="Product" >
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
@@ -248,7 +254,7 @@
                                         <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
                                     </Button.Background>
                                 </Button>
-                            </StackPanel>    
+                            </StackPanel>
                         </Grid>
                     </Grid>
                 </Border>

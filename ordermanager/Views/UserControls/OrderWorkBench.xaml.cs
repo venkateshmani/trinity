@@ -31,13 +31,13 @@ namespace ordermanager.Views.UserControls
         void OrderWorkBench_Loaded(object sender, RoutedEventArgs e)
         {
             List<ProductDetails> productDetails = new List<ProductDetails>();
-            productDetails.Add(new ProductDetails { ItemIndexNumber= 1, ProductName = "T-Shirt", Quantity = "200 Pieces" });
+            productDetails.Add(new ProductDetails { ItemIndexNumber = 1, ProductName = "T-Shirt", Quantity = "200 Pieces" });
             productDetails.Add(new ProductDetails { ItemIndexNumber = 2, ProductName = "Trousers", Quantity = "100 Pieces" });
             productDetails.Add(new ProductDetails { ItemIndexNumber = 3, ProductName = "Briefs", Quantity = "500 Pieces" });
             productsList.ItemsSource = productDetails;
 
             List<MaterialDetails> materialDetails = new List<MaterialDetails>();
-            materialDetails.Add(new MaterialDetails{MaterialName="Material 1", CostPerUnit="$10", Consumption="100" , UOM="1 KG", ConsumptionCost="1000" });
+            materialDetails.Add(new MaterialDetails { MaterialName = "Materials 1", CostPerUnit = "$10", Consumption = "100", UOM = "1 KG", ConsumptionCost = "1000" });
             materialsGrid.ItemsSource = materialDetails;
         }
 
@@ -51,7 +51,7 @@ namespace ordermanager.Views.UserControls
 
         private void TabControl_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-           
+
         }
 
         private void Button_PreviewMouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
@@ -72,7 +72,7 @@ namespace ordermanager.Views.UserControls
 
         public class ProductDetails
         {
-            public string ProductName {get;set;}
+            public string ProductName { get; set; }
             public string Quantity { get; set; }
             public int ItemIndexNumber { get; set; }
         }
@@ -85,24 +85,21 @@ namespace ordermanager.Views.UserControls
 
     public class MaterialsProvider
     {
-        private ObservableCollection<ComboBoxItem> dtMaterialsProvider = null;
+        private ObservableCollection<string> dtMaterialsProvider = null;
         public MaterialsProvider()
         {
-            dtMaterialsProvider = new ObservableCollection<ComboBoxItem>();
-            dtMaterialsProvider.Add(new ComboBoxItem { Content ="Materials 1"});
-            dtMaterialsProvider.Add(new ComboBoxItem { Content = "Materials 2" });
-            dtMaterialsProvider.Add(new ComboBoxItem { Content = "Materials 3" });
-            //dtMaterialsProvider.Add("Materials 1");
-            //dtMaterialsProvider.Add("Materials 2");
-            //dtMaterialsProvider.Add("Materials 3");
-            //dtMaterialsProvider.Add("Materials 4");
-            //dtMaterialsProvider.Add("Materials 4");   
-            //dtMaterialsProvider.Add("Materials 4");
-            //dtMaterialsProvider.Add("Materials 4");
-            //dtMaterialsProvider.Add("Materials 4");
+            dtMaterialsProvider = new ObservableCollection<string>();
+            dtMaterialsProvider.Add("Materials 1");
+            dtMaterialsProvider.Add("Materials 2");
+            dtMaterialsProvider.Add("Materials 3");
+            dtMaterialsProvider.Add("Materials 4");
+            dtMaterialsProvider.Add("Materials 4");
+            dtMaterialsProvider.Add("Materials 4");
+            dtMaterialsProvider.Add("Materials 4");
+            dtMaterialsProvider.Add("Materials 4");
         }
 
-        public ObservableCollection<ComboBoxItem> AvailableMaterials
+        public ObservableCollection<string> AvailableMaterials
         {
             get
             {

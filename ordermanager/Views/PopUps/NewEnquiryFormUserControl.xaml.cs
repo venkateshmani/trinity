@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.DatabaseModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,14 @@ namespace ordermanager.Views.PopUps
         public NewEnquiryFormUserControl()
         {
             InitializeComponent();
+            this.Loaded += NewEnquiryFormUserControl_Loaded;
+        }
+
+        Order newEnquiry = null;
+        void NewEnquiryFormUserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            newEnquiry = new Order();
+            this.DataContext = newEnquiry;
         }
 
         private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)

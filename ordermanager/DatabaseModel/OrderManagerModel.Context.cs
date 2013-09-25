@@ -18,6 +18,7 @@ namespace ordermanager.DatabaseModel
         public OrderManagerDBEntities()
             : base("name=OrderManagerDBEntities")
         {
+            
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
