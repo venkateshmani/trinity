@@ -27,7 +27,8 @@ namespace ordermanager.Views.PopUps
 
         private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            CustomerDetailsControl details = new CustomerDetailsControl();
+            details.ShowDialog();
         }
     }
 }

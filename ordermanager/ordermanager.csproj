@@ -39,11 +39,18 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>C:\Users\User\Downloads\ModernUI.1.0.5\net40\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ThirdParty\packages\WPF Toolkit\v3.5.50211.1\System.Windows.Controls.Input.Toolkit.dll</HintPath>
@@ -76,7 +83,88 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DatabaseModel\CommissionValueType.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\Company.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\CompanyType.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\Currency.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\History.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\MaterialName.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\Order.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\OrderCurrencyConversion.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\OrderManagerModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderManagerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\OrderManagerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\OrderManagerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderManagerModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\OrderProduct.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\OrderStatu.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\OrderThrough.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\ProductExtraCost.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\ProductExtraCostType.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\ProductMaterial.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\ProductMaterialItem.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\ProductName.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SubMaterial.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\sysdiagram.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\UnitsOfMeasurement.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\User.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\UserRole.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Delegates.cs" />
+    <Compile Include="LoginScreen.xaml.cs">
+      <DependentUpon>LoginScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
@@ -103,12 +191,19 @@
     <Compile Include="Views\PopUps\NewEnquiryFormUserControl.xaml.cs">
       <DependentUpon>NewEnquiryFormUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CustomerDetailsControl.xaml.cs">
+      <DependentUpon>CustomerDetailsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\OrderWorkBench.xaml.cs">
       <DependentUpon>OrderWorkBench.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ViewOrdersControl.xaml.cs">
       <DependentUpon>ViewOrdersControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="LoginScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -130,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PopUps\NewEnquiryFormUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomerDetailsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -201,6 +300,24 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <EntityDeploy Include="DatabaseModel\OrderManagerModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OrderManagerModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DatabaseModel\OrderManagerModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrderManagerModel.edmx</DependentUpon>
+      <LastGenOutput>OrderManagerModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="DatabaseModel\OrderManagerModel.edmx.diagram">
+      <DependentUpon>OrderManagerModel.edmx</DependentUpon>
+    </None>
+    <None Include="DatabaseModel\OrderManagerModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OrderManagerModel.edmx</DependentUpon>
+      <LastGenOutput>OrderManagerModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -208,7 +325,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DatabaseModel\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Resources\Icons\" />
     <Folder Include="Resources\Images\" />
@@ -219,6 +335,9 @@
       <Project>{942d11c4-29f5-46c4-8c14-4b976d56c637}</Project>
       <Name>MahApps.Metro.NET45</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
