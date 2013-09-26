@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
              mc:Ignorable="d" d:DesignHeight="619" d:DesignWidth="1068" Background="White">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -27,7 +28,7 @@
                 <Setter Property="HorizontalAlignment" Value="Right" />
                 <Setter Property="Margin" Value="5" />
             </Style>
-
+            <DataProviders:DataProvider x:Key="DataProvider" />
         </ResourceDictionary>
 
 
@@ -39,11 +40,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" />
+            <ColumnDefinition Width="0.3*" />
+        </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.8*" />
-                <ColumnDefinition Width="0.4*" />
-            </Grid.ColumnDefinitions>
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -57,7 +58,13 @@
 
                 <TextBlock Text="Customer"  Style="{StaticResource inLineTextBlockStyle}" Grid.Row="0" Grid.Column="0" />
                 <StackPanel  Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                    <ComboBox x:Name="customerComboBox" Width="300" Margin="5" />
+                    <ComboBox x:Name="customerComboBox" Width="300" Margin="5" 
+                              ItemsSource="{Binding DBResources.Companies}"
+                              DisplayMemberPath="Name"
+                              IsEditable="True"
+                              SelectedValue="{Binding Order.Company}"
+                              SelectedValuePath="CompanyID" />
+                    
                     <Button Width="28"
                         Height="28"
                         Margin="0, 2, 0, 0"
@@ -78,15 +85,15 @@
                 <TextBlock Text="Order Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="1" />
                 <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Orientation="Horizontal">
                     <DatePicker Width="150" 
-                                    SelectedDate="{Binding OrderDate}"
+                                    SelectedDate="{Binding Order.OrderDate}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date" Margin="5"
                                 />
 
-                    <TextBlock Text="Expected Delivery Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="3" Margin="10,0,0,0"/>
+                    <TextBlock Text="Expected Delivery Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Margin="10,0,0,0"/>
                     <StackPanel Grid.Row="3" Grid.Column="1" Margin="5" Orientation="Horizontal">
                         <DatePicker Width="150" 
-                                    SelectedDate="{Binding ExpectedDeliveryDate}"
+                                    SelectedDate="{Binding Order.ExpectedDeliveryDate}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date"/>
                         <TextBlock x:Name="numberOfDays" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Top" />
@@ -97,7 +104,12 @@
 
                 <TextBlock Text="Order By" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <ComboBox Width="200" Margin="5"/>
+                    <ComboBox Width="200" Margin="5"
+                              ItemsSource="{Binding DBResources.Agents}"
+                              DisplayMemberPath="Name"
+                              IsEditable="True"
+                              SelectedValue="{Binding Order.Company1}"
+                              SelectedValuePath="CompanyID"/>
                     <Button Width="28"
                         Height="28"
                         Margin="0, 2, 0, 0"
@@ -114,28 +126,80 @@
                         </Rectangle>
                     </Button>
                     <TextBlock Text="through" Style="{StaticResource inLineTextBlockStyle}" Margin="10,5,5,5" />
-                    <ComboBox Width="100" Margin="5"/>
+                    <ComboBox Width="100" Margin="5"
+                             ItemsSource="{Binding DBResources.OrderThroughs}"
+                             DisplayMemberPath="Mode"
+                             SelectedValue="{Binding Order.OrderThrough}"
+                             IsEditable="True" 
+                             />
                     <TextBlock Text="and commision is" Grid.Row="5" Style="{StaticResource inLineTextBlockStyle}"/>
                     <StackPanel  Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5">
-                        <TextBox Width="60" BorderBrush="LightGray" HorizontalContentAlignment="Right"  Controls:TextboxHelper.Watermark="0" Text="{Binding CommissionValue}"/>
-                        <ComboBox Width="50" Margin="5,0,0,0" />
+                        <TextBox Width="60" BorderBrush="LightGray"
+                                 HorizontalContentAlignment="Right" 
+                                 VerticalContentAlignment="Center"
+                                 Controls:TextboxHelper.Watermark="0" Text="{Binding CommissionValue}"/>
+                        <ComboBox Width="73" Margin="5,0,0,0"
+                                  IsEditable="True"
+                                  ItemsSource="{Binding DBResources.CommissionValueTypes}"
+                                  DisplayMemberPath="Type"
+                                  SelectedValue="{Binding Order.CommissionValueType}"
+                                   />
                     </StackPanel>
                 </StackPanel>
 
 
             </Grid>
 
-            <Grid Grid.Column="1">
-                <Rectangle Width="1" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="10" Fill="Gray"/>
+            
+        </Grid>
+         
+        <Grid Grid.Column="1" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Row="0" Grid.Column="1">
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Company Full Address"
-                           />
+               />
+            </Grid>
+
+            <Rectangle Width="1.5" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0,50,0,50" Fill="Gray" Grid.RowSpan="2"/>
+            
+            <Grid Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom" Margin="5,10,10,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Currency Conversion Rate Table" Margin="3"/>
+                <DataGrid x:Name="currencyConversionGrid" BorderThickness="1" BorderBrush="Gray" CanUserAddRows="False" Grid.Row="1" MinHeight="200" Margin="2"
+                          ItemsSource="{Binding OrderCurrencyConversions}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn x:Name="currencySymbol" Header="Currency" Width="0.5*" IsReadOnly="True" Binding="{Binding Symbol}" />
+                        <DataGridTextColumn x:Name="inrValue" Header="Value in Rupees" Width="0.5*" Binding="{Binding valueInINR}" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </Grid>
 
         <Grid Grid.Row="1" Margin="10">
-            <DataGrid x:Name="productsRequired" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1"
-                      CanUserAddRows="True" CanUserDeleteRows="True" CanUserResizeRows="True"  CanUserSortColumns="True" GridLinesVisibility="All"
-                       ColumnWidth="Auto" ItemsSource="{Binding OrderProducts}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+                <Button x:Name="addNewItemBtn" Grid.Row="0" Content="New Item"  Margin="5" Width="100" Height="25" Foreground="White"
+                                        ToolTip="Add New Item" HorizontalAlignment="Left" PreviewMouseLeftButtonUp="addNewItemBtn_PreviewMouseLeftButtonUp">
+                    <Button.Background>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </Button.Background>
+                </Button>
+                <DataGrid x:Name="productsRequired"  Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1"
+                      CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeRows="True"  CanUserSortColumns="True" GridLinesVisibility="All"
+                      ColumnWidth="Auto" ItemsSource="{Binding OrderProducts}">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn x:Name="productColumn" Header="Product" Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
@@ -144,11 +208,11 @@
                                     <ComboBox x:Name="productComboBox" 
                                                                       IsEditable="True"
                                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                                                      SelectedValue="ProductID"
-                                                                      SelectedValuePath="{Binding Path=ProductID, Mode=TwoWay}"
-                                                                      DisplayMemberPath="{Binding ProductName}"  
+                                                                      ItemsSource="{Binding AvailableProducts, Source={StaticResource DataProvider}}"
+                                                                      DisplayMemberPath="Name"
+                                                                      SelectedValue="ProductName"  
                                                                       Height="20"
-                                                                      ItemsSource="{Binding AvailableProducts}" />
+                                                                      />
                                         <Button x:Name="newProductAdd" Content="Add"  Margin="5" Width="50" Foreground="White"
                                                                     ToolTip="Add to Database" Visibility="Collapsed">
                                         <Button.Background>
@@ -160,7 +224,8 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTextColumn x:Name="quantityColumn" Header="Expected Order Quantity"/>
+                    <DataGridTextColumn x:Name="quantityColumn" Header="Expected Order Quantity"
+                                        Binding="{Binding ExpectedQuantity}"/>
                     <DataGridTemplateColumn x:Name="unitOfMeasurementColumn" Header="UOM">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -168,9 +233,11 @@
                                     <ComboBox x:Name="uomComboBox" 
                                                                       IsEditable="True"
                                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                                                      SelectedItem="{Binding Path=MaterialName}"
                                                                       Height="20"
-                                                                      ItemsSource="{Binding AvailableMaterials, Source={StaticResource materialsProvider}}" />
+                                                                      ItemsSource="{Binding UOMs, Source={StaticResource DataProvider}}"
+                                                                      DisplayMemberPath="Units"
+                                                                      SelectedValue="UnitOfMeasurement" 
+                                                                      />
                                     <Button x:Name="newUOMAdd" Content="Add"  Margin="5" Width="50" Foreground="White"
                                                                     ToolTip="Add to Database" Visibility="Collapsed">
                                         <Button.Background>
@@ -181,16 +248,19 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn x:Name="currencyColumn" Header="UOM">
+                    <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                     <ComboBox x:Name="currencyComboBox" 
                                                                       IsEditable="True"
                                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                                                      SelectedItem="{Binding Path=MaterialName}"
                                                                       Height="20"
-                                                                      ItemsSource="{Binding AvailableMaterials, Source={StaticResource materialsProvider}}" />
+                                                                      ItemsSource="{Binding Currencies, Source={StaticResource DataProvider}}"
+                                                                      DisplayMemberPath="Symbol"
+                                                                      SelectedItem="{Binding Currency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                      SelectionChanged="currencyComboBox_SelectionChanged"
+                                                                      />
                                     <Button x:Name="newCurrencyAdd" Content="Add"  Margin="5" Width="50" Foreground="White"
                                                                     ToolTip="Add to Database" Visibility="Collapsed">
                                         <Button.Background>
@@ -201,8 +271,10 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price"/>
-                    <DataGridTextColumn x:Name="orderValueColumn" Header="Order Value"/>
+                    <DataGridTextColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price"
+                                        Binding="{Binding CustomerTargetPrice}"/>
+                    <DataGridTextColumn x:Name="orderValueColumn" Header="Order Value"
+                                        Binding="{Binding OrderValue}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -210,7 +282,7 @@
         <Grid Grid.Row="2" Margin="5">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <Label Content="Total Number Of Products "  Style="{StaticResource DescriptionHeaderStyle}"/>
-                <Label x:Name="totalNumberOfItems" Content="### "  Style="{StaticResource DescriptionHeaderStyle}" FontWeight="Bold">
+                <Label x:Name="totalNumberOfItems" Content="{Binding OrderProducts.Count}"  Style="{StaticResource DescriptionHeaderStyle}" FontWeight="Bold">
                     <Label.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Label.Foreground>
@@ -226,7 +298,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Margin="5,5,10,10">
                 <Button x:Name="positiveDecisionBtn" Content="Create" Width="150" Height="35" Foreground="White"
                         ToolTip="Create Enquiry" >

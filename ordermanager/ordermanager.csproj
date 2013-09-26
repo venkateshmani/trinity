@@ -169,6 +169,8 @@
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValueConverters\StarWidthConverter.cs" />
+    <Compile Include="ViewModel\DataProviers.cs" />
+    <Compile Include="ViewModel\DBSingleton.cs" />
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />
     <Compile Include="Views\CommonControls\BackForwardButton.xaml.cs">
       <DependentUpon>BackForwardButton.xaml</DependentUpon>
