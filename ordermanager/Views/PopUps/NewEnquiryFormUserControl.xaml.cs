@@ -1,4 +1,5 @@
-﻿using ordermanager.DatabaseModel;
+﻿using MahApps.Metro;
+using ordermanager.DatabaseModel;
 using ordermanager.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace ordermanager.Views.PopUps
     /// </summary>
     public partial class NewEnquiryFormUserControl : UserControl
     {
+        private Accent currentAccent = ThemeManager.DefaultAccents.First(x => x.Name == "Blue");
+
         public NewEnquiryFormUserControl()
         {
             InitializeComponent();
@@ -184,7 +187,19 @@ namespace ordermanager.Views.PopUps
         {
             if (positiveDecisionBtn.Content.ToString() == "Create")
             {
-                NewEnquiryViewModel.CreateNewOrder();
+                if (NewEnquiryViewModel.HasErrors)
+                {
+                    statusText.Visibility = System.Windows.Visibility.Visible;
+                    return;
+                }
+
+                Order newOrder = NewEnquiryViewModel.CreateNewOrder();
+                if (newOrder != null)
+                {
+                    statusText.Text = string.Format("Enquiry Successfull Created. ID : {0}", newOrder.OrderID.ToString());
+                    statusText.Visibility = System.Windows.Visibility.Visible;
+                    statusText.Foreground = new SolidColorBrush(Color.FromArgb(255, 17, 158, 218));
+                }
             }
         }
     }

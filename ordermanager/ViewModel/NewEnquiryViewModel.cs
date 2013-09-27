@@ -35,6 +35,8 @@ namespace ordermanager.ViewModel
         }
 
 
+
+
         private ObservableCollection<OrderProduct> m_OrderProducts = null;
         public ObservableCollection<OrderProduct> OrderProducts
         {
@@ -50,6 +52,20 @@ namespace ordermanager.ViewModel
             }
         }
 
+        private decimal m_TotalOrderValue = 0;
+        public decimal TotalOrderValue
+        {
+            get
+            {
+                return m_TotalOrderValue;
+            }
+            set
+            {
+                m_TotalOrderValue = value;
+                OnPropertyChanged("TotalOrderValue");
+            }
+        }
+
         void m_OrderProducts_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
@@ -58,9 +74,39 @@ namespace ordermanager.ViewModel
                 {
                     OrderProduct newProduct = newItem as OrderProduct;
                     newProduct.Order = Order;
+                    newProduct.PropertyChanged += Order_PropertyChanged;
+                }
+            }
+            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var deletedItem in e.OldItems)
+                {
+                    OrderProduct deletedProduct = deletedItem as OrderProduct;
+                    deletedProduct.Order = null;
+                    deletedProduct.PropertyChanged -= Order_PropertyChanged;
                 }
             }
         }
+
+        void Order_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "OrderValueWrapper")
+            {
+                CalculateTotalOrderValue();
+            }
+        }
+
+        private void CalculateTotalOrderValue()
+        {
+            decimal totalOrderValue = 0;
+            foreach (OrderProduct product in OrderProducts)
+            {
+                totalOrderValue += product.OrderValue;
+            }
+
+            TotalOrderValue = totalOrderValue;
+        }
+        
 
         private ObservableCollection<OrderCurrencyConversion> m_OrderCurrencyConversions = null;
         public ObservableCollection<OrderCurrencyConversion> OrderCurrencyConversions
@@ -112,17 +158,22 @@ namespace ordermanager.ViewModel
 
         public Order CreateNewOrder()
         {
-            foreach (OrderProduct product in OrderProducts)
+            if (!HasErrors)
             {
-                if (product.ProductID == 0)
+                foreach (OrderProduct product in OrderProducts)
                 {
-                    Order.OrderProducts.Add(product);
+                    if (product.ProductID == 0)
+                    {
+                        Order.OrderProducts.Add(product);
+                    }
                 }
+
+                Order.OrderStatusID = 1;
+                Order.LastModifiedDate = DateTime.Now;
+                return DBResources.CreateNewOrder(Order);
             }
 
-            Order.OrderStatusID = 1;
-            Order.LastModifiedDate = DateTime.Now;
-            return DBResources.CreateNewOrder(Order);
+            return null;
         }
 
         public DBResources DBResources
@@ -139,6 +190,33 @@ namespace ordermanager.ViewModel
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public bool HasErrors
+        {
+            get
+            {
+                bool hasErrors = false;
+                Order.Validate();
+                if (Order.HasErrors)
+                    hasErrors = true;
+
+                foreach (OrderCurrencyConversion currencyConversion in OrderCurrencyConversions)
+                {
+                    currencyConversion.Validate();
+                    if (currencyConversion.HasErrors)
+                        hasErrors = true;
+                }
+                
+                foreach (OrderProduct product in OrderProducts)
+                {
+                    product.Validate();
+                    if (product.HasErrors)
+                        hasErrors = true;
+                }
+
+                return hasErrors;
             }
         }
     }

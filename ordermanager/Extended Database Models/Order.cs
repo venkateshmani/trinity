@@ -94,6 +94,14 @@ namespace ordermanager.DatabaseModel
 
         #region Data Validation
 
+        //Add the property validation methods in to this method to ensure validation on create button click
+        public void Validate()
+        {
+            ValidateCustomer();
+            ValidateExpectedDeliveryDate();
+            ValidateAgent();
+            ValidateOrderThrough();
+        }
 
         private void ValidateOrderThrough()
         {

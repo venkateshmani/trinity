@@ -202,7 +202,7 @@
             </Grid.ColumnDefinitions>
             
             <Grid Grid.Row="0" Grid.Column="1">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Company Full Address"
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Order.Company.Address1}"
                />
             </Grid>
 
@@ -218,8 +218,14 @@
                           ItemsSource="{Binding OrderCurrencyConversions}" AutoGenerateColumns="False" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray"
                           GridLinesVisibility="All">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="currencySymbol" Header="Currency" Width="0.5*" IsReadOnly="True" Binding="{Binding Currency.Symbol}" />
-                        <DataGridTextColumn x:Name="inrValue" Header="Value in Rupees" Width="0.5*" Binding="{Binding ValueInINR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <DataGridTextColumn x:Name="currencySymbol" Header="Currency" Width="0.2*" IsReadOnly="True" Binding="{Binding Currency.Symbol}" />
+                        <DataGridTemplateColumn x:Name="inrValue" Header="Value in Rupees" Width="0.5*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding ValueInINRWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"  />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
@@ -237,7 +243,7 @@
                     </Button.Background>
                 </Button>
                 <DataGrid x:Name="productsRequired"  Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1"
-                      CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeRows="True"  CanUserSortColumns="True" GridLinesVisibility="All"
+                      CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeRows="True"  CanUserSortColumns="True" GridLinesVisibility="Horizontal"
                       ColumnWidth="Auto" ItemsSource="{Binding OrderProducts}" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn x:Name="productColumn" Header="Product" Width="0.1*">
@@ -254,7 +260,7 @@
                                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                                       ItemsSource="{Binding AvailableProducts, Source={StaticResource DataProvider}}"
                                                                       DisplayMemberPath="Name"
-                                                                      SelectedItem="{Binding ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                      SelectedItem="{Binding ProductNameWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                                       SelectionChanged="productComboBox_SelectionChanged"
                                                                       Height="20"
                                                                       />
@@ -269,6 +275,7 @@
                                             Click="addNewProductBtn_Click"
                                             Style="{DynamicResource MetroCircleButtonStyle}"
                                             ToolTip="Add New Product"
+                                            Visibility="Collapsed"
                                             >
                                             <Rectangle Width="10" Height="10">
                                                 <Rectangle.Fill>
@@ -281,8 +288,14 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTextColumn x:Name="quantityColumn" Header="Expected Order Quantity"
-                                        Binding="{Binding ExpectedQuantity}"/>
+                    <DataGridTemplateColumn x:Name="quantityColumn" Header="Expected Order Quantity">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding ExpectedQuantityWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
                     <DataGridTemplateColumn x:Name="unitOfMeasurementColumn" Header="UOM">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -298,7 +311,7 @@
                                                                       Height="20"
                                                                       ItemsSource="{Binding UOMs, Source={StaticResource DataProvider}}"
                                                                       DisplayMemberPath="Units"
-                                                                      SelectedItem="{Binding  UnitsOfMeasurement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                      SelectedItem="{Binding  UnitsOfMeasurementWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                                       />
                                     <Button Width="28"
                                             Grid.Column="1"
@@ -336,7 +349,7 @@
                                                                       Height="20"
                                                                       ItemsSource="{Binding Currencies, Source={StaticResource DataProvider}}"
                                                                       DisplayMemberPath="Symbol"
-                                                                      SelectedItem="{Binding Currency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                      SelectedItem="{Binding CurrencyWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                                       SelectionChanged="currencyComboBox_SelectionChanged"
                                                                       />
                                     <Button Width="28"
@@ -361,10 +374,25 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price"
-                                        Binding="{Binding CustomerTargetPrice}"/>
-                    <DataGridTextColumn x:Name="orderValueColumn" Header="Order Value"
-                                        Binding="{Binding OrderValue}"/>
+
+                    <DataGridTemplateColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="orderValueColumn" Header="Order Value">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Right" Orientation="Horizontal">
+                                    <TextBlock Text="{Binding OrderValueWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold" />
+                                    <TextBlock Text=" INR" FontSize="16" FontWeight="Bold" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -380,15 +408,21 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <Label Content="Total Order Value "  Style="{StaticResource DescriptionHeaderStyle}"/>
-                <Label x:Name="totalOrderValueLabel" Content="### "  Style="{StaticResource DescriptionHeaderStyle}" FontWeight="Bold">
+                <Label x:Name="totalOrderValueLabel" Content="{Binding TotalOrderValue}"  Style="{StaticResource DescriptionHeaderStyle}" FontWeight="Bold">
                     <Label.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Label.Foreground>
                 </Label>
+                <Label Content="  INR"  Style="{StaticResource DescriptionHeaderStyle}"/>
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="2">
+            <TextBlock x:Name="statusText" Text="Fill in the missing fields and Click CREATE" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Visibility="Collapsed">
+                <TextBlock.Foreground>
+                        <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
+                </TextBlock.Foreground>
+            </TextBlock>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Margin="5,5,10,10">
                 <Button x:Name="positiveDecisionBtn" Content="Create" Width="150" Height="35" Foreground="White"
                         ToolTip="Create Enquiry" Click="positiveDecisionBtn_Click" >

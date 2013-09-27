@@ -13,7 +13,7 @@ namespace ordermanager.DatabaseModel
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
-    public partial class OrderProduct : INotifyPropertyChanged
+    public partial class OrderProduct
     {
         public OrderProduct()
         {
@@ -25,148 +25,22 @@ namespace ordermanager.DatabaseModel
         public long OrderID { get; set; }
         public long ProductNameID { get; set; }
 
-        private decimal m_ExpectedQuantity = 0;
-        public decimal ExpectedQuantity 
-        {
-            get
-            {
-                return m_ExpectedQuantity;
-            }
-            set
-            {
-                m_ExpectedQuantity = value;
-                CalculateOrderValue();
-            }
-        }
-
+        
+        public decimal ExpectedQuantity { get; set; }
         public short UOMID { get; set; }
         public short CurrencyID { get; set; }
+        public decimal CustomerTargetPrice { get; set; }
+        public decimal OrderValue { get; set; }
 
-        public decimal m_CustomerTargetPrice = 0;
-        public decimal CustomerTargetPrice
-        {
-            get
-            {
-                return m_CustomerTargetPrice;
-            }
-            set
-            {
-                m_CustomerTargetPrice = value;
-                CalculateOrderValue();
-            }
-        }
 
-        private decimal m_OrderValue = 0;
-        public decimal OrderValue
-        {
-            get
-            {
-                return m_OrderValue;
-            }
-            set
-            {
-                m_OrderValue = value;
-                OnPropertyChanged("OrderValue");
-            }
-        }
-
-        private Currency m_Currency = null;
-        public virtual Currency Currency 
-        {
-            get
-            {
-                return m_Currency;
-            }
-            set
-            {
-                
-                m_Currency = value;
-                SelectOrAddCurrencyConversion();
-                CalculateOrderValue();
-            }
-        }
-
+        public virtual Currency Currency { get; set; }
         public virtual Order Order { get; set; }
         public virtual ProductName ProductName { get; set; }
-
         public virtual UnitsOfMeasurement UnitsOfMeasurement { get; set; }
         public virtual ICollection<ProductExtraCost> ProductExtraCosts { get; set; }
         public virtual ICollection<ProductMaterial> ProductMaterials { get; set; }
 
-        #region Helpers
-
-        private OrderCurrencyConversion m_CurrencyConversion = null;
-        private OrderCurrencyConversion CurrencyConversion
-        {
-            get
-            {
-                return m_CurrencyConversion;
-            }
-            set
-            {
-                if (m_CurrencyConversion != null)
-                {
-                    m_CurrencyConversion.PropertyChanged -= m_CurrencyConversion_PropertyChanged;
-                }
-
-                m_CurrencyConversion = value;
-                m_CurrencyConversion.PropertyChanged += m_CurrencyConversion_PropertyChanged;
-            }
-        }
-
-        private void SelectOrAddCurrencyConversion()
-        {
-            if (Currency != null)
-            {
-                var currencyConversion = Order.OrderCurrencyConversions.Where(c => c.Currency.CurrencyID == Currency.CurrencyID)
-                                                                       .Select(c => c);
-
-                OrderCurrencyConversion newConversion = null;
-                if (currencyConversion == null || currencyConversion.Count() == 0)
-                {
-                    newConversion = new OrderCurrencyConversion();
-                    newConversion.Currency = Currency;
-
-                    Order.OrderCurrencyConversions.Add(newConversion);
-                }
-                else
-                {
-                    newConversion = currencyConversion.First();
-                }
-
-                CurrencyConversion = newConversion;
-            }
-        }
-
-        void m_CurrencyConversion_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            CalculateOrderValue();   
-        }
-
-        private void CalculateOrderValue()
-        {
-            if (Currency != null && CurrencyConversion == null)
-            {
-                foreach (OrderCurrencyConversion currencyConversion in Order.OrderCurrencyConversions)
-                {
-                    if (currencyConversion.Currency.CurrencyID == Currency.CurrencyID)
-                    {
-                        CurrencyConversion = currencyConversion;
-                    }
-                }
-            }
-
-            decimal currencyValueInINR = 0;
-
-            if (CurrencyConversion != null)
-            {
-                currencyValueInINR = CurrencyConversion.ValueInINR;
-            }
-
-            OrderValue = ExpectedQuantity * CustomerTargetPrice * currencyValueInINR;
-        }
-
-        #endregion 
+     
 
 
     
