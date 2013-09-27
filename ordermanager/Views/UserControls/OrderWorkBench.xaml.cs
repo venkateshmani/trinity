@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -25,20 +26,22 @@ namespace ordermanager.Views.UserControls
         public OrderWorkBench()
         {
             InitializeComponent();
+            long orderId = 0;
+            this.DataContext = new ProductMaterialsViewModel(orderId);
             this.Loaded += OrderWorkBench_Loaded;
         }
 
         void OrderWorkBench_Loaded(object sender, RoutedEventArgs e)
         {
-            List<ProductDetails> productDetails = new List<ProductDetails>();
-            productDetails.Add(new ProductDetails { ItemIndexNumber = 1, ProductName = "T-Shirt", Quantity = "200 Pieces" });
-            productDetails.Add(new ProductDetails { ItemIndexNumber = 2, ProductName = "Trousers", Quantity = "100 Pieces" });
-            productDetails.Add(new ProductDetails { ItemIndexNumber = 3, ProductName = "Briefs", Quantity = "500 Pieces" });
-            productsList.ItemsSource = productDetails;
+            //List<ProductDetails> productDetails = new List<ProductDetails>();
+            //productDetails.Add(new ProductDetails { ItemIndexNumber = 1, ProductName = "T-Shirt", Quantity = "200 Pieces" });
+            //productDetails.Add(new ProductDetails { ItemIndexNumber = 2, ProductName = "Trousers", Quantity = "100 Pieces" });
+            //productDetails.Add(new ProductDetails { ItemIndexNumber = 3, ProductName = "Briefs", Quantity = "500 Pieces" });
+            //productsList.ItemsSource = productDetails;
 
-            List<MaterialDetails> materialDetails = new List<MaterialDetails>();
-            materialDetails.Add(new MaterialDetails { MaterialName = "Materials 1", CostPerUnit = "$10", Consumption = "100", UOM = "1 KG", ConsumptionCost = "1000" });
-            materialsGrid.ItemsSource = materialDetails;
+            //List<MaterialDetails> materialDetails = new List<MaterialDetails>();
+            //materialDetails.Add(new MaterialDetails { MaterialName = "Materials 1", CostPerUnit = "$10", Consumption = "100", UOM = "1 KG", ConsumptionCost = "1000" });
+            //materialsGrid.ItemsSource = materialDetails;
         }
 
         private void GoBack_MouseDown_1(object sender, MouseButtonEventArgs e)
