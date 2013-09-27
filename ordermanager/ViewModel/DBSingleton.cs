@@ -104,14 +104,16 @@ namespace ordermanager.ViewModel
                 Company newCompany = dbContext.Companies.Create();
 
 
-                var companyTypeID = dbContext.CompanyTypes.Where(c => c.Type == type)
-                                                          .Select(c => c.CompanyTypeID)
+                var companyType = dbContext.CompanyTypes.Where(c => c.Type == type)
+                                                          .Select(c => c)
                                                           .FirstOrDefault();
-                newCompany.CompanyTypeID = companyTypeID;
 
+                newCompany.CompanyTypeID = companyType.CompanyTypeID;
+                newCompany.CompanyType = companyType;
 
                 return newCompany;
             }
+
 
             public void SaveNewCompany(Company company)
             {
@@ -121,13 +123,13 @@ namespace ordermanager.ViewModel
                 switch (company.CompanyType.Type)
                 {
                     case "Customer":
-                        Customers = UpdateCompaniesCollection(company.CompanyType.Type);
+                        Customers.Add(company);
                         break; 
                     case "Agent":
-                        Agents = UpdateCompaniesCollection(company.CompanyType.Type);
+                        Agents.Add(company);
                         break;
                     case "Supplier":
-                        Suppliers = UpdateCompaniesCollection(company.CompanyType.Type);
+                        Suppliers.Add(company);
                         break;
                 }
             }
@@ -272,10 +274,12 @@ namespace ordermanager.ViewModel
                 return newOrder;
             }
 
-            public void CreateNewOrder(Order newOrder)
+            public Order CreateNewOrder(Order newOrder)
             {
-                dbContext.Orders.Add(newOrder);
+                Order newSavedOrder = dbContext.Orders.Add(newOrder);
                 Save();
+
+                return newSavedOrder;
             }
 
         #endregion 

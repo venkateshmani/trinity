@@ -11,15 +11,38 @@ namespace ordermanager.DatabaseModel
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     
-    public partial class OrderCurrencyConversion
+    public partial class OrderCurrencyConversion : INotifyPropertyChanged
     {
         public long OrderCurrencyConversionID { get; set; }
         public long OrderID { get; set; }
         public short CurrencyID { get; set; }
-        public decimal ValueInINR { get; set; }
+
+        private decimal m_ValueInINR = 0;
+        public decimal ValueInINR 
+        {
+            get
+            {
+                return m_ValueInINR;
+            }
+            set
+            {
+                m_ValueInINR = value;
+                OnPropertyChanged("ValueInINR");
+            }
+        }
     
         public virtual Currency Currency { get; set; }
         public virtual Order Order { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }

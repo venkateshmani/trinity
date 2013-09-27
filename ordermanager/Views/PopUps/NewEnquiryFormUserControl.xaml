@@ -59,11 +59,28 @@
                 <TextBlock Text="Customer"  Style="{StaticResource inLineTextBlockStyle}" Grid.Row="0" Grid.Column="0" />
                 <StackPanel  Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
                     <ComboBox x:Name="customerComboBox" Width="300" Margin="5" 
-                              ItemsSource="{Binding DBResources.Companies}"
+                              ItemsSource="{Binding DBResources.Customers}"
                               DisplayMemberPath="Name"
                               IsEditable="True"
-                              SelectedValue="{Binding Order.Company}"
-                              SelectedValuePath="CompanyID" />
+                              SelectedItem="{Binding Order.Customer, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                              SelectionChanged="customerComboBox_SelectionChanged"/>
+                    
+                    <Button Width="28"
+                        Height="28"
+                        Margin="0, 2, 0, 0"
+                        HorizontalAlignment="Left"
+                        Grid.Row="0"
+                        Cursor="Hand"
+                        x:Name="editExistingCustomerBtn"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        ToolTip="Edit Customer Details" Click="editExistingCustomerBtn_Click"
+                        Visibility="Collapsed">
+                        <Rectangle Width="10" Height="10">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
                     
                     <Button Width="28"
                         Height="28"
@@ -73,7 +90,8 @@
                         Cursor="Hand"
                         x:Name="addNewCustomerBtn"
                         Style="{DynamicResource MetroCircleButtonStyle}"
-                        ToolTip="Add New Customer" Click="addNewCustomerBtn_Click">
+                        ToolTip="Add New Customer" Click="addNewCustomerBtn_Click"
+                        >
                         <Rectangle Width="10" Height="10">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
@@ -88,12 +106,13 @@
                                     SelectedDate="{Binding Order.OrderDate}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date" Margin="5"
+                                    IsEnabled="False"
                                 />
 
                     <TextBlock Text="Expected Delivery Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Margin="10,0,0,0"/>
                     <StackPanel Grid.Row="3" Grid.Column="1" Margin="5" Orientation="Horizontal">
                         <DatePicker Width="150" 
-                                    SelectedDate="{Binding Order.ExpectedDeliveryDate}"
+                                    SelectedDate="{Binding Order.ExpectedDeliveryDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date"/>
                         <TextBlock x:Name="numberOfDays" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Top" />
@@ -104,12 +123,30 @@
 
                 <TextBlock Text="Order By" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <ComboBox Width="200" Margin="5"
+                    <ComboBox x:Name="agentComboxBox" Width="200" Margin="5"
                               ItemsSource="{Binding DBResources.Agents}"
                               DisplayMemberPath="Name"
                               IsEditable="True"
-                              SelectedValue="{Binding Order.Company1}"
-                              SelectedValuePath="CompanyID"/>
+                              SelectedItem="{Binding Order.Agent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              SelectionChanged="agentComboxBox_SelectionChanged" />
+
+                    <Button Width="28"
+                        Height="28"
+                        Margin="0, 2, 0, 0"
+                        HorizontalAlignment="Left"
+                        Grid.Row="0"
+                        Cursor="Hand"
+                        x:Name="editExistingAgentBtn"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        ToolTip="Edit Agent Details"  Click="editExistingAgentBtn_Click"
+                        Visibility="Collapsed">
+                        <Rectangle Width="10" Height="10">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    
                     <Button Width="28"
                         Height="28"
                         Margin="0, 2, 0, 0"
@@ -118,7 +155,8 @@
                         Cursor="Hand"
                         x:Name="addNewAgentBtn"
                         Style="{DynamicResource MetroCircleButtonStyle}"
-                        ToolTip="Add New Agent">
+                        ToolTip="Add New Agent"
+                        >
                         <Rectangle Width="10" Height="10">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
@@ -129,11 +167,11 @@
                     <ComboBox Width="100" Margin="5"
                              ItemsSource="{Binding DBResources.OrderThroughs}"
                              DisplayMemberPath="Mode"
-                             SelectedValue="{Binding Order.OrderThrough}"
+                             SelectedItem="{Binding Order.OrderThroughWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
                              IsEditable="True" 
                              />
-                    <TextBlock Text="and commision is" Grid.Row="5" Style="{StaticResource inLineTextBlockStyle}"/>
-                    <StackPanel  Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5">
+                    <StackPanel x:Name="commisionInfo" Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5">
+                        <TextBlock Text="and commision is" Grid.Row="5" Style="{StaticResource inLineTextBlockStyle}"/>
                         <TextBox Width="60" BorderBrush="LightGray"
                                  HorizontalContentAlignment="Right" 
                                  VerticalContentAlignment="Center"
@@ -142,7 +180,7 @@
                                   IsEditable="True"
                                   ItemsSource="{Binding DBResources.CommissionValueTypes}"
                                   DisplayMemberPath="Type"
-                                  SelectedValue="{Binding Order.CommissionValueType}"
+                                  SelectedItem="{Binding Order.CommissionValueType, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                    />
                     </StackPanel>
                 </StackPanel>
@@ -177,10 +215,11 @@
                 </Grid.RowDefinitions>
                 <TextBlock Text="Currency Conversion Rate Table" Margin="3"/>
                 <DataGrid x:Name="currencyConversionGrid" BorderThickness="1" BorderBrush="Gray" CanUserAddRows="False" Grid.Row="1" MinHeight="200" Margin="2"
-                          ItemsSource="{Binding OrderCurrencyConversions}">
+                          ItemsSource="{Binding OrderCurrencyConversions}" AutoGenerateColumns="False" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray"
+                          GridLinesVisibility="All">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="currencySymbol" Header="Currency" Width="0.5*" IsReadOnly="True" Binding="{Binding Symbol}" />
-                        <DataGridTextColumn x:Name="inrValue" Header="Value in Rupees" Width="0.5*" Binding="{Binding valueInINR}" />
+                        <DataGridTextColumn x:Name="currencySymbol" Header="Currency" Width="0.5*" IsReadOnly="True" Binding="{Binding Currency.Symbol}" />
+                        <DataGridTextColumn x:Name="inrValue" Header="Value in Rupees" Width="0.5*" Binding="{Binding ValueInINR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
@@ -199,27 +238,45 @@
                 </Button>
                 <DataGrid x:Name="productsRequired"  Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1"
                       CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeRows="True"  CanUserSortColumns="True" GridLinesVisibility="All"
-                      ColumnWidth="Auto" ItemsSource="{Binding OrderProducts}">
+                      ColumnWidth="Auto" ItemsSource="{Binding OrderProducts}" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn x:Name="productColumn" Header="Product" Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                    <ComboBox x:Name="productComboBox" 
+                                <Grid x:Name="productGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                
+                                    <ComboBox x:Name="comboBox" Grid.Column="0"
                                                                       IsEditable="True"
                                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                                       ItemsSource="{Binding AvailableProducts, Source={StaticResource DataProvider}}"
                                                                       DisplayMemberPath="Name"
-                                                                      SelectedValue="ProductName"  
+                                                                      SelectedItem="{Binding ProductName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                                      SelectionChanged="productComboBox_SelectionChanged"
                                                                       Height="20"
                                                                       />
-                                        <Button x:Name="newProductAdd" Content="Add"  Margin="5" Width="50" Foreground="White"
-                                                                    ToolTip="Add to Database" Visibility="Collapsed">
-                                        <Button.Background>
-                                            <SolidColorBrush Color="{StaticResource AccentColor}" />
-                                        </Button.Background>
-                                    </Button>
-                                </StackPanel>
+                                        <Button Width="28"
+                                            Grid.Column="1"
+                                            Height="28"
+                                            Margin="0, 2, 0, 0"
+                                            HorizontalAlignment="Left"
+                                            Grid.Row="0"
+                                            Cursor="Hand"
+                                            x:Name="addBtn"
+                                            Click="addNewProductBtn_Click"
+                                            Style="{DynamicResource MetroCircleButtonStyle}"
+                                            ToolTip="Add New Product"
+                                            >
+                                            <Rectangle Width="10" Height="10">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
+                                </Grid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -229,30 +286,51 @@
                     <DataGridTemplateColumn x:Name="unitOfMeasurementColumn" Header="UOM">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                    <ComboBox x:Name="uomComboBox" 
+                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <ComboBox x:Name="uomComboBox" Grid.Column="0"
                                                                       IsEditable="True"
                                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                                       Height="20"
                                                                       ItemsSource="{Binding UOMs, Source={StaticResource DataProvider}}"
                                                                       DisplayMemberPath="Units"
-                                                                      SelectedValue="UnitOfMeasurement" 
+                                                                      SelectedItem="{Binding  UnitsOfMeasurement, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                                       />
-                                    <Button x:Name="newUOMAdd" Content="Add"  Margin="5" Width="50" Foreground="White"
-                                                                    ToolTip="Add to Database" Visibility="Collapsed">
-                                        <Button.Background>
-                                            <SolidColorBrush Color="{StaticResource AccentColor}" />
-                                        </Button.Background>
+                                    <Button Width="28"
+                                            Grid.Column="1"
+                                            Height="28"
+                                            Margin="0, 2, 0, 0"
+                                            HorizontalAlignment="Left"
+                                            Grid.Row="0"
+                                            Cursor="Hand"
+                                            x:Name="addBtn"
+                                            Visibility="Collapsed"
+                                            Style="{DynamicResource MetroCircleButtonStyle}"
+                                            ToolTip="Add New UOM"
+                                            >
+                                        <Rectangle Width="10" Height="10">
+                                            <Rectangle.Fill>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                            </Rectangle.Fill>
+                                        </Rectangle>
                                     </Button>
-                                </StackPanel>
+                                </Grid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                    <ComboBox x:Name="currencyComboBox" 
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <ComboBox x:Name="currencyComboBox" Grid.Column="0"
                                                                       IsEditable="True"
                                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                                       Height="20"
@@ -261,13 +339,25 @@
                                                                       SelectedItem="{Binding Currency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                                       SelectionChanged="currencyComboBox_SelectionChanged"
                                                                       />
-                                    <Button x:Name="newCurrencyAdd" Content="Add"  Margin="5" Width="50" Foreground="White"
-                                                                    ToolTip="Add to Database" Visibility="Collapsed">
-                                        <Button.Background>
-                                            <SolidColorBrush Color="{StaticResource AccentColor}" />
-                                        </Button.Background>
+                                    <Button Width="28"
+                                            Grid.Column="1"
+                                            Height="28"
+                                            Margin="0, 2, 0, 0"
+                                            HorizontalAlignment="Left"
+                                            Grid.Row="0"
+                                            Cursor="Hand"
+                                            x:Name="addBtn"
+                                            Visibility="Collapsed"
+                                            Style="{DynamicResource MetroCircleButtonStyle}"
+                                            ToolTip="Add New Currency"
+                                            >
+                                        <Rectangle Width="10" Height="10">
+                                            <Rectangle.Fill>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                            </Rectangle.Fill>
+                                        </Rectangle>
                                     </Button>
-                                </StackPanel>
+                                </Grid>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -301,7 +391,7 @@
         <Grid Grid.Row="3" Grid.ColumnSpan="2">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Margin="5,5,10,10">
                 <Button x:Name="positiveDecisionBtn" Content="Create" Width="150" Height="35" Foreground="White"
-                        ToolTip="Create Enquiry" >
+                        ToolTip="Create Enquiry" Click="positiveDecisionBtn_Click" >
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>

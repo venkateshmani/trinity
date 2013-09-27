@@ -38,36 +38,41 @@
             <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Customer Details"  Style="{StaticResource DescriptionHeaderStyle}" />
         </Border>
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"    Margin="0,5,0,0"  Foreground="Gray"
-                                Controls:TextboxHelper.Watermark="Customer Name" ToolTip="Customer name"/>
+                                Controls:TextboxHelper.Watermark="Customer Name" ToolTip="Customer name"
+                                Text="{Binding Name}"    />
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"    Margin="0,5,0,0"  Foreground="Gray"
-                                Controls:TextboxHelper.Watermark="Alias Name" ToolTip="Alias name"/>
+                                Controls:TextboxHelper.Watermark="Alias Name" ToolTip="Alias name"
+                                Text="{Binding Alias}"/>
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"  Margin="0,5,0,0" Foreground="Gray"
-                                Controls:TextboxHelper.Watermark="Street/Road #" ToolTip="Customer address - Street/Road #"/>
+                                Controls:TextboxHelper.Watermark="Street/Road #" ToolTip="Customer address - Street/Road #"
+                                Text="{Binding Address1}"/>
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0" Foreground="Gray"
-                                Controls:TextboxHelper.Watermark="Area" ToolTip="Customer address - Area"/>
+                                Controls:TextboxHelper.Watermark="Area" ToolTip="Customer address - Area"
+                                Text="{Binding Address2}"/>
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"  Margin="0,5,0,0"  Foreground="Gray"
-                                Controls:TextboxHelper.Watermark="City" ToolTip="City name"/>
+                                Controls:TextboxHelper.Watermark="City" ToolTip="City name"
+                                Text="{Binding City}"/>
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"  Margin="0,5,0,0"  Foreground="Gray"
-                                Controls:TextboxHelper.Watermark="State" ToolTip="State name"/>
+                                Controls:TextboxHelper.Watermark="State" ToolTip="State name"
+                                Text="{Binding State}"/>
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
-                                Controls:TextboxHelper.Watermark="Country" ToolTip="Country name"/>
+                                Controls:TextboxHelper.Watermark="Country" ToolTip="Country name"
+                                Text="{Binding Country}"/>
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
-                                Controls:TextboxHelper.Watermark="Telephone Work" ToolTip="Work telephone number"/>
+                                Controls:TextboxHelper.Watermark="Telephone Work" ToolTip="Work telephone number"
+                                Text="{Binding Telephone}"/>
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
-                                Controls:TextboxHelper.Watermark="Telephone Fax" ToolTip="Fax number"/>
+                                Controls:TextboxHelper.Watermark="Telephone Fax" ToolTip="Fax number"
+                                Text="{Binding Fax}"/>
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
-                                Controls:TextboxHelper.Watermark="Mobile" ToolTip="Mobile number"/>
+                                Controls:TextboxHelper.Watermark="Mobile" ToolTip="Mobile number"
+                                Text="{Binding Mobile}"/>
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
-                                Controls:TextboxHelper.Watermark="Email" ToolTip="Customer email ID"/>
+                                Controls:TextboxHelper.Watermark="Email" ToolTip="Customer email ID"
+                                Text="{Binding EmailID}"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-            <Button x:Name="btnReset" Content="Reset"  Margin="5,10,0,5" Width="75" Height="20" Foreground="White"
-                                        ToolTip="Save Changes" HorizontalAlignment="Right">
-                <Button.Background>
-                    <SolidColorBrush Color="{StaticResource Gray1}" />
-                </Button.Background>
-            </Button>
             <Button x:Name="btnSave" Content="Save"  Margin="5,10,0,5" Width="75" Height="20" Foreground="White"
-                                        ToolTip="Save Changes" HorizontalAlignment="Right">
+                                        ToolTip="Save Changes" HorizontalAlignment="Right"  PreviewMouseLeftButtonUp="btnSave_PreviewMouseLeftButtonUp">
                 <Button.Background>
                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                 </Button.Background>

@@ -24,5 +24,17 @@ namespace ordermanager.Views
         {
             InitializeComponent();
         }
+
+        private void btnSave_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            this.DialogResult = true;
+            this.Close();
+        }
+
+        private void btnReset_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
+        }
     }
 }

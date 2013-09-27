@@ -83,6 +83,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Extended Database Models\EntityBase.cs" />
+    <Compile Include="Extended Database Models\Order.cs" />
     <Compile Include="DatabaseModel\CommissionValueType.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
@@ -162,6 +164,7 @@
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Delegates.cs" />
+    <Compile Include="Extended Database Models\OrderProduct.cs" />
     <Compile Include="LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
@@ -329,6 +332,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DatabaseModel\Overrides\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Resources\Icons\" />
     <Folder Include="Resources\Images\" />
