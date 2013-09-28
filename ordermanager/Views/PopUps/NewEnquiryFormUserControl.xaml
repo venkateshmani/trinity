@@ -316,7 +316,7 @@
                     <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.16*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding ExpectedQuantityWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                <TextBox Text="{Binding ExpectedQuantityWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler" />
                             </DataTemplate>
@@ -405,7 +405,7 @@
                     <DataGridTemplateColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price" Width="0.2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" 
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler" />
                             </DataTemplate>
@@ -416,7 +416,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Right" Orientation="Horizontal">
-                                    <TextBlock Text="{Binding OrderValueWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding OrderValueWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold" />
                                     <TextBlock Text=" INR" FontSize="16" FontWeight="Bold" />
                                 </StackPanel>
                             </DataTemplate>
@@ -437,7 +437,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <Label Content="Total Order Value "  Style="{StaticResource DescriptionHeaderStyle}"/>
-                <TextBlock x:Name="totalOrderValueLabel" Text="{Binding TotalOrderValue}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold">
+                <TextBlock x:Name="totalOrderValueLabel" Text="{Binding TotalOrderValue, StringFormat=n}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </TextBlock.Foreground>

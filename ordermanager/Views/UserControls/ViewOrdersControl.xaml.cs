@@ -28,8 +28,6 @@ namespace ordermanager.Views.UserControls
         {
             InitializeComponent();
             this.Loaded += ViewOrdersControl_Loaded;
-            
-            
         }
 
         void ViewOrdersControl_Loaded(object sender, RoutedEventArgs e)
@@ -50,6 +48,7 @@ namespace ordermanager.Views.UserControls
                 m_OrderViewModel = value;
                 ordersCollectionViewSource = this.FindResource("orderViewSource") as CollectionViewSource;
                 ordersCollectionViewSource.Source = value.Orders;
+                ordersCollectionViewSource.SortDescriptions.Add(new System.ComponentModel.SortDescription("OrderDate", System.ComponentModel.ListSortDirection.Descending));
             }
         }
 
