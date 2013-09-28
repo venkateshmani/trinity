@@ -72,22 +72,27 @@ namespace ordermanager.ViewModel
         
         void m_SelectedProductMaterials_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            if (m_SelectedItem != null)
             {
-                foreach (var newItem in e.NewItems)
+                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
                 {
-                    ProductMaterial newMaterialItem = newItem as ProductMaterial;
-                    newMaterialItem.OrderProduct = m_SelectedItem;                   
+                    foreach (var newItem in e.NewItems)
+                    {
+                        ProductMaterial newMaterialItem = newItem as ProductMaterial;
+                        newMaterialItem.OrderProduct = m_SelectedItem;
+                    }
                 }
-            }
-            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
-            {
-                foreach (var deletedItem in e.OldItems)
+                else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
                 {
-                    ProductMaterial deletedMaterial = deletedItem as ProductMaterial;
-                    deletedMaterial.OrderProduct = null;                   
+                    foreach (var deletedItem in e.OldItems)
+                    {
+                        ProductMaterial deletedMaterial = deletedItem as ProductMaterial;
+                        deletedMaterial.OrderProduct = null;
+                    }
                 }
+               // NotifyPropertyChanged("ProductMaterialsList");
             }
+            
         }           
 
         #region [INotifyPropertyChanged]

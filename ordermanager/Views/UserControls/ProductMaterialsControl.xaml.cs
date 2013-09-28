@@ -64,6 +64,7 @@ namespace ordermanager.Views.UserControls
             if (m_ViewModel != null)
             {
                 m_ViewModel.ProductMaterialsList.Add(new ProductMaterial());
+                materialsGrid.ItemsSource = m_ViewModel.ProductMaterialsList;
             }
         }
     }
