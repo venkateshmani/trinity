@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ordermanager.ViewModel
 {
-    public class DBResources : IDisposable
+    public class DBResources : INotifyPropertyChanged, IDisposable
     {
         #region  single ton
             private static DBResources _DBSingleton = null;
@@ -177,6 +178,7 @@ namespace ordermanager.ViewModel
             private set
             {
                 m_AvailableProducts = value;
+                OnPropertyChanged("AvailableProducts");
             }
         }
 
@@ -319,6 +321,15 @@ namespace ordermanager.ViewModel
         public void Dispose()
         {
             dbContext.Dispose();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

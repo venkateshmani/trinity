@@ -126,32 +126,6 @@ namespace ordermanager.Views.PopUps
                 DBResources.Instance.Save();
             }
         }
-
-        private void productComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox productComboBox = sender as ComboBox;
-            if (productComboBox != null)
-            {
-                Grid parentGrid = productComboBox.Parent as Grid;
-                
-                if (parentGrid != null)
-                {
-                    Button addbtn = parentGrid.FindName("addBtn") as Button;
-                    if (addbtn != null)
-                    {
-                        if (productComboBox.SelectedItem != null)
-                        {
-                            addbtn.Visibility = System.Windows.Visibility.Collapsed;
-                        }
-                        else
-                        {
-                            addbtn.Visibility = System.Windows.Visibility.Visible;
-                        }
-                    }
-                }
-            }
-        }
-
      
         private void addNewProductBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -247,6 +221,31 @@ namespace ordermanager.Views.PopUps
                 if (!IsTextAllowed(text)) e.CancelCommand();
             }
             else e.CancelCommand();
+        }
+
+        private void comboBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ComboBox productComboBox = sender as ComboBox;
+            if (productComboBox != null)
+            {
+                Grid parentGrid = productComboBox.Parent as Grid;
+
+                if (parentGrid != null)
+                {
+                    Button addbtn = parentGrid.FindName("addBtn") as Button;
+                    if (addbtn != null)
+                    {
+                        if (productComboBox.SelectedItem != null)
+                        {
+                            addbtn.Visibility = System.Windows.Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            addbtn.Visibility = System.Windows.Visibility.Visible;
+                        }
+                    }
+                }
+            }
         }
     }
 }

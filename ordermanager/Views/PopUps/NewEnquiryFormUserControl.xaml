@@ -285,8 +285,8 @@
                                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                                       ItemsSource="{Binding AvailableProducts, Source={StaticResource DataProvider}}"
                                                                       DisplayMemberPath="Name"
-                                                                      SelectedItem="{Binding ProductNameWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                                      SelectionChanged="productComboBox_SelectionChanged"
+                                                                      SelectedItem="{Binding ProductNameWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                                      TextBoxBase.TextChanged="comboBox_TextChanged"
                                                                       Height="20"
                                                                       />
                                         <Button Width="28"
