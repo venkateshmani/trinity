@@ -176,6 +176,7 @@
     <Compile Include="ViewModel\DBSingleton.cs" />
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />
     <Compile Include="ViewModel\ProductMaterialsViewModel.cs" />
+    <Compile Include="ViewModel\PurchaseOrderControlViewModel.cs" />
     <Compile Include="Views\CommonControls\BackForwardButton.xaml.cs">
       <DependentUpon>BackForwardButton.xaml</DependentUpon>
     </Compile>
@@ -203,6 +204,9 @@
     </Compile>
     <Compile Include="Views\UserControls\OrderWorkBench.xaml.cs">
       <DependentUpon>OrderWorkBench.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ProductMaterialsControl.xaml.cs">
+      <DependentUpon>ProductMaterialsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ViewOrdersControl.xaml.cs">
       <DependentUpon>ViewOrdersControl.xaml</DependentUpon>
@@ -238,6 +242,10 @@
     <Page Include="Views\CustomerDetailsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\ProductMaterialsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserControls\ViewOrdersControl.xaml">
       <SubType>Designer</SubType>

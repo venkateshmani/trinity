@@ -5,8 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:local="clr-namespace:ordermanager.Views.UserControls"
+               xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500">
+             d:DesignHeight="500" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -37,13 +38,13 @@
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
             </Style>
+            <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -54,40 +55,93 @@
 
         <Grid Grid.Row="0" Grid.Column="0">
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Order Quantity" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Products" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
 
-        <Grid Grid.Row="0" Grid.Column="2">
-            <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Purchase Order Materials Details"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
-            </Border>
-        </Grid>
-
-        <Grid Grid.Row="1" Grid.Column="2">
-            <ScrollViewer>
-                <StackPanel Name="spBase">
-                    <ItemsControl Name="items" ItemsSource="{Binding PurchaseOrderItems}" >
-                        <ItemsControl.ItemTemplate>
+        <ListView x:Name="productsList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Products}" SelectionChanged="productsList_SelectionChanged">
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
+                    <GridViewColumn x:Name="productColumn" Header="Product" >
+                        <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Expander Header="{Binding Path= Key}" Margin="10" Background="WhiteSmoke"  FontSize="{StaticResource NormalFontSize}" FontWeight="SemiBold">
-                                    <DataGrid  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" AutoGenerateColumns="False" ItemsSource="{Binding Path= Value}" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="Gainsboro" Background="WhiteSmoke">
-                                        <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Item Name"  Binding="{Binding ItemName}"/>
-                                            <DataGridTextColumn Header="Alias" Binding="{Binding Alias}" />
-                                            <DataGridTextColumn Header="Quantity"  Binding="{Binding Quantity}"/>
-                                            <DataGridComboBoxColumn Header="Currency"  DisplayMemberPath="{Binding Currency}"/>
-                                            <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" />
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </Expander>
+                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock HorizontalAlignment="Left" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexToNumber}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
+                                        <TextBlock HorizontalAlignment="Left" Text=".  "   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
+                                        <TextBlock HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=ProductName}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" />
+                                    </StackPanel>
+                                    <TextBlock HorizontalAlignment="Right" TextAlignment="Left" Text="{Binding Path=ExpectedQuantity}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" />
+                                </Grid>
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
+        <Grid Grid.Row="0" Grid.Column="3" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Order Quantity"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
+                    </Border>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <ScrollViewer Background="White">
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+            <GridSplitter Grid.Row="1"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Center"
+              Background="LightGray" 
+              ShowsPreview="True"
+              Height="5" />
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+                        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Purchase Order Materials Details"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
+                    </Border>
+                </Grid>
+                <Grid Grid.Row="1" DataContext="{Binding Path=SelectedItem}">
+                    <ScrollViewer Background="White">
+                        <StackPanel Name="spBase">
+                            <ItemsControl x:Name="itemsControl" ItemsSource="{Binding MaterialItems}">  
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Expander Header="{Binding Path= Key}" Margin="10" Background="WhiteSmoke"  FontSize="{StaticResource NormalFontSize}" FontWeight="SemiBold">
+                                            <DataGrid  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" AutoGenerateColumns="False" ItemsSource="{Binding Path= Value}" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="Gainsboro" Background="WhiteSmoke">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn Header="Item Name"  Binding="{Binding ItemName}"/>
+                                                    <DataGridTextColumn Header="Alias" Binding="{Binding Alias}" />
+                                                    <DataGridTextColumn Header="Quantity"  Binding="{Binding Quantity}"/>
+                                                    <DataGridComboBoxColumn Header="Currency"  DisplayMemberPath="{Binding Currency}"/>
+                                                    <DataGridTextColumn Header="Cost" Binding="{Binding Cost}" />
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Expander>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+        </Grid>
         <GridSplitter Grid.Row="0" Grid.Column="1"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"
@@ -96,7 +150,7 @@
                       Width="5" Grid.RowSpan="2" />
 
         <Grid Grid.Row="2" Grid.ColumnSpan="3">
-            <Rectangle Height="1" Fill="Gray" />
+            <Rectangle Height="1" Fill="Gray" VerticalAlignment="Top" />
         </Grid>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="3">

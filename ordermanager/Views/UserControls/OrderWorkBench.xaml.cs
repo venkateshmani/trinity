@@ -82,7 +82,7 @@ namespace ordermanager.Views.UserControls
 
         private void productsList_SizeChanged_1(object sender, SizeChangedEventArgs e)
         {
-            productColumn.Width = productsList.ActualWidth - 5;  //5 for Border
+           // productColumn.Width = productsList.ActualWidth - 5;  //5 for Border
         }
     }
 

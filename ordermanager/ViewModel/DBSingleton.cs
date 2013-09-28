@@ -24,6 +24,10 @@ namespace ordermanager.ViewModel
                 }
             }
 
+            public OrderManagerDBEntities Context
+            {
+                get { return dbContext; }
+            }
         #endregion 
 
         #region
