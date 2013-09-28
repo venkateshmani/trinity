@@ -9,7 +9,6 @@ namespace ordermanager.DatabaseModel
 {
     public partial class ProductMaterial : EntityBase, INotifyPropertyChanged
     {
-
         #region Wrapper Properties
 
             public virtual Currency CurrencyWrapper

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
              mc:Ignorable="d" d:DesignHeight="593.4" d:DesignWidth="1416">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -17,8 +18,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="22" />
+            <Style x:Key="DescriptionHeaderStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="18" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
             <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
@@ -31,6 +32,16 @@
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
             </Style>
+            
+            <Style x:Key="HeaderStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="10"/>
+                <Setter Property="Foreground" Value="Gray"/>
+                <Setter Property="FontStyle" Value="Italic" />
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+            <DataProviders:DataProvider x:Key="DataProvider" />
+            <CollectionViewSource x:Key="orderViewSource" Filter="CollectionViewSource_Filter" />
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -48,20 +59,27 @@
                         </Rectangle.Fill>
                     </Rectangle>
                     <TextBlock Text="Company Name"  Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
-                    <ComboBox Width="200" Height="5" Margin="5,0,25,0" ToolTip="Filter by Company Name"/>
-                    <TextBlock Text="From" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
-                    <DatePicker Width="150" 
+                    <ComboBox x:Name="companyNameFilter" Width="200" Height="5" Margin="5,0,25,0" ToolTip="Filter by Company Name"
+                              ItemsSource="{Binding Companies, Source={StaticResource DataProvider}}"
+                              DisplayMemberPath="Name"
+                              SelectionChanged="companyNameFilter_SelectionChanged"/>
+                    <TextBlock  Text="From" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
+                    <DatePicker x:Name="fromDateFilter" Width="150" 
                                     HorizontalAlignment="Left"
-                                    Controls:TextboxHelper.Watermark="Select a date" Margin="5" />
+                                    Controls:TextboxHelper.Watermark="Select a date" Margin="5"
+                                SelectedDateChanged="fromDateFilter_SelectedDateChanged"/>
                     <TextBlock Text="To" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
-                    <DatePicker Width="150" 
+                    <DatePicker x:Name="toDateFilter" Width="150" 
                                     HorizontalAlignment="Left"
-                                    Controls:TextboxHelper.Watermark="Select a date" Margin="5,5,25,5" />
-                    <TextBox VerticalAlignment="Center" HorizontalAlignment="Right"
+                                    Controls:TextboxHelper.Watermark="Select a date" Margin="5,5,25,5"
+                                SelectedDateChanged="toDateFilter_SelectedDateChanged"/>
+                    <TextBox x:Name="searchText" VerticalAlignment="Center" HorizontalAlignment="Right"
                                 Width="200"
                                 Foreground="Gray"
+                                Visibility="Collapsed"
                                 Controls:TextboxHelper.Watermark="Search"
                                 Controls:TextboxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}"
+                                TextInput="searchText_TextInput"
                                 Style="{DynamicResource SearchMetroTextBox}"  Margin="5"/>
                     <Button Width="28"
                         Height="28"
@@ -69,8 +87,9 @@
                         HorizontalAlignment="Left"
                         Grid.Row="0"
                         Cursor="Hand"
-                        x:Name="addNewCustomerBtn"
-                            BorderBrush="Transparent"
+                        x:Name="clearFilterBtn"
+                        BorderBrush="Transparent"
+                        Click="clearFilterBtn_Click"
                         ToolTip="Clear All Filters">
                         <Rectangle Width="10" Height="10">
                             <Rectangle.Fill>
@@ -80,21 +99,24 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <ListView Name="lvOrders" Grid.Row="1" ItemsSource="{Binding Path= Orders}" SelectionChanged="lvOrders_SelectionChanged">
+            <ListView Name="lvOrders" Grid.Row="1" ItemsSource="{Binding Source={StaticResource orderViewSource}}" SelectionChanged="lvOrders_SelectionChanged">
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
                         <GridViewColumn Header="OrderID">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Margin="25,5,10,5" TextAlignment="Right" Text="{Binding Path=OrderID}"  FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"/>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock TextAlignment="Center" Text="{Binding Path=OrderID}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource DescriptionHeaderStyle}"/>
+                                        <TextBlock Text="Order ID" Style="{StaticResource HeaderStyle}"/>
+                                    </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                         <GridViewColumn Header="CustomerName">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Margin="10,5,10,5" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                                        <TextBlock TextAlignment="Center" Text="{Binding Path=Company.Name}"  FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" HorizontalAlignment="Center"/>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock TextAlignment="Center" Text="{Binding Path=Company.Name}"  FontFamily="{StaticResource ContentFontFamily}" HorizontalAlignment="Center" Style="{StaticResource DescriptionHeaderStyle}"/>
                                         <TextBlock TextAlignment="Center" Text="{Binding Path=Company.City}"  FontSize="10" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -104,7 +126,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="10,5,10,5" VerticalAlignment="Center">
-                                        <TextBlock TextAlignment="Right" Text="{Binding Path=OrderStatu.StatusLabel}"   FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" HorizontalAlignment="Center"/>
+                                        <TextBlock TextAlignment="Right" Text="{Binding Path=OrderStatu.StatusLabel}"  HorizontalAlignment="Center" Style="{StaticResource DescriptionHeaderStyle}"/>
                                         <TextBlock TextAlignment="Right" Text="{Binding Path=OrderDate}"  FontSize="10" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -113,7 +135,7 @@
                         <GridViewColumn Header="OrderValue" >
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Margin="10,5,10,5" TextAlignment="Right" Text="{Binding Path=OrderValue}"  FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"/>
+                                    <TextBlock Margin="10,5,10,5" TextAlignment="Right" Text="{Binding Path=OrderValue}"   VerticalAlignment="Center"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -123,3 +145,5 @@
         </Grid>
     </Grid>
 </UserControl>
+
+    

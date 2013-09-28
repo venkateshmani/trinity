@@ -43,7 +43,25 @@ namespace ordermanager.ViewModel
 
         #region Companies
 
-        private ObservableCollection<Company> m_Customers = null;
+            public ObservableCollection<Company> m_Companies = null;
+            public ObservableCollection<Company> Companies
+            {
+                get
+                {
+                    if (m_Companies == null)
+                    {
+                        m_Companies = new ObservableCollection<Company>(dbContext.Companies.ToList());
+                    }
+
+                    return m_Companies;
+                }
+                private set
+                {
+                    m_Companies = value;
+                }
+            }
+
+            private ObservableCollection<Company> m_Customers = null;
             public ObservableCollection<Company> Customers
             {
                 get
@@ -136,6 +154,8 @@ namespace ordermanager.ViewModel
                         Suppliers.Add(company);
                         break;
                 }
+
+                Companies.Add(company);
             }
 
 

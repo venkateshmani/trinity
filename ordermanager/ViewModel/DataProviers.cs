@@ -41,6 +41,15 @@ namespace ordermanager.ViewModel
                 return DBResources.Instance.AvailableMaterials;
             }
         }
+
+        public ObservableCollection<Company> Companies
+        {
+            get
+            {
+                return DBResources.Instance.Companies;
+            }
+        }
+
     }
 
 }

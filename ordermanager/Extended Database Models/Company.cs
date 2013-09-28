@@ -6,11 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace oordermanager.DatabaseModel
+namespace ordermanager.DatabaseModel
 {
     public partial class Company : EntityBase, INotifyPropertyChanged
     {
-
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
