@@ -14,6 +14,7 @@ namespace ordermanager.ViewModel
         private Order m_Order = null;
         private OrderProduct m_SelectedItem = null;
         private ObservableCollection<OrderProduct> m_Products = null;
+        ObservableCollection<ProductMaterial> m_SelectedProductMaterials;
 
         public ObservableCollection<OrderProduct> Products
         {
@@ -25,7 +26,20 @@ namespace ordermanager.ViewModel
             }
         }
 
-        public OrderProduct SelectedItem
+        public ObservableCollection<ProductMaterial> ProductMaterialsList
+        {
+            get
+            {
+                if (m_SelectedProductMaterials == null)
+                {
+                    m_SelectedProductMaterials = new ObservableCollection<ProductMaterial>(m_SelectedItem.ProductMaterials);
+                    m_SelectedProductMaterials.CollectionChanged += m_SelectedProductMaterials_CollectionChanged;
+                }
+                return m_SelectedProductMaterials;
+            }
+        }
+
+        public OrderProduct SelectedProduct
         {
             get { return m_SelectedItem; }
             set
@@ -33,7 +47,7 @@ namespace ordermanager.ViewModel
                 if (value != m_SelectedItem)
                 {
                     m_SelectedItem = value;
-                    NotifyPropertyChanged("SelectedItem");
+                    NotifyPropertyChanged("SelectedProduct");
                 }
             }
         }
@@ -41,7 +55,7 @@ namespace ordermanager.ViewModel
         public bool SetOrder(Order order)
         {
             if (m_Order != order)
-            {                
+            {
                 if (order != null)
                 {
                     Products = new ObservableCollection<OrderProduct>(order.OrderProducts);
@@ -50,6 +64,31 @@ namespace ordermanager.ViewModel
             }
             return true;
         }
+
+        public MaterialName CreateNewMaterial(string materialName)
+        {
+            return DBResources.Instance.CreateNewMaterial(materialName);
+        }
+        
+        void m_SelectedProductMaterials_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                foreach (var newItem in e.NewItems)
+                {
+                    ProductMaterial newMaterialItem = newItem as ProductMaterial;
+                    newMaterialItem.OrderProduct = m_SelectedItem;                   
+                }
+            }
+            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var deletedItem in e.OldItems)
+                {
+                    ProductMaterial deletedMaterial = deletedItem as ProductMaterial;
+                    deletedMaterial.OrderProduct = null;                   
+                }
+            }
+        }           
 
         #region [INotifyPropertyChanged]
         public event PropertyChangedEventHandler PropertyChanged;

@@ -21,17 +21,50 @@ namespace ordermanager.Views.UserControls
     /// Interaction logic for ProductMaterials.xaml
     /// </summary>
     public partial class ProductMaterialsControl : UserControl
-    {       
+    {
+        ProductMaterialsViewModel m_ViewModel;
+
         public ProductMaterialsControl()
         {
-            InitializeComponent();           
-        }             
+            InitializeComponent();
+        }
 
         private void productsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             OrderProduct product = productsList.SelectedItem as OrderProduct;
-            if (product != null && this.DataContext != null)
-                (DataContext as ProductMaterialsViewModel).SelectedItem = product;
+            if (product != null && m_ViewModel != null)
+                m_ViewModel.SelectedProduct = product;
+        }
+
+        private void AddNewMaterial(object sender, RoutedEventArgs e)
+        {
+            Button addBtn = sender as Button;
+            if (addBtn != null)
+            {
+                Grid parentGrid = addBtn.Parent as Grid;
+                if (parentGrid != null)
+                {
+                    ComboBox comboBox = parentGrid.FindName("materialsComboBox") as ComboBox;
+                    if (comboBox != null && m_ViewModel != null)
+                    {
+                        comboBox.SelectedItem = m_ViewModel.CreateNewMaterial(comboBox.Text);
+                        addBtn.Visibility = System.Windows.Visibility.Collapsed;
+                    }
+                }
+            }
+        }
+
+        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            m_ViewModel = DataContext as ProductMaterialsViewModel;
+        }
+
+        private void AddNewItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_ViewModel != null)
+            {
+                m_ViewModel.ProductMaterialsList.Add(new ProductMaterial());
+            }
         }
     }
 }
