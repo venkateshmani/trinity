@@ -20,10 +20,10 @@
             <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="22" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
-            </Style>       
-        <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
-            <Setter Property="Visibility" Value="Collapsed" />
-        </Style>
+            </Style>
+            <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Style>
             <Style x:Key="ProductInfoStyle" TargetType="{x:Type TextBlock}">
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -32,7 +32,7 @@
                 <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
             </Style>
         </ResourceDictionary>
-    </UserControl.Resources>        
+    </UserControl.Resources>
     <Grid>
         <Grid Margin="2">
             <Grid.RowDefinitions>
@@ -41,7 +41,7 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                   
+
                     <Rectangle Width="15" Height="15" ToolTip="Filters">
                         <Rectangle.Fill>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_filter}" />
@@ -79,32 +79,32 @@
                         </Rectangle>
                     </Button>
                 </StackPanel>
-            </Grid>           
-            <ListView Name="lvOrders" SelectionChanged="orderList_SelectionChanged" Grid.Row="1">
+            </Grid>
+            <ListView Name="lvOrders" SelectionChanged="orderList_SelectionChanged" Grid.Row="1" ItemsSource="{Binding Path= Orders}">
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
-                        <GridViewColumn Header="OrderID">                            
+                        <GridViewColumn Header="OrderID">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Margin="25,5,10,5" TextAlignment="Right" Text="{Binding Path=OrderID}"  FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="CustomeName">
+                        <GridViewColumn Header="CustomerName">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="10,5,10,5" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                                        <TextBlock TextAlignment="Center" Text="{Binding Path=CustomerName}"  FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" HorizontalAlignment="Center"/>
-                                        <TextBlock TextAlignment="Center" Text="{Binding Path=CustomerLocation}"  FontSize="10" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center"/>
+                                        <TextBlock TextAlignment="Center" Text="{Binding Path=Company.Name}"  FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" HorizontalAlignment="Center"/>
+                                        <TextBlock TextAlignment="Center" Text="{Binding Path=Company.City}"  FontSize="10" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Name2">
+                        <GridViewColumn Header="OrderStatus">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="10,5,10,5" VerticalAlignment="Center">
-                                        <TextBlock TextAlignment="Right" Text="{Binding Path=Status}"   FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" HorizontalAlignment="Center"/>
+                                        <TextBlock TextAlignment="Right" Text="{Binding Path=OrderStatu.StatusLabel}"   FontSize="{StaticResource NormalFontSize}" FontFamily="{StaticResource ContentFontFamily}" HorizontalAlignment="Center"/>
                                         <TextBlock TextAlignment="Right" Text="{Binding Path=OrderDate}"  FontSize="10" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>
@@ -118,7 +118,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     </GridView>
-                </ListView.View>    
+                </ListView.View>
             </ListView>
         </Grid>
     </Grid>

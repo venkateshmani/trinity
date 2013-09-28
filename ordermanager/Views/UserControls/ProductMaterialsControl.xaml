@@ -58,7 +58,7 @@
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Products" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
-        </Grid>       
+        </Grid>
 
         <ListView x:Name="productsList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Products}" SelectionChanged="productsList_SelectionChanged">
             <ListView.View>
@@ -70,9 +70,10 @@
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock HorizontalAlignment="Left" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexToNumber}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
                                         <TextBlock HorizontalAlignment="Left" Text=".  "   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
-                                        <TextBlock HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=ProductName}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" />
+                                        <TextBlock HorizontalAlignment="Left" TextAlignment="Left" DataContext="{Binding Path=ProductName}" Text="{Binding Path=Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" />
+                                        <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" />
                                     </StackPanel>
-                                    <TextBlock HorizontalAlignment="Right" TextAlignment="Left" Text="{Binding Path=ExpectedQuantity}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" />
+
                                 </Grid>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -94,7 +95,7 @@
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0">
                 <TextBlock Text="Product Name" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
-                <TextBlock Text="{Binding Path = ProductName}"  Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                <TextBlock Text="{Binding Path = ProductName.Name}"  Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </TextBlock.Foreground>
@@ -184,7 +185,7 @@
                 </Grid>
             </Grid>
         </Grid>
-    
+
         <GridSplitter Grid.Row="0" Grid.Column="1"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"

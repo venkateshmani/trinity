@@ -22,20 +22,37 @@ namespace ordermanager.Views.UserControls
     /// </summary>
     public partial class ProductMaterialsControl : UserControl
     {
-        ProductMaterialsViewModel viewModel;
+        //ProductMaterialsViewModel m_MaterialsViewModel;
+        //private long m_OrderID;
         public ProductMaterialsControl()
         {
             InitializeComponent();
-            long orderId = 0;
-            viewModel = new ProductMaterialsViewModel(orderId);
-            this.DataContext = viewModel;
+            //long orderId = 0;
+            //m_MaterialsViewModel = new ProductMaterialsViewModel(orderId);
+            //this.DataContext = m_MaterialsViewModel;
         }
+
+        //public long OrderID
+        //{
+        //    get { return m_OrderID; }
+        //    set { SetOrderID(value); }
+        //}
+
+        //private void SetOrderID(long orderID)
+        //{
+        //    if (m_OrderID != orderID)
+        //    {
+        //        m_MaterialsViewModel.SetOrderID(orderID);
+        //        this.DataContext = m_MaterialsViewModel;
+        //        m_OrderID = orderID;
+        //    }
+        //}
 
         private void productsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             OrderProduct product = productsList.SelectedItem as OrderProduct;
-            if (product != null)
-                viewModel.SelectedItem = product;
+            if (product != null && this.DataContext != null)
+                (DataContext as ProductMaterialsViewModel).SelectedItem = product;
         }
     }
 }

@@ -51,6 +51,7 @@ namespace ordermanager
         private void ViewOrdersControl_OnOrderClick()
         {
             viewOrdersTabControl.Visibility = System.Windows.Visibility.Collapsed;
+            orderWorkBench.OrderID = 5;
             orderWorkBench.Visibility = System.Windows.Visibility.Visible;
         }
 

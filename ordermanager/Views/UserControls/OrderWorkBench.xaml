@@ -8,8 +8,7 @@
              xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              mc:Ignorable="d" 
-             d:DesignHeight="619" d:DesignWidth="1068"
-             >
+             d:DesignHeight="619" d:DesignWidth="1068">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -48,7 +47,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <TabControl x:Name="tabControl" SelectionChanged="TabControl_SelectionChanged_1" SelectedIndex="2">
+        <TabControl x:Name="tabControl">
             <TabItem x:Name="GoBackTab">
                 <TabItem.Header>
                     <Button Width="40"
@@ -74,7 +73,7 @@
             </TabItem>
             <TabItem Header="  Materials  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
-                    <local:ProductMaterialsControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:ProductMaterialsControl>
+                    <local:ProductMaterialsControl x:Name="materialsControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:ProductMaterialsControl>
                 </Border>
             </TabItem>
             <TabItem Header="  Purchase Order  " Cursor="Hand">

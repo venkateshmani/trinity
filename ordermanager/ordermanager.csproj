@@ -178,6 +178,7 @@
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />
     <Compile Include="ViewModel\ProductMaterialsViewModel.cs" />
     <Compile Include="ViewModel\PurchaseOrderControlViewModel.cs" />
+    <Compile Include="ViewModel\ViewOrdersControlViewModel.cs" />
     <Compile Include="Views\CommonControls\BackForwardButton.xaml.cs">
       <DependentUpon>BackForwardButton.xaml</DependentUpon>
     </Compile>

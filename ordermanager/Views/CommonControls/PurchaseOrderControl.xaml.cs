@@ -31,7 +31,7 @@ namespace ordermanager.Views.UserControls
         {
             InitializeComponent();
             long orderId = 0;
-            m_ViewModel = new ProductMaterialsViewModel(orderId);
+           // m_ViewModel = new ProductMaterialsViewModel(orderId);
             this.DataContext = m_ViewModel;
 
             // List<PurchaseOrder> items = new List<PurchaseOrder>();

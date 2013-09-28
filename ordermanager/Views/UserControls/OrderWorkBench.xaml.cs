@@ -23,25 +23,48 @@ namespace ordermanager.Views.UserControls
     public partial class OrderWorkBench : UserControl
     {
         public event OnGoBackDelegate OnGoBack = null;
+        ProductMaterialsViewModel m_MaterialsViewModel;
+        long m_OrderID = -1;
         public OrderWorkBench()
         {
             InitializeComponent();
-            long orderId = 0;
-            this.DataContext = new ProductMaterialsViewModel(orderId);
+            m_MaterialsViewModel = new ProductMaterialsViewModel();
+            materialsControl.DataContext = m_MaterialsViewModel;
             this.Loaded += OrderWorkBench_Loaded;
+            tabControl.SelectedIndex = 2;
+            tabControl.SelectionChanged += tabControl_SelectionChanged;
+        }
+
+        public long OrderID
+        {
+            get { return m_OrderID; }
+            set { SetOrderID(value); }
+        }
+
+        public void UpdateView()
+        {
+            string tabHeader = Convert.ToString(((System.Windows.Controls.HeaderedContentControl)(tabControl.SelectedItem)).Header);
+            switch (tabHeader.Trim())
+            {
+                case "Materials":
+                    m_MaterialsViewModel.SetOrderID(m_OrderID);
+                    break;
+                case "Purchase Order":
+                    break;
+            }
+        }
+
+        private void SetOrderID(long orderID)
+        {
+            if (m_OrderID != orderID)
+            {
+                m_OrderID = orderID;
+                UpdateView();
+            }
         }
 
         void OrderWorkBench_Loaded(object sender, RoutedEventArgs e)
         {
-            //List<ProductDetails> productDetails = new List<ProductDetails>();
-            //productDetails.Add(new ProductDetails { ItemIndexNumber = 1, ProductName = "T-Shirt", Quantity = "200 Pieces" });
-            //productDetails.Add(new ProductDetails { ItemIndexNumber = 2, ProductName = "Trousers", Quantity = "100 Pieces" });
-            //productDetails.Add(new ProductDetails { ItemIndexNumber = 3, ProductName = "Briefs", Quantity = "500 Pieces" });
-            //productsList.ItemsSource = productDetails;
-
-            //List<MaterialDetails> materialDetails = new List<MaterialDetails>();
-            //materialDetails.Add(new MaterialDetails { MaterialName = "Materials 1", CostPerUnit = "$10", Consumption = "100", UOM = "1 KG", ConsumptionCost = "1000" });
-            //materialsGrid.ItemsSource = materialDetails;
         }
 
         private void GoBack_MouseDown_1(object sender, MouseButtonEventArgs e)
@@ -52,9 +75,9 @@ namespace ordermanager.Views.UserControls
             }
         }
 
-        private void TabControl_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            UpdateView();
         }
 
         private void Button_PreviewMouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
@@ -82,7 +105,7 @@ namespace ordermanager.Views.UserControls
 
         private void productsList_SizeChanged_1(object sender, SizeChangedEventArgs e)
         {
-           // productColumn.Width = productsList.ActualWidth - 5;  //5 for Border
+            // productColumn.Width = productsList.ActualWidth - 5;  //5 for Border
         }
     }
 

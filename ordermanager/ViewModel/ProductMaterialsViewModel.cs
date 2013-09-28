@@ -11,19 +11,9 @@ namespace ordermanager.ViewModel
 {
     public class ProductMaterialsViewModel : INotifyPropertyChanged
     {
-        private OrderProduct m_SelectedItem;
-        private ObservableCollection<OrderProduct> m_Products;
-        private Dictionary<string, ObservableCollection<ProductMaterial>> m_MaterialItems;
-
-        public ProductMaterialsViewModel(long orderId)
-        {
-            Order order = DBResources.Instance.Context.Orders.Find(orderId);
-            if (order != null)
-            {
-                m_Products = new ObservableCollection<OrderProduct>(order.OrderProducts);
-                m_MaterialItems = new Dictionary<string, ObservableCollection<ProductMaterial>>();
-            }
-        }
+        private long m_OrderID = -1;
+        private OrderProduct m_SelectedItem = null;
+        private ObservableCollection<OrderProduct> m_Products = null;
 
         public ObservableCollection<OrderProduct> Products
         {
@@ -48,21 +38,18 @@ namespace ordermanager.ViewModel
             }
         }
 
-        public Dictionary<string, ObservableCollection<ProductMaterial>> MaterialItems
+        public bool SetOrderID(long orderID)
         {
-            get { return GroupMaterialByName(); }
-        }
-
-        private Dictionary<string, ObservableCollection<ProductMaterial>> GroupMaterialByName()
-        {
-            Dictionary<string, ObservableCollection<ProductMaterial>> items = new Dictionary<string, ObservableCollection<ProductMaterial>>();
-            foreach (MaterialName material in DBResources.Instance.AvailableMaterials)
+            if (m_OrderID != orderID)
             {
-                ObservableCollection<ProductMaterial> queryItems = new ObservableCollection<ProductMaterial>((from item in SelectedItem.ProductMaterials where item.MaterialName.Name == material.Name select item));
-                items.Add(material.Name, queryItems);
+                Order order = DBResources.Instance.Context.Orders.Find(orderID);
+                if (order != null)
+                {
+                    Products = new ObservableCollection<OrderProduct>(order.OrderProducts);
+                }
+                m_OrderID = orderID;
             }
-            m_MaterialItems = items;
-            return m_MaterialItems;
+            return true;
         }
 
         #region [INotifyPropertyChanged]
