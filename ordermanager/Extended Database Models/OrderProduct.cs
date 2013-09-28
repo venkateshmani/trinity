@@ -101,7 +101,7 @@ namespace ordermanager.DatabaseModel
         #region Helpers
 
             private OrderCurrencyConversion m_CurrencyConversion = null;
-            private OrderCurrencyConversion CurrencyConversion
+            public OrderCurrencyConversion CurrencyConversion
             {
                 get
                 {
