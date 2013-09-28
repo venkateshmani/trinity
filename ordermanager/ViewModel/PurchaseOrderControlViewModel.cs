@@ -11,20 +11,10 @@ namespace ordermanager.ViewModel
 {
     public class PurchaseOrderControlViewModel : INotifyPropertyChanged
     {
-        private long m_OrderID = -1;
+        private Order m_Order = null;
         private OrderProduct m_SelectedItem;
         private ObservableCollection<OrderProduct> m_Products;
         private Dictionary<string, ObservableCollection<ProductMaterial>> m_MaterialItems;
-
-        public PurchaseOrderControlViewModel(long orderId)
-        {
-            Order order = DBResources.Instance.Context.Orders.Find(orderId);
-            if (order != null)
-            {
-                Products = new ObservableCollection<OrderProduct>(order.OrderProducts);
-                m_MaterialItems = new Dictionary<string, ObservableCollection<ProductMaterial>>();
-            }
-        }
 
         public ObservableCollection<OrderProduct> Products
         {
@@ -66,17 +56,16 @@ namespace ordermanager.ViewModel
             return m_MaterialItems;
         }
 
-        public bool SetOrderID(long orderID)
+        public bool SetOrder(Order order)
         {
-            if (m_OrderID != orderID)
+            if (m_Order != order)
             {
-                Order order = DBResources.Instance.Context.Orders.Find(orderID);
                 if (order != null)
                 {
                     Products = new ObservableCollection<OrderProduct>(order.OrderProducts);
                     m_MaterialItems = new Dictionary<string, ObservableCollection<ProductMaterial>>();
                 }
-                m_OrderID = orderID;
+                m_Order = order;
             }
             return true;
         }

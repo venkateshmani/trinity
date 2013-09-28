@@ -21,32 +21,11 @@ namespace ordermanager.Views.UserControls
     /// Interaction logic for ProductMaterials.xaml
     /// </summary>
     public partial class ProductMaterialsControl : UserControl
-    {
-        //ProductMaterialsViewModel m_MaterialsViewModel;
-        //private long m_OrderID;
+    {       
         public ProductMaterialsControl()
         {
-            InitializeComponent();
-            //long orderId = 0;
-            //m_MaterialsViewModel = new ProductMaterialsViewModel(orderId);
-            //this.DataContext = m_MaterialsViewModel;
-        }
-
-        //public long OrderID
-        //{
-        //    get { return m_OrderID; }
-        //    set { SetOrderID(value); }
-        //}
-
-        //private void SetOrderID(long orderID)
-        //{
-        //    if (m_OrderID != orderID)
-        //    {
-        //        m_MaterialsViewModel.SetOrderID(orderID);
-        //        this.DataContext = m_MaterialsViewModel;
-        //        m_OrderID = orderID;
-        //    }
-        //}
+            InitializeComponent();           
+        }             
 
         private void productsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

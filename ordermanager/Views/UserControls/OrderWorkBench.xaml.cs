@@ -1,4 +1,5 @@
-﻿using ordermanager.ViewModel;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,22 +25,26 @@ namespace ordermanager.Views.UserControls
     {
         public event OnGoBackDelegate OnGoBack = null;
         ProductMaterialsViewModel m_MaterialsViewModel;
-        long m_OrderID = -1;
+        PurchaseOrderControlViewModel m_PurchaseOrderViewModel;
+        Order m_Order = null;
         public OrderWorkBench()
         {
             InitializeComponent();
             m_MaterialsViewModel = new ProductMaterialsViewModel();
             materialsControl.DataContext = m_MaterialsViewModel;
+            m_PurchaseOrderViewModel = new PurchaseOrderControlViewModel();
+            purchaseOrderControl.DataContext = m_PurchaseOrderViewModel;
             this.Loaded += OrderWorkBench_Loaded;
             tabControl.SelectedIndex = 2;
             tabControl.SelectionChanged += tabControl_SelectionChanged;
         }
 
-        public long OrderID
+        public Order Order
         {
-            get { return m_OrderID; }
-            set { SetOrderID(value); }
+            get { return m_Order; }
+            set { SetOrder(value); }
         }
+      
 
         public void UpdateView()
         {
@@ -47,18 +52,19 @@ namespace ordermanager.Views.UserControls
             switch (tabHeader.Trim())
             {
                 case "Materials":
-                    m_MaterialsViewModel.SetOrderID(m_OrderID);
+                    m_MaterialsViewModel.SetOrder(m_Order);
                     break;
                 case "Purchase Order":
+                    m_PurchaseOrderViewModel.SetOrder(m_Order);
                     break;
             }
         }
 
-        private void SetOrderID(long orderID)
+        private void SetOrder(Order order)
         {
-            if (m_OrderID != orderID)
+            if (m_Order != order)
             {
-                m_OrderID = orderID;
+                m_Order = order;
                 UpdateView();
             }
         }

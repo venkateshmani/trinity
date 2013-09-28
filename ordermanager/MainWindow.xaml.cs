@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro;
+using ordermanager.DatabaseModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,11 +49,15 @@ namespace ordermanager
                 this.WindowState = System.Windows.WindowState.Maximized;
         }
 
-        private void ViewOrdersControl_OnOrderClick()
+        private void ViewOrdersControl_OnOrderClick(object sender)
         {
-            viewOrdersTabControl.Visibility = System.Windows.Visibility.Collapsed;
-            orderWorkBench.OrderID = 5;
-            orderWorkBench.Visibility = System.Windows.Visibility.Visible;
+            Order order = sender as Order;
+            if (order != null)
+            {
+                viewOrdersTabControl.Visibility = System.Windows.Visibility.Collapsed;
+                orderWorkBench.Order = order;
+                orderWorkBench.Visibility = System.Windows.Visibility.Visible;
+            }
         }
 
         private void orderWorkBench_OnGoBack_1()

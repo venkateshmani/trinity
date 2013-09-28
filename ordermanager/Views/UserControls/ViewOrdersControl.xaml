@@ -80,7 +80,7 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <ListView Name="lvOrders" SelectionChanged="orderList_SelectionChanged" Grid.Row="1" ItemsSource="{Binding Path= Orders}">
+            <ListView Name="lvOrders" Grid.Row="1" ItemsSource="{Binding Path= Orders}" SelectionChanged="lvOrders_SelectionChanged">
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
                         <GridViewColumn Header="OrderID">

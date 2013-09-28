@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager
 {
-    public delegate void OnOrderClickDelegate();
+    public delegate void OnOrderClickDelegate(object sender);
 
     public delegate void OnGoBackDelegate();
 

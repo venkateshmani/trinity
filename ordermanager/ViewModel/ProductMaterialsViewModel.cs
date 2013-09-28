@@ -11,7 +11,7 @@ namespace ordermanager.ViewModel
 {
     public class ProductMaterialsViewModel : INotifyPropertyChanged
     {
-        private long m_OrderID = -1;
+        private Order m_Order = null;
         private OrderProduct m_SelectedItem = null;
         private ObservableCollection<OrderProduct> m_Products = null;
 
@@ -38,16 +38,15 @@ namespace ordermanager.ViewModel
             }
         }
 
-        public bool SetOrderID(long orderID)
+        public bool SetOrder(Order order)
         {
-            if (m_OrderID != orderID)
-            {
-                Order order = DBResources.Instance.Context.Orders.Find(orderID);
+            if (m_Order != order)
+            {                
                 if (order != null)
                 {
                     Products = new ObservableCollection<OrderProduct>(order.OrderProducts);
                 }
-                m_OrderID = orderID;
+                m_Order = order;
             }
             return true;
         }
