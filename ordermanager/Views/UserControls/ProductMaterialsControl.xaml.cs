@@ -56,16 +56,23 @@ namespace ordermanager.Views.UserControls
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            m_ViewModel = DataContext as ProductMaterialsViewModel;
+            m_ViewModel = DataContext as ProductMaterialsViewModel;           
         }
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)
         {
             if (m_ViewModel != null)
             {
-                m_ViewModel.ProductMaterialsList.Add(new ProductMaterial());
-                materialsGrid.ItemsSource = m_ViewModel.ProductMaterialsList;
+                m_ViewModel.ProductMaterialsList.Add(new ProductMaterial());             
             }
+        }      
+
+        private void DeleteItem_Click(object sender, RoutedEventArgs e)
+        {            
+            if (m_ViewModel != null)
+            {               
+                //m_ViewModel.ProductMaterialsList.Remove(materialsGrid.CurrentItem as ProductMaterial);             
+            }           
         }
     }
 }

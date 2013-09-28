@@ -30,7 +30,7 @@ namespace ordermanager.ViewModel
         {
             get
             {
-                if (m_SelectedProductMaterials == null)
+                if (m_SelectedItem!=null && m_SelectedProductMaterials == null)
                 {
                     m_SelectedProductMaterials = new ObservableCollection<ProductMaterial>(m_SelectedItem.ProductMaterials);
                     m_SelectedProductMaterials.CollectionChanged += m_SelectedProductMaterials_CollectionChanged;
@@ -90,7 +90,7 @@ namespace ordermanager.ViewModel
                         deletedMaterial.OrderProduct = null;
                     }
                 }
-               // NotifyPropertyChanged("ProductMaterialsList");
+                NotifyPropertyChanged("ProductMaterialsList");
             }
             
         }           
