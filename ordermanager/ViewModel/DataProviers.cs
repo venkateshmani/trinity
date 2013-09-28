@@ -33,6 +33,14 @@ namespace ordermanager.ViewModel
                 return DBResources.Instance.AvailableProducts;
             }
         }
+
+        public ObservableCollection<MaterialName> AvailableMaterials
+        {
+            get
+            {
+                return DBResources.Instance.AvailableMaterials;
+            }
+        }
     }
 
 }
