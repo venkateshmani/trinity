@@ -23,6 +23,12 @@
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
 
+            <Style x:Key="TextBlockHeaderStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+
             <Style x:Key="inLineTextBlockStyle" TargetType="TextBlock">
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Right" />
@@ -62,7 +68,7 @@
                               ItemsSource="{Binding DBResources.Customers}"
                               DisplayMemberPath="Name"
                               IsEditable="True"
-                              SelectedItem="{Binding Order.Customer, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                              SelectedItem="{Binding Order.Customer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                               SelectionChanged="customerComboBox_SelectionChanged"/>
                     
                     <Button Width="28"
@@ -155,6 +161,7 @@
                         Cursor="Hand"
                         x:Name="addNewAgentBtn"
                         Style="{DynamicResource MetroCircleButtonStyle}"
+                            Click="addNewAgentBtn_Click"
                         ToolTip="Add New Agent"
                         >
                         <Rectangle Width="10" Height="10">
@@ -175,12 +182,14 @@
                         <TextBox Width="60" BorderBrush="LightGray"
                                  HorizontalContentAlignment="Right" 
                                  VerticalContentAlignment="Center"
-                                 Controls:TextboxHelper.Watermark="0" Text="{Binding CommissionValue}"/>
+                                 Controls:TextboxHelper.Watermark="0" Text="{Binding Order.CommissionValueWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                 PreviewTextInput="TextBox_PreviewTextInput"
+                                 DataObject.Pasting="PastingHandler" 
+                                 />
                         <ComboBox Width="73" Margin="5,0,0,0"
-                                  IsEditable="True"
                                   ItemsSource="{Binding DBResources.CommissionValueTypes}"
                                   DisplayMemberPath="Type"
-                                  SelectedItem="{Binding Order.CommissionValueType, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                  SelectedItem="{Binding Order.CommissionValueTypeWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                    />
                     </StackPanel>
                 </StackPanel>
@@ -202,8 +211,22 @@
             </Grid.ColumnDefinitions>
             
             <Grid Grid.Row="0" Grid.Column="1">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Order.Company.Address1}"
-               />
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10">
+                    <StackPanel x:Name="customerInfo">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.Name}" FontSize="18"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.City}"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.Country}"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.Mobile}"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.Telephone}"/>
+                    </StackPanel>
+                    <StackPanel x:Name="agentInfo" Margin="0,10,0,0">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.Name}" FontSize="18"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.City}"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.Country}"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.Mobile}"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.Telephone}"/>
+                    </StackPanel>
+                </StackPanel>
             </Grid>
 
             <Rectangle Width="1.5" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0,50,0,50" Fill="Gray" Grid.RowSpan="2"/>
@@ -222,7 +245,9 @@
                         <DataGridTemplateColumn x:Name="inrValue" Header="Value in Rupees" Width="0.5*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding ValueInINRWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"  />
+                                    <TextBox Text="{Binding ValueInINRWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                PreviewTextInput="TextBox_PreviewTextInput"
+                                                DataObject.Pasting="PastingHandler" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -246,7 +271,7 @@
                       CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeRows="True"  CanUserSortColumns="True" GridLinesVisibility="Horizontal"
                       ColumnWidth="Auto" ItemsSource="{Binding OrderProducts}" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn x:Name="productColumn" Header="Product" Width="0.1*">
+                    <DataGridTemplateColumn x:Name="productColumn" Header="Product" Width="0.2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid x:Name="productGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -288,15 +313,17 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn x:Name="quantityColumn" Header="Expected Order Quantity">
+                    <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.16*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding ExpectedQuantityWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"  />
+                                <TextBox Text="{Binding ExpectedQuantityWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                            PreviewTextInput="TextBox_PreviewTextInput"
+                                            DataObject.Pasting="PastingHandler" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    
-                    <DataGridTemplateColumn x:Name="unitOfMeasurementColumn" Header="UOM">
+
+                    <DataGridTemplateColumn x:Name="unitOfMeasurementColumn" Header="UOM" Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -335,7 +362,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency">
+                    <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency" Width="0.12*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -375,15 +402,17 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price">
+                    <DataGridTemplateColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price" Width="0.2*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                            PreviewTextInput="TextBox_PreviewTextInput"
+                                            DataObject.Pasting="PastingHandler" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn x:Name="orderValueColumn" Header="Order Value">
+                    <DataGridTemplateColumn x:Name="orderValueColumn" Header="Order Value" Width="0.16*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Right" Orientation="Horizontal">
@@ -400,19 +429,19 @@
         <Grid Grid.Row="2" Margin="5">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <Label Content="Total Number Of Products "  Style="{StaticResource DescriptionHeaderStyle}"/>
-                <Label x:Name="totalNumberOfItems" Content="{Binding OrderProducts.Count}"  Style="{StaticResource DescriptionHeaderStyle}" FontWeight="Bold">
-                    <Label.Foreground>
+                <TextBlock x:Name="totalNumberOfItems" Text="{Binding OrderProducts.Count}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold">
+                    <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
-                    </Label.Foreground>
-                </Label>
+                    </TextBlock.Foreground>
+                </TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <Label Content="Total Order Value "  Style="{StaticResource DescriptionHeaderStyle}"/>
-                <Label x:Name="totalOrderValueLabel" Content="{Binding TotalOrderValue}"  Style="{StaticResource DescriptionHeaderStyle}" FontWeight="Bold">
-                    <Label.Foreground>
+                <TextBlock x:Name="totalOrderValueLabel" Text="{Binding TotalOrderValue}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold">
+                    <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
-                    </Label.Foreground>
-                </Label>
+                    </TextBlock.Foreground>
+                </TextBlock>
                 <Label Content="  INR"  Style="{StaticResource DescriptionHeaderStyle}"/>
             </StackPanel>
         </Grid>

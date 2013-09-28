@@ -66,6 +66,7 @@ namespace ordermanager.DatabaseModel
                 }
             }
 
+
             public virtual OrderThrough OrderThroughWrapper
             {
                 get
@@ -77,6 +78,33 @@ namespace ordermanager.DatabaseModel
                     OrderThrough = value;
                     OnPropertyChanged("OrderThroughWrapper");
                     ValidateOrderThrough();
+                }
+            }
+
+            public virtual decimal? CommissionValueWrapper
+            {
+                get
+                {
+                    return CommissionValue;
+                }
+                set
+                {
+                    CommissionValue = value;
+                    OnPropertyChanged("CommissionValueWrapper");
+                }
+            }
+
+            public virtual CommissionValueType CommissionValueTypeWrapper
+            {
+                get
+                {
+                    return CommissionValueType;
+                }
+                set
+                {
+                    CommissionValueType = value;
+                    OnPropertyChanged("CommissionValueType");
+                    ValidateCommissionType();
                 }
             }
     
@@ -101,6 +129,19 @@ namespace ordermanager.DatabaseModel
             ValidateExpectedDeliveryDate();
             ValidateAgent();
             ValidateOrderThrough();
+            ValidateCommissionType();
+        }
+
+        private void ValidateCommissionType()
+        {
+            if (CommissionValue == 0 || CommissionValue == null || CommissionValueType != null)
+            {
+                RemoveError("CommissionValueTypeWrapper", "Select a commission type");
+            }
+            else
+            {
+                AddError("CommissionValueTypeWrapper", "Select a commission type", false);
+            }
         }
 
         private void ValidateOrderThrough()

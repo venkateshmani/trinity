@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,19 +38,7 @@ namespace ordermanager.Views.PopUps
             NewEnquiryViewModel = new NewEnquiryViewModel();
         }
 
-        private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)
-        {
-            CustomerDetailsControl details = new CustomerDetailsControl();
-            Company newCompany = DBResources.Instance.CreateNewCompany("Customer");
-            newCompany.Name = customerComboBox.Text;
-
-            details.DataContext = newCompany;
-            if (details.ShowDialog() == true)
-            {
-                DBResources.Instance.SaveNewCompany(newCompany);
-                NewEnquiryViewModel.Order.Company = newCompany;
-            }
-        }
+        
 
         private NewEnquiryViewModel m_NewEnquiryViewModel = null;
         public NewEnquiryViewModel NewEnquiryViewModel
@@ -102,12 +91,14 @@ namespace ordermanager.Views.PopUps
             {
                 if (((Company)agentComboxBox.SelectedItem).Name.ToLower() == "customer")
                 {
+                    agentInfo.Visibility = System.Windows.Visibility.Collapsed;
                     addNewAgentBtn.Visibility = System.Windows.Visibility.Collapsed;
                     editExistingAgentBtn.Visibility = System.Windows.Visibility.Collapsed;
                     commisionInfo.Visibility = System.Windows.Visibility.Hidden;
                 }
                 else
                 {
+                    agentInfo.Visibility = System.Windows.Visibility.Visible;
                     addNewAgentBtn.Visibility = System.Windows.Visibility.Collapsed;
                     editExistingAgentBtn.Visibility = System.Windows.Visibility.Visible;
                     commisionInfo.Visibility = System.Windows.Visibility.Visible;
@@ -117,25 +108,23 @@ namespace ordermanager.Views.PopUps
 
         private void editExistingCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
-            CustomerDetailsControl details = new CustomerDetailsControl();
-            details.DataContext = NewEnquiryViewModel.Order.Company;
-
-            if (details.ShowDialog() == true)
-            {
-                DBResources.Instance.Save();
-            }
+            EditCompany(NewEnquiryViewModel.Order.Company);
         }
 
         private void editExistingAgentBtn_Click(object sender, RoutedEventArgs e)
         {
+            EditCompany(NewEnquiryViewModel.Order.Agent);
+        }
+
+        private void EditCompany(Company company)
+        {
             CustomerDetailsControl details = new CustomerDetailsControl();
-            details.DataContext = NewEnquiryViewModel.Order.Agent;
+            details.DataContext = company;
 
             if (details.ShowDialog() == true)
             {
                 DBResources.Instance.Save();
             }
-
         }
 
         private void productComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -201,6 +190,63 @@ namespace ordermanager.Views.PopUps
                     statusText.Foreground = new SolidColorBrush(Color.FromArgb(255, 17, 158, 218));
                 }
             }
+        }
+
+
+        private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var newCustomer = NewCompany("Customer", customerComboBox.Text);
+            if (newCustomer != null)
+            {
+                NewEnquiryViewModel.Order.Customer = newCustomer;
+            }
+        }
+
+        private void addNewAgentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var newAgent = NewCompany("Agent", agentComboxBox.Text);
+            if (newAgent != null)
+            {
+                NewEnquiryViewModel.Order.Agent = newAgent;
+            }
+        }
+
+        private Company NewCompany(string type, string companyName)
+        {
+            CustomerDetailsControl details = new CustomerDetailsControl();
+            Company newCompany = DBResources.Instance.CreateNewCompany(type);
+            newCompany.Name = companyName;
+
+            details.DataContext = newCompany;
+            if (details.ShowDialog() == true)
+            {
+                DBResources.Instance.SaveNewCompany(newCompany);
+                return newCompany;
+            }
+
+            return null;
+        }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private Boolean IsTextAllowed(String text)
+        {
+            Regex regex = new Regex("[^0-9.-]+"); //regex that matches disallowed text
+            return !regex.IsMatch(text);
+        }
+
+        // Use the DataObject.Pasting Handler  
+        private void PastingHandler(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!IsTextAllowed(text)) e.CancelCommand();
+            }
+            else e.CancelCommand();
         }
     }
 }
