@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ordermanager.DatabaseModel;
+using System.Data.Entity;
 
 namespace ordermanager.ViewModel
 {
@@ -14,7 +15,6 @@ namespace ordermanager.ViewModel
         private Order m_Order = null;
         private OrderProduct m_SelectedItem = null;
         private ObservableCollection<OrderProduct> m_Products = null;
-        ObservableCollection<ProductMaterial> m_SelectedProductMaterials;
 
         public ObservableCollection<OrderProduct> Products
         {
@@ -23,19 +23,6 @@ namespace ordermanager.ViewModel
             {
                 m_Products = value;
                 NotifyPropertyChanged("Products");
-            }
-        }
-
-        public ObservableCollection<ProductMaterial> ProductMaterialsList
-        {
-            get
-            {
-                if (m_SelectedItem!=null && m_SelectedProductMaterials == null)
-                {
-                    m_SelectedProductMaterials = new ObservableCollection<ProductMaterial>(m_SelectedItem.ProductMaterials);
-                    m_SelectedProductMaterials.CollectionChanged += m_SelectedProductMaterials_CollectionChanged;
-                }
-                return m_SelectedProductMaterials;
             }
         }
 
@@ -69,31 +56,36 @@ namespace ordermanager.ViewModel
         {
             return DBResources.Instance.CreateNewMaterial(materialName);
         }
-        
-        void m_SelectedProductMaterials_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+
+        public bool AddNewMaterialItem()
         {
             if (m_SelectedItem != null)
             {
-                if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
-                {
-                    foreach (var newItem in e.NewItems)
-                    {
-                        ProductMaterial newMaterialItem = newItem as ProductMaterial;
-                        newMaterialItem.OrderProduct = m_SelectedItem;
-                    }
-                }
-                else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
-                {
-                    foreach (var deletedItem in e.OldItems)
-                    {
-                        ProductMaterial deletedMaterial = deletedItem as ProductMaterial;
-                        deletedMaterial.OrderProduct = null;
-                    }
-                }
-                NotifyPropertyChanged("ProductMaterialsList");
+                m_SelectedItem.ProductMaterialsWrapper.Add(new ProductMaterial());
+                return true;
             }
-            
-        }           
+            else
+                return false;
+        }
+
+        public bool Save(bool isSubmit)
+        {
+            DbSet<Order> dbOrders = DBResources.Instance.Context.Orders;
+            foreach (Order order in dbOrders)
+            {
+                foreach (OrderProduct dbProduct in order.OrderProducts)
+                {
+                    foreach (ProductMaterial material in dbProduct.ProductMaterialsWrapper)
+                    {
+                        if (material.MaterialID == 0)
+                        {
+                            dbProduct.ProductMaterials.Add(material);
+                        }
+                    }
+                }
+            }
+            return DBResources.Instance.UpdateOrderProducts();
+        }
 
         #region [INotifyPropertyChanged]
         public event PropertyChangedEventHandler PropertyChanged;

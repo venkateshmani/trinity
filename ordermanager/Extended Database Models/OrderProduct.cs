@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -12,167 +13,237 @@ namespace ordermanager.DatabaseModel
 
         #region Property Wrappers
 
-            public virtual Currency CurrencyWrapper
+        public virtual Currency CurrencyWrapper
+        {
+            get
             {
-                get
-                {
-                    return Currency;
-                }
-                set
-                {
-                    Currency = value;
-                    ValidateCurrency();
-                    SelectOrAddCurrencyConversion();
-                    CalculateOrderValue();
-                    
-                }
+                return Currency;
             }
-
-            public virtual ProductName ProductNameWrapper
+            set
             {
-                get
-                {
-                    return ProductName;
-                }
-                set
-                {
-                    ProductName = value;
-                    ValidateProduct();
-                }
-            }
+                Currency = value;
+                ValidateCurrency();
+                SelectOrAddCurrencyConversion();
+                CalculateOrderValue();
 
-            public virtual UnitsOfMeasurement UnitsOfMeasurementWrapper
+            }
+        }
+
+        public virtual ProductName ProductNameWrapper
+        {
+            get
             {
-                get
-                {
-                    return UnitsOfMeasurement;
-                }
-                set
-                {
-                    UnitsOfMeasurement = value;
-                    ValidateUOM();
-                }
+                return ProductName;
             }
-           
-
-            public decimal OrderValueWrapper
+            set
             {
-                get
-                {
-                    return OrderValue;
-                }
-                set
-                {
-                    OrderValue = value;
-                    OnPropertyChanged("OrderValueWrapper");
-                }
+                ProductName = value;
+                ValidateProduct();
             }
+        }
 
-            public decimal CustomerTargetPriceWrapper
+        public virtual UnitsOfMeasurement UnitsOfMeasurementWrapper
+        {
+            get
             {
-                get
-                {
-                    return CustomerTargetPrice; 
-                }
-                set
-                {
-                    CustomerTargetPrice = value;
-                    CalculateOrderValue();
-                    ValidateCustomerTargetPrice();
-                }
+                return UnitsOfMeasurement;
             }
-
-            public decimal ExpectedQuantityWrapper
+            set
             {
-                get
-                {
-                    return ExpectedQuantity;
-                }
-                set
-                {
-                    ExpectedQuantity = value;
-                    CalculateOrderValue();
-                    ValidateExpectedQuantity();
-                }
+                UnitsOfMeasurement = value;
+                ValidateUOM();
             }
+        }
 
-        #endregion 
+        public decimal OrderValueWrapper
+        {
+            get
+            {
+                return OrderValue;
+            }
+            set
+            {
+                OrderValue = value;
+                OnPropertyChanged("OrderValueWrapper");
+            }
+        }
+
+        public decimal CustomerTargetPriceWrapper
+        {
+            get
+            {
+                return CustomerTargetPrice;
+            }
+            set
+            {
+                CustomerTargetPrice = value;
+                CalculateOrderValue();
+                ValidateCustomerTargetPrice();
+            }
+        }
+
+        public decimal ExpectedQuantityWrapper
+        {
+            get
+            {
+                return ExpectedQuantity;
+            }
+            set
+            {
+                ExpectedQuantity = value;
+                CalculateOrderValue();
+                ValidateExpectedQuantity();
+            }
+        }
+
+        public decimal TotalProductMaterialsCostWrapper
+        {
+            get
+            {
+                if (m_TotalProductMaterialsCostWrapper == -1.0m)
+                    CalculateTotalMaterialsCost();
+                return m_TotalProductMaterialsCostWrapper;
+            }
+            set
+            {
+                m_TotalProductMaterialsCostWrapper = value;
+                OnPropertyChanged("TotalProductMaterialsCostWrapper");
+            }
+        }
+        #endregion
 
         #region Helpers
 
-            private OrderCurrencyConversion m_CurrencyConversion = null;
-            public OrderCurrencyConversion CurrencyConversion
+        private OrderCurrencyConversion m_CurrencyConversion = null;
+        public OrderCurrencyConversion CurrencyConversion
+        {
+            get
             {
-                get
+                return m_CurrencyConversion;
+            }
+            set
+            {
+                if (m_CurrencyConversion != null)
                 {
-                    return m_CurrencyConversion;
+                    m_CurrencyConversion.PropertyChanged -= m_CurrencyConversion_PropertyChanged;
                 }
-                set
-                {
-                    if (m_CurrencyConversion != null)
-                    {
-                        m_CurrencyConversion.PropertyChanged -= m_CurrencyConversion_PropertyChanged;
-                    }
 
-                    m_CurrencyConversion = value;
-                    m_CurrencyConversion.PropertyChanged += m_CurrencyConversion_PropertyChanged;
+                m_CurrencyConversion = value;
+                m_CurrencyConversion.PropertyChanged += m_CurrencyConversion_PropertyChanged;
+            }
+        }
+
+        private void SelectOrAddCurrencyConversion()
+        {
+            if (Currency != null)
+            {
+                var currencyConversion = Order.OrderCurrencyConversions.Where(c => c.Currency.CurrencyID == Currency.CurrencyID)
+                                                                       .Select(c => c);
+
+                OrderCurrencyConversion newConversion = null;
+                if (currencyConversion == null || currencyConversion.Count() == 0)
+                {
+                    newConversion = new OrderCurrencyConversion();
+                    newConversion.Currency = Currency;
+
+                    Order.OrderCurrencyConversions.Add(newConversion);
+                }
+                else
+                {
+                    newConversion = currencyConversion.First();
+                }
+
+                CurrencyConversion = newConversion;
+            }
+        }
+
+        void m_CurrencyConversion_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            CalculateOrderValue();
+        }
+
+        private void CalculateOrderValue()
+        {
+            if (Currency != null && CurrencyConversion == null)
+            {
+                foreach (OrderCurrencyConversion currencyConversion in Order.OrderCurrencyConversions)
+                {
+                    if (currencyConversion.Currency.CurrencyID == Currency.CurrencyID)
+                    {
+                        CurrencyConversion = currencyConversion;
+                    }
                 }
             }
 
-            private void SelectOrAddCurrencyConversion()
+            decimal currencyValueInINR = 0;
+
+            if (CurrencyConversion != null)
             {
-                if (Currency != null)
-                {
-                    var currencyConversion = Order.OrderCurrencyConversions.Where(c => c.Currency.CurrencyID == Currency.CurrencyID)
-                                                                           .Select(c => c);
-
-                    OrderCurrencyConversion newConversion = null;
-                    if (currencyConversion == null || currencyConversion.Count() == 0)
-                    {
-                        newConversion = new OrderCurrencyConversion();
-                        newConversion.Currency = Currency;
-
-                        Order.OrderCurrencyConversions.Add(newConversion);
-                    }
-                    else
-                    {
-                        newConversion = currencyConversion.First();
-                    }
-
-                    CurrencyConversion = newConversion;
-                }
+                currencyValueInINR = CurrencyConversion.ValueInINR;
             }
 
-            void m_CurrencyConversion_PropertyChanged(object sender, PropertyChangedEventArgs e)
+            OrderValueWrapper = ExpectedQuantity * CustomerTargetPrice * currencyValueInINR;
+        }
+
+        #endregion
+
+        ObservableCollection<ProductMaterial> m_ProductMaterialsWrapper;
+        public ObservableCollection<ProductMaterial> ProductMaterialsWrapper
+        {
+            get
             {
-                CalculateOrderValue();
+                if (m_ProductMaterialsWrapper == null)
+                {
+                    m_ProductMaterialsWrapper = new ObservableCollection<ProductMaterial>(this.ProductMaterials);
+                    m_ProductMaterialsWrapper.CollectionChanged += m_ProductMaterialsWrapper_CollectionChanged;
+                }
+                return m_ProductMaterialsWrapper;
             }
+        }
 
-            private void CalculateOrderValue()
+        void m_ProductMaterialsWrapper_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                if (Currency != null && CurrencyConversion == null)
+                foreach (var newItem in e.NewItems)
                 {
-                    foreach (OrderCurrencyConversion currencyConversion in Order.OrderCurrencyConversions)
-                    {
-                        if (currencyConversion.Currency.CurrencyID == Currency.CurrencyID)
-                        {
-                            CurrencyConversion = currencyConversion;
-                        }
-                    }
+                    ProductMaterial newMaterialItem = newItem as ProductMaterial;
+                    newMaterialItem.OrderProduct = this;
+                    newMaterialItem.PropertyChanged += newMaterialItem_PropertyChanged;
                 }
-
-                decimal currencyValueInINR = 0;
-
-                if (CurrencyConversion != null)
-                {
-                    currencyValueInINR = CurrencyConversion.ValueInINR;
-                }
-
-                OrderValueWrapper = ExpectedQuantity * CustomerTargetPrice * currencyValueInINR;
             }
+            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var deletedItem in e.OldItems)
+                {
+                    ProductMaterial deletedMaterial = deletedItem as ProductMaterial;
+                    deletedMaterial.OrderProduct = null;
+                    deletedMaterial.PropertyChanged -= newMaterialItem_PropertyChanged;
+                }
+            }
+            OnPropertyChanged("ProductMaterialsWrapper");
+        }
 
-        #endregion 
-        
+        void newMaterialItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ConsumptionCostWrapper")
+            {
+                CalculateTotalMaterialsCost();
+            }
+        }
+
+        decimal m_TotalProductMaterialsCostWrapper = -1.0m;
+        private void CalculateTotalMaterialsCost()
+        {
+            decimal cost = 0;
+            foreach (ProductMaterial material in ProductMaterialsWrapper)
+            {
+                if (material.OrderProduct != null)
+                    cost += material.ConsumptionCostWrapper;
+            }
+            TotalProductMaterialsCostWrapper = cost;
+        }
+
         #region Data Validation
 
         public void Validate()
@@ -200,7 +271,7 @@ namespace ordermanager.DatabaseModel
         {
             if (ExpectedQuantityWrapper == 0)
             {
-                AddError("ExpectedQuantityWrapper", "Quantity can't be Zero",false);
+                AddError("ExpectedQuantityWrapper", "Quantity can't be Zero", false);
             }
             else
             {
@@ -224,7 +295,7 @@ namespace ordermanager.DatabaseModel
         {
             if (UnitsOfMeasurementWrapper == null)
             {
-                AddError("UnitsOfMeasurementWrapper", "Select Units",false);
+                AddError("UnitsOfMeasurementWrapper", "Select Units", false);
             }
             else
             {
@@ -245,7 +316,7 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        #endregion 
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)

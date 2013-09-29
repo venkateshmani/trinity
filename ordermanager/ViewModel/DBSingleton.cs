@@ -12,28 +12,28 @@ namespace ordermanager.ViewModel
     public class DBResources : INotifyPropertyChanged, IDisposable
     {
         #region  single ton
-            private static DBResources _DBSingleton = null;
+        private static DBResources _DBSingleton = null;
 
-            public static DBResources Instance
+        public static DBResources Instance
+        {
+            get
             {
-                get
-                {
-                    if (_DBSingleton == null)
-                        _DBSingleton = new DBResources();
+                if (_DBSingleton == null)
+                    _DBSingleton = new DBResources();
 
-                    return _DBSingleton;
-                }
+                return _DBSingleton;
             }
+        }
 
-            public OrderManagerDBEntities Context
-            {
-                get { return dbContext; }
-            }
-        #endregion 
+        public OrderManagerDBEntities Context
+        {
+            get { return dbContext; }
+        }
+        #endregion
 
         #region
-            OrderManagerDBEntities dbContext = null;
-        #endregion 
+        OrderManagerDBEntities dbContext = null;
+        #endregion
 
         private DBResources()
         {
@@ -44,123 +44,123 @@ namespace ordermanager.ViewModel
 
         #region Companies
 
-            public ObservableCollection<Company> m_Companies = null;
-            public ObservableCollection<Company> Companies
+        public ObservableCollection<Company> m_Companies = null;
+        public ObservableCollection<Company> Companies
+        {
+            get
             {
-                get
+                if (m_Companies == null)
                 {
-                    if (m_Companies == null)
-                    {
-                        m_Companies = new ObservableCollection<Company>(dbContext.Companies.ToList());
-                    }
+                    m_Companies = new ObservableCollection<Company>(dbContext.Companies.ToList());
+                }
 
-                    return m_Companies;
-                }
-                private set
+                return m_Companies;
+            }
+            private set
+            {
+                m_Companies = value;
+            }
+        }
+
+        private ObservableCollection<Company> m_Customers = null;
+        public ObservableCollection<Company> Customers
+        {
+            get
+            {
+                if (m_Customers == null)
                 {
-                    m_Companies = value;
+                    m_Customers = UpdateCompaniesCollection("Customer");
                 }
+
+                return m_Customers;
+            }
+            private set
+            {
+                m_Customers = value;
+            }
+        }
+
+        private ObservableCollection<Company> m_Agents = null;
+        public ObservableCollection<Company> Agents
+        {
+            get
+            {
+                if (m_Agents == null)
+                {
+                    m_Agents = UpdateCompaniesCollection("Agent");
+                }
+                return m_Agents;
+            }
+            private set
+            {
+                m_Agents = value;
+            }
+        }
+
+        private ObservableCollection<Company> m_Suppliers = null;
+        public ObservableCollection<Company> Suppliers
+        {
+            get
+            {
+                if (m_Suppliers == null)
+                {
+                    m_Suppliers = UpdateCompaniesCollection("Supplier");
+                }
+                return m_Suppliers;
+            }
+            private set
+            {
+                m_Suppliers = value;
+            }
+        }
+
+        private ObservableCollection<Company> UpdateCompaniesCollection(string type)
+        {
+            return new ObservableCollection<Company>(dbContext.Companies.Where(c => c.CompanyType.Type == type)
+                                                               .Select(c => c)
+                                                               .ToList());
+        }
+
+        //Create a new Company of type passed in the arguments
+        public Company CreateNewCompany(string type)
+        {
+            Company newCompany = dbContext.Companies.Create();
+
+
+            var companyType = dbContext.CompanyTypes.Where(c => c.Type == type)
+                                                      .Select(c => c)
+                                                      .FirstOrDefault();
+
+            newCompany.CompanyTypeID = companyType.CompanyTypeID;
+            newCompany.CompanyType = companyType;
+
+            return newCompany;
+        }
+
+
+        public void SaveNewCompany(Company company)
+        {
+            dbContext.Companies.Add(company);
+            Save();
+
+            switch (company.CompanyType.Type)
+            {
+                case "Customer":
+                    Customers.Add(company);
+                    break;
+                case "Agent":
+                    Agents.Add(company);
+                    break;
+                case "Supplier":
+                    Suppliers.Add(company);
+                    break;
             }
 
-            private ObservableCollection<Company> m_Customers = null;
-            public ObservableCollection<Company> Customers
-            {
-                get
-                {
-                    if (m_Customers == null)
-                    {
-                        m_Customers = UpdateCompaniesCollection("Customer");
-                    }
-
-                    return m_Customers;
-                }
-                private set
-                {
-                    m_Customers = value;
-                }
-            }
-
-            private ObservableCollection<Company> m_Agents = null;
-            public ObservableCollection<Company> Agents
-            {
-                get
-                {
-                    if (m_Agents == null)
-                    {
-                        m_Agents = UpdateCompaniesCollection("Agent");
-                    }
-                    return m_Agents;
-                }
-                private set
-                {
-                    m_Agents = value;
-                }
-            }
-
-            private ObservableCollection<Company> m_Suppliers = null;
-            public ObservableCollection<Company> Suppliers
-            {
-                get
-                {
-                    if (m_Suppliers == null)
-                    {
-                        m_Suppliers = UpdateCompaniesCollection("Supplier");
-                    }
-                    return m_Suppliers;
-                }
-                private set
-                {
-                    m_Suppliers = value;
-                }
-            }
-
-            private ObservableCollection<Company> UpdateCompaniesCollection(string type)
-            {
-                return new ObservableCollection<Company>(dbContext.Companies.Where(c => c.CompanyType.Type == type)
-                                                                   .Select(c => c)
-                                                                   .ToList());
-            }
-
-            //Create a new Company of type passed in the arguments
-            public Company CreateNewCompany(string type)
-            {
-                Company newCompany = dbContext.Companies.Create();
+            Companies.Add(company);
+        }
 
 
-                var companyType = dbContext.CompanyTypes.Where(c => c.Type == type)
-                                                          .Select(c => c)
-                                                          .FirstOrDefault();
-
-                newCompany.CompanyTypeID = companyType.CompanyTypeID;
-                newCompany.CompanyType = companyType;
-
-                return newCompany;
-            }
-
-
-            public void SaveNewCompany(Company company)
-            {
-                dbContext.Companies.Add(company);
-                Save();
-
-                switch (company.CompanyType.Type)
-                {
-                    case "Customer":
-                        Customers.Add(company);
-                        break; 
-                    case "Agent":
-                        Agents.Add(company);
-                        break;
-                    case "Supplier":
-                        Suppliers.Add(company);
-                        break;
-                }
-
-                Companies.Add(company);
-            }
-
-
-            #endregion  
+        #endregion
 
         #region Product, Materials and SubMaterials
 
@@ -195,7 +195,7 @@ namespace ordermanager.ViewModel
 
             return newProduct;
         }
-       
+
         private ObservableCollection<MaterialName> m_AvailableMaterials = null;
         public ObservableCollection<MaterialName> AvailableMaterials
         {
@@ -229,86 +229,92 @@ namespace ordermanager.ViewModel
         }
 
 
-        #endregion 
+        #endregion
 
         #region No Add support tables
 
-                private ObservableCollection<OrderThrough> m_OrderThroughs = null;
-                public ObservableCollection<OrderThrough> OrderThroughs
+        private ObservableCollection<OrderThrough> m_OrderThroughs = null;
+        public ObservableCollection<OrderThrough> OrderThroughs
+        {
+            get
+            {
+                if (m_OrderThroughs == null)
                 {
-                    get
-                    {
-                        if (m_OrderThroughs == null)
-                        {
-                            m_OrderThroughs = new ObservableCollection<OrderThrough>(dbContext.OrderThroughs.ToList());
-                        }
-
-                        return m_OrderThroughs;
-                    }
+                    m_OrderThroughs = new ObservableCollection<OrderThrough>(dbContext.OrderThroughs.ToList());
                 }
 
-                private ObservableCollection<CommissionValueType> m_CommissionValueTypes = null;
-                public ObservableCollection<CommissionValueType> CommissionValueTypes
+                return m_OrderThroughs;
+            }
+        }
+
+        private ObservableCollection<CommissionValueType> m_CommissionValueTypes = null;
+        public ObservableCollection<CommissionValueType> CommissionValueTypes
+        {
+            get
+            {
+                if (m_CommissionValueTypes == null)
                 {
-                    get
-                    {
-                        if (m_CommissionValueTypes == null)
-                        {
-                            m_CommissionValueTypes = new ObservableCollection<CommissionValueType>(dbContext.CommissionValueTypes.ToList());
-                        }
-                        return m_CommissionValueTypes;
-                    }
+                    m_CommissionValueTypes = new ObservableCollection<CommissionValueType>(dbContext.CommissionValueTypes.ToList());
+                }
+                return m_CommissionValueTypes;
+            }
+        }
+
+        private ObservableCollection<Currency> m_Currencies = null;
+        public ObservableCollection<Currency> Currencies
+        {
+            get
+            {
+                if (m_Currencies == null)
+                {
+                    m_Currencies = new ObservableCollection<Currency>(dbContext.Currencies.ToList());
                 }
 
-                private ObservableCollection<Currency> m_Currencies = null;
-                public ObservableCollection<Currency> Currencies
-                {
-                    get
-                    {
-                        if (m_Currencies == null)
-                        {
-                            m_Currencies = new ObservableCollection<Currency>(dbContext.Currencies.ToList());
-                        }
+                return m_Currencies;
+            }
+        }
 
-                        return m_Currencies;
-                    }
+        private ObservableCollection<UnitsOfMeasurement> m_UOMs = null;
+        public ObservableCollection<UnitsOfMeasurement> UOMs
+        {
+            get
+            {
+                if (m_UOMs == null)
+                {
+                    m_UOMs = new ObservableCollection<UnitsOfMeasurement>(dbContext.UnitsOfMeasurements.ToList());
                 }
 
-                private ObservableCollection<UnitsOfMeasurement> m_UOMs = null;
-                public ObservableCollection<UnitsOfMeasurement> UOMs
-                {
-                    get
-                    {
-                        if (m_UOMs == null)
-                        {
-                            m_UOMs = new ObservableCollection<UnitsOfMeasurement>(dbContext.UnitsOfMeasurements.ToList());
-                        }
-
-                        return m_UOMs;
-                    }
-                }
+                return m_UOMs;
+            }
+        }
 
 
-          #endregion 
+        #endregion
 
         #region Orders
 
-            public Order CreateNewOrder()
-            {
-                Order newOrder = dbContext.Orders.Create();
-                newOrder.OrderDate = DateTime.Now;
-                return newOrder;
-            }
+        public Order CreateNewOrder()
+        {
+            Order newOrder = dbContext.Orders.Create();
+            newOrder.OrderDate = DateTime.Now;
+            return newOrder;
+        }
 
-            public Order CreateNewOrder(Order newOrder)
-            {
-                Order newSavedOrder = dbContext.Orders.Add(newOrder);
-                Save();
+        public Order CreateNewOrder(Order newOrder)
+        {
+            Order newSavedOrder = dbContext.Orders.Add(newOrder);
+            Save();
 
-                return newSavedOrder;
-            }
+            return newSavedOrder;
+        }
 
-        #endregion 
+        #endregion
+
+        public bool UpdateOrderProducts()
+        {
+            Save();
+            return true;
+        }
 
         #endregion
 

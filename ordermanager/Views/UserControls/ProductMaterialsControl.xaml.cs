@@ -63,7 +63,7 @@ namespace ordermanager.Views.UserControls
         {
             if (m_ViewModel != null)
             {
-                m_ViewModel.ProductMaterialsList.Add(new ProductMaterial());             
+                m_ViewModel.AddNewMaterialItem();             
             }
         }      
 
@@ -73,6 +73,14 @@ namespace ordermanager.Views.UserControls
             {               
                 //m_ViewModel.ProductMaterialsList.Remove(materialsGrid.CurrentItem as ProductMaterial);             
             }           
+        }      
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_ViewModel != null)
+            {
+                m_ViewModel.Save(false);
+            } 
         }
     }
 }

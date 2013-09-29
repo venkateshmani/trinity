@@ -90,14 +90,14 @@
             </Border>
         </Grid>
 
-        <Grid x:Name="productDetailsGrid"  Grid.Row="1" Grid.Column="2">
+        <Grid x:Name="productDetailsGrid"  Grid.Row="1" Grid.Column="2" DataContext="{Binding ElementName=productsList, Path=SelectedItem}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0">
                 <TextBlock Text="Product Name" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
-                <TextBlock Text="{Binding Path = SelectedProduct.ProductName.Name}"  Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                <TextBlock Text="{Binding Path = ProductName.Name}"  Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </TextBlock.Foreground>
@@ -106,7 +106,7 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
                 <TextBlock Text="Quantity" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
-                <TextBlock Text="{Binding Path = SelectedProduct.ExpectedQuantity}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                <TextBlock Text="{Binding Path = ExpectedQuantity}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </TextBlock.Foreground>
@@ -129,7 +129,7 @@
                     </TextBlock.Foreground>
                 </TextBlock>
                 <TextBlock Text="Total Consumption Cost" Grid.Row="1" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" HorizontalAlignment="Right"/>
-                <TextBlock Text="*****" Grid.Row="1" Grid.Column="2" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Margin="5,0,0,0" HorizontalAlignment="Left" >
+                <TextBlock Text="{Binding Path=TotalProductMaterialsCostWrapper}"  Grid.Row="1" Grid.Column="2" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Margin="5,0,0,0" HorizontalAlignment="Left" >
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </TextBlock.Foreground>
@@ -157,7 +157,7 @@
                 <Border BorderBrush="Gray" BorderThickness="1" Margin="10,5,10,10" Grid.Row="1">
                     <DataGrid x:Name="materialsGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" SelectionUnit="Cell"
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
-                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductMaterialsList, UpdateSourceTrigger=PropertyChanged}">
+                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductMaterialsWrapper, UpdateSourceTrigger=PropertyChanged}">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn x:Name="materialColumn" Header="Material Name" Width="0.3*">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -190,7 +190,7 @@
                             <DataGridTemplateColumn x:Name="costPerUnitColumn" Header="Cost Per Unit" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Cost, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                        <TextBox Text="{Binding CostPerUnitWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -243,14 +243,14 @@
                             <DataGridTemplateColumn x:Name="consumptionColumn" Header="Consumption" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Consumption, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                        <TextBox Text="{Binding ConsumptionWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="consumptionCostColumn" Header="Consumption Cost" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding ConsumptionCost, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" FontWeight="Bold" IsReadOnly="True"/>
+                                        <TextBox Text="{Binding ConsumptionCostWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" FontWeight="Bold" IsReadOnly="True"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -290,7 +290,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Save Changes">
+                                        ToolTip="Save Changes" Click="Save_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>

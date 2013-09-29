@@ -11,90 +11,92 @@ namespace ordermanager.DatabaseModel
     {
         #region Wrapper Properties
 
-            public virtual Currency CurrencyWrapper
+        public virtual Currency CurrencyWrapper
+        {
+            get
             {
-                get
-                {
-                    return Currency;
-                }
-                set
-                {
-                    Currency = value;
-                    ValidateCurrency();
-                    OnPropertyChanged("CurrencyWrapper");
-                }
+                return Currency;
             }
-
-
-            public virtual UnitsOfMeasurement UnitsOfMeasurementWrapper
+            set
             {
-                get
-                {
-                    return UnitsOfMeasurement;
-                }
-                set
-                {
-                    UnitsOfMeasurement = value;
-                    ValidateUOM();
-                    OnPropertyChanged("UnitsOfMeasurementWrapper");
-                }
+                Currency = value;
+                ValidateCurrency();
+                OnPropertyChanged("CurrencyWrapper");
             }
+        }
 
-            public virtual MaterialName MaterialNameWrapper
+
+        public virtual UnitsOfMeasurement UnitsOfMeasurementWrapper
+        {
+            get
             {
-                get
-                {
-                    return MaterialName;
-                }
-                set
-                {
-                    MaterialName = value;
-                    OnPropertyChanged("MaterialNameWrapper");
-                }
+                return UnitsOfMeasurement;
             }
-
-            public virtual decimal CostPerUnitWrapper
+            set
             {
-                get
-                {
-                    return Cost;
-                }
-                set
-                {
-                    Cost = value;
-                    ValidateCostPerUnit();
-                    OnPropertyChanged("CostPerUnitWrapper");
-                }
+                UnitsOfMeasurement = value;
+                ValidateUOM();
+                OnPropertyChanged("UnitsOfMeasurementWrapper");
             }
+        }
 
-            public virtual decimal ConsumptionWrapper
+        public virtual MaterialName MaterialNameWrapper
+        {
+            get
             {
-                get
-                {
-                    return Consumption;
-                }
-                set
-                {
-                    Consumption = value;
-                    ValidateConsumtpion();
-                    OnPropertyChanged("ConsumptionWrapper");
-                }
+                return MaterialName;
             }
-
-            public virtual decimal ConsumptionCostWrapper
+            set
             {
-                get
-                {
-                    return ConsumptionCost;
-                }
-                set
-                {
-                    ConsumptionCost = value;
-                    OnPropertyChanged("ConsumptionCostWrapper");
-                }
+                MaterialName = value;
+                OnPropertyChanged("MaterialNameWrapper");
             }
+        }
 
-        #endregion 
+        public virtual decimal CostPerUnitWrapper
+        {
+            get
+            {
+                return Cost;
+            }
+            set
+            {
+                Cost = value;
+                ValidateCostPerUnit();
+                CalculateConsumptionCost();
+                OnPropertyChanged("CostPerUnitWrapper");
+            }
+        }
+
+        public virtual decimal ConsumptionWrapper
+        {
+            get
+            {
+                return Consumption;
+            }
+            set
+            {
+                Consumption = value;
+                ValidateConsumtpion();
+                CalculateConsumptionCost();
+                OnPropertyChanged("ConsumptionWrapper");
+            }
+        }
+
+        public virtual decimal ConsumptionCostWrapper
+        {
+            get
+            {
+                return ConsumptionCost;
+            }
+            set
+            {
+                ConsumptionCost = value;
+                OnPropertyChanged("ConsumptionCostWrapper");
+            }
+        }
+
+        #endregion
 
         #region Data Validation
 
@@ -160,14 +162,16 @@ namespace ordermanager.DatabaseModel
         }
 
 
-        #endregion 
+        #endregion
 
         #region Helpers
 
-            private void CalculateConsumptionCost()
-            {
-                decimal currencyValueInINR = 0m;
+        private void CalculateConsumptionCost()
+        {
+            decimal currencyValueInINR = 0m;
 
+            if (Currency != null)
+            {
                 var currencyValueInINRDbObj = OrderProduct.Order.OrderCurrencyConversions.Where(c => c.Currency.CurrencyID == Currency.CurrencyID)
                                                                               .Select(c => c.ValueInINR);
 
@@ -176,10 +180,11 @@ namespace ordermanager.DatabaseModel
                     currencyValueInINR = currencyValueInINRDbObj.First();
                 }
 
-                ConsumptionCost = Cost * Consumption * currencyValueInINR;
             }
+            ConsumptionCostWrapper = Cost * Consumption * currencyValueInINR;
+        }
 
-        #endregion 
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
