@@ -84,6 +84,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Extended Database Models\Company.cs" />
+    <Compile Include="Extended Database Models\Helper.cs" />
     <Compile Include="Extended Database Models\OrderCurrencyConversion.cs" />
     <Compile Include="Extended Database Models\EntityBase.cs" />
     <Compile Include="Extended Database Models\Order.cs" />

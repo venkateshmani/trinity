@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ordermanager.Extended_Database_Models;
+using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -206,6 +208,36 @@ namespace ordermanager.DatabaseModel
 
         #endregion
 
+        Dictionary<string, PurchaseOrder> m_MaterialItems;
+        public Dictionary<string, PurchaseOrder> MaterialItemsWrapper
+        {
+            get { return GroupMaterialByName(); }
+        }
+
+        private Dictionary<string, PurchaseOrder> GroupMaterialByName()
+        {
+            Dictionary<string, PurchaseOrder> items = new Dictionary<string, PurchaseOrder>();
+            foreach (MaterialName material in DBResources.Instance.AvailableMaterials)
+            {
+                ObservableCollection<ProductMaterial> queryItems = new ObservableCollection<ProductMaterial>((from item in ProductMaterials where item.MaterialName.Name == material.Name select item));
+                List<ProductMaterialItem> proItems = new List<ProductMaterialItem>();
+                ObservableCollection<SubMaterial> sub = new ObservableCollection<SubMaterial>();
+
+                for (int i = 1; i <= 3; i++)
+                {
+                    sub.Add(new SubMaterial() { Name = material.Name + "-SubItem" + i.ToString() });
+                }
+                foreach (ProductMaterial proMaterial in queryItems)
+                {
+                    proItems.AddRange(proMaterial.ProductMaterialItems);
+                    proItems.Add(new ProductMaterialItem() { Cost = 100.0m, Quantity = 10.0m });
+                }
+                items.Add(material.Name, new PurchaseOrder(material, sub, new ObservableCollection<ProductMaterialItem>(proItems)));
+            }
+            m_MaterialItems = items;
+            return m_MaterialItems;
+        }
+
         ObservableCollection<ProductMaterial> m_ProductMaterialsWrapper;
         public ObservableCollection<ProductMaterial> ProductMaterialsWrapper
         {
@@ -222,9 +254,7 @@ namespace ordermanager.DatabaseModel
                 }
                 return m_ProductMaterialsWrapper;
             }
-        }
-
-        
+        }        
 
         void m_ProductMaterialsWrapper_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
