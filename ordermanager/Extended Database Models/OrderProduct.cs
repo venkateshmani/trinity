@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager.DatabaseModel
 {
-    public partial class OrderProduct : EntityBase, INotifyPropertyChanged
+    public partial class OrderProduct : EntityBase
     {
 
         #region Property Wrappers
@@ -110,6 +110,25 @@ namespace ordermanager.DatabaseModel
                 OnPropertyChanged("TotalProductMaterialsCostWrapper");
             }
         }
+
+        public bool HasErrorsInProductMaterials
+        {
+            get
+            {
+                if (ProductMaterialsWrapper.Count == 0)
+                {
+                    return true;
+                }
+
+                foreach (var material in ProductMaterialsWrapper)
+                {
+                    if (material.HasErrors)
+                        return true;
+                }
+
+                return false;
+            }
+        }
         #endregion
 
         #region Helpers
@@ -195,11 +214,17 @@ namespace ordermanager.DatabaseModel
                 if (m_ProductMaterialsWrapper == null)
                 {
                     m_ProductMaterialsWrapper = new ObservableCollection<ProductMaterial>(this.ProductMaterials);
+                    foreach (var material in m_ProductMaterialsWrapper)
+                    {
+                        material.PropertyChanged += MaterialItem_PropertyChanged;
+                    }
                     m_ProductMaterialsWrapper.CollectionChanged += m_ProductMaterialsWrapper_CollectionChanged;
                 }
                 return m_ProductMaterialsWrapper;
             }
         }
+
+        
 
         void m_ProductMaterialsWrapper_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -209,7 +234,7 @@ namespace ordermanager.DatabaseModel
                 {
                     ProductMaterial newMaterialItem = newItem as ProductMaterial;
                     newMaterialItem.OrderProduct = this;
-                    newMaterialItem.PropertyChanged += newMaterialItem_PropertyChanged;
+                    newMaterialItem.PropertyChanged += MaterialItem_PropertyChanged;
                 }
             }
             else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
@@ -218,17 +243,22 @@ namespace ordermanager.DatabaseModel
                 {
                     ProductMaterial deletedMaterial = deletedItem as ProductMaterial;
                     deletedMaterial.OrderProduct = null;
-                    deletedMaterial.PropertyChanged -= newMaterialItem_PropertyChanged;
+                    deletedMaterial.PropertyChanged -= MaterialItem_PropertyChanged;
                 }
             }
             OnPropertyChanged("ProductMaterialsWrapper");
         }
 
-        void newMaterialItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        void MaterialItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "ConsumptionCostWrapper")
             {
                 CalculateTotalMaterialsCost();
+            }
+
+            if (e.PropertyName == "HasErrors")
+            {
+                OnPropertyChanged("HasErrorsInProductMaterials");
             }
         }
 
@@ -317,14 +347,5 @@ namespace ordermanager.DatabaseModel
         }
 
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
 }

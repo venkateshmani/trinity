@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager.DatabaseModel
 {
-    public partial class OrderCurrencyConversion : EntityBase, INotifyPropertyChanged
+    public partial class OrderCurrencyConversion : EntityBase
     {
         
         public decimal ValueInINRWrapper
@@ -23,16 +23,7 @@ namespace ordermanager.DatabaseModel
                 OnPropertyChanged("ValueInINRWrapper");
             }
         }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        
 
         #region Validation
 

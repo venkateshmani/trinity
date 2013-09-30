@@ -70,10 +70,9 @@ namespace ordermanager.ViewModel
 
         public bool Save(bool isSubmit)
         {
-            DbSet<Order> dbOrders = DBResources.Instance.Context.Orders;
-            foreach (Order order in dbOrders)
+            if (!HasError)
             {
-                foreach (OrderProduct dbProduct in order.OrderProducts)
+                foreach (OrderProduct dbProduct in Products)
                 {
                     foreach (ProductMaterial material in dbProduct.ProductMaterialsWrapper)
                     {
@@ -83,8 +82,34 @@ namespace ordermanager.ViewModel
                         }
                     }
                 }
+
+                return DBResources.Instance.UpdateOrderProducts();
             }
-            return DBResources.Instance.UpdateOrderProducts();
+
+            return false;
+        }
+
+        public bool HasError
+        {
+            get
+            {
+                bool hasError = false;
+                foreach (OrderProduct product in Products)
+                {
+                    foreach (ProductMaterial material in product.ProductMaterialsWrapper)
+                    {
+                        material.ValidateMaterialName();
+                        material.ValidateCostPerUnit();
+                        material.ValidateConsumtpion();
+                        material.ValidateCurrency();
+                        material.ValidateUOM();
+
+                        if (material.HasErrors)
+                            hasError = true;
+                    }
+                }
+                return hasError;
+            }
         }
 
         #region [INotifyPropertyChanged]

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager.DatabaseModel
 {
-    public partial class Order : EntityBase,  INotifyPropertyChanged
+    public partial class Order : EntityBase
     {
 
         #region Property Wrappers
@@ -110,15 +110,6 @@ namespace ordermanager.DatabaseModel
     
 
         #endregion 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
 
         #region Data Validation
 

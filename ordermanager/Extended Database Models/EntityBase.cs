@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager.DatabaseModel
 {
-    public class EntityBase : INotifyDataErrorInfo
+    public class EntityBase : INotifyDataErrorInfo, INotifyPropertyChanged
     {
       private Dictionary<String, List<String>> errors =
             new Dictionary<string, List<string>>();
@@ -45,7 +45,11 @@ namespace ordermanager.DatabaseModel
         public void RaiseErrorsChanged(string propertyName)
         {
             if (ErrorsChanged != null)
+            {
                 ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
+            }
+
+            OnPropertyChanged("HasErrors");
         }
 
         #region INotifyDataErrorInfo Members
@@ -59,9 +63,18 @@ namespace ordermanager.DatabaseModel
             return errors[propertyName];
         }
 
-        public bool HasErrors
+        public virtual bool HasErrors
         {
             get { return errors.Count > 0; }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         #endregion

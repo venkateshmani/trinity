@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager.DatabaseModel
 {
-    public partial class ProductMaterial : EntityBase, INotifyPropertyChanged
+    public partial class ProductMaterial : EntityBase
     {
         #region Wrapper Properties
 
@@ -136,7 +136,7 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        private void ValidateUOM()
+        public void ValidateUOM()
         {
             if (UnitsOfMeasurementWrapper == null)
             {
@@ -149,7 +149,7 @@ namespace ordermanager.DatabaseModel
         }
 
 
-        private void ValidateCurrency()
+        public void ValidateCurrency()
         {
             if (CurrencyWrapper == null)
             {
@@ -160,7 +160,6 @@ namespace ordermanager.DatabaseModel
                 RemoveError("CurrencyWrapper", "Select Currency");
             }
         }
-
 
         #endregion
 
@@ -185,14 +184,6 @@ namespace ordermanager.DatabaseModel
         }
 
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        
     }
 }

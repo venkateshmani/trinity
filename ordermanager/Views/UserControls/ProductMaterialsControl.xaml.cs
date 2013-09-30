@@ -82,5 +82,10 @@ namespace ordermanager.Views.UserControls
                 m_ViewModel.Save(false);
             } 
         }
+
+        private void productsList_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            productColumn.Width = productsList.ActualWidth;
+        }
     }
 }
