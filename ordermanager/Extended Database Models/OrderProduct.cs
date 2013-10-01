@@ -113,24 +113,47 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        private bool m_HasErrorsInProductMaterials;
         public bool HasErrorsInProductMaterials
         {
             get
             {
-                if (ProductMaterialsWrapper.Count == 0)
-                {
-                    return true;
-                }
-
-                foreach (var material in ProductMaterialsWrapper)
-                {
-                    if (material.HasErrors)
-                        return true;
-                }
-
-                return false;
+                return m_HasErrorsInProductMaterials;
+            }
+            set
+            {
+                m_HasErrorsInProductMaterials = value;
+                OnPropertyChanged("HasErrorsInProductMaterials");
             }
         }
+
+        public bool ValidateProductMaterials()
+        {
+            bool hasError = false;
+            if (HasUserClickedSaveOrSubmit)
+            {
+                if (ProductMaterialsWrapper.Count == 0)
+                {
+                    hasError = true;
+                }
+            }
+
+            foreach (var material in ProductMaterialsWrapper)
+            {
+                material.ValidateMaterialName();
+                material.ValidateCostPerUnit();
+                material.ValidateConsumtpion();
+                material.ValidateCurrency();
+                material.ValidateUOM();
+
+                if (material.HasErrors)
+                    hasError = true;
+            }
+
+            HasErrorsInProductMaterials = hasError;
+            return hasError;
+        }
+
         #endregion
 
         #region Helpers
@@ -288,7 +311,7 @@ namespace ordermanager.DatabaseModel
 
             if (e.PropertyName == "HasErrors")
             {
-                OnPropertyChanged("HasErrorsInProductMaterials");
+                ValidateProductMaterials();
             }
         }
 

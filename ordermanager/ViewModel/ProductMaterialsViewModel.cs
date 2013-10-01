@@ -39,6 +39,14 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public Order Order
+        {
+            get
+            {
+                return m_Order;
+            }
+        }
+
         public bool SetOrder(Order order)
         {
             if (m_Order != order)
@@ -70,6 +78,7 @@ namespace ordermanager.ViewModel
 
         public bool Save(bool isSubmit)
         {
+            Order.HasUserClickedSaveOrSubmit = true;
             if (!HasError)
             {
                 foreach (OrderProduct dbProduct in Products)
@@ -96,17 +105,8 @@ namespace ordermanager.ViewModel
                 bool hasError = false;
                 foreach (OrderProduct product in Products)
                 {
-                    foreach (ProductMaterial material in product.ProductMaterialsWrapper)
-                    {
-                        material.ValidateMaterialName();
-                        material.ValidateCostPerUnit();
-                        material.ValidateConsumtpion();
-                        material.ValidateCurrency();
-                        material.ValidateUOM();
-
-                        if (material.HasErrors)
+                    if (product.ValidateProductMaterials())
                             hasError = true;
-                    }
                 }
                 return hasError;
             }

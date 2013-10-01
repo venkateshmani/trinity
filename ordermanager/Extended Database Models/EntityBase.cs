@@ -77,6 +77,12 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public virtual bool HasUserClickedSaveOrSubmit
+        {
+            get;
+            set;
+        }
+
         #endregion
     }
 }

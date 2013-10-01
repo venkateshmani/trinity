@@ -194,6 +194,22 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public override bool HasUserClickedSaveOrSubmit
+        {
+            get
+            {
+                return base.HasUserClickedSaveOrSubmit;
+            }
+            set
+            {
+                base.HasUserClickedSaveOrSubmit = value;
+                foreach (OrderProduct product in OrderProducts)
+                {
+                    product.HasUserClickedSaveOrSubmit = value;
+                }
+            }
+        }
+
         #endregion 
     }
 }
