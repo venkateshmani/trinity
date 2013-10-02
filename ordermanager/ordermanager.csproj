@@ -212,6 +212,9 @@
     <Compile Include="Views\UserControls\OrderWorkBench.xaml.cs">
       <DependentUpon>OrderWorkBench.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\POProductDetails.xaml.cs">
+      <DependentUpon>POProductDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\ProductMaterialsControl.xaml.cs">
       <DependentUpon>ProductMaterialsControl.xaml</DependentUpon>
     </Compile>
@@ -247,6 +250,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CustomerDetailsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\POProductDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

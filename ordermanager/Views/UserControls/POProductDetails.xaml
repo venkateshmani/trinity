@@ -1,0 +1,180 @@
+﻿<UserControl x:Class="ordermanager.Views.UserControls.POProductDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" Background="White" Height="689.729" Width="875.132">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Metro.Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="ProductInfoStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
+            </Style>
+
+            <Style x:Key="inLineTextBlockStyle" TargetType="TextBlock">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="15">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBlock Text="Style ID:"  Style="{StaticResource ProductInfoStyle}" Foreground="Gray" />
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="Delivery Date:"  Style="{StaticResource ProductInfoStyle}" Foreground="Gray" />
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="Estimated Total Cost:"  Style="{StaticResource ProductInfoStyle}" Foreground="Gray" />
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Text="INR">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Order Qunatity" Grid.Row="0" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
+                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Margin="2">
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Text="Pieces">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                    <TextBlock Text="Tolerence" Style="{StaticResource inLineTextBlockStyle}" Margin="10,0,0,0"/>
+                    <TextBox x:Name="tollerenceText" Width="50"  Height="20" Margin="10,0,0,0"/>
+                    <TextBlock Text="%" Style="{StaticResource inLineTextBlockStyle}"/>
+                </StackPanel>
+                <TextBlock Text="Shipment Mode" Grid.Row="1" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
+                <ComboBox Grid.Row="1" Grid.Column="2" Width="200"  HorizontalAlignment="Left" Margin="2"/>
+                <TextBlock Text="Price Terms" Grid.Row="2" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
+                <TextBox Grid.Row="2" Grid.Column="2"  Margin="2" Height="75" Width="500"
+                         Controls:TextboxHelper.Watermark=" Enter price terms here" VerticalContentAlignment="Center"/>
+                <TextBlock Text="Payment Terms" Grid.Row="3" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
+                <TextBox Grid.Row="3" Grid.Column="2"  Margin="2" Height="75" Width="500" 
+                         Controls:TextboxHelper.Watermark=" Enter peyment terms here" VerticalContentAlignment="Center"/>
+                <TextBlock Text="Document Required" Grid.Row="4" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
+                <TextBox Grid.Row="4" Grid.Column="2" Margin="2" Height="75" Width="500"
+                         Controls:TextboxHelper.Watermark=" Enter documents required here" VerticalContentAlignment="Center"/>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="sizeSplitGrid" Grid.Row="1" Margin="15">
+            <StackPanel Orientation="Vertical" Grid.Row="1">
+                <Button x:Name="btnAddNewCountry"  Content="add New Country"  Width="150" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Margin="5">
+                    <Button.Background>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </Button.Background>
+                </Button>
+                <DataGrid x:Name="materialsGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
+                                                  GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
+                                                  HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductMaterialsWrapper, UpdateSourceTrigger=PropertyChanged}"
+                                                  RowHeaderWidth="25"
+                                                  HeadersVisibility="All" BorderBrush="Gray" BorderThickness="1">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn x:Name="countryColumn" Header="Country" Width="0.1*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <ComboBox x:Name="materialsComboBox" Grid.Column="0" IsEditable="True"                           
+                                                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                                                                      
+                                                          DisplayMemberPath="Name" SelectedItem="{Binding MaterialNameWrapper, Mode=TwoWay,                 
+                                                          UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                          Height="20"/>
+                                        <Button  x:Name="addBtn" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
+                                                         Cursor="Hand" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Material"
+                                                         Visibility="Collapsed" >
+                                            <Rectangle Width="10" Height="10">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn x:Name="orderCountColumn" Header="No. of Pieces"  Width="0.1*"/>
+                        <DataGridTextColumn x:Name="LSSizeCountColumn" Header="LS" Width="0.05*" />
+                        <DataGridTextColumn x:Name="SSizeCountColumn" Header="S"  Width="0.05*" />
+                        <DataGridTextColumn x:Name="MSizeCountColumn" Header="M"  Width="0.05*"  />
+                        <DataGridTextColumn x:Name="LSizeCountColumn" Header="L"  Width="0.05*" />
+                        <DataGridTextColumn x:Name="XLSizeCountColumn" Header="XL" Width="0.05*"  />
+                        <DataGridTextColumn x:Name="XXLSizeCountColumn" Header="XXL"  Width="0.05*" />
+                        <DataGridTextColumn x:Name="XXXLSizeCountColumn" Header="XXXL"  Width="0.05*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
