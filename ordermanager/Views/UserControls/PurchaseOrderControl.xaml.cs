@@ -51,6 +51,7 @@ namespace ordermanager.Views.UserControls
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             m_ViewModel = DataContext as PurchaseOrderControlViewModel;
+            poMaterialsDetails.ViewModel = m_ViewModel;
         }
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)
@@ -71,7 +72,11 @@ namespace ordermanager.Views.UserControls
             if (tvProducts.SelectedItem != null)
             {
                 if (tvProducts.SelectedItem is OrderProduct)
+                {
                     m_ViewModel.SelectedProduct = tvProducts.SelectedItem as OrderProduct;
+                    poProductDetails.Visibility = System.Windows.Visibility.Visible;
+                    poMaterialsDetails.Visibility = System.Windows.Visibility.Hidden;
+                }
                 else if (tvProducts.SelectedItem is ProductMaterial)
                 {
                     ProductMaterial material = tvProducts.SelectedItem as ProductMaterial;
@@ -80,6 +85,9 @@ namespace ordermanager.Views.UserControls
                         m_ViewModel.SelectedProduct = material.OrderProduct;
                     }
                     m_ViewModel.SelectedMaterial = material;
+                    poProductDetails.Visibility = System.Windows.Visibility.Hidden;
+                    poMaterialsDetails.Visibility = System.Windows.Visibility.Visible;
+
                 }
             }
         }

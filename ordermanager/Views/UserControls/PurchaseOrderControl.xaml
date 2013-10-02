@@ -1,0 +1,151 @@
+﻿<UserControl x:Class="ordermanager.Views.UserControls.PurchaseOrderControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:local="clr-namespace:ordermanager.Views.UserControls"
+             xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
+             xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
+             mc:Ignorable="d" DataContextChanged="UserControl_DataContextChanged" d:DesignHeight="506" d:DesignWidth="869">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Metro.Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Style>
+            <Style x:Key="ProductsListContentStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+            <Style x:Key="ProductInfoStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Foreground" Value="Gray" />
+                <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
+            </Style>
+            <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
+            <DataProviders:DataProvider x:Key="DataProvider" />
+            <Converters:Subractor x:Key="subractor"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.40*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Products and Materials" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
+            </Border>
+        </Grid>
+        <TreeView x:Name="tvProducts" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=Products}" Background="White" Margin="2" SelectedItemChanged="tvProducts_SelectedItemChanged">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding ProductMaterials}">
+                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=tvProducts, Path=ActualWidth, Converter={StaticResource subractor}, ConverterParameter=20}" Height="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Converter={StaticResource IndexToNumber}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}"/>
+                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text=". " FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
+                        <Viewbox Margin="3,0,3,0" Grid.Column="2" Width="25" Height="25" StretchDirection="Both">
+                            <Canvas Grid.Column="2" Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" UseLayoutRounding="False">
+                                <Path Width="22.7614" Height="28.2798" Canvas.Left="12.4886" Canvas.Top="10.9702" Stretch="Fill" Data="F1 M 24.25,39.25C 24.25,35.25 26,31.5 26,32.5C 26,33.5 28,29.5 29,27.5C 30,25.5 31,22.75 31,22.75L 35,23C 35,23 36,14.25 34,13.25C 32,12.25 29.9174,13.6505 28,12.5C 23,9.5 15,11.5 16,13.5C 16,13.5 12,15.5 13,16.5C 13,16.5 12,18 13.25,19.5C 12,21 12.5,22.5 13.25,23.5C 12.5,25 12,26.5 15,27.5C 16.8974,28.1325 22,25.75 22,28.5C 22,29.5 20,32.5 20,34.5C 20,38.5 24.25,39.25 24.25,39.25 Z ">
+                                    <Path.Fill>
+                                        <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                                    </Path.Fill>
+                                </Path>
+                            </Canvas>
+                        </Viewbox>
+                        <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=ProductName.Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                        <Border Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity, StringFormat=n}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" Margin="0,0,5,0"/>
+                        </Border>
+                    </Grid>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="25" Margin="25,2,0,2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Viewbox Margin="3,0,3,0" Grid.Column="0" Width="20" Height="20" StretchDirection="Both">
+                                    <Canvas Grid.Column="2" Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" UseLayoutRounding="False">
+                                        <Path Width="22.7614" Height="28.2798" Canvas.Left="12.4886" Canvas.Top="10.9702" Stretch="Fill" Data="F1 M 24.25,39.25C 24.25,35.25 26,31.5 26,32.5C 26,33.5 28,29.5 29,27.5C 30,25.5 31,22.75 31,22.75L 35,23C 35,23 36,14.25 34,13.25C 32,12.25 29.9174,13.6505 28,12.5C 23,9.5 15,11.5 16,13.5C 16,13.5 12,15.5 13,16.5C 13,16.5 12,18 13.25,19.5C 12,21 12.5,22.5 13.25,23.5C 12.5,25 12,26.5 15,27.5C 16.8974,28.1325 22,25.75 22,28.5C 22,29.5 20,32.5 20,34.5C 20,38.5 24.25,39.25 24.25,39.25 Z ">
+                                            <Path.Fill>
+                                                <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                                            </Path.Fill>
+                                        </Path>
+                                    </Canvas>
+                                </Viewbox>
+                                <TextBlock TextAlignment="Left"  Grid.Column="1" Text="{Binding Path=MaterialName.Name}" Margin="2,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"  FontFamily="{StaticResource ContentFontFamily}" FontSize="16" />
+                            </Grid>
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <Grid Grid.Row="0" Grid.Column="3">
+            <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Purchase Order Details" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+          <local:POProductDetails x:Name="poProductDetails" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden"/>
+          <local:POMaterialDetails x:Name="poMaterialsDetails" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+        </Grid>
+        <GridSplitter Grid.Row="0" Grid.Column="1"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      Background="LightGray" 
+                      ShowsPreview="True"
+                      Width="5" Grid.RowSpan="2" />
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="3">
+            <Rectangle Height="1" Fill="Gray" VerticalAlignment="Top" />
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.ColumnSpan="3">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
+                                        ToolTip="Save Changes">
+                    <Button.Background>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </Button.Background>
+                </Button>
+                <Button x:Name="submitBtn" Content="Submit" Margin="5" Width="150" Height="35" Foreground="White"
+                                        ToolTip="Submit to next level">
+                    <Button.Background>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

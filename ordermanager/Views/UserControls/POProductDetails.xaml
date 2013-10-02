@@ -46,7 +46,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="15">
+            <Grid Grid.Row="0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <TextBlock Text="Style ID:"  Style="{StaticResource ProductInfoStyle}" Foreground="Gray" />
                     <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
@@ -113,14 +113,17 @@
                 <TextBlock Text="Shipment Mode" Grid.Row="1" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
                 <ComboBox Grid.Row="1" Grid.Column="2" Width="200"  HorizontalAlignment="Left" Margin="2"/>
                 <TextBlock Text="Price Terms" Grid.Row="2" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
-                <TextBox Grid.Row="2" Grid.Column="2"  Margin="2" Height="75" Width="500"
-                         Controls:TextboxHelper.Watermark=" Enter price terms here" VerticalContentAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="2"  Margin="2" Height="50" Width="500"
+                         Controls:TextboxHelper.Watermark=" Enter price terms here" VerticalContentAlignment="Center"
+                         TextWrapping="Wrap"/>
                 <TextBlock Text="Payment Terms" Grid.Row="3" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
-                <TextBox Grid.Row="3" Grid.Column="2"  Margin="2" Height="75" Width="500" 
-                         Controls:TextboxHelper.Watermark=" Enter peyment terms here" VerticalContentAlignment="Center"/>
+                <TextBox Grid.Row="3" Grid.Column="2"  Margin="2" Height="50" Width="500" 
+                         Controls:TextboxHelper.Watermark=" Enter peyment terms here" VerticalContentAlignment="Center"
+                         TextWrapping="Wrap"/>
                 <TextBlock Text="Document Required" Grid.Row="4" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
-                <TextBox Grid.Row="4" Grid.Column="2" Margin="2" Height="75" Width="500"
-                         Controls:TextboxHelper.Watermark=" Enter documents required here" VerticalContentAlignment="Center"/>
+                <TextBox Grid.Row="4" Grid.Column="2" Margin="2" Height="50" Width="500"
+                         Controls:TextboxHelper.Watermark=" Enter documents required here" VerticalContentAlignment="Center"
+                         TextWrapping="Wrap"/>
             </Grid>
         </Grid>
 
