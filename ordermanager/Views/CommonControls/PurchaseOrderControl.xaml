@@ -36,6 +36,7 @@
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="Margin" Value="5" />
                 <Setter Property="FontSize" Value="16" />
+                <Setter Property="Foreground" Value="Gray" />
                 <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
             </Style>
             <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
@@ -143,19 +144,42 @@
                             </TextBlock.Foreground>
                         </TextBlock>
                     </StackPanel>
-                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Consumption Cost:"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" />
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=SelectedMaterial.ConsumptionCost, StringFormat=n}"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
-                            <TextBlock.Foreground>
-                                <SolidColorBrush Color="{StaticResource AccentColor}" />
-                            </TextBlock.Foreground>
-                        </TextBlock>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="INR"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
-                            <TextBlock.Foreground>
-                                <SolidColorBrush Color="{StaticResource AccentColor}" />
-                            </TextBlock.Foreground>
-                        </TextBlock>
-                    </StackPanel>
+                    <Grid  VerticalAlignment="Bottom" Grid.Row="0" HorizontalAlignment="Right">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Estimated Consumption Cost:"  Margin="4" Grid.Row="0" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" />
+                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=SelectedMaterial.ConsumptionCost, StringFormat=n}"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                                <TextBlock.Foreground>
+                                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="INR"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                                <TextBlock.Foreground>
+                                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                        </StackPanel>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Purchase Cost:"  Margin="4" Grid.Row="1" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" />
+                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="##"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                                <TextBlock.Foreground>
+                                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="INR"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                                <TextBlock.Foreground>
+                                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
                 <StackPanel Grid.Row="1" Margin="10">
                     <StackPanel  Margin="0,5,0,2" Orientation="Horizontal" >
@@ -170,7 +194,7 @@
                         </Button.Background>
                     </Button>
                 </StackPanel>
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="2" Margin="0,10,0,0">
                     <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
                         <DataGrid Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="Cell" 
                           GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" CanUserResizeColumns="True" 
