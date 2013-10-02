@@ -17,14 +17,14 @@ namespace ordermanager
     /// <summary>
     /// Interaction logic for LoginScreen.xaml
     /// </summary>
-    public partial class LoginScreen : Window
+    public partial class LoginScreen
     {
         public LoginScreen()
         {
             InitializeComponent();
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
+        private void btnExit_Click(object sender, RoutedEventArgs e)    
         {
             Application.Current.Shutdown();
         }

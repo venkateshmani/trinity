@@ -87,5 +87,30 @@ namespace ordermanager.Views.UserControls
         {
             productColumn.Width = productsList.ActualWidth;
         }
+
+        private void comboBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ComboBox materialComboBox = sender as ComboBox;
+            if (materialComboBox != null)
+            {
+                Grid parentGrid = materialComboBox.Parent as Grid;
+
+                if (parentGrid != null)
+                {
+                    Button addbtn = parentGrid.FindName("addBtn") as Button;
+                    if (addbtn != null)
+                    {
+                        if (materialComboBox.SelectedItem != null)
+                        {
+                            addbtn.Visibility = System.Windows.Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            addbtn.Visibility = System.Windows.Visibility.Visible;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

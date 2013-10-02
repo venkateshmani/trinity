@@ -45,7 +45,7 @@ namespace ordermanager.DatabaseModel
                 {
                     foreach (var extraCost in ProductExtraCosts)
                     {
-                        if (extraCost.ExtraCostID == 1)
+                        if (extraCost.ExtraCostTypeID == 1)
                         {
                             m_OtherCost = extraCost;
                             m_OtherCost.PropertyChanged +=m_OtherCost_PropertyChanged;
