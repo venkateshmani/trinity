@@ -60,28 +60,41 @@
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Products" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
-
-        <ListView x:Name="productsList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" Margin="2" SelectedIndex="0" ItemsSource="{Binding Path=Products}" SelectionChanged="productsList_SelectionChanged">
-            <ListView.View>
-                <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
-                    <GridViewColumn x:Name="productColumn" Header="Product" >
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock HorizontalAlignment="Left" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexToNumber}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
-                                        <TextBlock HorizontalAlignment="Left" Text=".  "   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
-                                        <TextBlock HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=ProductName.Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" />
-                                        <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" />
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-
+        <TreeView x:Name="tvProducts" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=Products}" Background="White" Margin="2" SelectedItemChanged="tvProducts_SelectedItemChanged">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding ProductMaterials}">
+                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}, Converter={StaticResource IndexToNumber}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}"/>
+                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text=". " FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
+                        <Viewbox Margin="3,0,3,0" Grid.Column="2" Width="25" Height="25" StretchDirection="Both">
+                            <Canvas Grid.Column="2" Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" UseLayoutRounding="False">
+                                <Path Width="22.7614" Height="28.2798" Canvas.Left="12.4886" Canvas.Top="10.9702" Stretch="Fill" Data="F1 M 24.25,39.25C 24.25,35.25 26,31.5 26,32.5C 26,33.5 28,29.5 29,27.5C 30,25.5 31,22.75 31,22.75L 35,23C 35,23 36,14.25 34,13.25C 32,12.25 29.9174,13.6505 28,12.5C 23,9.5 15,11.5 16,13.5C 16,13.5 12,15.5 13,16.5C 13,16.5 12,18 13.25,19.5C 12,21 12.5,22.5 13.25,23.5C 12.5,25 12,26.5 15,27.5C 16.8974,28.1325 22,25.75 22,28.5C 22,29.5 20,32.5 20,34.5C 20,38.5 24.25,39.25 24.25,39.25 Z ">
+                                    <Path.Fill>
+                                        <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                                    </Path.Fill>
+                                </Path>
+                            </Canvas>
+                        </Viewbox>
+                        <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=ProductName.Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                        <Border Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity, StringFormat=n}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                        </Border>
+                    </Grid>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock TextAlignment="Left" Text="{Binding Path=MaterialName.Name}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"  FontFamily="{StaticResource ContentFontFamily}" />
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
         <Grid Grid.Row="0" Grid.Column="3" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*" />
@@ -100,6 +113,7 @@
                 </Grid>
                 <Grid Grid.Row="1">
                     <ScrollViewer Background="White">
+                        <TextBlock Text="{Binding Path=SelectedProduct.ProductNameWrapper.Name}" FontSize="20"/>
                     </ScrollViewer>
                 </Grid>
             </Grid>
@@ -112,15 +126,105 @@
             <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
                     <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
-                        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Purchase Order Materials Details"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
+                        <StackPanel Orientation="Horizontal">
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Materials Details"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="{Binding Path=SelectedMaterial.MaterialName.Name}"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
+                        </StackPanel>
                     </Border>
                 </Grid>
-                <Grid Grid.Row="1" DataContext="{Binding ElementName=productsList, Path=SelectedItem}">
-                    <ScrollViewer Background="White">
+                <StackPanel Grid.Row="1" Margin="0,5,0,2" Orientation="Horizontal" >
+                    <Button x:Name="btnAddNewItem"  Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewItem_Click">
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="btnDeleteItem"  Content="Delete"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Delete Selected Item" HorizontalAlignment="Left" Click="DeleteItem_Click">
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+                <Grid Grid.Row="2">
+                    <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
+                        <DataGrid Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="Cell" 
+                          GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" CanUserResizeColumns="True" 
+                          ItemsSource="{Binding Path= SelectedMaterial.ProductMaterialItemsWrapper}" Background="WhiteSmoke">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn x:Name="subMaterialColumn" Header="Item Name" Width="0.3*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <ComboBox x:Name="materialsComboBox" Grid.Column="0" IsEditable="True"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                                                                      
+                                                          DisplayMemberPath="Name" SelectedItem="{Binding SubMaterial,Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" Height="20"/>
+                                                <Button  x:Name="btnAddNewSubMaterial" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
+                                                          Cursor="Hand" Click="AddNewSubMaterial"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Item"  Visibility="Collapsed">
+                                                    <Rectangle Width="10" Height="10">
+                                                        <Rectangle.Fill>
+                                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn x:Name="aliasColumn" Header="Alias" Width="0.2*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding Alias, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.2*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency" Width="0.12*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <ComboBox x:Name="currencyComboBox" Grid.Column="0" IsEditable="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                      Height="20" ItemsSource="{Binding Currencies, Source={StaticResource DataProvider}}" DisplayMemberPath="Symbol"
+                                                      SelectedItem="{Binding CurrencyWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                                <Button  x:Name="btnAddCurrency" Width="28"   Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left"  
+                                                     Cursor="Hand" Visibility="Collapsed" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Currency">
+                                                    <Rectangle Width="10" Height="10">
+                                                        <Rectangle.Fill>
+                                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn x:Name="costPerUnitColumn" Header="Cost" Width="0.2*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding Cost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                    <!--<ScrollViewer Background="White">
                         <StackPanel Name="spBase" Margin="0,0,0,10">
                             <ItemsControl x:Name="itemsControl" ItemsSource="{Binding MaterialItemsWrapper}">
                                 <ItemsControl.ItemTemplate>
@@ -203,7 +307,7 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </StackPanel>
-                    </ScrollViewer>
+                    </ScrollViewer>-->
                 </Grid>
             </Grid>
         </Grid>

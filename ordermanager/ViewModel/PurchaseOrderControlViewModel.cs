@@ -12,7 +12,8 @@ namespace ordermanager.ViewModel
     public class PurchaseOrderControlViewModel : INotifyPropertyChanged
     {
         private Order m_Order = null;
-        private OrderProduct m_SelectedItem;
+        private OrderProduct m_SelectedProduct;
+        private ProductMaterial m_SelectedMaterial;
         private ObservableCollection<OrderProduct> m_Products;
 
         public ObservableCollection<OrderProduct> Products
@@ -27,15 +28,40 @@ namespace ordermanager.ViewModel
 
         public OrderProduct SelectedProduct
         {
-            get { return m_SelectedItem; }
+            get { return m_SelectedProduct; }
             set
             {
-                if (value != m_SelectedItem)
+                if (value != m_SelectedProduct)
                 {
-                    m_SelectedItem = value;
+                    m_SelectedProduct = value;
+                    SelectedMaterial = null;
                     NotifyPropertyChanged("SelectedProduct");
                 }
             }
+        }
+
+        public ProductMaterial SelectedMaterial
+        {
+            get { return m_SelectedMaterial; }
+            set
+            {
+                if (value != m_SelectedMaterial)
+                {
+                    m_SelectedMaterial = value;
+                    NotifyPropertyChanged("SelectedMaterial");
+                }
+            }
+        }
+
+        public bool AddNewProductMaterialItem()
+        {
+            if (m_SelectedMaterial != null)
+            {
+                m_SelectedMaterial.ProductMaterialItemsWrapper.Add(new ProductMaterialItem());
+                return true;
+            }
+            else
+                return false;
         }
 
         public bool SetOrder(Order order)

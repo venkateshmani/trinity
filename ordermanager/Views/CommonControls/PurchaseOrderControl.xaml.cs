@@ -48,13 +48,6 @@ namespace ordermanager.Views.UserControls
             //}
         }
 
-        private void productsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            OrderProduct product = productsList.SelectedItem as OrderProduct;
-            if (product != null && m_ViewModel != null)
-                m_ViewModel.SelectedProduct = product;
-        }
-
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             m_ViewModel = DataContext as PurchaseOrderControlViewModel;
@@ -62,12 +55,33 @@ namespace ordermanager.Views.UserControls
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)
         {
-
+            if (m_ViewModel != null)
+            {
+                m_ViewModel.AddNewProductMaterialItem();
+            }
         }
 
         private void DeleteItem_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void tvProducts_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (tvProducts.SelectedItem != null)
+            {
+                if (tvProducts.SelectedItem is OrderProduct)
+                    m_ViewModel.SelectedProduct = tvProducts.SelectedItem as OrderProduct;
+                else if (tvProducts.SelectedItem is ProductMaterial)
+                {
+                    ProductMaterial material = tvProducts.SelectedItem as ProductMaterial;
+                    if (m_ViewModel.SelectedProduct.ProductID != material.ProductID)
+                    {
+                        m_ViewModel.SelectedProduct = material.OrderProduct;
+                    }
+                    m_ViewModel.SelectedMaterial = material;
+                }
+            }
         }
     }
 }

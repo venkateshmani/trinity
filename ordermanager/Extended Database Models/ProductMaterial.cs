@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -184,6 +185,53 @@ namespace ordermanager.DatabaseModel
         }
 
         #endregion
+
+        ObservableCollection<ProductMaterialItem> m_SubMaterialsWrapper;
+        public ObservableCollection<ProductMaterialItem> ProductMaterialItemsWrapper
+        {
+            get
+            {
+                if (m_SubMaterialsWrapper == null)
+                {
+                    m_SubMaterialsWrapper = new ObservableCollection<ProductMaterialItem>(this.ProductMaterialItems);
+                    foreach (var subMaterial in m_SubMaterialsWrapper)
+                    {
+                        subMaterial.PropertyChanged += ProductMaterialItem_PropertyChanged;
+                    }
+                    m_SubMaterialsWrapper.CollectionChanged += SubMaterialsWrapper_CollectionChanged;
+                }
+                return m_SubMaterialsWrapper;
+            }
+        }
+
+
+        void SubMaterialsWrapper_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                foreach (var newItem in e.NewItems)
+                {
+                    ProductMaterialItem newMaterialItem = newItem as ProductMaterialItem;
+                    newMaterialItem.ProductMaterial = this;
+                    newMaterialItem.PropertyChanged += ProductMaterialItem_PropertyChanged;
+                }
+            }
+            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var deletedItem in e.OldItems)
+                {
+                    ProductMaterialItem deletedMaterial = deletedItem as ProductMaterialItem;
+                    deletedMaterial.ProductMaterial = null;
+                    deletedMaterial.PropertyChanged -= ProductMaterialItem_PropertyChanged;
+                }
+            }
+            OnPropertyChanged("ProductMaterialsWrapper");
+        }
+
+        private void ProductMaterialItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
         
     }
 }
