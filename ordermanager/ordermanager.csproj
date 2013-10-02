@@ -42,6 +42,12 @@
     <Reference Include="EntityFramework">
       <HintPath>packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Kent.Boogaart.Converters">
+      <HintPath>packages\Kent.Boogaart.Converters.1.3.1\lib\net45\Kent.Boogaart.Converters.dll</HintPath>
+    </Reference>
+    <Reference Include="Kent.Boogaart.HelperTrinity">
+      <HintPath>packages\Kent.Boogaart.HelperTrinity.1.5.3\lib\net45\Kent.Boogaart.HelperTrinity.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>C:\Users\User\Downloads\ModernUI.1.0.5\net40\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
@@ -179,6 +185,7 @@
     </Compile>
     <Compile Include="ValueConverters\HasErrorToVisibilityConverter.cs" />
     <Compile Include="ValueConverters\StarWidthConverter.cs" />
+    <Compile Include="ValueConverters\Subractor.cs" />
     <Compile Include="ViewModel\DataProviers.cs" />
     <Compile Include="ViewModel\DBSingleton.cs" />
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />

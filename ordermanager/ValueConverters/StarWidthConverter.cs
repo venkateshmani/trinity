@@ -34,10 +34,22 @@ namespace ordermanager.ValueConverters
     {
         public object Convert(object value, Type TargetType, object parameter, CultureInfo culture)
         {
-            ListViewItem item = (ListViewItem)value;
-            ListView listView = ItemsControl.ItemsControlFromItemContainer(item) as ListView;
-            int index = listView.ItemContainerGenerator.IndexFromContainer(item) + 1;
-            return index.ToString();
+            if (value is ListViewItem)
+            {
+                ListViewItem item = (ListViewItem)value;
+                ListView listView = ItemsControl.ItemsControlFromItemContainer(item) as ListView;
+                int index = listView.ItemContainerGenerator.IndexFromContainer(item) + 1;
+                return index.ToString();
+            }
+            else if (value is TreeViewItem)
+            {
+                TreeViewItem item = (TreeViewItem)value;
+                TreeView listView = ItemsControl.ItemsControlFromItemContainer(item) as TreeView;
+                int index = listView.ItemContainerGenerator.IndexFromContainer(item) + 1;
+                return index.ToString();
+            }
+
+            return string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

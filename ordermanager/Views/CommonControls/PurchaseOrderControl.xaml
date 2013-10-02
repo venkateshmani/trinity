@@ -7,8 +7,7 @@
              xmlns:local="clr-namespace:ordermanager.Views.UserControls"
              xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
              xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
-             mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800" DataContextChanged="UserControl_DataContextChanged">
+             mc:Ignorable="d" DataContextChanged="UserControl_DataContextChanged" d:DesignHeight="506" d:DesignWidth="869">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -41,6 +40,7 @@
             </Style>
             <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
             <DataProviders:DataProvider x:Key="DataProvider" />
+            <Converters:Subractor x:Key="subractor"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -50,7 +50,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.6*"/>
+            <ColumnDefinition Width="0.40*"/>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -63,7 +63,7 @@
         <TreeView x:Name="tvProducts" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=Products}" Background="White" Margin="2" SelectedItemChanged="tvProducts_SelectedItemChanged">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding ProductMaterials}">
-                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
+                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=tvProducts, Path=ActualWidth, Converter={StaticResource subractor}, ConverterParameter=20}" Height="30">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -84,48 +84,22 @@
                         </Viewbox>
                         <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=ProductName.Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
                         <Border Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity, StringFormat=n}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                            <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity, StringFormat=n}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" Margin="0,0,5,0"/>
                         </Border>
                     </Grid>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock TextAlignment="Left" Text="{Binding Path=MaterialName.Name}" Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"  FontFamily="{StaticResource ContentFontFamily}" />
+                            <Grid Height="25">
+                                <TextBlock TextAlignment="Left" Text="{Binding Path=MaterialName.Name}" Margin="50,2,0,2" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"  FontFamily="{StaticResource ContentFontFamily}" FontSize="16" />
+                            </Grid>
                         </DataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
-        <Grid Grid.Row="0" Grid.Column="3" Grid.RowSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.5*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
-                        <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Order Quantity"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
-                    </Border>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <ScrollViewer Background="White">
-                        <TextBlock Text="{Binding Path=SelectedProduct.ProductNameWrapper.Name}" FontSize="20"/>
-                    </ScrollViewer>
-                </Grid>
-            </Grid>
-            <GridSplitter Grid.Row="1"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Center"
-              Background="LightGray" 
-              ShowsPreview="True"
-              Height="5" />
+        <Grid Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid Grid.Row="3">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
@@ -137,8 +111,9 @@
                         </StackPanel>
                     </Border>
                 </Grid>
-                <StackPanel Grid.Row="1" Margin="0,5,0,2" Orientation="Horizontal" >
-                    <Button x:Name="btnAddNewItem"  Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewItem_Click">
+                <StackPanel Grid.Row="1" Margin="10">
+                    <StackPanel  Margin="0,5,0,2" Orientation="Horizontal" >
+                        <Button x:Name="btnAddNewItem"  Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewItem_Click">
                         <Button.Background>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </Button.Background>
@@ -309,6 +284,7 @@
                         </StackPanel>
                     </ScrollViewer>-->
                 </Grid>
+                </StackPanel>
             </Grid>
         </Grid>
         <GridSplitter Grid.Row="0" Grid.Column="1"
