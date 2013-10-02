@@ -18,6 +18,7 @@ namespace ordermanager.DatabaseModel
             set
             {
                 Cost = value;
+                Validate();
                 OnPropertyChanged("CostWrapper");
             }
         }
@@ -44,19 +45,23 @@ namespace ordermanager.DatabaseModel
             set
             {
                 Description = value;
-                OnPropertyChanged("Description");
+                Validate();
+                OnPropertyChanged("DescriptionWrapper");
             }
         }
 
         public bool Validate()
         {
-            if (Cost != 0 && string.IsNullOrEmpty(Description))
+            if (HasUserClickedSaveOrSubmit)
             {
-                AddError("DescriptionWrapper", "Enter the reason for the cost", false);
-            }
-            else
-            {
-                RemoveError("DescriptionWrapper", "Enter the reason for the cost");
+                if (Cost != 0 && string.IsNullOrEmpty(Description))
+                {
+                    AddError("DescriptionWrapper", "Enter the reason for the cost", false);
+                }
+                else
+                {
+                    RemoveError("DescriptionWrapper", "Enter the reason for the cost");
+                }
             }
 
             return HasErrors;

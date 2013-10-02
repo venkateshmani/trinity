@@ -58,10 +58,8 @@ namespace ordermanager.DatabaseModel
                 {
                     m_OtherCost = new ProductExtraCost();
                     m_OtherCost.PropertyChanged += m_OtherCost_PropertyChanged;
-                    m_OtherCost.ExtraCostID = 1;
-
-                    OrderManagerDBEntities context = new OrderManagerDBEntities();
-                    Currency indianCurrency = context.Currencies.Find(1);
+                    m_OtherCost.ExtraCostTypeID = 1;
+                    Currency indianCurrency = DBResources.Instance.Context.Currencies.Find(1);
 
                     if (indianCurrency != null)
                         m_OtherCost.Currency = indianCurrency;
@@ -174,6 +172,23 @@ namespace ordermanager.DatabaseModel
             {
                 m_HasErrorsInProductMaterials = value;
                 OnPropertyChanged("HasErrorsInProductMaterials");
+            }
+        }
+
+        public override bool HasUserClickedSaveOrSubmit
+        {
+            get
+            {
+                return base.HasUserClickedSaveOrSubmit;
+            }
+            set
+            {
+                foreach (ProductExtraCost extraCost in ProductExtraCosts)
+                {
+                    extraCost.HasUserClickedSaveOrSubmit = value;
+                }
+
+                base.HasUserClickedSaveOrSubmit = value;
             }
         }
 
