@@ -40,6 +40,7 @@
                 <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
             </Style>
             <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
+            <Converters:Subractor x:Key="subractor"/>
             <Converters:HasErrorToVisibilityConverter x:Key="hasErrorToVisibilityConverter" />
             <DataProviders:DataProvider x:Key="DataProvider" />
         </ResourceDictionary>
@@ -63,12 +64,10 @@
             </Border>
         </Grid>
 
-        <ListView x:Name="productsList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Products}" SelectedIndex="0" SelectionChanged="productsList_SelectionChanged"
-                 
-                  SizeChanged="productsList_SizeChanged">
+        <ListView x:Name="productsList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Products}" SelectedIndex="0" SelectionChanged="productsList_SelectionChanged">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
-                    <GridViewColumn x:Name="productColumn" Header="Product" >
+                    <GridViewColumn x:Name="productColumn" Header="Product" Width="{Binding ActualWidth, ElementName=productsList, Converter={StaticResource subractor}, ConverterParameter=5}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
