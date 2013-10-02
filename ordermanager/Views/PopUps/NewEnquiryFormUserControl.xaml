@@ -269,7 +269,8 @@
                 </Button>
                 <DataGrid x:Name="productsRequired"  Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1"
                       CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeRows="True"  CanUserSortColumns="True" GridLinesVisibility="Horizontal"
-                      ColumnWidth="Auto" ItemsSource="{Binding OrderProducts}" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray">
+                      ColumnWidth="Auto" ItemsSource="{Binding OrderProducts}" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray"
+                      HeadersVisibility="All"  RowHeaderWidth="25">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn x:Name="productColumn" Header="Product" Width="0.2*">
                         <DataGridTemplateColumn.CellTemplate>

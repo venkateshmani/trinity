@@ -189,7 +189,9 @@
                 <Border BorderBrush="Gray" BorderThickness="1" Margin="10,5,10,10" Grid.Row="1">
                     <DataGrid x:Name="materialsGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
-                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductMaterialsWrapper, UpdateSourceTrigger=PropertyChanged}">
+                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductMaterialsWrapper, UpdateSourceTrigger=PropertyChanged}"
+                                              RowHeaderWidth="25"
+                                              HeadersVisibility="All">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn x:Name="materialColumn" Header="Material Name" Width="0.3*">
                                 <DataGridTemplateColumn.CellTemplate>
@@ -223,7 +225,7 @@
                             <DataGridTemplateColumn x:Name="costPerUnitColumn" Header="Cost Per Unit" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding CostPerUnitWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                        <TextBox Text="{Binding CostPerUnitWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -293,7 +295,7 @@
                 <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,10">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
                         <TextBlock Text="Other Cost:" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
-                        <TextBox PresentationTraceSources.TraceLevel="High" Text="{Binding OtherCost.CostWrapper,StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="100" Height="20" Foreground="Gray" Margin="10,0,0,0"/>
+                        <TextBox PresentationTraceSources.TraceLevel="High" Text="{Binding OtherCost.CostWrapper,StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="100" Height="20" Foreground="Gray" Margin="10,0,0,0"/>
                         <TextBlock Text="INR" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" Margin="3,0,0,0"/>
                         <TextBox  Text="{Binding OtherCost.DescriptionWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="400" Height="20" Foreground="Gray" Margin="40,0,0,0" Controls:TextboxHelper.Watermark=" Enter reason for other cost here"/>
                     </StackPanel>
