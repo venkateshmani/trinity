@@ -168,6 +168,7 @@
     </Compile>
     <Compile Include="Delegates.cs" />
     <Compile Include="Extended Database Models\OrderProduct.cs" />
+    <Compile Include="Extended Database Models\ProductExtraCost.cs" />
     <Compile Include="Extended Database Models\ProductMaterial.cs" />
     <Compile Include="LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>

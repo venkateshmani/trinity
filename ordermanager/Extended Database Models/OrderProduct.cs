@@ -13,6 +13,12 @@ namespace ordermanager.DatabaseModel
     public partial class OrderProduct : EntityBase
     {
 
+        #region fields
+
+        private ProductExtraCost m_OtherCost = null;
+
+        #endregion
+
         #region Property Wrappers
 
         public virtual Currency CurrencyWrapper
@@ -28,6 +34,50 @@ namespace ordermanager.DatabaseModel
                 SelectOrAddCurrencyConversion();
                 CalculateOrderValue();
 
+            }
+        }
+
+        public virtual ProductExtraCost OtherCost
+        {
+            get
+            {
+                if(m_OtherCost == null)
+                {
+                    foreach (var extraCost in ProductExtraCosts)
+                    {
+                        if (extraCost.ExtraCostID == 1)
+                        {
+                            m_OtherCost = extraCost;
+                            m_OtherCost.PropertyChanged +=m_OtherCost_PropertyChanged;
+                            break;
+                        }
+                    }
+                }
+
+                if (m_OtherCost == null)
+                {
+                    m_OtherCost = new ProductExtraCost();
+                    m_OtherCost.PropertyChanged += m_OtherCost_PropertyChanged;
+                    m_OtherCost.ExtraCostID = 1;
+
+                    OrderManagerDBEntities context = new OrderManagerDBEntities();
+                    Currency indianCurrency = context.Currencies.Find(1);
+
+                    if (indianCurrency != null)
+                        m_OtherCost.Currency = indianCurrency;
+
+                    this.ProductExtraCosts.Add(m_OtherCost);
+                }
+
+                return m_OtherCost;
+            }
+        }
+
+        void m_OtherCost_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "CostWrapper")
+            {
+                CalculateTotalMaterialsCost();
             }
         }
 
@@ -150,7 +200,22 @@ namespace ordermanager.DatabaseModel
                     hasError = true;
             }
 
+            if(ValidateExtraCosts())
+                hasError = true;
+
             HasErrorsInProductMaterials = hasError;
+            return hasError;
+        }
+
+        public bool ValidateExtraCosts()
+        {
+            bool hasError = false;
+            foreach (var extraCost in ProductExtraCosts)
+            {
+                if (extraCost.Validate())
+                    hasError = true;
+            }
+
             return hasError;
         }
 
@@ -324,6 +389,12 @@ namespace ordermanager.DatabaseModel
                 if (material.OrderProduct != null)
                     cost += material.ConsumptionCostWrapper;
             }
+
+            foreach (ProductExtraCost extraCost in ProductExtraCosts)
+            {
+                cost += extraCost.Cost;
+            }
+
             TotalProductMaterialsCostWrapper = cost;
         }
 
