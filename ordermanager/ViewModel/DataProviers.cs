@@ -67,6 +67,13 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public ObservableCollection<Company> Suppliers
+        {
+            get
+            {
+                return DBResources.Instance.Suppliers;
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
