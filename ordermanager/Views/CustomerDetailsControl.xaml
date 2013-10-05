@@ -69,7 +69,7 @@
                                 Text="{Binding Mobile}"/>
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
                                 Controls:TextboxHelper.Watermark="Email" ToolTip="Customer email ID"
-                                Text="{Binding EmailID}"/>
+                                Text="{Binding EmaiID}"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
             <Button x:Name="btnSave" Content="Save"  Margin="5,10,0,5" Width="75" Height="20" Foreground="White"
                                         ToolTip="Save Changes" HorizontalAlignment="Right"  PreviewMouseLeftButtonUp="btnSave_PreviewMouseLeftButtonUp">
