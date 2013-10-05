@@ -78,7 +78,7 @@
         <TabControl x:Name="viewOrdersTabControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" SelectedIndex="1">
             <TabItem x:Name="newEnquiryTab" Header="  New Enquiry  ">
                 <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <PopUps:NewEnquiryFormUserControl />
+                    <PopUps:NewEnquiryFormUserControl IsNewEnquiry="True" />
                 </Grid>
             </TabItem>
             <TabItem x:Name="myTasksTab" Header="  My Tasks  ">

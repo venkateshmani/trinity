@@ -17,6 +17,11 @@ namespace ordermanager.ViewModel
             
         }
 
+        public NewEnquiryViewModel(Order order)
+        {
+            Order = order;
+        }
+
         private Order m_Order = null;
         public Order Order
         {
@@ -33,8 +38,6 @@ namespace ordermanager.ViewModel
                 m_Order = value;
             }
         }
-
-
 
 
         private ObservableCollection<OrderProduct> m_OrderProducts = null;

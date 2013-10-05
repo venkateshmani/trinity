@@ -39,7 +39,7 @@
 
 
     </UserControl.Resources>
-    <Grid>
+    <Grid x:Name="rootLayout">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

@@ -68,7 +68,7 @@
             </TabItem>
             <TabItem Header="  View Enquiry  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
-                    <PopUps:NewEnquiryFormUserControl Margin="20,10,10,0" />
+                    <PopUps:NewEnquiryFormUserControl x:Name="viewEnquiry" Margin="20,10,10,0" IsNewEnquiry="False" />
                 </Border>
             </TabItem>
             <TabItem Header="  Materials  " Cursor="Hand">

@@ -29,16 +29,43 @@ namespace ordermanager.Views.PopUps
         public NewEnquiryFormUserControl()
         {
             InitializeComponent();
-            this.Loaded += NewEnquiryFormUserControl_Loaded;
+
         }
 
-        
-        void NewEnquiryFormUserControl_Loaded(object sender, RoutedEventArgs e)
+        private bool m_IsNewEnquiry = true;
+        public bool IsNewEnquiry
         {
-            NewEnquiryViewModel = new NewEnquiryViewModel();
+            get
+            {
+                return m_IsNewEnquiry;
+            }
+            set
+            {
+                m_IsNewEnquiry = value;
+                rootLayout.IsEnabled = value;
+                NewEnquiryViewModel = null;
+
+                if (!value)
+                {
+                    positiveDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
+                    negativeDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
+                    addNewItemBtn.Visibility = System.Windows.Visibility.Collapsed;
+                    addNewCustomerBtn.Visibility = System.Windows.Visibility.Collapsed;
+                    addNewAgentBtn.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else
+                {
+                    NewEnquiryViewModel = new NewEnquiryViewModel();
+                }
+            }
         }
 
         
+        public void SetOrder(Order order)
+        {
+            this.NewEnquiryViewModel = new NewEnquiryViewModel(order);
+        }
+    
 
         private NewEnquiryViewModel m_NewEnquiryViewModel = null;
         public NewEnquiryViewModel NewEnquiryViewModel

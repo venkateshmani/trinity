@@ -41,8 +41,14 @@ namespace ordermanager.Views.UserControls
 
         public Order Order
         {
-            get { return m_Order; }
-            set { SetOrder(value); }
+            get
+            {
+                return m_Order; 
+            }
+            set
+            {
+                SetOrder(value); 
+            }
         }
       
 
@@ -65,12 +71,14 @@ namespace ordermanager.Views.UserControls
             if (m_Order != order)
             {
                 m_Order = order;
+                viewEnquiry.SetOrder(order);
                 UpdateView();
             }
         }
 
         void OrderWorkBench_Loaded(object sender, RoutedEventArgs e)
         {
+
         }
 
         private void GoBack_MouseDown_1(object sender, MouseButtonEventArgs e)
