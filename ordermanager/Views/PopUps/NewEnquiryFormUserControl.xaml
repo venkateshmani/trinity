@@ -108,20 +108,23 @@
 
                 <TextBlock Text="Order Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="1" />
                 <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Orientation="Horizontal">
-                    <DatePicker Width="150" 
+                    <DatePicker x:Name="orderDate" Width="150" 
                                     SelectedDate="{Binding Order.OrderDate}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date" Margin="5"
                                     IsEnabled="False"
+                                    SelectedDateChanged="orderDate_SelectedDateChanged"
                                 />
 
                     <TextBlock Text="Expected Delivery Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Margin="10,0,0,0"/>
                     <StackPanel Grid.Row="3" Grid.Column="1" Margin="5" Orientation="Horizontal">
-                        <DatePicker Width="150" 
+                        <DatePicker x:Name="expectedDeliveryDate" Width="150" 
                                     SelectedDate="{Binding Order.ExpectedDeliveryDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                     HorizontalAlignment="Left"
-                                    Controls:TextboxHelper.Watermark="Select a date"/>
-                        <TextBlock x:Name="numberOfDays" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Top" />
+                                    Controls:TextboxHelper.Watermark="Select a date"
+                                    SelectedDateChanged="expectedDeliveryDate_SelectedDateChanged" />
+                        <TextBlock x:Name="numberOfDays" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Top" 
+                                   FontWeight="Bold" />
                         <TextBlock Text="Days" VerticalAlignment="Center" />
                     </StackPanel>
 

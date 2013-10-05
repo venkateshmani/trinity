@@ -92,5 +92,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <Rectangle x:Name="mask" Grid.Row="0" Grid.RowSpan="2" Fill="Gray" Opacity="0.7" Visibility="Collapsed" />
     </Grid>
 </Controls:MetroWindow>

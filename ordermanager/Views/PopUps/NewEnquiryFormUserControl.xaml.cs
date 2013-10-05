@@ -247,5 +247,24 @@ namespace ordermanager.Views.PopUps
                 }
             }
         }
+
+        private void orderDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateNumberOfDays();
+        }
+
+        private void expectedDeliveryDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateNumberOfDays();
+        }
+
+        private void UpdateNumberOfDays()
+        {
+            if (expectedDeliveryDate.SelectedDate != null && orderDate.SelectedDate != null)
+            {
+                 TimeSpan tSpan = expectedDeliveryDate.SelectedDate.Value.Subtract(orderDate.SelectedDate.Value);
+                 numberOfDays.Text = tSpan.Days.ToString();
+            }
+        }
     }
 }

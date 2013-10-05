@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro;
 using ordermanager.DatabaseModel;
+using ordermanager.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace ordermanager
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class MainWindow  : IMaskable
     {
         LoginScreen m_LoginScreen;
         public MainWindow()
@@ -86,6 +87,16 @@ namespace ordermanager
         void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        public void Mask()
+        {
+            mask.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        public void UnMask()
+        {
+            mask.Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 }

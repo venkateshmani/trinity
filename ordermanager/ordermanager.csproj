@@ -178,6 +178,7 @@
     <Compile Include="Extended Database Models\ProductExtraCost.cs" />
     <Compile Include="Extended Database Models\ProductMaterial.cs" />
     <Compile Include="Extended Database Models\ProductMaterialItem.cs" />
+    <Compile Include="Interfaces\IMaskable.cs" />
     <Compile Include="LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
@@ -204,6 +205,12 @@
     </Compile>
     <Compile Include="Views\CommonControls\ProductsListView.xaml.cs">
       <DependentUpon>ProductsListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopUps\CommentBox.xaml.cs">
+      <DependentUpon>CommentBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopUps\ProgressUpdateWindow.xaml.cs">
+      <DependentUpon>ProgressUpdateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\POMaterialDetails.xaml.cs">
       <DependentUpon>POMaterialDetails.xaml</DependentUpon>
@@ -249,6 +256,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\PopUps\CommentBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopUps\ProgressUpdateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\POMaterialDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -372,7 +387,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DatabaseModel\Overrides\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Resources\Icons\" />
     <Folder Include="Resources\Images\" />
     <Folder Include="ThirdParty\" />
