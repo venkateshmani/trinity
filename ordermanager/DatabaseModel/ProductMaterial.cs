@@ -17,7 +17,6 @@ namespace ordermanager.DatabaseModel
         public ProductMaterial()
         {
             this.ProductMaterialItems = new HashSet<ProductMaterialItem>();
-            this.SubMaterials = new HashSet<SubMaterial>();
         }
     
         public long MaterialID { get; set; }
@@ -34,6 +33,5 @@ namespace ordermanager.DatabaseModel
         public virtual OrderProduct OrderProduct { get; set; }
         public virtual ICollection<ProductMaterialItem> ProductMaterialItems { get; set; }
         public virtual UnitsOfMeasurement UnitsOfMeasurement { get; set; }
-        public virtual ICollection<SubMaterial> SubMaterials { get; set; }
     }
 }

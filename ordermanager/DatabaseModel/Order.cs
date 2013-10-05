@@ -11,9 +11,8 @@ namespace ordermanager.DatabaseModel
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
-    public partial class Order 
+    public partial class Order
     {
         public Order()
         {
@@ -34,17 +33,12 @@ namespace ordermanager.DatabaseModel
         public System.DateTime LastModifiedDate { get; set; }
     
         public virtual CommissionValueType CommissionValueType { get; set; }
-
         public virtual Company Company { get; set; }
         public virtual Company Company1 { get; set; }
-
         public virtual ICollection<History> Histories { get; set; }
         public virtual OrderStatu OrderStatu { get; set; }
         public virtual OrderThrough OrderThrough { get; set; }
         public virtual ICollection<OrderCurrencyConversion> OrderCurrencyConversions { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
-
-        
-
     }
 }

@@ -59,6 +59,22 @@ namespace ordermanager.ViewModel
             }
         }
 
+        private Dictionary<string, ObservableCollection<SubMaterial>> AvailableSubMaterials
+        {
+            get
+            {
+                return DBResources.Instance.AvailableSubMaterials;
+            }
+        }
+
+        public ObservableCollection<SubMaterial> GetAvailableSubMaterials(string materialName)
+        {
+            if (AvailableSubMaterials.ContainsKey(materialName))
+                return AvailableSubMaterials[materialName];
+            else
+                return null;
+        }
+
         public ObservableCollection<Company> Companies
         {
             get

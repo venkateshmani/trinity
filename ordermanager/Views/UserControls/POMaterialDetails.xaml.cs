@@ -26,9 +26,8 @@ namespace ordermanager.Views.UserControls
 
         public POMaterialDetails()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
-
 
         public PurchaseOrderControlViewModel ViewModel
         {
@@ -91,9 +90,22 @@ namespace ordermanager.Views.UserControls
 
         }
 
-        private void AddNewSubMaterial(object sender, RoutedEventArgs e)
+        private void AddNewSubMaterial_Click(object sender, RoutedEventArgs e)
         {
-
+            Button btnAddNewSubMaterial = sender as Button;
+            if (btnAddNewSubMaterial != null)
+            {
+                Grid parentGrid = btnAddNewSubMaterial.Parent as Grid;
+                if (parentGrid != null)
+                {
+                    ComboBox comboBox = GetControl(parentGrid,"subMaterialsComboBox") as ComboBox;
+                    if (comboBox != null && m_ViewModel != null)
+                    {
+                        comboBox.SelectedItem = m_ViewModel.CreateNewSubMaterial(comboBox.Text);
+                        btnAddNewSubMaterial.Visibility = System.Windows.Visibility.Collapsed;
+                    }
+                }
+            }
         }
 
         private void AddNewSupplier_Click(object sender, RoutedEventArgs e)
@@ -120,9 +132,7 @@ namespace ordermanager.Views.UserControls
                 }
             }
         }
-
-
-
+        
         private void EditSupplier_Click(object sender, RoutedEventArgs e)
         {
             Button btnEditSupplier = sender as Button;
@@ -162,18 +172,52 @@ namespace ordermanager.Views.UserControls
                             btnAddSupplier.Visibility = System.Windows.Visibility.Collapsed;
                             btnEditSupplier.Visibility = System.Windows.Visibility.Visible;
                         }
-                        else
+                        else if (!string.IsNullOrWhiteSpace(supplierComboBox.Text))
                         {
                             btnEditSupplier.Visibility = System.Windows.Visibility.Collapsed;
                             btnAddSupplier.Visibility = System.Windows.Visibility.Visible;
                         }
+                        else
+                        {
+                            btnAddSupplier.Visibility = System.Windows.Visibility.Collapsed;
+                            btnEditSupplier.Visibility = System.Windows.Visibility.Collapsed;
+                        }
+                    }
+                }
+            }
+        }     
+
+        private void SubMaterialsComboBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ComboBox subMaterialsComboBox = sender as ComboBox;
+            if (subMaterialsComboBox != null)
+            {
+                Grid parentGrid = subMaterialsComboBox.Parent as Grid;
+                if (parentGrid != null)
+                {
+                    Button btnAddNewSubMaterial = GetControl(parentGrid, "btnAddNewSubMaterial") as Button;                  
+                    if (btnAddNewSubMaterial != null)
+                    {
+                        if (subMaterialsComboBox.SelectedItem != null)                  
+                            btnAddNewSubMaterial.Visibility = System.Windows.Visibility.Collapsed;  
+                        else if(!string.IsNullOrWhiteSpace(subMaterialsComboBox.Text))
+                            btnAddNewSubMaterial.Visibility = System.Windows.Visibility.Visible;
+                        else
+                            btnAddNewSubMaterial.Visibility = System.Windows.Visibility.Collapsed;      
                     }
                 }
             }
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void DataGrid_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            ObjectDataProvider sub = this.FindResource("GetAvailableSubMaterials") as ObjectDataProvider;
+            if (sub != null && m_ViewModel != null && m_ViewModel.SelectedMaterial!=null)
+            {
+                sub.MethodParameters.Clear();
+                sub.MethodParameters.Add(m_ViewModel.SelectedMaterial.MaterialName.Name);
+                sub.Refresh();
+            }
 
         }
     }

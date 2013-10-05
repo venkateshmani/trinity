@@ -20,10 +20,10 @@ namespace ordermanager.DatabaseModel
         }
     
         public long SubMaterialsNameID { get; set; }
-        public long MaterialID { get; set; }
+        public int MaterialNameID { get; set; }
         public string Name { get; set; }
     
+        public virtual MaterialName MaterialName { get; set; }
         public virtual ICollection<ProductMaterialItem> ProductMaterialItems { get; set; }
-        public virtual ProductMaterial ProductMaterial { get; set; }
     }
 }

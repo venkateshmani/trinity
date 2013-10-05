@@ -6,6 +6,7 @@
              xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" d:DesignHeight="422.388" d:DesignWidth="883.582">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -41,6 +42,12 @@
             <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
             <DataProviders:DataProvider x:Key="DataProvider" />
             <Converters:Subractor x:Key="subractor"/>
+            <ObjectDataProvider x:Key="GetAvailableSubMaterials" ObjectType="{x:Type DataProviders:DataProvider}"
+                MethodName="GetAvailableSubMaterials">
+                <ObjectDataProvider.MethodParameters>
+                    <sys:String>Material1</sys:String>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -124,7 +131,7 @@
                     <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
                         <DataGrid Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" CanUserResizeColumns="True" 
-                        ItemsSource="{Binding Path= SelectedMaterial.ProductMaterialItemsWrapper}" Background="WhiteSmoke" SelectionChanged="DataGrid_SelectionChanged">
+                        DataContext="{Binding SelectedMaterial}" ItemsSource="{Binding ProductMaterialItemsWrapper}" Background="WhiteSmoke" DataContextChanged="DataGrid_DataContextChanged" >
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn x:Name="subMaterialColumn" Header="Item Name" Width="0.3*">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -134,10 +141,12 @@
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
-                                                <ComboBox x:Name="materialsComboBox" Grid.Column="0" IsEditable="True"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                                                                      
-                                                        DisplayMemberPath="Name" SelectedItem="{Binding SubMaterial,Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" Height="20"/>
+                                            <ComboBox x:Name="subMaterialsComboBox" Grid.Column="0" IsEditable="True"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                                    ItemsSource="{Binding Source={StaticResource GetAvailableSubMaterials}}" DisplayMemberPath="Name"
+                                                    SelectedItem="{Binding SubMaterial, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                    Height="20" TextBoxBase.TextChanged="SubMaterialsComboBox_TextChanged"/>
                                                 <Button  x:Name="btnAddNewSubMaterial" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
-                                                        Cursor="Hand" Click="AddNewSubMaterial"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Item"  Visibility="Collapsed">
+                                                        Cursor="Hand" Click="AddNewSubMaterial_Click"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Item"  Visibility="Collapsed">
                                                     <Rectangle Width="10" Height="10">
                                                         <Rectangle.Fill>
                                                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />

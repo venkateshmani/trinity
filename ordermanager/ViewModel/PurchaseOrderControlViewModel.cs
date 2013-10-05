@@ -77,6 +77,11 @@ namespace ordermanager.ViewModel
             return true;
         }
 
+        public SubMaterial CreateNewSubMaterial(string subMaterialName)
+        {
+            return DBResources.Instance.CreateNewSubMaterial(subMaterialName, SelectedMaterial);
+        }
+
         #region [INotifyPropertyChanged]
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string propertyName)

@@ -11,9 +11,8 @@ namespace ordermanager.DatabaseModel
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
-    public partial class OrderCurrencyConversion : INotifyPropertyChanged
+    public partial class OrderCurrencyConversion
     {
         public long OrderCurrencyConversionID { get; set; }
         public long OrderID { get; set; }

@@ -11,8 +11,7 @@ namespace ordermanager.DatabaseModel
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Linq;
+    
     public partial class OrderProduct
     {
         public OrderProduct()
@@ -24,25 +23,17 @@ namespace ordermanager.DatabaseModel
         public long ProductID { get; set; }
         public long OrderID { get; set; }
         public long ProductNameID { get; set; }
-
-        
         public decimal ExpectedQuantity { get; set; }
         public short UOMID { get; set; }
         public short CurrencyID { get; set; }
         public decimal CustomerTargetPrice { get; set; }
         public decimal OrderValue { get; set; }
-
-
+    
         public virtual Currency Currency { get; set; }
         public virtual Order Order { get; set; }
         public virtual ProductName ProductName { get; set; }
         public virtual UnitsOfMeasurement UnitsOfMeasurement { get; set; }
         public virtual ICollection<ProductExtraCost> ProductExtraCosts { get; set; }
         public virtual ICollection<ProductMaterial> ProductMaterials { get; set; }
-
-     
-
-
-    
     }
 }

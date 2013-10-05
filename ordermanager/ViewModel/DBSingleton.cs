@@ -213,6 +213,25 @@ namespace ordermanager.ViewModel
             }
         }
 
+        Dictionary<string, ObservableCollection<SubMaterial>> m_AvailableSubMaterials;
+        public Dictionary<string, ObservableCollection<SubMaterial>> AvailableSubMaterials
+        {
+            get
+            {
+                if (m_AvailableSubMaterials == null)
+                {
+                    m_AvailableSubMaterials = new Dictionary<string, ObservableCollection<SubMaterial>>(1);
+                    List<SubMaterial> subMaterials = dbContext.SubMaterials.ToList();
+                    foreach (MaterialName mName in AvailableMaterials)
+                    {
+                        ObservableCollection<SubMaterial> queryItems = new ObservableCollection<SubMaterial>((from item in subMaterials where item.MaterialName.Name == mName.Name select item));
+                        m_AvailableSubMaterials.Add(mName.Name, queryItems);
+                    }                   
+                }
+                return m_AvailableSubMaterials;
+            }          
+        }
+
 
         //Create a new product
         public MaterialName CreateNewMaterial(string newMaterialName)
@@ -228,7 +247,16 @@ namespace ordermanager.ViewModel
             return newMaterial;
         }
 
-
+        public SubMaterial CreateNewSubMaterial(string subMaterialName, ProductMaterial material)
+        {
+            SubMaterial newSubMaterial = dbContext.SubMaterials.Create();
+            newSubMaterial.Name = subMaterialName;
+            newSubMaterial.MaterialNameID = material.MaterialNameID;
+            dbContext.SubMaterials.Add(newSubMaterial);
+            Save();
+            AvailableMaterials = new ObservableCollection<MaterialName>(dbContext.MaterialNames.ToList()); //Refresh
+            return newSubMaterial;
+        }
         #endregion
 
         #region No Add support tables

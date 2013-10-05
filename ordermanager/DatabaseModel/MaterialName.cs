@@ -17,11 +17,13 @@ namespace ordermanager.DatabaseModel
         public MaterialName()
         {
             this.ProductMaterials = new HashSet<ProductMaterial>();
+            this.SubMaterials = new HashSet<SubMaterial>();
         }
     
         public int MaterialNameID { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<ProductMaterial> ProductMaterials { get; set; }
+        public virtual ICollection<SubMaterial> SubMaterials { get; set; }
     }
 }
