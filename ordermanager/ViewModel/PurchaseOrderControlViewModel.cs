@@ -32,13 +32,14 @@ namespace ordermanager.ViewModel
             set
             {
                 if (value != m_SelectedProduct)
-                {
+                {                   
                     m_SelectedProduct = value;
                     SelectedMaterial = null;
                     NotifyPropertyChanged("SelectedProduct");
+                   
                 }
             }
-        }
+        }              
 
         public ProductMaterial SelectedMaterial
         {
@@ -46,12 +47,12 @@ namespace ordermanager.ViewModel
             set
             {
                 if (value != m_SelectedMaterial)
-                {
-                    m_SelectedMaterial = value;
+                {                   
+                    m_SelectedMaterial = value;                  
                     NotifyPropertyChanged("SelectedMaterial");
                 }
             }
-        }
+        }       
 
         public bool AddNewProductMaterialItem()
         {
@@ -99,7 +100,7 @@ namespace ordermanager.ViewModel
         {
             return DBResources.Instance.CreateNewSubMaterial(subMaterialName, SelectedMaterial);
         }
-
+       
         #region [INotifyPropertyChanged]
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string propertyName)

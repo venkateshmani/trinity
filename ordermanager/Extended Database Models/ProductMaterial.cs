@@ -108,8 +108,30 @@ namespace ordermanager.DatabaseModel
             {
                 m_TotalSubMaterialsPurchaseCostWrapper = value;
                 OnPropertyChanged("TotalSubMaterialsPurchaseCostWrapper");
+                if (TotalSubMaterialsPurchaseCostWrapper > ConsumptionCostWrapper)
+                    HasErrorsInTotalPurchaseCost = true;
+                else
+                    HasErrorsInTotalPurchaseCost = false;
             }
         }
+
+        private bool m_HasErrors;
+        public bool HasErrorsInTotalPurchaseCost
+        {
+            get
+            {
+                return m_HasErrors;
+            }
+            set
+            {
+                if (m_HasErrors != value)
+                {
+                    m_HasErrors = value;
+                    OnPropertyChanged("HasErrorsInTotalPurchaseCost");
+                }
+            }
+        }
+
         #endregion
 
         #region Data Validation
