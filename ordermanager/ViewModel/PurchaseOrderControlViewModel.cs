@@ -77,6 +77,24 @@ namespace ordermanager.ViewModel
             return true;
         }
 
+        public bool Save(bool isSubmit)
+        {
+            foreach (OrderProduct dbProduct in Products)
+            {
+                foreach (ProductMaterial dbMaterial in dbProduct.ProductMaterials)
+                {
+                    foreach (ProductMaterialItem item in dbMaterial.ProductMaterialItemsWrapper)
+                    {
+                        if (item.ProductMaterialItemID == 0)
+                        {
+                            dbMaterial.ProductMaterialItems.Add(item);
+                        }
+                    }
+                }
+            }
+            return DBResources.Instance.UpdateOrderProducts();
+        }
+
         public SubMaterial CreateNewSubMaterial(string subMaterialName)
         {
             return DBResources.Instance.CreateNewSubMaterial(subMaterialName, SelectedMaterial);

@@ -117,8 +117,8 @@
             </Border>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
-          <local:POProductDetails x:Name="poProductDetails" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden"/>
-          <local:POMaterialDetails x:Name="poMaterialsDetails" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+            <local:POProductDetails x:Name="poProductDetails" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden"/>
+            <local:POMaterialDetails x:Name="poMaterialsDetails" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         </Grid>
         <GridSplitter Grid.Row="0" Grid.Column="1"
                       HorizontalAlignment="Center"
@@ -134,7 +134,7 @@
         <Grid Grid.Row="3" Grid.ColumnSpan="3">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Save Changes">
+                                        ToolTip="Save Changes" Click="Save_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>

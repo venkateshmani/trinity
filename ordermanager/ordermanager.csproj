@@ -90,11 +90,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Extended Database Models\Company.cs" />
-    <Compile Include="Extended Database Models\Helper.cs" />
-    <Compile Include="Extended Database Models\OrderCurrencyConversion.cs" />
-    <Compile Include="Extended Database Models\EntityBase.cs" />
-    <Compile Include="Extended Database Models\Order.cs" />
     <Compile Include="DatabaseModel\CommissionValueType.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
@@ -173,6 +168,11 @@
     <Compile Include="DatabaseModel\UserRole.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extended Database Models\Company.cs" />
+    <Compile Include="Extended Database Models\Helper.cs" />
+    <Compile Include="Extended Database Models\OrderCurrencyConversion.cs" />
+    <Compile Include="Extended Database Models\EntityBase.cs" />
+    <Compile Include="Extended Database Models\Order.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Extended Database Models\OrderProduct.cs" />
     <Compile Include="Extended Database Models\ProductExtraCost.cs" />
@@ -359,12 +359,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="App.Config" />
+    <None Include="ClassDiagram1.cd" />
     <EntityDeploy Include="DatabaseModel\OrderManagerModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OrderManagerModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ClassDiagram1.cd" />
     <None Include="DatabaseModel\OrderManagerModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OrderManagerModel.edmx</DependentUpon>

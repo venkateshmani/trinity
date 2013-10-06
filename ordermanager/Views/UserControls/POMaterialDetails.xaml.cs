@@ -26,7 +26,8 @@ namespace ordermanager.Views.UserControls
 
         public POMaterialDetails()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            gridDetails.DataContextChanged += DataGrid_DataContextChanged;
         }
 
         public PurchaseOrderControlViewModel ViewModel
@@ -98,7 +99,7 @@ namespace ordermanager.Views.UserControls
                 Grid parentGrid = btnAddNewSubMaterial.Parent as Grid;
                 if (parentGrid != null)
                 {
-                    ComboBox comboBox = GetControl(parentGrid,"subMaterialsComboBox") as ComboBox;
+                    ComboBox comboBox = GetControl(parentGrid, "subMaterialsComboBox") as ComboBox;
                     if (comboBox != null && m_ViewModel != null)
                     {
                         comboBox.SelectedItem = m_ViewModel.CreateNewSubMaterial(comboBox.Text);
@@ -132,7 +133,7 @@ namespace ordermanager.Views.UserControls
                 }
             }
         }
-        
+
         private void EditSupplier_Click(object sender, RoutedEventArgs e)
         {
             Button btnEditSupplier = sender as Button;
@@ -185,7 +186,7 @@ namespace ordermanager.Views.UserControls
                     }
                 }
             }
-        }     
+        }
 
         private void SubMaterialsComboBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -195,15 +196,15 @@ namespace ordermanager.Views.UserControls
                 Grid parentGrid = subMaterialsComboBox.Parent as Grid;
                 if (parentGrid != null)
                 {
-                    Button btnAddNewSubMaterial = GetControl(parentGrid, "btnAddNewSubMaterial") as Button;                  
+                    Button btnAddNewSubMaterial = GetControl(parentGrid, "btnAddNewSubMaterial") as Button;
                     if (btnAddNewSubMaterial != null)
                     {
-                        if (subMaterialsComboBox.SelectedItem != null)                  
-                            btnAddNewSubMaterial.Visibility = System.Windows.Visibility.Collapsed;  
-                        else if(!string.IsNullOrWhiteSpace(subMaterialsComboBox.Text))
+                        if (subMaterialsComboBox.SelectedItem != null)
+                            btnAddNewSubMaterial.Visibility = System.Windows.Visibility.Collapsed;
+                        else if (!string.IsNullOrWhiteSpace(subMaterialsComboBox.Text))
                             btnAddNewSubMaterial.Visibility = System.Windows.Visibility.Visible;
                         else
-                            btnAddNewSubMaterial.Visibility = System.Windows.Visibility.Collapsed;      
+                            btnAddNewSubMaterial.Visibility = System.Windows.Visibility.Collapsed;
                     }
                 }
             }
@@ -212,12 +213,17 @@ namespace ordermanager.Views.UserControls
         private void DataGrid_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             ObjectDataProvider sub = this.FindResource("GetAvailableSubMaterials") as ObjectDataProvider;
-            if (sub != null && m_ViewModel != null && m_ViewModel.SelectedMaterial!=null)
+            if (sub != null && m_ViewModel != null && m_ViewModel.SelectedMaterial != null)
             {
                 sub.MethodParameters.Clear();
                 sub.MethodParameters.Add(m_ViewModel.SelectedMaterial.MaterialName.Name);
                 sub.Refresh();
             }
+            gridDetails.DataContextChanged -= DataGrid_DataContextChanged;
+            object obj = this.DataContext;
+            this.DataContext = null;
+            this.DataContext = obj;
+            gridDetails.DataContextChanged += DataGrid_DataContextChanged;
 
         }
     }

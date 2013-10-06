@@ -26,7 +26,6 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-
         public virtual UnitsOfMeasurement UnitsOfMeasurementWrapper
         {
             get
@@ -97,6 +96,20 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public decimal TotalSubMaterialsPurchaseCostWrapper
+        {
+            get
+            {
+                if (m_TotalSubMaterialsPurchaseCostWrapper == -1.0m)
+                    CalculateTotalSubMaterialsPurchaseCost();
+                return m_TotalSubMaterialsPurchaseCostWrapper;
+            }
+            set
+            {
+                m_TotalSubMaterialsPurchaseCostWrapper = value;
+                OnPropertyChanged("TotalSubMaterialsPurchaseCostWrapper");
+            }
+        }
         #endregion
 
         #region Data Validation
@@ -148,8 +161,7 @@ namespace ordermanager.DatabaseModel
                 RemoveError("UnitsOfMeasurementWrapper", "Select Units");
             }
         }
-
-
+        
         public void ValidateCurrency()
         {
             if (CurrencyWrapper == null)
@@ -184,7 +196,17 @@ namespace ordermanager.DatabaseModel
             ConsumptionCostWrapper = Cost * Consumption * currencyValueInINR;
         }
 
-        #endregion
+        decimal m_TotalSubMaterialsPurchaseCostWrapper = -1.0m;
+        private void CalculateTotalSubMaterialsPurchaseCost()
+        {
+            decimal cost = 0;
+            foreach (ProductMaterialItem item in ProductMaterialItemsWrapper)
+            {
+                if (item.ProductMaterial != null)
+                    cost += item.ItemCostWrapper;
+            }
+            TotalSubMaterialsPurchaseCostWrapper = cost;
+        }             
 
         ObservableCollection<ProductMaterialItem> m_SubMaterialsWrapper;
         public ObservableCollection<ProductMaterialItem> ProductMaterialItemsWrapper
@@ -197,14 +219,15 @@ namespace ordermanager.DatabaseModel
                     foreach (var subMaterial in m_SubMaterialsWrapper)
                     {
                         subMaterial.PropertyChanged += ProductMaterialItem_PropertyChanged;
+                        subMaterial.CalculateItemCost();
                     }
                     m_SubMaterialsWrapper.CollectionChanged += SubMaterialsWrapper_CollectionChanged;
+                    CalculateTotalSubMaterialsPurchaseCost();
                 }
                 return m_SubMaterialsWrapper;
             }
         }
-
-
+        
         void SubMaterialsWrapper_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
@@ -230,8 +253,11 @@ namespace ordermanager.DatabaseModel
 
         private void ProductMaterialItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.PropertyName == "ItemCostWrapper")
+            {
+                CalculateTotalSubMaterialsPurchaseCost();
+            }
         }
-        
+        #endregion
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -346,10 +347,16 @@ namespace ordermanager.ViewModel
 
         #endregion
 
-
         public void Save()
         {
-            dbContext.SaveChanges();
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                throw;
+            }
         }
 
         public void Dispose()
