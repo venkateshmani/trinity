@@ -10,8 +10,8 @@ namespace ordermanager.DatabaseModel
 {
     public class EntityBase : INotifyDataErrorInfo, INotifyPropertyChanged
     {
-      private Dictionary<String, List<String>> errors =
-            new Dictionary<string, List<string>>();
+        private Dictionary<String, List<String>> errors =
+              new Dictionary<string, List<string>>();
 
         // Adds the specified error to the errors collection if it is not 
         // already present, inserting it in the first position if isWarning is 
@@ -42,6 +42,16 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public void RemoveError(string propertyName)
+        {
+            if (errors.ContainsKey(propertyName))
+            {
+                errors.Remove(propertyName);
+                RaiseErrorsChanged(propertyName);
+            }
+        }
+
+
         public void RaiseErrorsChanged(string propertyName)
         {
             if (ErrorsChanged != null)
@@ -58,7 +68,7 @@ namespace ordermanager.DatabaseModel
 
         public System.Collections.IEnumerable GetErrors(string propertyName)
         {
-            if (String.IsNullOrEmpty(propertyName) || 
+            if (String.IsNullOrEmpty(propertyName) ||
                 !errors.ContainsKey(propertyName)) return null;
             return errors[propertyName];
         }

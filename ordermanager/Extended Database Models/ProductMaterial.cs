@@ -108,30 +108,15 @@ namespace ordermanager.DatabaseModel
             {
                 m_TotalSubMaterialsPurchaseCostWrapper = value;
                 OnPropertyChanged("TotalSubMaterialsPurchaseCostWrapper");
+                RemoveError("TotalSubMaterialsPurchaseCostWrapper");
+                OrderProduct.RemoveError(MaterialName.Name);
                 if (TotalSubMaterialsPurchaseCostWrapper > ConsumptionCostWrapper)
-                    HasErrorsInTotalPurchaseCost = true;
-                else
-                    HasErrorsInTotalPurchaseCost = false;
-            }
-        }
-
-        private bool m_HasErrors;
-        public bool HasErrorsInTotalPurchaseCost
-        {
-            get
-            {
-                return m_HasErrors;
-            }
-            set
-            {
-                if (m_HasErrors != value)
                 {
-                    m_HasErrors = value;
-                    OnPropertyChanged("HasErrorsInTotalPurchaseCost");
-                }
+                    AddError("TotalSubMaterialsPurchaseCostWrapper", "Total purchase cost can't be more than consumption cost", false);
+                    this.OrderProduct.AddError(MaterialName.Name, MaterialName.Name + " has some errors", false);
+                }                
             }
         }
-
         #endregion
 
         #region Data Validation
@@ -183,7 +168,7 @@ namespace ordermanager.DatabaseModel
                 RemoveError("UnitsOfMeasurementWrapper", "Select Units");
             }
         }
-        
+
         public void ValidateCurrency()
         {
             if (CurrencyWrapper == null)
@@ -228,7 +213,7 @@ namespace ordermanager.DatabaseModel
                     cost += item.ItemCostWrapper;
             }
             TotalSubMaterialsPurchaseCostWrapper = cost;
-        }             
+        }
 
         ObservableCollection<ProductMaterialItem> m_SubMaterialsWrapper;
         public ObservableCollection<ProductMaterialItem> ProductMaterialItemsWrapper
@@ -249,7 +234,7 @@ namespace ordermanager.DatabaseModel
                 return m_SubMaterialsWrapper;
             }
         }
-        
+
         void SubMaterialsWrapper_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
