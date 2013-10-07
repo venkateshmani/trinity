@@ -47,7 +47,8 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="29.851" />
+            <RowDefinition Height="9.149"/>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -57,12 +58,12 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0">
+        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Products and Materials" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
-        <TreeView x:Name="tvProducts" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Path=Products}" Background="White" Margin="2" SelectedItemChanged="tvProducts_SelectedItemChanged">
+        <TreeView x:Name="tvProducts" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Path=Products}" Background="White" Margin="2" SelectedItemChanged="tvProducts_SelectedItemChanged">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding ProductMaterials}">
                     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=tvProducts, Path=ActualWidth, Converter={StaticResource subractor}, ConverterParameter=20}" Height="30">
@@ -112,12 +113,12 @@
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
-        <Grid Grid.Row="0" Grid.Column="3">
+        <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Purchase Order Details" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+        <Grid Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
             <local:POProductDetails x:Name="poProductDetails" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden"/>
             <local:POMaterialDetails x:Name="poMaterialsDetails" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         </Grid>
@@ -126,9 +127,9 @@
                       VerticalAlignment="Stretch"
                       Background="LightGray" 
                       ShowsPreview="True"
-                      Width="5" Grid.RowSpan="2" />
+                      Width="5" Grid.RowSpan="3" />
 
-        <Grid Grid.Row="2" Grid.ColumnSpan="3">
+        <Grid Grid.Row="3" Grid.ColumnSpan="3">
             <Rectangle Height="1" Fill="Gray" VerticalAlignment="Top" />
         </Grid>
 

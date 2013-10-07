@@ -76,9 +76,14 @@
                     <local:ProductMaterialsControl x:Name="materialsControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:ProductMaterialsControl>
                 </Border>
             </TabItem>
-            <TabItem Header="  Purchase Order  " Cursor="Hand">
+            <TabItem Header="  Material Details  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
                     <local:PurchaseOrderControl x:Name="purchaseOrderControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
+                </Border>
+            </TabItem>
+            <TabItem Header="  Purchase Order  " Cursor="Hand">
+                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
+                  <local:POControl x:Name="poControl"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>  
                 </Border>
             </TabItem>
             <TabItem Header="  Change History  " Cursor="Hand">

@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ordermanager", "ordermanage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MahApps.Metro.NET45", "MahApps.Metro\MahApps.Metro.NET45.csproj", "{942D11C4-29F5-46C4-8C14-4B976D56C637}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManagerReports", "..\OrderManagerReports\OrderManagerReports.csproj", "{3C400DD8-A269-4FF3-952F-EC01AACBE504}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,16 +35,6 @@ Global
 		{942D11C4-29F5-46C4-8C14-4B976D56C637}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{942D11C4-29F5-46C4-8C14-4B976D56C637}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{942D11C4-29F5-46C4-8C14-4B976D56C637}.Release|x86.ActiveCfg = Release|Any CPU
-		{3C400DD8-A269-4FF3-952F-EC01AACBE504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C400DD8-A269-4FF3-952F-EC01AACBE504}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C400DD8-A269-4FF3-952F-EC01AACBE504}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{3C400DD8-A269-4FF3-952F-EC01AACBE504}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{3C400DD8-A269-4FF3-952F-EC01AACBE504}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3C400DD8-A269-4FF3-952F-EC01AACBE504}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C400DD8-A269-4FF3-952F-EC01AACBE504}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C400DD8-A269-4FF3-952F-EC01AACBE504}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{3C400DD8-A269-4FF3-952F-EC01AACBE504}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{3C400DD8-A269-4FF3-952F-EC01AACBE504}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

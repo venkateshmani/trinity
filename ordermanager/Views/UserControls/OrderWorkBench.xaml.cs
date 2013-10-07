@@ -60,8 +60,11 @@ namespace ordermanager.Views.UserControls
                 case "Materials":
                     m_MaterialsViewModel.SetOrder(m_Order);
                     break;
-                case "Purchase Order":
+                case "Material Details":
                     m_PurchaseOrderViewModel.SetOrder(m_Order);
+                    break;
+                case "Purchase Order":
+                    poControl.SetOrder(m_Order);
                     break;
             }
         }
