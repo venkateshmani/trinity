@@ -34,6 +34,7 @@ namespace ordermanager.Views.UserControls
             {
                 purchaseOrderReportControl.Generate(Order.OrderID, supplier.CompanyID);
                 purchaseOrderReportControl.CreatePDF("D:\\test.pdf");
+                webBrowser.Source = new Uri("D:\\test.pdf");
             }
         }
 

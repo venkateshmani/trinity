@@ -374,7 +374,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.Config" />
-    <None Include="ClassDiagram1.cd" />
     <EntityDeploy Include="DatabaseModel\OrderManagerModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OrderManagerModel.Designer.cs</LastGenOutput>
@@ -407,6 +406,10 @@
     <Folder Include="ThirdParty\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Microsoft.DwayneNeed\Microsoft.DwayneNeed.csproj">
+      <Project>{80a10b86-6615-4440-93b0-c943df5b8693}</Project>
+      <Name>Microsoft.DwayneNeed</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Reports\Reports.csproj">
       <Project>{542f6659-eb9a-4ea2-81f8-8b76da9e0aea}</Project>
       <Name>Reports</Name>

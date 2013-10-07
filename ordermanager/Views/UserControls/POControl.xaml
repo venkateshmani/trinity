@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
              xmlns:Reports="clr-namespace:Reports;assembly=Reports"
+             xmlns:interop="clr-namespace:Microsoft.DwayneNeed.Interop;assembly=Microsoft.DwayneNeed"
              mc:Ignorable="d" d:DesignWidth="785.075" d:DesignHeight="404.478">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -96,6 +97,14 @@
                       ShowsPreview="True"
                       Width="5" Grid.RowSpan="2" />
         <Grid Grid.Row="1" Grid.Column="2">
+            <interop:AirspaceDecorator AirspaceMode="Redirect"
+                                   Background="White"
+                                   IsInputRedirectionEnabled="True"
+                                   IsOutputRedirectionEnabled="True"
+                                   VerticalAlignment="Stretch"
+                                   HorizontalAlignment="Stretch">
+                <WebBrowser x:Name="webBrowser"/>
+            </interop:AirspaceDecorator>
             <WindowsFormsHost x:Name="windowsFormHost" VerticalAlignment="Stretch"
                               HorizontalAlignment="Stretch">
                 <Reports:PurchaseOrderReportControl x:Name="purchaseOrderReportControl" Dock="Fill" />
