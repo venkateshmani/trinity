@@ -18,6 +18,17 @@ namespace Reports
             InitializeComponent();
         }
 
+        public void SetParameters(string supplierInformation, string purchaseOrderNumber, string quoteNumber, string quoteDate)
+        {
+            ReportParameter[] parameters = new ReportParameter[4];
+            parameters[0] = new ReportParameter("SupplierInformation", supplierInformation);
+            parameters[1] = new ReportParameter("PurchaseOrderNumber", purchaseOrderNumber);
+            parameters[2] = new ReportParameter("QuoteNumber", quoteNumber);
+            parameters[3] = new ReportParameter("QuoteDate", quoteDate);
+
+            this.reportViewer1.LocalReport.SetParameters(parameters);
+        }
+
         public void Generate(long? orderId, int? supplierId)
         {
             this.SP_PurchaseOrderTableAdapter.Fill(this.OrderManagerDBDataSet.SP_PurchaseOrder, orderId, supplierId);
