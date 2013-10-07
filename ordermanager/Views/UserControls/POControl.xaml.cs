@@ -33,6 +33,7 @@ namespace ordermanager.Views.UserControls
             if (supplier != null)
             {
                 purchaseOrderReportControl.Generate(Order.OrderID, supplier.CompanyID);
+                purchaseOrderReportControl.CreatePDF("D:\\test.pdf");
             }
         }
 

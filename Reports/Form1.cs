@@ -25,7 +25,10 @@ namespace Reports
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'OrderManagerDBDataSet.SP_PurchaseOrder' table. You can move, or remove it, as needed.
-            
+            this.SP_PurchaseOrderTableAdapter.Fill(this.OrderManagerDBDataSet.SP_PurchaseOrder, 9, 24);
+            this.reportViewer1.RefreshReport();
+
+            purchaseOrderReportControl1.Generate(9, 24);
         }
     }
 }
