@@ -29,7 +29,11 @@ namespace ordermanager.Views.UserControls
 
         private void supplierList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Company supplier = supplierList.SelectedItem as Company;
+            if (supplier != null)
+            {
+                purchaseOrderReportControl.Generate(Order.OrderID, supplier.CompanyID);
+            }
         }
 
         POControlViewModel m_ViewModel = null;
