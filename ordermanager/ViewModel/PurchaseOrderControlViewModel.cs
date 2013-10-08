@@ -47,9 +47,18 @@ namespace ordermanager.ViewModel
             set
             {
                 if (value != m_SelectedMaterial)
-                {                   
-                    m_SelectedMaterial = value;                  
+                {
+                    //Fix to avoid loosing values when data context changed
+                    if (m_SelectedMaterial != null)
+                    {
+                        m_SelectedMaterial.DontLoosePropertyValue = true;
+                    }
+
+                    m_SelectedMaterial = value;
                     NotifyPropertyChanged("SelectedMaterial");
+                    
+                    //Take back the fix which is made to avoid loosing values when data context changed
+                    m_SelectedMaterial.DontLoosePropertyValue = false;
                 }
             }
         }       

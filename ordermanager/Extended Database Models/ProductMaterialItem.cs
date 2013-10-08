@@ -87,6 +87,23 @@ namespace ordermanager.DatabaseModel
                 }
             }
         }
+
+        public virtual SubMaterial SubMaterialWrapper
+        {
+            get
+            {
+                return this.SubMaterial;
+            }
+            set
+            {
+                if (!DontLoosePropertyValue)
+                {
+                    this.SubMaterial = value;
+                    OnPropertyChanged("SubMaterialWrapper");
+                }
+            }
+        }
+
         #endregion [Wrappers]
 
         #region [Helpers]

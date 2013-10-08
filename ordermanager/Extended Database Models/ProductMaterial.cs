@@ -185,6 +185,7 @@ namespace ordermanager.DatabaseModel
 
         #region Helpers
 
+
         private void CalculateConsumptionCost()
         {
             decimal currencyValueInINR = 0m;
@@ -263,6 +264,22 @@ namespace ordermanager.DatabaseModel
             if (e.PropertyName == "ItemCostWrapper")
             {
                 CalculateTotalSubMaterialsPurchaseCost();
+            }
+        }
+
+        public override bool DontLoosePropertyValue
+        {
+            get
+            {
+                return base.DontLoosePropertyValue;
+            }
+            set
+            {
+                base.DontLoosePropertyValue = value;
+                foreach (ProductMaterialItem item in this.ProductMaterialItemsWrapper)
+                {
+                    item.DontLoosePropertyValue = value;
+                }
             }
         }
         #endregion

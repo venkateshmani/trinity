@@ -62,6 +62,12 @@ namespace ordermanager.DatabaseModel
             OnPropertyChanged("HasErrors");
         }
 
+        public virtual bool DontLoosePropertyValue
+        {
+            get;
+            set;
+        }
+
         #region INotifyDataErrorInfo Members
 
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
