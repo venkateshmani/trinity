@@ -26,6 +26,7 @@ namespace ordermanager.Views.UserControls
         public event OnGoBackDelegate OnGoBack = null;
         ProductMaterialsViewModel m_MaterialsViewModel;
         PurchaseOrderControlViewModel m_PurchaseOrderViewModel;
+        ChangeHistoryViewModel m_ChangeHistorViewModel;
         Order m_Order = null;
         public OrderWorkBench()
         {
@@ -34,6 +35,8 @@ namespace ordermanager.Views.UserControls
             materialsControl.DataContext = m_MaterialsViewModel;
             m_PurchaseOrderViewModel = new PurchaseOrderControlViewModel();
             purchaseOrderControl.DataContext = m_PurchaseOrderViewModel;
+            m_ChangeHistorViewModel = new ChangeHistoryViewModel();
+            changeHistoryControl.DataContext = m_ChangeHistorViewModel;
             this.Loaded += OrderWorkBench_Loaded;
             tabControl.SelectedIndex = 2;
             tabControl.SelectionChanged += tabControl_SelectionChanged;
@@ -65,6 +68,9 @@ namespace ordermanager.Views.UserControls
                     break;
                 case "Purchase Order":
                     poControl.SetOrder(m_Order);
+                    break;
+                case "Change History":
+                    m_ChangeHistorViewModel.SetOrder(m_Order);
                     break;
             }
         }
