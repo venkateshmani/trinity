@@ -42,7 +42,6 @@
     <Reference Include="EntityFramework">
       <HintPath>packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=0.0.0.999, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>C:\Users\User\Downloads\ModernUI.1.0.5\net40\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
@@ -413,6 +412,10 @@
     <ProjectReference Include="..\Reports\Reports.csproj">
       <Project>{542f6659-eb9a-4ea2-81f8-8b76da9e0aea}</Project>
       <Name>Reports</Name>
+    </ProjectReference>
+    <ProjectReference Include="MahApps.Metro\MahApps.Metro.csproj">
+      <Project>{5b1710d2-5dc8-4754-91b2-19165de49b3d}</Project>
+      <Name>MahApps.Metro</Name>
     </ProjectReference>
     <ProjectReference Include="MahApps.Metro\MahApps.Metro.NET45.csproj">
       <Project>{942d11c4-29f5-46c4-8c14-4b976d56c637}</Project>
