@@ -50,11 +50,11 @@ namespace ordermanager.Views.UserControls
             }
             set
             {
-                SetOrder(value); 
+                SetOrder(value);
+                this.DataContext = value;
             }
         }
       
-
         public void UpdateView()
         {
             string tabHeader = Convert.ToString(((System.Windows.Controls.HeaderedContentControl)(tabControl.SelectedItem)).Header);

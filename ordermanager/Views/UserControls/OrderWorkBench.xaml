@@ -47,7 +47,27 @@
     </UserControl.Resources>
 
     <Grid>
-        <TabControl x:Name="tabControl">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Order ID:" FontSize="22" FontFamily="{StaticResource ContentFontFamily}" Margin="5"  VerticalAlignment="Center" Foreground="Gray"/>
+                <TextBlock Text="{Binding OrderID}" FontSize="22" FontFamily="{StaticResource ContentFontFamily}" Margin="5"  VerticalAlignment="Center">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <TextBlock Text="Customer:" FontSize="22" FontFamily="{StaticResource ContentFontFamily}" Margin="40,5,5,5" VerticalAlignment="Center" Foreground="Gray" />
+                <TextBlock Text="{Binding Customer.Name}" FontSize="22" FontFamily="{StaticResource ContentFontFamily}" Margin="5" VerticalAlignment="Center">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </TextBlock.Foreground>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+        <TabControl x:Name="tabControl" Grid.Row="1">
             <TabItem x:Name="GoBackTab">
                 <TabItem.Header>
                     <Button Width="40"
@@ -83,7 +103,7 @@
             </TabItem>
             <TabItem Header="  Purchase Order  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
-                  <local:POControl x:Name="poControl"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>  
+                    <local:POControl x:Name="poControl"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 </Border>
             </TabItem>
             <TabItem Header="  Change History  " Cursor="Hand">
