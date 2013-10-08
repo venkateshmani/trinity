@@ -28,7 +28,7 @@ namespace Reports
             this.SP_PurchaseOrderTableAdapter.Fill(this.OrderManagerDBDataSet.SP_PurchaseOrder, 9, 24);
             this.reportViewer1.RefreshReport();
 
-            purchaseOrderReportControl1.Generate(9, 24);
+            purchaseOrderReportControl1.DisplayReport(9, 24);
         }
     }
 }

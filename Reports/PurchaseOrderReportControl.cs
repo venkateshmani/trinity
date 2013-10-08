@@ -29,14 +29,17 @@ namespace Reports
             this.reportViewer1.LocalReport.SetParameters(parameters);
         }
 
-        public void Generate(long? orderId, int? supplierId)
+        public void DisplayReport(long? orderId, int? supplierId)
         {
             this.SP_PurchaseOrderTableAdapter.Fill(this.OrderManagerDBDataSet.SP_PurchaseOrder, orderId, supplierId);
             this.reportViewer1.RefreshReport();
         }
 
-        public void CreatePDF(string fileName)
+        public void CreateReportAsPDF(long? orderId, int? supplierId,string fileName)
         {
+
+            this.SP_PurchaseOrderTableAdapter.Fill(this.OrderManagerDBDataSet.SP_PurchaseOrder, orderId, supplierId);
+
             // Variables
             Warning[] warnings;
             string[] streamIds;

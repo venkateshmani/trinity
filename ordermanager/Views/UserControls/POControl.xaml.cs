@@ -15,17 +15,49 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.ComponentModel;
+using System.Windows.Forms;
+using ordermanager.Views.PopUps;
 
 namespace ordermanager.Views.UserControls
 {
     /// <summary>
     /// Interaction logic for POControl.xaml
     /// </summary>
-    public partial class POControl : UserControl
+    public partial class POControl : System.Windows.Controls.UserControl
     {
+        private BackgroundWorker m_POGenerator = null;
         public POControl()
         {
             InitializeComponent();
+            m_POGenerator = new BackgroundWorker();
+            m_POGenerator.WorkerReportsProgress = true;
+            m_POGenerator.ProgressChanged += m_POGenerator_ProgressChanged;
+            m_POGenerator.DoWork += m_POGenerator_DoWork;
+            m_POGenerator.WorkerSupportsCancellation = true;
+            m_POGenerator.RunWorkerCompleted += m_POGenerator_RunWorkerCompleted;
+        }
+
+        void m_POGenerator_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressWindow.Close();   
+        }
+
+        void m_POGenerator_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            
+        }
+
+        void m_POGenerator_DoWork(object sender, DoWorkEventArgs e)
+        {
+            string folderPath = e.Argument.ToString();
+
+            foreach (Company supplier in ViewModel.Suppliers)
+            {
+                string filePath = System.IO.Path.Combine(
+                                             folderPath, "PurchaseOrder" + Order.OrderID.ToString() + "_" + supplier.Name + ".pdf");
+                GeneratePurchaseOrder(supplier, filePath);
+            }
         }
 
         private void supplierList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -37,14 +69,10 @@ namespace ordermanager.Views.UserControls
                                              System.IO.Path.GetTempPath(), "OM_PurchaseOrder" + Order.OrderID.ToString() + "_" + supplier.CompanyID.ToString() + ".pdf");
                 string lastOpenedPdfFile = string.Empty;
 
-                string supplierInformation = GetSupplierInformation(supplier);
-                string purchaseOrderNumber = GetPurchaseOrderNumber(supplier);
-                string quoteNumber = GetQuoteNumber();
-                string quoteDate = GetQuoteDate();
-                purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, quoteNumber, quoteDate);
-                purchaseOrderReportControl.Generate(Order.OrderID, supplier.CompanyID);
-                purchaseOrderReportControl.CreatePDF(tempFilePathForPdf);
-                webBrowser.Source = new Uri(tempFilePathForPdf);
+                if (GeneratePurchaseOrder(supplier, tempFilePathForPdf))
+                {
+                    webBrowser.Source = new Uri(tempFilePathForPdf);
+                }
 
                 if (System.IO.File.Exists(lastOpenedPdfFile))
                 {
@@ -53,6 +81,27 @@ namespace ordermanager.Views.UserControls
 
                 lastOpenedPdfFile = tempFilePathForPdf;
             }
+        }
+
+        private bool GeneratePurchaseOrder(Company supplier, string filePath)
+        {
+            try
+            {
+                string supplierInformation = GetSupplierInformation(supplier);
+                string purchaseOrderNumber = GetPurchaseOrderNumber(supplier);
+                string quoteNumber = GetQuoteNumber();
+                string quoteDate = GetQuoteDate();
+                purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, quoteNumber, quoteDate);
+                purchaseOrderReportControl.CreateReportAsPDF(Order.OrderID, supplier.CompanyID, filePath);
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(e.Message);
+                return false;
+            }
+
+            return true;
+
         }
 
         private string GetQuoteDate()
@@ -135,6 +184,24 @@ namespace ordermanager.Views.UserControls
         {
             Order = order;
             ViewModel = new POControlViewModel(order);
+        }
+
+        ProgressUpdateWindow progressWindow = null;
+        private void btnGeneratePOs_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog fldDiag = new FolderBrowserDialog();
+            if (fldDiag.ShowDialog() == DialogResult.OK)
+            {
+                progressWindow = new ProgressUpdateWindow();
+                progressWindow.UpdateString = "Generate Purchase Orders";
+                progressWindow.Show();
+                string folderPath = fldDiag.SelectedPath;
+                if (!m_POGenerator.IsBusy)
+                {
+                    m_POGenerator.RunWorkerAsync(folderPath);
+                }
+            }
+            
         }
     }
 }

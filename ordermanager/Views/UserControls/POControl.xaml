@@ -61,28 +61,39 @@
             </Border>
         </Grid>
 
-        <ListView x:Name="supplierList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Suppliers}" SelectedIndex="0" SelectionChanged="supplierList_SelectionChanged">
-            <ListView.View>
-                <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
-                    <GridViewColumn x:Name="supplierColumn" Width="{Binding ActualWidth, ElementName=supplierList, Converter={StaticResource subractor}, ConverterParameter=5}">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexToNumber}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}"/>
-                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text=".  "   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
-                                    <TextBlock Grid.Column="3" PresentationTraceSources.TraceLevel="High" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+                <ListView x:Name="supplierList" Grid.Row="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Suppliers}" SelectedIndex="0" SelectionChanged="supplierList_SelectionChanged">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
+                            <GridViewColumn x:Name="supplierColumn" Width="{Binding ActualWidth, ElementName=supplierList, Converter={StaticResource subractor}, ConverterParameter=5}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexToNumber}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}"/>
+                                            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text=".  "   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
+                                            <TextBlock Grid.Column="3" PresentationTraceSources.TraceLevel="High" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            <Button x:Name="btnGeneratePOs"  Content="Generate All POs"  Width="150" Height="35" Foreground="White"  ToolTip="Generate Purchase Order for all Suppliers and Save PDF" HorizontalAlignment="Center" Click="btnGeneratePOs_Click" Grid.Row="1" Margin="10">
+                <Button.Background>
+                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                </Button.Background>
+            </Button>
+        </Grid>
 
         <Grid Grid.Row="0" Grid.Column="2">
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
