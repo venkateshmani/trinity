@@ -186,6 +186,7 @@
     <Compile Include="ValueConverters\HasErrorToVisibilityConverter.cs" />
     <Compile Include="ValueConverters\StarWidthConverter.cs" />
     <Compile Include="ValueConverters\Subractor.cs" />
+    <Compile Include="ViewModel\ChangeHistoryViewModel.cs" />
     <Compile Include="ViewModel\DataProviers.cs" />
     <Compile Include="ViewModel\DBSingleton.cs" />
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />
@@ -210,6 +211,9 @@
     </Compile>
     <Compile Include="Views\PopUps\ProgressUpdateWindow.xaml.cs">
       <DependentUpon>ProgressUpdateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ChangeHistoryControl.xaml.cs">
+      <DependentUpon>ChangeHistoryControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\POControl.xaml.cs">
       <DependentUpon>POControl.xaml</DependentUpon>
@@ -265,6 +269,10 @@
     <Page Include="Views\PopUps\ProgressUpdateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\ChangeHistoryControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserControls\POControl.xaml">
       <SubType>Designer</SubType>

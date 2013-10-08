@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="ordermanager.Views.UserControls.ChangeHistoryControl"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
+             xmlns:local="clr-namespace:ordermanager.Views.UserControls"           
+             mc:Ignorable="d" d:DesignHeight="506" d:DesignWidth="869">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Metro.Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="HistoryItemStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Foreground" Value="Gray" />
+                <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
+            </Style>
+            <Converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <ScrollViewer>
+        <ItemsControl Margin="10" x:Name="historyItemsControl" ItemsSource="{Binding HistoryItems}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" Margin="0,10,0,0" CornerRadius="3">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </Border.BorderBrush>
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>                           
+                            <TextBlock  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding UserName}"  Style="{StaticResource HistoryItemStyle}" FontWeight="Bold">
+                                <TextBlock.Foreground>
+                                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                            <TextBlock  Grid.Row="0" Grid.Column="1" Text="{Binding Date}"  Style="{StaticResource HistoryItemStyle}" FontStyle="Italic" Margin="10,0,5,0" FontSize="14" HorizontalAlignment="Right"/>
+                            <Viewbox Grid.Row="1" Grid.Column="0" Margin="0,6,5,0" Width="20" Height="20" StretchDirection="Both" VerticalAlignment="Top">
+                                <Canvas Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" UseLayoutRounding="False">
+                                    <Path Stretch="Fill" Data="F1 M 306.03,393.546C 305.535,390.499 302.279,387.568 299.251,387.23C 291.765,386.479 284.275,386.479 276.787,387.23C 273.759,387.568 270.503,390.5 270.009,393.546C 269.317,398.224 269.317,403.263 270.009,407.942C 270.503,410.988 273.759,413.918 276.787,414.258C 277.861,414.366 278.931,414.423 280.003,414.5L 280.003,421.271C 280.003,421.81 280.33,422.296 280.827,422.503C 280.991,422.571 281.166,422.604 281.337,422.604C 281.683,422.604 282.025,422.468 282.279,422.214L 290.218,414.583C 293.23,414.523 296.241,414.378 299.251,414.075C 302.279,413.736 305.535,410.988 306.03,407.942C 306.723,403.263 306.723,398.224 306.03,393.546 Z " UseLayoutRounding="False">
+                                        <Path.Fill>
+                                            <SolidColorBrush Color="DimGray" />
+                                        </Path.Fill>
+                                    </Path>
+                                </Canvas>
+                            </Viewbox>
+                            <TextBlock  Grid.Row="1" Grid.Column="1" Text="{Binding Comment}"  Style="{StaticResource HistoryItemStyle}" TextWrapping="Wrap" />
+                            <Viewbox x:Name="vbChanges" Grid.Row="2" Grid.Column="0" Margin="0,6,5,0" Width="20" Height="20" StretchDirection="Both" VerticalAlignment="Top" Visibility="{Binding OrderChanges, Converter={StaticResource StringToVisibilityConverter}}">
+                                <Canvas Width="48" Height="48" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0" UseLayoutRounding="False">
+                                    <Path Stretch="Fill" Data="F1 M 306.03,393.546C 305.535,390.499 302.279,387.568 299.251,387.23C 291.765,386.479 284.275,386.479 276.787,387.23C 273.759,387.568 270.503,390.5 270.009,393.546C 269.317,398.224 269.317,403.263 270.009,407.942C 270.503,410.988 273.759,413.918 276.787,414.258C 277.861,414.366 278.931,414.423 280.003,414.5L 280.003,421.271C 280.003,421.81 280.33,422.296 280.827,422.503C 280.991,422.571 281.166,422.604 281.337,422.604C 281.683,422.604 282.025,422.468 282.279,422.214L 290.218,414.583C 293.23,414.523 296.241,414.378 299.251,414.075C 302.279,413.736 305.535,410.988 306.03,407.942C 306.723,403.263 306.723,398.224 306.03,393.546 Z " UseLayoutRounding="False">
+                                        <Path.Fill>
+                                            <SolidColorBrush Color="DimGray" />
+                                        </Path.Fill>
+                                    </Path>
+                                </Canvas>
+                            </Viewbox>
+                            <TextBlock  Grid.Row="2" Grid.Column="1" Text="{Binding OrderChanges}"  Style="{StaticResource HistoryItemStyle}" TextWrapping="Wrap"  Visibility="{Binding ElementName=vbChanges, Path=Visibility}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

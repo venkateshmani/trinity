@@ -88,6 +88,7 @@
             </TabItem>
             <TabItem Header="  Change History  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray">
+                    <local:ChangeHistoryControl x:Name="changeHistoryControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
                 </Border>
             </TabItem>
         </TabControl>
