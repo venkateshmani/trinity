@@ -167,7 +167,7 @@
                             <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding QuantityWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                        <TextBox Text="{Binding QuantityWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -190,7 +190,7 @@
                             <DataGridTemplateColumn x:Name="costPerUnitColumn" Header="Cost" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding CostWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                        <TextBox Text="{Binding CostWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -228,7 +228,7 @@
                                             </Grid.ColumnDefinitions>
                                             <ComboBox x:Name="supplierComboBox" Grid.Column="0" IsEditable="True"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                                                       ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
-                                                      DisplayMemberPath="Name" SelectedItem="{Binding Company,Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                                      DisplayMemberPath="Name" SelectedItem="{Binding SupplierWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
                                                       Height="20"  TextBoxBase.TextChanged="SupplierComboBox_TextChanged"/>
                                             <Button  x:Name="btnAddSupplier" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
                                                         Cursor="Hand" Click="AddNewSupplier_Click"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Supplier"  Visibility="Collapsed">

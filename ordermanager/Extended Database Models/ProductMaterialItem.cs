@@ -40,6 +40,21 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public virtual Company SupplierWrapper
+        {
+            get
+            {
+                return Company;
+            }
+            set
+            {
+                if (Company != value)
+                {
+                    Company = value;                   
+                }               
+            }
+        }
+
         public virtual decimal CostWrapper
         {
             get
