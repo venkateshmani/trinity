@@ -358,7 +358,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency" Width="0.12*">
+                    <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency" Width="0.10*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -398,7 +398,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     
-                    <DataGridTemplateColumn x:Name="currencyValueInINR" Header="Currency Value In INR" Width="0.16*">
+                    <DataGridTemplateColumn x:Name="currencyValueInINR" Header="Currency Value In INR" Width="0.19*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
@@ -408,7 +408,7 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price" Width="0.2*">
+                    <DataGridTemplateColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price" Width="0.18*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" 
