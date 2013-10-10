@@ -189,75 +189,79 @@ namespace ordermanager.DatabaseModel
 
         #region Helpers
 
-        public decimal CurrencyValueInINR
-        {
-            get
-            {
-                if (Currency != null && Currency.DefaultValueInINR != null)
-                    return Currency.DefaultValueInINR.Value;
+        #region Currency Management
 
-                if (CurrencyConversion != null)
-                    return CurrencyConversion.ValueInINRForMaterialsWrapper;
-
-                return 0;
-            }
-            set
+            public decimal CurrencyValueInINR
             {
-                CurrencyConversion.ValueInINRForMaterialsWrapper = value;
-            }
-        }
-
-        private OrderCurrencyConversion m_CurrencyConversion = null;
-        public OrderCurrencyConversion CurrencyConversion
-        {
-            get
-            {
-                return m_CurrencyConversion;
-            }
-            set
-            {
-                if (m_CurrencyConversion != null)
+                get
                 {
-                    m_CurrencyConversion.PropertyChanged -= m_CurrencyConversion_PropertyChanged;
+                    if (Currency != null && Currency.DefaultValueInINR != null)
+                        return Currency.DefaultValueInINR.Value;
+
+                    if (CurrencyConversion != null)
+                        return CurrencyConversion.ValueInINRForMaterialsWrapper;
+
+                    return 0;
                 }
-
-                m_CurrencyConversion = value;
-                m_CurrencyConversion.PropertyChanged += m_CurrencyConversion_PropertyChanged;
-            }
-        }
-
-        private void SelectOrAddCurrencyConversion()
-        {
-            if (Currency != null)
-            {
-                var currencyConversion = OrderProduct.Order.OrderCurrencyConversions.Where(c => c.Currency.CurrencyID == Currency.CurrencyID)
-                                                                       .Select(c => c);
-
-                OrderCurrencyConversion newConversion = null;
-                if (currencyConversion == null || currencyConversion.Count() == 0)
+                set
                 {
-                    newConversion = new OrderCurrencyConversion();
-                    newConversion.Currency = Currency;
-
-                    OrderProduct.Order.OrderCurrencyConversions.Add(newConversion);
+                    CurrencyConversion.ValueInINRForMaterialsWrapper = value;
                 }
-                else
-                {
-                    newConversion = currencyConversion.First();
-                }
-
-                CurrencyConversion = newConversion;
             }
-        }
 
-        void m_CurrencyConversion_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "ValueInINRForMaterialsWrapper")
+            private OrderCurrencyConversion m_CurrencyConversion = null;
+            public OrderCurrencyConversion CurrencyConversion
             {
-                OnPropertyChanged("CurrencyValueInINR");
-                CalculateConsumptionCost();
+                get
+                {
+                    return m_CurrencyConversion;
+                }
+                set
+                {
+                    if (m_CurrencyConversion != null)
+                    {
+                        m_CurrencyConversion.PropertyChanged -= m_CurrencyConversion_PropertyChanged;
+                    }
+
+                    m_CurrencyConversion = value;
+                    m_CurrencyConversion.PropertyChanged += m_CurrencyConversion_PropertyChanged;
+                }
             }
-        }
+
+            private void SelectOrAddCurrencyConversion()
+            {
+                if (Currency != null)
+                {
+                    var currencyConversion = OrderProduct.Order.OrderCurrencyConversions.Where(c => c.Currency.CurrencyID == Currency.CurrencyID)
+                                                                           .Select(c => c);
+
+                    OrderCurrencyConversion newConversion = null;
+                    if (currencyConversion == null || currencyConversion.Count() == 0)
+                    {
+                        newConversion = new OrderCurrencyConversion();
+                        newConversion.Currency = Currency;
+
+                        OrderProduct.Order.OrderCurrencyConversions.Add(newConversion);
+                    }
+                    else
+                    {
+                        newConversion = currencyConversion.First();
+                    }
+
+                    CurrencyConversion = newConversion;
+                }
+            }
+
+            void m_CurrencyConversion_PropertyChanged(object sender, PropertyChangedEventArgs e)
+            {
+                if (e.PropertyName == "ValueInINRForMaterialsWrapper")
+                {
+                    OnPropertyChanged("CurrencyValueInINR");
+                    CalculateConsumptionCost();
+                }
+            }
+
+        #endregion 
 
         private void CalculateConsumptionCost()
         {

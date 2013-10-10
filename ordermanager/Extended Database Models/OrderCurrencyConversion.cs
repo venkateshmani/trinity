@@ -40,6 +40,22 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public decimal ValueInINRForSubMaterialsWrapper
+        {
+            get
+            {
+                if (ValueInINRForSubMaterials != null)
+                    return ValueInINRForSubMaterials.Value;
+
+                return 0;
+            }
+            set
+            {
+                ValueInINRForSubMaterials = value;
+                OnPropertyChanged("ValueInINRForSubMaterialsWrapper");
+            }
+        }
+
         #region Validation
 
         //Add the property validation methods in to this method to ensure validation on create button click

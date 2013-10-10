@@ -1,6 +1,7 @@
 ﻿using ordermanager.DatabaseModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,12 +32,11 @@ namespace ordermanager.DatabaseModel
             }
             set
             {
-                if (Currency != value)
-                {
-                    Currency = value;
-                    CalculateItemCost();
-                }
+                Currency = value;
                 ValidateCurrency();
+                SelectOrAddCurrencyConversion();
+                CalculateItemCost();
+                OnPropertyChanged("CurrencyValueInINR");
             }
         }
 
@@ -122,19 +122,84 @@ namespace ordermanager.DatabaseModel
         #endregion [Wrappers]
 
         #region [Helpers]
-        public void CalculateItemCost()
+
+        #region Currency Management
+
+        public decimal CurrencyValueInINR
         {
-            decimal currencyValueInINR = 0m;
+            get
+            {
+                if (Currency != null && Currency.DefaultValueInINR != null)
+                    return Currency.DefaultValueInINR.Value;
+
+                if (CurrencyConversion != null)
+                    return CurrencyConversion.ValueInINRForSubMaterialsWrapper;
+
+                return 0;
+            }
+            set
+            {
+                CurrencyConversion.ValueInINRForSubMaterialsWrapper = value;
+            }
+        }
+
+        private OrderCurrencyConversion m_CurrencyConversion = null;
+        public OrderCurrencyConversion CurrencyConversion
+        {
+            get
+            {
+                return m_CurrencyConversion;
+            }
+            set
+            {
+                if (m_CurrencyConversion != null)
+                {
+                    m_CurrencyConversion.PropertyChanged -= m_CurrencyConversion_PropertyChanged;
+                }
+
+                m_CurrencyConversion = value;
+                m_CurrencyConversion.PropertyChanged += m_CurrencyConversion_PropertyChanged;
+            }
+        }
+
+        private void SelectOrAddCurrencyConversion()
+        {
             if (Currency != null)
             {
-                var currencyValueInINRDbObj = ProductMaterial.OrderProduct.Order.OrderCurrencyConversions.Where(c => c.Currency.CurrencyID == Currency.CurrencyID)
-                                                                              .Select(c => c.ValueInINR);
-                if (currencyValueInINRDbObj != null && currencyValueInINRDbObj.Count() != 0)
+                var currencyConversion = ProductMaterial.OrderProduct.Order.OrderCurrencyConversions.Where(c => c.Currency.CurrencyID == Currency.CurrencyID)
+                                                                       .Select(c => c);
+
+                OrderCurrencyConversion newConversion = null;
+                if (currencyConversion == null || currencyConversion.Count() == 0)
                 {
-                    currencyValueInINR = currencyValueInINRDbObj.First();
+                    newConversion = new OrderCurrencyConversion();
+                    newConversion.Currency = Currency;
+
+                    ProductMaterial.OrderProduct.Order.OrderCurrencyConversions.Add(newConversion);
                 }
+                else
+                {
+                    newConversion = currencyConversion.First();
+                }
+
+                CurrencyConversion = newConversion;
             }
-            ItemCostWrapper = Cost * Quantity * currencyValueInINR;
+        }
+
+        void m_CurrencyConversion_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ValueInINRForSubMaterialsWrapper")
+            {
+                OnPropertyChanged("CurrencyValueInINR");
+                CalculateItemCost();
+            }
+        }
+
+        #endregion 
+
+        public void CalculateItemCost()
+        {
+            ItemCostWrapper = Cost * Quantity * CurrencyValueInINR;
         }
         #endregion [Helpers]
 
