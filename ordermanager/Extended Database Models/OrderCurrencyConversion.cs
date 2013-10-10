@@ -23,7 +23,6 @@ namespace ordermanager.DatabaseModel
                 OnPropertyChanged("ValueInINRWrapper");
             }
         }
-        
 
         #region Validation
 

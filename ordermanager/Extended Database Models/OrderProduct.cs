@@ -34,6 +34,7 @@ namespace ordermanager.DatabaseModel
                 SelectOrAddCurrencyConversion();
                 CalculateOrderValue();
 
+                OnPropertyChanged("CurrencyValueInINR");
             }
         }
 
@@ -238,6 +239,24 @@ namespace ordermanager.DatabaseModel
 
         #region Helpers
 
+        public decimal CurrencyValueInINR
+        {
+            get
+            {
+                if (Currency != null && Currency.DefaultValueInINR != null)
+                    return Currency.DefaultValueInINR.Value;
+
+                if(CurrencyConversion != null)
+                    return CurrencyConversion.ValueInINRWrapper;
+
+                return 0;
+            }
+            set
+            {
+                CurrencyConversion.ValueInINRWrapper = value;
+            }
+        }
+
         private OrderCurrencyConversion m_CurrencyConversion = null;
         public OrderCurrencyConversion CurrencyConversion
         {
@@ -283,7 +302,11 @@ namespace ordermanager.DatabaseModel
 
         void m_CurrencyConversion_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            CalculateOrderValue();
+            if (e.PropertyName == "ValueInINRWrapper")
+            {
+                OnPropertyChanged("CurrencyValueInINR");
+                CalculateOrderValue();
+            }
         }
 
         private void CalculateOrderValue()

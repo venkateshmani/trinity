@@ -234,28 +234,20 @@
 
             <Rectangle Width="1.5" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0,50,0,50" Fill="Gray" Grid.RowSpan="2"/>
             
-            <Grid Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom" Margin="5,10,10,10">
+            <Grid Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom" Margin="5,10,10,40">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Currency Conversion Rate Table" Margin="3"/>
-                <DataGrid x:Name="currencyConversionGrid" BorderThickness="1" BorderBrush="Gray" CanUserAddRows="False" Grid.Row="1" MinHeight="200" Margin="2"
-                          ItemsSource="{Binding OrderCurrencyConversions}" AutoGenerateColumns="False" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray"
-                          GridLinesVisibility="All">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="currencySymbol" Header="Currency" Width="0.2*" IsReadOnly="True" Binding="{Binding Currency.Symbol}" />
-                        <DataGridTemplateColumn x:Name="inrValue" Header="Value in Rupees" Width="0.5*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBox Text="{Binding ValueInINRWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                PreviewTextInput="TextBox_PreviewTextInput"
-                                                DataObject.Pasting="PastingHandler" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <Label Content="Total Order Value "  Style="{StaticResource DescriptionHeaderStyle}" Grid.Row="0" Margin="0,0,0,12"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Margin="0,0,0,75">
+                    <TextBlock x:Name="totalOrderValueLabel" Text="{Binding TotalOrderValue, StringFormat=n}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                    <Label Content="  INR"  Style="{StaticResource DescriptionHeaderStyle}"/>
+                </StackPanel>
             </Grid>
         </Grid>
 
@@ -405,6 +397,16 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
+                    
+                    <DataGridTemplateColumn x:Name="currencyValueInINR" Header="Currency Value In INR" Width="0.16*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
+                                            PreviewTextInput="TextBox_PreviewTextInput"
+                                            DataObject.Pasting="PastingHandler" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
                     <DataGridTemplateColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price" Width="0.2*">
                         <DataGridTemplateColumn.CellTemplate>
@@ -439,15 +441,7 @@
                     </TextBlock.Foreground>
                 </TextBlock>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <Label Content="Total Order Value "  Style="{StaticResource DescriptionHeaderStyle}"/>
-                <TextBlock x:Name="totalOrderValueLabel" Text="{Binding TotalOrderValue, StringFormat=n}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold">
-                    <TextBlock.Foreground>
-                        <SolidColorBrush Color="{StaticResource AccentColor}" />
-                    </TextBlock.Foreground>
-                </TextBlock>
-                <Label Content="  INR"  Style="{StaticResource DescriptionHeaderStyle}"/>
-            </StackPanel>
+           
         </Grid>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="2">
