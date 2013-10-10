@@ -9,7 +9,6 @@ namespace ordermanager.DatabaseModel
 {
     public partial class OrderCurrencyConversion : EntityBase
     {
-        
         public decimal ValueInINRWrapper
         {
             get

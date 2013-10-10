@@ -210,6 +210,7 @@ namespace ordermanager.DatabaseModel
                 material.ValidateCostPerUnit();
                 material.ValidateConsumtpion();
                 material.ValidateCurrency();
+                material.ValidateCurrencyValueInINR();
                 material.ValidateUOM();
 
                 if (material.HasErrors)
@@ -253,7 +254,11 @@ namespace ordermanager.DatabaseModel
             }
             set
             {
-                CurrencyConversion.ValueInINRWrapper = value;
+                if (Currency != null && Currency.DefaultValueInINR == null)
+                {
+                    CurrencyConversion.ValueInINRWrapper = value;
+                    ValidateCurrencyValueInINR();
+                }
             }
         }
 
@@ -444,7 +449,20 @@ namespace ordermanager.DatabaseModel
             ValidateExpectedQuantity();
             ValidateUOM();
             ValidateCurrency();
+            ValidateCurrencyValueInINR();
             ValidateCustomerTargetPrice();
+        }
+
+        public void ValidateCurrencyValueInINR()
+        {
+            if (CurrencyValueInINR == 0)
+            {
+                AddError("CurrencyValueInINR", "Value in INR can't be Zero", false);
+            }
+            else
+            {
+                RemoveError("CurrencyValueInINR", "Value in INR can't be Zero");
+            }
         }
 
         private void ValidateCustomerTargetPrice()

@@ -125,6 +125,18 @@ namespace ordermanager.DatabaseModel
 
         #region Data Validation
 
+        public void ValidateCurrencyValueInINR()
+        {
+            if (CurrencyValueInINR == 0)
+            {
+                AddError("CurrencyValueInINR", "Value in INR can't be Zero", false);
+            }
+            else
+            {
+                RemoveError("CurrencyValueInINR", "Value in INR can't be Zero");
+            }
+        }
+
         public void ValidateConsumtpion()
         {
             if (Consumption == 0)
@@ -205,7 +217,11 @@ namespace ordermanager.DatabaseModel
                 }
                 set
                 {
-                    CurrencyConversion.ValueInINRForMaterialsWrapper = value;
+                    if (Currency != null && Currency.DefaultValueInINR == null)
+                    {
+                        CurrencyConversion.ValueInINRForMaterialsWrapper = value;
+                        ValidateCurrencyValueInINR();
+                    }
                 }
             }
 
