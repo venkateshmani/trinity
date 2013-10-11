@@ -52,6 +52,7 @@ namespace ordermanager.Views.UserControls
         {
             m_ViewModel = DataContext as PurchaseOrderControlViewModel;
             poMaterialsDetails.ViewModel = m_ViewModel;
+            poProductDetails.ViewModel = m_ViewModel;
         }
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)

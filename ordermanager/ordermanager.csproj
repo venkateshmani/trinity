@@ -181,6 +181,8 @@
     <Compile Include="Extended Database Models\Order.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Extended Database Models\OrderProduct.cs" />
+    <Compile Include="Extended Database Models\ProductBreakUp.cs" />
+    <Compile Include="Extended Database Models\ProductCountryWiseBreakUp.cs" />
     <Compile Include="Extended Database Models\ProductExtraCost.cs" />
     <Compile Include="Extended Database Models\ProductMaterial.cs" />
     <Compile Include="Extended Database Models\ProductMaterialItem.cs" />

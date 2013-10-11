@@ -13,7 +13,9 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                return ValueInINR;
+                if (ValueInINR != null)
+                    return ValueInINR.Value;
+                return 0;
             }
             set
             {
@@ -27,7 +29,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                if(ValueInINRForMaterials != null)
+                if (ValueInINRForMaterials != null)
                     return ValueInINRForMaterials.Value;
 
                 return 0;
@@ -67,7 +69,7 @@ namespace ordermanager.DatabaseModel
         {
             if (ValueInINRWrapper == 0)
             {
-                AddError("ValueInINRWrapper", "Value in INR can't be Zero",false);
+                AddError("ValueInINRWrapper", "Value in INR can't be Zero", false);
             }
             else
             {
@@ -75,7 +77,7 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        #endregion 
+        #endregion
 
     }
 }

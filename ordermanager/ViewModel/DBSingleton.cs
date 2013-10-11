@@ -317,7 +317,23 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public ObservableCollection<ShipmentMode> m_ShipmentModes = null;
+        public ObservableCollection<ShipmentMode> ShipmentModes
+        {
+            get
+            {
+                if (m_ShipmentModes == null)
+                {
+                    m_ShipmentModes = new ObservableCollection<ShipmentMode>(dbContext.ShipmentModes.ToList());
+                }
 
+                return m_ShipmentModes;
+            }
+            private set
+            {
+                m_ShipmentModes = value;
+            }
+        }
         #endregion
 
         #region Orders

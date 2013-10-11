@@ -17,7 +17,7 @@ namespace ordermanager.DatabaseModel
         public long OrderCurrencyConversionID { get; set; }
         public long OrderID { get; set; }
         public short CurrencyID { get; set; }
-        public decimal ValueInINR { get; set; }
+        public Nullable<decimal> ValueInINR { get; set; }
         public Nullable<decimal> ValueInINRForMaterials { get; set; }
         public Nullable<decimal> ValueInINRForSubMaterials { get; set; }
     

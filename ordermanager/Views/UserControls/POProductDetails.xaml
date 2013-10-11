@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
              mc:Ignorable="d" Background="White" Height="689.729" Width="875.132">
 
     <UserControl.Resources>
@@ -32,7 +33,7 @@
                 <Setter Property="HorizontalAlignment" Value="Right" />
                 <Setter Property="Margin" Value="5" />
             </Style>
-
+            <DataProviders:DataProvider x:Key="DataProvider" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -107,21 +108,23 @@
                         </TextBlock.Foreground>
                     </TextBlock>
                     <TextBlock Text="Tolerence" Style="{StaticResource inLineTextBlockStyle}" Margin="10,0,0,0"/>
-                    <TextBox x:Name="tollerenceText" Width="50"  Height="20" Margin="10,0,0,0"/>
+                    <TextBox x:Name="tollerenceText" Text="{Binding SelectedProduct.ToleranceWrapper}" Width="50"  Height="20" Margin="10,0,0,0"/>
                     <TextBlock Text="%" Style="{StaticResource inLineTextBlockStyle}"/>
                 </StackPanel>
                 <TextBlock Text="Shipment Mode" Grid.Row="1" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
-                <ComboBox Grid.Row="1" Grid.Column="2" Width="200"  HorizontalAlignment="Left" Margin="2"/>
+                <ComboBox Grid.Row="1" Grid.Column="2" Width="200"  HorizontalAlignment="Left" Margin="2"  ItemsSource="{Binding ShipmentModes, Source={StaticResource DataProvider}}"         
+                                                      DisplayMemberPath="Mode" SelectedItem="{Binding ProductBreakUpDetails.ShipmentModeWrapper, Mode=TwoWay,                 
+                                                      UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                 <TextBlock Text="Price Terms" Grid.Row="2" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
-                <TextBox Grid.Row="2" Grid.Column="2"  Margin="2" Height="50" Width="500"
+                <TextBox Text="{Binding ProductBreakUpDetails.PriceTermsWrapper}" Grid.Row="2" Grid.Column="2"  Margin="2"  Width="500"
                          Controls:TextboxHelper.Watermark=" Enter price terms here" VerticalContentAlignment="Center"
                          TextWrapping="Wrap"/>
                 <TextBlock Text="Payment Terms" Grid.Row="3" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
-                <TextBox Grid.Row="3" Grid.Column="2"  Margin="2" Height="50" Width="500" 
-                         Controls:TextboxHelper.Watermark=" Enter peyment terms here" VerticalContentAlignment="Center"
+                <TextBox Text="{Binding ProductBreakUpDetails.PaymentTermsWrapper}" Grid.Row="3" Grid.Column="2"  Margin="2"  Width="500" 
+                         Controls:TextboxHelper.Watermark=" Enter payment terms here" VerticalContentAlignment="Center"
                          TextWrapping="Wrap"/>
                 <TextBlock Text="Document Required" Grid.Row="4" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
-                <TextBox Grid.Row="4" Grid.Column="2" Margin="2" Height="50" Width="500"
+                <TextBox Text="{Binding ProductBreakUpDetails.DocumentsRequiredWrapper}" Grid.Row="4" Grid.Column="2" Margin="2"  Width="500"
                          Controls:TextboxHelper.Watermark=" Enter documents required here" VerticalContentAlignment="Center"
                          TextWrapping="Wrap"/>
             </Grid>
@@ -129,52 +132,82 @@
 
         <Grid x:Name="sizeSplitGrid" Grid.Row="1" Margin="15">
             <StackPanel Orientation="Vertical" Grid.Row="1">
-                <Button x:Name="btnAddNewCountry"  Content="add New Country"  Width="150" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Margin="5">
+                <Button x:Name="btnAddNewCountry"  Content="add New Country"  Width="150" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Margin="5" Click="btnAddNewCountry_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
                 </Button>
-                <DataGrid x:Name="materialsGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
+                <DataGrid x:Name="countryWiseBreakUpGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
                                                   GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
-                                                  HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductMaterialsWrapper, UpdateSourceTrigger=PropertyChanged}"
+                                                  HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductCountryWiseBreakUpWrapper, UpdateSourceTrigger=PropertyChanged}"
                                                   RowHeaderWidth="25"
                                                   HeadersVisibility="All" BorderBrush="Gray" BorderThickness="1">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn x:Name="countryColumn" Header="Country" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <ComboBox x:Name="materialsComboBox" Grid.Column="0" IsEditable="True"                           
-                                                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                                                                      
-                                                          DisplayMemberPath="Name" SelectedItem="{Binding MaterialNameWrapper, Mode=TwoWay,                 
-                                                          UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                          Height="20"/>
-                                        <Button  x:Name="addBtn" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
-                                                         Cursor="Hand" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Material"
-                                                         Visibility="Collapsed" >
-                                            <Rectangle Width="10" Height="10">
-                                                <Rectangle.Fill>
-                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                        </Button>
-                                    </Grid>
+                                    <TextBox Text="{Binding Country, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn x:Name="orderCountColumn" Header="No. of Pieces"  Width="0.1*"/>
-                        <DataGridTextColumn x:Name="LSSizeCountColumn" Header="LS" Width="0.05*" />
-                        <DataGridTextColumn x:Name="SSizeCountColumn" Header="S"  Width="0.05*" />
-                        <DataGridTextColumn x:Name="MSizeCountColumn" Header="M"  Width="0.05*"  />
-                        <DataGridTextColumn x:Name="LSizeCountColumn" Header="L"  Width="0.05*" />
-                        <DataGridTextColumn x:Name="XLSizeCountColumn" Header="XL" Width="0.05*"  />
-                        <DataGridTextColumn x:Name="XXLSizeCountColumn" Header="XXL"  Width="0.05*" />
-                        <DataGridTextColumn x:Name="XXXLSizeCountColumn" Header="XXXL"  Width="0.05*" />
+                        <DataGridTemplateColumn x:Name="orderCountColumn" Header="No. of Pieces" Width="0.1*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding NumberOfPieces, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn x:Name="LSSizeCountColumn" Header="LS" Width="0.05*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding LS, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn x:Name="SSizeCountColumn" Header="S" Width="0.05*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding S, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn x:Name="MSizeCountColumn" Header="M" Width="0.05*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding M, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn x:Name="LSizeCountColumn" Header="L" Width="0.05*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding L, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn x:Name="XLSizeCountColumn" Header="XL" Width="0.05*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding XL, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn x:Name="XXLSizeCountColumn" Header="XXL" Width="0.05*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding XXL, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn x:Name="XXXLSizeCountColumn" Header="XXXL" Width="0.05*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding XXXL, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

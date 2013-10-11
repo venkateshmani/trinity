@@ -43,6 +43,14 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public ObservableCollection<ShipmentMode> ShipmentModes
+        {
+            get
+            {
+                return DBResources.Instance.ShipmentModes;
+            }
+        }
+
         public ObservableCollection<ProductName> AvailableProducts
         {
             get

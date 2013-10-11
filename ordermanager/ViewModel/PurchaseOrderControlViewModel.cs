@@ -14,8 +14,7 @@ namespace ordermanager.ViewModel
         private Order m_Order = null;
         private OrderProduct m_SelectedProduct;
         private ProductMaterial m_SelectedMaterial;
-        private ObservableCollection<OrderProduct> m_Products;
-
+        private ObservableCollection<OrderProduct> m_Products;      
         public ObservableCollection<OrderProduct> Products
         {
             get { return m_Products; }
@@ -33,13 +32,13 @@ namespace ordermanager.ViewModel
             {
                 if (value != m_SelectedProduct)
                 {
-                    m_SelectedProduct = value;
+                    m_SelectedProduct = value;                   
                     SelectedMaterial = null;
                     NotifyPropertyChanged("SelectedProduct");
-
                 }
             }
         }
+
 
         public ProductMaterial SelectedMaterial
         {
@@ -67,6 +66,19 @@ namespace ordermanager.ViewModel
             }
         }
 
+        //public ProductBreakUp ProductBreakUpDetails
+        //{
+        //    get { return m_ProductBreakUp; }
+        //    set
+        //    {
+        //        if (value != m_ProductBreakUp)
+        //        {
+        //            m_ProductBreakUp = value;
+        //            NotifyPropertyChanged("ProductBreakUpDetails");
+        //        }
+        //    }
+        //}
+
         public bool AddNewProductMaterialItem()
         {
             if (m_SelectedMaterial != null)
@@ -76,6 +88,12 @@ namespace ordermanager.ViewModel
             }
             else
                 return false;
+        }
+
+        public void AddNewCountry()
+        {
+            //if (m_ProductBreakUp != null)
+            //    m_ProductBreakUp.ProductCountryWiseBreakUpWrapper.Add(new ProductCountryWiseBreakUp());
         }
 
         public bool SetOrder(Order order)

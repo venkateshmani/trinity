@@ -16,6 +16,7 @@ namespace ordermanager.DatabaseModel
     {
         public ProductBreakUp()
         {
+            this.OrderProducts = new HashSet<OrderProduct>();
             this.ProductCountryWiseBreakUps = new HashSet<ProductCountryWiseBreakUp>();
         }
     
@@ -25,9 +26,10 @@ namespace ordermanager.DatabaseModel
         public string PriceTerms { get; set; }
         public string PaymentTerms { get; set; }
         public string DocumentsRequired { get; set; }
-        public long ProductID { get; set; }
     
-        public virtual OrderProduct OrderProduct { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+        public virtual ProductBreakUp ProductBreakUp1 { get; set; }
+        public virtual ProductBreakUp ProductBreakUp2 { get; set; }
         public virtual ShipmentMode ShipmentMode { get; set; }
         public virtual ICollection<ProductCountryWiseBreakUp> ProductCountryWiseBreakUps { get; set; }
     }

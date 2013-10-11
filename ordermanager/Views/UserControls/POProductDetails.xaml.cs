@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,29 @@ namespace ordermanager.Views.UserControls
     /// </summary>
     public partial class POProductDetails : UserControl
     {
+        PurchaseOrderControlViewModel m_ViewModel;
         public POProductDetails()
         {
             InitializeComponent();
+        }
+
+        public PurchaseOrderControlViewModel ViewModel
+        {
+            get
+            {
+                return m_ViewModel;
+            }
+            set
+            {
+                m_ViewModel = value;
+                this.DataContext = value;
+            }
+        }
+
+        private void btnAddNewCountry_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_ViewModel != null)
+                m_ViewModel.AddNewCountry();
         }
     }
 }
