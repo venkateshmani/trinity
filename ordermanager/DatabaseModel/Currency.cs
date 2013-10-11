@@ -26,6 +26,7 @@ namespace ordermanager.DatabaseModel
         public short CurrencyID { get; set; }
         public string CountryName { get; set; }
         public string Symbol { get; set; }
+        public Nullable<decimal> DefaultValueInINR { get; set; }
     
         public virtual ICollection<OrderCurrencyConversion> OrderCurrencyConversions { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
