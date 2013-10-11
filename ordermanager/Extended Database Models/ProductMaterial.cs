@@ -210,7 +210,10 @@ namespace ordermanager.DatabaseModel
                     if (Currency != null && Currency.DefaultValueInINR != null)
                         return Currency.DefaultValueInINR.Value;
 
-                    if (CurrencyConversion != null)
+                    if (CurrencyConversion == null)
+                        SelectOrAddCurrencyConversion();
+
+                    if(CurrencyConversion != null)
                         return CurrencyConversion.ValueInINRForMaterialsWrapper;
 
                     return 0;
