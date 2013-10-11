@@ -233,6 +233,8 @@
           <Property Name="OrderID" Type="bigint" Nullable="false" />
           <Property Name="CurrencyID" Type="smallint" Nullable="false" />
           <Property Name="ValueInINR" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="ValueInINRForMaterials" Type="decimal" Scale="4" />
+          <Property Name="ValueInINRForSubMaterials" Type="decimal" Scale="4" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
@@ -1016,6 +1018,8 @@
           <Property Name="OrderID" Type="Int64" Nullable="false" />
           <Property Name="CurrencyID" Type="Int16" Nullable="false" />
           <Property Name="ValueInINR" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="ValueInINRForMaterials" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="ValueInINRForSubMaterials" Type="Decimal" Precision="18" Scale="4" />
           <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_OrderCurrencyConversion_Currency" FromRole="OrderCurrencyConversion" ToRole="Currency" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_OrderCurrencyConversion_Order" FromRole="OrderCurrencyConversion" ToRole="Order" />
         </EntityType>
@@ -1676,6 +1680,8 @@
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
                 <ScalarProperty Name="ValueInINR" ColumnName="ValueInINR" />
+                <ScalarProperty Name="ValueInINRForMaterials" ColumnName="ValueInINRForMaterials" />
+                <ScalarProperty Name="ValueInINRForSubMaterials" ColumnName="ValueInINRForSubMaterials" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

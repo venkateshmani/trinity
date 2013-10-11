@@ -18,6 +18,8 @@ namespace ordermanager.DatabaseModel
         public long OrderID { get; set; }
         public short CurrencyID { get; set; }
         public decimal ValueInINR { get; set; }
+        public Nullable<decimal> ValueInINRForMaterials { get; set; }
+        public Nullable<decimal> ValueInINRForSubMaterials { get; set; }
     
         public virtual Currency Currency { get; set; }
         public virtual Order Order { get; set; }
