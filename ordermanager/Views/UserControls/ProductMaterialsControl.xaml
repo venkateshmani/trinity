@@ -53,7 +53,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.40*"/>
+            <ColumnDefinition Width="0.28*"/>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -291,7 +291,7 @@
                             <DataGridTemplateColumn x:Name="consumptionCostColumn" Header="Consumption Cost" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding ConsumptionCostWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" FontWeight="Bold" IsReadOnly="True"/>
+                                        <TextBox Text="{Binding ConsumptionCostWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" FontWeight="Bold" IsReadOnly="True"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
