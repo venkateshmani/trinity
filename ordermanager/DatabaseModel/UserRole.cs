@@ -21,11 +21,12 @@ namespace ordermanager.DatabaseModel
     
         public short UserRoleID { get; set; }
         public string RoleName { get; set; }
+        public string AliasName { get; set; }
         public bool CanCreateUser { get; set; }
         public bool CanCreateNewEnquiry { get; set; }
         public bool CanAddMaterials { get; set; }
         public bool CanAddMaterialsCost { get; set; }
-        public bool CanAddConsumptionCost { get; set; }
+        public bool CanAddConsumption { get; set; }
         public bool CanAddExtraCost { get; set; }
         public bool CanApproveEnquiry { get; set; }
         public bool CanConfirmOrder { get; set; }

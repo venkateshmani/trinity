@@ -394,11 +394,12 @@
           </Key>
           <Property Name="UserRoleID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="AliasName" Type="varchar" MaxLength="50" />
           <Property Name="CanCreateUser" Type="bit" Nullable="false" />
           <Property Name="CanCreateNewEnquiry" Type="bit" Nullable="false" />
           <Property Name="CanAddMaterials" Type="bit" Nullable="false" />
           <Property Name="CanAddMaterialsCost" Type="bit" Nullable="false" />
-          <Property Name="CanAddConsumptionCost" Type="bit" Nullable="false" />
+          <Property Name="CanAddConsumption" Type="bit" Nullable="false" />
           <Property Name="CanAddExtraCost" Type="bit" Nullable="false" />
           <Property Name="CanApproveEnquiry" Type="bit" Nullable="false" />
           <Property Name="CanConfirmOrder" Type="bit" Nullable="false" />
@@ -1218,11 +1219,12 @@
           </Key>
           <Property Name="UserRoleID" Type="Int16" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="AliasName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="CanCreateUser" Type="Boolean" Nullable="false" />
           <Property Name="CanCreateNewEnquiry" Type="Boolean" Nullable="false" />
           <Property Name="CanAddMaterials" Type="Boolean" Nullable="false" />
           <Property Name="CanAddMaterialsCost" Type="Boolean" Nullable="false" />
-          <Property Name="CanAddConsumptionCost" Type="Boolean" Nullable="false" />
+          <Property Name="CanAddConsumption" Type="Boolean" Nullable="false" />
           <Property Name="CanAddExtraCost" Type="Boolean" Nullable="false" />
           <Property Name="CanApproveEnquiry" Type="Boolean" Nullable="false" />
           <Property Name="CanConfirmOrder" Type="Boolean" Nullable="false" />
@@ -1861,11 +1863,12 @@
               <MappingFragment StoreEntitySet="UserRole">
                 <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="AliasName" ColumnName="AliasName" />
                 <ScalarProperty Name="CanCreateUser" ColumnName="CanCreateUser" />
                 <ScalarProperty Name="CanCreateNewEnquiry" ColumnName="CanCreateNewEnquiry" />
                 <ScalarProperty Name="CanAddMaterials" ColumnName="CanAddMaterials" />
                 <ScalarProperty Name="CanAddMaterialsCost" ColumnName="CanAddMaterialsCost" />
-                <ScalarProperty Name="CanAddConsumptionCost" ColumnName="CanAddConsumptionCost" />
+                <ScalarProperty Name="CanAddConsumption" ColumnName="CanAddConsumption" />
                 <ScalarProperty Name="CanAddExtraCost" ColumnName="CanAddExtraCost" />
                 <ScalarProperty Name="CanApproveEnquiry" ColumnName="CanApproveEnquiry" />
                 <ScalarProperty Name="CanConfirmOrder" ColumnName="CanConfirmOrder" />

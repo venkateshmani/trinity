@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3313797cb66f43d99a2a2b297a57bcf5" Name="Diagram1">
+      <Diagram DiagramId="46cb4a493807491fbe0bb0c229859091" Name="Diagram1">
         <EntityTypeShape EntityType="OrderManagerDBModel.CommissionValueType" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.Company" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.CompanyType" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
@@ -27,7 +27,7 @@
         <EntityTypeShape EntityType="OrderManagerDBModel.SubMaterial" Width="1.5" PointX="12.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.sysdiagram" Width="1.5" PointX="12.75" PointY="12.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.UnitsOfMeasurement" Width="1.5" PointX="5.25" PointY="23.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.User" Width="1.5" PointX="10" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.User" Width="1.5" PointX="10" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.UserRole" Width="1.5" PointX="7.75" PointY="12.375" IsExpanded="true" />
         <AssociationConnector Association="OrderManagerDBModel.FK_Order_CommissionValueType" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_Company_CompanyType" ManuallyRouted="false" />
