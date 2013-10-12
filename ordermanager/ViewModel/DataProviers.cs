@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace ordermanager.ViewModel
 {
-    public class DataProvider :INotifyPropertyChanged
+    public class DataProvider : INotifyPropertyChanged
     {
         public DataProvider()
         {
@@ -20,7 +20,7 @@ namespace ordermanager.ViewModel
         {
             DBResources.Instance.PropertyChanged -= Instance_PropertyChanged;
         }
-    
+
 
         void Instance_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -40,6 +40,14 @@ namespace ordermanager.ViewModel
             get
             {
                 return DBResources.Instance.Currencies;
+            }
+        }
+
+        public ObservableCollection<UserRole> UserRoles
+        {
+            get
+            {
+                return DBResources.Instance.UserRoles;
             }
         }
 

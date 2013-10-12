@@ -186,6 +186,7 @@
     <Compile Include="Extended Database Models\ProductExtraCost.cs" />
     <Compile Include="Extended Database Models\ProductMaterial.cs" />
     <Compile Include="Extended Database Models\ProductMaterialItem.cs" />
+    <Compile Include="Extended Database Models\User.cs" />
     <Compile Include="Interfaces\IMaskable.cs" />
     <Compile Include="LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
@@ -193,6 +194,7 @@
     <Compile Include="TestWindow.xaml.cs">
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\ExtendedMethods.cs" />
     <Compile Include="ValueConverters\HasErrorToVisibilityConverter.cs" />
     <Compile Include="ValueConverters\StarWidthConverter.cs" />
     <Compile Include="ValueConverters\Subractor.cs" />
@@ -203,6 +205,7 @@
     <Compile Include="ViewModel\POControlViewModel.cs" />
     <Compile Include="ViewModel\ProductMaterialsViewModel.cs" />
     <Compile Include="ViewModel\PurchaseOrderControlViewModel.cs" />
+    <Compile Include="ViewModel\UserManagementViewModel.cs" />
     <Compile Include="ViewModel\ViewOrdersControlViewModel.cs" />
     <Compile Include="Views\CommonControls\BackForwardButton.xaml.cs">
       <DependentUpon>BackForwardButton.xaml</DependentUpon>
@@ -224,6 +227,9 @@
     </Compile>
     <Compile Include="Views\PopUps\ProgressUpdateWindow.xaml.cs">
       <DependentUpon>ProgressUpdateWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopUps\UserManagementWindow.xaml.cs">
+      <DependentUpon>UserManagementWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ChangeHistoryControl.xaml.cs">
       <DependentUpon>ChangeHistoryControl.xaml</DependentUpon>
@@ -286,6 +292,10 @@
     <Page Include="Views\PopUps\ProgressUpdateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopUps\UserManagementWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserControls\ChangeHistoryControl.xaml">
       <Generator>MSBuild:Compile</Generator>

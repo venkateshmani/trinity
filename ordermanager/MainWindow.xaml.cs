@@ -1,6 +1,7 @@
 ﻿using MahApps.Metro;
 using ordermanager.DatabaseModel;
 using ordermanager.Interfaces;
+using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace ordermanager
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow  : IMaskable
+    public partial class MainWindow : IMaskable
     {
         LoginScreen m_LoginScreen;
         public MainWindow()
@@ -97,6 +98,12 @@ namespace ordermanager
         public void UnMask()
         {
             mask.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void addNewUser_Click(object sender, RoutedEventArgs e)
+        {
+            UserManagementWindow userManagementWindow = new UserManagementWindow();
+            userManagementWindow.ShowDialog();
         }
     }
 }

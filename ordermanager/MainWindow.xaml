@@ -31,10 +31,10 @@
             </Style>
         </ResourceDictionary>
 
-        
+
     </Window.Resources>
 
-    
+
     <Controls:MetroWindow.GlowBrush>
         <SolidColorBrush Color="{DynamicResource AccentColor}" />
     </Controls:MetroWindow.GlowBrush>
@@ -43,7 +43,7 @@
         <Controls:WindowCommands>
             <Button Name="btnLogout" Click="btnLogout_Click">
                 <Button.Content>
-                    <StackPanel Orientation="Horizontal">                       
+                    <StackPanel Orientation="Horizontal">
                         <Rectangle Width="15" Height="15">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />
@@ -53,9 +53,21 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
+            <Button Name="addNewUser" Click="addNewUser_Click">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Width="15" Height="15">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_user}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <TextBlock Margin="5,0,0,0" Text="User Management" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
             <Button Click="LaunchSettings">
                 <Button.Content>
-                    <StackPanel Orientation="Horizontal">                       
+                    <StackPanel Orientation="Horizontal">
                         <Rectangle Width="15" Height="15">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />

@@ -389,6 +389,30 @@ namespace ordermanager.ViewModel
             }
         }
 
+        #region User Management
+
+
+        private ObservableCollection<UserRole> m_UserRole = null;
+        public ObservableCollection<UserRole> UserRoles
+        {
+            get
+            {
+                if (m_UserRole == null)
+                {
+                    m_UserRole = new ObservableCollection<UserRole>(dbContext.UserRoles.ToList());
+                }
+
+                return m_UserRole;
+            }
+        }
+
+        public void AddNewUser(User NewUser)
+        {
+            dbContext.Users.Add(NewUser);
+            Save();
+        }
+
+
         public User CurrentUser
         {
             get;
@@ -426,6 +450,8 @@ namespace ordermanager.ViewModel
             Save();
             return true;
         }
+
+        #endregion
     }
 
     public class LoginResult

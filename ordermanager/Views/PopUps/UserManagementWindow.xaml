@@ -1,0 +1,190 @@
+﻿<Controls:MetroWindow x:Class="ordermanager.Views.PopUps.UserManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddNewUserWindow" Height="485.983" Width="934.867"
+        AllowsTransparency="False" 
+        ShowIconOnTitleBar="true"
+        ShowTitleBar="True"
+        WindowState="Normal"
+        WindowStartupLocation="CenterScreen"
+        xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Metro.Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Style>
+            <DataProviders:DataProvider x:Key="DataProvider" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Controls:MetroWindow.GlowBrush>
+        <SolidColorBrush Color="{DynamicResource AccentColor}" />
+    </Controls:MetroWindow.GlowBrush>
+
+    <Grid>
+        <TabControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectedIndex="1">
+            <TabItem x:Name="addNewUser" Header=" Add New User ">
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="New User Name :" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="8"/>
+                        <TextBox x:Name="userName" Text="{Binding NewUser.UserNameWrapper}"  Grid.Row="0" Grid.Column="1" Width="150" Controls:TextboxHelper.Watermark="Type Here" Height="25"
+                                 HorizontalAlignment="Left"/>
+
+                        <TextBlock Text="Role :" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="8"/>
+                        <ComboBox x:Name="roleSelector" SelectedItem="{Binding NewUser.UserRoleWrapper}" DisplayMemberPath="RoleName"  Grid.Row="1" Grid.Column="1" Width="150" Controls:TextboxHelper.Watermark="Type Here" Height="25" HorizontalAlignment="Left"
+                                 ItemsSource="{Binding UserRoles, Source={StaticResource DataProvider}}"  />
+
+                        <TextBlock Text="EmailID :" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="8"/>
+                        <TextBox x:Name="emailID" Text="{Binding NewUser.EmailIDWrapper}"  Grid.Row="2" Grid.Column="1" Width="300" Controls:TextboxHelper.Watermark="Type Here" Height="25"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                            <Button x:Name="addNewuserBtn"  Content="Add"  Width="100" Height="25" Foreground="White"  ToolTip="Add the user" HorizontalAlignment="Left" Click="addNewuserBtn_Click">
+                                <Button.Background>
+                                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                </Button.Background>
+                            </Button>
+                            <Button x:Name="clearFieldsBtn"  Content="Clear Fields"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Delete Selected Item" HorizontalAlignment="Left" Click="clearFieldsBtn_Click">
+                                <Button.Background>
+                                    <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                                </Button.Background>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="existingUsers" Header="  Existing Users  ">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Users" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="2">
+                        <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+                            <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="User Details"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
+                        </Border>
+                    </Grid>
+
+                    <GridSplitter Grid.Row="0" Grid.Column="1"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      Background="LightGray" 
+                      ShowsPreview="True"
+                      Width="5" Grid.RowSpan="2" />
+
+
+                    <ListView x:Name="existingUsersList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=ExistingUsers}" SelectedIndex="0" SelectionChanged="existingUser_SelectionChanged" >
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
+                                <GridViewColumn x:Name="productColumn" Header="Product">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
+                                                <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left"  Text="{Binding Path=UserName}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="User Name :" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="8"/>
+                            <TextBlock Text="{Binding SelectedExistingUser.UserName}"  Grid.Row="0" Grid.Column="1" Width="150" Height="25" FontWeight="Bold"
+                                 HorizontalAlignment="Left"/>
+
+                            <TextBlock Text="Role :" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="8"/>
+                            <ComboBox x:Name="existingUserRoleSelector" SelectedItem="{Binding SelectedExistingUser.UserRoleWrapper}" DisplayMemberPath="RoleName"  Grid.Row="1" Grid.Column="1" Width="150" Controls:TextboxHelper.Watermark="Type Here" Height="25" HorizontalAlignment="Left"
+                                 ItemsSource="{Binding UserRoles, Source={StaticResource DataProvider}}"  />
+
+                            <TextBlock Text="EmailID :" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="8"/>
+                            <TextBox x:Name="existingUserEmailID" Text="{Binding SelectedExistingUser.EmailID}"  Grid.Row="2" Grid.Column="1" Width="300" Controls:TextboxHelper.Watermark="Type Here" Height="25"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                                <Button x:Name="SaveChangesToExistingUserBtn"  Content="Save Changes"  Width="125" Height="25" Foreground="White"  ToolTip="Save the changes" HorizontalAlignment="Left" Click="SaveChangesToExistingUserBtn_Click">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                    </Button.Background>
+                                </Button>
+                                <Button x:Name="ResetPasswordBtn"  Content="Reset Password"  Width="150" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Resest password for the selected user" HorizontalAlignment="Left" Click="ResetPasswordBtn_Click">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                        
+                                    </Button.Background>
+                                </Button>
+                                <Button x:Name="deleteUser"  Content="Delete User"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Delete User" HorizontalAlignment="Left" Click="deleteUser_Click">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                                    </Button.Background>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Controls:MetroWindow>
