@@ -40,6 +40,8 @@
                 <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
             </Style>
             <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
+            <Converters:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
+            <Converters:FlipBoolValueConverter x:Key="FlipBoolValueConverter"/>
             <Converters:Subractor x:Key="subractor"/>
             <Converters:HasErrorToVisibilityConverter x:Key="hasErrorToVisibilityConverter" />
             <DataProviders:DataProvider x:Key="DataProvider" />
@@ -173,7 +175,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Margin="10,10,5,0" Orientation="Horizontal" >
+                <StackPanel x:Name="spAddeDeleteButtons" Grid.Row="0" Margin="10,10,5,0" Orientation="Horizontal" Visibility="{Binding CanAddMaterialsWrapper, Converter={StaticResource BoolToVisibility}}" >
                     <Button x:Name="btnAddNewItem"  Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewItem_Click">
                         <Button.Background>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
@@ -192,7 +194,7 @@
                                               RowHeaderWidth="25"
                                               HeadersVisibility="All">
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn x:Name="materialColumn" Header="Material Name" Width="0.3*">
+                            <DataGridTemplateColumn x:Name="materialColumn" Header="Material Name" Width="0.3*" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -200,14 +202,17 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-
-                                            <ComboBox x:Name="materialsComboBox" Grid.Column="0" IsEditable="True"                           
-                                                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                                                                      
+                                            <ComboBox x:Name="materialsComboBox" Grid.Column="0" 
+                                                      IsReadOnly="{Binding CanAddMaterialsWrapper, Converter={StaticResource FlipBoolValueConverter}}"
+                                                      IsEditable="{Binding CanAddMaterialsWrapper}"
+                                                      IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
+                                                      IsTabStop="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"                   
+                                                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                                                                
                                                       ItemsSource="{Binding AvailableMaterials, Source={StaticResource DataProvider}}"         
                                                       DisplayMemberPath="Name" SelectedItem="{Binding MaterialNameWrapper, Mode=TwoWay,                 
                                                       UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                       TextBoxBase.TextChanged="comboBox_TextChanged"
-                                                      Height="20"/>
+                                                      Height="20" />
                                             <Button  x:Name="addBtn" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
                                                      Cursor="Hand" Click="AddNewMaterial"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Material"
                                                      Visibility="Collapsed" >
@@ -224,7 +229,9 @@
                             <DataGridTemplateColumn x:Name="costPerUnitColumn" Header="Cost Per Unit" Width="0.15*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding CostPerUnitWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                        <TextBox PresentationTraceSources.TraceLevel="High" Text="{Binding CostPerUnitWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                 IsReadOnly="{Binding CanAddMaterialsCostWrapper, Converter={StaticResource FlipBoolValueConverter}}"
+                                                 IsEnabled="{Binding CanAddMaterialsCostWrapper}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -236,9 +243,13 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <ComboBox x:Name="currencyComboBox" Grid.Column="0" IsEditable="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                            <ComboBox x:Name="currencyComboBox" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                       Height="20" ItemsSource="{Binding Currencies, Source={StaticResource DataProvider}}" DisplayMemberPath="Symbol"
-                                                      SelectedItem="{Binding CurrencyWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                                      SelectedItem="{Binding CurrencyWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                      IsReadOnly="{Binding CanAddMaterialsCostWrapper, Converter={StaticResource FlipBoolValueConverter}}"
+                                                      IsEditable="{Binding CanAddMaterialsCostWrapper}"
+                                                      IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
+                                                      IsTabStop="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"  />
                                             <Button  x:Name="btnAddCurrency" Width="28"   Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left"  
                                                      Cursor="Hand" Visibility="Collapsed" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Currency">
                                                 <Rectangle Width="10" Height="10">
@@ -254,7 +265,9 @@
                             <DataGridTemplateColumn x:Name="currencyValueInINR" Header="Currency Value In INR" Width="0.22*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"/>
+                                        <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
+                                                 IsReadOnly="{Binding CanAddMaterialsCostWrapper, Converter={StaticResource FlipBoolValueConverter}}"
+                                                 IsEnabled="{Binding CanAddMaterialsCostWrapper}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -266,9 +279,13 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <ComboBox x:Name="uomComboBox" Grid.Column="0" IsEditable="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                            <ComboBox x:Name="uomComboBox" Grid.Column="0"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                       Height="20" ItemsSource="{Binding UOMs, Source={StaticResource DataProvider}}" DisplayMemberPath="Units"
-                                                      SelectedItem="{Binding  UnitsOfMeasurementWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                                      SelectedItem="{Binding  UnitsOfMeasurementWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                      IsReadOnly="{Binding CanAddMaterialsCostWrapper, Converter={StaticResource FlipBoolValueConverter}}"
+                                                      IsEditable="{Binding CanAddMaterialsCostWrapper}"
+                                                      IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
+                                                      IsTabStop="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"  />
                                             <Button  x:Name="btnAddUOM" Width="28" Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
                                                      Cursor="Hand" Visibility="Collapsed" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New UOM">
                                                 <Rectangle Width="10" Height="10">
@@ -284,7 +301,9 @@
                             <DataGridTemplateColumn x:Name="consumptionColumn" Header="Consumption" Width="0.16*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding ConsumptionWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                        <TextBox Text="{Binding ConsumptionWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                                   IsReadOnly="{Binding CanAddConsumptionWrapper, Converter={StaticResource FlipBoolValueConverter}}"
+                                                   IsEnabled="{Binding CanAddConsumptionWrapper}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

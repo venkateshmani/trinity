@@ -26,7 +26,7 @@ namespace ordermanager.Views.UserControls
 
         public ProductMaterialsControl()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void productsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -56,7 +56,7 @@ namespace ordermanager.Views.UserControls
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            m_ViewModel = DataContext as ProductMaterialsViewModel;           
+            m_ViewModel = DataContext as ProductMaterialsViewModel;               
         }
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)

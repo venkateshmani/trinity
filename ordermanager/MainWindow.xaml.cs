@@ -1,6 +1,7 @@
 ﻿using MahApps.Metro;
 using ordermanager.DatabaseModel;
 using ordermanager.Interfaces;
+using ordermanager.ViewModel;
 using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace ordermanager
         {
             InitializeComponent();
             this.Closing += MainWindow_Closing;
+            if (!DBResources.Instance.CurrentUser.UserRole.CanCreateUser)
+                addNewUser.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         public MainWindow(LoginScreen loginScreen)
@@ -35,6 +38,7 @@ namespace ordermanager
         {
             m_LoginScreen = loginScreen;
             m_LoginScreen.Hide();
+
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -79,6 +83,7 @@ namespace ordermanager
             {
                 this.Closing -= MainWindow_Closing;
                 this.Close();
+                m_LoginScreen.ClearPassword();
                 m_LoginScreen.ShowDialog();
             }
             else

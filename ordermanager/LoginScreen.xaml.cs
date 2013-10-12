@@ -54,6 +54,16 @@ namespace ordermanager
             
             MainWindow mainWindow = new MainWindow(this);
             mainWindow.ShowDialog();
-        }   
+        }
+
+        public void Reset()
+        {
+            tbUserName.Clear();
+            tbPassword.Clear();
+        }
+        public void ClearPassword()
+        {            
+            tbPassword.Clear();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -120,6 +121,19 @@ namespace ordermanager.DatabaseModel
                     this.OrderProduct.AddError(MaterialName.Name, MaterialName.Name + " has some errors", false);
                 }                
             }
+        }
+
+        public bool CanAddMaterialsWrapper
+        {
+            get { return DBResources.Instance.CurrentUser.UserRole.CanAddMaterials; }
+        }
+        public bool CanAddConsumptionWrapper
+        {
+            get { return DBResources.Instance.CurrentUser.UserRole.CanAddConsumption; }
+        }
+        public bool CanAddMaterialsCostWrapper
+        {
+            get { return DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost; }
         }
         #endregion
 

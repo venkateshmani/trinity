@@ -106,7 +106,7 @@ namespace ordermanager.ViewModel
                 foreach (OrderProduct product in Products)
                 {
                     if (product.ValidateProductMaterials())
-                            hasError = true;
+                        hasError = true;
                 }
                 return hasError;
             }

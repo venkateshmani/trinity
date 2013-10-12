@@ -208,6 +208,20 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public bool CanAddMaterialsWrapper
+        {
+            get { return DBResources.Instance.CurrentUser.UserRole.CanAddMaterials; }
+        }
+        public bool CanAddConsumptionWrapper
+        {
+            get { return DBResources.Instance.CurrentUser.UserRole.CanAddConsumption; }
+        }
+        public bool CanAddMaterialsCostWrapper
+        {
+            get { return DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost; }
+        }
+
+
         public bool ValidateProductMaterials()
         {
             bool hasError = false;
