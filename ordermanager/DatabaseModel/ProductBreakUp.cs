@@ -28,8 +28,6 @@ namespace ordermanager.DatabaseModel
         public string DocumentsRequired { get; set; }
     
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
-        public virtual ProductBreakUp ProductBreakUp1 { get; set; }
-        public virtual ProductBreakUp ProductBreakUp2 { get; set; }
         public virtual ShipmentMode ShipmentMode { get; set; }
         public virtual ICollection<ProductCountryWiseBreakUp> ProductCountryWiseBreakUps { get; set; }
     }

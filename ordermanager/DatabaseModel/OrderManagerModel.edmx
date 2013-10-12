@@ -86,10 +86,6 @@
             <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurement" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductBreakUp_ProductBreakUp" Association="OrderManagerDBModel.Store.FK_ProductBreakUp_ProductBreakUp">
-            <End Role="ProductBreakUp" EntitySet="ProductBreakUp" />
-            <End Role="ProductBreakUp1" EntitySet="ProductBreakUp" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProductBreakUp_ShipmentMode" Association="OrderManagerDBModel.Store.FK_ProductBreakUp_ShipmentMode">
             <End Role="ShipmentMode" EntitySet="ShipmentMode" />
             <End Role="ProductBreakUp" EntitySet="ProductBreakUp" />
@@ -229,6 +225,7 @@
           <Property Name="CommissionValueTypeID" Type="tinyint" />
           <Property Name="OrderStatusID" Type="smallint" Nullable="false" />
           <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="TotalOrderValue" Type="decimal" Scale="4" />
         </EntityType>
         <EntityType Name="OrderCurrencyConversion">
           <Key>
@@ -576,18 +573,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductBreakUp_ProductBreakUp">
-          <End Role="ProductBreakUp" Type="OrderManagerDBModel.Store.ProductBreakUp" Multiplicity="1" />
-          <End Role="ProductBreakUp1" Type="OrderManagerDBModel.Store.ProductBreakUp" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ProductBreakUp">
-              <PropertyRef Name="ProductBreakUpID" />
-            </Principal>
-            <Dependent Role="ProductBreakUp1">
-              <PropertyRef Name="ProductBreakUpID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProductBreakUp_ShipmentMode">
           <End Role="ShipmentMode" Type="OrderManagerDBModel.Store.ShipmentMode" Multiplicity="1" />
           <End Role="ProductBreakUp" Type="OrderManagerDBModel.Store.ProductBreakUp" Multiplicity="*" />
@@ -898,10 +883,6 @@
             <End Role="OrderProduct" EntitySet="OrderProducts" />
             <End Role="ProductMaterials" EntitySet="ProductMaterials" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProductBreakUp_ProductBreakUp" Association="OrderManagerDBModel.FK_ProductBreakUp_ProductBreakUp">
-            <End Role="ProductBreakUp" EntitySet="ProductBreakUps" />
-            <End Role="ProductBreakUp1" EntitySet="ProductBreakUps" />
-          </AssociationSet>
           <AssociationSet Name="FK_ProductBreakUp_ShipmentMode" Association="OrderManagerDBModel.FK_ProductBreakUp_ShipmentMode">
             <End Role="ShipmentMode" EntitySet="ShipmentModes" />
             <End Role="ProductBreakUp" EntitySet="ProductBreakUps" />
@@ -1023,6 +1004,7 @@
           <Property Name="CommissionValueTypeID" Type="Byte" />
           <Property Name="OrderStatusID" Type="Int16" Nullable="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TotalOrderValue" Type="Decimal" Precision="18" Scale="4" />
           <NavigationProperty Name="CommissionValueType" Relationship="OrderManagerDBModel.FK_Order_CommissionValueType" FromRole="Order" ToRole="CommissionValueType" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Order" ToRole="Company" />
           <NavigationProperty Name="Company1" Relationship="OrderManagerDBModel.FK_Order_OrderBy" FromRole="Order" ToRole="Company" />
@@ -1093,8 +1075,6 @@
           <Property Name="PaymentTerms" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="DocumentsRequired" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="OrderProducts" Relationship="OrderManagerDBModel.FK_OrderProduct_ProductBreakUp" FromRole="ProductBreakUp" ToRole="OrderProduct" />
-          <NavigationProperty Name="ProductBreakUp1" Relationship="OrderManagerDBModel.FK_ProductBreakUp_ProductBreakUp" FromRole="ProductBreakUp" ToRole="ProductBreakUp1" />
-          <NavigationProperty Name="ProductBreakUp2" Relationship="OrderManagerDBModel.FK_ProductBreakUp_ProductBreakUp" FromRole="ProductBreakUp1" ToRole="ProductBreakUp" />
           <NavigationProperty Name="ShipmentMode" Relationship="OrderManagerDBModel.FK_ProductBreakUp_ShipmentMode" FromRole="ProductBreakUp" ToRole="ShipmentMode" />
           <NavigationProperty Name="ProductCountryWiseBreakUps" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductBreakUp" FromRole="ProductBreakUp" ToRole="ProductCountryWiseBreakUp" />
         </EntityType>
@@ -1514,18 +1494,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProductBreakUp_ProductBreakUp">
-          <End Role="ProductBreakUp" Type="OrderManagerDBModel.ProductBreakUp" Multiplicity="1" />
-          <End Role="ProductBreakUp1" Type="OrderManagerDBModel.ProductBreakUp" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ProductBreakUp">
-              <PropertyRef Name="ProductBreakUpID" />
-            </Principal>
-            <Dependent Role="ProductBreakUp1">
-              <PropertyRef Name="ProductBreakUpID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProductBreakUp_ShipmentMode">
           <End Role="ShipmentMode" Type="OrderManagerDBModel.ShipmentMode" Multiplicity="1" />
           <End Role="ProductBreakUp" Type="OrderManagerDBModel.ProductBreakUp" Multiplicity="*" />
@@ -1707,6 +1675,7 @@
                 <ScalarProperty Name="CommissionValueTypeID" ColumnName="CommissionValueTypeID" />
                 <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
                 <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="TotalOrderValue" ColumnName="TotalOrderValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
