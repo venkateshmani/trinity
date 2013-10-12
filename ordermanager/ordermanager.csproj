@@ -216,6 +216,9 @@
     <Compile Include="Views\CommonControls\ProductsListView.xaml.cs">
       <DependentUpon>ProductsListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PasswordChangeDialog.xaml.cs">
+      <DependentUpon>PasswordChangeDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PopUps\CommentBox.xaml.cs">
       <DependentUpon>CommentBox.xaml</DependentUpon>
     </Compile>
@@ -272,6 +275,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\PasswordChangeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PopUps\CommentBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

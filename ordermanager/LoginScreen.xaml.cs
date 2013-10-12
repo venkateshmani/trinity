@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using ordermanager.Views;
 namespace ordermanager
 {
     /// <summary>
@@ -21,18 +22,38 @@ namespace ordermanager
     {
         public LoginScreen()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)    
+        private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
-        private void btnLogin_Click_1(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            string userName = tbUserName.Text.Trim();
+            string password = tbPassword.Password.Trim();
+            
+            LoginResult res = DBResources.Instance.AuthenticateUser(userName, password);
+            
+            if (!res.Authenticated)
+            {
+                MessageBox.Show(res.Message,"Authentication Failed",MessageBoxButton.OK,MessageBoxImage.Error);
+                return;
+            }
+            if (res.NeedPasswordReset)
+            {
+                MessageBox.Show("Reset your password!!!", "Change Password", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Hide();
+                PasswordChangeDialog dialog = new PasswordChangeDialog();
+                dialog.ShowDialog();
+                if (dialog.DialogResult != true)
+                    Application.Current.Shutdown();                
+            }
+            
             MainWindow mainWindow = new MainWindow(this);
             mainWindow.ShowDialog();
-        }
+        }   
     }
 }

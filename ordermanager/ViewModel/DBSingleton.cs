@@ -227,10 +227,10 @@ namespace ordermanager.ViewModel
                     {
                         ObservableCollection<SubMaterial> queryItems = new ObservableCollection<SubMaterial>((from item in subMaterials where item.MaterialName.Name == mName.Name select item));
                         m_AvailableSubMaterials.Add(mName.Name, queryItems);
-                    }                   
+                    }
                 }
                 return m_AvailableSubMaterials;
-            }          
+            }
         }
 
 
@@ -388,5 +388,63 @@ namespace ordermanager.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public User CurrentUser
+        {
+            get;
+            private set;
+        }
+
+        public LoginResult AuthenticateUser(string userName, string password)
+        {
+            List<User> users = dbContext.Users.ToList();
+            if (users != null && users.Count > 0)
+            {
+                User user = dbContext.Users.Where(u => u.UserName == userName).Select(u => u)
+                                                         .FirstOrDefault();
+                if (user != null)
+                {
+                    string decodePassword = user.Password;
+                    if (decodePassword == password)
+                    {
+                        CurrentUser = user;
+                        return new LoginResult() { Authenticated = true, NeedPasswordReset = (decodePassword == user.UserName) };
+                    }
+                    else
+                        return new LoginResult() { Authenticated = false, Message = "Authentication failed." };
+
+                }
+                return new LoginResult() { Authenticated = false, Message = "User not found" };
+            }
+            return new LoginResult() { Authenticated = false, Message = "User not found" };
+        }
+
+        public bool ChangePassword(string newPassword)
+        {
+            string encryptedPassword = newPassword;
+            CurrentUser.Password = encryptedPassword;
+            Save();
+            return true;
+        }
+    }
+
+    public class LoginResult
+    {
+        public bool Authenticated
+        {
+            get;
+            set;
+        }
+        public string Message
+        {
+            get;
+            set;
+        }
+        public bool NeedPasswordReset
+        {
+            get;
+            set;
+        }
+
     }
 }
