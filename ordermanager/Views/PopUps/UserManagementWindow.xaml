@@ -120,7 +120,7 @@
                     <ListView x:Name="existingUsersList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=ExistingUsers}" SelectedIndex="0" SelectionChanged="existingUser_SelectionChanged" >
                         <ListView.View>
                             <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
-                                <GridViewColumn x:Name="productColumn" Header="Product">
+                                <GridViewColumn x:Name="usersColumn" Header="Users">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
@@ -151,7 +151,7 @@
 
                             <TextBlock Text="User Name :" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="8"/>
                             <TextBlock Text="{Binding SelectedExistingUser.UserName}"  Grid.Row="0" Grid.Column="1" Width="150" Height="25" FontWeight="Bold"
-                                 HorizontalAlignment="Left"/>
+                                 HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
                             <TextBlock Text="Role :" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Margin="8"/>
                             <ComboBox x:Name="existingUserRoleSelector" SelectedItem="{Binding SelectedExistingUser.UserRoleWrapper}" DisplayMemberPath="RoleName"  Grid.Row="1" Grid.Column="1" Width="150" Controls:TextboxHelper.Watermark="Type Here" Height="25" HorizontalAlignment="Left"
@@ -174,7 +174,7 @@
                                         
                                     </Button.Background>
                                 </Button>
-                                <Button x:Name="deleteUser"  Content="Delete User"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Delete User" HorizontalAlignment="Left" Click="deleteUser_Click">
+                                <Button x:Name="deleteUser"  Content="Delete User"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Delete User" HorizontalAlignment="Left" Click="deleteUser_Click" Visibility="Collapsed">
                                     <Button.Background>
                                         <SolidColorBrush Color="{StaticResource ValidationColor5}" />
                                     </Button.Background>

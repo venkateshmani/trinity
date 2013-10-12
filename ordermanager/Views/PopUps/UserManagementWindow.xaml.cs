@@ -37,6 +37,7 @@ namespace ordermanager.Views.PopUps
         private void existingUser_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             userManagementViewModel.SelectedExistingUser = existingUsersList.SelectedItem as User;
+            DBResources.Instance.DiscardChanges();
         }
 
         private void addNewuserBtn_Click(object sender, RoutedEventArgs e)
@@ -51,12 +52,15 @@ namespace ordermanager.Views.PopUps
 
         private void SaveChangesToExistingUserBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            userManagementViewModel.SelectedExistingUser.ValidateForSaveChanges();
+            if( !userManagementViewModel.SelectedExistingUser.HasErrors)
+                   DBResources.Instance.Save();
         }
 
         private void ResetPasswordBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            userManagementViewModel.SelectedExistingUser.Password = userManagementViewModel.SelectedExistingUser.UserName;
+            DBResources.Instance.Save();
         }
 
         private void deleteUser_Click(object sender, RoutedEventArgs e)

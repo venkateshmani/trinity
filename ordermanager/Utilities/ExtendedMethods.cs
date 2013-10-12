@@ -62,14 +62,21 @@ namespace ordermanager.Utilities
         /// is a null reference.</exception>
         public static string Decrypt(this string cipher)
         {
-            if (cipher == null) throw new ArgumentNullException("cipher");
+            try
+            {
+                if (cipher == null) throw new ArgumentNullException("cipher");
 
-            //parse base64 string
-            byte[] data = Convert.FromBase64String(cipher);
+                //parse base64 string
+                byte[] data = Convert.FromBase64String(cipher);
 
-            //decrypt data
-            byte[] decrypted = ProtectedData.Unprotect(data, null, DataProtectionScope.LocalMachine);
-            return Encoding.Unicode.GetString(decrypted);
+                //decrypt data
+                byte[] decrypted = ProtectedData.Unprotect(data, null, DataProtectionScope.LocalMachine);
+                return Encoding.Unicode.GetString(decrypted);
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
     }
 }

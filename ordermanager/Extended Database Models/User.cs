@@ -114,11 +114,17 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public void ValidateForSaveChanges()
+        {
+            ValidateUserRoleWrapper();
+            ValidateEmailIDWrapper();
+        }
+
         public void Validate()
         {
             ValidateUserNameWrapper();
-            ValidateEmailIDWrapper();
             ValidateUserRoleWrapper();
+            ValidateEmailIDWrapper();
         }
 
         #endregion 

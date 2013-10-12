@@ -461,11 +461,11 @@ namespace ordermanager.ViewModel
                                                          .FirstOrDefault();
                 if (user != null)
                 {
-                    string decodePassword = user.Password.Decrypt();
-                    if (decodePassword == password || user.Password == password)  //Later condition is just only for development
+                    string passwordValueInDatabase = user.Password;
+                    if (user.Password == password || passwordValueInDatabase.Decrypt() == password)  //Later condition is just only for development
                     {
                         CurrentUser = user;
-                        return new LoginResult() { Authenticated = true, NeedPasswordReset = (decodePassword == user.UserName) };
+                        return new LoginResult() { Authenticated = true, NeedPasswordReset = (passwordValueInDatabase == user.UserName) };
                     }
                     else
                         return new LoginResult() { Authenticated = false, Message = "Authentication failed." };
