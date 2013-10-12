@@ -106,6 +106,21 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public ProductBreakUp ProductBreakUpWrapper
+        {
+            get
+            {
+                if (ProductBreakUp == null)
+                    ProductBreakUp = new ProductBreakUp();
+                return ProductBreakUp;
+            }
+            set
+            {
+                if (ProductBreakUp != value)
+                    ProductBreakUp = value;
+            }
+        }
+
         public decimal OrderValueWrapper
         {
             get
