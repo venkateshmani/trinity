@@ -7,7 +7,7 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ordermanager.Utilities;
 namespace ordermanager.ViewModel
 {
     public class DBResources : INotifyPropertyChanged, IDisposable
@@ -428,8 +428,8 @@ namespace ordermanager.ViewModel
                                                          .FirstOrDefault();
                 if (user != null)
                 {
-                    string decodePassword = user.Password;
-                    if (decodePassword == password)
+                    string decodePassword = user.Password.Decrypt();
+                    if (decodePassword == password || user.Password == password)  //Later condition is just only for development
                     {
                         CurrentUser = user;
                         return new LoginResult() { Authenticated = true, NeedPasswordReset = (decodePassword == user.UserName) };
@@ -445,7 +445,7 @@ namespace ordermanager.ViewModel
 
         public bool ChangePassword(string newPassword)
         {
-            string encryptedPassword = newPassword;
+            string encryptedPassword = newPassword.Encrypt();
             CurrentUser.Password = encryptedPassword;
             Save();
             return true;
