@@ -193,10 +193,13 @@ namespace ordermanager.ViewModel
             ProductName newProduct = dbContext.ProductNames.Create();
             newProduct.Name = newProductName;
 
-            dbContext.ProductNames.Add(newProduct);
-            Save();
 
-            m_AvailableProducts = new ObservableCollection<ProductName>(dbContext.ProductNames.ToList());
+            OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+            newManager.ProductNames.Add(newProduct);
+            newManager.SaveChanges();
+            newManager.Dispose();
+
+            AvailableProducts = new ObservableCollection<ProductName>(dbContext.ProductNames.ToList());
 
             return newProduct;
         }
@@ -215,6 +218,7 @@ namespace ordermanager.ViewModel
             private set
             {
                 m_AvailableMaterials = value;
+                OnPropertyChanged("AvailableMaterials");
             }
         }
 
@@ -244,8 +248,10 @@ namespace ordermanager.ViewModel
             MaterialName newMaterial = dbContext.MaterialNames.Create();
             newMaterial.Name = newMaterialName;
 
-            dbContext.MaterialNames.Add(newMaterial);
-            Save();
+            OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+            newManager.MaterialNames.Add(newMaterial);
+            newManager.SaveChanges();
+            newManager.Dispose();
 
             AvailableMaterials = new ObservableCollection<MaterialName>(dbContext.MaterialNames.ToList()); //Refresh
 
@@ -257,9 +263,18 @@ namespace ordermanager.ViewModel
             SubMaterial newSubMaterial = dbContext.SubMaterials.Create();
             newSubMaterial.Name = subMaterialName;
             newSubMaterial.MaterialNameID = material.MaterialNameID;
-            dbContext.SubMaterials.Add(newSubMaterial);
-            Save();
-            AvailableMaterials = new ObservableCollection<MaterialName>(dbContext.MaterialNames.ToList()); //Refresh
+
+            OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+            newManager.SubMaterials.Add(newSubMaterial);
+            newManager.SaveChanges();
+            newManager.Dispose();
+
+            if (AvailableSubMaterials.ContainsKey(material.MaterialName.Name))
+            {
+                AvailableSubMaterials[material.MaterialName.Name].Add(newSubMaterial);
+                OnPropertyChanged("AvailableSubMaterials");
+            }
+
             return newSubMaterial;
         }
         #endregion

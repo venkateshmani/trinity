@@ -55,7 +55,7 @@ namespace ordermanager.Views.UserControls
                 OrderStatusEnum status = (OrderStatusEnum)Enum.Parse(typeof(OrderStatusEnum), value.OrderStatu.StatusLabel);
                 if (status < OrderStatusEnum.OrderConfirmed)
                 {
-                    tabMaterialDetails.Visibility = System.Windows.Visibility.Collapsed;
+                    //tabMaterialDetails.Visibility = System.Windows.Visibility.Collapsed;
                     tabPurchaseOrder.Visibility = System.Windows.Visibility.Collapsed;
                 }
                 else
