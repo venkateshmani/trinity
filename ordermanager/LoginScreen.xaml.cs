@@ -32,28 +32,7 @@ namespace ordermanager
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            string userName = tbUserName.Text.Trim();
-            string password = tbPassword.Password.Trim();
-            
-            LoginResult res = DBResources.Instance.AuthenticateUser(userName, password);
-            
-            if (!res.Authenticated)
-            {
-                MessageBox.Show(res.Message,"Authentication Failed",MessageBoxButton.OK,MessageBoxImage.Error);
-                return;
-            }
-            if (res.NeedPasswordReset)
-            {
-                MessageBox.Show("Reset your password!!!", "Change Password", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.Hide();
-                PasswordChangeDialog dialog = new PasswordChangeDialog();
-                dialog.ShowDialog();
-                if (dialog.DialogResult != true)
-                    Application.Current.Shutdown();                
-            }
-            
-            MainWindow mainWindow = new MainWindow(this);
-            mainWindow.ShowDialog();
+            LogIn();
         }
 
         public void Reset()
@@ -64,6 +43,40 @@ namespace ordermanager
         public void ClearPassword()
         {            
             tbPassword.Clear();
+        }
+
+        private void tbPassword_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                LogIn();
+            }
+        }
+
+        private void LogIn()
+        {
+            string userName = tbUserName.Text.Trim();
+            string password = tbPassword.Password.Trim();
+
+            LoginResult res = DBResources.Instance.AuthenticateUser(userName, password);
+
+            if (!res.Authenticated)
+            {
+                MessageBox.Show(res.Message, "Authentication Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (res.NeedPasswordReset)
+            {
+                MessageBox.Show("Reset your password!!!", "Change Password", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Hide();
+                PasswordChangeDialog dialog = new PasswordChangeDialog();
+                dialog.ShowDialog();
+                if (dialog.DialogResult != true)
+                    Application.Current.Shutdown();
+            }
+
+            MainWindow mainWindow = new MainWindow(this);
+            mainWindow.ShowDialog();
         }
     }
 }
