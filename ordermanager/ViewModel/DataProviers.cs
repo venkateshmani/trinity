@@ -107,6 +107,14 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public User LoggedInUser
+        {
+            get
+            {
+                return DBResources.Instance.CurrentUser;
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {

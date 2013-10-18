@@ -34,7 +34,7 @@ namespace ordermanager.ViewModel
                 if (value != m_SelectedItem)
                 {
                     m_SelectedItem = value;
-                    NotifyPropertyChanged("SelectedProduct");
+                    NotifyPropertyChanged("SelectedProduct"); 
                 }
             }
         }

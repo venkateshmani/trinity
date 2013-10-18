@@ -201,6 +201,7 @@
     <Compile Include="ViewModel\ChangeHistoryViewModel.cs" />
     <Compile Include="ViewModel\DataProviers.cs" />
     <Compile Include="ViewModel\DBSingleton.cs" />
+    <Compile Include="ViewModel\Helper.cs" />
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />
     <Compile Include="ViewModel\POControlViewModel.cs" />
     <Compile Include="ViewModel\ProductMaterialsViewModel.cs" />

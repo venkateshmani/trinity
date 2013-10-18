@@ -44,11 +44,10 @@ namespace ordermanager.Views.PopUps
                 m_IsNewEnquiry = value;
                 rootLayout.IsEnabled = value;
                 NewEnquiryViewModel = null;
-
                 if (!value)
-                {
-                    positiveDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
-                    negativeDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
+                {   
+                   // positiveDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
+                   // negativeDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewItemBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewCustomerBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewAgentBtn.Visibility = System.Windows.Visibility.Collapsed;
@@ -78,6 +77,35 @@ namespace ordermanager.Views.PopUps
             {
                 m_NewEnquiryViewModel = value;
                 this.DataContext = value;
+                if (value != null)
+                {
+                    positiveDecisionBtn.Visibility = System.Windows.Visibility.Visible;
+                    negativeDecisionBtn.Visibility = System.Windows.Visibility.Visible;
+                    if (value.Order.OrderStatusID == 0)
+                    {
+                        positiveDecisionBtn.Content = "Create";
+                        negativeDecisionBtn.Content = "Discard";
+                    }
+                    else
+                    {
+                        OrderStatusEnum status = (OrderStatusEnum)Enum.Parse(typeof(OrderStatusEnum), value.Order.OrderStatu.StatusLabel);
+                        if (status == OrderStatusEnum.MaterialsJobCompleted)
+                        {
+                            positiveDecisionBtn.Content = "Approve";
+                            negativeDecisionBtn.Content = "Reject";
+                        }
+                        else if (status == OrderStatusEnum.EnquiryApproved)
+                        {
+                            positiveDecisionBtn.Content = "Confirm";
+                            negativeDecisionBtn.Content = "Cancel";
+                        }
+                        else
+                        {
+                            positiveDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
+                            negativeDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
+                        }
+                    }
+                }
             }
         }
 
@@ -190,6 +218,10 @@ namespace ordermanager.Views.PopUps
                     statusText.Visibility = System.Windows.Visibility.Visible;
                     statusText.Foreground = new SolidColorBrush(Color.FromArgb(255, 17, 158, 218));
                 }
+            }
+            else if (positiveDecisionBtn.Content.ToString() == "Approve")
+            { 
+
             }
         }
 

@@ -46,15 +46,26 @@ namespace ordermanager.Views.UserControls
         {
             get
             {
-                return m_Order; 
+                return m_Order;
             }
             set
             {
                 SetOrder(value);
                 this.DataContext = value;
+                OrderStatusEnum status = (OrderStatusEnum)Enum.Parse(typeof(OrderStatusEnum), value.OrderStatu.StatusLabel);
+                if (status < OrderStatusEnum.OrderConfirmed)
+                {
+                    tabMaterialDetails.Visibility = System.Windows.Visibility.Collapsed;
+                    tabPurchaseOrder.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else
+                {
+                    tabMaterialDetails.Visibility = System.Windows.Visibility.Visible;
+                    tabPurchaseOrder.Visibility = System.Windows.Visibility.Visible;
+                }
             }
         }
-      
+
         public void UpdateView()
         {
             string tabHeader = Convert.ToString(((System.Windows.Controls.HeaderedContentControl)(tabControl.SelectedItem)).Header);
