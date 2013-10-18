@@ -1,132 +1,151 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="OrderManagerModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="OrderManagerModelStoreContainer">
-    <EntitySet Name="CommissionValueType" EntityType="OrderManagerModel.Store.CommissionValueType" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Company" EntityType="OrderManagerModel.Store.Company" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CompanyType" EntityType="OrderManagerModel.Store.CompanyType" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Currency" EntityType="OrderManagerModel.Store.Currency" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="History" EntityType="OrderManagerModel.Store.History" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MaterialName" EntityType="OrderManagerModel.Store.MaterialName" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Order" EntityType="OrderManagerModel.Store.Order" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="OrderCurrencyConversion" EntityType="OrderManagerModel.Store.OrderCurrencyConversion" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="OrderProduct" EntityType="OrderManagerModel.Store.OrderProduct" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="OrderStatus" EntityType="OrderManagerModel.Store.OrderStatus" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="OrderThrough" EntityType="OrderManagerModel.Store.OrderThrough" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ProductExtraCost" EntityType="OrderManagerModel.Store.ProductExtraCost" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ProductExtraCostType" EntityType="OrderManagerModel.Store.ProductExtraCostType" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ProductMaterialItem" EntityType="OrderManagerModel.Store.ProductMaterialItem" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ProductMaterials" EntityType="OrderManagerModel.Store.ProductMaterials" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ProductName" EntityType="OrderManagerModel.Store.ProductName" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="SubMaterial" EntityType="OrderManagerModel.Store.SubMaterial" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="sysdiagrams" EntityType="OrderManagerModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UnitsOfMeasurement" EntityType="OrderManagerModel.Store.UnitsOfMeasurement" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="User" EntityType="OrderManagerModel.Store.User" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UserRole" EntityType="OrderManagerModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_Company_CompanyType" Association="OrderManagerModel.Store.FK_Company_CompanyType">
+<Schema Namespace="OrderManagerDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="OrderManagerDBModelStoreContainer">
+    <EntitySet Name="CommissionValueType" EntityType="OrderManagerDBModel.Store.CommissionValueType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Company" EntityType="OrderManagerDBModel.Store.Company" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CompanyType" EntityType="OrderManagerDBModel.Store.CompanyType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Currency" EntityType="OrderManagerDBModel.Store.Currency" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="History" EntityType="OrderManagerDBModel.Store.History" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MaterialName" EntityType="OrderManagerDBModel.Store.MaterialName" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Order" EntityType="OrderManagerDBModel.Store.Order" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderCurrencyConversion" EntityType="OrderManagerDBModel.Store.OrderCurrencyConversion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderProduct" EntityType="OrderManagerDBModel.Store.OrderProduct" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderStatus" EntityType="OrderManagerDBModel.Store.OrderStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderThrough" EntityType="OrderManagerDBModel.Store.OrderThrough" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductBreakUp" EntityType="OrderManagerDBModel.Store.ProductBreakUp" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductCountryWiseBreakUp" EntityType="OrderManagerDBModel.Store.ProductCountryWiseBreakUp" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductExtraCost" EntityType="OrderManagerDBModel.Store.ProductExtraCost" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductExtraCostType" EntityType="OrderManagerDBModel.Store.ProductExtraCostType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductMaterialItem" EntityType="OrderManagerDBModel.Store.ProductMaterialItem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductMaterials" EntityType="OrderManagerDBModel.Store.ProductMaterials" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductName" EntityType="OrderManagerDBModel.Store.ProductName" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ShipmentMode" EntityType="OrderManagerDBModel.Store.ShipmentMode" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SubMaterial" EntityType="OrderManagerDBModel.Store.SubMaterial" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="OrderManagerDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UnitsOfMeasurement" EntityType="OrderManagerDBModel.Store.UnitsOfMeasurement" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="OrderManagerDBModel.Store.User" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserRole" EntityType="OrderManagerDBModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Company_CompanyType" Association="OrderManagerDBModel.Store.FK_Company_CompanyType">
       <End Role="CompanyType" EntitySet="CompanyType" />
       <End Role="Company" EntitySet="Company" />
     </AssociationSet>
-    <AssociationSet Name="FK_History_Order" Association="OrderManagerModel.Store.FK_History_Order">
+    <AssociationSet Name="FK_History_Order" Association="OrderManagerDBModel.Store.FK_History_Order">
       <End Role="Order" EntitySet="Order" />
       <End Role="History" EntitySet="History" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_CommissionValueType" Association="OrderManagerModel.Store.FK_Order_CommissionValueType">
+    <AssociationSet Name="FK_Order_CommissionValueType" Association="OrderManagerDBModel.Store.FK_Order_CommissionValueType">
       <End Role="CommissionValueType" EntitySet="CommissionValueType" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_Company" Association="OrderManagerModel.Store.FK_Order_Company">
+    <AssociationSet Name="FK_Order_Company" Association="OrderManagerDBModel.Store.FK_Order_Company">
       <End Role="Company" EntitySet="Company" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_OrderBy" Association="OrderManagerModel.Store.FK_Order_OrderBy">
+    <AssociationSet Name="FK_Order_OrderBy" Association="OrderManagerDBModel.Store.FK_Order_OrderBy">
       <End Role="Company" EntitySet="Company" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_OrderStatus" Association="OrderManagerModel.Store.FK_Order_OrderStatus">
+    <AssociationSet Name="FK_Order_OrderStatus" Association="OrderManagerDBModel.Store.FK_Order_OrderStatus">
       <End Role="OrderStatus" EntitySet="OrderStatus" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_OrderThrough" Association="OrderManagerModel.Store.FK_Order_OrderThrough">
+    <AssociationSet Name="FK_Order_OrderThrough" Association="OrderManagerDBModel.Store.FK_Order_OrderThrough">
       <End Role="OrderThrough" EntitySet="OrderThrough" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderCurrencyConversion_Currency" Association="OrderManagerModel.Store.FK_OrderCurrencyConversion_Currency">
+    <AssociationSet Name="FK_OrderCurrencyConversion_Currency" Association="OrderManagerDBModel.Store.FK_OrderCurrencyConversion_Currency">
       <End Role="Currency" EntitySet="Currency" />
       <End Role="OrderCurrencyConversion" EntitySet="OrderCurrencyConversion" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderCurrencyConversion_Order" Association="OrderManagerModel.Store.FK_OrderCurrencyConversion_Order">
+    <AssociationSet Name="FK_OrderCurrencyConversion_Order" Association="OrderManagerDBModel.Store.FK_OrderCurrencyConversion_Order">
       <End Role="Order" EntitySet="Order" />
       <End Role="OrderCurrencyConversion" EntitySet="OrderCurrencyConversion" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderProduct_Currency" Association="OrderManagerModel.Store.FK_OrderProduct_Currency">
+    <AssociationSet Name="FK_OrderProduct_Currency" Association="OrderManagerDBModel.Store.FK_OrderProduct_Currency">
       <End Role="Currency" EntitySet="Currency" />
       <End Role="OrderProduct" EntitySet="OrderProduct" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderProduct_Order" Association="OrderManagerModel.Store.FK_OrderProduct_Order">
+    <AssociationSet Name="FK_OrderProduct_Order" Association="OrderManagerDBModel.Store.FK_OrderProduct_Order">
       <End Role="Order" EntitySet="Order" />
       <End Role="OrderProduct" EntitySet="OrderProduct" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderProduct_ProductName" Association="OrderManagerModel.Store.FK_OrderProduct_ProductName">
+    <AssociationSet Name="FK_OrderProduct_ProductBreakUp" Association="OrderManagerDBModel.Store.FK_OrderProduct_ProductBreakUp">
+      <End Role="ProductBreakUp" EntitySet="ProductBreakUp" />
+      <End Role="OrderProduct" EntitySet="OrderProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderProduct_ProductName" Association="OrderManagerDBModel.Store.FK_OrderProduct_ProductName">
       <End Role="ProductName" EntitySet="ProductName" />
       <End Role="OrderProduct" EntitySet="OrderProduct" />
     </AssociationSet>
-    <AssociationSet Name="FK_OrderProduct_UnitsOfMeasurement" Association="OrderManagerModel.Store.FK_OrderProduct_UnitsOfMeasurement">
+    <AssociationSet Name="FK_OrderProduct_UnitsOfMeasurement" Association="OrderManagerDBModel.Store.FK_OrderProduct_UnitsOfMeasurement">
       <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurement" />
       <End Role="OrderProduct" EntitySet="OrderProduct" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductExtraCost_Currency" Association="OrderManagerModel.Store.FK_ProductExtraCost_Currency">
+    <AssociationSet Name="FK_OrderStatus_UserRole" Association="OrderManagerDBModel.Store.FK_OrderStatus_UserRole">
+      <End Role="UserRole" EntitySet="UserRole" />
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBreakUp_ShipmentMode" Association="OrderManagerDBModel.Store.FK_ProductBreakUp_ShipmentMode">
+      <End Role="ShipmentMode" EntitySet="ShipmentMode" />
+      <End Role="ProductBreakUp" EntitySet="ProductBreakUp" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCountryWiseBreakUp_ProductBreakUp" Association="OrderManagerDBModel.Store.FK_ProductCountryWiseBreakUp_ProductBreakUp">
+      <End Role="ProductBreakUp" EntitySet="ProductBreakUp" />
+      <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUp" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductExtraCost_Currency" Association="OrderManagerDBModel.Store.FK_ProductExtraCost_Currency">
       <End Role="Currency" EntitySet="Currency" />
       <End Role="ProductExtraCost" EntitySet="ProductExtraCost" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductExtraCost_OrderProduct" Association="OrderManagerModel.Store.FK_ProductExtraCost_OrderProduct">
+    <AssociationSet Name="FK_ProductExtraCost_OrderProduct" Association="OrderManagerDBModel.Store.FK_ProductExtraCost_OrderProduct">
       <End Role="OrderProduct" EntitySet="OrderProduct" />
       <End Role="ProductExtraCost" EntitySet="ProductExtraCost" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductExtraCost_ProductExtraCostType" Association="OrderManagerModel.Store.FK_ProductExtraCost_ProductExtraCostType">
+    <AssociationSet Name="FK_ProductExtraCost_ProductExtraCostType" Association="OrderManagerDBModel.Store.FK_ProductExtraCost_ProductExtraCostType">
       <End Role="ProductExtraCostType" EntitySet="ProductExtraCostType" />
       <End Role="ProductExtraCost" EntitySet="ProductExtraCost" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductMaterialItem_Company" Association="OrderManagerModel.Store.FK_ProductMaterialItem_Company">
+    <AssociationSet Name="FK_ProductMaterialItem_Company" Association="OrderManagerDBModel.Store.FK_ProductMaterialItem_Company">
       <End Role="Company" EntitySet="Company" />
       <End Role="ProductMaterialItem" EntitySet="ProductMaterialItem" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductMaterialItem_Currency" Association="OrderManagerModel.Store.FK_ProductMaterialItem_Currency">
+    <AssociationSet Name="FK_ProductMaterialItem_Currency" Association="OrderManagerDBModel.Store.FK_ProductMaterialItem_Currency">
       <End Role="Currency" EntitySet="Currency" />
       <End Role="ProductMaterialItem" EntitySet="ProductMaterialItem" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductMaterialItem_ProductMaterials" Association="OrderManagerModel.Store.FK_ProductMaterialItem_ProductMaterials">
+    <AssociationSet Name="FK_ProductMaterialItem_ProductMaterials" Association="OrderManagerDBModel.Store.FK_ProductMaterialItem_ProductMaterials">
       <End Role="ProductMaterials" EntitySet="ProductMaterials" />
       <End Role="ProductMaterialItem" EntitySet="ProductMaterialItem" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductMaterialItem_SubMaterial" Association="OrderManagerModel.Store.FK_ProductMaterialItem_SubMaterial">
+    <AssociationSet Name="FK_ProductMaterialItem_SubMaterial" Association="OrderManagerDBModel.Store.FK_ProductMaterialItem_SubMaterial">
       <End Role="SubMaterial" EntitySet="SubMaterial" />
       <End Role="ProductMaterialItem" EntitySet="ProductMaterialItem" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductMaterialItem_UnitsOfMeasurement" Association="OrderManagerModel.Store.FK_ProductMaterialItem_UnitsOfMeasurement">
+    <AssociationSet Name="FK_ProductMaterialItem_UnitsOfMeasurement" Association="OrderManagerDBModel.Store.FK_ProductMaterialItem_UnitsOfMeasurement">
       <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurement" />
       <End Role="ProductMaterialItem" EntitySet="ProductMaterialItem" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductMaterials_Currency" Association="OrderManagerModel.Store.FK_ProductMaterials_Currency">
+    <AssociationSet Name="FK_ProductMaterials_Currency" Association="OrderManagerDBModel.Store.FK_ProductMaterials_Currency">
       <End Role="Currency" EntitySet="Currency" />
       <End Role="ProductMaterials" EntitySet="ProductMaterials" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductMaterials_MaterialName" Association="OrderManagerModel.Store.FK_ProductMaterials_MaterialName">
+    <AssociationSet Name="FK_ProductMaterials_MaterialName" Association="OrderManagerDBModel.Store.FK_ProductMaterials_MaterialName">
       <End Role="MaterialName" EntitySet="MaterialName" />
       <End Role="ProductMaterials" EntitySet="ProductMaterials" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductMaterials_OrderProduct" Association="OrderManagerModel.Store.FK_ProductMaterials_OrderProduct">
+    <AssociationSet Name="FK_ProductMaterials_OrderProduct" Association="OrderManagerDBModel.Store.FK_ProductMaterials_OrderProduct">
       <End Role="OrderProduct" EntitySet="OrderProduct" />
       <End Role="ProductMaterials" EntitySet="ProductMaterials" />
     </AssociationSet>
-    <AssociationSet Name="FK_ProductMaterials_UnitsOfMeasurement" Association="OrderManagerModel.Store.FK_ProductMaterials_UnitsOfMeasurement">
+    <AssociationSet Name="FK_ProductMaterials_UnitsOfMeasurement" Association="OrderManagerDBModel.Store.FK_ProductMaterials_UnitsOfMeasurement">
       <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurement" />
       <End Role="ProductMaterials" EntitySet="ProductMaterials" />
     </AssociationSet>
-    <AssociationSet Name="FK_SubMaterial_ProductMaterials" Association="OrderManagerModel.Store.FK_SubMaterial_ProductMaterials">
-      <End Role="ProductMaterials" EntitySet="ProductMaterials" />
+    <AssociationSet Name="FK_SubMaterial_MaterialName" Association="OrderManagerDBModel.Store.FK_SubMaterial_MaterialName">
+      <End Role="MaterialName" EntitySet="MaterialName" />
       <End Role="SubMaterial" EntitySet="SubMaterial" />
     </AssociationSet>
-    <AssociationSet Name="FK_User_UserRole" Association="OrderManagerModel.Store.FK_User_UserRole">
+    <AssociationSet Name="FK_User_UserRole" Association="OrderManagerDBModel.Store.FK_User_UserRole">
       <End Role="UserRole" EntitySet="UserRole" />
       <End Role="User" EntitySet="User" />
     </AssociationSet>
@@ -171,6 +190,7 @@
     <Property Name="CurrencyID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="CountryName" Type="varchar" MaxLength="50" />
     <Property Name="Symbol" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DefaultValueInINR" Type="decimal" Scale="4" />
   </EntityType>
   <EntityType Name="History">
     <Key>
@@ -204,6 +224,7 @@
     <Property Name="CommissionValueTypeID" Type="tinyint" />
     <Property Name="OrderStatusID" Type="smallint" Nullable="false" />
     <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="TotalOrderValue" Type="decimal" Scale="4" />
   </EntityType>
   <EntityType Name="OrderCurrencyConversion">
     <Key>
@@ -212,7 +233,9 @@
     <Property Name="OrderCurrencyConversionID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="OrderID" Type="bigint" Nullable="false" />
     <Property Name="CurrencyID" Type="smallint" Nullable="false" />
-    <Property Name="ValueInINR" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="ValueInINR" Type="decimal" Scale="4" />
+    <Property Name="ValueInINRForMaterials" Type="decimal" Scale="4" />
+    <Property Name="ValueInINRForSubMaterials" Type="decimal" Scale="4" />
   </EntityType>
   <EntityType Name="OrderProduct">
     <Key>
@@ -226,6 +249,8 @@
     <Property Name="CurrencyID" Type="smallint" Nullable="false" />
     <Property Name="CustomerTargetPrice" Type="decimal" Nullable="false" Scale="4" />
     <Property Name="OrderValue" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="ProductBreakUpID" Type="bigint" />
+    <Property Name="TotalConsumptionCost" Type="decimal" Scale="4" />
   </EntityType>
   <EntityType Name="OrderStatus">
     <Key>
@@ -233,6 +258,8 @@
     </Key>
     <Property Name="OrderStatusID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="StatusLabel" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DisplayLabel" Type="varchar" MaxLength="50" />
+    <Property Name="NextUserRoleID" Type="smallint" />
   </EntityType>
   <EntityType Name="OrderThrough">
     <Key>
@@ -240,6 +267,33 @@
     </Key>
     <Property Name="OrderThroughID" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Mode" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ProductBreakUp">
+    <Key>
+      <PropertyRef Name="ProductBreakUpID" />
+    </Key>
+    <Property Name="ProductBreakUpID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Tolerance" Type="float" Nullable="false" />
+    <Property Name="ShipmentModeID" Type="tinyint" Nullable="false" />
+    <Property Name="PriceTerms" Type="text" />
+    <Property Name="PaymentTerms" Type="text" />
+    <Property Name="DocumentsRequired" Type="text" />
+  </EntityType>
+  <EntityType Name="ProductCountryWiseBreakUp">
+    <Key>
+      <PropertyRef Name="ProductCountryWiseBreakUpID" />
+    </Key>
+    <Property Name="ProductCountryWiseBreakUpID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Country" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="NumberOfPieces" Type="decimal" Nullable="false" />
+    <Property Name="LS" Type="decimal" />
+    <Property Name="S" Type="decimal" />
+    <Property Name="M" Type="decimal" />
+    <Property Name="L" Type="decimal" />
+    <Property Name="XL" Type="decimal" />
+    <Property Name="XXL" Type="decimal" />
+    <Property Name="XXXL" Type="decimal" />
+    <Property Name="ProductBreakUpID" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductExtraCost">
     <Key>
@@ -249,7 +303,7 @@
     <Property Name="ProductID" Type="bigint" Nullable="false" />
     <Property Name="ExtraCostTypeID" Type="smallint" Nullable="false" />
     <Property Name="CurrencyID" Type="smallint" Nullable="false" />
-    <Property Name="Description" Type="text" Nullable="false" />
+    <Property Name="Description" Type="text" />
     <Property Name="Cost" Type="decimal" Nullable="false" Scale="4" />
   </EntityType>
   <EntityType Name="ProductExtraCostType">
@@ -294,13 +348,20 @@
     <Property Name="Name" Type="text" Nullable="false" />
     <Property Name="StyleID" Type="bigint" />
   </EntityType>
+  <EntityType Name="ShipmentMode">
+    <Key>
+      <PropertyRef Name="ShipmentModeID" />
+    </Key>
+    <Property Name="ShipmentModeID" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Mode" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
   <EntityType Name="SubMaterial">
     <Key>
       <PropertyRef Name="SubMaterialsNameID" />
     </Key>
     <Property Name="SubMaterialsNameID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="MaterialID" Type="bigint" Nullable="false" />
-    <Property Name="Name" Type="text" />
+    <Property Name="MaterialNameID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="text" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -335,11 +396,12 @@
     </Key>
     <Property Name="UserRoleID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="RoleName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="AliasName" Type="varchar" MaxLength="50" />
     <Property Name="CanCreateUser" Type="bit" Nullable="false" />
     <Property Name="CanCreateNewEnquiry" Type="bit" Nullable="false" />
     <Property Name="CanAddMaterials" Type="bit" Nullable="false" />
     <Property Name="CanAddMaterialsCost" Type="bit" Nullable="false" />
-    <Property Name="CanAddConsumptionCost" Type="bit" Nullable="false" />
+    <Property Name="CanAddConsumption" Type="bit" Nullable="false" />
     <Property Name="CanAddExtraCost" Type="bit" Nullable="false" />
     <Property Name="CanApproveEnquiry" Type="bit" Nullable="false" />
     <Property Name="CanConfirmOrder" Type="bit" Nullable="false" />
@@ -347,8 +409,8 @@
     <Property Name="CanGeneratePurchaseOrder" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_Company_CompanyType">
-    <End Role="CompanyType" Type="OrderManagerModel.Store.CompanyType" Multiplicity="1" />
-    <End Role="Company" Type="OrderManagerModel.Store.Company" Multiplicity="*" />
+    <End Role="CompanyType" Type="OrderManagerDBModel.Store.CompanyType" Multiplicity="1" />
+    <End Role="Company" Type="OrderManagerDBModel.Store.Company" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CompanyType">
         <PropertyRef Name="CompanyTypeID" />
@@ -359,8 +421,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_History_Order">
-    <End Role="Order" Type="OrderManagerModel.Store.Order" Multiplicity="1" />
-    <End Role="History" Type="OrderManagerModel.Store.History" Multiplicity="*" />
+    <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
+    <End Role="History" Type="OrderManagerDBModel.Store.History" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Order">
         <PropertyRef Name="OrderID" />
@@ -371,8 +433,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Order_CommissionValueType">
-    <End Role="CommissionValueType" Type="OrderManagerModel.Store.CommissionValueType" Multiplicity="0..1" />
-    <End Role="Order" Type="OrderManagerModel.Store.Order" Multiplicity="*" />
+    <End Role="CommissionValueType" Type="OrderManagerDBModel.Store.CommissionValueType" Multiplicity="0..1" />
+    <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CommissionValueType">
         <PropertyRef Name="CommissionValueTypeID" />
@@ -383,8 +445,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Order_Company">
-    <End Role="Company" Type="OrderManagerModel.Store.Company" Multiplicity="1" />
-    <End Role="Order" Type="OrderManagerModel.Store.Order" Multiplicity="*" />
+    <End Role="Company" Type="OrderManagerDBModel.Store.Company" Multiplicity="1" />
+    <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Company">
         <PropertyRef Name="CompanyID" />
@@ -395,8 +457,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Order_OrderBy">
-    <End Role="Company" Type="OrderManagerModel.Store.Company" Multiplicity="1" />
-    <End Role="Order" Type="OrderManagerModel.Store.Order" Multiplicity="*" />
+    <End Role="Company" Type="OrderManagerDBModel.Store.Company" Multiplicity="1" />
+    <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Company">
         <PropertyRef Name="CompanyID" />
@@ -407,8 +469,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Order_OrderStatus">
-    <End Role="OrderStatus" Type="OrderManagerModel.Store.OrderStatus" Multiplicity="1" />
-    <End Role="Order" Type="OrderManagerModel.Store.Order" Multiplicity="*" />
+    <End Role="OrderStatus" Type="OrderManagerDBModel.Store.OrderStatus" Multiplicity="1" />
+    <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="OrderStatus">
         <PropertyRef Name="OrderStatusID" />
@@ -419,8 +481,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Order_OrderThrough">
-    <End Role="OrderThrough" Type="OrderManagerModel.Store.OrderThrough" Multiplicity="1" />
-    <End Role="Order" Type="OrderManagerModel.Store.Order" Multiplicity="*" />
+    <End Role="OrderThrough" Type="OrderManagerDBModel.Store.OrderThrough" Multiplicity="1" />
+    <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="OrderThrough">
         <PropertyRef Name="OrderThroughID" />
@@ -431,8 +493,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_OrderCurrencyConversion_Currency">
-    <End Role="Currency" Type="OrderManagerModel.Store.Currency" Multiplicity="1" />
-    <End Role="OrderCurrencyConversion" Type="OrderManagerModel.Store.OrderCurrencyConversion" Multiplicity="*" />
+    <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="1" />
+    <End Role="OrderCurrencyConversion" Type="OrderManagerDBModel.Store.OrderCurrencyConversion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Currency">
         <PropertyRef Name="CurrencyID" />
@@ -443,8 +505,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_OrderCurrencyConversion_Order">
-    <End Role="Order" Type="OrderManagerModel.Store.Order" Multiplicity="1" />
-    <End Role="OrderCurrencyConversion" Type="OrderManagerModel.Store.OrderCurrencyConversion" Multiplicity="*" />
+    <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
+    <End Role="OrderCurrencyConversion" Type="OrderManagerDBModel.Store.OrderCurrencyConversion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Order">
         <PropertyRef Name="OrderID" />
@@ -455,8 +517,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_OrderProduct_Currency">
-    <End Role="Currency" Type="OrderManagerModel.Store.Currency" Multiplicity="1" />
-    <End Role="OrderProduct" Type="OrderManagerModel.Store.OrderProduct" Multiplicity="*" />
+    <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="1" />
+    <End Role="OrderProduct" Type="OrderManagerDBModel.Store.OrderProduct" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Currency">
         <PropertyRef Name="CurrencyID" />
@@ -467,8 +529,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_OrderProduct_Order">
-    <End Role="Order" Type="OrderManagerModel.Store.Order" Multiplicity="1" />
-    <End Role="OrderProduct" Type="OrderManagerModel.Store.OrderProduct" Multiplicity="*" />
+    <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
+    <End Role="OrderProduct" Type="OrderManagerDBModel.Store.OrderProduct" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Order">
         <PropertyRef Name="OrderID" />
@@ -478,9 +540,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_OrderProduct_ProductBreakUp">
+    <End Role="ProductBreakUp" Type="OrderManagerDBModel.Store.ProductBreakUp" Multiplicity="0..1" />
+    <End Role="OrderProduct" Type="OrderManagerDBModel.Store.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBreakUp">
+        <PropertyRef Name="ProductBreakUpID" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="ProductBreakUpID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_OrderProduct_ProductName">
-    <End Role="ProductName" Type="OrderManagerModel.Store.ProductName" Multiplicity="1" />
-    <End Role="OrderProduct" Type="OrderManagerModel.Store.OrderProduct" Multiplicity="*" />
+    <End Role="ProductName" Type="OrderManagerDBModel.Store.ProductName" Multiplicity="1" />
+    <End Role="OrderProduct" Type="OrderManagerDBModel.Store.OrderProduct" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ProductName">
         <PropertyRef Name="ProductNameID" />
@@ -491,8 +565,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_OrderProduct_UnitsOfMeasurement">
-    <End Role="UnitsOfMeasurement" Type="OrderManagerModel.Store.UnitsOfMeasurement" Multiplicity="1" />
-    <End Role="OrderProduct" Type="OrderManagerModel.Store.OrderProduct" Multiplicity="*" />
+    <End Role="UnitsOfMeasurement" Type="OrderManagerDBModel.Store.UnitsOfMeasurement" Multiplicity="1" />
+    <End Role="OrderProduct" Type="OrderManagerDBModel.Store.OrderProduct" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UnitsOfMeasurement">
         <PropertyRef Name="UOMID" />
@@ -502,9 +576,45 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_OrderStatus_UserRole">
+    <End Role="UserRole" Type="OrderManagerDBModel.Store.UserRole" Multiplicity="0..1" />
+    <End Role="OrderStatus" Type="OrderManagerDBModel.Store.OrderStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="UserRoleID" />
+      </Principal>
+      <Dependent Role="OrderStatus">
+        <PropertyRef Name="NextUserRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBreakUp_ShipmentMode">
+    <End Role="ShipmentMode" Type="OrderManagerDBModel.Store.ShipmentMode" Multiplicity="1" />
+    <End Role="ProductBreakUp" Type="OrderManagerDBModel.Store.ProductBreakUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipmentMode">
+        <PropertyRef Name="ShipmentModeID" />
+      </Principal>
+      <Dependent Role="ProductBreakUp">
+        <PropertyRef Name="ShipmentModeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCountryWiseBreakUp_ProductBreakUp">
+    <End Role="ProductBreakUp" Type="OrderManagerDBModel.Store.ProductBreakUp" Multiplicity="1" />
+    <End Role="ProductCountryWiseBreakUp" Type="OrderManagerDBModel.Store.ProductCountryWiseBreakUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBreakUp">
+        <PropertyRef Name="ProductBreakUpID" />
+      </Principal>
+      <Dependent Role="ProductCountryWiseBreakUp">
+        <PropertyRef Name="ProductBreakUpID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProductExtraCost_Currency">
-    <End Role="Currency" Type="OrderManagerModel.Store.Currency" Multiplicity="1" />
-    <End Role="ProductExtraCost" Type="OrderManagerModel.Store.ProductExtraCost" Multiplicity="*" />
+    <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="1" />
+    <End Role="ProductExtraCost" Type="OrderManagerDBModel.Store.ProductExtraCost" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Currency">
         <PropertyRef Name="CurrencyID" />
@@ -515,8 +625,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductExtraCost_OrderProduct">
-    <End Role="OrderProduct" Type="OrderManagerModel.Store.OrderProduct" Multiplicity="1" />
-    <End Role="ProductExtraCost" Type="OrderManagerModel.Store.ProductExtraCost" Multiplicity="*" />
+    <End Role="OrderProduct" Type="OrderManagerDBModel.Store.OrderProduct" Multiplicity="1" />
+    <End Role="ProductExtraCost" Type="OrderManagerDBModel.Store.ProductExtraCost" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="OrderProduct">
         <PropertyRef Name="ProductID" />
@@ -527,8 +637,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductExtraCost_ProductExtraCostType">
-    <End Role="ProductExtraCostType" Type="OrderManagerModel.Store.ProductExtraCostType" Multiplicity="1" />
-    <End Role="ProductExtraCost" Type="OrderManagerModel.Store.ProductExtraCost" Multiplicity="*" />
+    <End Role="ProductExtraCostType" Type="OrderManagerDBModel.Store.ProductExtraCostType" Multiplicity="1" />
+    <End Role="ProductExtraCost" Type="OrderManagerDBModel.Store.ProductExtraCost" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ProductExtraCostType">
         <PropertyRef Name="ExtraCostTypeID" />
@@ -539,8 +649,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterialItem_Company">
-    <End Role="Company" Type="OrderManagerModel.Store.Company" Multiplicity="0..1" />
-    <End Role="ProductMaterialItem" Type="OrderManagerModel.Store.ProductMaterialItem" Multiplicity="*" />
+    <End Role="Company" Type="OrderManagerDBModel.Store.Company" Multiplicity="0..1" />
+    <End Role="ProductMaterialItem" Type="OrderManagerDBModel.Store.ProductMaterialItem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Company">
         <PropertyRef Name="CompanyID" />
@@ -551,8 +661,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterialItem_Currency">
-    <End Role="Currency" Type="OrderManagerModel.Store.Currency" Multiplicity="1" />
-    <End Role="ProductMaterialItem" Type="OrderManagerModel.Store.ProductMaterialItem" Multiplicity="*" />
+    <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="1" />
+    <End Role="ProductMaterialItem" Type="OrderManagerDBModel.Store.ProductMaterialItem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Currency">
         <PropertyRef Name="CurrencyID" />
@@ -563,8 +673,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterialItem_ProductMaterials">
-    <End Role="ProductMaterials" Type="OrderManagerModel.Store.ProductMaterials" Multiplicity="1" />
-    <End Role="ProductMaterialItem" Type="OrderManagerModel.Store.ProductMaterialItem" Multiplicity="*" />
+    <End Role="ProductMaterials" Type="OrderManagerDBModel.Store.ProductMaterials" Multiplicity="1" />
+    <End Role="ProductMaterialItem" Type="OrderManagerDBModel.Store.ProductMaterialItem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ProductMaterials">
         <PropertyRef Name="MaterialID" />
@@ -575,8 +685,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterialItem_SubMaterial">
-    <End Role="SubMaterial" Type="OrderManagerModel.Store.SubMaterial" Multiplicity="1" />
-    <End Role="ProductMaterialItem" Type="OrderManagerModel.Store.ProductMaterialItem" Multiplicity="*" />
+    <End Role="SubMaterial" Type="OrderManagerDBModel.Store.SubMaterial" Multiplicity="1" />
+    <End Role="ProductMaterialItem" Type="OrderManagerDBModel.Store.ProductMaterialItem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SubMaterial">
         <PropertyRef Name="SubMaterialsNameID" />
@@ -587,8 +697,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterialItem_UnitsOfMeasurement">
-    <End Role="UnitsOfMeasurement" Type="OrderManagerModel.Store.UnitsOfMeasurement" Multiplicity="1" />
-    <End Role="ProductMaterialItem" Type="OrderManagerModel.Store.ProductMaterialItem" Multiplicity="*" />
+    <End Role="UnitsOfMeasurement" Type="OrderManagerDBModel.Store.UnitsOfMeasurement" Multiplicity="1" />
+    <End Role="ProductMaterialItem" Type="OrderManagerDBModel.Store.ProductMaterialItem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UnitsOfMeasurement">
         <PropertyRef Name="UOMID" />
@@ -599,8 +709,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterials_Currency">
-    <End Role="Currency" Type="OrderManagerModel.Store.Currency" Multiplicity="1" />
-    <End Role="ProductMaterials" Type="OrderManagerModel.Store.ProductMaterials" Multiplicity="*" />
+    <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="1" />
+    <End Role="ProductMaterials" Type="OrderManagerDBModel.Store.ProductMaterials" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Currency">
         <PropertyRef Name="CurrencyID" />
@@ -611,8 +721,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterials_MaterialName">
-    <End Role="MaterialName" Type="OrderManagerModel.Store.MaterialName" Multiplicity="1" />
-    <End Role="ProductMaterials" Type="OrderManagerModel.Store.ProductMaterials" Multiplicity="*" />
+    <End Role="MaterialName" Type="OrderManagerDBModel.Store.MaterialName" Multiplicity="1" />
+    <End Role="ProductMaterials" Type="OrderManagerDBModel.Store.ProductMaterials" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MaterialName">
         <PropertyRef Name="MaterialNameID" />
@@ -623,8 +733,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterials_OrderProduct">
-    <End Role="OrderProduct" Type="OrderManagerModel.Store.OrderProduct" Multiplicity="1" />
-    <End Role="ProductMaterials" Type="OrderManagerModel.Store.ProductMaterials" Multiplicity="*" />
+    <End Role="OrderProduct" Type="OrderManagerDBModel.Store.OrderProduct" Multiplicity="1" />
+    <End Role="ProductMaterials" Type="OrderManagerDBModel.Store.ProductMaterials" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="OrderProduct">
         <PropertyRef Name="ProductID" />
@@ -635,8 +745,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterials_UnitsOfMeasurement">
-    <End Role="UnitsOfMeasurement" Type="OrderManagerModel.Store.UnitsOfMeasurement" Multiplicity="1" />
-    <End Role="ProductMaterials" Type="OrderManagerModel.Store.ProductMaterials" Multiplicity="*" />
+    <End Role="UnitsOfMeasurement" Type="OrderManagerDBModel.Store.UnitsOfMeasurement" Multiplicity="1" />
+    <End Role="ProductMaterials" Type="OrderManagerDBModel.Store.ProductMaterials" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UnitsOfMeasurement">
         <PropertyRef Name="UOMID" />
@@ -646,21 +756,21 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SubMaterial_ProductMaterials">
-    <End Role="ProductMaterials" Type="OrderManagerModel.Store.ProductMaterials" Multiplicity="1" />
-    <End Role="SubMaterial" Type="OrderManagerModel.Store.SubMaterial" Multiplicity="*" />
+  <Association Name="FK_SubMaterial_MaterialName">
+    <End Role="MaterialName" Type="OrderManagerDBModel.Store.MaterialName" Multiplicity="1" />
+    <End Role="SubMaterial" Type="OrderManagerDBModel.Store.SubMaterial" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="ProductMaterials">
-        <PropertyRef Name="MaterialID" />
+      <Principal Role="MaterialName">
+        <PropertyRef Name="MaterialNameID" />
       </Principal>
       <Dependent Role="SubMaterial">
-        <PropertyRef Name="MaterialID" />
+        <PropertyRef Name="MaterialNameID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_User_UserRole">
-    <End Role="UserRole" Type="OrderManagerModel.Store.UserRole" Multiplicity="1" />
-    <End Role="User" Type="OrderManagerModel.Store.User" Multiplicity="*" />
+    <End Role="UserRole" Type="OrderManagerDBModel.Store.UserRole" Multiplicity="1" />
+    <End Role="User" Type="OrderManagerDBModel.Store.User" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UserRole">
         <PropertyRef Name="UserRoleID" />

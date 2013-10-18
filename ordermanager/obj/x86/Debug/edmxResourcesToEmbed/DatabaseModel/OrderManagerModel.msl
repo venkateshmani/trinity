@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="OrderManagerModelStoreContainer" CdmEntityContainer="OrderManagerDBEntities">
+  <EntityContainerMapping StorageEntityContainer="OrderManagerDBModelStoreContainer" CdmEntityContainer="OrderManagerDBEntities">
     <EntitySetMapping Name="CommissionValueTypes">
-      <EntityTypeMapping TypeName="OrderManagerModel.CommissionValueType">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.CommissionValueType">
         <MappingFragment StoreEntitySet="CommissionValueType">
           <ScalarProperty Name="CommissionValueTypeID" ColumnName="CommissionValueTypeID" />
           <ScalarProperty Name="Type" ColumnName="Type" />
@@ -10,7 +10,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Companies">
-      <EntityTypeMapping TypeName="OrderManagerModel.Company">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.Company">
         <MappingFragment StoreEntitySet="Company">
           <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -30,7 +30,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CompanyTypes">
-      <EntityTypeMapping TypeName="OrderManagerModel.CompanyType">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.CompanyType">
         <MappingFragment StoreEntitySet="CompanyType">
           <ScalarProperty Name="CompanyTypeID" ColumnName="CompanyTypeID" />
           <ScalarProperty Name="Type" ColumnName="Type" />
@@ -38,16 +38,17 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Currencies">
-      <EntityTypeMapping TypeName="OrderManagerModel.Currency">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.Currency">
         <MappingFragment StoreEntitySet="Currency">
           <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
           <ScalarProperty Name="CountryName" ColumnName="CountryName" />
           <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+          <ScalarProperty Name="DefaultValueInINR" ColumnName="DefaultValueInINR" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Histories">
-      <EntityTypeMapping TypeName="OrderManagerModel.History">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.History">
         <MappingFragment StoreEntitySet="History">
           <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -59,7 +60,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MaterialNames">
-      <EntityTypeMapping TypeName="OrderManagerModel.MaterialName">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.MaterialName">
         <MappingFragment StoreEntitySet="MaterialName">
           <ScalarProperty Name="MaterialNameID" ColumnName="MaterialNameID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -67,7 +68,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Orders">
-      <EntityTypeMapping TypeName="OrderManagerModel.Order">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.Order">
         <MappingFragment StoreEntitySet="Order">
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
@@ -79,21 +80,24 @@
           <ScalarProperty Name="CommissionValueTypeID" ColumnName="CommissionValueTypeID" />
           <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
           <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="TotalOrderValue" ColumnName="TotalOrderValue" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="OrderCurrencyConversions">
-      <EntityTypeMapping TypeName="OrderManagerModel.OrderCurrencyConversion">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.OrderCurrencyConversion">
         <MappingFragment StoreEntitySet="OrderCurrencyConversion">
           <ScalarProperty Name="OrderCurrencyConversionID" ColumnName="OrderCurrencyConversionID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
           <ScalarProperty Name="ValueInINR" ColumnName="ValueInINR" />
+          <ScalarProperty Name="ValueInINRForMaterials" ColumnName="ValueInINRForMaterials" />
+          <ScalarProperty Name="ValueInINRForSubMaterials" ColumnName="ValueInINRForSubMaterials" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="OrderProducts">
-      <EntityTypeMapping TypeName="OrderManagerModel.OrderProduct">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.OrderProduct">
         <MappingFragment StoreEntitySet="OrderProduct">
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
@@ -103,27 +107,60 @@
           <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
           <ScalarProperty Name="CustomerTargetPrice" ColumnName="CustomerTargetPrice" />
           <ScalarProperty Name="OrderValue" ColumnName="OrderValue" />
+          <ScalarProperty Name="ProductBreakUpID" ColumnName="ProductBreakUpID" />
+          <ScalarProperty Name="TotalConsumptionCost" ColumnName="TotalConsumptionCost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="OrderStatus">
-      <EntityTypeMapping TypeName="OrderManagerModel.OrderStatu">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.OrderStatu">
         <MappingFragment StoreEntitySet="OrderStatus">
           <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
           <ScalarProperty Name="StatusLabel" ColumnName="StatusLabel" />
+          <ScalarProperty Name="DisplayLabel" ColumnName="DisplayLabel" />
+          <ScalarProperty Name="NextUserRoleID" ColumnName="NextUserRoleID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="OrderThroughs">
-      <EntityTypeMapping TypeName="OrderManagerModel.OrderThrough">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.OrderThrough">
         <MappingFragment StoreEntitySet="OrderThrough">
           <ScalarProperty Name="OrderThroughID" ColumnName="OrderThroughID" />
           <ScalarProperty Name="Mode" ColumnName="Mode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductBreakUps">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.ProductBreakUp">
+        <MappingFragment StoreEntitySet="ProductBreakUp">
+          <ScalarProperty Name="ProductBreakUpID" ColumnName="ProductBreakUpID" />
+          <ScalarProperty Name="Tolerance" ColumnName="Tolerance" />
+          <ScalarProperty Name="ShipmentModeID" ColumnName="ShipmentModeID" />
+          <ScalarProperty Name="PriceTerms" ColumnName="PriceTerms" />
+          <ScalarProperty Name="PaymentTerms" ColumnName="PaymentTerms" />
+          <ScalarProperty Name="DocumentsRequired" ColumnName="DocumentsRequired" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductCountryWiseBreakUps">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.ProductCountryWiseBreakUp">
+        <MappingFragment StoreEntitySet="ProductCountryWiseBreakUp">
+          <ScalarProperty Name="ProductCountryWiseBreakUpID" ColumnName="ProductCountryWiseBreakUpID" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="NumberOfPieces" ColumnName="NumberOfPieces" />
+          <ScalarProperty Name="LS" ColumnName="LS" />
+          <ScalarProperty Name="S" ColumnName="S" />
+          <ScalarProperty Name="M" ColumnName="M" />
+          <ScalarProperty Name="L" ColumnName="L" />
+          <ScalarProperty Name="XL" ColumnName="XL" />
+          <ScalarProperty Name="XXL" ColumnName="XXL" />
+          <ScalarProperty Name="XXXL" ColumnName="XXXL" />
+          <ScalarProperty Name="ProductBreakUpID" ColumnName="ProductBreakUpID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ProductExtraCosts">
-      <EntityTypeMapping TypeName="OrderManagerModel.ProductExtraCost">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.ProductExtraCost">
         <MappingFragment StoreEntitySet="ProductExtraCost">
           <ScalarProperty Name="ExtraCostID" ColumnName="ExtraCostID" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
@@ -135,7 +172,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProductExtraCostTypes">
-      <EntityTypeMapping TypeName="OrderManagerModel.ProductExtraCostType">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.ProductExtraCostType">
         <MappingFragment StoreEntitySet="ProductExtraCostType">
           <ScalarProperty Name="ExtraCostTypeID" ColumnName="ExtraCostTypeID" />
           <ScalarProperty Name="TypeName" ColumnName="TypeName" />
@@ -143,7 +180,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProductMaterialItems">
-      <EntityTypeMapping TypeName="OrderManagerModel.ProductMaterialItem">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.ProductMaterialItem">
         <MappingFragment StoreEntitySet="ProductMaterialItem">
           <ScalarProperty Name="ProductMaterialItemID" ColumnName="ProductMaterialItemID" />
           <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
@@ -158,7 +195,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProductMaterials">
-      <EntityTypeMapping TypeName="OrderManagerModel.ProductMaterial">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.ProductMaterial">
         <MappingFragment StoreEntitySet="ProductMaterials">
           <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
           <ScalarProperty Name="ProductID" ColumnName="ProductID" />
@@ -172,7 +209,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProductNames">
-      <EntityTypeMapping TypeName="OrderManagerModel.ProductName">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.ProductName">
         <MappingFragment StoreEntitySet="ProductName">
           <ScalarProperty Name="ProductNameID" ColumnName="ProductNameID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -180,17 +217,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ShipmentModes">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.ShipmentMode">
+        <MappingFragment StoreEntitySet="ShipmentMode">
+          <ScalarProperty Name="ShipmentModeID" ColumnName="ShipmentModeID" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SubMaterials">
-      <EntityTypeMapping TypeName="OrderManagerModel.SubMaterial">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.SubMaterial">
         <MappingFragment StoreEntitySet="SubMaterial">
           <ScalarProperty Name="SubMaterialsNameID" ColumnName="SubMaterialsNameID" />
-          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="MaterialNameID" ColumnName="MaterialNameID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="OrderManagerModel.sysdiagram">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.sysdiagram">
         <MappingFragment StoreEntitySet="sysdiagrams">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -201,7 +246,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UnitsOfMeasurements">
-      <EntityTypeMapping TypeName="OrderManagerModel.UnitsOfMeasurement">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.UnitsOfMeasurement">
         <MappingFragment StoreEntitySet="UnitsOfMeasurement">
           <ScalarProperty Name="UOMID" ColumnName="UOMID" />
           <ScalarProperty Name="Units" ColumnName="Units" />
@@ -209,7 +254,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="OrderManagerModel.User">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.User">
         <MappingFragment StoreEntitySet="User">
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -220,15 +265,16 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserRoles">
-      <EntityTypeMapping TypeName="OrderManagerModel.UserRole">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.UserRole">
         <MappingFragment StoreEntitySet="UserRole">
           <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
           <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="AliasName" ColumnName="AliasName" />
           <ScalarProperty Name="CanCreateUser" ColumnName="CanCreateUser" />
           <ScalarProperty Name="CanCreateNewEnquiry" ColumnName="CanCreateNewEnquiry" />
           <ScalarProperty Name="CanAddMaterials" ColumnName="CanAddMaterials" />
           <ScalarProperty Name="CanAddMaterialsCost" ColumnName="CanAddMaterialsCost" />
-          <ScalarProperty Name="CanAddConsumptionCost" ColumnName="CanAddConsumptionCost" />
+          <ScalarProperty Name="CanAddConsumption" ColumnName="CanAddConsumption" />
           <ScalarProperty Name="CanAddExtraCost" ColumnName="CanAddExtraCost" />
           <ScalarProperty Name="CanApproveEnquiry" ColumnName="CanApproveEnquiry" />
           <ScalarProperty Name="CanConfirmOrder" ColumnName="CanConfirmOrder" />

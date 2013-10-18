@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Work\trinity\ordermanager\obj\x86\Debug\
+E:\trinity\ordermanager\obj\x86\Debug\
 ordermanager
 none
 false
 DEBUG;TRACE
-D:\Work\trinity\ordermanager\App.xaml
-141669611776
+E:\trinity\ordermanager\App.xaml
+22-2060010431
 
-551856343737
-21-672123680
-LoginScreen.xaml;MainWindow.xaml;Views\CommonControls\PurchaseOrderControl.xaml;Views\PopUps\NewEnquiryForm.xaml;Views\PopUps\NewEnquiryFormUserControl.xaml;Views\CustomerDetailsControl.xaml;Views\UserControls\ProductMaterialsControl.xaml;Views\UserControls\ViewOrdersControl.xaml;TestWindow.xaml;Views\CommonControls\BackForwardButton.xaml;Views\CommonControls\OMbutton.xaml;Views\CommonControls\OrdersListView.xaml;Views\CommonControls\ProductsListView.xaml;Views\UserControls\OrderWorkBench.xaml;
+821908002256
+28-1090014918
+LoginScreen.xaml;MainWindow.xaml;Views\PasswordChangeDialog.xaml;Views\PopUps\CommentBox.xaml;Views\PopUps\ProgressUpdateWindow.xaml;Views\PopUps\UserManagementWindow.xaml;Views\UserControls\ChangeHistoryControl.xaml;Views\UserControls\POControl.xaml;Views\UserControls\POMaterialDetails.xaml;Views\UserControls\PurchaseOrderControl.xaml;Views\PopUps\NewEnquiryForm.xaml;Views\PopUps\NewEnquiryFormUserControl.xaml;Views\CustomerDetailsControl.xaml;Views\UserControls\POProductDetails.xaml;Views\UserControls\ProductMaterialsControl.xaml;Views\UserControls\ViewOrdersControl.xaml;TestWindow.xaml;Views\CommonControls\BackForwardButton.xaml;Views\CommonControls\OMbutton.xaml;Views\CommonControls\OrdersListView.xaml;Views\CommonControls\ProductsListView.xaml;Views\UserControls\OrderWorkBench.xaml;
 
 False
 

@@ -1,8 +1,15 @@
-﻿D:\Work\trinity\ordermanager\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 
-FD:\Work\trinity\ordermanager\MainWindow.xaml;;
-FD:\Work\trinity\ordermanager\Views\CommonControls\PurchaseOrderControl.xaml;;
-FD:\Work\trinity\ordermanager\Views\PopUps\NewEnquiryFormUserControl.xaml;;
-FD:\Work\trinity\ordermanager\Views\UserControls\ProductMaterialsControl.xaml;;
-FD:\Work\trinity\ordermanager\Views\UserControls\OrderWorkBench.xaml;;
+FE:\trinity\ordermanager\MainWindow.xaml;;
+FE:\trinity\ordermanager\Views\PopUps\UserManagementWindow.xaml;;
+FE:\trinity\ordermanager\Views\UserControls\ChangeHistoryControl.xaml;;
+FE:\trinity\ordermanager\Views\UserControls\POControl.xaml;;
+FE:\trinity\ordermanager\Views\UserControls\POMaterialDetails.xaml;;
+FE:\trinity\ordermanager\Views\UserControls\PurchaseOrderControl.xaml;;
+FE:\trinity\ordermanager\Views\PopUps\NewEnquiryFormUserControl.xaml;;
+FE:\trinity\ordermanager\Views\UserControls\POProductDetails.xaml;;
+FE:\trinity\ordermanager\Views\UserControls\ProductMaterialsControl.xaml;;
+FE:\trinity\ordermanager\Views\UserControls\ViewOrdersControl.xaml;;
+FE:\trinity\ordermanager\TestWindow.xaml;;
+FE:\trinity\ordermanager\Views\UserControls\OrderWorkBench.xaml;;
 
