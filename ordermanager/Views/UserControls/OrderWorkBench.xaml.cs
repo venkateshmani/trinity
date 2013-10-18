@@ -117,7 +117,10 @@ namespace ordermanager.Views.UserControls
         private void Button_PreviewMouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
         {
             if (OnGoBack != null)
+            {
+                DBResources.Instance.DiscardChanges();
                 OnGoBack();
+            }
         }
 
 
