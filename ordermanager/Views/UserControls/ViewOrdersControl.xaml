@@ -126,7 +126,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="10,5,10,5" VerticalAlignment="Center">
-                                        <TextBlock TextAlignment="Right" Text="{Binding Path=OrderStatu.StatusLabel}"  HorizontalAlignment="Center" Style="{StaticResource DescriptionHeaderStyle}"/>
+                                        <TextBlock TextAlignment="Right" Text="{Binding Path=OrderStatu.DisplayLabel}"  HorizontalAlignment="Center" Style="{StaticResource DescriptionHeaderStyle}"/>
                                         <TextBlock TextAlignment="Right" Text="{Binding Path=OrderDate}"  FontSize="10" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>

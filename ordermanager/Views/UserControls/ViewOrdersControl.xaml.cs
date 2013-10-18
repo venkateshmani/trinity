@@ -24,15 +24,23 @@ namespace ordermanager.Views.UserControls
     {
         public event OnOrderClickDelegate OnOrderClick = null;
         private ViewOrdersControlViewModel m_OrderViewModel;
+        
         public ViewOrdersControl()
         {
             InitializeComponent();
             this.Loaded += ViewOrdersControl_Loaded;
+            ShowAllOrders = true;
+        }
+
+        public bool ShowAllOrders
+        {
+            get;
+            set;
         }
 
         void ViewOrdersControl_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel = new ViewOrdersControlViewModel();
+            ViewModel = new ViewOrdersControlViewModel(ShowAllOrders);
         }
 
         CollectionViewSource ordersCollectionViewSource = null;
