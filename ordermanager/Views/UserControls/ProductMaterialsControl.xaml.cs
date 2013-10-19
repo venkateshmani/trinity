@@ -1,5 +1,7 @@
 ﻿using ordermanager.DatabaseModel;
+using ordermanager.Utilities;
 using ordermanager.ViewModel;
+using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,7 +81,11 @@ namespace ordermanager.Views.UserControls
         {
             if (m_ViewModel != null)
             {
-                m_ViewModel.Save(false, string.Empty);
+                CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
+                if (commentBox.ShowDialog() == true)
+                {
+                    m_ViewModel.Save(false, commentBox.Comment);
+                }
             } 
         }
 
