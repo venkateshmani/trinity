@@ -4,12 +4,14 @@
         ShowInTaskbar="True" 
         AllowsTransparency="True" 
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        ShowIconOnTitleBar="True"
-        ShowTitleBar="True"
+        ShowIconOnTitleBar="False"
+        ShowTitleBar="False"
         ShowCloseButton="True"
         ShowMaxRestoreButton="False"
         ShowMinButton="False"
-        Title="Comment Window" Height="216.029" Width="393.796">
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        Title="Comment Window" Height="267.029" Width="482.796">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -32,25 +34,27 @@
     <Controls:MetroWindow.GlowBrush>
         <SolidColorBrush Color="{DynamicResource AccentColor}" />
     </Controls:MetroWindow.GlowBrush>
-    <Grid Margin="5">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Comment Here:" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" />
-        <TextBox x:Name="commentTextBox" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="-1,1,1,34" Grid.RowSpan="2" BorderBrush="Gray"/>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
-            <Button x:Name="updateToDatabaseBtn"  Content="Save"  Width="100" Height="25" Foreground="White" HorizontalAlignment="Left" Click="updateToDatabaseBtn_Click">
-                <Button.Background>
-                    <SolidColorBrush Color="{StaticResource AccentColor}" />
-                </Button.Background>
-            </Button>
-            <Button x:Name="cancelBtn"  Content="Cancel"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" HorizontalAlignment="Left" Click="cancelBtn_Click">
-                <Button.Background>
-                    <SolidColorBrush Color="{StaticResource ValidationColor5}" />
-                </Button.Background>
-            </Button>
-        </StackPanel>
+    <Grid>
+        <Grid Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Comment Here:" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" FontSize="16" />
+            <TextBox x:Name="commentTextBox" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="5,1,5,34" Grid.RowSpan="2" BorderBrush="Gray"/>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
+                <Button x:Name="updateToDatabaseBtn"  Content="GO"  Width="100" Height="25" Foreground="White" HorizontalAlignment="Left" Click="updateToDatabaseBtn_Click">
+                    <Button.Background>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </Button.Background>
+                </Button>
+                <Button x:Name="cancelBtn"  Content="Cancel"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" HorizontalAlignment="Left" Click="cancelBtn_Click" Visibility="Collapsed" >
+                    <Button.Background>
+                        <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Controls:MetroWindow>

@@ -108,8 +108,9 @@ namespace ordermanager.ViewModel
             return true;
         }
 
-        public bool Save(bool isSubmit)
+        public bool Save(bool isSubmit,string userComment)
         {
+            
             foreach (OrderProduct dbProduct in Products)
             {
                 foreach (ProductMaterial dbMaterial in dbProduct.ProductMaterials)
@@ -130,6 +131,27 @@ namespace ordermanager.ViewModel
                     }
                 }
             }
+
+            #region History
+
+            History historyItem = new History();
+            historyItem.Date = DateTime.Now;
+            historyItem.UserName = DBResources.Instance.CurrentUser.UserName;
+            historyItem.Comment = userComment;
+
+            if (isSubmit)
+            {
+                historyItem.OrderChanges = "Submitted in Material Details Page. Order Stauts Changed to " + m_Order.OrderStatu.DisplayLabel.ToUpper();
+            }
+            else
+            {
+                historyItem.OrderChanges = "Saved Changes in Material Details";
+            }
+
+            m_Order.Histories.Add(historyItem);
+
+            #endregion 
+
             return DBResources.Instance.UpdateOrderProducts();
         }
 

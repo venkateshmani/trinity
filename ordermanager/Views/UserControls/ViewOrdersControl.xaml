@@ -142,6 +142,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+            <TextBlock x:Name="noTasksInfoLabel" Text="No tasks for you right now. Take a break :) !!" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24" />
         </Grid>
     </Grid>
 </UserControl>

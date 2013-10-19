@@ -159,7 +159,7 @@ namespace ordermanager.ViewModel
             return DBResources.CreateNewProduct(newProductName);
         }
 
-        public Order CreateNewOrder()
+        public Order CreateNewOrder(string userComment)
         {
             if (!HasErrors)
             {
@@ -173,18 +173,31 @@ namespace ordermanager.ViewModel
 
                 Order.OrderStatusID = 1;
                 Order.LastModifiedDate = DateTime.Now;
-                return DBResources.CreateNewOrder(Order);
+                return DBResources.CreateNewOrder(Order, string.Empty);
             }
 
             return null;
         }
 
-        public bool UpdateOrderStatus(OrderStatusEnum newStatus)
+        public bool UpdateOrderStatus(string userActionVerb, string userComment,OrderStatusEnum newStatus)
         {
             if (newStatus != OrderStatusEnum.None && Order != null)
             {
                 Order.OrderStatusID = (short)newStatus;
                 Order.LastModifiedDate = DateTime.Now;
+
+                #region History
+
+                History historyItem = new History();
+                historyItem.Date = DateTime.Now;
+                historyItem.UserName = DBResources.Instance.CurrentUser.UserName;
+                historyItem.Comment = userComment;
+                historyItem.OrderChanges = "has " + userActionVerb;
+
+                Order.Histories.Add(historyItem);
+
+                #endregion 
+
                 return DBResources.Save();
             }
             return false;

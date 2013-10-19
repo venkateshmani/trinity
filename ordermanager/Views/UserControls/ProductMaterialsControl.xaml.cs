@@ -79,7 +79,7 @@ namespace ordermanager.Views.UserControls
         {
             if (m_ViewModel != null)
             {
-                m_ViewModel.Save(false);
+                m_ViewModel.Save(false, string.Empty);
             } 
         }
 
@@ -111,6 +111,11 @@ namespace ordermanager.Views.UserControls
                     }
                 }
             }
+        }
+
+        private void discardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

@@ -114,7 +114,7 @@ namespace ordermanager.Views.UserControls
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            m_ViewModel.Save(false);
+            m_ViewModel.Save(false, "Comment");
         }
     }
 }

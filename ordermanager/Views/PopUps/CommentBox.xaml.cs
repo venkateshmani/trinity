@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,31 @@ namespace ordermanager.Views.PopUps
     /// </summary>
     public partial class CommentBox 
     {
+        IMaskable maskableParent = null;
         public CommentBox()
         {
             InitializeComponent();
+            this.IsVisibleChanged += CommentBox_IsVisibleChanged;
+        }
+
+        void CommentBox_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (maskableParent != null)
+            {
+                if (IsVisible)
+                {
+                    maskableParent.Mask();
+                }
+                else
+                {
+                    maskableParent.UnMask();
+                }
+            }
+        }
+
+        public CommentBox(Window parentWindow) : this()
+        {
+            maskableParent = parentWindow as IMaskable;
         }
 
         public string UpdateBtnText
