@@ -21,6 +21,22 @@ namespace ordermanager
         public TestWindow()
         {
             InitializeComponent();
+            this.Loaded += TestWindow_Loaded;
+        }
+
+        void TestWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void TextBoxPopup_OnClosed(object sender, PopupClosedEventArgs eventArgs)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TextBoxPopup.ShowDialog();
         }
     }
 }

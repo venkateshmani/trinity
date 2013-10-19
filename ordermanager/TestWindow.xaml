@@ -5,6 +5,7 @@
         xmlns:UserControls="clr-namespace:ordermanager.Views.UserControls" x:Class="ordermanager.TestWindow"
         Title="TestWindow" Height="645.954" Width="905.104"
         ShowIconOnTitleBar="true"
+        AllowsTransparency="True"
         ShowTitleBar="True"
         WindowStartupLocation="CenterScreen">
     <Controls:MetroWindow.Resources>
@@ -30,7 +31,12 @@
         <SolidColorBrush Color="{DynamicResource AccentColor}" />
     </Controls:MetroWindow.GlowBrush>
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <UserControls:POProductDetails VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <Controls:MetroPopup x:Name="TextBoxPopup"
+            Header="Are you sure to exit ?"
+            PopupButton="OKCancel"
+            Closed="TextBoxPopup_OnClosed">
+        </Controls:MetroPopup>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="193,196,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </Controls:MetroWindow>
 
