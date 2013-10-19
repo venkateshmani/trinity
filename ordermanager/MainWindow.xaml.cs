@@ -31,6 +31,9 @@ namespace ordermanager
             this.Closing += MainWindow_Closing;
             if (!DBResources.Instance.CurrentUser.UserRole.CanCreateUser)
                 addNewUser.Visibility = System.Windows.Visibility.Collapsed;
+
+            if (!DBResources.Instance.CurrentUser.UserRole.CanCreateNewEnquiry)
+                newEnquiryTab.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         public MainWindow(LoginScreen loginScreen)
