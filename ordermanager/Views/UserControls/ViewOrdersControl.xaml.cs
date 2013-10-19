@@ -56,6 +56,11 @@ namespace ordermanager.Views.UserControls
                 m_OrderViewModel = value;
                 ordersCollectionViewSource = this.FindResource("orderViewSource") as CollectionViewSource;
                 ordersCollectionViewSource.Source = value.Orders;
+                if (value.Orders.Count == 0)
+                    noTasksInfoLabel.Visibility = System.Windows.Visibility.Visible;
+                else
+                    noTasksInfoLabel.Visibility = System.Windows.Visibility.Hidden;
+
                 ordersCollectionViewSource.SortDescriptions.Add(new System.ComponentModel.SortDescription("OrderDate", System.ComponentModel.ListSortDirection.Descending));
             }
         }
