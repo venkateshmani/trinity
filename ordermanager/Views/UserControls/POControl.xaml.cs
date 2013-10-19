@@ -30,12 +30,28 @@ namespace ordermanager.Views.UserControls
         public POControl()
         {
             InitializeComponent();
+            this.IsVisibleChanged += POControl_IsVisibleChanged;
             m_POGenerator = new BackgroundWorker();
             m_POGenerator.WorkerReportsProgress = true;
             m_POGenerator.ProgressChanged += m_POGenerator_ProgressChanged;
             m_POGenerator.DoWork += m_POGenerator_DoWork;
             m_POGenerator.WorkerSupportsCancellation = true;
             m_POGenerator.RunWorkerCompleted += m_POGenerator_RunWorkerCompleted;
+        }
+
+        void POControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsVisible)
+            {
+                if (supplierList.Items.Count != 0)
+                {
+                    supplierList.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                webBrowser.Navigate("about:blank");
+            }
         }
 
         void m_POGenerator_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
