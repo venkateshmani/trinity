@@ -227,6 +227,9 @@
     <Compile Include="Views\PopUps\CommentBox.xaml.cs">
       <DependentUpon>CommentBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PopUps\PopupBox.xaml.cs">
+      <DependentUpon>PopupBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PopUps\ProgressUpdateWindow.xaml.cs">
       <DependentUpon>ProgressUpdateWindow.xaml</DependentUpon>
     </Compile>
@@ -288,6 +291,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PopUps\CommentBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopUps\PopupBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

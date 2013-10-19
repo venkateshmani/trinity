@@ -44,6 +44,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+     
         <Grid  x:Name="rootLayout" Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -54,6 +55,7 @@
                 <ColumnDefinition Width="0.7*" />
                 <ColumnDefinition Width="0.3*" />
             </Grid.ColumnDefinitions>
+            
             <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0">
                     <Grid.RowDefinitions>

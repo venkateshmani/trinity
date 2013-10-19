@@ -17,13 +17,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ordermanager.Utilities;
+using MahApps.Metro.Controls;
+
 
 namespace ordermanager.Views.PopUps
 {
     /// <summary>
     /// Interaction logic for NewEnquiryFormUserControl.xaml
     /// </summary>
-    public partial class NewEnquiryFormUserControl : UserControl
+    public partial class NewEnquiryFormUserControl : System.Windows.Controls.UserControl
     {
         private Accent currentAccent = ThemeManager.DefaultAccents.First(x => x.Name == "Blue");
 
@@ -114,7 +116,7 @@ namespace ordermanager.Views.PopUps
             negativeDecisionBtn.Visibility = visibility;
         }
 
-        private void SetButtonText(Button btn, string text)
+        private void SetButtonText(System.Windows.Controls.Button btn, string text)
         {
             btn.Content = text;
             btn.ToolTip = text + " Enquiry";
@@ -279,9 +281,17 @@ namespace ordermanager.Views.PopUps
 
         private void negativeDecisionBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (positiveDecisionBtn.Content.ToString() == "Discard")
-            {
 
+            if (negativeDecisionBtn.Content.ToString() == "Discard")
+            {
+                PopupBox actionConfirmer = new PopupBox(Util.GetParentWindow(this));
+                actionConfirmer.Message = "Are you sure to discard the new enquiry ?";
+                actionConfirmer.PopupButton = PopupButton.YesNo;
+                bool? result = actionConfirmer.ShowDialog();
+                if(result != null && result.Value == true)
+                {
+
+                }
                 return;
             }
 
@@ -329,6 +339,11 @@ namespace ordermanager.Views.PopUps
                  }
              }
                 
+        }
+
+        void popup_Closed(object sender, PopupClosedEventArgs eventArgs)
+        {
+            
         }
 
         private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)
