@@ -50,8 +50,8 @@ namespace ordermanager.DatabaseModel
             {
                 if (Company != value)
                 {
-                    Company = value;                   
-                }               
+                    Company = value;
+                }
             }
         }
 
@@ -202,7 +202,7 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        #endregion 
+        #endregion
 
         public void CalculateItemCost()
         {
@@ -212,64 +212,60 @@ namespace ordermanager.DatabaseModel
 
         #region Data Validation
 
+        public bool Validate()
+        {
+            ValidateQuantity();
+            ValidateCurrency();
+            ValidateCost();
+            ValidateCurrencyValueInINR();
+            ValidateUOM();
+            return !HasErrors;
+        }
+
 
         public void ValidateCurrencyValueInINR()
         {
+            RemoveError("CurrencyValueInINR");
             if (CurrencyValueInINR == 0)
             {
                 AddError("CurrencyValueInINR", "Value in INR can't be Zero", false);
-            }
-            else
-            {
-                RemoveError("CurrencyValueInINR", "Value in INR can't be Zero");
             }
         }
 
         public void ValidateCost()
         {
+
+            RemoveError("CostWrapper");
             if (Cost == 0)
             {
                 AddError("CostWrapper", "Cost can't be Zero", false);
-            }
-            else
-            {
-                RemoveError("CostWrapper", "Cost can't be Zero");
             }
         }
 
         private void ValidateCurrency()
         {
+            RemoveError("CurrencyWrapper");
             if (CurrencyWrapper == null)
             {
                 AddError("CurrencyWrapper", "Select Currency", false);
             }
-            else
-            {
-                RemoveError("CurrencyWrapper", "Select Currency");
-            }
         }
-        
+
         private void ValidateUOM()
         {
+            RemoveError("UnitsOfMeasurementWrapper");
             if (UnitsOfMeasurementWrapper == null)
             {
                 AddError("UnitsOfMeasurementWrapper", "Select Units", false);
-            }
-            else
-            {
-                RemoveError("UnitsOfMeasurementWrapper", "Select Units");
             }
         }
 
         private void ValidateQuantity()
         {
+            RemoveError("QuantityWrapper");
             if (QuantityWrapper == 0)
             {
                 AddError("QuantityWrapper", "Quantity can't be Zero", false);
-            }
-            else
-            {
-                RemoveError("QuantityWrapper", "Quantity can't be Zero");
             }
         }
         #endregion Data Validation

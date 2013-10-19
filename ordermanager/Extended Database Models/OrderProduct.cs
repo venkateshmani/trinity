@@ -42,14 +42,14 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                if(m_OtherCost == null)
+                if (m_OtherCost == null)
                 {
                     foreach (var extraCost in ProductExtraCosts)
                     {
                         if (extraCost.ExtraCostTypeID == 1)
                         {
                             m_OtherCost = extraCost;
-                            m_OtherCost.PropertyChanged +=m_OtherCost_PropertyChanged;
+                            m_OtherCost.PropertyChanged += m_OtherCost_PropertyChanged;
                             break;
                         }
                     }
@@ -177,6 +177,21 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public decimal TotalProductPurchaseCostWrapper
+        {
+            get
+            {
+                if (m_TotalProductPurchaseCostWrapper == -1.0m)
+                    CalculateTotalPurchaseCost();
+                return m_TotalProductPurchaseCostWrapper;
+            }
+            set
+            {
+                m_TotalProductPurchaseCostWrapper = value;
+                OnPropertyChanged("TotalProductPurchaseCostWrapper");
+            }
+        }
+
         private bool m_HasErrorsInProductMaterials;
         public bool HasErrorsInProductMaterials
         {
@@ -246,7 +261,7 @@ namespace ordermanager.DatabaseModel
                     hasError = true;
             }
 
-            if(ValidateExtraCosts())
+            if (ValidateExtraCosts())
                 hasError = true;
 
             HasErrorsInProductMaterials = hasError;
@@ -279,7 +294,7 @@ namespace ordermanager.DatabaseModel
                 if (CurrencyConversion == null)
                     SelectOrAddCurrencyConversion();
 
-                if(CurrencyConversion != null)
+                if (CurrencyConversion != null)
                     return CurrencyConversion.ValueInINRWrapper;
 
                 return 0;
@@ -347,11 +362,11 @@ namespace ordermanager.DatabaseModel
         }
 
         private void CalculateOrderValue()
-        {                     
+        {
             OrderValueWrapper = ExpectedQuantity * CustomerTargetPrice * CurrencyValueInINR;
         }
 
-        #endregion        
+        #endregion
 
         ObservableCollection<ProductMaterial> m_ProductMaterialsWrapper;
         public ObservableCollection<ProductMaterial> ProductMaterialsWrapper
@@ -369,7 +384,7 @@ namespace ordermanager.DatabaseModel
                 }
                 return m_ProductMaterialsWrapper;
             }
-        }        
+        }
 
         void m_ProductMaterialsWrapper_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -400,7 +415,10 @@ namespace ordermanager.DatabaseModel
             {
                 CalculateTotalMaterialsCost();
             }
-
+            else if (e.PropertyName == "TotalSubMaterialsPurchaseCostWrapper")
+            {
+                CalculateTotalPurchaseCost();
+            }
             if (e.PropertyName == "HasErrors")
             {
                 ValidateProductMaterials();
@@ -423,6 +441,19 @@ namespace ordermanager.DatabaseModel
             }
 
             TotalProductMaterialsCostWrapper = cost;
+        }
+
+
+        decimal m_TotalProductPurchaseCostWrapper = -1.0m;
+        private void CalculateTotalPurchaseCost()
+        {
+            decimal cost = 0;
+            foreach (ProductMaterial material in ProductMaterialsWrapper)
+            {
+                if (material.OrderProduct != null)
+                    cost += material.TotalSubMaterialsPurchaseCostWrapper;
+            }
+            TotalProductPurchaseCostWrapper = cost;
         }
 
         #region Data Validation
