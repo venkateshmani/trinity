@@ -53,6 +53,7 @@ namespace ordermanager.Views.UserControls
                 SetOrder(value);
                 this.DataContext = value;
                 OrderStatusEnum status = (OrderStatusEnum)Enum.Parse(typeof(OrderStatusEnum), value.OrderStatu.StatusLabel);
+
                 if (status < OrderStatusEnum.OrderConfirmed)
                 {
                     tabMaterialDetails.Visibility = System.Windows.Visibility.Collapsed;
@@ -63,6 +64,27 @@ namespace ordermanager.Views.UserControls
                     tabMaterialDetails.Visibility = System.Windows.Visibility.Visible;
                     tabPurchaseOrder.Visibility = System.Windows.Visibility.Visible;
                 }
+
+                //Navigate to appropriate page
+                if (status == OrderStatusEnum.EnquiryCreated ||
+                    status == OrderStatusEnum.MaterialsAdded ||
+                    status == OrderStatusEnum.MaterialsCostAdded ||
+                    status == OrderStatusEnum.EnquiryRejected)
+                {
+                    tabControl.SelectedItem = tabMaterials;
+                }
+                else if (status == OrderStatusEnum.MaterialsJobCompleted
+                    || status == OrderStatusEnum.EnquiryApproved
+                    || status == OrderStatusEnum.EnquiryCancelled)
+                {
+                    tabControl.SelectedItem = tabViewEnquiry;
+                }
+                else if (status == OrderStatusEnum.OrderConfirmed)
+                    tabControl.SelectedItem = tabMaterialDetails;
+                else if (status == OrderStatusEnum.SubMaterialsJobCompleted)
+                    tabControl.SelectedItem = tabPurchaseOrder;
+                else
+                    tabControl.SelectedItem = tabViewEnquiry;
             }
         }
 

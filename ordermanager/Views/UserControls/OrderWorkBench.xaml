@@ -86,12 +86,12 @@
                     </Button>
                 </TabItem.Header>
             </TabItem>
-            <TabItem Header="  View Enquiry  " Cursor="Hand">
+            <TabItem x:Name="tabViewEnquiry" Header="  View Enquiry  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <PopUps:NewEnquiryFormUserControl x:Name="viewEnquiry" Margin="20,10,10,0" IsNewEnquiry="False" />
                 </Border>
             </TabItem>
-            <TabItem Header="  Materials  " Cursor="Hand">
+            <TabItem x:Name="tabMaterials" Header="  Materials  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <local:ProductMaterialsControl x:Name="materialsControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:ProductMaterialsControl>
                 </Border>
@@ -106,7 +106,7 @@
                     <local:POControl x:Name="poControl"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 </Border>
             </TabItem>
-            <TabItem Header="  Change History  " Cursor="Hand">
+            <TabItem x:Name="tabChangeHistory" Header="  Change History  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <local:ChangeHistoryControl x:Name="changeHistoryControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
                 </Border>
