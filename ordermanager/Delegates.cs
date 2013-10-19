@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.Interfaces_And_Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,7 @@ namespace ordermanager
     public delegate void OnOrderClickDelegate(object sender);
 
     public delegate void OnGoBackDelegate();
+
+    public delegate void OnNavigateToDelegate(OrderManagerTab tab);
 
 }

@@ -187,7 +187,8 @@
     <Compile Include="Extended Database Models\ProductMaterial.cs" />
     <Compile Include="Extended Database Models\ProductMaterialItem.cs" />
     <Compile Include="Extended Database Models\User.cs" />
-    <Compile Include="Interfaces\IMaskable.cs" />
+    <Compile Include="Interfaces And Enums\IMaskable.cs" />
+    <Compile Include="Interfaces And Enums\OrderManagerTab.cs" />
     <Compile Include="LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>

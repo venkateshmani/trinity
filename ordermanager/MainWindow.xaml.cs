@@ -113,5 +113,18 @@ namespace ordermanager
             UserManagementWindow userManagementWindow = new UserManagementWindow();
             userManagementWindow.ShowDialog();
         }
+
+        private void newEnquiryControl_OnNavigateTo(Interfaces_And_Enums.OrderManagerTab tab)
+        {
+            switch (tab)
+            {
+                case Interfaces_And_Enums.OrderManagerTab.MyTasks:
+                    viewOrdersTabControl.SelectedIndex = 1;
+                    break;
+                case Interfaces_And_Enums.OrderManagerTab.AllOrders:
+                    viewOrdersTabControl.SelectedIndex =  2;
+                    break;
+            }
+        }
     }
 }

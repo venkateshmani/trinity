@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ordermanager.Utilities;
 using MahApps.Metro.Controls;
+using ordermanager.Interfaces_And_Enums;
 
 
 namespace ordermanager.Views.PopUps
@@ -28,7 +29,7 @@ namespace ordermanager.Views.PopUps
     public partial class NewEnquiryFormUserControl : System.Windows.Controls.UserControl
     {
         private Accent currentAccent = ThemeManager.DefaultAccents.First(x => x.Name == "Blue");
-
+        public event OnNavigateToDelegate OnNavigateTo = null;
         public NewEnquiryFormUserControl()
         {
             InitializeComponent();
@@ -290,7 +291,7 @@ namespace ordermanager.Views.PopUps
                 bool? result = actionConfirmer.ShowDialog();
                 if(result != null && result.Value == true)
                 {
-
+                    OnNavigateTo(OrderManagerTab.MyTasks);
                 }
                 return;
             }
@@ -339,11 +340,6 @@ namespace ordermanager.Views.PopUps
                  }
              }
                 
-        }
-
-        void popup_Closed(object sender, PopupClosedEventArgs eventArgs)
-        {
-            
         }
 
         private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)
