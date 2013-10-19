@@ -233,7 +233,7 @@ namespace ordermanager.Views.PopUps
             {
                 try
                 {
-                    if (NewEnquiryViewModel.UpdateOrderStatus(OrderStatusEnum.EnquiryApproved))
+                    if (NewEnquiryViewModel.UpdateOrderStatus("approved the Order",string.Empty, OrderStatusEnum.EnquiryApproved))
                     {
                         SetButtonText(positiveDecisionBtn, "Confirm");
                         SetButtonText(negativeDecisionBtn, "Cancel");
@@ -251,7 +251,7 @@ namespace ordermanager.Views.PopUps
             {
                 try
                 {
-                    if (NewEnquiryViewModel.UpdateOrderStatus(OrderStatusEnum.OrderConfirmed))
+                    if (NewEnquiryViewModel.UpdateOrderStatus( "confirmed the Order", string.Empty,OrderStatusEnum.OrderConfirmed))
                     {
                         SetButtonsVisibility(System.Windows.Visibility.Collapsed);
                         MessageBox.Show("Enquiry confirmed successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -280,7 +280,7 @@ namespace ordermanager.Views.PopUps
             {
                 try
                 {
-                    if (NewEnquiryViewModel.UpdateOrderStatus(OrderStatusEnum.EnquiryRejected))
+                    if (NewEnquiryViewModel.UpdateOrderStatus("rejected the Enquiry", string.Empty, OrderStatusEnum.EnquiryRejected))
                     {
                         SetButtonsVisibility(System.Windows.Visibility.Collapsed);
                         MessageBox.Show("Enquiry rejected successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -297,7 +297,7 @@ namespace ordermanager.Views.PopUps
             {
                 try
                 {
-                    if (NewEnquiryViewModel.UpdateOrderStatus(OrderStatusEnum.EnquiryCancelled))
+                    if (NewEnquiryViewModel.UpdateOrderStatus("cancelled the Enquiry", string.Empty, OrderStatusEnum.EnquiryCancelled))
                     {
                         SetButtonsVisibility(System.Windows.Visibility.Collapsed);
                         MessageBox.Show("Enquiry cancelled successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);

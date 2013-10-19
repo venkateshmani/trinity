@@ -80,22 +80,6 @@ namespace ordermanager.ViewModel
         {
             Order.HasUserClickedSaveOrSubmit = true;
 
-            History historyItem = new History();
-            historyItem.Date = DateTime.Now;
-            historyItem.UserName = DBResources.Instance.CurrentUser.UserName;
-            historyItem.Comment = userComment;
-
-            if (isSubmit)
-            {
-                historyItem.OrderChanges = "Submitted. Order Stauts Changed to " + Order.OrderStatu.DisplayLabel.ToUpper();
-            }
-            else
-            {
-                historyItem.OrderChanges = "Saved Changes in Materials";
-            }
-
-            Order.Histories.Add(historyItem);
-
             if (!HasError)
             {
                 foreach (OrderProduct dbProduct in Products)
@@ -108,6 +92,26 @@ namespace ordermanager.ViewModel
                         }
                     }
                 }
+
+                #region History
+
+                    History historyItem = new History();
+                    historyItem.Date = DateTime.Now;
+                    historyItem.UserName = DBResources.Instance.CurrentUser.UserName;
+                    historyItem.Comment = userComment;
+
+                    if (isSubmit)
+                    {
+                        historyItem.OrderChanges = "Submitted in Materials Page. Order Stauts Changed to " + Order.OrderStatu.DisplayLabel.ToUpper();
+                    }
+                    else
+                    {
+                        historyItem.OrderChanges = "Saved Changes in Materials";
+                    }
+
+                    Order.Histories.Add(historyItem);
+
+                #endregion 
 
                 return DBResources.Instance.UpdateOrderProducts();
             }

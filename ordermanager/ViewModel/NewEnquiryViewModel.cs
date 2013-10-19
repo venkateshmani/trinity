@@ -179,12 +179,25 @@ namespace ordermanager.ViewModel
             return null;
         }
 
-        public bool UpdateOrderStatus(OrderStatusEnum newStatus)
+        public bool UpdateOrderStatus(string userActionVerb, string userComment,OrderStatusEnum newStatus)
         {
             if (newStatus != OrderStatusEnum.None && Order != null)
             {
                 Order.OrderStatusID = (short)newStatus;
                 Order.LastModifiedDate = DateTime.Now;
+
+                #region History
+
+                History historyItem = new History();
+                historyItem.Date = DateTime.Now;
+                historyItem.UserName = DBResources.Instance.CurrentUser.UserName;
+                historyItem.Comment = userComment;
+                historyItem.OrderChanges = "has " + userActionVerb;
+
+                Order.Histories.Add(historyItem);
+
+                #endregion 
+
                 return DBResources.Save();
             }
             return false;
