@@ -179,6 +179,17 @@ namespace ordermanager.ViewModel
             return null;
         }
 
+        public bool UpdateOrderStatus(OrderStatusEnum newStatus)
+        {
+            if (newStatus != OrderStatusEnum.None && Order != null)
+            {
+                Order.OrderStatusID = (short)newStatus;
+                Order.LastModifiedDate = DateTime.Now;
+                return DBResources.Save();
+            }
+            return false;
+        }
+
         public DBResources DBResources
         {
             get

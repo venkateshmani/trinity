@@ -39,39 +39,43 @@
 
 
     </UserControl.Resources>
-    <Grid x:Name="rootLayout">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.7*" />
-            <ColumnDefinition Width="0.3*" />
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+        <Grid  x:Name="rootLayout" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*" />
+                <ColumnDefinition Width="0.3*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Customer"  Style="{StaticResource inLineTextBlockStyle}" Grid.Row="0" Grid.Column="0" />
-                <StackPanel  Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                    <ComboBox x:Name="customerComboBox" Width="300" Margin="5" 
+                    <TextBlock Text="Customer"  Style="{StaticResource inLineTextBlockStyle}" Grid.Row="0" Grid.Column="0" />
+                    <StackPanel  Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                        <ComboBox x:Name="customerComboBox" Width="300" Margin="5" 
                               ItemsSource="{Binding DBResources.Customers}"
                               DisplayMemberPath="Name"
                               IsEditable="True"
                               SelectedItem="{Binding Order.Customer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                               SelectionChanged="customerComboBox_SelectionChanged"/>
-                    
-                    <Button Width="28"
+
+                        <Button Width="28"
                         Height="28"
                         Margin="0, 2, 0, 0"
                         HorizontalAlignment="Left"
@@ -81,14 +85,14 @@
                         Style="{DynamicResource MetroCircleButtonStyle}"
                         ToolTip="Edit Customer Details" Click="editExistingCustomerBtn_Click"
                         Visibility="Collapsed">
-                        <Rectangle Width="10" Height="10">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
-                    
-                    <Button Width="28"
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+
+                        <Button Width="28"
                         Height="28"
                         Margin="0, 2, 0, 0"
                         HorizontalAlignment="Left"
@@ -98,17 +102,17 @@
                         Style="{DynamicResource MetroCircleButtonStyle}"
                         ToolTip="Add New Customer" Click="addNewCustomerBtn_Click"
                         >
-                        <Rectangle Width="10" Height="10">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
-                </StackPanel>
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                    </StackPanel>
 
-                <TextBlock Text="Order Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="1" />
-                <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Orientation="Horizontal">
-                    <DatePicker x:Name="orderDate" Width="150" 
+                    <TextBlock Text="Order Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="1" />
+                    <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <DatePicker x:Name="orderDate" Width="150" 
                                     SelectedDate="{Binding Order.OrderDate}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date" Margin="5"
@@ -116,30 +120,30 @@
                                     SelectedDateChanged="orderDate_SelectedDateChanged"
                                 />
 
-                    <TextBlock Text="Expected Delivery Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Margin="10,0,0,0"/>
-                    <StackPanel Grid.Row="3" Grid.Column="1" Margin="5" Orientation="Horizontal">
-                        <DatePicker x:Name="expectedDeliveryDate" Width="150" 
+                        <TextBlock Text="Expected Delivery Date" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Margin="10,0,0,0"/>
+                        <StackPanel Grid.Row="3" Grid.Column="1" Margin="5" Orientation="Horizontal">
+                            <DatePicker x:Name="expectedDeliveryDate" Width="150" 
                                     SelectedDate="{Binding Order.ExpectedDeliveryDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date"
                                     SelectedDateChanged="expectedDeliveryDate_SelectedDateChanged" />
-                        <TextBlock x:Name="numberOfDays" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Top" 
+                            <TextBlock x:Name="numberOfDays" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Top" 
                                    FontWeight="Bold" />
-                        <TextBlock Text="Days" VerticalAlignment="Center" />
+                            <TextBlock Text="Days" VerticalAlignment="Center" />
+                        </StackPanel>
+
                     </StackPanel>
 
-                </StackPanel>
-
-                <TextBlock Text="Order By" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2"/>
-                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <ComboBox x:Name="agentComboxBox" Width="200" Margin="5"
+                    <TextBlock Text="Order By" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2"/>
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <ComboBox x:Name="agentComboxBox" Width="200" Margin="5"
                               ItemsSource="{Binding DBResources.Agents}"
                               DisplayMemberPath="Name"
                               IsEditable="True"
                               SelectedItem="{Binding Order.Agent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                               SelectionChanged="agentComboxBox_SelectionChanged" />
 
-                    <Button Width="28"
+                        <Button Width="28"
                         Height="28"
                         Margin="0, 2, 0, 0"
                         HorizontalAlignment="Left"
@@ -149,14 +153,14 @@
                         Style="{DynamicResource MetroCircleButtonStyle}"
                         ToolTip="Edit Agent Details"  Click="editExistingAgentBtn_Click"
                         Visibility="Collapsed">
-                        <Rectangle Width="10" Height="10">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
-                    
-                    <Button Width="28"
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+
+                        <Button Width="28"
                         Height="28"
                         Margin="0, 2, 0, 0"
                         HorizontalAlignment="Left"
@@ -167,95 +171,95 @@
                             Click="addNewAgentBtn_Click"
                         ToolTip="Add New Agent"
                         >
-                        <Rectangle Width="10" Height="10">
-                            <Rectangle.Fill>
-                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                            </Rectangle.Fill>
-                        </Rectangle>
-                    </Button>
-                    <TextBlock Text="through" Style="{StaticResource inLineTextBlockStyle}" Margin="10,5,5,5" />
-                    <ComboBox Width="100" Margin="5"
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                        <TextBlock Text="through" Style="{StaticResource inLineTextBlockStyle}" Margin="10,5,5,5" />
+                        <ComboBox Width="100" Margin="5"
                              ItemsSource="{Binding DBResources.OrderThroughs}"
                              DisplayMemberPath="Mode"
                              SelectedItem="{Binding Order.OrderThroughWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
                              IsEditable="True" 
                              />
-                    <StackPanel x:Name="commisionInfo" Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5">
-                        <TextBlock Text="and commision is" Grid.Row="5" Style="{StaticResource inLineTextBlockStyle}"/>
-                        <TextBox Width="60" BorderBrush="LightGray"
+                        <StackPanel x:Name="commisionInfo" Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5">
+                            <TextBlock Text="and commision is" Grid.Row="5" Style="{StaticResource inLineTextBlockStyle}"/>
+                            <TextBox Width="60" BorderBrush="LightGray"
                                  HorizontalContentAlignment="Right" 
                                  VerticalContentAlignment="Center"
                                  Controls:TextboxHelper.Watermark="0" Text="{Binding Order.CommissionValueWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                  PreviewTextInput="TextBox_PreviewTextInput"
                                  DataObject.Pasting="PastingHandler" 
                                  />
-                        <ComboBox Width="73" Margin="5,0,0,0"
+                            <ComboBox Width="73" Margin="5,0,0,0"
                                   ItemsSource="{Binding DBResources.CommissionValueTypes}"
                                   DisplayMemberPath="Type"
                                   SelectedItem="{Binding Order.CommissionValueTypeWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                    />
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
+
+
+                </Grid>
 
 
             </Grid>
 
-            
-        </Grid>
-         
-        <Grid Grid.Column="1" Grid.RowSpan="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="0.9*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            
-            <Grid Grid.Row="0" Grid.Column="1">
-                <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10">
-                    <StackPanel x:Name="customerInfo">
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.Name}" FontSize="18"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.City}"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.Country}"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.Mobile}"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.Telephone}"/>
+            <Grid Grid.Column="1" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.9*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="0" Grid.Column="1">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10">
+                        <StackPanel x:Name="customerInfo">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.Name}" FontSize="18"/>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.City}"/>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.Country}"/>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.Mobile}"/>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Customer.Telephone}"/>
+                        </StackPanel>
+                        <StackPanel x:Name="agentInfo" Margin="0,10,0,0">
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.Name}" FontSize="18"/>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.City}"/>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.Country}"/>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.Mobile}"/>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.Telephone}"/>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel x:Name="agentInfo" Margin="0,10,0,0">
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.Name}" FontSize="18"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.City}"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.Country}"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.Mobile}"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Order.Agent.Telephone}"/>
+                </Grid>
+
+                <Rectangle Width="1.5" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0,50,0,50" Fill="Gray" Grid.RowSpan="2"/>
+
+                <Grid Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom" Margin="5,10,10,40">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Total Order Value "  Style="{StaticResource DescriptionHeaderStyle}" Grid.Row="0" Margin="0,0,0,12"/>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Margin="0,0,0,75">
+                        <TextBlock x:Name="totalOrderValueLabel" Text="{Binding TotalOrderValue, StringFormat=n}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold">
+                            <TextBlock.Foreground>
+                                <SolidColorBrush Color="{StaticResource AccentColor}" />
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                        <Label Content="  INR"  Style="{StaticResource DescriptionHeaderStyle}"/>
                     </StackPanel>
-                </StackPanel>
+                </Grid>
             </Grid>
 
-            <Rectangle Width="1.5" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="0,50,0,50" Fill="Gray" Grid.RowSpan="2"/>
-            
-            <Grid Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom" Margin="5,10,10,40">
+            <Grid Grid.Row="1" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Total Order Value "  Style="{StaticResource DescriptionHeaderStyle}" Grid.Row="0" Margin="0,0,0,12"/>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Margin="0,0,0,75">
-                    <TextBlock x:Name="totalOrderValueLabel" Text="{Binding TotalOrderValue, StringFormat=n}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold">
-                        <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource AccentColor}" />
-                        </TextBlock.Foreground>
-                    </TextBlock>
-                    <Label Content="  INR"  Style="{StaticResource DescriptionHeaderStyle}"/>
-                </StackPanel>
-            </Grid>
-        </Grid>
-
-        <Grid Grid.Row="1" Margin="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
                 <Button x:Name="addNewItemBtn" Grid.Row="0" Content="New Item"  Margin="5" Width="100" Height="25" Foreground="White"
                                         ToolTip="Add New Item" HorizontalAlignment="Left" PreviewMouseLeftButtonUp="addNewItemBtn_PreviewMouseLeftButtonUp">
                     <Button.Background>
@@ -266,17 +270,17 @@
                       CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeRows="True"  CanUserSortColumns="True" GridLinesVisibility="Horizontal"
                       ColumnWidth="Auto" ItemsSource="{Binding OrderProducts}" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray"
                       HeadersVisibility="All"  RowHeaderWidth="25">
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn x:Name="productColumn" Header="Product" Width="0.2*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid x:Name="productGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                
-                                    <ComboBox x:Name="comboBox" Grid.Column="0"
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn x:Name="productColumn" Header="Product" Width="0.2*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid x:Name="productGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <ComboBox x:Name="comboBox" Grid.Column="0"
                                                                       IsEditable="True"
                                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                                       ItemsSource="{Binding AvailableProducts, Source={StaticResource DataProvider}}"
@@ -304,31 +308,31 @@
                                                 </Rectangle.Fill>
                                             </Rectangle>
                                         </Button>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.16*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding ExpectedQuantityWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
+                        <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.16*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding ExpectedQuantityWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn x:Name="unitOfMeasurementColumn" Header="UOM" Width="0.1*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    
-                                    <ComboBox x:Name="uomComboBox" Grid.Column="0"
+                        <DataGridTemplateColumn x:Name="unitOfMeasurementColumn" Header="UOM" Width="0.1*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <ComboBox x:Name="uomComboBox" Grid.Column="0"
                                                                       IsEditable="True"
                                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                                       Height="20"
@@ -336,7 +340,7 @@
                                                                       DisplayMemberPath="Units"
                                                                       SelectedItem="{Binding  UnitsOfMeasurementWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                                       />
-                                    <Button Width="28"
+                                        <Button Width="28"
                                             Grid.Column="1"
                                             Height="28"
                                             Margin="0, 2, 0, 0"
@@ -348,25 +352,25 @@
                                             Style="{DynamicResource MetroCircleButtonStyle}"
                                             ToolTip="Add New UOM"
                                             >
-                                        <Rectangle Width="10" Height="10">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                    </Button>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency" Width="0.10*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <ComboBox x:Name="currencyComboBox" Grid.Column="0"
+                                            <Rectangle Width="10" Height="10">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency" Width="0.10*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ComboBox x:Name="currencyComboBox" Grid.Column="0"
                                                                       IsEditable="True"
                                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                                       Height="20"
@@ -375,7 +379,7 @@
                                                                       SelectedItem="{Binding CurrencyWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                                       SelectionChanged="currencyComboBox_SelectionChanged"
                                                                       />
-                                    <Button Width="28"
+                                        <Button Width="28"
                                             Grid.Column="1"
                                             Height="28"
                                             Margin="0, 2, 0, 0"
@@ -387,67 +391,68 @@
                                             Style="{DynamicResource MetroCircleButtonStyle}"
                                             ToolTip="Add New Currency"
                                             >
-                                        <Rectangle Width="10" Height="10">
-                                            <Rectangle.Fill>
-                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                            </Rectangle.Fill>
-                                        </Rectangle>
-                                    </Button>
-                                </Grid>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    
-                    <DataGridTemplateColumn x:Name="currencyValueInINR" Header="Currency Value In INR" Width="0.19*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
+                                            <Rectangle Width="10" Height="10">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn x:Name="currencyValueInINR" Header="Currency Value In INR" Width="0.19*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price" Width="0.18*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" 
+                        <DataGridTemplateColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price" Width="0.18*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" 
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn x:Name="orderValueColumn" Header="Order Value" Width="0.16*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Right" Orientation="Horizontal">
-                                    <TextBlock Text="{Binding OrderValueWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold" />
-                                    <TextBlock Text=" INR" FontSize="16" FontWeight="Bold" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+                        <DataGridTemplateColumn x:Name="orderValueColumn" Header="Order Value" Width="0.16*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Right" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding OrderValueWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold" />
+                                        <TextBlock Text=" INR" FontSize="16" FontWeight="Bold" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="5">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <Label Content="Total Number Of Products "  Style="{StaticResource DescriptionHeaderStyle}"/>
+                    <TextBlock x:Name="totalNumberOfItems" Text="{Binding OrderProducts.Count}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </StackPanel>
+
+            </Grid>
+
         </Grid>
-
-        <Grid Grid.Row="2" Margin="5">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <Label Content="Total Number Of Products "  Style="{StaticResource DescriptionHeaderStyle}"/>
-                <TextBlock x:Name="totalNumberOfItems" Text="{Binding OrderProducts.Count}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold">
-                    <TextBlock.Foreground>
-                        <SolidColorBrush Color="{StaticResource AccentColor}" />
-                    </TextBlock.Foreground>
-                </TextBlock>
-            </StackPanel>
-           
-        </Grid>
-
-        <Grid Grid.Row="3" Grid.ColumnSpan="2">
+        <Grid Grid.Row="1">
             <TextBlock x:Name="statusText" Text="Fill in the missing fields and Click CREATE" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Visibility="Collapsed">
                 <TextBlock.Foreground>
-                        <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
+                    <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
                 </TextBlock.Foreground>
             </TextBlock>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Margin="5,5,10,10">
@@ -457,8 +462,8 @@
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
                 </Button>
-                <Button x:Name="negativeDecisionBtn" Content="Discard Enquiry" Width="125" Height="35" Margin="15,0,0,0" Foreground="White"
-                        ToolTip="Discard Enquiry">
+                <Button x:Name="negativeDecisionBtn" Content="Discard" Width="125" Height="35" Margin="15,0,0,0" Foreground="White"
+                        ToolTip="Discard Enquiry" Click="negativeDecisionBtn_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
                     </Button.Background>

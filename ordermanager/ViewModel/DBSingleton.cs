@@ -411,11 +411,12 @@ namespace ordermanager.ViewModel
             } 
         }
 
-        public void Save()
+        public bool Save()
         {
             try
             {
                 dbContext.SaveChanges();
+                return true;
             }
             catch (DbEntityValidationException ex)
             {

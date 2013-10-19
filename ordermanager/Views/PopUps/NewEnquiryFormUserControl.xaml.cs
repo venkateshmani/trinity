@@ -45,9 +45,9 @@ namespace ordermanager.Views.PopUps
                 rootLayout.IsEnabled = value;
                 NewEnquiryViewModel = null;
                 if (!value)
-                {   
-                   // positiveDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
-                   // negativeDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
+                {
+                    // positiveDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
+                    // negativeDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewItemBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewCustomerBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewAgentBtn.Visibility = System.Windows.Visibility.Collapsed;
@@ -59,12 +59,12 @@ namespace ordermanager.Views.PopUps
             }
         }
 
-        
+
         public void SetOrder(Order order)
         {
             this.NewEnquiryViewModel = new NewEnquiryViewModel(order);
         }
-    
+
 
         private NewEnquiryViewModel m_NewEnquiryViewModel = null;
         public NewEnquiryViewModel NewEnquiryViewModel
@@ -79,40 +79,50 @@ namespace ordermanager.Views.PopUps
                 this.DataContext = value;
                 if (value != null)
                 {
-                    positiveDecisionBtn.Visibility = System.Windows.Visibility.Visible;
-                    negativeDecisionBtn.Visibility = System.Windows.Visibility.Visible;
+                    SetButtonsVisibility(System.Windows.Visibility.Visible);
                     if (value.Order.OrderStatusID == 0)
                     {
-                        positiveDecisionBtn.Content = "Create";
-                        negativeDecisionBtn.Content = "Discard";
+                        SetButtonText(positiveDecisionBtn, "Create");
+                        SetButtonText(negativeDecisionBtn, "Discard");
                     }
                     else
                     {
-                        OrderStatusEnum status = (OrderStatusEnum)Enum.Parse(typeof(OrderStatusEnum), value.Order.OrderStatu.StatusLabel);
+                        OrderStatusEnum status = Helper.GetOrderStatusEnumFromString(value.Order.OrderStatu.StatusLabel);
                         if (status == OrderStatusEnum.MaterialsJobCompleted)
                         {
-                            positiveDecisionBtn.Content = "Approve";
-                            negativeDecisionBtn.Content = "Reject";
+                            SetButtonText(positiveDecisionBtn, "Approve");
+                            SetButtonText(negativeDecisionBtn, "Reject");
                         }
                         else if (status == OrderStatusEnum.EnquiryApproved)
                         {
-                            positiveDecisionBtn.Content = "Confirm";
-                            negativeDecisionBtn.Content = "Cancel";
+                            SetButtonText(positiveDecisionBtn, "Confirm");
+                            SetButtonText(negativeDecisionBtn, "Cancel");
                         }
                         else
                         {
-                            positiveDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
-                            negativeDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
+                            SetButtonsVisibility(System.Windows.Visibility.Collapsed);
                         }
                     }
                 }
             }
         }
 
+        private void SetButtonsVisibility(System.Windows.Visibility visibility)
+        {
+            positiveDecisionBtn.Visibility = visibility;
+            negativeDecisionBtn.Visibility = visibility;
+        }
+
+        private void SetButtonText(Button btn, string text)
+        {
+            btn.Content = text;
+            btn.ToolTip = text + " Enquiry";
+        }
+
         private void currencyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-                //Dirty
-                NewEnquiryViewModel.RefreshCurrencyConversionTable();
+            //Dirty
+            NewEnquiryViewModel.RefreshCurrencyConversionTable();
         }
 
         private void addNewItemBtn_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -181,7 +191,7 @@ namespace ordermanager.Views.PopUps
                 DBResources.Instance.Save();
             }
         }
-     
+
         private void addNewProductBtn_Click(object sender, RoutedEventArgs e)
         {
             Button addBtn = sender as Button;
@@ -198,7 +208,7 @@ namespace ordermanager.Views.PopUps
                         addBtn.Visibility = System.Windows.Visibility.Collapsed;
                     }
                 }
-            }  
+            }
         }
 
         private void positiveDecisionBtn_Click(object sender, RoutedEventArgs e)
@@ -210,21 +220,101 @@ namespace ordermanager.Views.PopUps
                     statusText.Visibility = System.Windows.Visibility.Visible;
                     return;
                 }
-
                 Order newOrder = NewEnquiryViewModel.CreateNewOrder();
                 if (newOrder != null)
                 {
                     statusText.Text = string.Format("Enquiry Successfull Created. ID : {0}", newOrder.OrderID.ToString());
                     statusText.Visibility = System.Windows.Visibility.Visible;
                     statusText.Foreground = new SolidColorBrush(Color.FromArgb(255, 17, 158, 218));
+                    SetButtonsVisibility(System.Windows.Visibility.Collapsed);
                 }
             }
             else if (positiveDecisionBtn.Content.ToString() == "Approve")
-            { 
-
+            {
+                try
+                {
+                    if (NewEnquiryViewModel.UpdateOrderStatus(OrderStatusEnum.EnquiryApproved))
+                    {
+                        SetButtonText(positiveDecisionBtn, "Confirm");
+                        SetButtonText(negativeDecisionBtn, "Cancel");
+                        MessageBox.Show("Enquiry approved successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                        MessageBox.Show("Enquiry approval failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Enquiry approval failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else if (positiveDecisionBtn.Content.ToString() == "Confirm")
+            {
+                try
+                {
+                    if (NewEnquiryViewModel.UpdateOrderStatus(OrderStatusEnum.OrderConfirmed))
+                    {
+                        SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                        MessageBox.Show("Enquiry confirmed successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                        MessageBox.Show("Enquiry confirming failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Enquiry confirming failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                SetButtonsVisibility(System.Windows.Visibility.Collapsed);
             }
         }
 
+        private void negativeDecisionBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (positiveDecisionBtn.Content.ToString() == "Discard")
+            {
+
+            }
+            else if (positiveDecisionBtn.Content.ToString() == "Reject")
+            {
+                try
+                {
+                    if (NewEnquiryViewModel.UpdateOrderStatus(OrderStatusEnum.EnquiryRejected))
+                    {
+                        SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                        MessageBox.Show("Enquiry rejected successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                        MessageBox.Show("Enquiry rejection failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Enquiry rejection failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else if (positiveDecisionBtn.Content.ToString() == "Cancel")
+            {
+                try
+                {
+                    if (NewEnquiryViewModel.UpdateOrderStatus(OrderStatusEnum.EnquiryCancelled))
+                    {
+                        SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                        MessageBox.Show("Enquiry cancelled successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                        MessageBox.Show("Enquiry cancellation failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Enquiry cancellation failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+            }
+        }
 
         private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -321,8 +411,8 @@ namespace ordermanager.Views.PopUps
         {
             if (expectedDeliveryDate.SelectedDate != null && orderDate.SelectedDate != null)
             {
-                 TimeSpan tSpan = expectedDeliveryDate.SelectedDate.Value.Subtract(orderDate.SelectedDate.Value);
-                 numberOfDays.Text = tSpan.Days.ToString();
+                TimeSpan tSpan = expectedDeliveryDate.SelectedDate.Value.Subtract(orderDate.SelectedDate.Value);
+                numberOfDays.Text = tSpan.Days.ToString();
             }
         }
     }
