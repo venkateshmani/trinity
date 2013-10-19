@@ -11,7 +11,7 @@
         ShowMinButton="False"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
-        Title="Comment Window" Height="267.029" Width="482.796">
+        Title="Comment Window" Height="309.029" Width="826.796">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -28,23 +28,31 @@
                 <Setter Property="FontSize" Value="22" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
+            <Style x:Key="PopupButtonTemplate"  TargetType="{x:Type Button}" BasedOn="{StaticResource MetroAccentButton}">
+                <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}"/>
+                <Setter Property="Margin" Value="5,0,0,0"/>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
 
     <Controls:MetroWindow.GlowBrush>
         <SolidColorBrush Color="{DynamicResource AccentColor}" />
     </Controls:MetroWindow.GlowBrush>
-    <Grid>
-        <Grid Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+    <Border>
+        <Border.Background>
+            <SolidColorBrush Color="{StaticResource AccentColor}"/>
+        </Border.Background>
+        <Grid>
+        <Grid Margin="15" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="Comment Here:" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" FontSize="16" />
+                <TextBlock Text="Add a comment" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" Foreground="White" FontWeight="Light"  FontSize="{DynamicResource SubHeaderFontSize}"/>
             <TextBox x:Name="commentTextBox" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="5,1,5,34" Grid.RowSpan="2" BorderBrush="Gray"/>
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
-                <Button x:Name="updateToDatabaseBtn"  Content="GO"  Width="100" Height="25" Foreground="White" HorizontalAlignment="Left" Click="updateToDatabaseBtn_Click">
+                <Button x:Name="updateToDatabaseBtn"  Content="GO"  Width="100" Height="25" Foreground="White" HorizontalAlignment="Left" Click="updateToDatabaseBtn_Click" Style="{StaticResource PopupButtonTemplate}">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
@@ -57,4 +65,5 @@
             </StackPanel>
         </Grid>
     </Grid>
+    </Border>
 </Controls:MetroWindow>
