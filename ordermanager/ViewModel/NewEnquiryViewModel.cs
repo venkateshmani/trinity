@@ -173,7 +173,7 @@ namespace ordermanager.ViewModel
 
                 Order.OrderStatusID = 1;
                 Order.LastModifiedDate = DateTime.Now;
-                return DBResources.CreateNewOrder(Order);
+                return DBResources.CreateNewOrder(Order, string.Empty);
             }
 
             return null;

@@ -364,11 +364,17 @@ namespace ordermanager.ViewModel
             return newOrder;
         }
 
-        public Order CreateNewOrder(Order newOrder)
+        public Order CreateNewOrder(Order newOrder, string userComment)
         {
             Order newSavedOrder = dbContext.Orders.Add(newOrder);
-            Save();
+            History historyItem = new History();
+            historyItem.Comment = userComment;
+            historyItem.UserName = CurrentUser.UserName;
+            historyItem.OrderChanges = "Created New Enquiry";
+            historyItem.Date = DateTime.Now;
+            newSavedOrder.Histories.Add(historyItem);
 
+            Save();
             return newSavedOrder;
         }
 

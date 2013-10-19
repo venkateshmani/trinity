@@ -30,8 +30,8 @@ namespace ordermanager.ViewModel
             {
                 if (order != null)
                 {
-                    //HistoryItems = new ObservableCollection<History>(order.Histories);
-                    CreateDummyData();
+                    HistoryItems = new ObservableCollection<History>(order.Histories.Reverse());
+                    //CreateDummyData();
                 }
                 m_Order = order;
             }

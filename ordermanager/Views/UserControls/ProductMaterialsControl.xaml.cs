@@ -79,7 +79,7 @@ namespace ordermanager.Views.UserControls
         {
             if (m_ViewModel != null)
             {
-                m_ViewModel.Save(false);
+                m_ViewModel.Save(false, string.Empty);
             } 
         }
 

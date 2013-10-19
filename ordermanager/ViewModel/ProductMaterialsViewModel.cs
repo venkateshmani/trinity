@@ -76,9 +76,26 @@ namespace ordermanager.ViewModel
                 return false;
         }
 
-        public bool Save(bool isSubmit)
+        public bool Save(bool isSubmit, string userComment)
         {
             Order.HasUserClickedSaveOrSubmit = true;
+
+            History historyItem = new History();
+            historyItem.Date = DateTime.Now;
+            historyItem.UserName = DBResources.Instance.CurrentUser.UserName;
+            historyItem.Comment = userComment;
+
+            if (isSubmit)
+            {
+                historyItem.OrderChanges = "Submitted. Order Stauts Changed to " + Order.OrderStatu.DisplayLabel.ToUpper();
+            }
+            else
+            {
+                historyItem.OrderChanges = "Saved Changes in Materials";
+            }
+
+            Order.Histories.Add(historyItem);
+
             if (!HasError)
             {
                 foreach (OrderProduct dbProduct in Products)
