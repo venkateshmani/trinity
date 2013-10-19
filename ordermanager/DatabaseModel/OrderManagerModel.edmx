@@ -86,6 +86,10 @@
             <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurement" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderStatus_UserRole" Association="OrderManagerDBModel.Store.FK_OrderStatus_UserRole">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductBreakUp_ShipmentMode" Association="OrderManagerDBModel.Store.FK_ProductBreakUp_ShipmentMode">
             <End Role="ShipmentMode" EntitySet="ShipmentMode" />
             <End Role="ProductBreakUp" EntitySet="ProductBreakUp" />
@@ -251,6 +255,7 @@
           <Property Name="CustomerTargetPrice" Type="decimal" Nullable="false" Scale="4" />
           <Property Name="OrderValue" Type="decimal" Nullable="false" Scale="4" />
           <Property Name="ProductBreakUpID" Type="bigint" />
+          <Property Name="TotalConsumptionCost" Type="decimal" Scale="4" />
         </EntityType>
         <EntityType Name="OrderStatus">
           <Key>
@@ -258,6 +263,8 @@
           </Key>
           <Property Name="OrderStatusID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="StatusLabel" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DisplayLabel" Type="varchar" MaxLength="50" />
+          <Property Name="NextUserRoleID" Type="smallint" />
         </EntityType>
         <EntityType Name="OrderThrough">
           <Key>
@@ -574,6 +581,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderStatus_UserRole">
+          <End Role="UserRole" Type="OrderManagerDBModel.Store.UserRole" Multiplicity="0..1" />
+          <End Role="OrderStatus" Type="OrderManagerDBModel.Store.OrderStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="UserRoleID" />
+            </Principal>
+            <Dependent Role="OrderStatus">
+              <PropertyRef Name="NextUserRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductBreakUp_ShipmentMode">
           <End Role="ShipmentMode" Type="OrderManagerDBModel.Store.ShipmentMode" Multiplicity="1" />
           <End Role="ProductBreakUp" Type="OrderManagerDBModel.Store.ProductBreakUp" Multiplicity="*" />
@@ -884,6 +903,10 @@
             <End Role="OrderProduct" EntitySet="OrderProducts" />
             <End Role="ProductMaterials" EntitySet="ProductMaterials" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderStatus_UserRole" Association="OrderManagerDBModel.FK_OrderStatus_UserRole">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductBreakUp_ShipmentMode" Association="OrderManagerDBModel.FK_ProductBreakUp_ShipmentMode">
             <End Role="ShipmentMode" EntitySet="ShipmentModes" />
             <End Role="ProductBreakUp" EntitySet="ProductBreakUps" />
@@ -1041,6 +1064,7 @@
           <Property Name="CustomerTargetPrice" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <Property Name="OrderValue" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <Property Name="ProductBreakUpID" Type="Int64" />
+          <Property Name="TotalConsumptionCost" Type="Decimal" Precision="18" Scale="4" />
           <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_OrderProduct_Currency" FromRole="OrderProduct" ToRole="Currency" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_OrderProduct_Order" FromRole="OrderProduct" ToRole="Order" />
           <NavigationProperty Name="ProductBreakUp" Relationship="OrderManagerDBModel.FK_OrderProduct_ProductBreakUp" FromRole="OrderProduct" ToRole="ProductBreakUp" />
@@ -1055,7 +1079,10 @@
           </Key>
           <Property Name="OrderStatusID" Type="Int16" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="StatusLabel" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DisplayLabel" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="NextUserRoleID" Type="Int16" />
           <NavigationProperty Name="Orders" Relationship="OrderManagerDBModel.FK_Order_OrderStatus" FromRole="OrderStatus" ToRole="Order" />
+          <NavigationProperty Name="UserRole" Relationship="OrderManagerDBModel.FK_OrderStatus_UserRole" FromRole="OrderStatus" ToRole="UserRole" />
         </EntityType>
         <EntityType Name="OrderThrough">
           <Key>
@@ -1230,6 +1257,7 @@
           <Property Name="CanConfirmOrder" Type="Boolean" Nullable="false" />
           <Property Name="CanAddSubMaterials" Type="Boolean" Nullable="false" />
           <Property Name="CanGeneratePurchaseOrder" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="OrderStatus" Relationship="OrderManagerDBModel.FK_OrderStatus_UserRole" FromRole="UserRole" ToRole="OrderStatus" />
           <NavigationProperty Name="Users" Relationship="OrderManagerDBModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
         </EntityType>
         <Association Name="FK_Order_CommissionValueType">
@@ -1496,6 +1524,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderStatus_UserRole">
+          <End Role="UserRole" Type="OrderManagerDBModel.UserRole" Multiplicity="0..1" />
+          <End Role="OrderStatus" Type="OrderManagerDBModel.OrderStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="UserRoleID" />
+            </Principal>
+            <Dependent Role="OrderStatus">
+              <PropertyRef Name="NextUserRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductBreakUp_ShipmentMode">
           <End Role="ShipmentMode" Type="OrderManagerDBModel.ShipmentMode" Multiplicity="1" />
           <End Role="ProductBreakUp" Type="OrderManagerDBModel.ProductBreakUp" Multiplicity="*" />
@@ -1705,6 +1745,7 @@
                 <ScalarProperty Name="CustomerTargetPrice" ColumnName="CustomerTargetPrice" />
                 <ScalarProperty Name="OrderValue" ColumnName="OrderValue" />
                 <ScalarProperty Name="ProductBreakUpID" ColumnName="ProductBreakUpID" />
+                <ScalarProperty Name="TotalConsumptionCost" ColumnName="TotalConsumptionCost" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1713,6 +1754,8 @@
               <MappingFragment StoreEntitySet="OrderStatus">
                 <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
                 <ScalarProperty Name="StatusLabel" ColumnName="StatusLabel" />
+                <ScalarProperty Name="DisplayLabel" ColumnName="DisplayLabel" />
+                <ScalarProperty Name="NextUserRoleID" ColumnName="NextUserRoleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

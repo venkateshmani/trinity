@@ -16,6 +16,7 @@ namespace ordermanager.DatabaseModel
     {
         public UserRole()
         {
+            this.OrderStatus = new HashSet<OrderStatu>();
             this.Users = new HashSet<User>();
         }
     
@@ -33,6 +34,7 @@ namespace ordermanager.DatabaseModel
         public bool CanAddSubMaterials { get; set; }
         public bool CanGeneratePurchaseOrder { get; set; }
     
+        public virtual ICollection<OrderStatu> OrderStatus { get; set; }
         public virtual ICollection<User> Users { get; set; }
     }
 }

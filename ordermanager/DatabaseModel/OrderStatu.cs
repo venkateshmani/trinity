@@ -21,7 +21,10 @@ namespace ordermanager.DatabaseModel
     
         public short OrderStatusID { get; set; }
         public string StatusLabel { get; set; }
+        public string DisplayLabel { get; set; }
+        public Nullable<short> NextUserRoleID { get; set; }
     
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual UserRole UserRole { get; set; }
     }
 }
