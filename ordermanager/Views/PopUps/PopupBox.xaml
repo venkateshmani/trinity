@@ -11,7 +11,7 @@
         ShowMinButton="False"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
-        Height="280.563" Width="689.187">
+        Height="309.029" Width="826.796">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -40,7 +40,7 @@
         <Border.Background>
             <SolidColorBrush Color="{StaticResource AccentColor}" />
         </Border.Background>
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

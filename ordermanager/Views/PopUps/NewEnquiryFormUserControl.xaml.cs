@@ -226,16 +226,17 @@ namespace ordermanager.Views.PopUps
                 {
                     if (NewEnquiryViewModel.HasErrors)
                     {
-                        statusText.Visibility = System.Windows.Visibility.Visible;
+                        string message = string.Format("Failed to Create !. Fill in the highlighted fields and Click Create again");
+                        InformUser(message);
                         return;
                     }
                     Order newOrder = NewEnquiryViewModel.CreateNewOrder(userComment);
                     if (newOrder != null)
                     {
-                        statusText.Text = string.Format("Enquiry Successfull Created. ID : {0}", newOrder.OrderID.ToString());
-                        statusText.Visibility = System.Windows.Visibility.Visible;
-                        statusText.Foreground = new SolidColorBrush(Color.FromArgb(255, 17, 158, 218));
                         SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                        string message = string.Format("Enquiry Successfully Created. ID : {0}", newOrder.OrderID.ToString());
+                        InformUser(message);
+                        Navigate(OrderManagerTab.AllOrders);
                     }
                 }
                 else if (positiveDecisionBtn.Content.ToString() == "Approve")
@@ -291,7 +292,7 @@ namespace ordermanager.Views.PopUps
                 bool? result = actionConfirmer.ShowDialog();
                 if(result != null && result.Value == true)
                 {
-                    OnNavigateTo(OrderManagerTab.MyTasks);
+                    Navigate(OrderManagerTab.MyTasks);
                 }
                 return;
             }
@@ -307,10 +308,10 @@ namespace ordermanager.Views.PopUps
                          if (NewEnquiryViewModel.UpdateOrderStatus("rejected the Enquiry", userComment, OrderStatusEnum.EnquiryRejected))
                          {
                              SetButtonsVisibility(System.Windows.Visibility.Collapsed);
-                             MessageBox.Show("Enquiry rejected successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                             InformUser("Enquiry rejected");
                          }
                          else
-                             MessageBox.Show("Enquiry rejection failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                             InformUser("Unable to reject enquiry");
                      }
                      catch (Exception ex)
                      {
@@ -324,10 +325,10 @@ namespace ordermanager.Views.PopUps
                          if (NewEnquiryViewModel.UpdateOrderStatus("cancelled the Enquiry", userComment, OrderStatusEnum.EnquiryCancelled))
                          {
                              SetButtonsVisibility(System.Windows.Visibility.Collapsed);
-                             MessageBox.Show("Enquiry cancelled successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                             InformUser("Enquiry cancelled");
                          }
                          else
-                             MessageBox.Show("Enquiry cancellation failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                             InformUser("Unable to cancel the enquiry");
                      }
                      catch (Exception ex)
                      {
@@ -349,6 +350,14 @@ namespace ordermanager.Views.PopUps
             {
                 NewEnquiryViewModel.Order.Customer = newCustomer;
             }
+        }
+
+        private void InformUser(string message)
+        {
+            PopupBox informer = new PopupBox();
+            informer.Message = message;
+            informer.PopupButton = PopupButton.OK;
+            informer.ShowDialog();
         }
 
         private void addNewAgentBtn_Click(object sender, RoutedEventArgs e)
@@ -439,6 +448,15 @@ namespace ordermanager.Views.PopUps
             {
                 TimeSpan tSpan = expectedDeliveryDate.SelectedDate.Value.Subtract(orderDate.SelectedDate.Value);
                 numberOfDays.Text = tSpan.Days.ToString();
+            }
+        }
+
+        private void Navigate(Interfaces_And_Enums.OrderManagerTab tab)
+        {
+            if (OnNavigateTo != null)
+            {
+                NewEnquiryViewModel = null;
+                OnNavigateTo(tab);
             }
         }
     }

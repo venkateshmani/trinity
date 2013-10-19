@@ -452,11 +452,6 @@
 
         </Grid>
         <Grid Grid.Row="1">
-            <TextBlock x:Name="statusText" Text="Fill in the missing fields and Click CREATE" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Visibility="Collapsed">
-                <TextBlock.Foreground>
-                    <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
-                </TextBlock.Foreground>
-            </TextBlock>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal" Margin="5,5,10,10">
                 <Button x:Name="positiveDecisionBtn" Content="Create" Width="150" Height="35" Foreground="White"
                         ToolTip="Create Enquiry" Click="positiveDecisionBtn_Click" >

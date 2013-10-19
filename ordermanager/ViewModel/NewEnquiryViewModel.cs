@@ -55,16 +55,19 @@ namespace ordermanager.ViewModel
             }
         }
 
-        private decimal m_TotalOrderValue = 0;
+        
         public decimal TotalOrderValue
         {
             get
             {
-                return m_TotalOrderValue;
+                if(Order.TotalOrderValue != null)
+                    return Order.TotalOrderValue.Value;
+
+                return 0;
             }
             set
             {
-                m_TotalOrderValue = value;
+                Order.TotalOrderValue = value;
                 OnPropertyChanged("TotalOrderValue");
             }
         }
