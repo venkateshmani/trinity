@@ -93,7 +93,10 @@
                                     </Viewbox>
                                     <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" DataContext="{Binding Path=ProductName}" Text="{Binding Path=Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
                                     <Border Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                        <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity, StringFormat=n}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity, StringFormat=n}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                                            <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=UnitsOfMeasurement.Units}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" Margin="6,0,0,0"/>
+                                        </StackPanel>
                                     </Border>
                                 </Grid>
                             </DataTemplate>
@@ -126,6 +129,11 @@
             <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
                 <TextBlock Text="Quantity:" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
                 <TextBlock Text="{Binding Path = ExpectedQuantity, StringFormat=n}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                    <TextBlock.Foreground>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </TextBlock.Foreground>
+                </TextBlock>
+                <TextBlock Text="{Binding Path = UnitsOfMeasurement.Units}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </TextBlock.Foreground>
@@ -181,7 +189,7 @@
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </Button.Background>
                     </Button>
-                    <Button x:Name="btnDeleteItem"  Content="Delete"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Delete Selected Item" HorizontalAlignment="Left" Click="DeleteItem_Click">
+                    <Button x:Name="btnDeleteItem"  Content="Delete"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Delete Selected Item" HorizontalAlignment="Left" Click="DeleteItem_Click" Visibility="Hidden">
                         <Button.Background>
                             <SolidColorBrush Color="{StaticResource ValidationColor5}" />
                         </Button.Background>
@@ -342,7 +350,7 @@
         <Grid Grid.Row="3" Grid.ColumnSpan="3">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <Button x:Name="sendBackBtn" Content="Send Back"  Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Send back to previous level">
+                                        ToolTip="Send back to previous level" Visibility="Hidden">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
