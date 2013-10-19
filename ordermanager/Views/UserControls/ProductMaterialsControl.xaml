@@ -66,7 +66,7 @@
             </Border>
         </Grid>
 
-        <ListView x:Name="productsList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Products}" SelectedIndex="0" SelectionChanged="productsList_SelectionChanged">
+        <ListView x:Name="productsList" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Products}" SelectedIndex="{Binding Path=SelectedIndex, Mode=OneWay}" SelectionChanged="productsList_SelectionChanged">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
                     <GridViewColumn x:Name="productColumn" Header="Product" Width="{Binding ActualWidth, ElementName=productsList, Converter={StaticResource subractor}, ConverterParameter=5}">

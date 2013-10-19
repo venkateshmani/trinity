@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -28,31 +29,49 @@ namespace ordermanager.Views.UserControls
         public PurchaseOrderControl()
         {
             InitializeComponent();
-        }
-
-        private void AddNewSubMaterial(object sender, RoutedEventArgs e)
-        {
-            //Button addBtn = sender as Button;
-            //if (addBtn != null)
-            //{
-            //    Grid parentGrid = addBtn.Parent as Grid;
-            //    if (parentGrid != null)
-            //    {
-            //        ComboBox comboBox = parentGrid.FindName("materialsComboBox") as ComboBox;
-            //        if (comboBox != null && m_ViewModel != null)
-            //        {
-            //            comboBox.SelectedItem = m_ViewModel.CreateNewMaterial(comboBox.Text);
-            //            addBtn.Visibility = System.Windows.Visibility.Collapsed;
-            //        }
-            //    }
-            //}
-        }
+        }     
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
+            if (m_ViewModel != null)
+                m_ViewModel.PropertyChanged -= m_ViewModel_PropertyChanged;
             m_ViewModel = DataContext as PurchaseOrderControlViewModel;
             poMaterialsDetails.ViewModel = m_ViewModel;
             poProductDetails.ViewModel = m_ViewModel;
+            if (m_ViewModel != null)
+                m_ViewModel.PropertyChanged += m_ViewModel_PropertyChanged;
+        }
+
+        void m_ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Products")
+            {
+                SetSelectedItem();
+            }
+        }
+
+        void ItemContainerGenerator_StatusChanged(object sender, EventArgs e)
+        {           
+            SetSelectedItem();
+        }
+
+        private void SetSelectedItem()
+        {
+            ItemsControl control = tvProducts as ItemsControl;
+            control.ItemContainerGenerator.StatusChanged -= ItemContainerGenerator_StatusChanged;
+            if (control.ItemContainerGenerator.Status == GeneratorStatus.ContainersGenerated)
+            {
+                if (tvProducts.Items.Count > 0)
+                {
+                    TreeViewItem item = control.ItemContainerGenerator.ContainerFromItem(tvProducts.Items[0]) as TreeViewItem;
+                    if (item != null)
+                        item.IsSelected = true;
+                }
+            }
+            else
+            {
+                control.ItemContainerGenerator.StatusChanged += ItemContainerGenerator_StatusChanged;
+            }
         }
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)

@@ -23,6 +23,8 @@ namespace ordermanager.ViewModel
             {
                 m_Products = value;
                 NotifyPropertyChanged("Products");
+                if (m_Products.Count > 0)
+                    NotifyPropertyChanged("SelectedIndex");
             }
         }
 
@@ -34,9 +36,14 @@ namespace ordermanager.ViewModel
                 if (value != m_SelectedItem)
                 {
                     m_SelectedItem = value;
-                    NotifyPropertyChanged("SelectedProduct"); 
+                    NotifyPropertyChanged("SelectedProduct");
                 }
             }
+        }
+
+        public int SelectedIndex
+        {
+            get { return 0; }
         }
 
         public Order Order
