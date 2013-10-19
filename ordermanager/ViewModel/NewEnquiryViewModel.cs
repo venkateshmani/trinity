@@ -159,7 +159,7 @@ namespace ordermanager.ViewModel
             return DBResources.CreateNewProduct(newProductName);
         }
 
-        public Order CreateNewOrder()
+        public Order CreateNewOrder(string userComment)
         {
             if (!HasErrors)
             {

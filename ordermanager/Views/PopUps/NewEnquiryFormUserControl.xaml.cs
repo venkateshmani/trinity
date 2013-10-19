@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ordermanager.Utilities;
 
 namespace ordermanager.Views.PopUps
 {
@@ -213,60 +214,66 @@ namespace ordermanager.Views.PopUps
 
         private void positiveDecisionBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (positiveDecisionBtn.Content.ToString() == "Create")
+            CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
+            if (commentBox.ShowDialog() == true)
             {
-                if (NewEnquiryViewModel.HasErrors)
+                string userComment = commentBox.Comment;
+
+                if (positiveDecisionBtn.Content.ToString() == "Create")
                 {
-                    statusText.Visibility = System.Windows.Visibility.Visible;
-                    return;
+                    if (NewEnquiryViewModel.HasErrors)
+                    {
+                        statusText.Visibility = System.Windows.Visibility.Visible;
+                        return;
+                    }
+                    Order newOrder = NewEnquiryViewModel.CreateNewOrder(userComment);
+                    if (newOrder != null)
+                    {
+                        statusText.Text = string.Format("Enquiry Successfull Created. ID : {0}", newOrder.OrderID.ToString());
+                        statusText.Visibility = System.Windows.Visibility.Visible;
+                        statusText.Foreground = new SolidColorBrush(Color.FromArgb(255, 17, 158, 218));
+                        SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                    }
                 }
-                Order newOrder = NewEnquiryViewModel.CreateNewOrder();
-                if (newOrder != null)
+                else if (positiveDecisionBtn.Content.ToString() == "Approve")
                 {
-                    statusText.Text = string.Format("Enquiry Successfull Created. ID : {0}", newOrder.OrderID.ToString());
-                    statusText.Visibility = System.Windows.Visibility.Visible;
-                    statusText.Foreground = new SolidColorBrush(Color.FromArgb(255, 17, 158, 218));
+                    try
+                    {
+                        if (NewEnquiryViewModel.UpdateOrderStatus("approved the Order", userComment, OrderStatusEnum.EnquiryApproved))
+                        {
+                            SetButtonText(positiveDecisionBtn, "Confirm");
+                            SetButtonText(negativeDecisionBtn, "Cancel");
+                            MessageBox.Show("Enquiry approved successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                            MessageBox.Show("Enquiry approval failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Enquiry approval failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else if (positiveDecisionBtn.Content.ToString() == "Confirm")
+                {
+                    try
+                    {
+                        if (NewEnquiryViewModel.UpdateOrderStatus("confirmed the Order", userComment, OrderStatusEnum.OrderConfirmed))
+                        {
+                            SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                            MessageBox.Show("Enquiry confirmed successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                        else
+                            MessageBox.Show("Enquiry confirming failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Enquiry confirming failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
                     SetButtonsVisibility(System.Windows.Visibility.Collapsed);
                 }
-            }
-            else if (positiveDecisionBtn.Content.ToString() == "Approve")
-            {
-                try
-                {
-                    if (NewEnquiryViewModel.UpdateOrderStatus("approved the Order",string.Empty, OrderStatusEnum.EnquiryApproved))
-                    {
-                        SetButtonText(positiveDecisionBtn, "Confirm");
-                        SetButtonText(negativeDecisionBtn, "Cancel");
-                        MessageBox.Show("Enquiry approved successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else
-                        MessageBox.Show("Enquiry approval failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Enquiry approval failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else if (positiveDecisionBtn.Content.ToString() == "Confirm")
-            {
-                try
-                {
-                    if (NewEnquiryViewModel.UpdateOrderStatus( "confirmed the Order", string.Empty,OrderStatusEnum.OrderConfirmed))
-                    {
-                        SetButtonsVisibility(System.Windows.Visibility.Collapsed);
-                        MessageBox.Show("Enquiry confirmed successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else
-                        MessageBox.Show("Enquiry confirming failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Enquiry confirming failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else
-            {
-                SetButtonsVisibility(System.Windows.Visibility.Collapsed);
             }
         }
 
@@ -275,45 +282,53 @@ namespace ordermanager.Views.PopUps
             if (positiveDecisionBtn.Content.ToString() == "Discard")
             {
 
+                return;
             }
-            else if (positiveDecisionBtn.Content.ToString() == "Reject")
-            {
-                try
-                {
-                    if (NewEnquiryViewModel.UpdateOrderStatus("rejected the Enquiry", string.Empty, OrderStatusEnum.EnquiryRejected))
-                    {
-                        SetButtonsVisibility(System.Windows.Visibility.Collapsed);
-                        MessageBox.Show("Enquiry rejected successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else
-                        MessageBox.Show("Enquiry rejection failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Enquiry rejection failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else if (positiveDecisionBtn.Content.ToString() == "Cancel")
-            {
-                try
-                {
-                    if (NewEnquiryViewModel.UpdateOrderStatus("cancelled the Enquiry", string.Empty, OrderStatusEnum.EnquiryCancelled))
-                    {
-                        SetButtonsVisibility(System.Windows.Visibility.Collapsed);
-                        MessageBox.Show("Enquiry cancelled successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else
-                        MessageBox.Show("Enquiry cancellation failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Enquiry cancellation failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            else
-            {
-                SetButtonsVisibility(System.Windows.Visibility.Collapsed);
-            }
+
+            CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
+             if (commentBox.ShowDialog() == true)
+             {
+                 string userComment = commentBox.Comment;
+                 if (positiveDecisionBtn.Content.ToString() == "Reject")
+                 {
+                     try
+                     {
+                         if (NewEnquiryViewModel.UpdateOrderStatus("rejected the Enquiry", userComment, OrderStatusEnum.EnquiryRejected))
+                         {
+                             SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                             MessageBox.Show("Enquiry rejected successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                         }
+                         else
+                             MessageBox.Show("Enquiry rejection failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                     }
+                     catch (Exception ex)
+                     {
+                         MessageBox.Show("Enquiry rejection failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                     }
+                 }
+                 else if (positiveDecisionBtn.Content.ToString() == "Cancel")
+                 {
+                     try
+                     {
+                         if (NewEnquiryViewModel.UpdateOrderStatus("cancelled the Enquiry", userComment, OrderStatusEnum.EnquiryCancelled))
+                         {
+                             SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                             MessageBox.Show("Enquiry cancelled successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                         }
+                         else
+                             MessageBox.Show("Enquiry cancellation failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                     }
+                     catch (Exception ex)
+                     {
+                         MessageBox.Show("Enquiry cancellation failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                     }
+                 }
+                 else
+                 {
+                     SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                 }
+             }
+                
         }
 
         private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)

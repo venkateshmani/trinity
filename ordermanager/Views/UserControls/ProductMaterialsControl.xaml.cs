@@ -112,5 +112,10 @@ namespace ordermanager.Views.UserControls
                 }
             }
         }
+
+        private void discardBtn_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

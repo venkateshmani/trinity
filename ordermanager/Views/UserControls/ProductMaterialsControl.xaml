@@ -370,7 +370,8 @@
                     </Button.Background>
                 </Button>
                 <Button x:Name="discardBtn" Content="Discard Changes" Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Discard the Changes">
+                                        ToolTip="Discard the Changes"
+                                        Click="discardBtn_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
                     </Button.Background>
