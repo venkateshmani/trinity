@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\trinity\ordermanager\obj\x86\Debug\
+C:\Users\User\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\
 ordermanager
 none
 false
 DEBUG;TRACE
-E:\trinity\ordermanager\App.xaml
-22-2060010431
+C:\Users\User\Documents\GitHub\trinity\ordermanager\App.xaml
+231901564272
 
-821908002256
-28-1090014918
-LoginScreen.xaml;MainWindow.xaml;Views\PasswordChangeDialog.xaml;Views\PopUps\CommentBox.xaml;Views\PopUps\ProgressUpdateWindow.xaml;Views\PopUps\UserManagementWindow.xaml;Views\UserControls\ChangeHistoryControl.xaml;Views\UserControls\POControl.xaml;Views\UserControls\POMaterialDetails.xaml;Views\UserControls\PurchaseOrderControl.xaml;Views\PopUps\NewEnquiryForm.xaml;Views\PopUps\NewEnquiryFormUserControl.xaml;Views\CustomerDetailsControl.xaml;Views\UserControls\POProductDetails.xaml;Views\UserControls\ProductMaterialsControl.xaml;Views\UserControls\ViewOrdersControl.xaml;TestWindow.xaml;Views\CommonControls\BackForwardButton.xaml;Views\CommonControls\OMbutton.xaml;Views\CommonControls\OrdersListView.xaml;Views\CommonControls\ProductsListView.xaml;Views\UserControls\OrderWorkBench.xaml;
+85-1391181959
+28-2011958645
+LoginScreen.xaml;MainWindow.xaml;Views\PasswordChangeDialog.xaml;Views\PopUps\CommentBox.xaml;Views\PopUps\PopupBox.xaml;Views\PopUps\ProgressUpdateWindow.xaml;Views\PopUps\UserManagementWindow.xaml;Views\UserControls\ChangeHistoryControl.xaml;Views\UserControls\POControl.xaml;Views\UserControls\POMaterialDetails.xaml;Views\UserControls\PurchaseOrderControl.xaml;Views\PopUps\NewEnquiryForm.xaml;Views\PopUps\NewEnquiryFormUserControl.xaml;Views\CustomerDetailsControl.xaml;Views\UserControls\POProductDetails.xaml;Views\UserControls\ProductMaterialsControl.xaml;Views\UserControls\ViewOrdersControl.xaml;TestWindow.xaml;Views\CommonControls\BackForwardButton.xaml;Views\CommonControls\OMbutton.xaml;Views\CommonControls\OrdersListView.xaml;Views\CommonControls\ProductsListView.xaml;Views\UserControls\OrderWorkBench.xaml;
 
 False
 

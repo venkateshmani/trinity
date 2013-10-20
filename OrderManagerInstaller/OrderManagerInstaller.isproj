@@ -1,0 +1,57 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+	<PropertyGroup>
+		<!-- Select a Product Configuration -->
+		<InstallShieldProductConfiguration>Express</InstallShieldProductConfiguration>
+		<!-- Select a Visual Studio Configuration / InstallShield Release -->
+		<Configuration>Debug</Configuration>
+		<InstallShieldRelease>$(Configuration)</InstallShieldRelease>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- The InstallShieldProject item selects the project to build -->
+		<InstallShieldProject Include="$(MSBuildProjectDirectory)\$(MSBuildProjectName).isl"/>
+		<!-- The InstallShieldReleaseFlags sets Release Flags -->
+		<!--<InstallShieldReleaseFlags Include=""/>-->
+		<!-- The InstallShieldMergeModulePath specifies what directories are
+		searched for Merge Modules -->
+		<!--<InstallShieldMergeModulePath Include=""/>-->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The ProjectReference items refer to any Visual Studio solutions you want to automatically probe for Project Output Groups.  -->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The TaggedOutputs items allow you to explicitly add extra files to output groups. Each item must include both Name and OutputGroup, as well as TargetPath metadata values. -->
+		<!--<TaggedOutputs Include="C:\My Test Exe.exe">
+			<Name>My Test Project</Name>
+			<OutputGroup>Primary output</OutputGroup>
+			<TargetPath>My Test Exe.exe</TargetPath>
+		</TaggedOutputs> -->
+	</ItemGroup>
+	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2012SpringLimited\InstallShield.targets"/>
+	<ItemGroup>
+		<ProjectReference Include="..\ordermanager\MahApps.Metro\MahApps.Metro.csproj">
+			<Name>MahApps.Metro</Name>
+			<Project>{5B1710D2-5DC8-4754-91B2-19165DE49B3D}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\ordermanager\MahApps.Metro\MahApps.Metro.NET45.csproj">
+			<Name>MahApps.Metro.NET45</Name>
+			<Project>{942D11C4-29F5-46C4-8C14-4B976D56C637}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\Microsoft.DwayneNeed\Microsoft.DwayneNeed.csproj">
+			<Name>Microsoft.DwayneNeed</Name>
+			<Project>{80A10B86-6615-4440-93B0-C943DF5B8693}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\Microsoft.DwayneNeed.Win32\Microsoft.DwayneNeed.Win32.csproj">
+			<Name>Microsoft.DwayneNeed.Win32</Name>
+			<Project>{39337E67-FDBB-4B17-AB5F-B65820CCD11E}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\Reports\Reports.csproj">
+			<Name>Reports</Name>
+			<Project>{542F6659-EB9A-4EA2-81F8-8B76DA9E0AEA}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\ordermanager\ordermanager.csproj">
+			<Name>ordermanager</Name>
+			<Project>{90AC4DF2-CEB4-47C1-89A0-6BB83D113212}</Project>
+		</ProjectReference>
+	</ItemGroup>
+
+	</Project>

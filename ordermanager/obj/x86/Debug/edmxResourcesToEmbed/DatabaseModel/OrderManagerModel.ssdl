@@ -286,13 +286,13 @@
     <Property Name="ProductCountryWiseBreakUpID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Country" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="NumberOfPieces" Type="decimal" Nullable="false" />
-    <Property Name="LS" Type="decimal" />
-    <Property Name="S" Type="decimal" />
-    <Property Name="M" Type="decimal" />
-    <Property Name="L" Type="decimal" />
-    <Property Name="XL" Type="decimal" />
-    <Property Name="XXL" Type="decimal" />
-    <Property Name="XXXL" Type="decimal" />
+    <Property Name="LS" Type="decimal" Nullable="false" />
+    <Property Name="S" Type="decimal" Nullable="false" />
+    <Property Name="M" Type="decimal" Nullable="false" />
+    <Property Name="L" Type="decimal" Nullable="false" />
+    <Property Name="XL" Type="decimal" Nullable="false" />
+    <Property Name="XXL" Type="decimal" Nullable="false" />
+    <Property Name="XXXL" Type="decimal" Nullable="false" />
     <Property Name="ProductBreakUpID" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductExtraCost">
