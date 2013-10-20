@@ -16,6 +16,7 @@ namespace ordermanager.ViewModel
 {
     public class DBResources : INotifyPropertyChanged, IDisposable
     {
+
         #region  single ton
         private static DBResources _DBSingleton = null;
 
@@ -44,6 +45,7 @@ namespace ordermanager.ViewModel
         {
             dbContext = new OrderManagerDBEntities();
         }
+
 
         #region Supporting Collections
 

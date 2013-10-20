@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="Login" Height="240" Width="443.478" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" ShowCloseButton="False" ShowTitleBar="False">
+        Icon="/Resources/Icons/OrderManagerIcon1.ico"   
+        Title="Login" Height="301" Width="553.478" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" ShowCloseButton="False" ShowTitleBar="False">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,39 +27,39 @@
         <SolidColorBrush Color="{DynamicResource AccentColor}" />
     </Controls:MetroWindow.GlowBrush>
 
-
-    <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="75"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0">
-            <Border.Background>
-                <SolidColorBrush Color="{StaticResource AccentColor}" />
-            </Border.Background>
-            <TextBlock x:Name="tbCompanyName" Margin="10" FontSize="{StaticResource HeaderFontSize}" Text="Trinity"></TextBlock>
-        </Border>
-        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,30,0,0">
-            <TextBox x:Name="tbUserName" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="320"   Foreground="Gray" FontSize="{StaticResource NormalFontSize}"
+    <Border>
+        <Border.Background>
+            <SolidColorBrush Color="{StaticResource AccentColor}" />
+        </Border.Background>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0">
+                <TextBlock x:Name="tbCompanyName" Margin="10" FontFamily="{DynamicResource ContentFontFamily}" FontSize="{StaticResource HeaderFontSize}" Text="Order Manager" Foreground="White"></TextBlock>
+            </Border>
+            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,30,0,0">
+                <TextBox x:Name="tbUserName" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="320"   Foreground="Gray" FontSize="{StaticResource NormalFontSize}"
         		Controls:TextboxHelper.Watermark="User Name" ToolTip="User name"/>
-            <PasswordBox x:Name="tbPassword" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="320" Margin="0,10,0,0"  Foreground="Gray" FontSize="{StaticResource NormalFontSize}"
+                <PasswordBox x:Name="tbPassword" VerticalAlignment="Center" HorizontalAlignment="Center"  Width="320" Margin="0,10,0,0"  Foreground="Gray" FontSize="{StaticResource NormalFontSize}"
         		Controls:TextboxHelper.Watermark="Password" ToolTip="Password" PreviewKeyDown="tbPassword_PreviewKeyDown"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Margin="0,15,0,0" >
-                <Button x:Name="btnLogin" Content="Login"   Width="80" Height="30" Foreground="White" FontSize="{StaticResource NormalFontSize}"
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  Margin="0,15,0,0" >
+                    <Button x:Name="btnLogin" Content="Login"   Width="80" Height="30" Foreground="White" FontSize="{StaticResource NormalFontSize}"
         			ToolTip="Login" HorizontalAlignment="Right" Click="btnLogin_Click">
-                    <Button.Background>
-                        <SolidColorBrush Color="{StaticResource AccentColor}" />
-                    </Button.Background>
-                </Button>
-                <Button x:Name="btnExit" Content="Exit"  Margin="5,0,0,0" Width="80" Height="30" Foreground="White"
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="btnExit" Content="Exit"  Margin="5,0,0,0" Width="80" Height="30" Foreground="White"
         			ToolTip="Exit" HorizontalAlignment="Right" FontSize="{StaticResource NormalFontSize}" Click="btnExit_Click">
-                    <Button.Background>
-                        <SolidColorBrush Color="{StaticResource Gray1}" />
-                    </Button.Background>
-                </Button>
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource Gray1}" />
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
-
-    </Grid>
+        </Grid>
+    </Border>
 </Controls:MetroWindow>

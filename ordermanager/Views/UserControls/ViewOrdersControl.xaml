@@ -143,7 +143,7 @@
                 </ListView.View>
             </ListView>
             <TextBlock x:Name="noTasksInfoLabel" Text="No tasks for you. Take a break :) !!" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Gray"
-                        FontWeight="Light"  FontSize="{DynamicResource SubHeaderFontSize}"/>
+                        FontFamily="{DynamicResource ContentFontFamily}" FontWeight="Light"  FontSize="{DynamicResource SubHeaderFontSize}"/>
         </Grid>
     </Grid>
 </UserControl>

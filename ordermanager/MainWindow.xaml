@@ -10,7 +10,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         WindowStartupLocation="CenterScreen"
         Height="588" Width="1108" 
-        Icon="/Resources/Icons/OrderManagerIcon.ico"      
+        Icon="/Resources/Icons/OrderManagerIcon1.ico"      
         xmlns:my="clr-namespace:ordermanager.Views.CommonControls" 
         xmlns:my1="clr-namespace:ordermanager.Views.UserControls">
 
@@ -66,7 +66,7 @@
                     </StackPanel>
                 </Button.Content>
             </Button>
-            <Button Click="LaunchSettings">
+            <Button Click="LaunchSettings" Visibility="Collapsed">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Width="15" Height="15">
