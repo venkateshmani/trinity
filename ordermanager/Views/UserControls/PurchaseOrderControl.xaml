@@ -133,7 +133,7 @@
             <Rectangle Height="1" Fill="Gray" VerticalAlignment="Top" />
         </Grid>
 
-        <Grid Grid.Row="3" Grid.ColumnSpan="3">
+        <Grid Grid.Row="3" Grid.ColumnSpan="3" x:Name="gridButtons">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
                                         ToolTip="Save Changes" Click="Save_Click">
@@ -142,7 +142,7 @@
                     </Button.Background>
                 </Button>
                 <Button x:Name="submitBtn" Content="Submit" Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Submit to next level">
+                                        ToolTip="Submit to next level" Click="Submit_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>

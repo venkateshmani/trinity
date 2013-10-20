@@ -1,5 +1,7 @@
 ﻿using ordermanager.DatabaseModel;
+using ordermanager.Utilities;
 using ordermanager.ViewModel;
+using ordermanager.Views.PopUps;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,7 +29,27 @@ namespace ordermanager.Views.UserControls
             poMaterialsDetails.ViewModel = m_ViewModel;
             poProductDetails.ViewModel = m_ViewModel;
             if (m_ViewModel != null)
+            {
                 m_ViewModel.PropertyChanged += m_ViewModel_PropertyChanged;
+                SetControlState();
+            }
+        }
+
+        private void SetControlState()
+        {
+            if (m_ViewModel!=null && m_ViewModel.Order != null)
+            {
+                gridButtons.Visibility = System.Windows.Visibility.Visible;
+                poMaterialsDetails.IsEnabled = true;
+                poProductDetails.IsEnabled = true;  
+                OrderStatusEnum status = Helper.GetOrderStatusEnumFromString(m_ViewModel.Order.OrderStatu.StatusLabel);
+                if (status >= OrderStatusEnum.SubMaterialsJobCompleted)
+                {
+                    gridButtons.Visibility = System.Windows.Visibility.Collapsed;
+                    poMaterialsDetails.IsEnabled = false;
+                    poProductDetails.IsEnabled = false;                  
+                }
+            }
         }
 
         void m_ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -35,6 +57,10 @@ namespace ordermanager.Views.UserControls
             if (e.PropertyName == "Products")
             {
                 SetSelectedItem();
+            }
+            else if (e.PropertyName == "Order")
+            {
+                SetControlState();
             }
         }
 
@@ -102,11 +128,39 @@ namespace ordermanager.Views.UserControls
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            if (Save(false) == false)
+                MessageBox.Show("Cannot save the materials details. Please make sure all the mandatory details are filled", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void Submit_Click(object sender, RoutedEventArgs e)
+        {
+            bool? saved = Save(true);
+            if (saved == true)
+            {
+                SetControlState();
+            }
+            else if (saved == false)
+            {
+                MessageBox.Show("Cannot submit the materials details. Please make sure all the mandatory details are filled", "Submit Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private bool? Save(bool isSubmit)
+        {
             if (m_ViewModel != null)
             {
-                if (!m_ViewModel.Save(false, "Comment"))
-                    MessageBox.Show("Cannot save the materials details. Please make sure all the mandatory details are filled", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (m_ViewModel.Validate())
+                {
+                    CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
+                    if (commentBox.ShowDialog() == true)
+                    {
+                        return m_ViewModel.Save(isSubmit, commentBox.Comment);
+                    }
+                    return null;
+                }
+                return false;
             }
+            return false;
         }
     }
 }
