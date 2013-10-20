@@ -4,12 +4,13 @@
         Title="Order Manger" 
         ShowInTaskbar="True" 
         AllowsTransparency="False" 
-        ShowIconOnTitleBar="true"
+        ShowIconOnTitleBar="False"
         ShowTitleBar="True"
         WindowState="Maximized"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         WindowStartupLocation="CenterScreen"
         Height="588" Width="1108" 
+        Icon="/Resources/Icons/OrderManagerIcon.ico"      
         xmlns:my="clr-namespace:ordermanager.Views.CommonControls" 
         xmlns:my1="clr-namespace:ordermanager.Views.UserControls">
 

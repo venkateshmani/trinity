@@ -1171,6 +1171,8 @@
 		<row><td>USERPROFILE</td><td>TARGETDIR</td><td>.:USERPR~1|UserProfile</td><td/><td>0</td><td/></row>
 		<row><td>WindowsFolder</td><td>TARGETDIR</td><td>.:Windows</td><td/><td>0</td><td/></row>
 		<row><td>WindowsVolume</td><td>TARGETDIR</td><td>.:WinRoot</td><td/><td>0</td><td/></row>
+		<row><td>devwar_1_devwarriors</td><td>ProgramMenuFolder</td><td>DEVWAR~1|DevWarriors</td><td/><td>1</td><td/></row>
+		<row><td>orderm_1_ordermanager</td><td>devwar_1_devwarriors</td><td>ORDERM~1|OrderManager</td><td/><td>1</td><td/></row>
 	</table>
 
 	<table name="DrLocator">
@@ -3597,6 +3599,7 @@
 		<row><td>IDS_PROGMSG_XML_ROLLBACK_FILES</td><td>1033</td><td>Rolling back XML file changes...</td><td>0</td><td/><td>-1658762734</td></row>
 		<row><td>IDS_PROGMSG_XML_UPDATE_FILE</td><td>1033</td><td>Updating XML file %s...</td><td>0</td><td/><td>-1658762734</td></row>
 		<row><td>IDS_SETUPEXE_EXPIRE_MSG</td><td>1033</td><td>This setup works until %s. The setup will now exit.</td><td>0</td><td/><td>-1658762734</td></row>
+		<row><td>IDS_SHORTCUT_DISPLAY_NAME1</td><td>1033</td><td>Order Manager</td><td>0</td><td/><td>-1524550868</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO</td><td>1033</td><td>From the list of servers below, select the database server you would like to target.</td><td>0</td><td/><td>-1658762734</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_DB</td><td>1033</td><td>From the list of catalog names below, select the database catalog you would like to target.</td><td>0</td><td/><td>-1658762734</td></row>
 		<row><td>IDS_SQLBROWSE_INTRO_TEMPLATE</td><td>1033</td><td>[IS_SQLBROWSE_INTRO]</td><td>0</td><td/><td>-1658762734</td></row>
@@ -3887,6 +3890,7 @@
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-1658762734</td></row>
 		<row><td>ID_STRING1</td><td>1033</td><td>http://www.DevWarriors.com</td><td>0</td><td/><td>-1658758638</td></row>
 		<row><td>ID_STRING2</td><td>1033</td><td>DevWarriors</td><td>0</td><td/><td>-1658758638</td></row>
+		<row><td>ID_STRING3</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>-1524530516</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-1658762734</td></row>
 	</table>
 
@@ -4581,6 +4585,9 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="L255">FileName</col>
 		<col def="s72">DirProperty</col>
 		<col def="i2">InstallMode</col>
+		<row><td>FileKey1</td><td>ordermanager.Primary_output</td><td/><td>devwar_1_devwarriors</td><td>2</td></row>
+		<row><td>FileKey2</td><td>ordermanager.Primary_output</td><td/><td>orderm_1_ordermanager</td><td>2</td></row>
+		<row><td>_Built</td><td>ordermanager.Primary_output</td><td/><td>orderm_1_ordermanager</td><td>2</td></row>
 	</table>
 
 	<table name="RemoveIniFile">
@@ -4666,6 +4673,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
+		<row><td>_Built</td><td>orderm_1_ordermanager</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>ordermanager.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>ordermanager.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td/><td/><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

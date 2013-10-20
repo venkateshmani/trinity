@@ -12,6 +12,7 @@ namespace ordermanager.DatabaseModel
 {
     public partial class OrderProduct : EntityBase
     {
+
         #region fields
 
         private ProductExtraCost m_OtherCost = null;
@@ -177,17 +178,22 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        private decimal m_PerUnitTotalProductMaterialsCost = 0;
         public decimal PerUnitTotalProductMaterialsCost
         {
             get
             {
-                if (ExpectedQuantity != 0)
-                    return TotalProductMaterialsCostWrapper / ExpectedQuantity;
+                if (m_PerUnitTotalProductMaterialsCost == 0 && ExpectedQuantity != 0)
+                {
+                    m_PerUnitTotalProductMaterialsCost = TotalProductMaterialsCostWrapper / ExpectedQuantity;
+                }
 
-                return 0;
+                return m_PerUnitTotalProductMaterialsCost;
             }
             set
             {
+                m_PerUnitTotalProductMaterialsCost = value;
+                ValidatePerUnitTotalProductMaterialsCost();
                 OnPropertyChanged("PerUnitTotalProductMaterialsCost");
             }
         }
@@ -204,7 +210,9 @@ namespace ordermanager.DatabaseModel
             {
                 m_TotalProductMaterialsCostWrapper = value;
                 OnPropertyChanged("TotalProductMaterialsCostWrapper");
-                OnPropertyChanged("PerUnitTotalProductMaterialsCost");
+
+                if(ExpectedQuantity != 0)
+                    PerUnitTotalProductMaterialsCost = TotalProductMaterialsCostWrapper / ExpectedQuantity; 
             }
         }
 
@@ -291,6 +299,9 @@ namespace ordermanager.DatabaseModel
                 if (material.HasErrors)
                     hasError = true;
             }
+
+            if (ValidatePerUnitTotalProductMaterialsCost())
+                hasError = true;
 
             if (ValidateExtraCosts())
                 hasError = true;
@@ -499,7 +510,9 @@ namespace ordermanager.DatabaseModel
             ValidateCurrency();
             ValidateCurrencyValueInINR();
             ValidateCustomerTargetPrice();
+            ValidatePerUnitTotalProductMaterialsCost();
         }
+
 
         public void ValidateCurrencyValueInINR()
         {
@@ -510,6 +523,20 @@ namespace ordermanager.DatabaseModel
             else
             {
                 RemoveError("CurrencyValueInINR", "Value in INR can't be Zero");
+            }
+        }
+
+        private bool ValidatePerUnitTotalProductMaterialsCost()
+        {
+            if (PerUnitTotalProductMaterialsCost > PerUnitOrderValue)
+            {
+                AddError("PerUnitTotalProductMaterialsCost", "Consumption cost is higher than order value", false);
+                return true;
+            }
+            else
+            {
+                RemoveError("PerUnitTotalProductMaterialsCost", "Consumption cost is higher than order value");
+                return false;
             }
         }
 

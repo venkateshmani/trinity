@@ -1,4 +1,5 @@
-﻿using ordermanager.DatabaseModel;
+﻿using MahApps.Metro.Controls;
+using ordermanager.DatabaseModel;
 using ordermanager.Utilities;
 using ordermanager.ViewModel;
 using ordermanager.Views.PopUps;
@@ -82,11 +83,25 @@ namespace ordermanager.Views.UserControls
             if (m_ViewModel != null)
             {
                 CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
-                if (commentBox.ShowDialog() == true)
+
+                if (m_ViewModel.HasError)
                 {
-                    m_ViewModel.Save(false, commentBox.Comment);
+                    InformUser("Errors highlighted in red color !. Fix it and retry");
+                }
+                else 
+                {
+                    if((commentBox.ShowDialog() == true))
+                       m_ViewModel.Save(false, commentBox.Comment);
                 }
             } 
+        }
+
+        private void InformUser(string message)
+        {
+            PopupBox informer = new PopupBox();
+            informer.Message = message;
+            informer.PopupButton = PopupButton.OK;
+            informer.ShowDialog();
         }
 
         private void productsList_SizeChanged(object sender, SizeChangedEventArgs e)

@@ -45,7 +45,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="messageTextBlock" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="{DynamicResource SubHeaderFontSize}" Text="Message" FontWeight="Light" Foreground="White"
+            <TextBlock x:Name="messageTextBlock" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="{DynamicResource ContentFontFamily}" FontSize="{DynamicResource SubHeaderFontSize}" Text="Message" FontWeight="Light" Foreground="White"
                        TextWrapping="Wrap"/>
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" Margin="0,10,0,0">
                 <Button x:Name="positiveDecisionBtn" FontWeight="Light" FontSize="{DynamicResource ContentFontSize}" Content="OK" Width="75" Style="{StaticResource PopupButtonTemplate}" Visibility="Collapsed" Click="positiveDecisionBtn_Click"/>
