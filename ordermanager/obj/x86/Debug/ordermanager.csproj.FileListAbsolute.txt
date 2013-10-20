@@ -144,7 +144,6 @@ C:\Users\User\Documents\GitHub\trinity\ordermanager\bin\Debug\EntityFramework.dl
 C:\Users\User\Documents\GitHub\trinity\ordermanager\bin\Debug\MahApps.Metro.dll
 C:\Users\User\Documents\GitHub\trinity\ordermanager\bin\Debug\Microsoft.DwayneNeed.dll
 C:\Users\User\Documents\GitHub\trinity\ordermanager\bin\Debug\Microsoft.Windows.Shell.dll
-C:\Users\User\Documents\GitHub\trinity\ordermanager\bin\Debug\Reports.exe
 C:\Users\User\Documents\GitHub\trinity\ordermanager\bin\Debug\Microsoft.DwayneNeed.Win32.dll
 C:\Users\User\Documents\GitHub\trinity\ordermanager\bin\Debug\System.Windows.Interactivity.dll
 C:\Users\User\Documents\GitHub\trinity\ordermanager\bin\Debug\Microsoft.DwayneNeed.pdb
@@ -217,3 +216,4 @@ C:\Users\User\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserCont
 C:\Users\User\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\ordermanager.g.resources
 C:\Users\User\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\ordermanager.Properties.Resources.resources
 C:\Users\User\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\ordermanager.csproj.GenerateResource.Cache
+C:\Users\User\Documents\GitHub\trinity\ordermanager\bin\Debug\Reports.dll
