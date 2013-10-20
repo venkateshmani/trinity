@@ -141,73 +141,91 @@ namespace ordermanager.DatabaseModel
 
         public void ValidateCurrencyValueInINR()
         {
-            if (CurrencyValueInINR == 0)
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost)
             {
-                AddError("CurrencyValueInINR", "Value in INR can't be Zero", false);
-            }
-            else
-            {
-                RemoveError("CurrencyValueInINR", "Value in INR can't be Zero");
+                if (CurrencyValueInINR == 0)
+                {
+                    AddError("CurrencyValueInINR", "Value in INR can't be Zero", false);
+                }
+                else
+                {
+                    RemoveError("CurrencyValueInINR", "Value in INR can't be Zero");
+                }
             }
         }
 
         public void ValidateConsumtpion()
         {
-            if (Consumption == 0)
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddConsumption)
             {
-                AddError("ConsumptionWrapper", "Consumption can't be Zero", false);
-            }
-            else
-            {
-                RemoveError("ConsumptionWrapper", "Consumption can't be Zero");
+                if (Consumption == 0)
+                {
+                    AddError("ConsumptionWrapper", "Consumption can't be Zero", false);
+                }
+                else
+                {
+                    RemoveError("ConsumptionWrapper", "Consumption can't be Zero");
+                }
             }
         }
 
         public void ValidateCostPerUnit()
         {
-            if (Cost == 0)
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost)
             {
-                AddError("CostPerUnitWrapper", "Cost Per Unit can't be Zero", false);
-            }
-            else
-            {
-                RemoveError("CostPerUnitWrapper", "Cost Per Unit can't be Zero");
+                if (Cost == 0)
+                {
+                    AddError("CostPerUnitWrapper", "Cost Per Unit can't be Zero", false);
+                }
+                else
+                {
+                    RemoveError("CostPerUnitWrapper", "Cost Per Unit can't be Zero");
+                }
             }
         }
 
         public void ValidateMaterialName()
         {
-            if (MaterialName == null)
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterials)
             {
-                AddError("MaterialNameWrapper", "Select Material", false);
-            }
-            else
-            {
-                RemoveError("MaterialNameWrapper", "Select Material");
+                if (MaterialName == null)
+                {
+                    AddError("MaterialNameWrapper", "Select Material", false);
+                }
+                else
+                {
+                    RemoveError("MaterialNameWrapper", "Select Material");
+                }
             }
         }
 
         public void ValidateUOM()
         {
-            if (UnitsOfMeasurementWrapper == null)
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost)
             {
-                AddError("UnitsOfMeasurementWrapper", "Select Units", false);
-            }
-            else
-            {
-                RemoveError("UnitsOfMeasurementWrapper", "Select Units");
+                if (UnitsOfMeasurementWrapper == null)
+                {
+                    AddError("UnitsOfMeasurementWrapper", "Select Units", false);
+                }
+                else
+                {
+                    RemoveError("UnitsOfMeasurementWrapper", "Select Units");
+                }
             }
         }
 
         public void ValidateCurrency()
         {
-            if (CurrencyWrapper == null)
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost)
             {
-                AddError("CurrencyWrapper", "Select Currency", false);
-            }
-            else
-            {
-                RemoveError("CurrencyWrapper", "Select Currency");
+                if (CurrencyWrapper == null)
+                {
+                    AddError("CurrencyWrapper", "Select Currency", false);
+                }
+                else
+                {
+                    RemoveError("CurrencyWrapper", "Select Currency");
+                }
             }
         }
 

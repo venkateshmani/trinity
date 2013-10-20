@@ -275,3 +275,4 @@ C:\Users\User\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debu
 C:\Users\User\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.g.resources
 C:\Users\User\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.dll
 C:\Users\User\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.pdb
+C:\Users\User\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.NET45.csprojResolveAssemblyReference.cache

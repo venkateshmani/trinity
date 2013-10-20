@@ -313,10 +313,14 @@ namespace ordermanager.DatabaseModel
         public bool ValidateExtraCosts()
         {
             bool hasError = false;
-            foreach (var extraCost in ProductExtraCosts)
+
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddExtraCost)
             {
-                if (extraCost.Validate())
-                    hasError = true;
+                foreach (var extraCost in ProductExtraCosts)
+                {
+                    if (extraCost.Validate())
+                        hasError = true;
+                }
             }
 
             return hasError;
@@ -528,16 +532,21 @@ namespace ordermanager.DatabaseModel
 
         private bool ValidatePerUnitTotalProductMaterialsCost()
         {
-            if (PerUnitTotalProductMaterialsCost > PerUnitOrderValue)
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddConsumption)
             {
-                AddError("PerUnitTotalProductMaterialsCost", "Consumption cost is higher than order value", false);
-                return true;
+                if (PerUnitTotalProductMaterialsCost > PerUnitOrderValue)
+                {
+                    AddError("PerUnitTotalProductMaterialsCost", "Consumption cost is higher than order value", false);
+                    return true;
+                }
+                else
+                {
+                    RemoveError("PerUnitTotalProductMaterialsCost", "Consumption cost is higher than order value");
+                    return false;
+                }
             }
-            else
-            {
-                RemoveError("PerUnitTotalProductMaterialsCost", "Consumption cost is higher than order value");
-                return false;
-            }
+
+            return false;
         }
 
         private void ValidateCustomerTargetPrice()
