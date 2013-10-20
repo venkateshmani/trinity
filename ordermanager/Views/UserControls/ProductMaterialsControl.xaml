@@ -358,20 +358,23 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Save Changes" Click="Save_Click">
+                                        ToolTip="Save Changes" Click="Save_Click"
+                                        Visibility="{Binding ActionButtonsVisibility}">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
                 </Button>
                 <Button x:Name="submitBtn" Content="Submit" Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Submit to next level">
+                                        ToolTip="Submit to next level" Click="submitBtn_Click"
+                                        Visibility="{Binding ActionButtonsVisibility}">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
                 </Button>
                 <Button x:Name="discardBtn" Content="Discard Changes" Margin="5" Width="150" Height="35" Foreground="White"
                                         ToolTip="Discard the Changes"
-                                        Click="discardBtn_Click">
+                                        Click="discardBtn_Click"
+                                        Visibility="{Binding ActionButtonsVisibility}">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
                     </Button.Background>

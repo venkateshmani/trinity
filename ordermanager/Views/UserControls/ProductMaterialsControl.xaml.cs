@@ -80,20 +80,10 @@ namespace ordermanager.Views.UserControls
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (m_ViewModel != null)
+            if (Persist(false))
             {
-                CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
-
-                if (m_ViewModel.HasError)
-                {
-                    InformUser("Errors highlighted in red color !. Fix it and retry");
-                }
-                else 
-                {
-                    if((commentBox.ShowDialog() == true))
-                       m_ViewModel.Save(false, commentBox.Comment);
-                }
-            } 
+                InformUser("Saved Successfully !!");
+            }
         }
 
         private void InformUser(string message)
@@ -137,6 +127,33 @@ namespace ordermanager.Views.UserControls
         private void discardBtn_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void submitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Persist(true);   
+        }
+
+        private bool Persist(bool isSubmit)
+        {
+            if (m_ViewModel != null)
+            {
+                CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
+
+                if (m_ViewModel.HasError)
+                {
+                    InformUser("Errors highlighted in red color !. Fix it and retry");
+                }
+                else
+                {
+                    if ((commentBox.ShowDialog() == true))
+                    {
+                        m_ViewModel.Save(isSubmit, commentBox.Comment);
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

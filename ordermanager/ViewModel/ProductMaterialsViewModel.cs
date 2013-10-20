@@ -7,11 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using ordermanager.DatabaseModel;
 using System.Data.Entity;
+using System.Windows;
 
 namespace ordermanager.ViewModel
 {
     public class ProductMaterialsViewModel : INotifyPropertyChanged
     {
+
         private Order m_Order = null;
         private OrderProduct m_SelectedItem = null;
         private ObservableCollection<OrderProduct> m_Products = null;
@@ -63,6 +65,21 @@ namespace ordermanager.ViewModel
                     Products = new ObservableCollection<OrderProduct>(order.OrderProducts);
                 }
                 m_Order = order;
+
+
+                UserRole cuRole = DBResources.Instance.CurrentUser.UserRole;
+                OrderStatu coStatus = Order.OrderStatu;
+
+                if ((cuRole.CanAddMaterials && coStatus.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated) ||
+                     (cuRole.CanAddMaterialsCost && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded) ||
+                     (cuRole.CanAddConsumption && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsCostAdded))
+                {
+                    ActionButtonsVisibility = Visibility.Visible;
+                }
+                else
+                {
+                    ActionButtonsVisibility = Visibility.Hidden;
+                }
             }
             return true;
         }
@@ -83,9 +100,33 @@ namespace ordermanager.ViewModel
                 return false;
         }
 
+        private Visibility m_ActionButtonsVisibility = Visibility.Visible;
+        public Visibility ActionButtonsVisibility
+        {
+            get
+            {
+                return m_ActionButtonsVisibility;
+            }
+            set
+            {
+                m_ActionButtonsVisibility = value;
+                NotifyPropertyChanged("ActionButtonsVisibility");
+            }
+        }
+
         public bool Save(bool isSubmit, string userComment)
         {
             Order.HasUserClickedSaveOrSubmit = true;
+
+            if (isSubmit)
+            {
+                if (Order.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated)
+                    Order.OrderStatusID = (short)OrderStatusEnum.MaterialsAdded;
+                else if (Order.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded)
+                    Order.OrderStatusID = (short)OrderStatusEnum.MaterialsCostAdded;
+                else if(Order.OrderStatusID == (short)OrderStatusEnum.MaterialsCostAdded)
+                   Order.OrderStatusID = (short)OrderStatusEnum.MaterialsJobCompleted;
+            }
 
             if (!HasError)
             {

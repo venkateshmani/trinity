@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ordermanager.ViewModel
 {
     [Flags]
-    public enum OrderStatusEnum
+    public enum OrderStatusEnum : short
     {
         None = -1,
         EnquiryCreated = 1,
