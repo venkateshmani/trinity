@@ -22,11 +22,11 @@ namespace ordermanager.DatabaseModel
         public long MaterialID { get; set; }
         public long ProductID { get; set; }
         public int MaterialNameID { get; set; }
-        public decimal Cost { get; set; }
-        public short UOMID { get; set; }
-        public short CurrencyID { get; set; }
-        public decimal Consumption { get; set; }
-        public decimal ConsumptionCost { get; set; }
+        public Nullable<decimal> Cost { get; set; }
+        public Nullable<short> UOMID { get; set; }
+        public Nullable<short> CurrencyID { get; set; }
+        public Nullable<decimal> Consumption { get; set; }
+        public Nullable<decimal> ConsumptionCost { get; set; }
     
         public virtual Currency Currency { get; set; }
         public virtual MaterialName MaterialName { get; set; }

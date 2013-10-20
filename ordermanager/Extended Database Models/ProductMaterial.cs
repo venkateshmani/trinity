@@ -62,7 +62,10 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                return Cost;
+                if(Cost != null)
+                    return Cost.Value;
+
+                return 0;
             }
             set
             {
@@ -77,7 +80,10 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                return Consumption;
+                if(Consumption != null)
+                    return Consumption.Value;
+
+                return 0;
             }
             set
             {
@@ -92,7 +98,10 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                return ConsumptionCost;
+                if(ConsumptionCost != null)
+                    return ConsumptionCost.Value;
+
+                return 0;
             }
             set
             {
@@ -318,7 +327,7 @@ namespace ordermanager.DatabaseModel
 
         private void CalculateConsumptionCost()
         {
-            ConsumptionCostWrapper = Cost * Consumption * CurrencyValueInINR;
+            ConsumptionCostWrapper = CostPerUnitWrapper * ConsumptionWrapper * CurrencyValueInINR;
         }
 
         decimal m_TotalSubMaterialsPurchaseCostWrapper = -1.0m;
