@@ -131,7 +131,10 @@ namespace ordermanager.Views.UserControls
 
         private void submitBtn_Click(object sender, RoutedEventArgs e)
         {
-            Persist(true);   
+            if (Persist(true))
+            {
+                 InformUser("Successfully submitted to next level !");
+            }
         }
 
         private bool Persist(bool isSubmit)
@@ -140,6 +143,7 @@ namespace ordermanager.Views.UserControls
             {
                 CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
 
+                m_ViewModel.HasUserClickedSaveOrSubmit = true;
                 if (m_ViewModel.HasError)
                 {
                     InformUser("Errors highlighted in red color !. Fix it and retry");

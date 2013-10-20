@@ -334,11 +334,11 @@
     <Property Name="MaterialID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="ProductID" Type="bigint" Nullable="false" />
     <Property Name="MaterialNameID" Type="int" Nullable="false" />
-    <Property Name="Cost" Type="decimal" Nullable="false" Scale="4" />
-    <Property Name="UOMID" Type="smallint" Nullable="false" />
-    <Property Name="CurrencyID" Type="smallint" Nullable="false" />
-    <Property Name="Consumption" Type="decimal" Nullable="false" Scale="4" />
-    <Property Name="ConsumptionCost" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Cost" Type="decimal" Scale="4" />
+    <Property Name="UOMID" Type="smallint" />
+    <Property Name="CurrencyID" Type="smallint" />
+    <Property Name="Consumption" Type="decimal" Scale="4" />
+    <Property Name="ConsumptionCost" Type="decimal" Scale="4" />
   </EntityType>
   <EntityType Name="ProductName">
     <Key>
@@ -709,7 +709,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterials_Currency">
-    <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="1" />
+    <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="0..1" />
     <End Role="ProductMaterials" Type="OrderManagerDBModel.Store.ProductMaterials" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Currency">
@@ -745,7 +745,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterials_UnitsOfMeasurement">
-    <End Role="UnitsOfMeasurement" Type="OrderManagerDBModel.Store.UnitsOfMeasurement" Multiplicity="1" />
+    <End Role="UnitsOfMeasurement" Type="OrderManagerDBModel.Store.UnitsOfMeasurement" Multiplicity="0..1" />
     <End Role="ProductMaterials" Type="OrderManagerDBModel.Store.ProductMaterials" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UnitsOfMeasurement">

@@ -381,11 +381,11 @@
     <Property Name="MaterialID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="ProductID" Type="Int64" Nullable="false" />
     <Property Name="MaterialNameID" Type="Int32" Nullable="false" />
-    <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-    <Property Name="UOMID" Type="Int16" Nullable="false" />
-    <Property Name="CurrencyID" Type="Int16" Nullable="false" />
-    <Property Name="Consumption" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-    <Property Name="ConsumptionCost" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="Cost" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="UOMID" Type="Int16" />
+    <Property Name="CurrencyID" Type="Int16" />
+    <Property Name="Consumption" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="ConsumptionCost" Type="Decimal" Precision="18" Scale="4" />
     <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_ProductMaterials_Currency" FromRole="ProductMaterials" ToRole="Currency" />
     <NavigationProperty Name="MaterialName" Relationship="OrderManagerDBModel.FK_ProductMaterials_MaterialName" FromRole="ProductMaterials" ToRole="MaterialName" />
     <NavigationProperty Name="OrderProduct" Relationship="OrderManagerDBModel.FK_ProductMaterials_OrderProduct" FromRole="ProductMaterials" ToRole="OrderProduct" />
@@ -579,7 +579,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterials_Currency">
-    <End Role="Currency" Type="OrderManagerDBModel.Currency" Multiplicity="1" />
+    <End Role="Currency" Type="OrderManagerDBModel.Currency" Multiplicity="0..1" />
     <End Role="ProductMaterials" Type="OrderManagerDBModel.ProductMaterial" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Currency">
@@ -819,7 +819,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterials_UnitsOfMeasurement">
-    <End Role="UnitsOfMeasurement" Type="OrderManagerDBModel.UnitsOfMeasurement" Multiplicity="1" />
+    <End Role="UnitsOfMeasurement" Type="OrderManagerDBModel.UnitsOfMeasurement" Multiplicity="0..1" />
     <End Role="ProductMaterials" Type="OrderManagerDBModel.ProductMaterial" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UnitsOfMeasurement">

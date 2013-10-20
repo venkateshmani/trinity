@@ -114,22 +114,35 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public bool HasUserClickedSaveOrSubmit
+        {
+            get
+            {
+                return Order.HasUserClickedSaveOrSubmit;
+            }
+            set
+            {
+                Order.HasUserClickedSaveOrSubmit = value;
+            }
+        }
+
         public bool Save(bool isSubmit, string userComment)
         {
+            //Just to make sure
             Order.HasUserClickedSaveOrSubmit = true;
-
-            if (isSubmit)
-            {
-                if (Order.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated)
-                    Order.OrderStatusID = (short)OrderStatusEnum.MaterialsAdded;
-                else if (Order.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded)
-                    Order.OrderStatusID = (short)OrderStatusEnum.MaterialsCostAdded;
-                else if(Order.OrderStatusID == (short)OrderStatusEnum.MaterialsCostAdded)
-                   Order.OrderStatusID = (short)OrderStatusEnum.MaterialsJobCompleted;
-            }
 
             if (!HasError)
             {
+                if (isSubmit)
+                {
+                    if (Order.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated)
+                        Order.OrderStatusID = (short)OrderStatusEnum.MaterialsAdded;
+                    else if (Order.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded)
+                        Order.OrderStatusID = (short)OrderStatusEnum.MaterialsCostAdded;
+                    else if (Order.OrderStatusID == (short)OrderStatusEnum.MaterialsCostAdded)
+                        Order.OrderStatusID = (short)OrderStatusEnum.MaterialsJobCompleted;
+                }
+
                 foreach (OrderProduct dbProduct in Products)
                 {
                     foreach (ProductMaterial material in dbProduct.ProductMaterialsWrapper)
@@ -158,10 +171,18 @@ namespace ordermanager.ViewModel
                     }
 
                     Order.Histories.Add(historyItem);
-
+                    
                 #endregion 
 
-                return DBResources.Instance.UpdateOrderProducts();
+                Order.LastModifiedDate = DateTime.Now;
+                if (DBResources.Instance.UpdateOrderProducts())
+                {
+                    if(isSubmit)
+                        ActionButtonsVisibility = Visibility.Hidden;
+                    return true;
+                }
+
+                return false;
             }
 
             return false;
