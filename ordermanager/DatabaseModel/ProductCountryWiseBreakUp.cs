@@ -17,13 +17,13 @@ namespace ordermanager.DatabaseModel
         public long ProductCountryWiseBreakUpID { get; set; }
         public string Country { get; set; }
         public decimal NumberOfPieces { get; set; }
-        public Nullable<decimal> LS { get; set; }
-        public Nullable<decimal> S { get; set; }
-        public Nullable<decimal> M { get; set; }
-        public Nullable<decimal> L { get; set; }
-        public Nullable<decimal> XL { get; set; }
-        public Nullable<decimal> XXL { get; set; }
-        public Nullable<decimal> XXXL { get; set; }
+        public decimal LS { get; set; }
+        public decimal S { get; set; }
+        public decimal M { get; set; }
+        public decimal L { get; set; }
+        public decimal XL { get; set; }
+        public decimal XXL { get; set; }
+        public decimal XXXL { get; set; }
         public long ProductBreakUpID { get; set; }
     
         public virtual ProductBreakUp ProductBreakUp { get; set; }

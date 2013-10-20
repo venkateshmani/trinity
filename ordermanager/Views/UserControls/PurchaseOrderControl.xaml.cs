@@ -1,21 +1,9 @@
 ﻿using ordermanager.DatabaseModel;
 using ordermanager.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ordermanager.Views.UserControls
 {
@@ -29,7 +17,7 @@ namespace ordermanager.Views.UserControls
         public PurchaseOrderControl()
         {
             InitializeComponent();
-        }     
+        }
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -51,7 +39,7 @@ namespace ordermanager.Views.UserControls
         }
 
         void ItemContainerGenerator_StatusChanged(object sender, EventArgs e)
-        {           
+        {
             SetSelectedItem();
         }
 
@@ -114,7 +102,11 @@ namespace ordermanager.Views.UserControls
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            m_ViewModel.Save(false, "Comment");
+            if (m_ViewModel != null)
+            {
+                if (!m_ViewModel.Save(false, "Comment"))
+                    MessageBox.Show("Cannot save the materials details. Please make sure all the mandatory details are filled", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

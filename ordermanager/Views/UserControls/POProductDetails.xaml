@@ -45,9 +45,14 @@
         <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <TextBlock Text="Style ID:"  Style="{StaticResource ProductInfoStyle}" Foreground="Gray" />
                     <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
@@ -56,7 +61,6 @@
                         </TextBlock.Foreground>
                     </TextBlock>
                 </StackPanel>
-
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <TextBlock Text="{Binding DeliveryDate}"  Style="{StaticResource ProductInfoStyle}" Foreground="Gray" />
                     <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
@@ -65,10 +69,32 @@
                         </TextBlock.Foreground>
                     </TextBlock>
                 </StackPanel>
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="Estimated Total Cost:"  Style="{StaticResource ProductInfoStyle}" Foreground="Gray" />
-                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Height="62" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Total Estimated Cost:  "  Style="{StaticResource ProductInfoStyle}" Foreground="Gray" Grid.Column="0"  Grid.Row="0" HorizontalAlignment="Right"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1"  Grid.Row="0">
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold"  Text="{Binding Path=SelectedProduct.TotalProductMaterialsCostWrapper, StringFormat=n}">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Text="INR">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </StackPanel>
+                <TextBlock Text="Total Purchase Cost:  "  Style="{StaticResource ProductInfoStyle}" Foreground="Gray" Grid.Column="0"  Grid.Row="1" HorizontalAlignment="Right" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1"  Grid.Row="1">
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold"  Text="{Binding Path=SelectedProduct.TotalProductPurchaseCostWrapper, StringFormat=n}">
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>
@@ -80,11 +106,13 @@
                     </TextBlock>
                 </StackPanel>
             </Grid>
-            <Grid x:Name="gridTerms" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Center" DataContext="{Binding SelectedProduct.ProductBreakUpWrapper}">
+
+            <Grid x:Name="gridTerms" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="0,5,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="340.567"/>
+                    <ColumnDefinition Width="163.433"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -95,9 +123,9 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Order Quantity" Grid.Row="0" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
-                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Margin="2">
-                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                <TextBlock Text="Order Quantity" Grid.Row="0" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}" Margin="0,10,5,9"/>
+                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" Margin="2" Grid.ColumnSpan="2">
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Text="{Binding SelectedProduct.ExpectedQuantity}">
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>
@@ -108,25 +136,25 @@
                         </TextBlock.Foreground>
                     </TextBlock>
                     <TextBlock Text="Tolerence" Style="{StaticResource inLineTextBlockStyle}" Margin="10,0,0,0"/>
-                    <TextBox x:Name="tollerenceText" Text="{Binding ToleranceWrapper}" Width="50"  Height="20" Margin="10,0,0,0"/>
+                    <TextBox x:Name="tollerenceText" Text="{Binding SelectedProduct.ProductBreakUpWrapper.ToleranceWrapper}" Width="50"  Height="20" Margin="10,0,0,0"/>
                     <TextBlock Text="%" Style="{StaticResource inLineTextBlockStyle}"/>
                 </StackPanel>
-                <TextBlock Text="Shipment Mode" Grid.Row="1" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
-                <ComboBox Grid.Row="1" Grid.Column="2" Width="200"  HorizontalAlignment="Left" Margin="2"  ItemsSource="{Binding ShipmentModes, Source={StaticResource DataProvider}}"         
+                <TextBlock Text="Shipment Mode" Grid.Row="1" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}" Margin="0,7,4,7"/>
+                <ComboBox Grid.Row="1" Grid.Column="2" Width="200"  HorizontalAlignment="Left" Margin="2,2,0,2"  ItemsSource="{Binding ShipmentModes, Source={StaticResource DataProvider}}"         
                                                       DisplayMemberPath="Mode" SelectedItem="{Binding ShipmentModeWrapper, Mode=TwoWay,                 
                                                       UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
-                <TextBlock Text="Price Terms" Grid.Row="2" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
-                <TextBox Text="{Binding PriceTermsWrapper}" Grid.Row="2" Grid.Column="2"  Margin="2"  Width="500"
+                <TextBlock Text="Price Terms" Grid.Row="2" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}" Margin="0,7,4,7"/>
+                <TextBox Text="{Binding SelectedProduct.ProductBreakUpWrapper.PriceTermsWrapper}" Grid.Row="2" Grid.Column="2"  Margin="2"  Width="500"
                          Controls:TextboxHelper.Watermark=" Enter price terms here" VerticalContentAlignment="Center"
-                         TextWrapping="Wrap"/>
-                <TextBlock Text="Payment Terms" Grid.Row="3" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
-                <TextBox Text="{Binding PaymentTermsWrapper}" Grid.Row="3" Grid.Column="2"  Margin="2"  Width="500" 
+                         TextWrapping="Wrap" Grid.ColumnSpan="2"/>
+                <TextBlock Text="Payment Terms" Grid.Row="3" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}" Margin="0,7,5,7"/>
+                <TextBox Text="{Binding SelectedProduct.ProductBreakUpWrapper.PaymentTermsWrapper}" Grid.Row="3" Grid.Column="2"  Margin="2"  Width="500" 
                          Controls:TextboxHelper.Watermark=" Enter payment terms here" VerticalContentAlignment="Center"
-                         TextWrapping="Wrap"/>
-                <TextBlock Text="Document Required" Grid.Row="4" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}"/>
-                <TextBox Text="{Binding DocumentsRequiredWrapper}" Grid.Row="4" Grid.Column="2" Margin="2"  Width="500"
+                         TextWrapping="Wrap" Grid.ColumnSpan="2"/>
+                <TextBlock Text="Document Required" Grid.Row="4" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}" Margin="0,7,4,7"/>
+                <TextBox Text="{Binding SelectedProduct.ProductBreakUpWrapper.DocumentsRequiredWrapper}" Grid.Row="4" Grid.Column="2" Margin="2"  Width="500"
                          Controls:TextboxHelper.Watermark=" Enter documents required here" VerticalContentAlignment="Center"
-                         TextWrapping="Wrap"/>
+                         TextWrapping="Wrap" Grid.ColumnSpan="2"/>
             </Grid>
         </Grid>
 
@@ -153,7 +181,7 @@
                         <DataGridTemplateColumn x:Name="orderCountColumn" Header="No. of Pieces" Width="0.05*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding NumberOfPieces, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                    <TextBox Text="{Binding NumberOfPiecesWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -161,7 +189,7 @@
                         <DataGridTemplateColumn x:Name="LSSizeCountColumn" Header="LS" Width="0.03*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding LS, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                    <TextBox Text="{Binding LSWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -169,42 +197,42 @@
                         <DataGridTemplateColumn x:Name="SSizeCountColumn" Header="S" Width="0.03*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding S, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                    <TextBox Text="{Binding SWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn x:Name="MSizeCountColumn" Header="M" Width="0.03*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding M, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                    <TextBox Text="{Binding MWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn x:Name="LSizeCountColumn" Header="L" Width="0.03*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding L, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                    <TextBox Text="{Binding LWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn x:Name="XLSizeCountColumn" Header="XL" Width="0.03*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding XL, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                    <TextBox Text="{Binding XLWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn x:Name="XXLSizeCountColumn" Header="XXL" Width="0.03*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding XXL, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                    <TextBox Text="{Binding XXLWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn x:Name="XXXLSizeCountColumn" Header="XXXL" Width="0.03*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding XXXL, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
+                                    <TextBox Text="{Binding XXXLWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
