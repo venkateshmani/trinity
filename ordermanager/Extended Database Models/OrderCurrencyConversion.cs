@@ -67,7 +67,14 @@ namespace ordermanager.DatabaseModel
 
         private void ValidateValueInINR()
         {
-            if (ValueInINRWrapper == 0)
+            decimal defaultValueInINR = 0;
+
+            if (Currency.DefaultValueInINR != null)
+            {
+                defaultValueInINR = Currency.DefaultValueInINR.Value;
+            }
+
+            if (ValueInINRWrapper == 0 && defaultValueInINR == 0)
             {
                 AddError("ValueInINRWrapper", "Value in INR can't be Zero", false);
             }

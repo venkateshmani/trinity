@@ -455,7 +455,7 @@ namespace ordermanager.Views.PopUps
         {
             if (OnNavigateTo != null)
             {
-                NewEnquiryViewModel = null;
+                NewEnquiryViewModel = new NewEnquiryViewModel();
                 OnNavigateTo(tab);
             }
         }
