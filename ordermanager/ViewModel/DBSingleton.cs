@@ -390,6 +390,15 @@ namespace ordermanager.ViewModel
 
         #endregion
 
+
+        public void ReloadChangedEntities()
+        {
+            foreach (DbEntityEntry entry in Context.ChangeTracker.Entries())
+            {
+                entry.Reload();
+            }
+        }
+
         public void DiscardChanges()
         {
             // Undo the changes of the all entries. 

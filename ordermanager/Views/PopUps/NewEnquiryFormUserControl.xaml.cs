@@ -247,7 +247,8 @@ namespace ordermanager.Views.PopUps
                         {
                             SetButtonText(positiveDecisionBtn, "Confirm");
                             SetButtonText(negativeDecisionBtn, "Cancel");
-                            MessageBox.Show("Enquiry approved successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                            string message = "Enquiry approved successfully";
+                            InformUser(message);
                         }
                         else
                             MessageBox.Show("Enquiry approval failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -264,7 +265,8 @@ namespace ordermanager.Views.PopUps
                         if (NewEnquiryViewModel.UpdateOrderStatus("confirmed the Order", userComment, OrderStatusEnum.OrderConfirmed))
                         {
                             SetButtonsVisibility(System.Windows.Visibility.Collapsed);
-                            MessageBox.Show("Enquiry confirmed successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                            string message = "Enquiry confirmed successfully";
+                            InformUser(message);
                         }
                         else
                             MessageBox.Show("Enquiry confirming failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);

@@ -186,6 +186,9 @@ namespace ordermanager.ViewModel
         {
             if (newStatus != OrderStatusEnum.None && Order != null)
             {
+                //Workaround for crash
+                DBResources.Instance.ReloadChangedEntities();
+
                 Order.OrderStatusID = (short)newStatus;
                 Order.LastModifiedDate = DateTime.Now;
 

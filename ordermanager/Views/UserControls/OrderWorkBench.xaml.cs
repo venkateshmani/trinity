@@ -140,7 +140,8 @@ namespace ordermanager.Views.UserControls
         {
             if (OnGoBack != null)
             {
-                DBResources.Instance.DiscardChanges();
+                DBResources.Instance.ReloadChangedEntities();
+                //DBResources.Instance.DiscardChanges();
                 OnGoBack();
             }
         }
