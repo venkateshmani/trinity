@@ -149,9 +149,9 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Order Value:" Grid.Row="0" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" HorizontalAlignment="Right"/>
+                <TextBlock Text="Per Unit Order Value:" Grid.Row="0" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" HorizontalAlignment="Right"/>
                 <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path =OrderValue,StringFormat=n}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Margin="5,0,0,0" HorizontalAlignment="Left" >
+                    <TextBlock Text="{Binding Path =PerUnitOrderValue,StringFormat=n}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Margin="5,0,0,0" HorizontalAlignment="Left" >
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>
@@ -162,9 +162,9 @@
                         </TextBlock.Foreground>
                     </TextBlock>
                 </StackPanel>
-                <TextBlock Text="Total Consumption Cost:" Grid.Row="1" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" HorizontalAlignment="Right"/>
+                <TextBlock Text="Per Unit Total Consumption Cost:" Grid.Row="1" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" HorizontalAlignment="Right"/>
                 <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="{Binding Path=TotalProductMaterialsCostWrapper, StringFormat=n}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Margin="5,0,0,0" HorizontalAlignment="Left" >
+                    <TextBlock Text="{Binding Path=PerUnitTotalProductMaterialsCost, StringFormat=n}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Margin="5,0,0,0" HorizontalAlignment="Left" >
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>

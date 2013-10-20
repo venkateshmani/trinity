@@ -239,6 +239,8 @@ namespace ordermanager.DatabaseModel
                         CurrencyConversion.ValueInINRForMaterialsWrapper = value;
                         ValidateCurrencyValueInINR();
                     }
+
+                    OnPropertyChanged("CurrencyValueInINR");
                 }
             }
 

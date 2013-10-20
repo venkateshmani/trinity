@@ -12,7 +12,6 @@ namespace ordermanager.DatabaseModel
 {
     public partial class OrderProduct : EntityBase
     {
-
         #region fields
 
         private ProductExtraCost m_OtherCost = null;
@@ -121,6 +120,21 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public decimal PerUnitOrderValue
+        {
+            get
+            {
+                if (ExpectedQuantity != 0)
+                    return OrderValueWrapper / ExpectedQuantity;
+
+                return 0;
+            }
+            set
+            {
+                OnPropertyChanged("PerUnitOrderValue");
+            }
+        }
+
         public decimal OrderValueWrapper
         {
             get
@@ -131,6 +145,7 @@ namespace ordermanager.DatabaseModel
             {
                 OrderValue = value;
                 OnPropertyChanged("OrderValueWrapper");
+                OnPropertyChanged("PerUnitOrderValue");
             }
         }
 
@@ -162,6 +177,21 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public decimal PerUnitTotalProductMaterialsCost
+        {
+            get
+            {
+                if (ExpectedQuantity != 0)
+                    return TotalProductMaterialsCostWrapper / ExpectedQuantity;
+
+                return 0;
+            }
+            set
+            {
+                OnPropertyChanged("PerUnitTotalProductMaterialsCost");
+            }
+        }
+
         public decimal TotalProductMaterialsCostWrapper
         {
             get
@@ -174,6 +204,7 @@ namespace ordermanager.DatabaseModel
             {
                 m_TotalProductMaterialsCostWrapper = value;
                 OnPropertyChanged("TotalProductMaterialsCostWrapper");
+                OnPropertyChanged("PerUnitTotalProductMaterialsCost");
             }
         }
 
@@ -306,6 +337,8 @@ namespace ordermanager.DatabaseModel
                     CurrencyConversion.ValueInINRWrapper = value;
                     ValidateCurrencyValueInINR();
                 }
+
+                OnPropertyChanged("CurrencyValueInINR");
             }
         }
 
