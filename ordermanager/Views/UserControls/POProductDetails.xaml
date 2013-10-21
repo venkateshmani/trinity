@@ -141,7 +141,7 @@
                 </StackPanel>
                 <TextBlock Text="Shipment Mode" Grid.Row="1" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}" Margin="0,7,4,7"/>
                 <ComboBox Grid.Row="1" Grid.Column="2" Width="200"  HorizontalAlignment="Left" Margin="2,2,0,2"  ItemsSource="{Binding ShipmentModes, Source={StaticResource DataProvider}}"         
-                                                      DisplayMemberPath="Mode" SelectedItem="{Binding ShipmentModeWrapper, Mode=TwoWay,                 
+                                                      DisplayMemberPath="Mode" SelectedItem="{Binding SelectedProduct.ProductBreakUpWrapper.ShipmentModeWrapper, Mode=TwoWay,                 
                                                       UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"/>
                 <TextBlock Text="Price Terms" Grid.Row="2" Grid.Column="0" Style="{StaticResource inLineTextBlockStyle}" Margin="0,7,4,7"/>
                 <TextBox Text="{Binding SelectedProduct.ProductBreakUpWrapper.PriceTermsWrapper}" Grid.Row="2" Grid.Column="2"  Margin="2"  Width="500"

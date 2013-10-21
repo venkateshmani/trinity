@@ -160,6 +160,16 @@ namespace ordermanager.ViewModel
             bool hasErrors = false;
             foreach (OrderProduct dbProduct in Products)
             {
+
+                if (dbProduct.ProductBreakUp != null)
+                {
+                    dbProduct.ProductBreakUp.RemoveError("ShipmentModeWrapper");
+                    if (dbProduct.ProductBreakUp.ShipmentModeWrapper ==null)
+                    {                       
+                        dbProduct.ProductBreakUp.AddError("ShipmentModeWrapper", "Select Shipment Mode", false);
+                        hasErrors = true;
+                    }
+                }
                 foreach (ProductMaterial dbMaterial in dbProduct.ProductMaterials)
                 {
                     foreach (ProductMaterialItem item in dbMaterial.ProductMaterialItemsWrapper)
