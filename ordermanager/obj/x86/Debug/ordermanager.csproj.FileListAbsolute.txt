@@ -216,4 +216,4 @@ C:\Users\User\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserCont
 C:\Users\User\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\ordermanager.g.resources
 C:\Users\User\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\ordermanager.Properties.Resources.resources
 C:\Users\User\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\ordermanager.csproj.GenerateResource.Cache
-C:\Users\User\Documents\GitHub\trinity\ordermanager\bin\Debug\Reports.dll
+C:\Users\User\Documents\GitHub\trinity\ordermanager\bin\Debug\Reports.exe

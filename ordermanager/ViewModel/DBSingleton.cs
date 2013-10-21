@@ -395,7 +395,10 @@ namespace ordermanager.ViewModel
         {
             foreach (DbEntityEntry entry in Context.ChangeTracker.Entries())
             {
-                entry.Reload();
+                if (entry.State == EntityState.Added)
+                    entry.State = EntityState.Detached;
+                else
+                    entry.Reload();
             }
         }
 
