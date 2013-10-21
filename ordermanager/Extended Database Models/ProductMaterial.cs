@@ -54,6 +54,7 @@ namespace ordermanager.DatabaseModel
             set
             {
                 MaterialName = value;
+                ValidateMaterialName();
                 OnPropertyChanged("MaterialNameWrapper");
             }
         }
@@ -195,7 +196,7 @@ namespace ordermanager.DatabaseModel
 
         public void ValidateMaterialName()
         {
-            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterials)
+            if (HasUserClickedSaveOrSubmit && DBResources.Instance.CurrentUser.UserRole.CanAddMaterials)
             {
                 if (MaterialName == null)
                 {

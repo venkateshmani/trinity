@@ -247,15 +247,24 @@ namespace ordermanager.ViewModel
         //Create a new product
         public MaterialName CreateNewMaterial(string newMaterialName)
         {
-            MaterialName newMaterial = dbContext.MaterialNames.Create();
-            newMaterial.Name = newMaterialName;
+            //Check whether the material is already existing
+            MaterialName newMaterial = AvailableMaterials.Where(a => a.Name == newMaterialName)
+                       .Select(a => a).FirstOrDefault();
 
-            OrderManagerDBEntities newManager = new OrderManagerDBEntities();
-            newManager.MaterialNames.Add(newMaterial);
-            newManager.SaveChanges();
-            newManager.Dispose();
+            if (newMaterial == null)
+            {
+                OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+                newMaterial = newManager.MaterialNames.Create();
+                newMaterial.Name = newMaterialName;
+                newManager.MaterialNames.Add(newMaterial);
+                newManager.SaveChanges();
+                newManager.Dispose();
 
-            AvailableMaterials = new ObservableCollection<MaterialName>(dbContext.MaterialNames.ToList()); //Refresh
+                AvailableMaterials = new ObservableCollection<MaterialName>(dbContext.MaterialNames.ToList()); //Refresh
+
+                newMaterial = AvailableMaterials.Where(a => a.Name == newMaterialName)
+                              .Select(a => a).First();
+            }
 
             return newMaterial;
         }
