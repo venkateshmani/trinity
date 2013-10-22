@@ -252,42 +252,62 @@ namespace ordermanager.ViewModel
             }
         }
 
+         #region Inline Items Creation
 
-        //Create a new product
-        public MaterialName CreateNewMaterial(string newMaterialName)
-        {
-            MaterialName newMaterial = dbContext.MaterialNames.Create();
-            newMaterial.Name = newMaterialName;
-
-            OrderManagerDBEntities newManager = new OrderManagerDBEntities();
-            newManager.MaterialNames.Add(newMaterial);
-            newManager.SaveChanges();
-            newManager.Dispose();
-
-            AvailableMaterials = new ObservableCollection<MaterialName>(dbContext.MaterialNames.ToList()); //Refresh
-
-            return newMaterial;
-        }
-
-        public SubMaterial CreateNewSubMaterial(string subMaterialName, ProductMaterial material)
-        {
-            SubMaterial newSubMaterial = dbContext.SubMaterials.Create();
-            newSubMaterial.Name = subMaterialName;
-            newSubMaterial.MaterialNameID = material.MaterialNameID;
-
-            OrderManagerDBEntities newManager = new OrderManagerDBEntities();
-            newManager.SubMaterials.Add(newSubMaterial);
-            newManager.SaveChanges();
-            newManager.Dispose();
-
-            if (AvailableSubMaterials.ContainsKey(material.MaterialName.Name))
+            //Create a new product
+            public MaterialName CreateNewMaterial(string newMaterialName)
             {
-                AvailableSubMaterials[material.MaterialName.Name].Add(newSubMaterial);
-                OnPropertyChanged("AvailableSubMaterials");
+                //Check whether the material is already existing
+                MaterialName newMaterial = AvailableMaterials.Where(a => a.Name == newMaterialName)
+                           .Select(a => a).FirstOrDefault();
+
+                if (newMaterial == null)
+                {
+                    OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+                    newMaterial = newManager.MaterialNames.Create();
+                    newMaterial.Name = newMaterialName;
+                    newManager.MaterialNames.Add(newMaterial);
+                    newManager.SaveChanges();
+                    newManager.Dispose();
+
+                    AvailableMaterials = new ObservableCollection<MaterialName>(dbContext.MaterialNames.ToList()); //Refresh
+
+                    newMaterial = AvailableMaterials.Where(a => a.Name == newMaterialName)
+                                  .Select(a => a).First();
+                }
+
+                return newMaterial;
             }
 
-            return newSubMaterial;
-        }
+            public SubMaterial CreateNewSubMaterial(string subMaterialName, ProductMaterial material)
+            {
+                SubMaterial newSubMaterial = AvailableSubMaterials[material.MaterialName.Name].Where(a => a.Name == subMaterialName)
+                                                                                                .Select(a => a).FirstOrDefault();
+
+                if (newSubMaterial == null)
+                {
+                    OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+                    newSubMaterial = newManager.SubMaterials.Create();
+                    newSubMaterial.Name = subMaterialName;
+                    newSubMaterial.MaterialNameID = material.MaterialNameID;
+                    newManager.SubMaterials.Add(newSubMaterial);
+                    newManager.SaveChanges();
+                    newManager.Dispose();
+
+                    if (AvailableSubMaterials.ContainsKey(material.MaterialName.Name))
+                    {
+                        AvailableSubMaterials[material.MaterialName.Name].Add(newSubMaterial);
+                        OnPropertyChanged("AvailableSubMaterials");
+                        newSubMaterial = AvailableSubMaterials[material.MaterialName.Name].Where(a => a.Name == subMaterialName)
+                                                                                            .Select(a => a).First();
+                    }
+                }
+
+                return newSubMaterial;
+            }
+
+        #endregion 
+
         #endregion
 
         #region No Add support tables

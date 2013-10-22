@@ -263,6 +263,11 @@ namespace ordermanager.DatabaseModel
                     extraCost.HasUserClickedSaveOrSubmit = value;
                 }
 
+                foreach (ProductMaterial material in ProductMaterials)
+                {
+                    material.HasUserClickedSaveOrSubmit = true;
+                }
+
                 base.HasUserClickedSaveOrSubmit = value;
             }
         }

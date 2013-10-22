@@ -218,7 +218,7 @@
                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                                                                
                                                       ItemsSource="{Binding AvailableMaterials, Source={StaticResource DataProvider}}"         
                                                       DisplayMemberPath="Name" SelectedItem="{Binding MaterialNameWrapper, Mode=TwoWay,                 
-                                                      UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                      UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                       TextBoxBase.TextChanged="comboBox_TextChanged"
                                                       Height="20" />
                                             <Button  x:Name="addBtn" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
