@@ -208,11 +208,13 @@ namespace ordermanager.DatabaseModel
             }
             set
             {
-                m_TotalProductMaterialsCostWrapper = value;
-                OnPropertyChanged("TotalProductMaterialsCostWrapper");
-
-                if(ExpectedQuantity != 0)
-                    PerUnitTotalProductMaterialsCost = TotalProductMaterialsCostWrapper / ExpectedQuantity; 
+                if (m_TotalProductMaterialsCostWrapper != value)
+                {
+                    m_TotalProductMaterialsCostWrapper = value;
+                    OnPropertyChanged("TotalProductMaterialsCostWrapper");
+                    if (ExpectedQuantity != 0)
+                        PerUnitTotalProductMaterialsCost = TotalProductMaterialsCostWrapper / ExpectedQuantity;
+                }
             }
         }
 
@@ -226,8 +228,11 @@ namespace ordermanager.DatabaseModel
             }
             set
             {
-                m_TotalProductPurchaseCostWrapper = value;
-                OnPropertyChanged("TotalProductPurchaseCostWrapper");
+                if (m_TotalProductPurchaseCostWrapper != value)
+                {
+                    m_TotalProductPurchaseCostWrapper = value;
+                    OnPropertyChanged("TotalProductPurchaseCostWrapper");
+                }
             }
         }
 

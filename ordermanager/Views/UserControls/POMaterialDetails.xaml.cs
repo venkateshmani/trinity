@@ -46,12 +46,12 @@ namespace ordermanager.Views.UserControls
         private Company AddNewSupplier(string type, string companyName)
         {
             CustomerDetailsControl details = new CustomerDetailsControl();
-            Company newCompany = DBResources.Instance.CreateNewCompany(type);
+            Company newCompany = new Company();
             newCompany.Name = companyName;
             details.DataContext = newCompany;
             if (details.ShowDialog() == true)
             {
-                DBResources.Instance.SaveNewCompany(newCompany);
+                DBResources.Instance.SaveNewCompany(newCompany, type);
                 return newCompany;
             }
             return null;

@@ -120,30 +120,20 @@ namespace ordermanager.DatabaseModel
             }
             set
             {
-                m_TotalSubMaterialsPurchaseCostWrapper = value;
-                OnPropertyChanged("TotalSubMaterialsPurchaseCostWrapper");
-                RemoveError("TotalSubMaterialsPurchaseCostWrapper");
-                OrderProduct.RemoveError(MaterialName.Name);
-                if (TotalSubMaterialsPurchaseCostWrapper > ConsumptionCostWrapper)
+                if (m_TotalSubMaterialsPurchaseCostWrapper != value)
                 {
-                    AddError("TotalSubMaterialsPurchaseCostWrapper", "Total purchase cost can't be more than consumption cost", false);
-                    this.OrderProduct.AddError(MaterialName.Name, MaterialName.Name + " has some errors", false);
-                }                
+                    m_TotalSubMaterialsPurchaseCostWrapper = value;
+                    OnPropertyChanged("TotalSubMaterialsPurchaseCostWrapper");
+                    RemoveError("TotalSubMaterialsPurchaseCostWrapper");
+                    OrderProduct.RemoveError(MaterialName.Name);
+                    if (TotalSubMaterialsPurchaseCostWrapper > ConsumptionCostWrapper)
+                    {
+                        AddError("TotalSubMaterialsPurchaseCostWrapper", "Total purchase cost can't be more than consumption cost", false);
+                        OrderProduct.AddError(MaterialName.Name, MaterialName.Name + " has some errors", false);
+                    }
+                }
             }
-        }
-
-        public bool CanAddMaterialsWrapper
-        {
-            get { return DBResources.Instance.CurrentUser.UserRole.CanAddMaterials; }
-        }
-        public bool CanAddConsumptionWrapper
-        {
-            get { return DBResources.Instance.CurrentUser.UserRole.CanAddConsumption; }
-        }
-        public bool CanAddMaterialsCostWrapper
-        {
-            get { return DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost; }
-        }
+        }      
         #endregion
 
         #region Data Validation

@@ -145,25 +145,33 @@ namespace ordermanager.ViewModel
         }
 
 
-        public void SaveNewCompany(Company company)
+        public bool SaveNewCompany(Company company, string type)
         {
-            dbContext.Companies.Add(company);
-            Save();
-
+            OrderManagerDBEntities localContext = new OrderManagerDBEntities();           
+            try
+            {
+                var companyType = localContext.CompanyTypes.Where(c => c.Type == type).Select(c => c).FirstOrDefault();
+                company.CompanyTypeID = companyType.CompanyTypeID;
+                company.CompanyType = companyType;
+                localContext.Companies.Add(company);
+                localContext.SaveChanges();
+                localContext.Dispose();
+            }
+            catch { throw; }
+            Companies = new ObservableCollection<Company>(dbContext.Companies.ToList());
             switch (company.CompanyType.Type)
             {
                 case "Customer":
-                    Customers.Add(company);
+                    Customers = UpdateCompaniesCollection("Customer");
                     break;
                 case "Agent":
-                    Agents.Add(company);
+                    Agents = UpdateCompaniesCollection("Agent");
                     break;
                 case "Supplier":
-                    Suppliers.Add(company);
+                    Suppliers = UpdateCompaniesCollection("Supplier");
                     break;
             }
-
-            Companies.Add(company);
+            return true;
         }
 
 
@@ -236,7 +244,8 @@ namespace ordermanager.ViewModel
                     foreach (MaterialName mName in AvailableMaterials)
                     {
                         ObservableCollection<SubMaterial> queryItems = new ObservableCollection<SubMaterial>((from item in subMaterials where item.MaterialName.Name == mName.Name select item));
-                        m_AvailableSubMaterials.Add(mName.Name, queryItems);
+                        if (!m_AvailableSubMaterials.ContainsKey(mName.Name))
+                            m_AvailableSubMaterials.Add(mName.Name, queryItems);
                     }
                 }
                 return m_AvailableSubMaterials;
@@ -428,7 +437,7 @@ namespace ordermanager.ViewModel
                         break;
                     default: break;
                 }
-            } 
+            }
         }
 
         public bool Save()
