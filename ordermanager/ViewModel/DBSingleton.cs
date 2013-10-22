@@ -145,9 +145,9 @@ namespace ordermanager.ViewModel
         }
 
 
-        public bool SaveNewCompany(Company company, string type)
+        public Company SaveNewCompany(Company company, string type)
         {
-            OrderManagerDBEntities localContext = new OrderManagerDBEntities();           
+            OrderManagerDBEntities localContext = new OrderManagerDBEntities();
             try
             {
                 var companyType = localContext.CompanyTypes.Where(c => c.Type == type).Select(c => c).FirstOrDefault();
@@ -159,6 +159,13 @@ namespace ordermanager.ViewModel
             }
             catch { throw; }
             Companies = new ObservableCollection<Company>(dbContext.Companies.ToList());
+            Company newCompany = null;
+            if (Companies != null)
+            {
+                newCompany = Companies.Where(c => (c.CompanyType.Type == company.CompanyType.Type && c.Name == company.Name)).Select(c => c).FirstOrDefault();
+            }
+            else return null;
+
             switch (company.CompanyType.Type)
             {
                 case "Customer":
@@ -171,7 +178,7 @@ namespace ordermanager.ViewModel
                     Suppliers = UpdateCompaniesCollection("Supplier");
                     break;
             }
-            return true;
+            return newCompany;
         }
 
 
@@ -252,61 +259,61 @@ namespace ordermanager.ViewModel
             }
         }
 
-         #region Inline Items Creation
+        #region Inline Items Creation
 
-            //Create a new product
-            public MaterialName CreateNewMaterial(string newMaterialName)
+        //Create a new product
+        public MaterialName CreateNewMaterial(string newMaterialName)
+        {
+            //Check whether the material is already existing
+            MaterialName newMaterial = AvailableMaterials.Where(a => a.Name == newMaterialName)
+                       .Select(a => a).FirstOrDefault();
+
+            if (newMaterial == null)
             {
-                //Check whether the material is already existing
-                MaterialName newMaterial = AvailableMaterials.Where(a => a.Name == newMaterialName)
-                           .Select(a => a).FirstOrDefault();
+                OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+                newMaterial = newManager.MaterialNames.Create();
+                newMaterial.Name = newMaterialName;
+                newManager.MaterialNames.Add(newMaterial);
+                newManager.SaveChanges();
+                newManager.Dispose();
 
-                if (newMaterial == null)
-                {
-                    OrderManagerDBEntities newManager = new OrderManagerDBEntities();
-                    newMaterial = newManager.MaterialNames.Create();
-                    newMaterial.Name = newMaterialName;
-                    newManager.MaterialNames.Add(newMaterial);
-                    newManager.SaveChanges();
-                    newManager.Dispose();
+                AvailableMaterials = new ObservableCollection<MaterialName>(dbContext.MaterialNames.ToList()); //Refresh
 
-                    AvailableMaterials = new ObservableCollection<MaterialName>(dbContext.MaterialNames.ToList()); //Refresh
-
-                    newMaterial = AvailableMaterials.Where(a => a.Name == newMaterialName)
-                                  .Select(a => a).First();
-                }
-
-                return newMaterial;
+                newMaterial = AvailableMaterials.Where(a => a.Name == newMaterialName)
+                              .Select(a => a).First();
             }
 
-            public SubMaterial CreateNewSubMaterial(string subMaterialName, ProductMaterial material)
+            return newMaterial;
+        }
+
+        public SubMaterial CreateNewSubMaterial(string subMaterialName, ProductMaterial material)
+        {
+            SubMaterial newSubMaterial = AvailableSubMaterials[material.MaterialName.Name].Where(a => a.Name == subMaterialName)
+                                                                                            .Select(a => a).FirstOrDefault();
+
+            if (newSubMaterial == null)
             {
-                SubMaterial newSubMaterial = AvailableSubMaterials[material.MaterialName.Name].Where(a => a.Name == subMaterialName)
-                                                                                                .Select(a => a).FirstOrDefault();
+                OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+                newSubMaterial = newManager.SubMaterials.Create();
+                newSubMaterial.Name = subMaterialName;
+                newSubMaterial.MaterialNameID = material.MaterialNameID;
+                newManager.SubMaterials.Add(newSubMaterial);
+                newManager.SaveChanges();
+                newManager.Dispose();
 
-                if (newSubMaterial == null)
+                if (AvailableSubMaterials.ContainsKey(material.MaterialName.Name))
                 {
-                    OrderManagerDBEntities newManager = new OrderManagerDBEntities();
-                    newSubMaterial = newManager.SubMaterials.Create();
-                    newSubMaterial.Name = subMaterialName;
-                    newSubMaterial.MaterialNameID = material.MaterialNameID;
-                    newManager.SubMaterials.Add(newSubMaterial);
-                    newManager.SaveChanges();
-                    newManager.Dispose();
-
-                    if (AvailableSubMaterials.ContainsKey(material.MaterialName.Name))
-                    {
-                        AvailableSubMaterials[material.MaterialName.Name].Add(newSubMaterial);
-                        OnPropertyChanged("AvailableSubMaterials");
-                        newSubMaterial = AvailableSubMaterials[material.MaterialName.Name].Where(a => a.Name == subMaterialName)
-                                                                                            .Select(a => a).First();
-                    }
+                    AvailableSubMaterials[material.MaterialName.Name].Add(newSubMaterial);
+                    OnPropertyChanged("AvailableSubMaterials");
+                    newSubMaterial = AvailableSubMaterials[material.MaterialName.Name].Where(a => a.Name == subMaterialName)
+                                                                                        .Select(a => a).First();
                 }
-
-                return newSubMaterial;
             }
 
-        #endregion 
+            return newSubMaterial;
+        }
+
+        #endregion
 
         #endregion
 

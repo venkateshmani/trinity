@@ -219,6 +219,7 @@ namespace ordermanager.DatabaseModel
             ValidateCost();
             ValidateCurrencyValueInINR();
             ValidateUOM();
+            ValidateSupplier();
             return !HasErrors;
         }
 
@@ -268,6 +269,16 @@ namespace ordermanager.DatabaseModel
                 AddError("QuantityWrapper", "Quantity can't be Zero", false);
             }
         }
+
+        private void ValidateSupplier()
+        {
+            RemoveError("SupplierWrapper");
+            if (Company ==null)
+            {
+                AddError("SupplierWrapper", "Select supplier", false);
+            }
+        }
+
         #endregion Data Validation
     }
 }
