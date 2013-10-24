@@ -215,9 +215,8 @@ namespace ordermanager.ViewModel
         //Create a new product
         public ProductName CreateNewProduct(string newProductName)
         {
-            ProductName newProduct = dbContext.ProductNames.Create();
+            ProductName newProduct = new ProductName();
             newProduct.Name = newProductName;
-
 
             OrderManagerDBEntities newManager = new OrderManagerDBEntities();
             newManager.ProductNames.Add(newProduct);
@@ -225,6 +224,9 @@ namespace ordermanager.ViewModel
             newManager.Dispose();
 
             AvailableProducts = new ObservableCollection<ProductName>(dbContext.ProductNames.ToList());
+
+            newProduct = AvailableProducts.Where(a => a.Name == newProductName)
+                                          .Select(a => a).First();
 
             return newProduct;
         }
@@ -279,7 +281,7 @@ namespace ordermanager.ViewModel
             if (newMaterial == null)
             {
                 OrderManagerDBEntities newManager = new OrderManagerDBEntities();
-                newMaterial = newManager.MaterialNames.Create();
+                newMaterial = new MaterialName();
                 newMaterial.Name = newMaterialName;
                 newManager.MaterialNames.Add(newMaterial);
                 newManager.SaveChanges();
@@ -302,7 +304,7 @@ namespace ordermanager.ViewModel
             if (newSubMaterial == null)
             {
                 OrderManagerDBEntities newManager = new OrderManagerDBEntities();
-                newSubMaterial = newManager.SubMaterials.Create();
+                newSubMaterial = new SubMaterial();
                 newSubMaterial.Name = subMaterialName;
                 newSubMaterial.MaterialNameID = material.MaterialNameID;
                 newManager.SubMaterials.Add(newSubMaterial);
