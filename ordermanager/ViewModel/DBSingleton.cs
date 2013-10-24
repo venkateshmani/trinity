@@ -71,6 +71,7 @@ namespace ordermanager.ViewModel
             private set
             {
                 m_Companies = value;
+                OnPropertyChanged("Companies");
             }
         }
 
@@ -89,6 +90,7 @@ namespace ordermanager.ViewModel
             private set
             {
                 m_Customers = value;
+                OnPropertyChanged("Customers");
             }
         }
 
@@ -106,6 +108,7 @@ namespace ordermanager.ViewModel
             private set
             {
                 m_Agents = value;
+                OnPropertyChanged("Agents");
             }
         }
 
@@ -136,7 +139,7 @@ namespace ordermanager.ViewModel
         //Create a new Company of type passed in the arguments
         public Company CreateNewCompany(string type)
         {
-            Company newCompany = dbContext.Companies.Create();
+            Company newCompany = new Company();
 
 
             var companyType = dbContext.CompanyTypes.Where(c => c.Type == type)
@@ -144,7 +147,7 @@ namespace ordermanager.ViewModel
                                                       .FirstOrDefault();
 
             newCompany.CompanyTypeID = companyType.CompanyTypeID;
-            newCompany.CompanyType = companyType;
+            //newCompany.CompanyType = companyType;
 
             return newCompany;
         }
