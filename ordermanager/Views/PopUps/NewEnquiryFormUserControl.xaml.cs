@@ -380,8 +380,7 @@ namespace ordermanager.Views.PopUps
             details.DataContext = newCompany;
             if (details.ShowDialog() == true)
             {
-                DBResources.Instance.SaveNewCompany(newCompany, type);
-                return newCompany;
+                return DBResources.Instance.SaveNewCompany(newCompany, type);
             }
             return null;
         }
