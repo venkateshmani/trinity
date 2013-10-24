@@ -197,7 +197,7 @@
                             <TextBox Width="60" BorderBrush="LightGray"
                                  HorizontalContentAlignment="Right" 
                                  VerticalContentAlignment="Center"
-                                 Controls:TextboxHelper.Watermark="0" Text="{Binding Order.CommissionValueWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                 Controls:TextboxHelper.Watermark="0" Text="{Binding Order.CommissionValueWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, StringFormat=n}"
                                  PreviewTextInput="TextBox_PreviewTextInput"
                                  DataObject.Pasting="PastingHandler" 
                                  IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
