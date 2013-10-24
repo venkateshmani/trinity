@@ -225,5 +225,13 @@ namespace ordermanager.Views.UserControls
             gridDetails.DataContextChanged += DataGrid_DataContextChanged;
 
         }
+
+        private void UserControl_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue == true)
+                spAddDeleteButtons.Visibility = System.Windows.Visibility.Visible;
+            else
+                spAddDeleteButtons.Visibility = System.Windows.Visibility.Collapsed;
+        }
     }
 }

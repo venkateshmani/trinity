@@ -38,16 +38,19 @@ namespace ordermanager.Views.UserControls
         private void SetControlState()
         {
             if (m_ViewModel!=null && m_ViewModel.Order != null)
-            {
-                gridButtons.Visibility = System.Windows.Visibility.Visible;
-                poMaterialsDetails.IsEnabled = true;
-                poProductDetails.IsEnabled = true;  
+            {                
                 OrderStatusEnum status = Helper.GetOrderStatusEnumFromString(m_ViewModel.Order.OrderStatu.StatusLabel);
-                if (status >= OrderStatusEnum.SubMaterialsJobCompleted)
+                if (DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterials && status == OrderStatusEnum.MaterialsJobCompleted)
+                {
+                    gridButtons.Visibility = System.Windows.Visibility.Visible;
+                    poMaterialsDetails.IsEnabled = true;
+                    poProductDetails.IsEnabled = true;  
+                }
+                else
                 {
                     gridButtons.Visibility = System.Windows.Visibility.Collapsed;
                     poMaterialsDetails.IsEnabled = false;
-                    poProductDetails.IsEnabled = false;                  
+                    poProductDetails.IsEnabled = false;
                 }
             }
         }

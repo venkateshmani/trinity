@@ -7,7 +7,7 @@
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             mc:Ignorable="d" d:DesignHeight="422.388" d:DesignWidth="883.582">
+             mc:Ignorable="d" d:DesignHeight="422.388" d:DesignWidth="883.582" IsEnabledChanged="UserControl_IsEnabledChanged">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -115,7 +115,7 @@
             </Grid>
         </Grid>
         <StackPanel Grid.Row="1" Margin="10">
-            <StackPanel  Margin="0,5,0,2" Orientation="Horizontal" >
+            <StackPanel  Margin="0,5,0,2" Orientation="Horizontal" x:Name="spAddDeleteButtons" >
                 <Button x:Name="btnAddNewItem"  Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewItem_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />

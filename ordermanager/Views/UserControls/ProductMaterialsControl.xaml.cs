@@ -159,7 +159,10 @@ namespace ordermanager.Views.UserControls
         {
             if (Persist(true))
             {
-                 InformUser("Successfully submitted to next level !");
+                gridButtons.Visibility = System.Windows.Visibility.Collapsed;
+                spAddDeleteButtons.Visibility = System.Windows.Visibility.Collapsed;
+                gridDetails.IsEnabled = false;
+                InformUser("Successfully submitted to next level !");
             }
         }
 

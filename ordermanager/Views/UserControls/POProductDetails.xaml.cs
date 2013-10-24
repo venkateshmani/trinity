@@ -45,5 +45,13 @@ namespace ordermanager.Views.UserControls
             if (m_ViewModel != null)
                 m_ViewModel.AddNewCountry();
         }
+
+        private void UserControl_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool) e.NewValue == true)
+                btnAddNewCountry.Visibility = System.Windows.Visibility.Visible;
+            else
+                btnAddNewCountry.Visibility = System.Windows.Visibility.Collapsed;
+        }
     }
 }
