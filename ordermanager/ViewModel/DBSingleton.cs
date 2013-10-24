@@ -256,17 +256,24 @@ namespace ordermanager.ViewModel
             {
                 if (m_AvailableSubMaterials == null)
                 {
-                    m_AvailableSubMaterials = new Dictionary<string, ObservableCollection<SubMaterial>>(1);
-                    List<SubMaterial> subMaterials = dbContext.SubMaterials.ToList();
-                    foreach (MaterialName mName in AvailableMaterials)
-                    {
-                        ObservableCollection<SubMaterial> queryItems = new ObservableCollection<SubMaterial>((from item in subMaterials where item.MaterialName.Name == mName.Name select item));
-                        if (!m_AvailableSubMaterials.ContainsKey(mName.Name))
-                            m_AvailableSubMaterials.Add(mName.Name, queryItems);
-                    }
+                    PopulateAvailableSubMaterials();
                 }
                 return m_AvailableSubMaterials;
             }
+        }
+
+        private void PopulateAvailableSubMaterials()
+        {
+            m_AvailableSubMaterials = new Dictionary<string, ObservableCollection<SubMaterial>>(1);
+            List<SubMaterial> subMaterials = dbContext.SubMaterials.ToList();
+            foreach (MaterialName mName in AvailableMaterials)
+            {
+                ObservableCollection<SubMaterial> queryItems = new ObservableCollection<SubMaterial>((from item in subMaterials where item.MaterialName.Name == mName.Name select item));
+                if (!m_AvailableSubMaterials.ContainsKey(mName.Name))
+                    m_AvailableSubMaterials.Add(mName.Name, queryItems);
+            }
+
+            OnPropertyChanged("AvailableSubMaterials");
         }
 
         #region Inline Items Creation
@@ -313,7 +320,7 @@ namespace ordermanager.ViewModel
 
                 if (AvailableSubMaterials.ContainsKey(material.MaterialName.Name))
                 {
-                    AvailableSubMaterials[material.MaterialName.Name].Add(newSubMaterial);
+                    PopulateAvailableSubMaterials();
                     OnPropertyChanged("AvailableSubMaterials");
                     newSubMaterial = AvailableSubMaterials[material.MaterialName.Name].Where(a => a.Name == subMaterialName)
                                                                                         .Select(a => a).First();
