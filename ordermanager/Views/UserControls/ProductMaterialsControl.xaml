@@ -177,15 +177,15 @@
                 </StackPanel>
             </Grid>
 
-            <Grid Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid x:Name="gridDetails" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <StackPanel x:Name="spAddeDeleteButtons" Grid.Row="0" Margin="10,10,5,0" Orientation="Horizontal" Visibility="{Binding CanAddMaterialsWrapper, Converter={StaticResource BoolToVisibility}}" >
-                    <Button x:Name="btnAddNewItem"  Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewItem_Click"
-                            Visibility="{Binding NewItemAddBtnVisibility}">
+                <StackPanel x:Name="spAddDeleteButtons" Grid.Row="0" Margin="10,10,5,0" Orientation="Horizontal"
+                            Visibility="{Binding LoggedInUser.UserRole.CanAddMaterials, Converter={StaticResource BoolToVisibility}, Source={StaticResource DataProvider}}">
+                    <Button x:Name="btnAddNewItem"  Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewItem_Click">
                         <Button.Background>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </Button.Background>
@@ -348,7 +348,7 @@
             <Rectangle Height="1" Fill="Gray" />
         </Grid>
 
-        <Grid Grid.Row="3" Grid.ColumnSpan="3">
+        <Grid x:Name="gridButtons" Grid.Row="3" Grid.ColumnSpan="3">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <Button x:Name="sendBackBtn" Content="Send Back"  Margin="5" Width="150" Height="35" Foreground="White"
                                         ToolTip="Send back to previous level" Visibility="Hidden">

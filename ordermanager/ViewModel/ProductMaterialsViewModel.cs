@@ -56,42 +56,48 @@ namespace ordermanager.ViewModel
             }
         }
 
+
+
         public bool SetOrder(Order order)
         {
             if (m_Order != order)
             {
+                ActionButtonsVisibility = Visibility.Collapsed;
+                NewItemAddBtnVisibility = Visibility.Collapsed;
+                IsEnabled = false;
                 if (order != null)
                 {
-                    Products = new ObservableCollection<OrderProduct>(order.OrderProducts);
-                }
-                m_Order = order;
-
-
-                UserRole cuRole = DBResources.Instance.CurrentUser.UserRole;
-                OrderStatu coStatus = Order.OrderStatu;
-
-                if ((cuRole.CanAddMaterials && coStatus.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated) ||
-                     (cuRole.CanAddMaterialsCost && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded) ||
-                     (cuRole.CanAddConsumption && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsCostAdded))
-                {
-                    ActionButtonsVisibility = Visibility.Visible;
-                }
-                else
-                {
-                    ActionButtonsVisibility = Visibility.Hidden;
-                }
-
-              
-                if ((Order.OrderStatu.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated ||
-                    Order.OrderStatu.OrderStatusID == (short)OrderStatusEnum.EnquiryRejected) &&
-                    DBResources.Instance.CurrentUser.UserRole.CanAddMaterials == true)
-                {
-                    NewItemAddBtnVisibility = System.Windows.Visibility.Visible;
-                }
-                else
-                {
-                    NewItemAddBtnVisibility = System.Windows.Visibility.Hidden;
-                }
+                    m_Products = new ObservableCollection<OrderProduct>(order.OrderProducts);
+                    m_Order = order;
+                    UserRole cuRole = DBResources.Instance.CurrentUser.UserRole;
+                    OrderStatu coStatus = Order.OrderStatu;                   
+                    if (cuRole.CanAddMaterials)
+                    {
+                        if (coStatus.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated || Order.OrderStatu.OrderStatusID == (short)OrderStatusEnum.EnquiryRejected)
+                        {
+                            ActionButtonsVisibility = Visibility.Visible;
+                            NewItemAddBtnVisibility = Visibility.Visible;
+                            IsEnabled = true;
+                        }
+                    }
+                    else if ((cuRole.CanAddMaterialsCost && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded) ||
+                         (cuRole.CanAddConsumption && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsCostAdded))
+                    {
+                        ActionButtonsVisibility = Visibility.Visible;
+                        NewItemAddBtnVisibility = Visibility.Hidden;
+                        IsEnabled = true;
+                    }
+                    else
+                    {
+                        ActionButtonsVisibility = Visibility.Hidden;
+                        NewItemAddBtnVisibility = Visibility.Hidden;
+                        IsEnabled = false;
+                    }
+                    NotifyPropertyChanged("Products");
+                    if (m_Products.Count > 0)
+                        NotifyPropertyChanged("SelectedIndex");
+                    NotifyPropertyChanged("Order");
+                }                
             }
             return true;
         }
@@ -112,7 +118,21 @@ namespace ordermanager.ViewModel
                 return false;
         }
 
-        private Visibility m_ActionButtonsVisibility = Visibility.Visible;
+        bool m_IsEnabled = false;
+        public bool IsEnabled
+        {
+            get { return m_IsEnabled; }
+            set
+            {
+                if (m_IsEnabled != value)
+                {
+                    m_IsEnabled = value;
+                    NotifyPropertyChanged("IsEnabled");
+                }
+            }
+        }
+
+        private Visibility m_ActionButtonsVisibility = Visibility.Collapsed;
         public Visibility ActionButtonsVisibility
         {
             get
@@ -126,16 +146,16 @@ namespace ordermanager.ViewModel
             }
         }
 
-        private Visibility m_NewItemAddBtnVisibiliti = Visibility.Visible;
+        private Visibility m_NewItemAddBtnVisibility = Visibility.Collapsed;
         public Visibility NewItemAddBtnVisibility
         {
             get
             {
-                return m_NewItemAddBtnVisibiliti;
+                return m_NewItemAddBtnVisibility;
             }
             set
             {
-                m_NewItemAddBtnVisibiliti = value;
+                m_NewItemAddBtnVisibility = value;
                 NotifyPropertyChanged("NewItemAddBtnVisibility");
             }
         }
@@ -182,28 +202,28 @@ namespace ordermanager.ViewModel
 
                 #region History
 
-                    History historyItem = new History();
-                    historyItem.Date = DateTime.Now;
-                    historyItem.UserName = DBResources.Instance.CurrentUser.UserName;
-                    historyItem.Comment = userComment;
+                History historyItem = new History();
+                historyItem.Date = DateTime.Now;
+                historyItem.UserName = DBResources.Instance.CurrentUser.UserName;
+                historyItem.Comment = userComment;
 
-                    if (isSubmit)
-                    {
-                        historyItem.OrderChanges = "Submitted in Materials Page. Order Stauts Changed to " + Order.OrderStatu.DisplayLabel.ToUpper();
-                    }
-                    else
-                    {
-                        historyItem.OrderChanges = "Saved Changes in Materials";
-                    }
+                if (isSubmit)
+                {
+                    historyItem.OrderChanges = "Submitted in Materials Page. Order Stauts Changed to " + Order.OrderStatu.DisplayLabel.ToUpper();
+                }
+                else
+                {
+                    historyItem.OrderChanges = "Saved Changes in Materials";
+                }
 
-                    Order.Histories.Add(historyItem);
-                    
-                #endregion 
+                Order.Histories.Add(historyItem);
+
+                #endregion
 
                 Order.LastModifiedDate = DateTime.Now;
                 if (DBResources.Instance.UpdateOrderProducts())
                 {
-                    if(isSubmit)
+                    if (isSubmit)
                         ActionButtonsVisibility = Visibility.Hidden;
                     return true;
                 }

@@ -31,7 +31,6 @@ namespace ordermanager.Views.UserControls
         {
             InitializeComponent();
         }
-
        
         private void productsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -60,8 +59,34 @@ namespace ordermanager.Views.UserControls
 
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            m_ViewModel = DataContext as ProductMaterialsViewModel;               
+            m_ViewModel = DataContext as ProductMaterialsViewModel;
+
+            if (m_ViewModel != null)
+                m_ViewModel.PropertyChanged -= m_ViewModel_PropertyChanged;
+            m_ViewModel = DataContext as ProductMaterialsViewModel;           
+            if (m_ViewModel != null)
+            {
+                m_ViewModel.PropertyChanged += m_ViewModel_PropertyChanged;
+                SetControlState();
+            }
         }
+
+        void m_ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Order")
+                SetControlState();
+        }
+
+        private void SetControlState()
+        {
+            if (m_ViewModel != null)
+            {
+                gridButtons.Visibility = m_ViewModel.ActionButtonsVisibility;
+                spAddDeleteButtons.Visibility = m_ViewModel.NewItemAddBtnVisibility;
+                gridDetails.IsEnabled = m_ViewModel.IsEnabled;             
+            }
+        }
+
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)
         {
