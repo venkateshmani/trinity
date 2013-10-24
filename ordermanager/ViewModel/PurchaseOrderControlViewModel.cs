@@ -132,7 +132,10 @@ namespace ordermanager.ViewModel
                     }
                 }
             }
-            m_Order.OrderStatusID = (short)OrderStatusEnum.SubMaterialsJobCompleted;
+
+            if(isSubmit)
+                m_Order.OrderStatusID = (short)OrderStatusEnum.SubMaterialsJobCompleted;
+
             #region History
 
             History historyItem = new History();
@@ -152,6 +155,7 @@ namespace ordermanager.ViewModel
             m_Order.Histories.Add(historyItem);
 
             #endregion
+
             return DBResources.Instance.UpdateOrderProducts();
         }
 
