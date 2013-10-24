@@ -498,7 +498,7 @@ namespace ordermanager.DatabaseModel
                 cost += extraCost.Cost;
             }
 
-            TotalProductMaterialsCostWrapper = cost;
+            TotalProductMaterialsCostWrapper = cost * ExpectedQuantity;
         }
 
 
