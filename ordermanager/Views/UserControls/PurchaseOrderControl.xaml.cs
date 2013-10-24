@@ -40,7 +40,7 @@ namespace ordermanager.Views.UserControls
             if (m_ViewModel!=null && m_ViewModel.Order != null)
             {                
                 OrderStatusEnum status = Helper.GetOrderStatusEnumFromString(m_ViewModel.Order.OrderStatu.StatusLabel);
-                if (DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterials && status == OrderStatusEnum.MaterialsJobCompleted)
+                if (DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterials && status == OrderStatusEnum.OrderConfirmed)
                 {
                     gridButtons.Visibility = System.Windows.Visibility.Visible;
                     poMaterialsDetails.IsEnabled = true;
