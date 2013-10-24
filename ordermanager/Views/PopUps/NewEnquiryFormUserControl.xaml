@@ -200,7 +200,7 @@
                                  Controls:TextboxHelper.Watermark="0" Text="{Binding Order.CommissionValueWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                  PreviewTextInput="TextBox_PreviewTextInput"
                                  DataObject.Pasting="PastingHandler" 
-                                 IsReadOnly="{Binding IsReadOnly}"
+                                 IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
                                  />
                             <ComboBox Width="73" Margin="5,0,0,0"
                                   ItemsSource="{Binding DBResources.CommissionValueTypes}"
@@ -326,7 +326,8 @@
                                 <DataTemplate>
                                     <TextBox Text="{Binding ExpectedQuantityWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
                                             PreviewTextInput="TextBox_PreviewTextInput"
-                                            DataObject.Pasting="PastingHandler" />
+                                            DataObject.Pasting="PastingHandler"
+                                            IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -415,7 +416,8 @@
                                 <DataTemplate>
                                     <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
                                             PreviewTextInput="TextBox_PreviewTextInput"
-                                            DataObject.Pasting="PastingHandler" />
+                                            DataObject.Pasting="PastingHandler"
+                                            IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -425,7 +427,8 @@
                                 <DataTemplate>
                                     <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" 
                                             PreviewTextInput="TextBox_PreviewTextInput"
-                                            DataObject.Pasting="PastingHandler" />
+                                            DataObject.Pasting="PastingHandler" 
+                                            IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
