@@ -267,7 +267,7 @@
                 </Grid.RowDefinitions>
                 <Button x:Name="addNewItemBtn" Grid.Row="0" Content="New Item"  Margin="5" Width="100" Height="25" Foreground="White"
                                         ToolTip="Add New Item" HorizontalAlignment="Left" PreviewMouseLeftButtonUp="addNewItemBtn_PreviewMouseLeftButtonUp"
-                                        Visibility="{Binding IsReadOnly, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        Visibility="{Binding CanAddNewItem, Converter={StaticResource BoolToVisibilityConverter}}">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>

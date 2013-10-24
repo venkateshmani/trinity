@@ -413,7 +413,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="DatabaseModel\OrderManagerModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OrderManagerModel.Designer.cs</LastGenOutput>

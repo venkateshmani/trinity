@@ -155,8 +155,11 @@ namespace ordermanager.Views.UserControls
                     {
                         if (m_ViewModel.Save(isSubmit, commentBox.Comment))
                         {
-                            btnAddNewItem.Visibility = System.Windows.Visibility.Hidden;
-                            materialsGrid.IsReadOnly = true;
+                            if (isSubmit)
+                            {
+                                btnAddNewItem.Visibility = System.Windows.Visibility.Hidden;
+                                materialsGrid.IsReadOnly = true;
+                            }
                         }
                         return true;
                     }

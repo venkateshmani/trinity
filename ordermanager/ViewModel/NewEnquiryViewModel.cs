@@ -22,6 +22,20 @@ namespace ordermanager.ViewModel
             Order = order;
         }
 
+        private bool m_CanAddNewItem = true;
+        public bool CanAddNewItem
+        {
+            get
+            {
+                return m_CanAddNewItem;
+            }
+            set
+            {
+                m_CanAddNewItem = value;
+                OnPropertyChanged("CanAddNewItem");
+            }
+        }
+
         private bool m_IsReadOnly = false;
         public bool IsReadOnly
         {
@@ -32,6 +46,7 @@ namespace ordermanager.ViewModel
             set
             {
                 m_IsReadOnly = value;
+                CanAddNewItem = !IsReadOnly;
                 OnPropertyChanged("IsReadOnly");
             }
         }
@@ -190,6 +205,7 @@ namespace ordermanager.ViewModel
 
                 Order.OrderStatusID = 1;
                 Order.LastModifiedDate = DateTime.Now;
+                CanAddNewItem = false;
                 return DBResources.CreateNewOrder(Order, userComment);
             }
 

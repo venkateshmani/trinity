@@ -50,7 +50,7 @@ namespace ordermanager.Views.PopUps
                 //rootLayout.IsEnabled = true;
                 if (!value)
                 {
-                    addNewItemBtn.Visibility = System.Windows.Visibility.Collapsed;
+                    //addNewItemBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewCustomerBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewAgentBtn.Visibility = System.Windows.Visibility.Collapsed;
                 }
