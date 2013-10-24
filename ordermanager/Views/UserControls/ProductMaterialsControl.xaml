@@ -184,7 +184,8 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel x:Name="spAddeDeleteButtons" Grid.Row="0" Margin="10,10,5,0" Orientation="Horizontal" Visibility="{Binding CanAddMaterialsWrapper, Converter={StaticResource BoolToVisibility}}" >
-                    <Button x:Name="btnAddNewItem"  Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewItem_Click">
+                    <Button x:Name="btnAddNewItem"  Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewItem_Click"
+                            Visibility="{Binding NewItemAddBtnVisibility}">
                         <Button.Background>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </Button.Background>

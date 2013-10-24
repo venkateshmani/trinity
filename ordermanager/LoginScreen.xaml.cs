@@ -22,7 +22,16 @@ namespace ordermanager
     {
         public LoginScreen()
         {
-            InitializeComponent();           
+            InitializeComponent();
+            this.IsVisibleChanged += LoginScreen_IsVisibleChanged;
+        }
+
+        void LoginScreen_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsVisible && DBResources.Instance != null)
+            {
+                DBResources.Instance.ReInstanceDbContext();
+            }
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)

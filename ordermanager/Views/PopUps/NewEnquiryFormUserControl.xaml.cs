@@ -46,12 +46,10 @@ namespace ordermanager.Views.PopUps
             set
             {
                 m_IsNewEnquiry = value;
-                rootLayout.IsEnabled = value;
                 NewEnquiryViewModel = null;
+                //rootLayout.IsEnabled = true;
                 if (!value)
                 {
-                    // positiveDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
-                    // negativeDecisionBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewItemBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewCustomerBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewAgentBtn.Visibility = System.Windows.Visibility.Collapsed;
@@ -63,10 +61,13 @@ namespace ordermanager.Views.PopUps
             }
         }
 
-
         public void SetOrder(Order order)
         {
             this.NewEnquiryViewModel = new NewEnquiryViewModel(order);
+            if (!IsNewEnquiry)
+            {
+                this.NewEnquiryViewModel.IsReadOnly = true;
+            }
         }
 
 

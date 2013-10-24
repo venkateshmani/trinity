@@ -22,6 +22,20 @@ namespace ordermanager.ViewModel
             Order = order;
         }
 
+        private bool m_IsReadOnly = false;
+        public bool IsReadOnly
+        {
+            get
+            {
+                return m_IsReadOnly;
+            }
+            set
+            {
+                m_IsReadOnly = value;
+                OnPropertyChanged("IsReadOnly");
+            }
+        }
+
         private Order m_Order = null;
         public Order Order
         {

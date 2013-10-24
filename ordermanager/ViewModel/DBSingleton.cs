@@ -46,6 +46,11 @@ namespace ordermanager.ViewModel
             dbContext = new OrderManagerDBEntities();
         }
 
+        public void ReInstanceDbContext()
+        {
+            _DBSingleton = null;
+            _DBSingleton = new DBResources();
+        }
 
         #region Supporting Collections
 

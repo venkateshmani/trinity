@@ -29,9 +29,10 @@ namespace ordermanager.Views.UserControls
 
         public ProductMaterialsControl()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
+       
         private void productsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             OrderProduct product = productsList.SelectedItem as OrderProduct;
@@ -152,7 +153,11 @@ namespace ordermanager.Views.UserControls
                 {
                     if ((commentBox.ShowDialog() == true))
                     {
-                        m_ViewModel.Save(isSubmit, commentBox.Comment);
+                        if (m_ViewModel.Save(isSubmit, commentBox.Comment))
+                        {
+                            btnAddNewItem.Visibility = System.Windows.Visibility.Hidden;
+                            materialsGrid.IsReadOnly = true;
+                        }
                         return true;
                     }
                 }

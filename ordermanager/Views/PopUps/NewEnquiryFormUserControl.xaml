@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
+             xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
              mc:Ignorable="d" d:DesignHeight="619" d:DesignWidth="1068" Background="White">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -35,6 +36,8 @@
                 <Setter Property="Margin" Value="5" />
             </Style>
             <DataProviders:DataProvider x:Key="DataProvider" />
+            <Converters:FlipBoolValueConverter x:Key="FlipBoolValueConverter"/>
+            <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
 
 
@@ -75,7 +78,8 @@
                               DisplayMemberPath="Name"
                               IsEditable="True"
                               SelectedItem="{Binding Order.Customer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                              SelectionChanged="customerComboBox_SelectionChanged"/>
+                              SelectionChanged="customerComboBox_SelectionChanged"
+                              IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
 
                         <Button Width="28"
                         Height="28"
@@ -128,7 +132,8 @@
                                     SelectedDate="{Binding Order.ExpectedDeliveryDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date"
-                                    SelectedDateChanged="expectedDeliveryDate_SelectedDateChanged" />
+                                    SelectedDateChanged="expectedDeliveryDate_SelectedDateChanged"
+                                    IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
                             <TextBlock x:Name="numberOfDays" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Top" 
                                    FontWeight="Bold" />
                             <TextBlock Text="Days" VerticalAlignment="Center" />
@@ -143,7 +148,8 @@
                               DisplayMemberPath="Name"
                               IsEditable="True"
                               SelectedItem="{Binding Order.Agent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              SelectionChanged="agentComboxBox_SelectionChanged" />
+                              SelectionChanged="agentComboxBox_SelectionChanged"
+                              IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
 
                         <Button Width="28"
                         Height="28"
@@ -185,7 +191,7 @@
                              DisplayMemberPath="Mode"
                              SelectedItem="{Binding Order.OrderThroughWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
                              IsEditable="True" 
-                             />
+                             IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
                         <StackPanel x:Name="commisionInfo" Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="5">
                             <TextBlock Text="and commision is" Grid.Row="5" Style="{StaticResource inLineTextBlockStyle}"/>
                             <TextBox Width="60" BorderBrush="LightGray"
@@ -194,19 +200,16 @@
                                  Controls:TextboxHelper.Watermark="0" Text="{Binding Order.CommissionValueWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                  PreviewTextInput="TextBox_PreviewTextInput"
                                  DataObject.Pasting="PastingHandler" 
+                                 IsReadOnly="{Binding IsReadOnly}"
                                  />
                             <ComboBox Width="73" Margin="5,0,0,0"
                                   ItemsSource="{Binding DBResources.CommissionValueTypes}"
                                   DisplayMemberPath="Type"
                                   SelectedItem="{Binding Order.CommissionValueTypeWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                                   />
+                                  IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
                         </StackPanel>
                     </StackPanel>
-
-
                 </Grid>
-
-
             </Grid>
 
             <Grid Grid.Column="1" Grid.RowSpan="2">
@@ -263,7 +266,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Button x:Name="addNewItemBtn" Grid.Row="0" Content="New Item"  Margin="5" Width="100" Height="25" Foreground="White"
-                                        ToolTip="Add New Item" HorizontalAlignment="Left" PreviewMouseLeftButtonUp="addNewItemBtn_PreviewMouseLeftButtonUp">
+                                        ToolTip="Add New Item" HorizontalAlignment="Left" PreviewMouseLeftButtonUp="addNewItemBtn_PreviewMouseLeftButtonUp"
+                                        Visibility="{Binding IsReadOnly, Converter={StaticResource BoolToVisibilityConverter}}">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
@@ -271,7 +275,8 @@
                 <DataGrid x:Name="productsRequired"  Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1"
                       CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeRows="True"  CanUserSortColumns="True" GridLinesVisibility="Horizontal"
                       ColumnWidth="Auto" ItemsSource="{Binding OrderProducts}" HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray"
-                      HeadersVisibility="All"  RowHeaderWidth="25">
+                      HeadersVisibility="All"  RowHeaderWidth="25"
+                      IsReadOnly="{Binding IsReadOnly}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn x:Name="productColumn" Header="Product" Width="0.2*">
                             <DataGridTemplateColumn.CellTemplate>
@@ -282,7 +287,7 @@
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
-                                        <ComboBox x:Name="comboBox" Grid.Column="0"
+                                        <ComboBox x:Name="comboBox"   Grid.Column="0"
                                                                       IsEditable="True"
                                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                                       ItemsSource="{Binding AvailableProducts, Source={StaticResource DataProvider}}"
@@ -290,7 +295,8 @@
                                                                       SelectedItem="{Binding ProductNameWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                                       TextBoxBase.TextChanged="comboBox_TextChanged"
                                                                       Height="20"
-                                                                      />
+                                                                      PresentationTraceSources.TraceLevel="High"
+                                                                      IsHitTestVisible="{Binding IsReadOnly, ElementName=productsRequired, Converter={StaticResource FlipBoolValueConverter}}"/>
                                         <Button Width="28"
                                             Grid.Column="1"
                                             Height="28"
@@ -341,7 +347,7 @@
                                                                       ItemsSource="{Binding UOMs, Source={StaticResource DataProvider}}"
                                                                       DisplayMemberPath="Units"
                                                                       SelectedItem="{Binding  UnitsOfMeasurementWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                                      />
+                                                                      IsHitTestVisible="{Binding IsReadOnly, ElementName=productsRequired, Converter={StaticResource FlipBoolValueConverter}}"/>
                                         <Button Width="28"
                                             Grid.Column="1"
                                             Height="28"
@@ -380,7 +386,7 @@
                                                                       DisplayMemberPath="Symbol"
                                                                       SelectedItem="{Binding CurrencyWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                                       SelectionChanged="currencyComboBox_SelectionChanged"
-                                                                      />
+                                                                      IsHitTestVisible="{Binding IsReadOnly, ElementName=productsRequired, Converter={StaticResource FlipBoolValueConverter}}" />
                                         <Button Width="28"
                                             Grid.Column="1"
                                             Height="28"

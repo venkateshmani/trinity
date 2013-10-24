@@ -80,6 +80,18 @@ namespace ordermanager.ViewModel
                 {
                     ActionButtonsVisibility = Visibility.Hidden;
                 }
+
+              
+                if ((Order.OrderStatu.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated ||
+                    Order.OrderStatu.OrderStatusID == (short)OrderStatusEnum.EnquiryRejected) &&
+                    DBResources.Instance.CurrentUser.UserRole.CanAddMaterials == true)
+                {
+                    NewItemAddBtnVisibility = System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    NewItemAddBtnVisibility = System.Windows.Visibility.Hidden;
+                }
             }
             return true;
         }
@@ -111,6 +123,20 @@ namespace ordermanager.ViewModel
             {
                 m_ActionButtonsVisibility = value;
                 NotifyPropertyChanged("ActionButtonsVisibility");
+            }
+        }
+
+        private Visibility m_NewItemAddBtnVisibiliti = Visibility.Visible;
+        public Visibility NewItemAddBtnVisibility
+        {
+            get
+            {
+                return m_NewItemAddBtnVisibiliti;
+            }
+            set
+            {
+                m_NewItemAddBtnVisibiliti = value;
+                NotifyPropertyChanged("NewItemAddBtnVisibility");
             }
         }
 
