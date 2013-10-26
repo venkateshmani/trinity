@@ -60,33 +60,7 @@ namespace ordermanager.Views.UserControls
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             m_ViewModel = DataContext as ProductMaterialsViewModel;
-
-            if (m_ViewModel != null)
-                m_ViewModel.PropertyChanged -= m_ViewModel_PropertyChanged;
-            m_ViewModel = DataContext as ProductMaterialsViewModel;           
-            if (m_ViewModel != null)
-            {
-                m_ViewModel.PropertyChanged += m_ViewModel_PropertyChanged;
-                SetControlState();
-            }
-        }
-
-        void m_ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "Order")
-                SetControlState();
-        }
-
-        private void SetControlState()
-        {
-            if (m_ViewModel != null)
-            {
-                gridButtons.Visibility = m_ViewModel.ActionButtonsVisibility;
-                spAddDeleteButtons.Visibility = m_ViewModel.NewItemAddBtnVisibility;
-                gridDetails.IsEnabled = m_ViewModel.IsEnabled;             
-            }
-        }
-
+        }      
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)
         {
@@ -159,9 +133,7 @@ namespace ordermanager.Views.UserControls
         {
             if (Persist(true))
             {
-                gridButtons.Visibility = System.Windows.Visibility.Collapsed;
-                spAddDeleteButtons.Visibility = System.Windows.Visibility.Collapsed;
-                gridDetails.IsEnabled = false;
+                m_ViewModel.Refresh();
                 InformUser("Successfully submitted to next level !");
             }
         }

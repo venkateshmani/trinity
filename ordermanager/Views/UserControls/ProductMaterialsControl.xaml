@@ -8,7 +8,7 @@
              xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
              xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1000" DataContextChanged="UserControl_DataContextChanged">
+             d:DesignHeight="600" d:DesignWidth="1000" DataContextChanged="UserControl_DataContextChanged" x:Name="This">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -183,8 +183,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <StackPanel x:Name="spAddDeleteButtons" Grid.Row="0" Margin="10,10,5,0" Orientation="Horizontal"
-                            Visibility="{Binding LoggedInUser.UserRole.CanAddMaterials, Converter={StaticResource BoolToVisibility}, Source={StaticResource DataProvider}}">
+                <StackPanel x:Name="spAddDeleteButtons" Grid.Row="0" Margin="10,10,5,0" Orientation="Horizontal"  Visibility="{Binding Path= DataContext.NewItemAddBtnVisibility,ElementName=This}">
                     <Button x:Name="btnAddNewItem"  Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewItem_Click">
                         <Button.Background>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
@@ -212,8 +211,8 @@
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
                                             <ComboBox x:Name="materialsComboBox" Grid.Column="0" 
-                                                      IsReadOnly="{Binding LoggedInUser.UserRole.CanAddMaterials, Converter={StaticResource FlipBoolValueConverter}, Source={StaticResource DataProvider}}"
-                                                      IsEditable="{Binding LoggedInUser.UserRole.CanAddMaterials, Source={StaticResource DataProvider}}"
+                                                      IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                      IsEditable="{Binding Path=DataContext.CanEditMaterials,ElementName=This}"
                                                       IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
                                                       IsTabStop="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"                   
                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                                                                
@@ -239,8 +238,8 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding CostPerUnitWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                 IsReadOnly="{Binding LoggedInUser.UserRole.CanAddMaterialsCost, Converter={StaticResource FlipBoolValueConverter}, Source={StaticResource DataProvider}}"
-                                                 IsEnabled="{Binding LoggedInUser.UserRole.CanAddMaterialsCost, Source={StaticResource DataProvider}}"/>
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -255,8 +254,8 @@
                                             <ComboBox x:Name="currencyComboBox" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                       Height="20" ItemsSource="{Binding Currencies, Source={StaticResource DataProvider}}" DisplayMemberPath="Symbol"
                                                       SelectedItem="{Binding CurrencyWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                      IsReadOnly="{Binding LoggedInUser.UserRole.CanAddMaterialsCost, Converter={StaticResource FlipBoolValueConverter},Source={StaticResource DataProvider}}"
-                                                      IsEditable="{Binding LoggedInUser.UserRole.CanAddMaterialsCost,Source={StaticResource DataProvider}}"
+                                                      IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                      IsEditable="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"
                                                       IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
                                                       IsTabStop="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"  />
                                             <Button  x:Name="btnAddCurrency" Width="28"   Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left"  
@@ -275,8 +274,8 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
-                                                 IsReadOnly="{Binding LoggedInUser.UserRole.CanAddMaterialsCost, Converter={StaticResource FlipBoolValueConverter}, Source={StaticResource DataProvider}}"
-                                                 IsEnabled="{Binding LoggedInUser.UserRole.CanAddMaterialsCost, Source={StaticResource DataProvider}}"/>
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -291,8 +290,8 @@
                                             <ComboBox x:Name="uomComboBox" Grid.Column="0"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                       Height="20" ItemsSource="{Binding UOMs, Source={StaticResource DataProvider}}" DisplayMemberPath="Units"
                                                       SelectedItem="{Binding  UnitsOfMeasurementWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                      IsReadOnly="{Binding LoggedInUser.UserRole.CanAddMaterialsCost, Converter={StaticResource FlipBoolValueConverter}, Source={StaticResource DataProvider}}"
-                                                      IsEditable="{Binding LoggedInUser.UserRole.CanAddMaterialsCost, Source={StaticResource DataProvider}}"
+                                                      IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                      IsEditable="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"
                                                       IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
                                                       IsTabStop="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"  />
                                             <Button  x:Name="btnAddUOM" Width="28" Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
@@ -311,8 +310,8 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding ConsumptionWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
-                                                   IsReadOnly="{Binding LoggedInUser.UserRole.CanAddConsumption, Converter={StaticResource FlipBoolValueConverter}, Source={StaticResource DataProvider}}"
-                                                   IsEnabled="{Binding LoggedInUser.UserRole.CanAddConsumption, Source={StaticResource DataProvider}}"/>
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditConsumption, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditConsumption,ElementName=This}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -327,11 +326,17 @@
                     </DataGrid>
                 </Border>
                 <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,10">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch" IsEnabled="{Binding LoggedInUser.UserRole.CanAddExtraCost, Source={StaticResource DataProvider}}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
                         <TextBlock Text="Other Cost:" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
-                        <TextBox Text="{Binding OtherCost.CostWrapper,StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="100" Height="20" Foreground="Gray" Margin="10,0,0,0"/>                     
+                        <TextBox Text="{Binding OtherCost.CostWrapper,StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+                                 IsReadOnly="{Binding Path=DataContext.CanEditExtraCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                 IsHitTestVisible="{Binding Path=DataContext.CanEditExtraCost,ElementName=This}"
+                                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="100" Height="20" Foreground="Gray" Margin="10,0,0,0"/>
                         <TextBlock Text="INR" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" Margin="3,0,0,0"/>
-                        <TextBox Text="{Binding OtherCost.DescriptionWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="400" Height="20" Foreground="Gray" Margin="40,0,0,0" Controls:TextboxHelper.Watermark=" Enter reason for other cost here"/>
+                        <TextBox Text="{Binding OtherCost.DescriptionWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" 
+                                 IsReadOnly="{Binding Path=DataContext.CanEditExtraCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                 IsHitTestVisible="{Binding Path=DataContext.CanEditExtraCost,ElementName=This}"
+                                 VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="400" Height="20" Foreground="Gray" Margin="40,0,0,0" Controls:TextboxHelper.Watermark=" Enter reason for other cost here"/>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -357,25 +362,22 @@
                     </Button.Background>
                 </Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Visibility="{Binding Path=DataContext.ActionButtonsVisibility, ElementName=This}">
                 <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Save Changes" Click="Save_Click"
-                                        Visibility="{Binding ActionButtonsVisibility}">
+                                        ToolTip="Save Changes" Click="Save_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
                 </Button>
                 <Button x:Name="submitBtn" Content="Submit" Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Submit to next level" Click="submitBtn_Click"
-                                        Visibility="{Binding ActionButtonsVisibility}">
+                                        ToolTip="Submit to next level" Click="submitBtn_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
                 </Button>
                 <Button x:Name="discardBtn" Content="Discard Changes" Margin="5" Width="150" Height="35" Foreground="White"
                                         ToolTip="Discard the Changes"
-                                        Click="discardBtn_Click"
-                                        Visibility="{Binding ActionButtonsVisibility}">
+                                        Click="discardBtn_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
                     </Button.Background>

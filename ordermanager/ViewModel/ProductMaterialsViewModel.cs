@@ -56,50 +56,61 @@ namespace ordermanager.ViewModel
             }
         }
 
-
-
         public bool SetOrder(Order order)
         {
             if (m_Order != order)
             {
-                ActionButtonsVisibility = Visibility.Collapsed;
-                NewItemAddBtnVisibility = Visibility.Collapsed;
-                IsEnabled = false;
-                if (order != null)
-                {
-                    m_Products = new ObservableCollection<OrderProduct>(order.OrderProducts);
-                    m_Order = order;
-                    UserRole cuRole = DBResources.Instance.CurrentUser.UserRole;
-                    OrderStatu coStatus = Order.OrderStatu;                   
-                    if (cuRole.CanAddMaterials)
-                    {
-                        if (coStatus.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated || Order.OrderStatu.OrderStatusID == (short)OrderStatusEnum.EnquiryRejected)
-                        {
-                            ActionButtonsVisibility = Visibility.Visible;
-                            NewItemAddBtnVisibility = Visibility.Visible;
-                            IsEnabled = true;
-                        }
-                    }
-                    else if ((cuRole.CanAddMaterialsCost && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded) ||
-                         (cuRole.CanAddConsumption && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsCostAdded))
-                    {
-                        ActionButtonsVisibility = Visibility.Visible;
-                        NewItemAddBtnVisibility = Visibility.Hidden;
-                        IsEnabled = true;
-                    }
-                    else
-                    {
-                        ActionButtonsVisibility = Visibility.Hidden;
-                        NewItemAddBtnVisibility = Visibility.Hidden;
-                        IsEnabled = false;
-                    }
-                    NotifyPropertyChanged("Products");
-                    if (m_Products.Count > 0)
-                        NotifyPropertyChanged("SelectedIndex");
-                    NotifyPropertyChanged("Order");
-                }                
+                m_Products = new ObservableCollection<OrderProduct>(order.OrderProducts);
+                m_Order = order;
+                NotifyPropertyChanged("Products");
+                if (m_Products.Count > 0)
+                    NotifyPropertyChanged("SelectedIndex");
+                NotifyPropertyChanged("Order");
+                SetAccess();
             }
             return true;
+        }
+
+        public void Refresh()
+        {
+            SetAccess();
+        }
+
+        private void SetAccess()
+        {
+            ActionButtonsVisibility = Visibility.Collapsed;
+            NewItemAddBtnVisibility = Visibility.Collapsed;
+            CanEditMaterials = false;
+            CanEditMaterialsCost = false;
+            CanEditConsumption = false;
+            CanEditExtraCost = false;
+            if (m_Order != null)
+            {
+                UserRole cuRole = DBResources.Instance.CurrentUser.UserRole;
+                OrderStatu coStatus = Order.OrderStatu;
+                if (cuRole.CanAddMaterials || cuRole.CanAddExtraCost)
+                {
+                    if (coStatus.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated || Order.OrderStatu.OrderStatusID == (short)OrderStatusEnum.EnquiryRejected)
+                    {
+                        ActionButtonsVisibility = Visibility.Visible;
+                        NewItemAddBtnVisibility = Visibility.Visible;
+                        CanEditMaterials = true;
+                        CanEditExtraCost = true;
+                    }
+                }
+                if (cuRole.CanAddMaterialsCost && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded)
+                {
+                    ActionButtonsVisibility = Visibility.Visible;
+                    NewItemAddBtnVisibility = Visibility.Hidden;
+                    CanEditMaterialsCost = true;
+                }
+                if (cuRole.CanAddConsumption && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsCostAdded)
+                {
+                    ActionButtonsVisibility = Visibility.Visible;
+                    NewItemAddBtnVisibility = Visibility.Hidden;
+                    CanEditConsumption = true;
+                }
+            }
         }
 
         public MaterialName CreateNewMaterial(string materialName)
@@ -118,21 +129,7 @@ namespace ordermanager.ViewModel
                 return false;
         }
 
-        bool m_IsEnabled = false;
-        public bool IsEnabled
-        {
-            get { return m_IsEnabled; }
-            set
-            {
-                if (m_IsEnabled != value)
-                {
-                    m_IsEnabled = value;
-                    NotifyPropertyChanged("IsEnabled");
-                }
-            }
-        }
-
-        private Visibility m_ActionButtonsVisibility = Visibility.Collapsed;
+        private Visibility m_ActionButtonsVisibility = Visibility.Hidden;
         public Visibility ActionButtonsVisibility
         {
             get
@@ -141,12 +138,15 @@ namespace ordermanager.ViewModel
             }
             set
             {
-                m_ActionButtonsVisibility = value;
-                NotifyPropertyChanged("ActionButtonsVisibility");
+                if (m_ActionButtonsVisibility != value)
+                {
+                    m_ActionButtonsVisibility = value;
+                    NotifyPropertyChanged("ActionButtonsVisibility");
+                }
             }
         }
 
-        private Visibility m_NewItemAddBtnVisibility = Visibility.Collapsed;
+        private Visibility m_NewItemAddBtnVisibility = Visibility.Hidden;
         public Visibility NewItemAddBtnVisibility
         {
             get
@@ -155,8 +155,67 @@ namespace ordermanager.ViewModel
             }
             set
             {
-                m_NewItemAddBtnVisibility = value;
-                NotifyPropertyChanged("NewItemAddBtnVisibility");
+                if (m_NewItemAddBtnVisibility != value)
+                {
+                    m_NewItemAddBtnVisibility = value;
+                    NotifyPropertyChanged("NewItemAddBtnVisibility");
+                }
+            }
+        }
+
+        private bool m_CanEditMaterials;
+        public bool CanEditMaterials
+        {
+            get { return m_CanEditMaterials; }
+            set
+            {
+                if (m_CanEditMaterials != value)
+                {
+                    m_CanEditMaterials = value;
+                    NotifyPropertyChanged("CanEditMaterials");
+                }
+            }
+        }
+
+        private bool m_CanEditMaterialsCost;
+        public bool CanEditMaterialsCost
+        {
+            get { return m_CanEditMaterialsCost; }
+            set
+            {
+                if (m_CanEditMaterialsCost != value)
+                {
+                    m_CanEditMaterialsCost = value;
+                    NotifyPropertyChanged("CanEditMaterialsCost");
+                }
+            }
+        }
+
+        private bool m_CanEditConsumption;
+        public bool CanEditConsumption
+        {
+            get { return m_CanEditConsumption; }
+            set
+            {
+                if (m_CanEditConsumption != value)
+                {
+                    m_CanEditConsumption = value;
+                    NotifyPropertyChanged("CanEditConsumption");
+                }
+            }
+        }
+
+        private bool m_CanEditExtraCost;
+        public bool CanEditExtraCost
+        {
+            get { return m_CanEditExtraCost; }
+            set
+            {
+                if (m_CanEditExtraCost != value)
+                {
+                    m_CanEditExtraCost = value;
+                    NotifyPropertyChanged("CanEditExtraCost");
+                }
             }
         }
 
