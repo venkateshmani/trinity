@@ -11,7 +11,7 @@
         ShowMinButton="False"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
-        Title="Comment Window" Height="309.029" Width="826.796">
+        Title="Comment Window" Height="285.008" Width="593.135">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -43,27 +43,27 @@
             <SolidColorBrush Color="{StaticResource AccentColor}"/>
         </Border.Background>
         <Grid>
-        <Grid Margin="15" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+            <Grid Margin="15" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 <TextBlock Text="Add a comment" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" Foreground="White" FontWeight="Light"  FontSize="{DynamicResource SubHeaderFontSize}"/>
-            <TextBox x:Name="commentTextBox" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="5,1,5,34" Grid.RowSpan="2" BorderBrush="Gray"/>
-            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
-                <Button x:Name="updateToDatabaseBtn"  Content="GO"  Width="100" Height="25" Foreground="White" HorizontalAlignment="Left" Click="updateToDatabaseBtn_Click" Style="{StaticResource PopupButtonTemplate}">
-                    <Button.Background>
-                        <SolidColorBrush Color="{StaticResource AccentColor}" />
-                    </Button.Background>
-                </Button>
-                <Button x:Name="cancelBtn"  Content="Cancel"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" HorizontalAlignment="Left" Click="cancelBtn_Click" Visibility="Collapsed" >
-                    <Button.Background>
-                        <SolidColorBrush Color="{StaticResource ValidationColor5}" />
-                    </Button.Background>
-                </Button>
-            </StackPanel>
+                <TextBox x:Name="commentTextBox" Grid.Row="1" FontFamily="{StaticResource ContentFontFamily}" FontSize="14" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap" Margin="5,1,5,34" Grid.RowSpan="2" BorderBrush="Gray"/>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0,5,0">
+                    <Button x:Name="updateToDatabaseBtn"  Content="GO"  Width="100" Height="25" Foreground="White" HorizontalAlignment="Left" Click="updateToDatabaseBtn_Click" Style="{StaticResource PopupButtonTemplate}">
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="cancelBtn"  Content="Cancel"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" HorizontalAlignment="Left" Click="cancelBtn_Click" Visibility="Collapsed" >
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </Grid>
-    </Grid>
     </Border>
 </Controls:MetroWindow>

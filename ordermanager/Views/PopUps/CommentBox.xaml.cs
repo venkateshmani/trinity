@@ -25,6 +25,7 @@ namespace ordermanager.Views.PopUps
         public CommentBox()
         {
             InitializeComponent();
+            commentTextBox.Focus();
             this.IsVisibleChanged += CommentBox_IsVisibleChanged;
         }
 
