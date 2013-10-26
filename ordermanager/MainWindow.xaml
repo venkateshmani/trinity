@@ -45,6 +45,7 @@
             <Button Name="btnLogout" Click="btnLogout_Click">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="userNameTextBlock" Margin="5,0,20,0" Foreground="White"  FontWeight="Bold"/>
                         <Rectangle Width="15" Height="15">
                             <Rectangle.Fill>
                                 <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_settings}" />

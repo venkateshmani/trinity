@@ -41,7 +41,8 @@ namespace ordermanager
         {
             m_LoginScreen = loginScreen;
             m_LoginScreen.Hide();
-
+            UpdateUserName();
+            
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -69,6 +70,18 @@ namespace ordermanager
             }
         }
 
+        private void UpdateUserName()
+        {
+            if (DBResources.Instance.CurrentUser != null)
+            {
+                userNameTextBlock.Text = "Hi, " + DBResources.Instance.CurrentUser.UserName + "!";
+            }
+            else
+            {
+                userNameTextBlock.Text = string.Empty;
+            }
+        }
+
         private void orderWorkBench_OnGoBack_1()
         {
             viewOrdersTabControl.Visibility = System.Windows.Visibility.Visible;
@@ -88,6 +101,8 @@ namespace ordermanager
                 this.Close();
                 m_LoginScreen.ClearPassword();
                 m_LoginScreen.ShowDialog();
+                UpdateUserName();
+                
             }
             else
                 Application.Current.Shutdown();
