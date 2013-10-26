@@ -321,7 +321,6 @@ namespace ordermanager.ViewModel
                 if (AvailableSubMaterials.ContainsKey(material.MaterialName.Name))
                 {
                     PopulateAvailableSubMaterials();
-                    OnPropertyChanged("AvailableSubMaterials");
                     newSubMaterial = AvailableSubMaterials[material.MaterialName.Name].Where(a => a.Name == subMaterialName)
                                                                                         .Select(a => a).First();
                 }

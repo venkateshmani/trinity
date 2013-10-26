@@ -1,4 +1,5 @@
 ﻿using ordermanager.DatabaseModel;
+using ordermanager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -121,7 +122,26 @@ namespace ordermanager.DatabaseModel
 
         #endregion [Wrappers]
 
+
         #region [Helpers]
+
+        public bool IsEditable
+        {
+            get
+            {
+                if (!DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterials)
+                    return false;
+
+                if( this.ProductMaterial != null && this.ProductMaterial.OrderProduct != null &&
+                    this.ProductMaterial.OrderProduct.Order != null &&
+                    this.ProductMaterial.OrderProduct.Order.OrderStatu.OrderStatusID != (short)OrderStatusEnum.OrderConfirmed)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
 
         #region Currency Management
 

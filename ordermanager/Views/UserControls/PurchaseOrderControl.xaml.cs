@@ -43,13 +43,11 @@ namespace ordermanager.Views.UserControls
                 if (DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterials && status == OrderStatusEnum.OrderConfirmed)
                 {
                     gridButtons.Visibility = System.Windows.Visibility.Visible;
-                    poMaterialsDetails.IsEnabled = true;
                     poProductDetails.IsEnabled = true;  
                 }
                 else
                 {
                     gridButtons.Visibility = System.Windows.Visibility.Collapsed;
-                    poMaterialsDetails.IsEnabled = false;
                     poProductDetails.IsEnabled = false;
                 }
             }

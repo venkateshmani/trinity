@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 
 namespace ordermanager.ViewModel
 {
@@ -104,9 +105,17 @@ namespace ordermanager.ViewModel
                     Products = new ObservableCollection<OrderProduct>(order.OrderProducts);
                     DeliveryDate = "Delivery Date: " + Convert.ToString(order.ExpectedDeliveryDate);
                 }
+
                 m_Order = order;
                 NotifyPropertyChanged("Order");
             }
+
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterials &&
+                     Order.OrderStatu.OrderStatusID == (short)OrderStatusEnum.OrderConfirmed)
+                AddDeleteButtonVisibility = Visibility.Visible;
+            else
+                AddDeleteButtonVisibility = Visibility.Hidden;
+
             return true;
         }
 
@@ -133,8 +142,11 @@ namespace ordermanager.ViewModel
                 }
             }
 
-            if(isSubmit)
+            if (isSubmit)
+            {
                 m_Order.OrderStatusID = (short)OrderStatusEnum.SubMaterialsJobCompleted;
+                AddDeleteButtonVisibility = Visibility.Hidden;
+            }
 
             #region History
 
@@ -189,6 +201,20 @@ namespace ordermanager.ViewModel
                 }
             }
             return !hasErrors;
+        }
+
+        private Visibility m_AddDeleteButtonVisibility = Visibility.Visible;
+        public Visibility AddDeleteButtonVisibility
+        {
+            get
+            {
+                return m_AddDeleteButtonVisibility;
+            }
+            set
+            {
+                m_AddDeleteButtonVisibility = value;
+                NotifyPropertyChanged("AddDeleteButtonVisibility");
+            }
         }
 
         public SubMaterial CreateNewSubMaterial(string subMaterialName)
