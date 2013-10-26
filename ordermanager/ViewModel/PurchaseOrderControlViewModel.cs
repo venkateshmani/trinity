@@ -146,6 +146,16 @@ namespace ordermanager.ViewModel
             {
                 m_Order.OrderStatusID = (short)OrderStatusEnum.SubMaterialsJobCompleted;
                 AddDeleteButtonVisibility = Visibility.Hidden;
+                foreach (OrderProduct dbProduct in Products)
+                {
+                    foreach (ProductMaterial dbMaterial in dbProduct.ProductMaterials)
+                    {
+                        foreach (ProductMaterialItem item in dbMaterial.ProductMaterialItemsWrapper)
+                        {
+                            item.OnPropertyChanged("IsEditable");
+                        }
+                    }
+                }
             }
 
             #region History

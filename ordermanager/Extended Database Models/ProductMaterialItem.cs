@@ -134,7 +134,7 @@ namespace ordermanager.DatabaseModel
 
                 if( this.ProductMaterial != null && this.ProductMaterial.OrderProduct != null &&
                     this.ProductMaterial.OrderProduct.Order != null &&
-                    this.ProductMaterial.OrderProduct.Order.OrderStatu.OrderStatusID != (short)OrderStatusEnum.OrderConfirmed)
+                    this.ProductMaterial.OrderProduct.Order.OrderStatusID != (short)OrderStatusEnum.OrderConfirmed)
                 {
                     return false;
                 }

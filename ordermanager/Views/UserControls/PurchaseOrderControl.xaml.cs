@@ -1,4 +1,5 @@
-﻿using ordermanager.DatabaseModel;
+﻿using MahApps.Metro.Controls;
+using ordermanager.DatabaseModel;
 using ordermanager.Utilities;
 using ordermanager.ViewModel;
 using ordermanager.Views.PopUps;
@@ -130,7 +131,15 @@ namespace ordermanager.Views.UserControls
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             if (Save(false) == false)
-                MessageBox.Show("Cannot save the materials details. Please make sure all the mandatory details are filled", "Save Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            {
+                string message = string.Format("Failed to Save !. Fill in the highlighted fields and Save");
+                InformUser(message);
+            }
+            else
+            {
+                string message = string.Format("Successfully Saved !");
+                InformUser(message);
+            }
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
@@ -138,11 +147,14 @@ namespace ordermanager.Views.UserControls
             bool? saved = Save(true);
             if (saved == true)
             {
+                string message = string.Format("Successfully Submitted !.");
+                InformUser(message);
                 SetControlState();
             }
             else if (saved == false)
             {
-                MessageBox.Show("Cannot submit the materials details. Please make sure all the mandatory details are filled", "Submit Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                string message = string.Format("Failed to Submit !. Fill in the highlighted fields and Submit");
+                InformUser(message);
             }
         }
 
@@ -162,6 +174,14 @@ namespace ordermanager.Views.UserControls
                 return false;
             }
             return false;
+        }
+
+         private void InformUser(string message)
+        {
+            PopupBox informer = new PopupBox();
+            informer.Message = message;
+            informer.PopupButton = PopupButton.OK;
+            informer.ShowDialog();
         }
     }
 }
