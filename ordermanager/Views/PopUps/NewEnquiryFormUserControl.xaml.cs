@@ -218,6 +218,12 @@ namespace ordermanager.Views.PopUps
                         {
                             comboBox.SelectedItem = NewEnquiryViewModel.CreateNewProduct(addNewProductPopUp.ProductName, addNewProductPopUp.StyleId);
                             addBtn.Visibility = System.Windows.Visibility.Collapsed;
+
+                            Button editButton = parentGrid.FindName("editBtn") as Button;
+                            if (editButton != null)
+                            {
+                                editButton.Visibility = System.Windows.Visibility.Visible;
+                            }
                         }
                     }
                 }
@@ -430,10 +436,22 @@ namespace ordermanager.Views.PopUps
                         if (productComboBox.SelectedItem != null)
                         {
                             addbtn.Visibility = System.Windows.Visibility.Collapsed;
+
+                            Button editBtn = parentGrid.FindName("editBtn") as Button;
+                            if (editBtn != null)
+                            {
+                                editBtn.Visibility = System.Windows.Visibility.Visible;
+                            }
                         }
                         else
                         {
                             addbtn.Visibility = System.Windows.Visibility.Visible;
+
+                            Button editBtn = parentGrid.FindName("editBtn") as Button;
+                            if (editBtn != null)
+                            {
+                                editBtn.Visibility = System.Windows.Visibility.Collapsed;
+                            }
                         }
                     }
                 }
@@ -474,6 +492,35 @@ namespace ordermanager.Views.PopUps
             {
                 TimeSpan tSpan = internalDeliveryDate.SelectedDate.Value.Subtract(orderDate.SelectedDate.Value);
                 internalDeliveryDateSpan.Text = tSpan.Days.ToString();
+            }
+        }
+
+        private void editStyleID_Click(object sender, RoutedEventArgs e)
+        {
+            Button editBtn = sender as Button;
+            if (editBtn != null)
+            {
+                Grid parentGrid = editBtn.Parent as Grid;
+
+                if (parentGrid != null)
+                {
+                    ComboBox comboBox = parentGrid.FindName("comboBox") as ComboBox;
+                    if (comboBox != null && comboBox.SelectedItem != null)
+                    {
+                        ProductName productName = comboBox.SelectedItem as ProductName;
+                        if(productColumn !=null)
+                        {
+                            AddEditProductPopupBox addNewProductPopUp = new AddEditProductPopupBox(Util.GetParentWindow(this));
+                            addNewProductPopUp.AllowToEditOnlyStyleID = true;
+                            addNewProductPopUp.ProductName = productName.Name;
+                            addNewProductPopUp.StyleId = productName.StyleID;
+                            if (addNewProductPopUp.ShowDialog() == true)
+                            {
+                                productName.StyleID = addNewProductPopUp.StyleId;
+                            }
+                        }
+                    }
+                }
             }
         }
     }

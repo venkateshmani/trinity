@@ -285,6 +285,25 @@
                                                 </Rectangle.Fill>
                                             </Rectangle>
                                         </Button>
+
+
+                                        <Button Width="28"
+                                                Height="28"
+                                                Margin="0, 2, 0, 0"
+                                                HorizontalAlignment="Left"
+                                                Grid.Column="1"
+                                                Cursor="Hand"
+                                                x:Name="editBtn"
+                                                Style="{DynamicResource MetroCircleButtonStyle}"
+                                                ToolTip="Edit Style ID" 
+                                                Click="editStyleID_Click"
+                                                Visibility="Collapsed">
+                                            <Rectangle Width="10" Height="10">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
                                     </Grid>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

@@ -69,6 +69,11 @@ namespace ordermanager.Views.PopUps
             {
                 m_AllowToEditOnlyStyleID = value;
                 productName.IsReadOnly = value;
+
+                if (value)
+                {
+                    positiveDecisionBtn.Content = "Save";
+                }
             }
         }
 
