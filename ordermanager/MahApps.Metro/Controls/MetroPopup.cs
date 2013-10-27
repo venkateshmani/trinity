@@ -738,6 +738,7 @@ namespace MahApps.Metro.Controls
         OKCancel = 2,
         YesNoCancel = 3,
         YesNo = 4,
+        AddCancel=5,
     }
 
     public enum PopupResult

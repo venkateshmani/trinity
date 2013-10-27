@@ -98,6 +98,13 @@ namespace ordermanager.Views.PopUps
                             positiveDecisionBtn.Content = "YES";
                         }
                         break;
+                    case MahApps.Metro.Controls.PopupButton.AddCancel:
+                        {
+                            positiveDecisionBtn.Visibility = System.Windows.Visibility.Visible;
+                            neutralDecisionBtn.Visibility = System.Windows.Visibility.Visible;
+                            positiveDecisionBtn.Content = "ADD";
+                        }
+                        break;
                 }
             }
         }

@@ -213,10 +213,11 @@ namespace ordermanager.ViewModel
         }
 
         //Create a new product
-        public ProductName CreateNewProduct(string newProductName)
+        public ProductName CreateNewProduct(string newProductName, string styleID)
         {
             ProductName newProduct = new ProductName();
             newProduct.Name = newProductName;
+            
 
             OrderManagerDBEntities newManager = new OrderManagerDBEntities();
             newManager.ProductNames.Add(newProduct);

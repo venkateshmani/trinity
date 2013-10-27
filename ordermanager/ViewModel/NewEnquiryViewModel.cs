@@ -186,9 +186,9 @@ namespace ordermanager.ViewModel
             OrderCurrencyConversions = new ObservableCollection<OrderCurrencyConversion>(Order.OrderCurrencyConversions);
         }
 
-        public ProductName CreateNewProduct(string newProductName)
+        public ProductName CreateNewProduct(string newProductName, string styleId)
         {
-            return DBResources.CreateNewProduct(newProductName);
+            return DBResources.CreateNewProduct(newProductName, styleId);
         }
 
         public Order CreateNewOrder(string userComment)

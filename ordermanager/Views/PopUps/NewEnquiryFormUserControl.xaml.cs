@@ -209,8 +209,13 @@ namespace ordermanager.Views.PopUps
                     ComboBox comboBox = parentGrid.FindName("comboBox") as ComboBox;
                     if (comboBox != null)
                     {
-                        comboBox.SelectedItem = NewEnquiryViewModel.CreateNewProduct(comboBox.Text);
-                        addBtn.Visibility = System.Windows.Visibility.Collapsed;
+                        AddEditProductPopupBox addNewProductPopUp = new AddEditProductPopupBox(Util.GetParentWindow(this));
+                        addNewProductPopUp.ProductName = comboBox.Text;
+                        if (addNewProductPopUp.ShowDialog() == true)
+                        {
+                            comboBox.SelectedItem = NewEnquiryViewModel.CreateNewProduct(addNewProductPopUp.ProductName, addNewProductPopUp.StyleId);
+                            addBtn.Visibility = System.Windows.Visibility.Collapsed;
+                        }
                     }
                 }
             }
