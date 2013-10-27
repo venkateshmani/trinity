@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0e0ee965c18e4b41aba48987740004d6" Name="Diagram1">
+      <Diagram DiagramId="d60306f61dc146849d17ddd39ec11f0b" Name="Diagram1">
         <EntityTypeShape EntityType="OrderManagerDBModel.CommissionValueType" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.Company" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.CompanyType" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
