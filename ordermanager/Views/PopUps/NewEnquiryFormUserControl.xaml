@@ -139,7 +139,7 @@
                                     Controls:TextboxHelper.Watermark="Select a date"
                                     SelectedDateChanged="expectedDeliveryDate_SelectedDateChanged"
                                     IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
-                            <TextBlock x:Name="numberOfDays" Foreground="Gray" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Top" 
+                            <TextBlock x:Name="numberOfDays" Foreground="Gray" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Center" 
                                    FontWeight="Bold" />
                             <TextBlock Text="Days" VerticalAlignment="Center" Foreground="Gray" />
                             <Rectangle HorizontalAlignment="Stretch" Width="2" Fill="Gray" Margin="5,0,0,0" />
@@ -150,7 +150,7 @@
                                     Controls:TextboxHelper.Watermark="Select a date"
                                     SelectedDateChanged="expectedDeliveryDate_SelectedDateChanged"
                                     IsHitTestVisible="{Binding CanUpdateEnquiry}" />
-                            <TextBlock x:Name="internalDeliveryDateSpan" Foreground="Gray" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Top" 
+                            <TextBlock x:Name="internalDeliveryDateSpan" Foreground="Gray" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Center" 
                                    FontWeight="Bold" />
                             
                             <TextBlock Text="Days" VerticalAlignment="Center" Foreground="Gray" />
@@ -296,7 +296,7 @@
                                     <TextBox Text="{Binding ExpectedQuantityWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler"
-                                            IsHitTestVisible="{Binding CanUpdateEnquiry}"/>
+                                            IsHitTestVisible="{Binding DataContext.CanUpdateEnquiry,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -386,7 +386,7 @@
                                     <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler"
-                                            IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
+                                            IsHitTestVisible="{Binding IsReadOnly, ElementName=productsRequired, Converter={StaticResource FlipBoolValueConverter}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -397,7 +397,7 @@
                                     <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" 
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler" 
-                                            IsHitTestVisible="{Binding CanUpdateEnquiry}"/>
+                                            IsHitTestVisible="{Binding DataContext.CanUpdateEnquiry,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -406,7 +406,8 @@
                         <DataGridTemplateColumn x:Name="ourPriceColumn" Header="Our Price" Width="0.18*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding OurCostInProductCurrenyValue, Mode=OneWay, StringFormat=n}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="0,3,3,3" IsReadOnly="True"
+                                    <TextBox Text="{Binding OurCostInProductCurrenyValue, Mode=OneWay, StringFormat=n}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="0,3,3,3" 
+                                             IsHitTestVisible="False"
                                              Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"
                                              />
                                 </DataTemplate>
@@ -416,7 +417,8 @@
                         <DataGridTemplateColumn x:Name="profitLoss" Header="Profit/Loss" Width="0.18*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding ProfitOrLossAmount, Mode=OneWay, StringFormat=n}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="0,0,3,0" IsReadOnly="True"
+                                    <TextBox Text="{Binding ProfitOrLossAmount, Mode=OneWay, StringFormat=n}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="0,0,3,0"
+                                             IsHitTestVisible="False"
                                              Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
