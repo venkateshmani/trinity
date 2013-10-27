@@ -161,14 +161,12 @@ namespace ordermanager.Views.PopUps
             {
                 if (((Company)agentComboxBox.SelectedItem).Name.ToLower() == "customer")
                 {
-                    agentInfo.Visibility = System.Windows.Visibility.Collapsed;
                     addNewAgentBtn.Visibility = System.Windows.Visibility.Collapsed;
                     editExistingAgentBtn.Visibility = System.Windows.Visibility.Collapsed;
                     commisionInfo.Visibility = System.Windows.Visibility.Hidden;
                 }
                 else
                 {
-                    agentInfo.Visibility = System.Windows.Visibility.Visible;
                     addNewAgentBtn.Visibility = System.Windows.Visibility.Collapsed;
                     editExistingAgentBtn.Visibility = System.Windows.Visibility.Visible;
                     commisionInfo.Visibility = System.Windows.Visibility.Visible;
@@ -298,7 +296,7 @@ namespace ordermanager.Views.PopUps
                 actionConfirmer.Message = "Are you sure to discard the new enquiry ?";
                 actionConfirmer.PopupButton = PopupButton.YesNo;
                 bool? result = actionConfirmer.ShowDialog();
-                if(result != null && result.Value == true)
+                if (result != null && result.Value == true)
                 {
                     Navigate(OrderManagerTab.MyTasks);
                 }
@@ -306,49 +304,49 @@ namespace ordermanager.Views.PopUps
             }
 
             CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
-             if (commentBox.ShowDialog() == true)
-             {
-                 string userComment = commentBox.Comment;
-                 if (positiveDecisionBtn.Content.ToString() == "Reject")
-                 {
-                     try
-                     {
-                         if (NewEnquiryViewModel.UpdateOrderStatus("rejected the Enquiry", userComment, OrderStatusEnum.EnquiryRejected))
-                         {
-                             SetButtonsVisibility(System.Windows.Visibility.Collapsed);
-                             InformUser("Enquiry rejected");
-                         }
-                         else
-                             InformUser("Unable to reject enquiry");
-                     }
-                     catch (Exception ex)
-                     {
-                         MessageBox.Show("Enquiry rejection failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                     }
-                 }
-                 else if (positiveDecisionBtn.Content.ToString() == "Cancel")
-                 {
-                     try
-                     {
-                         if (NewEnquiryViewModel.UpdateOrderStatus("cancelled the Enquiry", userComment, OrderStatusEnum.EnquiryCancelled))
-                         {
-                             SetButtonsVisibility(System.Windows.Visibility.Collapsed);
-                             InformUser("Enquiry cancelled");
-                         }
-                         else
-                             InformUser("Unable to cancel the enquiry");
-                     }
-                     catch (Exception ex)
-                     {
-                         MessageBox.Show("Enquiry cancellation failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                     }
-                 }
-                 else
-                 {
-                     SetButtonsVisibility(System.Windows.Visibility.Collapsed);
-                 }
-             }
-                
+            if (commentBox.ShowDialog() == true)
+            {
+                string userComment = commentBox.Comment;
+                if (positiveDecisionBtn.Content.ToString() == "Reject")
+                {
+                    try
+                    {
+                        if (NewEnquiryViewModel.UpdateOrderStatus("rejected the Enquiry", userComment, OrderStatusEnum.EnquiryRejected))
+                        {
+                            SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                            InformUser("Enquiry rejected");
+                        }
+                        else
+                            InformUser("Unable to reject enquiry");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Enquiry rejection failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else if (positiveDecisionBtn.Content.ToString() == "Cancel")
+                {
+                    try
+                    {
+                        if (NewEnquiryViewModel.UpdateOrderStatus("cancelled the Enquiry", userComment, OrderStatusEnum.EnquiryCancelled))
+                        {
+                            SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                            InformUser("Enquiry cancelled");
+                        }
+                        else
+                            InformUser("Unable to cancel the enquiry");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Enquiry cancellation failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                else
+                {
+                    SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                }
+            }
+
         }
 
         private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)

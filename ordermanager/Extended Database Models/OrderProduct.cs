@@ -178,6 +178,41 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+
+        /// <summary>
+        /// Per unit value
+        /// </summary>
+        public decimal OurCostInProductCurrenyValue
+        {
+            get
+            {
+                decimal cost = 0;
+                if (CurrencyConversion.ValueInINR != null)
+                {
+                    cost = PerUnitTotalProductMaterialsCost / CurrencyConversion.ValueInINR.Value;
+                }
+
+                return cost;
+            }
+        }
+
+
+        public bool IsOurCostHigherThanQuoted
+        {
+            get
+            {
+                return OurCostInProductCurrenyValue > CustomerTargetPrice;
+            }
+        }
+
+        public decimal ProfitOrLossAmount
+        {
+            get
+            {
+                return CustomerTargetPrice - OurCostInProductCurrenyValue;
+            }
+        }
+
         private decimal m_PerUnitTotalProductMaterialsCost = 0;
         public decimal PerUnitTotalProductMaterialsCost
         {

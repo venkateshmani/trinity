@@ -58,6 +58,20 @@ namespace ordermanager.Views.PopUps
             }
         }
 
+        bool m_AllowToEditOnlyStyleID = false;
+        public bool AllowToEditOnlyStyleID
+        {
+            get
+            {
+                return m_AllowToEditOnlyStyleID;
+            }
+            set
+            {
+                m_AllowToEditOnlyStyleID = value;
+                productName.IsReadOnly = value;
+            }
+        }
+
         void PopupBox_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (maskableParent != null)
