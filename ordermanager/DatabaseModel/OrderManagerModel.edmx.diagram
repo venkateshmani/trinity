@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d60306f61dc146849d17ddd39ec11f0b" Name="Diagram1">
+      <Diagram DiagramId="8fc9fd2d319349c592c5561926b5c9f5" Name="Diagram1">
         <EntityTypeShape EntityType="OrderManagerDBModel.CommissionValueType" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.Company" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.CompanyType" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.Currency" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.History" Width="1.5" PointX="7.5" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.MaterialName" Width="1.5" PointX="10.5" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Order" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Order" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.OrderCurrencyConversion" Width="1.5" PointX="10.5" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.OrderProduct" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.OrderStatu" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />

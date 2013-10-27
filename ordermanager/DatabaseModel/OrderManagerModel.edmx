@@ -229,6 +229,7 @@
           <Property Name="OrderStatusID" Type="smallint" Nullable="false" />
           <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="TotalOrderValue" Type="decimal" Scale="4" />
+          <Property Name="InternalDeliveryDate" Type="datetime" />
         </EntityType>
         <EntityType Name="OrderCurrencyConversion">
           <Key>
@@ -1019,6 +1020,7 @@
           <Property Name="OrderStatusID" Type="Int16" Nullable="false" />
           <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TotalOrderValue" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="InternalDeliveryDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CommissionValueType" Relationship="OrderManagerDBModel.FK_Order_CommissionValueType" FromRole="Order" ToRole="CommissionValueType" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Order" ToRole="Company" />
           <NavigationProperty Name="Company1" Relationship="OrderManagerDBModel.FK_Order_OrderBy" FromRole="Order" ToRole="Company" />
@@ -1700,6 +1702,7 @@
                 <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
                 <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
                 <ScalarProperty Name="TotalOrderValue" ColumnName="TotalOrderValue" />
+                <ScalarProperty Name="InternalDeliveryDate" ColumnName="InternalDeliveryDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
