@@ -66,6 +66,20 @@ namespace ordermanager.DatabaseModel
                 }
             }
 
+            public DateTime? InternalDeliveryDateWrapper
+            {
+                get
+                {
+                    return InternalDeliveryDate;
+                }
+                set
+                {
+                    InternalDeliveryDate = value;
+                    OnPropertyChanged("InternalDeliveryDateWrapper");
+                    ValidateInternalDeliveryDate();
+                }
+            }
+
 
             public virtual OrderThrough OrderThroughWrapper
             {
@@ -144,6 +158,22 @@ namespace ordermanager.DatabaseModel
             else
             {
                 RemoveError("OrderThroughWrapper", "Select order through");
+            }
+        }
+
+
+        private void ValidateInternalDeliveryDate()
+        {
+            if (InternalDeliveryDate != null)
+            {
+                if (InternalDeliveryDate < OrderDate)
+                {
+                    AddError("InternalDeliveryDateWrapper", "Internal delivery date cannot be before order date", false);
+                }
+                else
+                {
+                    RemoveError("InternalDeliveryDateWrapper", "Internal delivery date cannot be before order date");
+                }
             }
         }
 

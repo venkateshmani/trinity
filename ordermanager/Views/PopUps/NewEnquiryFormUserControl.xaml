@@ -138,19 +138,19 @@
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date"
                                     SelectedDateChanged="expectedDeliveryDate_SelectedDateChanged"
-                                    IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
-                            <TextBlock x:Name="numberOfDays" Foreground="Gray" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Center" 
+                                    IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" Height="26" VerticalAlignment="Bottom" />
+                            <TextBlock x:Name="numberOfDays" Foreground="Gray" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,0,5,0" VerticalAlignment="Center" 
                                    FontWeight="Bold" />
                             <TextBlock Text="Days" VerticalAlignment="Center" Foreground="Gray" />
                             <Rectangle HorizontalAlignment="Stretch" Width="2" Fill="Gray" Margin="5,0,0,0" />
                             <TextBlock Text="Internal Delivery Date" Style="{StaticResource inLineTextBlockStyle}" Margin="7,0,5,0"/>
                             <DatePicker x:Name="internalDeliveryDate" Width="150" 
-                                    SelectedDate="{Binding Order.ExpectedDeliveryDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                    SelectedDate="{Binding Order.InternalDeliveryDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date"
-                                    SelectedDateChanged="expectedDeliveryDate_SelectedDateChanged"
+                                    SelectedDateChanged="internalDeliveryDate_SelectedDateChanged"
                                     IsHitTestVisible="{Binding CanUpdateEnquiry}" />
-                            <TextBlock x:Name="internalDeliveryDateSpan" Foreground="Gray" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Center" 
+                            <TextBlock x:Name="internalDeliveryDateSpan" Foreground="Gray" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,0,5,0" VerticalAlignment="Center" 
                                    FontWeight="Bold" />
                             
                             <TextBlock Text="Days" VerticalAlignment="Center" Foreground="Gray" />
@@ -438,16 +438,11 @@
                 </DataGrid>
             </Grid>
 
-            <Grid Grid.Row="2" Margin="5">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                    <Label Content="Total Number Of Products "  Style="{StaticResource DescriptionHeaderStyle}"/>
-                    <TextBlock x:Name="totalNumberOfItems" Text="{Binding OrderProducts.Count}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold">
-                        <TextBlock.Foreground>
-                            <SolidColorBrush Color="{StaticResource AccentColor}" />
-                        </TextBlock.Foreground>
-                    </TextBlock>
+            <Grid Grid.Row="2" Margin="5" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Label Content="Total Order Value : "  Style="{StaticResource DescriptionHeaderStyle}"/>
+                    <TextBlock x:Name="totalNumberOfItems" Text="{Binding TotalOrderValue, StringFormat=n}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold"/>
                 </StackPanel>
-
             </Grid>
 
         </Grid>

@@ -217,7 +217,7 @@ namespace ordermanager.ViewModel
         {
             ProductName newProduct = new ProductName();
             newProduct.Name = newProductName;
-            
+            newProduct.StyleID = styleID;
 
             OrderManagerDBEntities newManager = new OrderManagerDBEntities();
             newManager.ProductNames.Add(newProduct);

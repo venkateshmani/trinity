@@ -467,5 +467,14 @@ namespace ordermanager.Views.PopUps
                 OnNavigateTo(tab);
             }
         }
+
+        private void internalDeliveryDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (internalDeliveryDate.SelectedDate != null && orderDate.SelectedDate != null)
+            {
+                TimeSpan tSpan = internalDeliveryDate.SelectedDate.Value.Subtract(orderDate.SelectedDate.Value);
+                internalDeliveryDateSpan.Text = tSpan.Days.ToString();
+            }
+        }
     }
 }
