@@ -55,7 +55,7 @@
             <Grid Grid.Row="0" Grid.Column="0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <TextBlock Text="Style ID:"  Style="{StaticResource ProductInfoStyle}" Foreground="Gray" />
-                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Text="{Binding SelectedProduct.ProductName.StyleID}">
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>
