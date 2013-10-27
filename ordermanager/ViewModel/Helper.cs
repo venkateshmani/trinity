@@ -12,13 +12,13 @@ namespace ordermanager.ViewModel
         None = -1,
         EnquiryCreated = 1,
         MaterialsAdded = 2,
-        MaterialsCostAdded = 3,
-        MaterialsJobCompleted = 5,
+        MaterialsCostAdded = 3,       
         EnquiryRejected = 6,
         EnquiryApproved = 7,
         OrderConfirmed = 8,
         SubMaterialsJobCompleted = 9,
         EnquiryCancelled = 10,
+        EnquirySentToSpecialApprover=12,
     }
 
     public class Helper

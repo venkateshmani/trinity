@@ -67,13 +67,12 @@ namespace ordermanager.Views.UserControls
 
                 //Navigate to appropriate page
                 if (status == OrderStatusEnum.EnquiryCreated ||
-                    status == OrderStatusEnum.MaterialsAdded ||
-                    status == OrderStatusEnum.MaterialsCostAdded ||
+                    status == OrderStatusEnum.MaterialsAdded ||                   
                     status == OrderStatusEnum.EnquiryRejected)
                 {
                     tabControl.SelectedItem = tabMaterials;
                 }
-                else if (status == OrderStatusEnum.MaterialsJobCompleted
+                else if (status == OrderStatusEnum.MaterialsCostAdded
                     || status == OrderStatusEnum.EnquiryApproved
                     || status == OrderStatusEnum.EnquiryCancelled)
                 {

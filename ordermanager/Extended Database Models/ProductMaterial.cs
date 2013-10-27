@@ -63,7 +63,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                if(Cost != null)
+                if (Cost != null)
                     return Cost.Value;
 
                 return 0;
@@ -81,7 +81,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                if(Consumption != null)
+                if (Consumption != null)
                     return Consumption.Value;
 
                 return 0;
@@ -99,7 +99,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                if(ConsumptionCost != null)
+                if (ConsumptionCost != null)
                     return ConsumptionCost.Value;
 
                 return 0;
@@ -108,6 +108,41 @@ namespace ordermanager.DatabaseModel
             {
                 ConsumptionCost = value;
                 OnPropertyChanged("ConsumptionCostWrapper");
+            }
+        }
+
+        public decimal OtherCostInINRWrapper
+        {
+            get
+            {
+                if (OtherCostInINR != null)
+                    return OtherCostInINR.Value;
+                return 0;
+            }
+            set
+            {
+                if (OtherCostInINR != value)
+                {
+                    OtherCostInINR = value;                   
+                    CalculateConsumptionCost();
+                    OnPropertyChanged("OtherCostInINRWrapper");
+                }
+            }
+        }
+
+        public string OtherCostNameWrapper
+        {
+            get
+            {
+                return OtherCostName;
+            }
+            set
+            {
+                if (OtherCostName != value)
+                {
+                    OtherCostName = value;                   
+                    OnPropertyChanged("OtherCostNameWrapper");
+                }
             }
         }
 
@@ -134,14 +169,14 @@ namespace ordermanager.DatabaseModel
                     }
                 }
             }
-        }      
+        }
         #endregion
 
         #region Data Validation
 
         public void ValidateCurrencyValueInINR()
         {
-            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost)
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterials)
             {
                 if (CurrencyValueInINR == 0)
                 {
@@ -171,7 +206,7 @@ namespace ordermanager.DatabaseModel
 
         public void ValidateCostPerUnit()
         {
-            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost)
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterials)
             {
                 if (Cost == 0)
                 {
@@ -201,7 +236,7 @@ namespace ordermanager.DatabaseModel
 
         public void ValidateUOM()
         {
-            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost)
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddConsumption)
             {
                 if (UnitsOfMeasurementWrapper == null)
                 {
@@ -216,7 +251,7 @@ namespace ordermanager.DatabaseModel
 
         public void ValidateCurrency()
         {
-            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost)
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterials)
             {
                 if (CurrencyWrapper == null)
                 {
@@ -229,96 +264,116 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public void ValidateOtherCost()
+        {
+            RemoveError("OtherCostInINRWrapper");
+            RemoveError("OtherCostNameWrapper");
+            if (OtherCostInINRWrapper > 0)
+            { 
+                if(string.IsNullOrWhiteSpace(OtherCostNameWrapper))
+                    AddError("OtherCostNameWrapper","Enter other cost name",false);
+            }
+            if (!string.IsNullOrWhiteSpace(OtherCostNameWrapper))
+            {
+                if (OtherCostInINRWrapper<=0)
+                    AddError("OtherCostInINRWrapper", "Enter other cost value",false);
+            }            
+        }
+
+
         #endregion
 
         #region Helpers
 
         #region Currency Management
 
-            public decimal CurrencyValueInINR
+        public decimal CurrencyValueInINR
+        {
+            get
             {
-                get
-                {
-                    if (Currency != null && Currency.DefaultValueInINR != null)
-                        return Currency.DefaultValueInINR.Value;
+                if (Currency != null && Currency.DefaultValueInINR != null)
+                    return Currency.DefaultValueInINR.Value;
 
-                    if (CurrencyConversion == null)
-                        SelectOrAddCurrencyConversion();
+                if (CurrencyConversion == null)
+                    SelectOrAddCurrencyConversion();
 
-                    if(CurrencyConversion != null)
-                        return CurrencyConversion.ValueInINRForMaterialsWrapper;
+                if (CurrencyConversion != null)
+                    return CurrencyConversion.ValueInINRForMaterialsWrapper;
 
-                    return 0;
-                }
-                set
-                {
-                    if (Currency != null && Currency.DefaultValueInINR == null)
-                    {
-                        CurrencyConversion.ValueInINRForMaterialsWrapper = value;
-                        ValidateCurrencyValueInINR();
-                    }
-
-                    OnPropertyChanged("CurrencyValueInINR");
-                }
+                return 0;
             }
-
-            private OrderCurrencyConversion m_CurrencyConversion = null;
-            public OrderCurrencyConversion CurrencyConversion
+            set
             {
-                get
+                if (Currency != null && Currency.DefaultValueInINR == null)
                 {
-                    return m_CurrencyConversion;
+                    CurrencyConversion.ValueInINRForMaterialsWrapper = value;
+                    ValidateCurrencyValueInINR();
                 }
-                set
-                {
-                    if (m_CurrencyConversion != null)
-                    {
-                        m_CurrencyConversion.PropertyChanged -= m_CurrencyConversion_PropertyChanged;
-                    }
 
-                    m_CurrencyConversion = value;
-                    m_CurrencyConversion.PropertyChanged += m_CurrencyConversion_PropertyChanged;
-                }
+                OnPropertyChanged("CurrencyValueInINR");
             }
+        }
 
-            private void SelectOrAddCurrencyConversion()
+        private OrderCurrencyConversion m_CurrencyConversion = null;
+        public OrderCurrencyConversion CurrencyConversion
+        {
+            get
             {
-                if (Currency != null)
-                {
-                    var currencyConversion = OrderProduct.Order.OrderCurrencyConversions.Where(c => c.Currency.CurrencyID == Currency.CurrencyID)
-                                                                           .Select(c => c);
-
-                    OrderCurrencyConversion newConversion = null;
-                    if (currencyConversion == null || currencyConversion.Count() == 0)
-                    {
-                        newConversion = new OrderCurrencyConversion();
-                        newConversion.Currency = Currency;
-
-                        OrderProduct.Order.OrderCurrencyConversions.Add(newConversion);
-                    }
-                    else
-                    {
-                        newConversion = currencyConversion.First();
-                    }
-
-                    CurrencyConversion = newConversion;
-                }
+                return m_CurrencyConversion;
             }
-
-            void m_CurrencyConversion_PropertyChanged(object sender, PropertyChangedEventArgs e)
+            set
             {
-                if (e.PropertyName == "ValueInINRForMaterialsWrapper")
+                if (m_CurrencyConversion != null)
                 {
-                    OnPropertyChanged("CurrencyValueInINR");
-                    CalculateConsumptionCost();
+                    m_CurrencyConversion.PropertyChanged -= m_CurrencyConversion_PropertyChanged;
                 }
-            }
 
-        #endregion 
+                m_CurrencyConversion = value;
+                m_CurrencyConversion.PropertyChanged += m_CurrencyConversion_PropertyChanged;
+            }
+        }
+
+        private void SelectOrAddCurrencyConversion()
+        {
+            if (Currency != null)
+            {
+                var currencyConversion = OrderProduct.Order.OrderCurrencyConversions.Where(c => c.Currency.CurrencyID == Currency.CurrencyID)
+                                                                       .Select(c => c);
+
+                OrderCurrencyConversion newConversion = null;
+                if (currencyConversion == null || currencyConversion.Count() == 0)
+                {
+                    newConversion = new OrderCurrencyConversion();
+                    newConversion.Currency = Currency;
+
+                    OrderProduct.Order.OrderCurrencyConversions.Add(newConversion);
+                }
+                else
+                {
+                    newConversion = currencyConversion.First();
+                }
+
+                CurrencyConversion = newConversion;
+            }
+        }
+
+        void m_CurrencyConversion_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ValueInINRForMaterialsWrapper")
+            {
+                OnPropertyChanged("CurrencyValueInINR");
+                CalculateConsumptionCost();
+            }
+        }
+
+        #endregion
 
         private void CalculateConsumptionCost()
         {
-            ConsumptionCostWrapper = CostPerUnitWrapper * ConsumptionWrapper * CurrencyValueInINR;
+            if (ConsumptionWrapper > 0)
+                ConsumptionCostWrapper = CostPerUnitWrapper * ConsumptionWrapper * CurrencyValueInINR + OtherCostInINRWrapper;
+            else
+                ConsumptionCostWrapper = 0;
         }
 
         decimal m_TotalSubMaterialsPurchaseCostWrapper = -1.0m;
