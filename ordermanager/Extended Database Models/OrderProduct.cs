@@ -343,15 +343,21 @@ namespace ordermanager.DatabaseModel
 
             foreach (var material in ProductMaterialsWrapper)
             {
+                material.IsValidating = true;
                 material.ValidateMaterialName();
                 material.ValidateCostPerUnit();
-                material.ValidateConsumtpion();
+                material.ValidateOtherCost();
                 material.ValidateCurrency();
                 material.ValidateCurrencyValueInINR();
-                material.ValidateUOM();
 
+                if (Helper.GetOrderStatusEnumFromString(this.Order.OrderStatu.StatusLabel) == OrderStatusEnum.MaterialsAdded)
+                {
+                    material.ValidateUOM();
+                    material.ValidateConsumtpion();
+                }
                 if (material.HasErrors)
                     hasError = true;
+                material.IsValidating = false;
             }
 
             if (ValidatePerUnitTotalProductMaterialsCost())
