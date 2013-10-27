@@ -442,6 +442,7 @@
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <Label Content="Total Order Value : "  Style="{StaticResource DescriptionHeaderStyle}"/>
                     <TextBlock x:Name="totalNumberOfItems" Text="{Binding TotalOrderValue, StringFormat=n}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold"/>
+                    <TextBlock  Text="INR"  Style="{StaticResource TextBlockHeaderStyle}" Margin="5,0,0,0"/>
                 </StackPanel>
             </Grid>
 
