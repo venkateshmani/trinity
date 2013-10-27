@@ -20,7 +20,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
-            </ResourceDictionary.MergedDictionaries>         
+            </ResourceDictionary.MergedDictionaries>
             <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -176,40 +176,44 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="gridDetails" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <StackPanel x:Name="spAddDeleteButtons" Grid.Row="0" Margin="10,10,5,0" Orientation="Horizontal"  Visibility="{Binding Path= DataContext.NewItemAddBtnVisibility,ElementName=This}">
-                    <Button x:Name="btnAddNewItem"  Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewItem_Click">
-                        <Button.Background>
-                            <SolidColorBrush Color="{StaticResource AccentColor}" />
-                        </Button.Background>
-                    </Button>
-                    <Button x:Name="btnDeleteItem"  Content="Delete"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Delete Selected Item" HorizontalAlignment="Left" Click="DeleteItem_Click" Visibility="Hidden">
-                        <Button.Background>
-                            <SolidColorBrush Color="{StaticResource ValidationColor5}" />
-                        </Button.Background>
-                    </Button>
-                </StackPanel>
-                <Border BorderBrush="Gray" BorderThickness="1" Margin="10,5,10,10" Grid.Row="1">
-                    <DataGrid x:Name="materialsGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
+
+            <TabControl x:Name="tabControl" Grid.Row="1">
+                <TabItem x:Name="tabViewMaterialsDetails" Header="  Materials Details  " Cursor="Hand" >
+                    <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                        <Grid x:Name="gridDetails" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel x:Name="spAddDeleteButtons" Grid.Row="0" Margin="10,10,5,0" Orientation="Horizontal"  Visibility="{Binding Path= DataContext.NewItemAddBtnVisibility,ElementName=This}">
+                                <Button x:Name="btnAddNewItem"  Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewItem_Click">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                    </Button.Background>
+                                </Button>
+                                <Button x:Name="btnDeleteItem"  Content="Delete"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Delete Selected Item" HorizontalAlignment="Left" Click="DeleteItem_Click" Visibility="Hidden">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                                    </Button.Background>
+                                </Button>
+                            </StackPanel>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="10,5,10,10" Grid.Row="1">
+                                <DataGrid x:Name="materialsGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductMaterialsWrapper, UpdateSourceTrigger=PropertyChanged}"
                                               RowHeaderWidth="25"
                                               HeadersVisibility="All">
-                        <DataGrid.Columns>
-                            <DataGridTemplateColumn x:Name="materialColumn" Header="Material Name" Width="0.25*" >
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <ComboBox x:Name="materialsComboBox" Grid.Column="0" 
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn x:Name="materialColumn" Header="Material Name" Width="0.25*" >
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <ComboBox x:Name="materialsComboBox" Grid.Column="0" 
                                                       IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
                                                       IsEditable="{Binding Path=DataContext.CanEditMaterials,ElementName=This}"
                                                       IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
@@ -220,187 +224,272 @@
                                                       UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                       TextBoxBase.TextChanged="comboBox_TextChanged"
                                                       Height="20" />
-                                            <Button  x:Name="addBtn" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
+                                                        <Button  x:Name="addBtn" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
                                                      Cursor="Hand" Click="AddNewMaterial"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Material"
                                                      Visibility="Collapsed" >
-                                                <Rectangle Width="10" Height="10">
-                                                    <Rectangle.Fill>
-                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
-                                            </Button>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="costPerUnitColumn" Width="0.15*" Header="Cost">                              
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBox Text="{Binding CostPerUnitWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                            <Rectangle Width="10" Height="10">
+                                                                <Rectangle.Fill>
+                                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                                </Rectangle.Fill>
+                                                            </Rectangle>
+                                                        </Button>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn x:Name="consumptionColumn" Header="Consumption" Width="0.18*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding ConsumptionWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
                                                  IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterials, ElementName=This}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="currencyColumn" Header="Cur" Width="60">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <ComboBox x:Name="currencyComboBox" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                                      Height="20" ItemsSource="{Binding Currencies, Source={StaticResource DataProvider}}" DisplayMemberPath="Symbol"
-                                                      SelectedItem="{Binding CurrencyWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterials,ElementName=This}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn x:Name="unitOfMeasurementColumn" Header="UOM" Width="0.1*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <ComboBox x:Name="uomComboBox" Grid.Column="0"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                      Height="20" ItemsSource="{Binding UOMs, Source={StaticResource DataProvider}}" DisplayMemberPath="Units"
+                                                      SelectedItem="{Binding  UnitsOfMeasurementWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                       IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
                                                       IsEditable="{Binding Path=DataContext.CanEditMaterials,ElementName=This}"
                                                       IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
                                                       IsTabStop="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"  />
-                                            <Button  x:Name="btnAddCurrency" Width="28"   Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left"  
-                                                     Cursor="Hand" Visibility="Collapsed" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Currency">
-                                                <Rectangle Width="10" Height="10">
-                                                    <Rectangle.Fill>
-                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
-                                            </Button>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="currencyValueInINR" Header="Cur Value (INR)" Width="90">
-                                <DataGridTemplateColumn.HeaderTemplate>
-                                    <DataTemplate>
-                                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Center">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-                                            <TextBlock Text="CUR VALUE" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            <TextBlock Text="(INR)" Grid.Row="1" HorizontalAlignment="Center" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.HeaderTemplate>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
-                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterials,ElementName=This}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="extraCostPerUnitColumn" Width="100">
-                                <DataGridTemplateColumn.HeaderTemplate>
-                                    <DataTemplate>
-                                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-                                            <TextBlock Text="OTHER COST" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            <TextBlock Text="(INR)" Grid.Row="1" HorizontalAlignment="Center" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.HeaderTemplate>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBox Text="{Binding OtherCostInINRWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterials, ElementName=This}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="extraCostNameColumn" Width="0.2*">
-                                <DataGridTemplateColumn.HeaderTemplate>
-                                    <DataTemplate>
-                                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto"/>
-                                                <RowDefinition Height="Auto"/>
-                                            </Grid.RowDefinitions>
-                                            <TextBlock Text="OTHER COST" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            <TextBlock Text="NAME" Grid.Row="1" HorizontalAlignment="Center" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.HeaderTemplate>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBox Text="{Binding OtherCostNameWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterials, ElementName=This}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="consumptionColumn" Header="Consumption" Width="0.18*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBox Text="{Binding ConsumptionWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
-                                                 IsReadOnly="{Binding Path=DataContext.CanEditConsumption, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditConsumption,ElementName=This}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="unitOfMeasurementColumn" Header="UOM" Width="0.1*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <ComboBox x:Name="uomComboBox" Grid.Column="0"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                                      Height="20" ItemsSource="{Binding UOMs, Source={StaticResource DataProvider}}" DisplayMemberPath="Units"
-                                                      SelectedItem="{Binding  UnitsOfMeasurementWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                      IsReadOnly="{Binding Path=DataContext.CanEditConsumption, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                      IsEditable="{Binding Path=DataContext.CanEditConsumption,ElementName=This}"
+                                                        <Button  x:Name="btnAddUOM" Width="28" Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
+                                                     Cursor="Hand" Visibility="Collapsed" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New UOM">
+                                                            <Rectangle Width="10" Height="10">
+                                                                <Rectangle.Fill>
+                                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                                </Rectangle.Fill>
+                                                            </Rectangle>
+                                                        </Button>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn x:Name="costPerUnitColumn" Width="0.15*" Header="Cost">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding CostPerUnitWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn x:Name="currencyColumn" Header="Cur" Width="60">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <ComboBox x:Name="currencyComboBox" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                      Height="20" ItemsSource="{Binding Currencies, Source={StaticResource DataProvider}}" DisplayMemberPath="Symbol"
+                                                      SelectedItem="{Binding CurrencyWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                      IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                      IsEditable="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"
                                                       IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
                                                       IsTabStop="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"  />
-                                            <Button  x:Name="btnAddUOM" Width="28" Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
-                                                     Cursor="Hand" Visibility="Collapsed" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New UOM">
-                                                <Rectangle Width="10" Height="10">
-                                                    <Rectangle.Fill>
-                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
-                                            </Button>
-                                        </Grid>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="consumptionCostColumn" Header="Consumption Cost" Width="0.2*">
-                                <DataGridTemplateColumn.HeaderTemplate>
-                                    <DataTemplate>
-                                        <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">                                            
-                                            <TextBlock Text="CONSUMPTION"  HorizontalAlignment="Center"/>
-                                            <TextBlock Text="COST" HorizontalAlignment="Center" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.HeaderTemplate>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBox Text="{Binding ConsumptionCostWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" FontWeight="Bold" IsReadOnly="True"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Border>
-                <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,10">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
-                        <TextBlock Text="Other Cost:" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
-                        <TextBox Text="{Binding OtherCost.CostWrapper,StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+                                                        <Button  x:Name="btnAddCurrency" Width="28"   Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left"  
+                                                     Cursor="Hand" Visibility="Collapsed" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Currency">
+                                                            <Rectangle Width="10" Height="10">
+                                                                <Rectangle.Fill>
+                                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                                </Rectangle.Fill>
+                                                            </Rectangle>
+                                                        </Button>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn x:Name="currencyValueInINR" Header="Cur Value (INR)" Width="90">
+                                            <DataGridTemplateColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <Grid  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <TextBlock Text="CUR VALUE" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        <TextBlock Text="(INR)" Grid.Row="1" HorizontalAlignment="Center" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.HeaderTemplate>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn x:Name="extraCostPerUnitColumn" Width="100">
+                                            <DataGridTemplateColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <TextBlock Text="OTHER COST" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        <TextBlock Text="(INR)" Grid.Row="1" HorizontalAlignment="Center" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.HeaderTemplate>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding OtherCostInINRWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn x:Name="extraCostNameColumn" Width="0.2*">
+                                            <DataGridTemplateColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto"/>
+                                                            <RowDefinition Height="Auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <TextBlock Text="OTHER COST" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        <TextBlock Text="NAME" Grid.Row="1" HorizontalAlignment="Center" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.HeaderTemplate>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding OtherCostNameWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn x:Name="consumptionCostColumn" Header="Consumption Cost" Width="0.2*">
+                                            <DataGridTemplateColumn.HeaderTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+                                                        <TextBlock Text="CONSUMPTION"  HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="COST" HorizontalAlignment="Center" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.HeaderTemplate>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding ConsumptionCostWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" FontWeight="Bold" IsReadOnly="True"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>                                      
+                                       </DataGrid.Columns>
+                                </DataGrid>
+                            </Border>
+                            <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,10" Visibility="Collapsed">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                                    <TextBlock Text="Other Cost:" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
+                                    <TextBox Text="{Binding OtherCost.CostWrapper,StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
                                  IsReadOnly="{Binding Path=DataContext.CanEditExtraCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
                                  IsHitTestVisible="{Binding Path=DataContext.CanEditExtraCost,ElementName=This}"
                                  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="100" Height="20" Foreground="Gray" Margin="10,0,0,0"/>
-                        <TextBlock Text="INR" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" Margin="3,0,0,0"/>
-                        <TextBox Text="{Binding OtherCost.DescriptionWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" 
+                                    <TextBlock Text="INR" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" Margin="3,0,0,0"/>
+                                    <TextBox Text="{Binding OtherCost.DescriptionWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" 
                                  IsReadOnly="{Binding Path=DataContext.CanEditExtraCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
                                  IsHitTestVisible="{Binding Path=DataContext.CanEditExtraCost,ElementName=This}"
                                  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="400" Height="20" Foreground="Gray" Margin="40,0,0,0" Controls:TextboxHelper.Watermark=" Enter reason for other cost here"/>
-                    </StackPanel>
-                </Grid>
-            </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </TabItem>
+                <TabItem x:Name="tabExtraCost" Header="  Other Costs  " Cursor="Hand">
+                    <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                        <Grid x:Name="gridExtraCostDetails" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Margin="10,10,5,0" Orientation="Horizontal"  Visibility="{Binding Path= DataContext.AddNewExtraCostItemBtnVisibility,ElementName=This}">
+                                <Button Content="New Item"  Width="100" Height="25" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left" Click="AddNewExtraCostItem_Click">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                    </Button.Background>
+                                </Button>
+                            </StackPanel>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="10,5,10,10" Grid.Row="1">
+                                <DataGrid x:Name="extraCostGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
+                                              GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
+                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductExtraCostWrapper, UpdateSourceTrigger=PropertyChanged}"
+                                              RowHeaderWidth="25" HeadersVisibility="All">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn x:Name="extraTypeColumn" Header="Extra Cost Name" Width="0.25*" >
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <ComboBox x:Name="extraTypeComboBox" Grid.Column="0" 
+                                                           IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                           IsEditable="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"
+                                                           IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
+                                                           IsTabStop="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"         
+                                                           VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                                                                
+                                                           ItemsSource="{Binding AvailableExtraCostTypes, Source={StaticResource DataProvider}}"         
+                                                           DisplayMemberPath= "TypeName" SelectedItem="{Binding ProductExtraCostType, Mode=TwoWay,                 
+                                                           UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                           TextBoxBase.TextChanged="extraTypeComboBox_TextChanged"
+                                                           Height="20" PresentationTraceSources.TraceLevel="High" />
+                                                        <Button  x:Name="addBtn" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
+                                                     Cursor="Hand" Click="AddNewExtraCostItem"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Cost Type"
+                                                     Visibility="Collapsed" >
+                                                            <Rectangle Width="10" Height="10">
+                                                                <Rectangle.Fill>
+                                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                                </Rectangle.Fill>
+                                                            </Rectangle>
+                                                        </Button>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn x:Name="extracost" Width="0.25*" Header="Extra Cost">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox Text="{Binding Cost, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Border>
+                            <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,10" Visibility="Collapsed">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                                    <TextBlock Text="Other Cost:" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
+                                    <TextBox Text="{Binding OtherCost.CostWrapper,StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"
+                                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="100" Height="20" Foreground="Gray" Margin="10,0,0,0"/>
+                                    <TextBlock Text="INR" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" Margin="3,0,0,0"/>
+                                    <TextBox Text="{Binding OtherCost.DescriptionWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" 
+                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"
+                                 VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="400" Height="20" Foreground="Gray" Margin="40,0,0,0" Controls:TextboxHelper.Watermark=" Enter reason for other cost here"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </TabItem>
+            </TabControl>
         </Grid>
 
         <GridSplitter Grid.Row="0" Grid.Column="1"

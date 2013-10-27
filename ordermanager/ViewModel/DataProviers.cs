@@ -115,6 +115,11 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public ObservableCollection<ProductExtraCostType> AvailableExtraCostTypes
+        {
+            get { return DBResources.Instance.AvailableExtraCostTypes; }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {

@@ -217,8 +217,8 @@ namespace ordermanager.ViewModel
         {
             ProductName newProduct = new ProductName();
             newProduct.Name = newProductName;
-            newProduct.StyleID = styleID;
 
+            newProduct.StyleID = styleID;
             OrderManagerDBEntities newManager = new OrderManagerDBEntities();
             newManager.ProductNames.Add(newProduct);
             newManager.SaveChanges();
@@ -263,6 +263,24 @@ namespace ordermanager.ViewModel
             }
         }
 
+        private ObservableCollection<ProductExtraCostType> m_AvailableExtraCostTypes = null;
+        public ObservableCollection<ProductExtraCostType> AvailableExtraCostTypes
+        {
+            get
+            {
+                if (m_AvailableExtraCostTypes == null)
+                {
+                    m_AvailableExtraCostTypes = new ObservableCollection<ProductExtraCostType>(dbContext.ProductExtraCostTypes.ToList());
+                }
+                return m_AvailableExtraCostTypes;
+            }
+            private set
+            {
+                m_AvailableExtraCostTypes = value;
+                OnPropertyChanged("AvailableExtraCostTypes");
+            }
+        }
+
         private void PopulateAvailableSubMaterials()
         {
             m_AvailableSubMaterials = new Dictionary<string, ObservableCollection<SubMaterial>>(1);
@@ -300,8 +318,27 @@ namespace ordermanager.ViewModel
                 newMaterial = AvailableMaterials.Where(a => a.Name == newMaterialName)
                               .Select(a => a).First();
             }
-
             return newMaterial;
+        }
+
+        public ProductExtraCostType CreateNewExtraCostType(string extraCostName)
+        {           
+            ProductExtraCostType newCostType = AvailableExtraCostTypes.Where(a => a.TypeName == extraCostName)
+                       .Select(a => a).FirstOrDefault();
+
+            if (newCostType == null)
+            {
+                OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+                newCostType = new ProductExtraCostType();
+                newCostType.TypeName = extraCostName;
+                newManager.ProductExtraCostTypes.Add(newCostType);
+                newManager.SaveChanges();
+                newManager.Dispose();
+                AvailableExtraCostTypes = new ObservableCollection<ProductExtraCostType>(dbContext.ProductExtraCostTypes.ToList()); //Refresh
+                newCostType = AvailableExtraCostTypes.Where(a => a.TypeName == extraCostName)
+                              .Select(a => a).First();
+            }
+            return newCostType;
         }
 
         public SubMaterial CreateNewSubMaterial(string subMaterialName, ProductMaterial material)

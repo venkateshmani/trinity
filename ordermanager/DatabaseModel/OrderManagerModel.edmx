@@ -307,7 +307,7 @@
           <Property Name="ExtraCostID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ProductID" Type="bigint" Nullable="false" />
           <Property Name="ExtraCostTypeID" Type="smallint" Nullable="false" />
-          <Property Name="CurrencyID" Type="smallint" Nullable="false" />
+          <Property Name="CurrencyID" Type="smallint" />
           <Property Name="Description" Type="text" />
           <Property Name="Cost" Type="decimal" Nullable="false" Scale="4" />
         </EntityType>
@@ -610,7 +610,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductExtraCost_Currency">
-          <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="1" />
+          <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="0..1" />
           <End Role="ProductExtraCost" Type="OrderManagerDBModel.Store.ProductExtraCost" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Currency">
@@ -1122,7 +1122,7 @@
           <Property Name="ExtraCostID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="ProductID" Type="Int64" Nullable="false" />
           <Property Name="ExtraCostTypeID" Type="Int16" Nullable="false" />
-          <Property Name="CurrencyID" Type="Int16" Nullable="false" />
+          <Property Name="CurrencyID" Type="Int16" />
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_ProductExtraCost_Currency" FromRole="ProductExtraCost" ToRole="Currency" />
@@ -1329,7 +1329,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductExtraCost_Currency">
-          <End Role="Currency" Type="OrderManagerDBModel.Currency" Multiplicity="1" />
+          <End Role="Currency" Type="OrderManagerDBModel.Currency" Multiplicity="0..1" />
           <End Role="ProductExtraCost" Type="OrderManagerDBModel.ProductExtraCost" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Currency">

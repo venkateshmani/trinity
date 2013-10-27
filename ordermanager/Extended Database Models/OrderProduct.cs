@@ -38,6 +38,21 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        private ObservableCollection<ProductExtraCost> m_ProductExtraCostWrapper = null;
+
+        public ObservableCollection<ProductExtraCost> ProductExtraCostWrapper
+        {
+            get
+            {
+                if (m_ProductExtraCostWrapper == null)
+                {
+                    m_ProductExtraCostWrapper = new ObservableCollection<ProductExtraCost>(this.ProductExtraCosts);
+                }
+                return m_ProductExtraCostWrapper;
+            }
+        }
+
+
         public virtual ProductExtraCost OtherCost
         {
             get
@@ -345,15 +360,16 @@ namespace ordermanager.DatabaseModel
             {
                 material.IsValidating = true;
                 material.ValidateMaterialName();
-                material.ValidateCostPerUnit();
-                material.ValidateOtherCost();
-                material.ValidateCurrency();
-                material.ValidateCurrencyValueInINR();
-
+                material.ValidateUOM();
+                material.ValidateConsumtpion();
                 if (Helper.GetOrderStatusEnumFromString(this.Order.OrderStatu.StatusLabel) == OrderStatusEnum.MaterialsAdded)
                 {
-                    material.ValidateUOM();
-                    material.ValidateConsumtpion();
+                    material.ValidateCostPerUnit();
+                    material.ValidateCurrency();
+                    material.ValidateCurrencyValueInINR();
+                    material.ValidateOtherCost();
+                    if (ValidateExtraCosts())
+                        hasError = true;
                 }
                 if (material.HasErrors)
                     hasError = true;
@@ -361,10 +377,7 @@ namespace ordermanager.DatabaseModel
             }
 
             if (ValidatePerUnitTotalProductMaterialsCost())
-                hasError = true;
-
-            if (ValidateExtraCosts())
-                hasError = true;
+                hasError = true;          
 
             HasErrorsInProductMaterials = hasError;
             return hasError;
@@ -373,16 +386,14 @@ namespace ordermanager.DatabaseModel
         public bool ValidateExtraCosts()
         {
             bool hasError = false;
-
-            if (DBResources.Instance.CurrentUser.UserRole.CanAddExtraCost)
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost)
             {
-                foreach (var extraCost in ProductExtraCosts)
+                foreach (ProductExtraCost eCost in ProductExtraCostWrapper)
                 {
-                    if (extraCost.Validate())
+                    if (!eCost.Validate())
                         hasError = true;
                 }
             }
-
             return hasError;
         }
 

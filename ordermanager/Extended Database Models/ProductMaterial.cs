@@ -123,7 +123,7 @@ namespace ordermanager.DatabaseModel
             {
                 if (OtherCostInINR != value)
                 {
-                    OtherCostInINR = value;                   
+                    OtherCostInINR = value;
                     CalculateConsumptionCost();
                     OnPropertyChanged("OtherCostInINRWrapper");
                 }
@@ -140,7 +140,7 @@ namespace ordermanager.DatabaseModel
             {
                 if (OtherCostName != value)
                 {
-                    OtherCostName = value;                   
+                    OtherCostName = value;
                     OnPropertyChanged("OtherCostNameWrapper");
                 }
             }
@@ -269,15 +269,15 @@ namespace ordermanager.DatabaseModel
             RemoveError("OtherCostInINRWrapper");
             RemoveError("OtherCostNameWrapper");
             if (OtherCostInINRWrapper > 0)
-            { 
-                if(string.IsNullOrWhiteSpace(OtherCostNameWrapper))
-                    AddError("OtherCostNameWrapper","Enter other cost name",false);
+            {
+                if (string.IsNullOrWhiteSpace(OtherCostNameWrapper))
+                    AddError("OtherCostNameWrapper", "Enter other cost name", false);
             }
             if (!string.IsNullOrWhiteSpace(OtherCostNameWrapper))
             {
-                if (OtherCostInINRWrapper<=0)
-                    AddError("OtherCostInINRWrapper", "Enter other cost value",false);
-            }            
+                if (OtherCostInINRWrapper <= 0)
+                    AddError("OtherCostInINRWrapper", "Enter other cost value", false);
+            }
         }
 
 
@@ -370,10 +370,7 @@ namespace ordermanager.DatabaseModel
 
         private void CalculateConsumptionCost()
         {
-            if (ConsumptionWrapper > 0)
-                ConsumptionCostWrapper = CostPerUnitWrapper * ConsumptionWrapper * CurrencyValueInINR + OtherCostInINRWrapper;
-            else
-                ConsumptionCostWrapper = 0;
+            ConsumptionCostWrapper = CostPerUnitWrapper * ConsumptionWrapper * CurrencyValueInINR + OtherCostInINRWrapper;
         }
 
         decimal m_TotalSubMaterialsPurchaseCostWrapper = -1.0m;

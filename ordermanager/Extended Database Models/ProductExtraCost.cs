@@ -54,17 +54,25 @@ namespace ordermanager.DatabaseModel
         {
             if (HasUserClickedSaveOrSubmit)
             {
-                if (Cost != 0 && string.IsNullOrEmpty(Description))
-                {
-                    AddError("DescriptionWrapper", "Enter the reason for the cost", false);
-                }
+                //if (Cost != 0 && string.IsNullOrEmpty(Description))
+                //{
+                //    AddError("DescriptionWrapper", "Enter the reason for the cost", false);
+                //}
+                //else
+                //{
+                //    RemoveError("DescriptionWrapper", "Enter the reason for the cost");
+                //}
+                if (ProductExtraCostType.ExtraCostTypeID == 0)
+                    AddError("ProductExtraCostType", "Select", false);
                 else
-                {
-                    RemoveError("DescriptionWrapper", "Enter the reason for the cost");
-                }
+                    RemoveError("ProductExtraCostType");
+                if (Cost == 0)
+                    AddError("Cost", "Add cost", false);
+                else
+                    RemoveError("Cost");
             }
 
-            return HasErrors;
+            return !HasErrors;
         }
     }
 }

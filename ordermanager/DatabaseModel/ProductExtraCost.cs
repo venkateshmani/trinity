@@ -17,7 +17,7 @@ namespace ordermanager.DatabaseModel
         public long ExtraCostID { get; set; }
         public long ProductID { get; set; }
         public short ExtraCostTypeID { get; set; }
-        public short CurrencyID { get; set; }
+        public Nullable<short> CurrencyID { get; set; }
         public string Description { get; set; }
         public decimal Cost { get; set; }
     
