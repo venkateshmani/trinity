@@ -13,6 +13,9 @@ namespace ordermanager.DatabaseModel
         private Dictionary<String, List<String>> errors =
               new Dictionary<string, List<string>>();
 
+        public bool IsValidating
+        { get; set; }
+
         // Adds the specified error to the errors collection if it is not 
         // already present, inserting it in the first position if isWarning is 
         // false. Raises the ErrorsChanged event if the collection changes. 
@@ -58,8 +61,8 @@ namespace ordermanager.DatabaseModel
             {
                 ErrorsChanged(this, new DataErrorsChangedEventArgs(propertyName));
             }
-
-            OnPropertyChanged("HasErrors");
+            if (!IsValidating)
+                OnPropertyChanged("HasErrors");
         }
 
         public virtual bool DontLoosePropertyValue

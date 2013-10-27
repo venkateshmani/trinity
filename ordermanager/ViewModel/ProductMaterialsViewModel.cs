@@ -81,14 +81,14 @@ namespace ordermanager.ViewModel
             ActionButtonsVisibility = Visibility.Collapsed;
             NewItemAddBtnVisibility = Visibility.Collapsed;
             CanEditMaterials = false;
-            CanEditMaterialsCost = false;
+            //CanEditMaterialsCost = false;
             CanEditConsumption = false;
             CanEditExtraCost = false;
             if (m_Order != null)
             {
                 UserRole cuRole = DBResources.Instance.CurrentUser.UserRole;
                 OrderStatu coStatus = Order.OrderStatu;
-                if (cuRole.CanAddMaterials || cuRole.CanAddExtraCost)
+                if (cuRole.CanAddMaterials || cuRole.CanAddExtraCost || cuRole.CanAddMaterialsCost)
                 {
                     if (coStatus.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated || Order.OrderStatu.OrderStatusID == (short)OrderStatusEnum.EnquiryRejected)
                     {
@@ -97,14 +97,8 @@ namespace ordermanager.ViewModel
                         CanEditMaterials = true;
                         CanEditExtraCost = true;
                     }
-                }
-                if (cuRole.CanAddMaterialsCost && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded)
-                {
-                    ActionButtonsVisibility = Visibility.Visible;
-                    NewItemAddBtnVisibility = Visibility.Hidden;
-                    CanEditMaterialsCost = true;
-                }
-                if (cuRole.CanAddConsumption && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsCostAdded)
+                }               
+                if (cuRole.CanAddConsumption && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded)
                 {
                     ActionButtonsVisibility = Visibility.Visible;
                     NewItemAddBtnVisibility = Visibility.Hidden;
@@ -177,19 +171,19 @@ namespace ordermanager.ViewModel
             }
         }
 
-        private bool m_CanEditMaterialsCost;
-        public bool CanEditMaterialsCost
-        {
-            get { return m_CanEditMaterialsCost; }
-            set
-            {
-                if (m_CanEditMaterialsCost != value)
-                {
-                    m_CanEditMaterialsCost = value;
-                    NotifyPropertyChanged("CanEditMaterialsCost");
-                }
-            }
-        }
+        //private bool m_CanEditMaterialsCost;
+        //public bool CanEditMaterialsCost
+        //{
+        //    get { return m_CanEditMaterialsCost; }
+        //    set
+        //    {
+        //        if (m_CanEditMaterialsCost != value)
+        //        {
+        //            m_CanEditMaterialsCost = value;
+        //            NotifyPropertyChanged("CanEditMaterialsCost");
+        //        }
+        //    }
+        //}
 
         private bool m_CanEditConsumption;
         public bool CanEditConsumption
@@ -244,8 +238,8 @@ namespace ordermanager.ViewModel
                         Order.OrderStatusID = (short)OrderStatusEnum.MaterialsAdded;
                     else if (Order.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded)
                         Order.OrderStatusID = (short)OrderStatusEnum.MaterialsCostAdded;
-                    else if (Order.OrderStatusID == (short)OrderStatusEnum.MaterialsCostAdded)
-                        Order.OrderStatusID = (short)OrderStatusEnum.MaterialsJobCompleted;
+                    //else if (Order.OrderStatusID == (short)OrderStatusEnum.MaterialsCostAdded)
+                    //    Order.OrderStatusID = (short)OrderStatusEnum.MaterialsJobCompleted;
                 }
 
                 foreach (OrderProduct dbProduct in Products)

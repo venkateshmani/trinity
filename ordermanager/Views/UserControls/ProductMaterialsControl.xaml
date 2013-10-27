@@ -20,12 +20,11 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>         
             <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
-
             <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
                 <Setter Property="Visibility" Value="Collapsed" />
             </Style>
@@ -202,7 +201,7 @@
                                               RowHeaderWidth="25"
                                               HeadersVisibility="All">
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn x:Name="materialColumn" Header="Material Name" Width="0.3*" >
+                            <DataGridTemplateColumn x:Name="materialColumn" Header="Material Name" Width="0.25*" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -234,16 +233,16 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="costPerUnitColumn" Header="Cost Per Unit" Width="0.15*">
+                            <DataGridTemplateColumn x:Name="costPerUnitColumn" Width="0.15*" Header="Cost">                              
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding CostPerUnitWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"/>
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterials, ElementName=This}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency" Width="0.12*">
+                            <DataGridTemplateColumn x:Name="currencyColumn" Header="Cur" Width="60">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -254,8 +253,8 @@
                                             <ComboBox x:Name="currencyComboBox" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                       Height="20" ItemsSource="{Binding Currencies, Source={StaticResource DataProvider}}" DisplayMemberPath="Symbol"
                                                       SelectedItem="{Binding CurrencyWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                      IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                      IsEditable="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"
+                                                      IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                      IsEditable="{Binding Path=DataContext.CanEditMaterials,ElementName=This}"
                                                       IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
                                                       IsTabStop="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"  />
                                             <Button  x:Name="btnAddCurrency" Width="28"   Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left"  
@@ -270,12 +269,75 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="currencyValueInINR" Header="Currency Value In INR" Width="0.22*">
+                            <DataGridTemplateColumn x:Name="currencyValueInINR" Header="Cur Value (INR)" Width="90">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="CUR VALUE" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="(INR)" Grid.Row="1" HorizontalAlignment="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
-                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"/>
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterials,ElementName=This}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn x:Name="extraCostPerUnitColumn" Width="100">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="OTHER COST" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="(INR)" Grid.Row="1" HorizontalAlignment="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding OtherCostInINRWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterials, ElementName=This}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn x:Name="extraCostNameColumn" Width="0.2*">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="OTHER COST" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="NAME" Grid.Row="1" HorizontalAlignment="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding OtherCostNameWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterials, ElementName=This}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn x:Name="consumptionColumn" Header="Consumption" Width="0.18*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding ConsumptionWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditConsumption, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditConsumption,ElementName=This}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -290,8 +352,8 @@
                                             <ComboBox x:Name="uomComboBox" Grid.Column="0"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                       Height="20" ItemsSource="{Binding UOMs, Source={StaticResource DataProvider}}" DisplayMemberPath="Units"
                                                       SelectedItem="{Binding  UnitsOfMeasurementWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                      IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                      IsEditable="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"
+                                                      IsReadOnly="{Binding Path=DataContext.CanEditConsumption, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                      IsEditable="{Binding Path=DataContext.CanEditConsumption,ElementName=This}"
                                                       IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
                                                       IsTabStop="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"  />
                                             <Button  x:Name="btnAddUOM" Width="28" Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
@@ -306,16 +368,15 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="consumptionColumn" Header="Consumption" Width="0.16*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBox Text="{Binding ConsumptionWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
-                                                 IsReadOnly="{Binding Path=DataContext.CanEditConsumption, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditConsumption,ElementName=This}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="consumptionCostColumn" Header="Consumption Cost" Width="0.2*">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">                                            
+                                            <TextBlock Text="CONSUMPTION"  HorizontalAlignment="Center"/>
+                                            <TextBlock Text="COST" HorizontalAlignment="Center" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding ConsumptionCostWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" FontWeight="Bold" IsReadOnly="True"/>
