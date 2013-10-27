@@ -36,6 +36,21 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public bool CanUpdateEnquiry
+        {
+            get
+            {
+                if (Order.OrderStatusID == (short)OrderStatusEnum.EnquiryApproved &&
+                    DBResources.Instance.CurrentUser.UserRole.CanConfirmOrder)
+                    return true;
+                else if (Order.OrderStatusID == 0 &&
+                    DBResources.Instance.CurrentUser.UserRole.CanCreateNewEnquiry)
+                    return true;
+
+                return false;
+            }
+        }
+
         private bool m_IsReadOnly = false;
         public bool IsReadOnly
         {

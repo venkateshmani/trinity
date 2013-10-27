@@ -53,10 +53,15 @@ namespace ordermanager.Views.PopUps
                     //addNewItemBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewCustomerBtn.Visibility = System.Windows.Visibility.Collapsed;
                     addNewAgentBtn.Visibility = System.Windows.Visibility.Collapsed;
+
+                    ourPriceColumn.Visibility = System.Windows.Visibility.Visible;
+                    profitLoss.Visibility = System.Windows.Visibility.Visible;
                 }
                 else
                 {
                     NewEnquiryViewModel = new NewEnquiryViewModel();
+                    ourPriceColumn.Visibility = System.Windows.Visibility.Hidden;
+                    profitLoss.Visibility = System.Windows.Visibility.Hidden;
                 }
             }
         }
@@ -93,7 +98,7 @@ namespace ordermanager.Views.PopUps
                     else
                     {
                         OrderStatusEnum status = Helper.GetOrderStatusEnumFromString(value.Order.OrderStatu.StatusLabel);
-                        if (status == OrderStatusEnum.MaterialsJobCompleted)
+                        if (status == OrderStatusEnum.MaterialsCostAdded)
                         {
                             SetButtonText(positiveDecisionBtn, "Approve");
                             SetButtonText(negativeDecisionBtn, "Reject");

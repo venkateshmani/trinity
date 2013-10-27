@@ -64,7 +64,7 @@
                 <ColumnDefinition Width="0.3*" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="2">
                 <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -139,9 +139,21 @@
                                     Controls:TextboxHelper.Watermark="Select a date"
                                     SelectedDateChanged="expectedDeliveryDate_SelectedDateChanged"
                                     IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
-                            <TextBlock x:Name="numberOfDays" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Top" 
+                            <TextBlock x:Name="numberOfDays" Foreground="Gray" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Top" 
                                    FontWeight="Bold" />
-                            <TextBlock Text="Days" VerticalAlignment="Center" />
+                            <TextBlock Text="Days" VerticalAlignment="Center" Foreground="Gray" />
+                            <Rectangle HorizontalAlignment="Stretch" Width="2" Fill="Gray" Margin="5,0,0,0" />
+                            <TextBlock Text="Internal Delivery Date" Style="{StaticResource inLineTextBlockStyle}" Margin="7,0,5,0"/>
+                            <DatePicker x:Name="internalDeliveryDate" Width="150" 
+                                    SelectedDate="{Binding Order.ExpectedDeliveryDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                    HorizontalAlignment="Left"
+                                    Controls:TextboxHelper.Watermark="Select a date"
+                                    SelectedDateChanged="expectedDeliveryDate_SelectedDateChanged"
+                                    IsHitTestVisible="{Binding CanUpdateEnquiry}" />
+                            <TextBlock x:Name="internalDeliveryDateSpan" Foreground="Gray" Text="##" Style="{StaticResource inLineTextBlockStyle}" Margin="5,5,5,0" VerticalAlignment="Top" 
+                                   FontWeight="Bold" />
+                            
+                            <TextBlock Text="Days" VerticalAlignment="Center" Foreground="Gray" />
                         </StackPanel>
 
                     </StackPanel>
@@ -284,7 +296,7 @@
                                     <TextBox Text="{Binding ExpectedQuantityWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}"
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler"
-                                            IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
+                                            IsHitTestVisible="{Binding CanUpdateEnquiry}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -385,7 +397,7 @@
                                     <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n}" 
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler" 
-                                            IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
+                                            IsHitTestVisible="{Binding CanUpdateEnquiry}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -395,7 +407,8 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox Text="{Binding OurCostInProductCurrenyValue, Mode=OneWay, StringFormat=n}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="0,3,3,3" IsReadOnly="True"
-                                             Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"/>
+                                             Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"
+                                             />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -404,7 +417,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox Text="{Binding ProfitOrLossAmount, Mode=OneWay, StringFormat=n}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="0,0,3,0" IsReadOnly="True"
-                                             Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}" />
+                                             Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

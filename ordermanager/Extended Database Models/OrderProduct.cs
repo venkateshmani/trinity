@@ -161,6 +161,7 @@ namespace ordermanager.DatabaseModel
                 CustomerTargetPrice = value;
                 CalculateOrderValue();
                 ValidateCustomerTargetPrice();
+                RefreshConsumptionCostProperties();
             }
         }
 
@@ -175,6 +176,7 @@ namespace ordermanager.DatabaseModel
                 ExpectedQuantity = value;
                 CalculateOrderValue();
                 ValidateExpectedQuantity();
+                RefreshConsumptionCostProperties();
             }
         }
 
@@ -211,6 +213,13 @@ namespace ordermanager.DatabaseModel
             {
                 return CustomerTargetPrice - OurCostInProductCurrenyValue;
             }
+        }
+
+        private void RefreshConsumptionCostProperties()
+        {
+            OnPropertyChanged("OurCostInProductCurrenyValue");
+            OnPropertyChanged("IsOurCostHigherThanQuoted");
+            OnPropertyChanged("ProfitOrLossAmount");
         }
 
         private decimal m_PerUnitTotalProductMaterialsCost = 0;
