@@ -21,7 +21,7 @@ namespace ordermanager.DatabaseModel
     
         public long ProductNameID { get; set; }
         public string Name { get; set; }
-        public Nullable<long> StyleID { get; set; }
+        public string StyleID { get; set; }
     
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }

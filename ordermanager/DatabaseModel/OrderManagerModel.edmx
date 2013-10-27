@@ -26,7 +26,6 @@
           <EntitySet Name="ProductName" EntityType="OrderManagerDBModel.Store.ProductName" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ShipmentMode" EntityType="OrderManagerDBModel.Store.ShipmentMode" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SubMaterial" EntityType="OrderManagerDBModel.Store.SubMaterial" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="sysdiagrams" EntityType="OrderManagerDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UnitsOfMeasurement" EntityType="OrderManagerDBModel.Store.UnitsOfMeasurement" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="OrderManagerDBModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserRole" EntityType="OrderManagerDBModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
@@ -213,7 +212,7 @@
             <PropertyRef Name="MaterialNameID" />
           </Key>
           <Property Name="MaterialNameID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="text" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -339,11 +338,13 @@
           <Property Name="MaterialID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ProductID" Type="bigint" Nullable="false" />
           <Property Name="MaterialNameID" Type="int" Nullable="false" />
-          <Property Name="Cost" Type="decimal" Scale="4" />
-          <Property Name="UOMID" Type="smallint" />
-          <Property Name="CurrencyID" Type="smallint" />
           <Property Name="Consumption" Type="decimal" Scale="4" />
+          <Property Name="UOMID" Type="smallint" />
+          <Property Name="Cost" Type="decimal" Scale="4" />
+          <Property Name="CurrencyID" Type="smallint" />
           <Property Name="ConsumptionCost" Type="decimal" Scale="4" />
+          <Property Name="OtherCostInINR" Type="decimal" Scale="4" />
+          <Property Name="OtherCostName" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ProductName">
           <Key>
@@ -351,7 +352,7 @@
           </Key>
           <Property Name="ProductNameID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="text" Nullable="false" />
-          <Property Name="StyleID" Type="bigint" />
+          <Property Name="StyleID" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ShipmentMode">
           <Key>
@@ -367,16 +368,6 @@
           <Property Name="SubMaterialsNameID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="MaterialNameID" Type="int" Nullable="false" />
           <Property Name="Name" Type="text" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="UnitsOfMeasurement">
           <Key>
@@ -811,7 +802,6 @@
           <EntitySet Name="ProductNames" EntityType="OrderManagerDBModel.ProductName" />
           <EntitySet Name="ShipmentModes" EntityType="OrderManagerDBModel.ShipmentMode" />
           <EntitySet Name="SubMaterials" EntityType="OrderManagerDBModel.SubMaterial" />
-          <EntitySet Name="sysdiagrams" EntityType="OrderManagerDBModel.sysdiagram" />
           <EntitySet Name="UnitsOfMeasurements" EntityType="OrderManagerDBModel.UnitsOfMeasurement" />
           <EntitySet Name="Users" EntityType="OrderManagerDBModel.User" />
           <EntitySet Name="UserRoles" EntityType="OrderManagerDBModel.UserRole" />
@@ -1010,7 +1000,7 @@
             <PropertyRef Name="MaterialNameID" />
           </Key>
           <Property Name="MaterialNameID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="ProductMaterials" Relationship="OrderManagerDBModel.FK_ProductMaterials_MaterialName" FromRole="MaterialName" ToRole="ProductMaterials" />
           <NavigationProperty Name="SubMaterials" Relationship="OrderManagerDBModel.FK_SubMaterial_MaterialName" FromRole="MaterialName" ToRole="SubMaterial" />
         </EntityType>
@@ -1171,11 +1161,13 @@
           <Property Name="MaterialID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="ProductID" Type="Int64" Nullable="false" />
           <Property Name="MaterialNameID" Type="Int32" Nullable="false" />
-          <Property Name="Cost" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="UOMID" Type="Int16" />
-          <Property Name="CurrencyID" Type="Int16" />
           <Property Name="Consumption" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="UOMID" Type="Int16" />
+          <Property Name="Cost" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="CurrencyID" Type="Int16" />
           <Property Name="ConsumptionCost" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="OtherCostInINR" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="OtherCostName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_ProductMaterials_Currency" FromRole="ProductMaterials" ToRole="Currency" />
           <NavigationProperty Name="MaterialName" Relationship="OrderManagerDBModel.FK_ProductMaterials_MaterialName" FromRole="ProductMaterials" ToRole="MaterialName" />
           <NavigationProperty Name="OrderProduct" Relationship="OrderManagerDBModel.FK_ProductMaterials_OrderProduct" FromRole="ProductMaterials" ToRole="OrderProduct" />
@@ -1188,7 +1180,7 @@
           </Key>
           <Property Name="ProductNameID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="StyleID" Type="Int64" />
+          <Property Name="StyleID" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="OrderProducts" Relationship="OrderManagerDBModel.FK_OrderProduct_ProductName" FromRole="ProductName" ToRole="OrderProduct" />
         </EntityType>
         <EntityType Name="ShipmentMode">
@@ -1208,16 +1200,6 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="MaterialName" Relationship="OrderManagerDBModel.FK_SubMaterial_MaterialName" FromRole="SubMaterial" ToRole="MaterialName" />
           <NavigationProperty Name="ProductMaterialItems" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_SubMaterial" FromRole="SubMaterial" ToRole="ProductMaterialItem" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="UnitsOfMeasurement">
           <Key>
@@ -1837,11 +1819,13 @@
                 <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="MaterialNameID" ColumnName="MaterialNameID" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="UOMID" ColumnName="UOMID" />
-                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
                 <ScalarProperty Name="Consumption" ColumnName="Consumption" />
+                <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
                 <ScalarProperty Name="ConsumptionCost" ColumnName="ConsumptionCost" />
+                <ScalarProperty Name="OtherCostInINR" ColumnName="OtherCostInINR" />
+                <ScalarProperty Name="OtherCostName" ColumnName="OtherCostName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1868,17 +1852,6 @@
                 <ScalarProperty Name="SubMaterialsNameID" ColumnName="SubMaterialsNameID" />
                 <ScalarProperty Name="MaterialNameID" ColumnName="MaterialNameID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="OrderManagerDBModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
