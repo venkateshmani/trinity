@@ -53,39 +53,39 @@ namespace ordermanager.DatabaseModel
         }
 
 
-        public virtual ProductExtraCost OtherCost
-        {
-            get
-            {
-                if (m_OtherCost == null)
-                {
-                    foreach (var extraCost in ProductExtraCosts)
-                    {
-                        if (extraCost.ExtraCostTypeID == 1)
-                        {
-                            m_OtherCost = extraCost;
-                            m_OtherCost.PropertyChanged += m_OtherCost_PropertyChanged;
-                            break;
-                        }
-                    }
-                }
+        //public virtual ProductExtraCost OtherCost
+        //{
+        //    get
+        //    {
+        //        if (m_OtherCost == null)
+        //        {
+        //            foreach (var extraCost in ProductExtraCosts)
+        //            {
+        //                if (extraCost.ExtraCostTypeID == 1)
+        //                {
+        //                    m_OtherCost = extraCost;
+        //                    m_OtherCost.PropertyChanged += m_OtherCost_PropertyChanged;
+        //                    break;
+        //                }
+        //            }
+        //        }
 
-                if (m_OtherCost == null)
-                {
-                    m_OtherCost = new ProductExtraCost();
-                    m_OtherCost.PropertyChanged += m_OtherCost_PropertyChanged;
-                    m_OtherCost.ExtraCostTypeID = 1;
-                    Currency indianCurrency = DBResources.Instance.Context.Currencies.Find(1);
+        //        if (m_OtherCost == null)
+        //        {
+        //            m_OtherCost = new ProductExtraCost();
+        //            m_OtherCost.PropertyChanged += m_OtherCost_PropertyChanged;
+        //            m_OtherCost.ExtraCostTypeID = 1;
+        //            Currency indianCurrency = DBResources.Instance.Context.Currencies.Find(1);
 
-                    if (indianCurrency != null)
-                        m_OtherCost.Currency = indianCurrency;
+        //            if (indianCurrency != null)
+        //                m_OtherCost.Currency = indianCurrency;
 
-                    this.ProductExtraCosts.Add(m_OtherCost);
-                }
+        //            this.ProductExtraCosts.Add(m_OtherCost);
+        //        }
 
-                return m_OtherCost;
-            }
-        }
+        //        return m_OtherCost;
+        //    }
+        //}
 
         void m_OtherCost_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

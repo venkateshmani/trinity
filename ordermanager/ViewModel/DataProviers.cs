@@ -107,6 +107,22 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public ObservableCollection<Country> Countries
+        {
+            get
+            {
+                return DBResources.Instance.Countries;
+            }
+        }
+
+        public ObservableCollection<ProductSize> ProductSizes
+        {
+            get
+            {
+                return DBResources.Instance.ProductSizes;
+            }
+        }
+
         public User LoggedInUser
         {
             get

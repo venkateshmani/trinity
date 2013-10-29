@@ -18,114 +18,85 @@ namespace ordermanager.DatabaseModel
             set
             {
                 NumberOfPieces = value;
-                Validate();
+                ValidateNumberOfPiecesWrapper();
                 OnPropertyChanged("NumberOfPiecesWrapper");
             }
         }
 
-        public decimal LSWrapper
+        public Country CountryWrapper
         {
             get
             {
-                return LS;
+                return Country;
             }
             set
             {
-                LS = value;
-                Validate();
-                OnPropertyChanged("LSWrapper");
-            }
-        }
-        public decimal SWrapper
-        {
-            get
-            {
-                return S;
-            }
-            set
-            {
-                S = value;
-                Validate();
-                OnPropertyChanged("SWrapper");
-            }
-        }
-        public decimal MWrapper
-        {
-            get
-            {
-                return M;
-            }
-            set
-            {
-                M = value;
-                Validate();
-                OnPropertyChanged("MWrapper");
-            }
-        }
-        public decimal LWrapper
-        {
-            get
-            {
-                return L;
-            }
-            set
-            {
-                L = value;
-                Validate();
-                OnPropertyChanged("LWrapper");
-            }
-        }
-        public decimal XLWrapper
-        {
-            get
-            {
-                return XL;
-            }
-            set
-            {
-                XL = value;
-                Validate();
-                OnPropertyChanged("XLWrapper");
-            }
-        }
-        public decimal XXLWrapper
-        {
-            get
-            {
-                return XXL;
-            }
-            set
-            {
-                XXL = value;
-                Validate();
-                OnPropertyChanged("XXLWrapper");
-            }
-        }
-        public decimal XXXLWrapper
-        {
-            get
-            {
-                return XXXL;
-            }
-            set
-            {
-                XXXL = value;
-                Validate();
-                OnPropertyChanged("XXXLWrapper");
+                Country = value;
+                OnPropertyChanged("CountryWrapper");
             }
         }
 
-        public bool Validate()
+        public ProductSize ProductSizeWrapper
         {
-            decimal totalQuantity = LS + S + M + L + XL + XXL + XXXL;
-            RemoveError("NumberOfPiecesWrapper");
-            if (totalQuantity == NumberOfPieces)
-                return true;
-            else
+            get
             {
-                AddError("NumberOfPiecesWrapper", string.Format("Total count ({0}) not matching {1}the Number Of Pieces ({2}).", totalQuantity, Environment.NewLine, NumberOfPieces), false);
-                return false;
+                return ProductSize;
+            }
+            set
+            {
+                ProductSize = value;
+                OnPropertyChanged("ProductSizeWrapper");
             }
         }
+
+        #region Validation
+
+
+        public void ValidateNumberOfPiecesWrapper()
+        {
+            if (NumberOfPieces == 0)
+            {
+                AddError("NumberOfPiecesWrapper", "Can't be Zero", false);
+            }
+            else
+            {
+                RemoveError("NumberOfPiecesWrapper", "Can't be Zero");
+            }
+        }
+
+        public void ValidateCountryWrapper()
+        {
+            if (CountryWrapper == null)
+            {
+                AddError("CountryWrapper", "Select Country", false);
+            }
+            else
+            {
+                RemoveError("CountryWrapper", "Select Country");
+            }
+        }
+
+        public void ValidateProductSizeWrapper()
+        {
+            if (ProductSizeWrapper == null)
+            {
+                AddError("ProductSizeWrapper", "Select Size", false);
+            }
+            else
+            {
+                RemoveError("ProductSizeWrapper", "Select Size");
+            }
+        }
+       
+        public bool Validate()
+        {
+            ValidateNumberOfPiecesWrapper();
+            ValidateCountryWrapper();
+            ValidateProductSizeWrapper();
+
+            return !HasErrors;
+        }
+
+        #endregion Validate
     }
 }

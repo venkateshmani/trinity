@@ -39,7 +39,7 @@ namespace ordermanager.ViewModel
 
         string m_DeliveryDate = "Delivery Date: ";
         public string DeliveryDate
-        {
+        {       
             get { return m_DeliveryDate; }
             private set
             {
@@ -90,10 +90,20 @@ namespace ordermanager.ViewModel
                 return false;
         }
 
-        public void AddNewCountry()
+        public void AddNewBreakUp()
         {
             if (SelectedProduct != null)
                 SelectedProduct.ProductBreakUpWrapper.ProductCountryWiseBreakUpWrapper.Add(new ProductCountryWiseBreakUp());
+        }
+
+        public Country AddNewCountry(string newCountryName)
+        {
+            return DBResources.Instance.CreateNewCountry(newCountryName);
+        }
+
+        public ProductSize AddNewProductSize(string newProductSize)
+        {
+            return DBResources.Instance.CreateNewProductSize(newProductSize);
         }
 
         public bool SetOrder(Order order)

@@ -40,18 +40,115 @@ namespace ordermanager.Views.UserControls
             }
         }
 
-        private void btnAddNewCountry_Click(object sender, RoutedEventArgs e)
-        {
-            if (m_ViewModel != null)
-                m_ViewModel.AddNewCountry();
-        }
 
         private void UserControl_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if ((bool) e.NewValue == true)
-                btnAddNewCountry.Visibility = System.Windows.Visibility.Visible;
-            else
-                btnAddNewCountry.Visibility = System.Windows.Visibility.Collapsed;
+
         }
+
+        private void btnAddNewItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (m_ViewModel != null)
+                m_ViewModel.AddNewBreakUp();
+        }
+
+        private void btnAddNew_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #region Country
+
+            private void countryComboBox_TextChanged(object sender, TextChangedEventArgs e)
+            {
+                ComboBox countryComboBox = sender as ComboBox;
+                if (countryComboBox != null)
+                {
+                    Grid parentGrid = countryComboBox.Parent as Grid;
+
+                    if (parentGrid != null)
+                    {
+                        Button addbtn = parentGrid.FindName("btnAddNewCountry") as Button;
+                        if (addbtn != null)
+                        {
+                            if (countryComboBox.SelectedItem != null)
+                            {
+                                addbtn.Visibility = System.Windows.Visibility.Collapsed;
+                            }
+                            else
+                            {
+                                addbtn.Visibility = System.Windows.Visibility.Visible;
+                            }
+                        }
+                    }
+                }            
+            }
+
+            private void btnAddNewCountry_Click(object sender, RoutedEventArgs e)
+            {
+                Button addBtn = sender as Button;
+                if (addBtn != null)
+                {
+                    Grid parentGrid = addBtn.Parent as Grid;
+                    if (parentGrid != null)
+                    {
+                        ComboBox comboBox = parentGrid.FindName("countryComboBox") as ComboBox;
+                        if (comboBox != null && m_ViewModel != null)
+                        {
+                            comboBox.SelectedItem = m_ViewModel.AddNewCountry(comboBox.Text);
+                            addBtn.Visibility = System.Windows.Visibility.Collapsed;
+                        }
+                    }
+                }
+            }
+
+        #endregion 
+
+        #region  ProductSize
+
+            private void sizeComboBox_TextChanged(object sender, TextChangedEventArgs e)
+            {
+                ComboBox sizeComboBox = sender as ComboBox;
+                if (sizeComboBox != null)
+                {
+                    Grid parentGrid = sizeComboBox.Parent as Grid;
+
+                    if (parentGrid != null)
+                    {
+                        Button addbtn = parentGrid.FindName("btnAddNewSize") as Button;
+                        if (addbtn != null)
+                        {
+                            if (sizeComboBox.SelectedItem != null)
+                            {
+                                addbtn.Visibility = System.Windows.Visibility.Collapsed;
+                            }
+                            else
+                            {
+                                addbtn.Visibility = System.Windows.Visibility.Visible;
+                            }
+                        }
+                    }
+                }     
+            }
+
+            private void btnAddNewSize_Click(object sender, RoutedEventArgs e)
+            {
+                Button addBtn = sender as Button;
+                if (addBtn != null)
+                {
+                    Grid parentGrid = addBtn.Parent as Grid;
+                    if (parentGrid != null)
+                    {
+                        ComboBox comboBox = parentGrid.FindName("sizeComboBox") as ComboBox;
+                        if (comboBox != null && m_ViewModel != null)
+                        {
+                            comboBox.SelectedItem = m_ViewModel.AddNewProductSize(comboBox.Text);
+                            addBtn.Visibility = System.Windows.Visibility.Collapsed;
+                        }
+                    }
+                }
+            }
+
+        #endregion 
     }
 }

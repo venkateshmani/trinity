@@ -344,6 +344,7 @@
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.HeaderTemplate>
                                             <DataGridTemplateColumn.CellTemplate>
+                                                
                                                 <DataTemplate>
                                                     <TextBox Text="{Binding OtherCostInINRWrapper, StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                  IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
@@ -390,7 +391,7 @@
                                        </DataGrid.Columns>
                                 </DataGrid>
                             </Border>
-                            <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,10" Visibility="Collapsed">
+                            <!--<Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,10" Visibility="Collapsed">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
                                     <TextBlock Text="Other Cost:" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
                                     <TextBox Text="{Binding OtherCost.CostWrapper,StringFormat=n, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
@@ -403,7 +404,7 @@
                                  IsHitTestVisible="{Binding Path=DataContext.CanEditExtraCost,ElementName=This}"
                                  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="400" Height="20" Foreground="Gray" Margin="40,0,0,0" Controls:TextboxHelper.Watermark=" Enter reason for other cost here"/>
                                 </StackPanel>
-                            </Grid>
+                            </Grid>-->
                         </Grid>
                     </Border>
                 </TabItem>
@@ -422,11 +423,12 @@
                                     </Button.Background>
                                 </Button>
                             </StackPanel>
-                            <Border BorderBrush="Gray" BorderThickness="1" Margin="10,5,10,10" Grid.Row="1">
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="10,5,10,10" Grid.Row="1" Width="400">
                                 <DataGrid x:Name="extraCostGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductExtraCostWrapper, UpdateSourceTrigger=PropertyChanged}"
-                                              RowHeaderWidth="25" HeadersVisibility="All">
+                                              RowHeaderWidth="25" HeadersVisibility="All" >
+                                              
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn x:Name="extraTypeColumn" Header="Extra Cost Name" Width="0.25*" >
                                             <DataGridTemplateColumn.CellTemplate>

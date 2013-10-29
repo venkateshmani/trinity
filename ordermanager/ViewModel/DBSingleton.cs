@@ -611,6 +611,88 @@ namespace ordermanager.ViewModel
         }
 
         #endregion
+
+        #region Country Management
+
+        private ObservableCollection<Country> m_Countries = null;
+        public ObservableCollection<Country> Countries
+        {
+            get
+            {
+                if (m_Countries == null)
+                {
+                    m_Countries = new ObservableCollection<Country>(dbContext.Countries.ToList());
+                }
+                return m_Countries;
+            }
+            set
+            {
+                m_Countries = value;
+                OnPropertyChanged("Countries");
+            }
+        }
+
+
+        public Country CreateNewCountry(string countryName)
+        {
+            Country country = new Country();
+            country.Name = countryName;
+
+            OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+            newManager.Countries.Add(country);
+            newManager.SaveChanges();
+            newManager.Dispose();
+
+            Countries = new ObservableCollection<Country>(dbContext.Countries.ToList());
+
+            country = Countries.Where(a => a.Name == countryName)
+                                          .Select(a => a).First();
+
+            return country;
+        }
+
+        #endregion 
+
+        #region Product Size Management
+
+        private ObservableCollection<ProductSize> m_ProductSizes = null;
+        public ObservableCollection<ProductSize> ProductSizes
+        {
+            get
+            {
+                if (m_ProductSizes == null)
+                {
+                    m_ProductSizes = new ObservableCollection<ProductSize>(dbContext.ProductSizes.ToList());
+                }
+
+                return m_ProductSizes;
+            }
+            set
+            {
+                m_ProductSizes = value;
+                OnPropertyChanged("ProductSizes");
+            }
+        }
+
+        public ProductSize CreateNewProductSize(string newSize)
+        {
+            ProductSize newProductSize = new ProductSize();
+            newProductSize.Size = newSize;
+
+            OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+            newManager.ProductSizes.Add(newProductSize);
+            newManager.SaveChanges();
+            newManager.Dispose();
+
+            ProductSizes = new ObservableCollection<ProductSize>(dbContext.ProductSizes.ToList());
+
+            newProductSize = ProductSizes.Where(a => a.Size == newSize)
+                                          .Select(a => a).First();
+
+            return newProductSize;
+        }
+
+        #endregion 
     }
 
     public class LoginResult

@@ -264,6 +264,7 @@ namespace ordermanager.Views.PopUps
                             SetButtonText(negativeDecisionBtn, "Cancel");
                             string message = "Enquiry approved successfully";
                             InformUser(message);
+                            NewEnquiryViewModel.OnPropertyChanged("CanUpdateEnquiry"); //Call to rebind in UI
                         }
                         else
                             MessageBox.Show("Enquiry approval failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -282,6 +283,7 @@ namespace ordermanager.Views.PopUps
                             SetButtonsVisibility(System.Windows.Visibility.Collapsed);
                             string message = "Enquiry confirmed successfully";
                             InformUser(message);
+                            NewEnquiryViewModel.OnPropertyChanged("CanUpdateEnquiry"); //Call to rebind in UI
                         }
                         else
                             MessageBox.Show("Enquiry confirming failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
