@@ -54,7 +54,7 @@ namespace ordermanager.DatabaseModel
 
         public void ValidateNumberOfPiecesWrapper()
         {
-            if (NumberOfPieces == 0)
+            if (NumberOfPiecesWrapper == 0)
             {
                 AddError("NumberOfPiecesWrapper", "Can't be Zero", false);
             }
