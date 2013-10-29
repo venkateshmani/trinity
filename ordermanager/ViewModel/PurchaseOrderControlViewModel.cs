@@ -48,6 +48,38 @@ namespace ordermanager.ViewModel
             }
         }
 
+
+        private bool m_CanAddNewBreakUpItem = true;
+        public bool CanAddNewBreakUpItem
+        {
+            get
+            {
+                return m_CanAddNewBreakUpItem;
+            }
+            set
+            {
+                m_CanAddNewBreakUpItem = value;
+                NotifyPropertyChanged("CanAddNewBreakUpItem");
+            }
+        }
+
+
+        private bool m_IsReadOnly = false;
+        public bool IsReadOnly
+        {
+            get
+            {
+                return m_IsReadOnly;
+            }
+            set
+            {
+                m_IsReadOnly = value;
+                CanAddNewBreakUpItem = !IsReadOnly;
+                NotifyPropertyChanged("IsReadOnly");
+            }
+        }
+
+
         public Order Order
         {
             get { return m_Order; }

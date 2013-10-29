@@ -44,12 +44,12 @@ namespace ordermanager.Views.UserControls
                 if (DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterials && status == OrderStatusEnum.OrderConfirmed)
                 {
                     gridButtons.Visibility = System.Windows.Visibility.Visible;
-                    poProductDetails.IsEnabled = true;  
+                    poProductDetails.IsReadOnly = false;
                 }
                 else
                 {
                     gridButtons.Visibility = System.Windows.Visibility.Collapsed;
-                    poProductDetails.IsEnabled = false;
+                    poProductDetails.IsReadOnly = true;
                 }
             }
         }
