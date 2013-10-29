@@ -168,9 +168,6 @@
     <Compile Include="DatabaseModel\ShipmentMode.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseModel\SP_PurchaseOrder_Result.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DatabaseModel\SubMaterial.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
@@ -181,9 +178,6 @@
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\UserRole.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DatabaseModel\VW_PurchaseOrder.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Extended Database Models\Company.cs" />

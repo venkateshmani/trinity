@@ -35,6 +35,8 @@ namespace ordermanager.DatabaseModel
         public string Mobile { get; set; }
         public string EmaiID { get; set; }
         public short CompanyTypeID { get; set; }
+        public string TIN { get; set; }
+        public string CST { get; set; }
     
         public virtual CompanyType CompanyType { get; set; }
         public virtual ICollection<Order> Orders { get; set; }

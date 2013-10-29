@@ -31,22 +31,6 @@
           <EntitySet Name="UnitsOfMeasurement" EntityType="OrderManagerDBModel.Store.UnitsOfMeasurement" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="OrderManagerDBModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserRole" EntityType="OrderManagerDBModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="VW_PurchaseOrder" EntityType="OrderManagerDBModel.Store.VW_PurchaseOrder" store:Type="Views" store:Schema="dbo" store:Name="VW_PurchaseOrder">
-            <DefiningQuery>SELECT 
-      [VW_PurchaseOrder].[OrderID] AS [OrderID], 
-      [VW_PurchaseOrder].[ProductName] AS [ProductName], 
-      [VW_PurchaseOrder].[MaterialName] AS [MaterialName], 
-      [VW_PurchaseOrder].[SubMaterialName] AS [SubMaterialName], 
-      [VW_PurchaseOrder].[Quantity] AS [Quantity], 
-      [VW_PurchaseOrder].[Units] AS [Units], 
-      [VW_PurchaseOrder].[Cost] AS [Cost], 
-      [VW_PurchaseOrder].[Currency] AS [Currency], 
-      [VW_PurchaseOrder].[Amount] AS [Amount], 
-      [VW_PurchaseOrder].[Tax] AS [Tax], 
-      [VW_PurchaseOrder].[Total] AS [Total], 
-      [VW_PurchaseOrder].[Supplier] AS [Supplier]
-      FROM [dbo].[VW_PurchaseOrder] AS [VW_PurchaseOrder]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Company_CompanyType" Association="OrderManagerDBModel.Store.FK_Company_CompanyType">
             <End Role="CompanyType" EntitySet="CompanyType" />
             <End Role="Company" EntitySet="Company" />
@@ -205,6 +189,8 @@
           <Property Name="Mobile" Type="varchar" MaxLength="20" />
           <Property Name="EmaiID" Type="varchar" MaxLength="100" />
           <Property Name="CompanyTypeID" Type="smallint" Nullable="false" />
+          <Property Name="TIN" Type="varchar" MaxLength="50" />
+          <Property Name="CST" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CompanyType">
           <Key>
@@ -438,35 +424,6 @@
           <Property Name="CanConfirmOrder" Type="bit" Nullable="false" />
           <Property Name="CanAddSubMaterials" Type="bit" Nullable="false" />
           <Property Name="CanGeneratePurchaseOrder" Type="bit" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'OrderManagerDB.dbo.VW_PurchaseOrder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
-        <EntityType Name="VW_PurchaseOrder">
-          <Key>
-            <PropertyRef Name="OrderID" />
-            <PropertyRef Name="ProductName" />
-            <PropertyRef Name="MaterialName" />
-            <PropertyRef Name="SubMaterialName" />
-            <PropertyRef Name="Quantity" />
-            <PropertyRef Name="Units" />
-            <PropertyRef Name="Cost" />
-            <PropertyRef Name="Currency" />
-            <PropertyRef Name="Tax" />
-            <PropertyRef Name="Supplier" />
-          </Key>
-          <Property Name="OrderID" Type="bigint" Nullable="false" />
-          <Property Name="ProductName" Type="text" Nullable="false" />
-          <Property Name="MaterialName" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="SubMaterialName" Type="text" Nullable="false" />
-          <Property Name="Quantity" Type="decimal" Nullable="false" Scale="4" />
-          <Property Name="Units" Type="varchar" Nullable="false" MaxLength="10" />
-          <Property Name="Cost" Type="decimal" Nullable="false" Scale="4" />
-          <Property Name="Currency" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Amount" Type="numeric" Precision="38" Scale="6" />
-          <Property Name="Tax" Type="int" Nullable="false" />
-          <Property Name="Total" Type="numeric" Precision="38" Scale="6" />
-          <Property Name="Supplier" Type="text" Nullable="false" />
         </EntityType>
         <Association Name="FK_Company_CompanyType">
           <End Role="CompanyType" Type="OrderManagerDBModel.Store.CompanyType" Multiplicity="1" />
@@ -864,10 +821,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="SP_PurchaseOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="orderId" Type="bigint" Mode="In" />
-          <Parameter Name="supplierId" Type="int" Mode="In" />
-        </Function>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -899,7 +852,6 @@
           <EntitySet Name="UnitsOfMeasurements" EntityType="OrderManagerDBModel.UnitsOfMeasurement" />
           <EntitySet Name="Users" EntityType="OrderManagerDBModel.User" />
           <EntitySet Name="UserRoles" EntityType="OrderManagerDBModel.UserRole" />
-          <EntitySet Name="VW_PurchaseOrder" EntityType="OrderManagerDBModel.VW_PurchaseOrder" />
           <AssociationSet Name="FK_Order_CommissionValueType" Association="OrderManagerDBModel.FK_Order_CommissionValueType">
             <End Role="CommissionValueType" EntitySet="CommissionValueTypes" />
             <End Role="Order" EntitySet="Orders" />
@@ -1032,10 +984,6 @@
             <End Role="UserRole" EntitySet="UserRoles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <FunctionImport Name="SP_PurchaseOrder" ReturnType="Collection(OrderManagerDBModel.SP_PurchaseOrder_Result)">
-            <Parameter Name="orderId" Mode="In" Type="Int64" />
-            <Parameter Name="supplierId" Mode="In" Type="Int32" />
-          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CommissionValueType">
           <Key>
@@ -1063,6 +1011,8 @@
           <Property Name="Mobile" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="EmaiID" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="CompanyTypeID" Type="Int16" Nullable="false" />
+          <Property Name="TIN" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CST" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
           <NavigationProperty Name="CompanyType" Relationship="OrderManagerDBModel.FK_Company_CompanyType" FromRole="Company" ToRole="CompanyType" />
           <NavigationProperty Name="Orders" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Company" ToRole="Order" />
           <NavigationProperty Name="Orders1" Relationship="OrderManagerDBModel.FK_Order_OrderBy" FromRole="Company" ToRole="Order" />
@@ -1361,32 +1311,6 @@
           <Property Name="CanGeneratePurchaseOrder" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="OrderStatus" Relationship="OrderManagerDBModel.FK_OrderStatus_UserRole" FromRole="UserRole" ToRole="OrderStatus" />
           <NavigationProperty Name="Users" Relationship="OrderManagerDBModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
-        </EntityType>
-        <EntityType Name="VW_PurchaseOrder">
-          <Key>
-            <PropertyRef Name="OrderID" />
-            <PropertyRef Name="ProductName" />
-            <PropertyRef Name="MaterialName" />
-            <PropertyRef Name="SubMaterialName" />
-            <PropertyRef Name="Quantity" />
-            <PropertyRef Name="Units" />
-            <PropertyRef Name="Cost" />
-            <PropertyRef Name="Currency" />
-            <PropertyRef Name="Tax" />
-            <PropertyRef Name="Supplier" />
-          </Key>
-          <Property Name="OrderID" Type="Int64" Nullable="false" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="MaterialName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="SubMaterialName" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <Property Name="Units" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <Property Name="Currency" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Amount" Type="Decimal" Precision="38" Scale="6" />
-          <Property Name="Tax" Type="Int32" Nullable="false" />
-          <Property Name="Total" Type="Decimal" Precision="38" Scale="6" />
-          <Property Name="Supplier" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
         </EntityType>
         <Association Name="FK_Order_CommissionValueType">
           <End Role="CommissionValueType" Type="OrderManagerDBModel.CommissionValueType" Multiplicity="0..1" />
@@ -1784,20 +1708,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="SP_PurchaseOrder_Result">
-          <Property Type="Int64" Name="OrderID" Nullable="false" />
-          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="Max" />
-          <Property Type="String" Name="MaterialName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="SubMaterialName" Nullable="false" MaxLength="Max" />
-          <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="4" />
-          <Property Type="String" Name="Units" Nullable="false" MaxLength="10" />
-          <Property Type="Decimal" Name="Cost" Nullable="false" Precision="18" Scale="4" />
-          <Property Type="String" Name="Currency" Nullable="false" MaxLength="50" />
-          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="38" Scale="6" />
-          <Property Type="Int32" Name="Tax" Nullable="false" />
-          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="6" />
-          <Property Type="String" Name="Supplier" Nullable="false" MaxLength="Max" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1829,6 +1739,8 @@
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
                 <ScalarProperty Name="EmaiID" ColumnName="EmaiID" />
                 <ScalarProperty Name="CompanyTypeID" ColumnName="CompanyTypeID" />
+                <ScalarProperty Name="TIN" ColumnName="TIN" />
+                <ScalarProperty Name="CST" ColumnName="CST" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2088,42 +2000,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VW_PurchaseOrder">
-            <EntityTypeMapping TypeName="OrderManagerDBModel.VW_PurchaseOrder">
-              <MappingFragment StoreEntitySet="VW_PurchaseOrder">
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
-                <ScalarProperty Name="SubMaterialName" ColumnName="SubMaterialName" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Units" ColumnName="Units" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Tax" ColumnName="Tax" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_PurchaseOrder" FunctionName="OrderManagerDBModel.Store.SP_PurchaseOrder">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_PurchaseOrder_Result">
-                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
-                <ScalarProperty Name="SubMaterialName" ColumnName="SubMaterialName" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Units" ColumnName="Units" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Tax" ColumnName="Tax" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

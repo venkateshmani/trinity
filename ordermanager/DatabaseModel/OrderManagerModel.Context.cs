@@ -12,9 +12,6 @@ namespace ordermanager.DatabaseModel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
-    using System.Linq;
     
     public partial class OrderManagerDBEntities : DbContext
     {
@@ -53,19 +50,5 @@ namespace ordermanager.DatabaseModel
         public DbSet<UnitsOfMeasurement> UnitsOfMeasurements { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<VW_PurchaseOrder> VW_PurchaseOrder { get; set; }
-    
-        public virtual ObjectResult<SP_PurchaseOrder_Result> SP_PurchaseOrder(Nullable<long> orderId, Nullable<int> supplierId)
-        {
-            var orderIdParameter = orderId.HasValue ?
-                new ObjectParameter("orderId", orderId) :
-                new ObjectParameter("orderId", typeof(long));
-    
-            var supplierIdParameter = supplierId.HasValue ?
-                new ObjectParameter("supplierId", supplierId) :
-                new ObjectParameter("supplierId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PurchaseOrder_Result>("SP_PurchaseOrder", orderIdParameter, supplierIdParameter);
-        }
     }
 }
