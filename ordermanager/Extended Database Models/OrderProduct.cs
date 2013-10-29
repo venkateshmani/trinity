@@ -344,7 +344,6 @@ namespace ordermanager.DatabaseModel
             get { return DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost; }
         }
 
-
         public bool ValidateProductMaterials()
         {
             bool hasError = false;
@@ -603,19 +602,19 @@ namespace ordermanager.DatabaseModel
 
         private bool ValidatePerUnitTotalProductMaterialsCost()
         {
-            if (DBResources.Instance.CurrentUser.UserRole.CanAddConsumption)
-            {
-                if (PerUnitTotalProductMaterialsCost > PerUnitOrderValue)
-                {
-                    AddError("PerUnitTotalProductMaterialsCost", "Consumption cost is higher than order value", false);
-                    return true;
-                }
-                else
-                {
-                    RemoveError("PerUnitTotalProductMaterialsCost", "Consumption cost is higher than order value");
-                    return false;
-                }
-            }
+            //if (DBResources.Instance.CurrentUser.UserRole.CanAddConsumption)
+            //{
+            //    if (PerUnitTotalProductMaterialsCost > PerUnitOrderValue)
+            //    {
+            //        AddError("PerUnitTotalProductMaterialsCost", "Consumption cost is higher than order value", false);
+            //        return true;
+            //    }
+            //    else
+            //    {
+            //        RemoveError("PerUnitTotalProductMaterialsCost", "Consumption cost is higher than order value");
+            //        return false;
+            //    }
+            //}
 
             return false;
         }

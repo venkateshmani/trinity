@@ -206,8 +206,8 @@
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
                                             <ComboBox x:Name="sizeComboBox" Grid.Column="0" IsEditable="True"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                                                        ItemsSource="{Binding AvailableSizes, Source={StaticResource DataProvider}}" DisplayMemberPath="Name"
-                                                        SelectedItem="{Binding SubMaterialWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                        ItemsSource="{Binding ProductSizes, Source={StaticResource DataProvider}}" DisplayMemberPath="Size"
+                                                        SelectedItem="{Binding ProductSizeWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                         Height="20" TextBoxBase.TextChanged="sizeComboBox_TextChanged"
                                                         IsHitTestVisible="{Binding IsEditable}"  />
                                             <Button  x:Name="btnAddNewSize" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
