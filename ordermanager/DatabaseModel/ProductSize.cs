@@ -12,16 +12,16 @@ namespace ordermanager.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductCountryWiseBreakUp
+    public partial class ProductSize
     {
-        public long ProductCountryWiseBreakUpID { get; set; }
-        public long ProductBreakUpID { get; set; }
-        public int CountryID { get; set; }
-        public long ProductSizeID { get; set; }
-        public decimal NumberOfPieces { get; set; }
+        public ProductSize()
+        {
+            this.ProductCountryWiseBreakUps = new HashSet<ProductCountryWiseBreakUp>();
+        }
     
-        public virtual Country Country { get; set; }
-        public virtual ProductBreakUp ProductBreakUp { get; set; }
-        public virtual ProductSize ProductSize { get; set; }
+        public long ProductSizeID { get; set; }
+        public string Size { get; set; }
+    
+        public virtual ICollection<ProductCountryWiseBreakUp> ProductCountryWiseBreakUps { get; set; }
     }
 }

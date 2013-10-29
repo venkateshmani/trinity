@@ -9,6 +9,7 @@
           <EntitySet Name="CommissionValueType" EntityType="OrderManagerDBModel.Store.CommissionValueType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Company" EntityType="OrderManagerDBModel.Store.Company" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CompanyType" EntityType="OrderManagerDBModel.Store.CompanyType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Country" EntityType="OrderManagerDBModel.Store.Country" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Currency" EntityType="OrderManagerDBModel.Store.Currency" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="History" EntityType="OrderManagerDBModel.Store.History" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MaterialName" EntityType="OrderManagerDBModel.Store.MaterialName" store:Type="Tables" Schema="dbo" />
@@ -24,11 +25,28 @@
           <EntitySet Name="ProductMaterialItem" EntityType="OrderManagerDBModel.Store.ProductMaterialItem" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProductMaterials" EntityType="OrderManagerDBModel.Store.ProductMaterials" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProductName" EntityType="OrderManagerDBModel.Store.ProductName" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProductSize" EntityType="OrderManagerDBModel.Store.ProductSize" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ShipmentMode" EntityType="OrderManagerDBModel.Store.ShipmentMode" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SubMaterial" EntityType="OrderManagerDBModel.Store.SubMaterial" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UnitsOfMeasurement" EntityType="OrderManagerDBModel.Store.UnitsOfMeasurement" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="OrderManagerDBModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserRole" EntityType="OrderManagerDBModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="VW_PurchaseOrder" EntityType="OrderManagerDBModel.Store.VW_PurchaseOrder" store:Type="Views" store:Schema="dbo" store:Name="VW_PurchaseOrder">
+            <DefiningQuery>SELECT 
+      [VW_PurchaseOrder].[OrderID] AS [OrderID], 
+      [VW_PurchaseOrder].[ProductName] AS [ProductName], 
+      [VW_PurchaseOrder].[MaterialName] AS [MaterialName], 
+      [VW_PurchaseOrder].[SubMaterialName] AS [SubMaterialName], 
+      [VW_PurchaseOrder].[Quantity] AS [Quantity], 
+      [VW_PurchaseOrder].[Units] AS [Units], 
+      [VW_PurchaseOrder].[Cost] AS [Cost], 
+      [VW_PurchaseOrder].[Currency] AS [Currency], 
+      [VW_PurchaseOrder].[Amount] AS [Amount], 
+      [VW_PurchaseOrder].[Tax] AS [Tax], 
+      [VW_PurchaseOrder].[Total] AS [Total], 
+      [VW_PurchaseOrder].[Supplier] AS [Supplier]
+      FROM [dbo].[VW_PurchaseOrder] AS [VW_PurchaseOrder]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Company_CompanyType" Association="OrderManagerDBModel.Store.FK_Company_CompanyType">
             <End Role="CompanyType" EntitySet="CompanyType" />
             <End Role="Company" EntitySet="Company" />
@@ -93,8 +111,16 @@
             <End Role="ShipmentMode" EntitySet="ShipmentMode" />
             <End Role="ProductBreakUp" EntitySet="ProductBreakUp" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProductCountryWiseBreakUp_Country" Association="OrderManagerDBModel.Store.FK_ProductCountryWiseBreakUp_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUp" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductCountryWiseBreakUp_ProductBreakUp" Association="OrderManagerDBModel.Store.FK_ProductCountryWiseBreakUp_ProductBreakUp">
             <End Role="ProductBreakUp" EntitySet="ProductBreakUp" />
+            <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCountryWiseBreakUp_ProductSize" Association="OrderManagerDBModel.Store.FK_ProductCountryWiseBreakUp_ProductSize">
+            <End Role="ProductSize" EntitySet="ProductSize" />
             <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUp" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductExtraCost_Currency" Association="OrderManagerDBModel.Store.FK_ProductExtraCost_Currency">
@@ -186,6 +212,13 @@
           </Key>
           <Property Name="CompanyTypeID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -289,16 +322,10 @@
             <PropertyRef Name="ProductCountryWiseBreakUpID" />
           </Key>
           <Property Name="ProductCountryWiseBreakUpID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Country" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="NumberOfPieces" Type="decimal" Nullable="false" />
-          <Property Name="LS" Type="decimal" Nullable="false" />
-          <Property Name="S" Type="decimal" Nullable="false" />
-          <Property Name="M" Type="decimal" Nullable="false" />
-          <Property Name="L" Type="decimal" Nullable="false" />
-          <Property Name="XL" Type="decimal" Nullable="false" />
-          <Property Name="XXL" Type="decimal" Nullable="false" />
-          <Property Name="XXXL" Type="decimal" Nullable="false" />
           <Property Name="ProductBreakUpID" Type="bigint" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="ProductSizeID" Type="bigint" Nullable="false" />
+          <Property Name="NumberOfPieces" Type="decimal" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductExtraCost">
           <Key>
@@ -355,6 +382,13 @@
           <Property Name="Name" Type="text" Nullable="false" />
           <Property Name="StyleID" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ProductSize">
+          <Key>
+            <PropertyRef Name="ProductSizeID" />
+          </Key>
+          <Property Name="ProductSizeID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Size" Type="varchar" Nullable="false" MaxLength="25" />
+        </EntityType>
         <EntityType Name="ShipmentMode">
           <Key>
             <PropertyRef Name="ShipmentModeID" />
@@ -404,6 +438,35 @@
           <Property Name="CanConfirmOrder" Type="bit" Nullable="false" />
           <Property Name="CanAddSubMaterials" Type="bit" Nullable="false" />
           <Property Name="CanGeneratePurchaseOrder" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'OrderManagerDB.dbo.VW_PurchaseOrder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="VW_PurchaseOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="MaterialName" />
+            <PropertyRef Name="SubMaterialName" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="Units" />
+            <PropertyRef Name="Cost" />
+            <PropertyRef Name="Currency" />
+            <PropertyRef Name="Tax" />
+            <PropertyRef Name="Supplier" />
+          </Key>
+          <Property Name="OrderID" Type="bigint" Nullable="false" />
+          <Property Name="ProductName" Type="text" Nullable="false" />
+          <Property Name="MaterialName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SubMaterialName" Type="text" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="Units" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Cost" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="Currency" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Amount" Type="numeric" Precision="38" Scale="6" />
+          <Property Name="Tax" Type="int" Nullable="false" />
+          <Property Name="Total" Type="numeric" Precision="38" Scale="6" />
+          <Property Name="Supplier" Type="text" Nullable="false" />
         </EntityType>
         <Association Name="FK_Company_CompanyType">
           <End Role="CompanyType" Type="OrderManagerDBModel.Store.CompanyType" Multiplicity="1" />
@@ -597,6 +660,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductCountryWiseBreakUp_Country">
+          <End Role="Country" Type="OrderManagerDBModel.Store.Country" Multiplicity="1" />
+          <End Role="ProductCountryWiseBreakUp" Type="OrderManagerDBModel.Store.ProductCountryWiseBreakUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="ProductCountryWiseBreakUp">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductCountryWiseBreakUp_ProductBreakUp">
           <End Role="ProductBreakUp" Type="OrderManagerDBModel.Store.ProductBreakUp" Multiplicity="1" />
           <End Role="ProductCountryWiseBreakUp" Type="OrderManagerDBModel.Store.ProductCountryWiseBreakUp" Multiplicity="*" />
@@ -606,6 +681,18 @@
             </Principal>
             <Dependent Role="ProductCountryWiseBreakUp">
               <PropertyRef Name="ProductBreakUpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCountryWiseBreakUp_ProductSize">
+          <End Role="ProductSize" Type="OrderManagerDBModel.Store.ProductSize" Multiplicity="1" />
+          <End Role="ProductCountryWiseBreakUp" Type="OrderManagerDBModel.Store.ProductCountryWiseBreakUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSize">
+              <PropertyRef Name="ProductSizeID" />
+            </Principal>
+            <Dependent Role="ProductCountryWiseBreakUp">
+              <PropertyRef Name="ProductSizeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -777,6 +864,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_PurchaseOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="orderId" Type="bigint" Mode="In" />
+          <Parameter Name="supplierId" Type="int" Mode="In" />
+        </Function>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -786,6 +877,7 @@
           <EntitySet Name="CommissionValueTypes" EntityType="OrderManagerDBModel.CommissionValueType" />
           <EntitySet Name="Companies" EntityType="OrderManagerDBModel.Company" />
           <EntitySet Name="CompanyTypes" EntityType="OrderManagerDBModel.CompanyType" />
+          <EntitySet Name="Countries" EntityType="OrderManagerDBModel.Country" />
           <EntitySet Name="Currencies" EntityType="OrderManagerDBModel.Currency" />
           <EntitySet Name="Histories" EntityType="OrderManagerDBModel.History" />
           <EntitySet Name="MaterialNames" EntityType="OrderManagerDBModel.MaterialName" />
@@ -801,11 +893,13 @@
           <EntitySet Name="ProductMaterialItems" EntityType="OrderManagerDBModel.ProductMaterialItem" />
           <EntitySet Name="ProductMaterials" EntityType="OrderManagerDBModel.ProductMaterial" />
           <EntitySet Name="ProductNames" EntityType="OrderManagerDBModel.ProductName" />
+          <EntitySet Name="ProductSizes" EntityType="OrderManagerDBModel.ProductSize" />
           <EntitySet Name="ShipmentModes" EntityType="OrderManagerDBModel.ShipmentMode" />
           <EntitySet Name="SubMaterials" EntityType="OrderManagerDBModel.SubMaterial" />
           <EntitySet Name="UnitsOfMeasurements" EntityType="OrderManagerDBModel.UnitsOfMeasurement" />
           <EntitySet Name="Users" EntityType="OrderManagerDBModel.User" />
           <EntitySet Name="UserRoles" EntityType="OrderManagerDBModel.UserRole" />
+          <EntitySet Name="VW_PurchaseOrder" EntityType="OrderManagerDBModel.VW_PurchaseOrder" />
           <AssociationSet Name="FK_Order_CommissionValueType" Association="OrderManagerDBModel.FK_Order_CommissionValueType">
             <End Role="CommissionValueType" EntitySet="CommissionValueTypes" />
             <End Role="Order" EntitySet="Orders" />
@@ -825,6 +919,10 @@
           <AssociationSet Name="FK_ProductMaterialItem_Company" Association="OrderManagerDBModel.FK_ProductMaterialItem_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCountryWiseBreakUp_Country" Association="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUps" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderCurrencyConversion_Currency" Association="OrderManagerDBModel.FK_OrderCurrencyConversion_Currency">
             <End Role="Currency" EntitySet="Currencies" />
@@ -906,6 +1004,10 @@
             <End Role="ProductBreakUp" EntitySet="ProductBreakUps" />
             <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUps" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProductCountryWiseBreakUp_ProductSize" Association="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductSize">
+            <End Role="ProductSize" EntitySet="ProductSizes" />
+            <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUps" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductExtraCost_ProductExtraCostType" Association="OrderManagerDBModel.FK_ProductExtraCost_ProductExtraCostType">
             <End Role="ProductExtraCostType" EntitySet="ProductExtraCostTypes" />
             <End Role="ProductExtraCost" EntitySet="ProductExtraCosts" />
@@ -930,6 +1032,10 @@
             <End Role="UserRole" EntitySet="UserRoles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <FunctionImport Name="SP_PurchaseOrder" ReturnType="Collection(OrderManagerDBModel.SP_PurchaseOrder_Result)">
+            <Parameter Name="orderId" Mode="In" Type="Int64" />
+            <Parameter Name="supplierId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CommissionValueType">
           <Key>
@@ -969,6 +1075,14 @@
           <Property Name="CompanyTypeID" Type="Int16" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Companies" Relationship="OrderManagerDBModel.FK_Company_CompanyType" FromRole="CompanyType" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ProductCountryWiseBreakUps" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Country" FromRole="Country" ToRole="ProductCountryWiseBreakUp" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -1103,17 +1217,13 @@
             <PropertyRef Name="ProductCountryWiseBreakUpID" />
           </Key>
           <Property Name="ProductCountryWiseBreakUpID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Country" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="NumberOfPieces" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="LS" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="S" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="M" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="L" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="XL" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="XXL" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="XXXL" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="ProductBreakUpID" Type="Int64" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="ProductSizeID" Type="Int64" Nullable="false" />
+          <Property Name="NumberOfPieces" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="Country" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Country" FromRole="ProductCountryWiseBreakUp" ToRole="Country" />
           <NavigationProperty Name="ProductBreakUp" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductBreakUp" FromRole="ProductCountryWiseBreakUp" ToRole="ProductBreakUp" />
+          <NavigationProperty Name="ProductSize" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductSize" FromRole="ProductCountryWiseBreakUp" ToRole="ProductSize" />
         </EntityType>
         <EntityType Name="ProductExtraCost">
           <Key>
@@ -1185,6 +1295,14 @@
           <Property Name="StyleID" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="OrderProducts" Relationship="OrderManagerDBModel.FK_OrderProduct_ProductName" FromRole="ProductName" ToRole="OrderProduct" />
         </EntityType>
+        <EntityType Name="ProductSize">
+          <Key>
+            <PropertyRef Name="ProductSizeID" />
+          </Key>
+          <Property Name="ProductSizeID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Size" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ProductCountryWiseBreakUps" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductSize" FromRole="ProductSize" ToRole="ProductCountryWiseBreakUp" />
+        </EntityType>
         <EntityType Name="ShipmentMode">
           <Key>
             <PropertyRef Name="ShipmentModeID" />
@@ -1244,6 +1362,32 @@
           <NavigationProperty Name="OrderStatus" Relationship="OrderManagerDBModel.FK_OrderStatus_UserRole" FromRole="UserRole" ToRole="OrderStatus" />
           <NavigationProperty Name="Users" Relationship="OrderManagerDBModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
         </EntityType>
+        <EntityType Name="VW_PurchaseOrder">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductName" />
+            <PropertyRef Name="MaterialName" />
+            <PropertyRef Name="SubMaterialName" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="Units" />
+            <PropertyRef Name="Cost" />
+            <PropertyRef Name="Currency" />
+            <PropertyRef Name="Tax" />
+            <PropertyRef Name="Supplier" />
+          </Key>
+          <Property Name="OrderID" Type="Int64" Nullable="false" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="MaterialName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="SubMaterialName" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Units" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Currency" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Amount" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Tax" Type="Int32" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Supplier" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+        </EntityType>
         <Association Name="FK_Order_CommissionValueType">
           <End Role="CommissionValueType" Type="OrderManagerDBModel.CommissionValueType" Multiplicity="0..1" />
           <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="*" />
@@ -1301,6 +1445,18 @@
             </Principal>
             <Dependent Role="ProductMaterialItem">
               <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCountryWiseBreakUp_Country">
+          <End Role="Country" Type="OrderManagerDBModel.Country" Multiplicity="1" />
+          <End Role="ProductCountryWiseBreakUp" Type="OrderManagerDBModel.ProductCountryWiseBreakUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="ProductCountryWiseBreakUp">
+              <PropertyRef Name="CountryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1544,6 +1700,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductCountryWiseBreakUp_ProductSize">
+          <End Role="ProductSize" Type="OrderManagerDBModel.ProductSize" Multiplicity="1" />
+          <End Role="ProductCountryWiseBreakUp" Type="OrderManagerDBModel.ProductCountryWiseBreakUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSize">
+              <PropertyRef Name="ProductSizeID" />
+            </Principal>
+            <Dependent Role="ProductCountryWiseBreakUp">
+              <PropertyRef Name="ProductSizeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductExtraCost_ProductExtraCostType">
           <End Role="ProductExtraCostType" Type="OrderManagerDBModel.ProductExtraCostType" Multiplicity="1" />
           <End Role="ProductExtraCost" Type="OrderManagerDBModel.ProductExtraCost" Multiplicity="*" />
@@ -1616,6 +1784,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SP_PurchaseOrder_Result">
+          <Property Type="Int64" Name="OrderID" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="MaterialName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SubMaterialName" Nullable="false" MaxLength="Max" />
+          <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="String" Name="Units" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="Cost" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="String" Name="Currency" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Int32" Name="Tax" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="String" Name="Supplier" Nullable="false" MaxLength="Max" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1655,6 +1837,14 @@
               <MappingFragment StoreEntitySet="CompanyType">
                 <ScalarProperty Name="CompanyTypeID" ColumnName="CompanyTypeID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1768,16 +1958,10 @@
             <EntityTypeMapping TypeName="OrderManagerDBModel.ProductCountryWiseBreakUp">
               <MappingFragment StoreEntitySet="ProductCountryWiseBreakUp">
                 <ScalarProperty Name="ProductCountryWiseBreakUpID" ColumnName="ProductCountryWiseBreakUpID" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="NumberOfPieces" ColumnName="NumberOfPieces" />
-                <ScalarProperty Name="LS" ColumnName="LS" />
-                <ScalarProperty Name="S" ColumnName="S" />
-                <ScalarProperty Name="M" ColumnName="M" />
-                <ScalarProperty Name="L" ColumnName="L" />
-                <ScalarProperty Name="XL" ColumnName="XL" />
-                <ScalarProperty Name="XXL" ColumnName="XXL" />
-                <ScalarProperty Name="XXXL" ColumnName="XXXL" />
                 <ScalarProperty Name="ProductBreakUpID" ColumnName="ProductBreakUpID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="ProductSizeID" ColumnName="ProductSizeID" />
+                <ScalarProperty Name="NumberOfPieces" ColumnName="NumberOfPieces" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1841,6 +2025,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductSizes">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.ProductSize">
+              <MappingFragment StoreEntitySet="ProductSize">
+                <ScalarProperty Name="ProductSizeID" ColumnName="ProductSizeID" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ShipmentModes">
             <EntityTypeMapping TypeName="OrderManagerDBModel.ShipmentMode">
               <MappingFragment StoreEntitySet="ShipmentMode">
@@ -1896,6 +2088,42 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VW_PurchaseOrder">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.VW_PurchaseOrder">
+              <MappingFragment StoreEntitySet="VW_PurchaseOrder">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+                <ScalarProperty Name="SubMaterialName" ColumnName="SubMaterialName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_PurchaseOrder" FunctionName="OrderManagerDBModel.Store.SP_PurchaseOrder">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_PurchaseOrder_Result">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+                <ScalarProperty Name="SubMaterialName" ColumnName="SubMaterialName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

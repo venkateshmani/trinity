@@ -12,6 +12,9 @@ namespace ordermanager.DatabaseModel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class OrderManagerDBEntities : DbContext
     {
@@ -28,6 +31,7 @@ namespace ordermanager.DatabaseModel
         public DbSet<CommissionValueType> CommissionValueTypes { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<CompanyType> CompanyTypes { get; set; }
+        public DbSet<Country> Countries { get; set; }
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<History> Histories { get; set; }
         public DbSet<MaterialName> MaterialNames { get; set; }
@@ -43,10 +47,25 @@ namespace ordermanager.DatabaseModel
         public DbSet<ProductMaterialItem> ProductMaterialItems { get; set; }
         public DbSet<ProductMaterial> ProductMaterials { get; set; }
         public DbSet<ProductName> ProductNames { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
         public DbSet<ShipmentMode> ShipmentModes { get; set; }
         public DbSet<SubMaterial> SubMaterials { get; set; }
         public DbSet<UnitsOfMeasurement> UnitsOfMeasurements { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<VW_PurchaseOrder> VW_PurchaseOrder { get; set; }
+    
+        public virtual ObjectResult<SP_PurchaseOrder_Result> SP_PurchaseOrder(Nullable<long> orderId, Nullable<int> supplierId)
+        {
+            var orderIdParameter = orderId.HasValue ?
+                new ObjectParameter("orderId", orderId) :
+                new ObjectParameter("orderId", typeof(long));
+    
+            var supplierIdParameter = supplierId.HasValue ?
+                new ObjectParameter("supplierId", supplierId) :
+                new ObjectParameter("supplierId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PurchaseOrder_Result>("SP_PurchaseOrder", orderIdParameter, supplierIdParameter);
+        }
     }
 }
