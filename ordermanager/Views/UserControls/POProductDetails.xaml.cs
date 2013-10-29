@@ -41,6 +41,19 @@ namespace ordermanager.Views.UserControls
         }
 
 
+        public bool IsReadOnly
+        {
+            get
+            {
+                return m_ViewModel.IsReadOnly;
+            }
+            set
+            {
+                m_ViewModel.IsReadOnly = value;
+                countryWiseBreakUpGrid.IsReadOnly = value;
+            }
+        }
+
         private void UserControl_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
 
