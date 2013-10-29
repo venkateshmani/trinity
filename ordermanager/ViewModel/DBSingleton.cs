@@ -152,7 +152,6 @@ namespace ordermanager.ViewModel
             return newCompany;
         }
 
-
         public Company SaveNewCompany(Company company, string type)
         {
             OrderManagerDBEntities localContext = new OrderManagerDBEntities();
@@ -189,7 +188,22 @@ namespace ordermanager.ViewModel
             return newCompany;
         }
 
-
+        private ObservableCollection<CompanyType> m_CompanyTypes = null;
+        public ObservableCollection<CompanyType> CompanyTypes
+        {
+            get
+            {
+                if (m_CompanyTypes == null)
+                {
+                    m_CompanyTypes = new ObservableCollection<CompanyType>(dbContext.CompanyTypes);
+                }
+                return m_CompanyTypes;
+            }
+            private set
+            {
+                m_CompanyTypes = value;
+            }
+        }
         #endregion
 
         #region Product, Materials and SubMaterials
@@ -322,7 +336,7 @@ namespace ordermanager.ViewModel
         }
 
         public ProductExtraCostType CreateNewExtraCostType(string extraCostName)
-        {           
+        {
             ProductExtraCostType newCostType = AvailableExtraCostTypes.Where(a => a.TypeName == extraCostName)
                        .Select(a => a).FirstOrDefault();
 
@@ -651,7 +665,7 @@ namespace ordermanager.ViewModel
             return country;
         }
 
-        #endregion 
+        #endregion
 
         #region Product Size Management
 
@@ -692,7 +706,7 @@ namespace ordermanager.ViewModel
             return newProductSize;
         }
 
-        #endregion 
+        #endregion
     }
 
     public class LoginResult

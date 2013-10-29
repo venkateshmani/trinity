@@ -45,7 +45,7 @@ namespace ordermanager.Views.UserControls
 
         private Company AddNewSupplier(string type, string companyName)
         {
-            CustomerDetailsControl details = new CustomerDetailsControl();
+            CustomerDetailsControl details = new CustomerDetailsControl("Supplier");
             Company newCompany = new Company();
             newCompany.Name = companyName;
             details.DataContext = newCompany;
@@ -58,7 +58,7 @@ namespace ordermanager.Views.UserControls
 
         private bool EditSupplier(Company company)
         {
-            CustomerDetailsControl details = new CustomerDetailsControl();
+            CustomerDetailsControl details = new CustomerDetailsControl("Supplier");
             details.DataContext = company;
             if (details.ShowDialog() == true)
             {

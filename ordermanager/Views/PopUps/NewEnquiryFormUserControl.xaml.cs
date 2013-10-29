@@ -191,7 +191,7 @@ namespace ordermanager.Views.PopUps
 
         private void EditCompany(Company company)
         {
-            CustomerDetailsControl details = new CustomerDetailsControl();
+            CustomerDetailsControl details = new CustomerDetailsControl(company.CompanyType.Type);
             details.DataContext = company;
 
             if (details.ShowDialog() == true)
@@ -390,7 +390,7 @@ namespace ordermanager.Views.PopUps
 
         private Company NewCompany(string type, string companyName)
         {
-            CustomerDetailsControl details = new CustomerDetailsControl();
+            CustomerDetailsControl details = new CustomerDetailsControl(type);
             Company newCompany = new Company();
             newCompany.Name = companyName;
             details.DataContext = newCompany;

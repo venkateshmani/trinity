@@ -19,7 +19,7 @@ namespace ordermanager.ViewModel
         SubMaterialsJobCompleted = 9,
         EnquiryCancelled = 10,
         EnquirySentToSpecialApprover=12,
-    }
+    }   
 
     public class Helper
     {

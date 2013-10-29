@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             mc:Ignorable="d" Height="465" Width="356" WindowStartupLocation="CenterScreen">
+             mc:Ignorable="d" WindowStartupLocation="CenterScreen" Width="400" Height="525" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -35,7 +35,7 @@
     </Window.Resources>
     <StackPanel Margin="5">
         <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
-            <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Customer Details"  Style="{StaticResource DescriptionHeaderStyle}" />
+            <Label x:Name="lblHeader" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Customer Details"  Style="{StaticResource DescriptionHeaderStyle}" />
         </Border>
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"    Margin="0,5,0,0"  Foreground="Gray"
                                 Controls:TextboxHelper.Watermark="Customer Name" ToolTip="Customer name"
@@ -70,6 +70,12 @@
         <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
                                 Controls:TextboxHelper.Watermark="Email" ToolTip="Customer email ID"
                                 Text="{Binding EmaiID}"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="TIN" ToolTip="TIN #" x:Name="txtBoxTIN"
+                                Text="{Binding TIN}"/>
+        <TextBox VerticalAlignment="Center" HorizontalAlignment="Stretch"   Margin="0,5,0,0"  Foreground="Gray"
+                                Controls:TextboxHelper.Watermark="CST" ToolTip="CST" x:Name="txtBoxCST"
+                                Text="{Binding CST}"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
             <Button x:Name="btnSave" Content="Save"  Margin="5,10,0,5" Width="75" Height="20" Foreground="White"
                                         ToolTip="Save Changes" HorizontalAlignment="Right"  PreviewMouseLeftButtonUp="btnSave_PreviewMouseLeftButtonUp">
