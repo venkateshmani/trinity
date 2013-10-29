@@ -47,8 +47,43 @@ namespace ordermanager.DatabaseModel
                 if (m_ProductExtraCostWrapper == null)
                 {
                     m_ProductExtraCostWrapper = new ObservableCollection<ProductExtraCost>(this.ProductExtraCosts);
+                    foreach (var extraCost in m_ProductExtraCostWrapper)
+                    {
+                        extraCost.PropertyChanged += ExtraCost_PropertyChanged;
+                    }
+                    m_ProductExtraCostWrapper.CollectionChanged += m_ProductExtraCostWrapper_CollectionChanged;
                 }
                 return m_ProductExtraCostWrapper;
+            }
+        }
+
+        void m_ProductExtraCostWrapper_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                foreach (var newItem in e.NewItems)
+                {
+                    ProductExtraCost newMaterialItem = newItem as ProductExtraCost;
+                    newMaterialItem.PropertyChanged += ExtraCost_PropertyChanged;
+                }
+            }
+            else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                foreach (var deletedItem in e.OldItems)
+                {
+                    ProductExtraCost deletedMaterial = deletedItem as ProductExtraCost;                   
+                    deletedMaterial.OrderProduct = null;
+                    deletedMaterial.PropertyChanged -= ExtraCost_PropertyChanged;
+                }
+            }
+            OnPropertyChanged("ProductExtraCostWrapper");
+        }
+
+        void ExtraCost_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "CostWrapper")
+            {
+                CalculateTotalMaterialsCost();
             }
         }
 
@@ -376,7 +411,7 @@ namespace ordermanager.DatabaseModel
             }
 
             if (ValidatePerUnitTotalProductMaterialsCost())
-                hasError = true;          
+                hasError = true;
 
             HasErrorsInProductMaterials = hasError;
             return hasError;
@@ -553,7 +588,7 @@ namespace ordermanager.DatabaseModel
                     cost += material.ConsumptionCostWrapper;
             }
 
-            foreach (ProductExtraCost extraCost in ProductExtraCosts)
+            foreach (ProductExtraCost extraCost in ProductExtraCostWrapper)
             {
                 cost += extraCost.Cost;
             }
