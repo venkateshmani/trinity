@@ -111,6 +111,17 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public virtual decimal TotalConsumptionCost
+        {
+            get
+            {
+                if (this.OrderProduct != null && ConsumptionCost != null)
+                    return ConsumptionCost.Value * this.OrderProduct.ExpectedQuantity;
+
+                return 0;
+            }
+        }
+
         public decimal OtherCostInINRWrapper
         {
             get

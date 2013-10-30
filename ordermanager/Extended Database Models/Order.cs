@@ -9,7 +9,6 @@ namespace ordermanager.DatabaseModel
 {
     public partial class Order : EntityBase
     {
-
         #region Property Wrappers
 
             public virtual Company Customer

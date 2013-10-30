@@ -88,7 +88,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Estimated Consumption Cost:"  Margin="4" Grid.Row="0" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" />
                 <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=SelectedMaterial.ConsumptionCost, StringFormat=n}"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=SelectedMaterial.TotalConsumptionCost, StringFormat=n}"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>
