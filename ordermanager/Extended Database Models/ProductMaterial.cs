@@ -173,7 +173,7 @@ namespace ordermanager.DatabaseModel
                     OnPropertyChanged("TotalSubMaterialsPurchaseCostWrapper");
                     RemoveError("TotalSubMaterialsPurchaseCostWrapper");
                     OrderProduct.RemoveError(MaterialName.Name);
-                    if (TotalSubMaterialsPurchaseCostWrapper > ConsumptionCostWrapper)
+                    if (TotalSubMaterialsPurchaseCostWrapper > (ConsumptionCostWrapper * ProductQuantity))
                     {
                         AddError("TotalSubMaterialsPurchaseCostWrapper", "Total purchase cost can't be more than consumption cost", false);
                         OrderProduct.AddError(MaterialName.Name, MaterialName.Name + " has some errors", false);
@@ -296,6 +296,17 @@ namespace ordermanager.DatabaseModel
 
         #region Helpers
 
+        private decimal ProductQuantity
+        {
+            get
+            {
+                if (this.OrderProduct != null)
+                    return this.OrderProduct.ExpectedQuantity;
+
+                return 0;
+            }
+        }
+        
         #region Currency Management
 
         public decimal CurrencyValueInINR
@@ -393,7 +404,7 @@ namespace ordermanager.DatabaseModel
                 if (item.ProductMaterial != null)
                     cost += item.ItemCostWrapper;
             }
-            TotalSubMaterialsPurchaseCostWrapper = cost;
+            TotalSubMaterialsPurchaseCostWrapper = cost * ProductQuantity;
         }
 
         ObservableCollection<ProductMaterialItem> m_SubMaterialsWrapper;
