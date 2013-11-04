@@ -178,7 +178,7 @@
                     </Grid>
                 </Grid>
             </Border>
-            <Grid x:Name="sizeSplitGrid" Grid.Column="2" Margin="10" Width="500">
+            <Grid x:Name="sizeSplitGrid" Grid.Column="2" Margin="10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>

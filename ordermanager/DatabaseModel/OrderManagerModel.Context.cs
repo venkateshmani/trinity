@@ -45,6 +45,8 @@ namespace ordermanager.DatabaseModel
         public DbSet<ProductMaterial> ProductMaterials { get; set; }
         public DbSet<ProductName> ProductNames { get; set; }
         public DbSet<ProductSize> ProductSizes { get; set; }
+        public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public DbSet<PurchaseOrderStatu> PurchaseOrderStatus { get; set; }
         public DbSet<ShipmentMode> ShipmentModes { get; set; }
         public DbSet<SubMaterial> SubMaterials { get; set; }
         public DbSet<UnitsOfMeasurement> UnitsOfMeasurements { get; set; }

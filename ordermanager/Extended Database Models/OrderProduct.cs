@@ -519,6 +519,50 @@ namespace ordermanager.DatabaseModel
             OrderValueWrapper = ExpectedQuantity * CustomerTargetPrice * CurrencyValueInINR;
         }
 
+
+        public string StyleID
+        {
+            get
+            {
+                if (this.ProductName != null)
+                    return this.ProductName.StyleID;
+
+                return string.Empty;
+            }
+        }
+
+        private Dictionary<string, PurchaseOrderItems> m_PurchaseOrderAndTheirItems = null;
+        public List<PurchaseOrderItems> PurchaseOrderItems
+        {
+            get
+            {
+                if (m_PurchaseOrderAndTheirItems == null)
+                {
+                    m_PurchaseOrderAndTheirItems = new Dictionary<string, PurchaseOrderItems>();
+                    foreach (ProductMaterial material in ProductMaterials)
+                    {
+                        foreach (ProductMaterialItem item in material.ProductMaterialItems)
+                        {
+                            PurchaseOrderItems poItems = null;
+                            if(m_PurchaseOrderAndTheirItems.ContainsKey(item.PurchaseOrderNumber))
+                            {
+                                poItems = m_PurchaseOrderAndTheirItems[item.PurchaseOrderNumber];
+                            }
+                            else
+                            {
+                                poItems = new PurchaseOrderItems { Supplier = item.SupplierWrapper, PurchaseOrderNumber = item.PurchaseOrderNumber };
+                                m_PurchaseOrderAndTheirItems.Add(item.PurchaseOrderNumber, poItems);
+                            }
+
+                            poItems.PurchaseItems.Add(item);
+                        }
+                    }
+                }
+
+                return m_PurchaseOrderAndTheirItems.Values.ToList();
+            }
+        }
+
         #endregion
 
         ObservableCollection<ProductMaterial> m_ProductMaterialsWrapper;

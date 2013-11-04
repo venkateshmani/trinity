@@ -404,7 +404,7 @@ namespace ordermanager.DatabaseModel
                 if (item.ProductMaterial != null)
                     cost += item.ItemCostWrapper;
             }
-            TotalSubMaterialsPurchaseCostWrapper = cost * ProductQuantity;
+            TotalSubMaterialsPurchaseCostWrapper = cost;
         }
 
         ObservableCollection<ProductMaterialItem> m_SubMaterialsWrapper;

@@ -105,6 +105,11 @@
                     <my1:ViewOrdersControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" OnOrderClick="ViewOrdersControl_OnOrderClick" ShowAllOrders="True" />
                 </Grid>
             </TabItem>
+            <TabItem x:Name="tabGRN" Header="  GRN  " Cursor="Hand">
+                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    <my1:GRNControl x:Name="grnControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></my1:GRNControl>
+                </Border>
+            </TabItem>
         </TabControl>
         <Rectangle x:Name="mask" Grid.Row="0" Grid.RowSpan="2" Fill="Gray" Opacity="0.7" Visibility="Collapsed" />
     </Grid>

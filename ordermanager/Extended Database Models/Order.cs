@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -124,9 +125,49 @@ namespace ordermanager.DatabaseModel
 
         #endregion 
 
-        #region Data Validation
+        #region Helpers
 
-        //Add the property validation methods in to this method to ensure validation on create button click
+            private ObservableCollection<Company> m_Suppliers = null;
+            public ObservableCollection<Company> Suppliers
+            {
+                get
+                {
+                    if (m_Suppliers == null && this.OrderProducts != null)
+                    {
+                        m_Suppliers = new ObservableCollection<Company>();
+                        foreach (OrderProduct product in this.OrderProducts)
+                        {
+                            if (product.ProductMaterials != null)
+                            {
+                                foreach (ProductMaterial material in product.ProductMaterials)
+                                {
+                                    if (material.ProductMaterialItems != null)
+                                    {
+                                        foreach (ProductMaterialItem materialItem in material.ProductMaterialItems)
+                                        {
+                                            if (!m_Suppliers.Contains(materialItem.Company))
+                                            {
+                                                m_Suppliers.Add(materialItem.Company);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return m_Suppliers;
+                }
+                set
+                {
+                    m_Suppliers = value;
+                }
+            }
+
+        #endregion 
+
+            #region Data Validation
+
+            //Add the property validation methods in to this method to ensure validation on create button click
         public void Validate()
         {
             ValidateCustomer();

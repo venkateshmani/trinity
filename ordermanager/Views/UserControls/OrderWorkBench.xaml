@@ -106,6 +106,12 @@
                     <local:POControl x:Name="poControl"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 </Border>
             </TabItem>
+           
+            <TabItem x:Name="tabProduction" Header="  Production  " Cursor="Hand">
+                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    
+                </Border>
+            </TabItem>
             <TabItem x:Name="tabChangeHistory" Header="  Change History  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <local:ChangeHistoryControl x:Name="changeHistoryControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />

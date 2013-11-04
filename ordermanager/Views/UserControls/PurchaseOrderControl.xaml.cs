@@ -6,7 +6,9 @@ using ordermanager.Views.PopUps;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.Generic;
 using System.Windows.Controls.Primitives;
+using ordermanager.Extended_Database_Models;
 
 namespace ordermanager.Views.UserControls
 {
@@ -148,6 +150,7 @@ namespace ordermanager.Views.UserControls
             if (saved == true)
             {
                 string message = string.Format("Successfully Submitted !.");
+                GenerateAndAssignPurchaseOrders();
                 InformUser(message);
                 SetControlState();
             }
@@ -156,6 +159,39 @@ namespace ordermanager.Views.UserControls
                 string message = string.Format("Failed to Submit !. Fill in the highlighted fields and Submit");
                 InformUser(message);
             }
+        }
+
+        
+        public void GenerateAndAssignPurchaseOrders()
+        {
+            //Create or Get and Populate Purchase Orders
+            Dictionary<Company, PurchaseOrder> purchaseOrders = new Dictionary<Company, PurchaseOrder>();
+            foreach (var supplier in m_ViewModel.Order.Suppliers)
+            {
+                string purchaseOrderNumber = Constants.GetPurchaseOrderNumber(supplier, m_ViewModel.Order);
+                PurchaseOrder po = DBResources.Instance.GetPurchaseOrder(purchaseOrderNumber);
+                if (po == null)
+                {
+                    po = DBResources.Instance.CreateNewPurchaseOrder(supplier, purchaseOrderNumber);
+                }
+
+                if (po != null && !purchaseOrders.ContainsKey(supplier))
+                {
+                    purchaseOrders.Add(supplier, po);
+                }
+            }
+
+            //Assign PO's to Material Items
+            foreach (var orderProduct in m_ViewModel.Products)
+            {
+                foreach (PurchaseOrderItems poItems in orderProduct.PurchaseOrderItems)
+                {
+                    PurchaseOrder po = purchaseOrders[poItems.Supplier];
+                    poItems.SetPurchaseOrder(po);
+                }
+            }
+
+            DBResources.Instance.Save();
         }
 
         private bool? Save(bool isSubmit)
@@ -183,6 +219,7 @@ namespace ordermanager.Views.UserControls
             informer.PopupButton = PopupButton.OK;
             informer.ShowDialog();
         }
+
     }
 }
 

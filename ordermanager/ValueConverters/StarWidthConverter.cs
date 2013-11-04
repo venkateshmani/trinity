@@ -45,8 +45,11 @@ namespace ordermanager.ValueConverters
             {
                 TreeViewItem item = (TreeViewItem)value;
                 TreeView listView = ItemsControl.ItemsControlFromItemContainer(item) as TreeView;
-                int index = listView.ItemContainerGenerator.IndexFromContainer(item) + 1;
-                return index.ToString();
+                if (listView != null)
+                {
+                    int index = listView.ItemContainerGenerator.IndexFromContainer(item) + 1;
+                    return index.ToString();
+                }
             }
 
             return string.Empty;

@@ -136,6 +136,30 @@ namespace ordermanager.ViewModel
                                                                .ToList());
         }
 
+
+        public PurchaseOrder CreateNewPurchaseOrder(Company supplier, string purchseOrderNumber)
+        {
+            PurchaseOrder newPO = new PurchaseOrder();
+            newPO.PurchaseOrderNumber = purchseOrderNumber;
+            newPO.SupplierID = supplier.CompanyID;
+            
+            OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+            newManager.PurchaseOrders.Add(newPO);
+            newManager.SaveChanges();
+            newManager.Dispose();
+
+            newPO = GetPurchaseOrder(purchseOrderNumber);
+
+            return newPO;
+        }
+
+        public PurchaseOrder GetPurchaseOrder(string purchaseOrderNumber)
+        {
+            return dbContext.PurchaseOrders.Where(c => c.PurchaseOrderNumber == purchaseOrderNumber)
+                                    .Select(c => c)
+                                    .FirstOrDefault();
+        }
+
         //Create a new Company of type passed in the arguments
         public Company CreateNewCompany(string type)
         {

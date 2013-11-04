@@ -19,6 +19,7 @@ namespace ordermanager.DatabaseModel
             this.OrderProducts = new HashSet<OrderProduct>();
             this.ProductMaterialItems = new HashSet<ProductMaterialItem>();
             this.ProductMaterials = new HashSet<ProductMaterial>();
+            this.SubMaterials = new HashSet<SubMaterial>();
         }
     
         public short UOMID { get; set; }
@@ -27,5 +28,8 @@ namespace ordermanager.DatabaseModel
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
         public virtual ICollection<ProductMaterialItem> ProductMaterialItems { get; set; }
         public virtual ICollection<ProductMaterial> ProductMaterials { get; set; }
+        public virtual ICollection<SubMaterial> SubMaterials { get; set; }
+        public virtual UnitsOfMeasurement UnitsOfMeasurement1 { get; set; }
+        public virtual UnitsOfMeasurement UnitsOfMeasurement2 { get; set; }
     }
 }

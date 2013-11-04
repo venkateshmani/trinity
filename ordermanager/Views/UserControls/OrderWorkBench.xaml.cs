@@ -37,6 +37,8 @@ namespace ordermanager.Views.UserControls
             purchaseOrderControl.DataContext = m_PurchaseOrderViewModel;
             m_ChangeHistorViewModel = new ChangeHistoryViewModel();
             changeHistoryControl.DataContext = m_ChangeHistorViewModel;
+            
+
             this.Loaded += OrderWorkBench_Loaded;
             tabControl.SelectedIndex = 2;
             tabControl.SelectionChanged += tabControl_SelectionChanged;

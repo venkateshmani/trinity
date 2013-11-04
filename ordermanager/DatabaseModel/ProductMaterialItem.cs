@@ -23,10 +23,22 @@ namespace ordermanager.DatabaseModel
         public short CurrencyID { get; set; }
         public decimal Cost { get; set; }
         public Nullable<int> SupplierID { get; set; }
+        public Nullable<decimal> InvoicedQuantity { get; set; }
+        public Nullable<decimal> RecievedInHand { get; set; }
+        public Nullable<System.DateTime> RecievedDate { get; set; }
+        public Nullable<decimal> ExcessiveQuantity { get; set; }
+        public Nullable<decimal> QualityPassedQuantity { get; set; }
+        public Nullable<decimal> QualityFailedQuantity { get; set; }
+        public string InvoiceNumber { get; set; }
+        public Nullable<System.DateTime> InvoiceDate { get; set; }
+        public Nullable<decimal> InvoiceValue { get; set; }
+        public Nullable<decimal> OtherChargesInINR { get; set; }
+        public Nullable<long> PurchaseOrderID { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual Currency Currency { get; set; }
         public virtual ProductMaterial ProductMaterial { get; set; }
+        public virtual PurchaseOrder PurchaseOrder { get; set; }
         public virtual SubMaterial SubMaterial { get; set; }
         public virtual UnitsOfMeasurement UnitsOfMeasurement { get; set; }
     }

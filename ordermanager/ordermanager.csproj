@@ -165,6 +165,12 @@
     <Compile Include="DatabaseModel\ProductSize.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\PurchaseOrder.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\PurchaseOrderStatu.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\ShipmentMode.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
@@ -192,6 +198,8 @@
     <Compile Include="Extended Database Models\ProductExtraCost.cs" />
     <Compile Include="Extended Database Models\ProductMaterial.cs" />
     <Compile Include="Extended Database Models\ProductMaterialItem.cs" />
+    <Compile Include="Extended Database Models\PurchaseOrder.cs" />
+    <Compile Include="Extended Database Models\PurchaseOrderItems.cs" />
     <Compile Include="Extended Database Models\User.cs" />
     <Compile Include="Interfaces And Enums\IMaskable.cs" />
     <Compile Include="Interfaces And Enums\OrderManagerTab.cs" />
@@ -208,13 +216,16 @@
     <Compile Include="ValueConverters\StarWidthConverter.cs" />
     <Compile Include="ValueConverters\Subractor.cs" />
     <Compile Include="ViewModel\ChangeHistoryViewModel.cs" />
+    <Compile Include="ViewModel\Constants.cs" />
     <Compile Include="ViewModel\DataProviers.cs" />
     <Compile Include="ViewModel\DBSingleton.cs" />
+    <Compile Include="ViewModel\GRNViewModel.cs" />
     <Compile Include="ViewModel\Helper.cs" />
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />
     <Compile Include="ViewModel\POControlViewModel.cs" />
     <Compile Include="ViewModel\ProductMaterialsViewModel.cs" />
     <Compile Include="ViewModel\PurchaseOrderControlViewModel.cs" />
+    <Compile Include="ViewModel\PurchaseOrderNumberInfo.cs" />
     <Compile Include="ViewModel\UserManagementViewModel.cs" />
     <Compile Include="ViewModel\ViewOrdersControlViewModel.cs" />
     <Compile Include="Views\CommonControls\BackForwardButton.xaml.cs">
@@ -250,11 +261,17 @@
     <Compile Include="Views\UserControls\ChangeHistoryControl.xaml.cs">
       <DependentUpon>ChangeHistoryControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\GRNControl.xaml.cs">
+      <DependentUpon>GRNControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\POControl.xaml.cs">
       <DependentUpon>POControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\POMaterialDetails.xaml.cs">
       <DependentUpon>POMaterialDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ProductionControl.xaml.cs">
+      <DependentUpon>ProductionControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PurchaseOrderControl.xaml.cs">
       <DependentUpon>PurchaseOrderControl.xaml</DependentUpon>
@@ -325,11 +342,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\UserControls\GRNControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\POControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\POMaterialDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\ProductionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

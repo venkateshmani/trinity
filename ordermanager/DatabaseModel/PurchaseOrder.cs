@@ -12,21 +12,21 @@ namespace ordermanager.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class SubMaterial
+    public partial class PurchaseOrder
     {
-        public SubMaterial()
+        public PurchaseOrder()
         {
             this.ProductMaterialItems = new HashSet<ProductMaterialItem>();
         }
     
-        public long SubMaterialsNameID { get; set; }
-        public int MaterialNameID { get; set; }
-        public string Name { get; set; }
-        public Nullable<decimal> InStock { get; set; }
-        public Nullable<short> UOMID { get; set; }
+        public long PurchaseOrderID { get; set; }
+        public int SupplierID { get; set; }
+        public Nullable<System.DateTime> PurchaseOrderDate { get; set; }
+        public string PurchaseOrderNumber { get; set; }
+        public Nullable<byte> PurchaseOrderStatusID { get; set; }
     
-        public virtual MaterialName MaterialName { get; set; }
+        public virtual Company Company { get; set; }
         public virtual ICollection<ProductMaterialItem> ProductMaterialItems { get; set; }
-        public virtual UnitsOfMeasurement UnitsOfMeasurement { get; set; }
+        public virtual PurchaseOrderStatu PurchaseOrderStatu { get; set; }
     }
 }
