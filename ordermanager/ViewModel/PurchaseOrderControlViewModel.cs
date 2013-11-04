@@ -133,6 +133,11 @@ namespace ordermanager.ViewModel
             return DBResources.Instance.CreateNewCountry(newCountryName);
         }
 
+        public Color AddNewColor(string newColorName)
+        {
+            return DBResources.Instance.CreateNewColor(newColorName);
+        }
+
         public ProductSize AddNewProductSize(string newProductSize)
         {
             return DBResources.Instance.CreateNewProductSize(newProductSize);

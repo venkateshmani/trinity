@@ -510,6 +510,48 @@ namespace ordermanager.ViewModel
 
         #endregion
 
+
+        #region Color Management
+
+
+        public ObservableCollection<Color> m_Colors = null;
+        public ObservableCollection<Color> Colors
+        {
+            get
+            {
+                if (m_Colors == null)
+                {
+                    m_Colors = new ObservableCollection<Color>(dbContext.Colors.ToList());
+                }
+
+                return m_Colors;
+            }
+            private set
+            {
+                m_Colors = value;
+                OnPropertyChanged("Colors");
+            }
+        }
+
+        public Color CreateNewColor(string colorName)
+        {
+            Color newColor = new Color();
+            newColor.Name = colorName;
+
+            OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+            newManager.Colors.Add(newColor);
+            newManager.SaveChanges();
+            newManager.Dispose();
+
+            Colors = new ObservableCollection<Color>(dbContext.Colors.ToList());
+
+            newColor = Colors.Where(a => a.Name == colorName)
+                             .Select(a => a).First();
+
+            return newColor;
+        }
+
+        #endregion 
         public bool UpdateOrderProducts()
         {
             Save();

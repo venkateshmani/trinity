@@ -23,6 +23,19 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public Color ColorWrapper
+        {
+            get
+            {
+                return Color;
+            }
+            set
+            {
+                Color = value;
+                OnPropertyChanged("ColorWrapper");
+            }
+        }
+
         public Country CountryWrapper
         {
             get

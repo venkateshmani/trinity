@@ -249,6 +249,32 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
+                                <DataGridTemplateColumn x:Name="colorColumn" Header="Color" Width="0.1*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <ComboBox x:Name="colorComboBox" Grid.Column="0" IsEditable="True"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                                        ItemsSource="{Binding Colors, Source={StaticResource DataProvider}}" DisplayMemberPath="Name"
+                                                        SelectedItem="{Binding ColorWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                        Height="20" TextBoxBase.TextChanged="colorComboBox_TextChanged_1"
+                                                        IsHitTestVisible="{Binding IsReadOnly, ElementName=countryWiseBreakUpGrid, Converter={StaticResource FlipBoolValueConverter}}" />
+                                                <Button  x:Name="btnAddNewColor" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
+                                                            Cursor="Hand" Click="btnAddNewColor_Click_1"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Color"  Visibility="Collapsed">
+                                                    <Rectangle Width="10" Height="10">
+                                                        <Rectangle.Fill>
+                                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                </Button>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
                                 <DataGridTemplateColumn x:Name="orderCountColumn" Header="No. of Pieces" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

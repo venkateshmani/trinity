@@ -163,5 +163,52 @@ namespace ordermanager.Views.UserControls
             }
 
         #endregion 
+
+        #region Color
+
+        private void btnAddNewColor_Click_1(object sender, RoutedEventArgs e)
+        {
+            Button addBtn = sender as Button;
+            if (addBtn != null)
+            {
+                Grid parentGrid = addBtn.Parent as Grid;
+                if (parentGrid != null)
+                {
+                    ComboBox comboBox = parentGrid.FindName("colorComboBox") as ComboBox;
+                    if (comboBox != null && m_ViewModel != null)
+                    {
+                        comboBox.SelectedItem = m_ViewModel.AddNewColor(comboBox.Text);
+                        addBtn.Visibility = System.Windows.Visibility.Collapsed;
+                    }
+                }
+            }
+        }
+
+        private void colorComboBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+            ComboBox colorComboBox = sender as ComboBox;
+            if (colorComboBox != null)
+            {
+                Grid parentGrid = colorComboBox.Parent as Grid;
+
+                if (parentGrid != null)
+                {
+                    Button addbtn = parentGrid.FindName("btnAddNewColor") as Button;
+                    if (addbtn != null)
+                    {
+                        if (colorComboBox.SelectedItem != null)
+                        {
+                            addbtn.Visibility = System.Windows.Visibility.Collapsed;
+                        }
+                        else
+                        {
+                            addbtn.Visibility = System.Windows.Visibility.Visible;
+                        }
+                    }
+                }
+            }     
+        }
+
+        #endregion 
     }
 }

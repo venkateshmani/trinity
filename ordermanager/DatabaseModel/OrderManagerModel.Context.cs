@@ -25,6 +25,7 @@ namespace ordermanager.DatabaseModel
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Color> Colors { get; set; }
         public DbSet<CommissionValueType> CommissionValueTypes { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<CompanyType> CompanyTypes { get; set; }

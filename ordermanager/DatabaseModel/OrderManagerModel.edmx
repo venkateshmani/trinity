@@ -6,6 +6,7 @@
     <edmx:StorageModels>
       <Schema Namespace="OrderManagerDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="OrderManagerDBModelStoreContainer">
+          <EntitySet Name="Color" EntityType="OrderManagerDBModel.Store.Color" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CommissionValueType" EntityType="OrderManagerDBModel.Store.CommissionValueType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Company" EntityType="OrderManagerDBModel.Store.Company" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CompanyType" EntityType="OrderManagerDBModel.Store.CompanyType" store:Type="Tables" Schema="dbo" />
@@ -97,6 +98,10 @@
             <End Role="ShipmentMode" EntitySet="ShipmentMode" />
             <End Role="ProductBreakUp" EntitySet="ProductBreakUp" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProductCountryWiseBreakUp_Color" Association="OrderManagerDBModel.Store.FK_ProductCountryWiseBreakUp_Color">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUp" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductCountryWiseBreakUp_Country" Association="OrderManagerDBModel.Store.FK_ProductCountryWiseBreakUp_Country">
             <End Role="Country" EntitySet="Country" />
             <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUp" />
@@ -186,6 +191,13 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="ColorID" />
+          </Key>
+          <Property Name="ColorID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
         <EntityType Name="CommissionValueType">
           <Key>
             <PropertyRef Name="CommissionValueTypeID" />
@@ -334,6 +346,7 @@
           <Property Name="CountryID" Type="int" Nullable="false" />
           <Property Name="ProductSizeID" Type="bigint" Nullable="false" />
           <Property Name="NumberOfPieces" Type="decimal" Nullable="false" />
+          <Property Name="ColorID" Type="int" />
         </EntityType>
         <EntityType Name="ProductExtraCost">
           <Key>
@@ -669,6 +682,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductCountryWiseBreakUp_Color">
+          <End Role="Color" Type="OrderManagerDBModel.Store.Color" Multiplicity="0..1" />
+          <End Role="ProductCountryWiseBreakUp" Type="OrderManagerDBModel.Store.ProductCountryWiseBreakUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ColorID" />
+            </Principal>
+            <Dependent Role="ProductCountryWiseBreakUp">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductCountryWiseBreakUp_Country">
           <End Role="Country" Type="OrderManagerDBModel.Store.Country" Multiplicity="1" />
           <End Role="ProductCountryWiseBreakUp" Type="OrderManagerDBModel.Store.ProductCountryWiseBreakUp" Multiplicity="*" />
@@ -939,6 +964,7 @@
     <edmx:ConceptualModels>
       <Schema Namespace="OrderManagerDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="OrderManagerDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Colors" EntityType="OrderManagerDBModel.Color" />
           <EntitySet Name="CommissionValueTypes" EntityType="OrderManagerDBModel.CommissionValueType" />
           <EntitySet Name="Companies" EntityType="OrderManagerDBModel.Company" />
           <EntitySet Name="CompanyTypes" EntityType="OrderManagerDBModel.CompanyType" />
@@ -966,6 +992,10 @@
           <EntitySet Name="UnitsOfMeasurements" EntityType="OrderManagerDBModel.UnitsOfMeasurement" />
           <EntitySet Name="Users" EntityType="OrderManagerDBModel.User" />
           <EntitySet Name="UserRoles" EntityType="OrderManagerDBModel.UserRole" />
+          <AssociationSet Name="FK_ProductCountryWiseBreakUp_Color" Association="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Color">
+            <End Role="Color" EntitySet="Colors" />
+            <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUps" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_CommissionValueType" Association="OrderManagerDBModel.FK_Order_CommissionValueType">
             <End Role="CommissionValueType" EntitySet="CommissionValueTypes" />
             <End Role="Order" EntitySet="Orders" />
@@ -1119,6 +1149,14 @@
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="ColorID" />
+          </Key>
+          <Property Name="ColorID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ProductCountryWiseBreakUps" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Color" FromRole="Color" ToRole="ProductCountryWiseBreakUp" />
+        </EntityType>
         <EntityType Name="CommissionValueType">
           <Key>
             <PropertyRef Name="CommissionValueTypeID" />
@@ -1306,6 +1344,8 @@
           <Property Name="CountryID" Type="Int32" Nullable="false" />
           <Property Name="ProductSizeID" Type="Int64" Nullable="false" />
           <Property Name="NumberOfPieces" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ColorID" Type="Int32" />
+          <NavigationProperty Name="Color" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Color" FromRole="ProductCountryWiseBreakUp" ToRole="Color" />
           <NavigationProperty Name="Country" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Country" FromRole="ProductCountryWiseBreakUp" ToRole="Country" />
           <NavigationProperty Name="ProductBreakUp" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductBreakUp" FromRole="ProductCountryWiseBreakUp" ToRole="ProductBreakUp" />
           <NavigationProperty Name="ProductSize" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductSize" FromRole="ProductCountryWiseBreakUp" ToRole="ProductSize" />
@@ -1486,6 +1526,18 @@
           <NavigationProperty Name="OrderStatus" Relationship="OrderManagerDBModel.FK_OrderStatus_UserRole" FromRole="UserRole" ToRole="OrderStatus" />
           <NavigationProperty Name="Users" Relationship="OrderManagerDBModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
         </EntityType>
+        <Association Name="FK_ProductCountryWiseBreakUp_Color">
+          <End Role="Color" Type="OrderManagerDBModel.Color" Multiplicity="0..1" />
+          <End Role="ProductCountryWiseBreakUp" Type="OrderManagerDBModel.ProductCountryWiseBreakUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ColorID" />
+            </Principal>
+            <Dependent Role="ProductCountryWiseBreakUp">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_CommissionValueType">
           <End Role="CommissionValueType" Type="OrderManagerDBModel.CommissionValueType" Multiplicity="0..1" />
           <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="*" />
@@ -1948,6 +2000,14 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="OrderManagerDBModelStoreContainer" CdmEntityContainer="OrderManagerDBEntities">
+          <EntitySetMapping Name="Colors">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.Color">
+              <MappingFragment StoreEntitySet="Color">
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CommissionValueTypes">
             <EntityTypeMapping TypeName="OrderManagerDBModel.CommissionValueType">
               <MappingFragment StoreEntitySet="CommissionValueType">
@@ -2108,6 +2168,7 @@
                 <ScalarProperty Name="CountryID" ColumnName="CountryID" />
                 <ScalarProperty Name="ProductSizeID" ColumnName="ProductSizeID" />
                 <ScalarProperty Name="NumberOfPieces" ColumnName="NumberOfPieces" />
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

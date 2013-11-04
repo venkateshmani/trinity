@@ -51,6 +51,14 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public ObservableCollection<Color> Colors
+        {
+            get
+            {
+                return DBResources.Instance.Colors;
+            }
+        }
+
         public ObservableCollection<ShipmentMode> ShipmentModes
         {
             get
