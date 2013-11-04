@@ -308,7 +308,15 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
+                        
+                        <DataGridTemplateColumn x:Name="styleIDColumn" Header="Style ID" Width="0.16*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding ProductNameWrapper.StyleID}" IsReadOnly="True" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
                         <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.16*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

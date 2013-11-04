@@ -219,11 +219,11 @@ namespace ordermanager.Views.PopUps
                             comboBox.SelectedItem = NewEnquiryViewModel.CreateNewProduct(addNewProductPopUp.ProductName, addNewProductPopUp.StyleId);
                             addBtn.Visibility = System.Windows.Visibility.Collapsed;
 
-                            Button editButton = parentGrid.FindName("editBtn") as Button;
-                            if (editButton != null)
-                            {
-                                editButton.Visibility = System.Windows.Visibility.Visible;
-                            }
+                            //Button editButton = parentGrid.FindName("editBtn") as Button;
+                            //if (editButton != null)
+                            //{
+                            //    editButton.Visibility = System.Windows.Visibility.Visible;
+                            //}
                         }
                     }
                 }
@@ -437,13 +437,13 @@ namespace ordermanager.Views.PopUps
                     {
                         if (productComboBox.SelectedItem != null)
                         {
-                            addbtn.Visibility = System.Windows.Visibility.Collapsed;
+                            //addbtn.Visibility = System.Windows.Visibility.Collapsed;
 
-                            Button editBtn = parentGrid.FindName("editBtn") as Button;
-                            if (editBtn != null)
-                            {
-                                editBtn.Visibility = System.Windows.Visibility.Visible;
-                            }
+                            //Button editBtn = parentGrid.FindName("editBtn") as Button;
+                            //if (editBtn != null)
+                            //{
+                            //    editBtn.Visibility = System.Windows.Visibility.Visible;
+                            //}
                         }
                         else
                         {

@@ -140,6 +140,7 @@ namespace ordermanager.DatabaseModel
             {
                 ProductName = value;
                 ValidateProduct();
+                OnPropertyChanged("ProductNameWrapper");
             }
         }
 
