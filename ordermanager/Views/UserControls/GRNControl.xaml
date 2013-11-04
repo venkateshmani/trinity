@@ -254,7 +254,7 @@
                                 <DataGridTemplateColumn Header="Recv. Qty"  Width="0.2*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox IsReadOnly="True"  Text="{Binding RecievedInHand, StringFormat=n4}"/>
+                                            <TextBox IsReadOnly="True"  Text="{Binding RecievedInHand, StringFormat=N4}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
