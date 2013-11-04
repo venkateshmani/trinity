@@ -92,6 +92,12 @@ namespace ordermanager.ViewModel
                 if (m_OrderProducts == null)
                 {
                     m_OrderProducts = new ObservableCollection<OrderProduct>(Order.OrderProducts);
+                    foreach (var orderProduct in m_OrderProducts)
+                    {
+                        orderProduct.PropertyChanged -= Order_PropertyChanged;
+                        orderProduct.PropertyChanged += Order_PropertyChanged;
+                    }
+
                     m_OrderProducts.CollectionChanged += m_OrderProducts_CollectionChanged;
                 }
 

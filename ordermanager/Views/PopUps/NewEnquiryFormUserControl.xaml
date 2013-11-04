@@ -468,7 +468,7 @@
             <Grid Grid.Row="2" Margin="5" Grid.ColumnSpan="2">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                     <Label Content="Total Order Value : "  Style="{StaticResource DescriptionHeaderStyle}"/>
-                    <TextBlock x:Name="totalNumberOfItems" Text="{Binding TotalOrderValue, StringFormat=n4}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold"/>
+                    <TextBlock x:Name="orderValue" Text="{Binding TotalOrderValue, StringFormat=n2}"  Style="{StaticResource TextBlockHeaderStyle}" FontWeight="Bold"/>
                     <TextBlock  Text="INR"  Style="{StaticResource TextBlockHeaderStyle}" Margin="5,0,0,0"/>
                 </StackPanel>
             </Grid>
