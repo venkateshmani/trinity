@@ -561,6 +561,18 @@ namespace ordermanager.ViewModel
         #endregion
 
 
+        public void AttachTheMissingNavigationProperties()
+        {
+            foreach (DbEntityEntry entry in Context.ChangeTracker.Entries())
+            {
+                OrderCurrencyConversion curConv = entry.Entity as OrderCurrencyConversion;
+                if (curConv != null && curConv.Order == null)
+                {
+                    curConv.Order = dbContext.Orders.Find(curConv.OrderID);
+                }
+            }
+        }
+
         public void ReloadChangedEntities()
         {
             foreach (DbEntityEntry entry in Context.ChangeTracker.Entries())
@@ -605,6 +617,7 @@ namespace ordermanager.ViewModel
         {
             try
             {
+                AttachTheMissingNavigationProperties();
                 dbContext.SaveChanges();
                 return true;
             }
