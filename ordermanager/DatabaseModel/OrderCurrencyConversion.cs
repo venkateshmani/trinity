@@ -11,7 +11,6 @@ namespace ordermanager.DatabaseModel
 {
     using System;
     using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class OrderCurrencyConversion
     {
@@ -23,8 +22,6 @@ using System.ComponentModel.DataAnnotations.Schema;
         public Nullable<decimal> ValueInINRForSubMaterials { get; set; }
     
         public virtual Currency Currency { get; set; }
-
-        [ForeignKey("OrderID")]
         public virtual Order Order { get; set; }
     }
 }
