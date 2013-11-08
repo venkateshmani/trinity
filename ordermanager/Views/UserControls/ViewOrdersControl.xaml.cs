@@ -67,10 +67,7 @@ namespace ordermanager.Views.UserControls
 
         private void lvOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (OnOrderClick != null && lvOrders.SelectedItem != null)
-            {
-                OnOrderClick(lvOrders.SelectedItem);
-            }
+            
         }
 
         
@@ -143,5 +140,13 @@ namespace ordermanager.Views.UserControls
             }
 
         #endregion 
+
+        private void lvOrders_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (OnOrderClick != null && lvOrders.SelectedItem != null)
+            {
+                OnOrderClick(lvOrders.SelectedItem);
+            }
+        }
     }
 }

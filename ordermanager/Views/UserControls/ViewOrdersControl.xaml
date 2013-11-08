@@ -99,7 +99,8 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <ListView Name="lvOrders" Grid.Row="1" ItemsSource="{Binding Source={StaticResource orderViewSource}}" SelectionChanged="lvOrders_SelectionChanged">
+            <ListView Name="lvOrders" Grid.Row="1" ItemsSource="{Binding Source={StaticResource orderViewSource}}"
+                      MouseLeftButtonUp="lvOrders_MouseLeftButtonUp">
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
                         <GridViewColumn Header="OrderID">
