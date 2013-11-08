@@ -25,6 +25,23 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public Currency CurrencyWrapper
+        {
+            get
+            {
+                return Currency;
+            }
+            set
+            {
+                Currency = value;
+
+                if (Currency.DefaultValueInINR != null)
+                {
+                    ValueInINRWrapper = ValueInINRForMaterialsWrapper = ValueInINRForSubMaterialsWrapper = Currency.DefaultValueInINR.Value;
+                }
+            }
+        }
+
         public decimal ValueInINRForMaterialsWrapper
         {
             get

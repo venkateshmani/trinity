@@ -367,7 +367,7 @@ namespace ordermanager.DatabaseModel
                 if (currencyConversion == null || currencyConversion.Count() == 0)
                 {
                     newConversion = new OrderCurrencyConversion();
-                    newConversion.Currency = Currency;
+                    newConversion.CurrencyWrapper = Currency;
 
                     OrderProduct.Order.OrderCurrencyConversions.Add(newConversion);
                 }
