@@ -21,6 +21,7 @@ namespace ordermanager.DatabaseModel
             set
             {
                 UnitsOfMeasurement = value;
+                CalculateItemCost();
                 ValidateUOM();
             }
         }
@@ -367,7 +368,11 @@ namespace ordermanager.DatabaseModel
 
         public void CalculateItemCost()
         {
-            ItemCostWrapper = Cost * Quantity * CurrencyValueInINR;
+            decimal uomMultipler = 1;
+            if (UnitsOfMeasurement != null)
+                uomMultipler = UnitsOfMeasurement.Multiplier;
+
+            ItemCostWrapper = Cost * Quantity * CurrencyValueInINR * uomMultipler;
         }
         #endregion [Helpers]
 

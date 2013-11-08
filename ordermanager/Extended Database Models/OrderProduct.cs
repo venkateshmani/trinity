@@ -153,6 +153,7 @@ namespace ordermanager.DatabaseModel
             set
             {
                 UnitsOfMeasurement = value;
+                CalculateOrderValue();
                 ValidateUOM();
             }
         }
@@ -517,7 +518,11 @@ namespace ordermanager.DatabaseModel
 
         private void CalculateOrderValue()
         {
-            OrderValueWrapper = ExpectedQuantity * CustomerTargetPrice * CurrencyValueInINR;
+            decimal uomMultipler = 1;
+            if (UnitsOfMeasurement != null)
+                uomMultipler = UnitsOfMeasurement.Multiplier;
+
+            OrderValueWrapper = ExpectedQuantity * CustomerTargetPrice * CurrencyValueInINR * uomMultipler;
         }
 
 
