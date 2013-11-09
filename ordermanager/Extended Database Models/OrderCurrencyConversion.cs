@@ -57,6 +57,25 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public Currency CurrencyWrapper
+        {
+            get
+            {
+                return Currency;
+            }
+            set
+            {
+                Currency = value;
+
+                if (Currency.DefaultValueInINR != null)
+                {
+                    ValueInINR = Currency.DefaultValueInINR.Value;
+                    ValueInINRForMaterialsWrapper = Currency.DefaultValueInINR.Value;
+                    ValueInINRForSubMaterialsWrapper = Currency.DefaultValueInINR.Value;
+                }
+            }
+        }
+
         #region Validation
 
         //Add the property validation methods in to this method to ensure validation on create button click

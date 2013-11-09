@@ -241,6 +241,10 @@ namespace ordermanager.DatabaseModel
             get
             {
                 decimal cost = 0;
+
+                if (CurrencyConversion == null)
+                    SelectOrAddCurrencyConversion();
+
                 if (CurrencyConversion.ValueInINR != null)
                 {
                     cost = PerUnitTotalProductMaterialsCost / CurrencyConversion.ValueInINR.Value;
@@ -494,7 +498,7 @@ namespace ordermanager.DatabaseModel
                 if (currencyConversion == null || currencyConversion.Count() == 0)
                 {
                     newConversion = new OrderCurrencyConversion();
-                    newConversion.Currency = Currency;
+                    newConversion.CurrencyWrapper = Currency;
 
                     Order.OrderCurrencyConversions.Add(newConversion);
                 }
