@@ -23,7 +23,7 @@ namespace ordermanager.ViewModel
                 if (m_Suppliers == null && Order != null)
                 {
                     m_Suppliers = new ObservableCollection<Company>();
-                    Company comp;
+                    Company supplier;
                     foreach (OrderProduct product in Order.OrderProducts)
                     {
                         foreach (ProductMaterial material in product.ProductMaterials)
@@ -32,10 +32,11 @@ namespace ordermanager.ViewModel
                             {
                                 if (!m_Suppliers.Contains(materialItem.Company))
                                 {
-                                    comp = materialItem.Company;
-                                    comp.PurchaseOrderDateWrapper = materialItem.PurchaseOrder.PurchaseOrderDate;
-                                    comp.PropertyChanged += comp_PropertyChanged;
-                                    m_Suppliers.Add(comp);
+                                    supplier = materialItem.Company;
+                                    supplier.PurchaseOrderDateWrapper = materialItem.PurchaseOrder.PurchaseOrderDate;
+                                    supplier.PropertyChanged -= Supplier_PropertyChanged;
+                                    supplier.PropertyChanged += Supplier_PropertyChanged;
+                                    m_Suppliers.Add(supplier);
                                 }
                             }
                         }
@@ -49,11 +50,12 @@ namespace ordermanager.ViewModel
             }
         }
 
-        void comp_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void Supplier_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "PurchaseOrderDateWrapper")
             {
                 Company comp = sender as Company;
+                bool save = false;
                 if (comp != null)
                 {
                     foreach (OrderProduct product in Order.OrderProducts)
@@ -62,15 +64,16 @@ namespace ordermanager.ViewModel
                         {
                             foreach (ProductMaterialItem materialItem in material.ProductMaterialItems)
                             {
-                                if (materialItem.Company.CompanyID == comp.CompanyID)
+                                if (materialItem.Company.CompanyID == comp.CompanyID && materialItem.PurchaseOrder.PurchaseOrderDate != comp.PurchaseOrderDateWrapper)
                                 {
                                     materialItem.PurchaseOrder.PurchaseOrderDate = comp.PurchaseOrderDateWrapper;
+                                    save = true;
                                 }
                             }
                         }
                     }
-
-                    DBResources.Instance.Save();
+                    if (save)
+                        DBResources.Instance.Save();
                 }
             }
         }
