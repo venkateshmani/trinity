@@ -33,7 +33,8 @@ namespace ordermanager.ViewModel
                                 if (!m_Suppliers.Contains(materialItem.Company))
                                 {
                                     supplier = materialItem.Company;
-                                    supplier.PurchaseOrderDateWrapper = materialItem.PurchaseOrder.PurchaseOrderDate;
+                                    if (materialItem.PurchaseOrder != null)
+                                        supplier.PurchaseOrderDateWrapper = materialItem.PurchaseOrder.PurchaseOrderDate;
                                     supplier.PropertyChanged -= Supplier_PropertyChanged;
                                     supplier.PropertyChanged += Supplier_PropertyChanged;
                                     m_Suppliers.Add(supplier);
