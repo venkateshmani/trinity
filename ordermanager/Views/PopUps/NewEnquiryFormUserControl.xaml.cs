@@ -437,6 +437,7 @@ namespace ordermanager.Views.PopUps
                     {
                         if (productComboBox.SelectedItem != null)
                         {
+                            addbtn.Visibility = System.Windows.Visibility.Collapsed;
                             //addbtn.Visibility = System.Windows.Visibility.Collapsed;
 
                             //Button editBtn = parentGrid.FindName("editBtn") as Button;
@@ -449,11 +450,11 @@ namespace ordermanager.Views.PopUps
                         {
                             addbtn.Visibility = System.Windows.Visibility.Visible;
 
-                            Button editBtn = parentGrid.FindName("editBtn") as Button;
-                            if (editBtn != null)
-                            {
-                                editBtn.Visibility = System.Windows.Visibility.Collapsed;
-                            }
+                            //Button editBtn = parentGrid.FindName("editBtn") as Button;
+                            //if (editBtn != null)
+                            //{
+                            //    editBtn.Visibility = System.Windows.Visibility.Collapsed;
+                            //}
                         }
                     }
                 }
