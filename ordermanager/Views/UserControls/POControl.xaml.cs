@@ -30,13 +30,14 @@ namespace ordermanager.Views.UserControls
         public POControl()
         {
             InitializeComponent();
-            this.IsVisibleChanged += POControl_IsVisibleChanged;
+            //this.IsVisibleChanged += POControl_IsVisibleChanged;
             m_POGenerator = new BackgroundWorker();
             m_POGenerator.WorkerReportsProgress = true;
             m_POGenerator.ProgressChanged += m_POGenerator_ProgressChanged;
             m_POGenerator.DoWork += m_POGenerator_DoWork;
             m_POGenerator.WorkerSupportsCancellation = true;
             m_POGenerator.RunWorkerCompleted += m_POGenerator_RunWorkerCompleted;
+            webBrowser.Navigate("about:blank");
         }
 
         void POControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -45,7 +46,7 @@ namespace ordermanager.Views.UserControls
             {
                 if (supplierList.Items.Count != 0)
                 {
-                    supplierList.SelectedIndex = 0;
+                    //supplierList.SelectedIndex = 0;
                 }
             }
             else
@@ -70,6 +71,8 @@ namespace ordermanager.Views.UserControls
 
             foreach (Company supplier in ViewModel.Suppliers)
             {
+                if (supplier.PurchaseOrderDateWrapper == null)
+                    supplier.PurchaseOrderDateWrapper = DateTime.Now;
                 string filePath = System.IO.Path.Combine(
                                              folderPath, "PurchaseOrder" + Order.OrderID.ToString() + "_" + supplier.Name + ".pdf");
                 GeneratePurchaseOrder(supplier, filePath);
@@ -205,6 +208,6 @@ namespace ordermanager.Views.UserControls
                 }
             }
             
-        }
+        }        
     }
 }
