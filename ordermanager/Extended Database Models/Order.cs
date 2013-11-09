@@ -132,7 +132,7 @@ namespace ordermanager.DatabaseModel
             {
                 get
                 {
-                    if (m_Suppliers == null && this.OrderProducts != null)
+                    if ((m_Suppliers == null || m_Suppliers.Count == 0) && this.OrderProducts != null)
                     {
                         m_Suppliers = new ObservableCollection<Company>();
                         foreach (OrderProduct product in this.OrderProducts)
