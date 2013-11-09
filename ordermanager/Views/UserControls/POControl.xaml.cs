@@ -30,7 +30,7 @@ namespace ordermanager.Views.UserControls
         public POControl()
         {
             InitializeComponent();
-            //this.IsVisibleChanged += POControl_IsVisibleChanged;
+            this.IsVisibleChanged += POControl_IsVisibleChanged;
             m_POGenerator = new BackgroundWorker();
             m_POGenerator.WorkerReportsProgress = true;
             m_POGenerator.ProgressChanged += m_POGenerator_ProgressChanged;
@@ -189,7 +189,7 @@ namespace ordermanager.Views.UserControls
         public void SetOrder(Order order)
         {
             Order = order;
-            ViewModel = new POControlViewModel(order);
+            ViewModel = new POControlViewModel(order);            
         }
 
         ProgressUpdateWindow progressWindow = null;

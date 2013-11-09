@@ -39,6 +39,7 @@
                 <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
             </Style>
             <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
+            <Converters:CountToVisibilityConverter x:Key="CountToVisibilityConverter"/>
             <Converters:Subractor x:Key="subractor"/>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -90,7 +91,8 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            <Button x:Name="btnGeneratePOs"  Content="Generate All POs"  Width="150" Height="35" Foreground="White"  ToolTip="Generate Purchase Order for all Suppliers and Save PDF" HorizontalAlignment="Center" Click="btnGeneratePOs_Click" Grid.Row="1" Margin="10">
+            <Button x:Name="btnGeneratePOs"  Content="Generate All POs"  Width="150" Height="35" Foreground="White"  ToolTip="Generate Purchase Order for all Suppliers and Save PDF" HorizontalAlignment="Center" Click="btnGeneratePOs_Click" Grid.Row="1" Margin="10"
+                    Visibility="{Binding Path=Suppliers.Count, Converter={StaticResource CountToVisibilityConverter}}" >
                 <Button.Background>
                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                 </Button.Background>
