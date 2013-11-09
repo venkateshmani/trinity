@@ -72,17 +72,19 @@
                             <GridViewColumn x:Name="supplierColumn" Width="{Binding ActualWidth, ElementName=supplierList, Converter={StaticResource subractor}, ConverterParameter=5}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexToNumber}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}"/>
-                                            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text=".  "   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
-                                            <TextBlock Grid.Column="3" PresentationTraceSources.TraceLevel="High" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
-                                        </Grid>
-                                    </DataTemplate>
+                                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>                                            
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexToNumber}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}"/>
+                                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text=".  "   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
+                                        <TextBlock Grid.Column="2" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                                        <DatePicker Grid.Column="3" BorderBrush="Transparent" Background="Transparent"  SelectedDate="{Binding PurchaseOrderDateWrapper, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="30" />
+                                    </Grid>
+                                </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                         </GridView>

@@ -46,5 +46,19 @@ namespace ordermanager.DatabaseModel
             }
             return !HasErrors;
         }
+
+        Nullable<DateTime> m_PurchaseOrderDateWrapper = null;
+        public Nullable<DateTime> PurchaseOrderDateWrapper
+        {
+            get { return m_PurchaseOrderDateWrapper; }
+            set
+            {
+                if (m_PurchaseOrderDateWrapper != value)
+                {
+                    m_PurchaseOrderDateWrapper = value;
+                    OnPropertyChanged("PurchaseOrderDateWrapper");
+                }
+            }
+        }
     }
 }

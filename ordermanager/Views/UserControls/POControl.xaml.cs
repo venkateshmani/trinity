@@ -81,6 +81,9 @@ namespace ordermanager.Views.UserControls
             Company supplier = supplierList.SelectedItem as Company;
             if (supplier != null && Order != null)
             {
+                if (supplier.PurchaseOrderDateWrapper == null)
+                    supplier.PurchaseOrderDateWrapper = DateTime.Now;
+
                 string tempFilePathForPdf = System.IO.Path.Combine(
                                              System.IO.Path.GetTempPath(), "OM_PurchaseOrder" + Order.OrderID.ToString() + "_" + supplier.CompanyID.ToString() + ".pdf");
                 string lastOpenedPdfFile = string.Empty;
@@ -106,7 +109,8 @@ namespace ordermanager.Views.UserControls
                 string supplierInformation = GetSupplierInformation(supplier);
                 string purchaseOrderNumber = GetPurchaseOrderNumber(supplier);
                 string quoteNumber = GetQuoteNumber();
-                string quoteDate = GetQuoteDate();
+                string quoteDate = GetQuoteDate(supplier.PurchaseOrderDateWrapper.GetValueOrDefault(DateTime.Now));
+                
                 purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, quoteNumber, quoteDate);
                 purchaseOrderReportControl.CreateReportAsPDF(Order.OrderID, supplier.CompanyID, filePath);
             }
@@ -120,9 +124,9 @@ namespace ordermanager.Views.UserControls
 
         }
 
-        private string GetQuoteDate()
-        {
-            return Order.OrderDate.ToString("MM/dd/yyyy");
+        private string GetQuoteDate(DateTime date)
+        {  
+            return date.ToString("MM/dd/yyyy");
         }
 
         private string GetQuoteNumber()

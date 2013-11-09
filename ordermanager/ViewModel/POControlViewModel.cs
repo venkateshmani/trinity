@@ -23,6 +23,7 @@ namespace ordermanager.ViewModel
                 if (m_Suppliers == null && Order != null)
                 {
                     m_Suppliers = new ObservableCollection<Company>();
+                    Company comp;
                     foreach (OrderProduct product in Order.OrderProducts)
                     {
                         foreach (ProductMaterial material in product.ProductMaterials)
@@ -31,7 +32,10 @@ namespace ordermanager.ViewModel
                             {
                                 if (!m_Suppliers.Contains(materialItem.Company))
                                 {
-                                    m_Suppliers.Add(materialItem.Company);
+                                    comp = materialItem.Company;
+                                    comp.PurchaseOrderDateWrapper = materialItem.PurchaseOrder.PurchaseOrderDate;
+                                    comp.PropertyChanged += comp_PropertyChanged;
+                                    m_Suppliers.Add(comp);
                                 }
                             }
                         }
@@ -42,6 +46,32 @@ namespace ordermanager.ViewModel
             set
             {
                 m_Suppliers = value;
+            }
+        }
+
+        void comp_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "PurchaseOrderDateWrapper")
+            {
+                Company comp = sender as Company;
+                if (comp != null)
+                {
+                    foreach (OrderProduct product in Order.OrderProducts)
+                    {
+                        foreach (ProductMaterial material in product.ProductMaterials)
+                        {
+                            foreach (ProductMaterialItem materialItem in material.ProductMaterialItems)
+                            {
+                                if (materialItem.Company.CompanyID == comp.CompanyID)
+                                {
+                                    materialItem.PurchaseOrder.PurchaseOrderDate = comp.PurchaseOrderDateWrapper;
+                                }
+                            }
+                        }
+                    }
+
+                    DBResources.Instance.Save();
+                }
             }
         }
 
