@@ -255,6 +255,9 @@
     <Compile Include="Views\CommonControls\BackForwardButton.xaml.cs">
       <DependentUpon>BackForwardButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CommonControls\ExecutionTreeViewControl.xaml.cs">
+      <DependentUpon>ExecutionTreeViewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CommonControls\OMbutton.xaml.cs">
       <DependentUpon>OMbutton.xaml</DependentUpon>
     </Compile>
@@ -284,6 +287,9 @@
     </Compile>
     <Compile Include="Views\UserControls\ChangeHistoryControl.xaml.cs">
       <DependentUpon>ChangeHistoryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Execution\CuttingControl.xaml.cs">
+      <DependentUpon>CuttingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\GRNControl.xaml.cs">
       <DependentUpon>GRNControl.xaml</DependentUpon>
@@ -338,6 +344,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CommonControls\ExecutionTreeViewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\PasswordChangeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -363,6 +373,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserControls\ChangeHistoryControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\Execution\CuttingControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

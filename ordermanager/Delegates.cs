@@ -1,4 +1,5 @@
-﻿using ordermanager.Interfaces_And_Enums;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.Interfaces_And_Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace ordermanager
     public delegate void OnGoBackDelegate();
 
     public delegate void OnNavigateToDelegate(OrderManagerTab tab);
+
+    public delegate void OnSelectionChanged(OrderProduct product, DateTime date);
 
 }

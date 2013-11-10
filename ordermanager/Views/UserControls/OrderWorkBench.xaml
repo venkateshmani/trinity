@@ -107,9 +107,15 @@
                 </Border>
             </TabItem>
            
-            <TabItem x:Name="tabProduction" Header="  Production  " Cursor="Hand">
+            <TabItem x:Name="tabExecution" Header="  Execution  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                    
+                    <TabControl x:Name="tabExecutionDetailsControl" Grid.Row="1">
+                        <TabItem x:Name="tabOverAllCompletion" Header="  ● OC Report  " Tag="Cutting"></TabItem>
+                        <TabItem x:Name="tabCutting" Header="  ● Cutting  " Tag="Cutting"></TabItem>
+                        <TabItem x:Name="tabProduction" Header=" ●  Production  " Tag="Production"></TabItem>
+                        <TabItem x:Name="tabQuality" Header="  ● Quality  " Tag="Quality"></TabItem>
+                        <TabItem x:Name="tabPackaging" Header="  ● Packaging  " Tag="Packaging"></TabItem>
+                    </TabControl>
                 </Border>
             </TabItem>
             <TabItem x:Name="tabChangeHistory" Header="  Change History  " Cursor="Hand">
