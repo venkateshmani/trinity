@@ -1,4 +1,4 @@
-﻿<UserControl xmlns:PopUps="clr-namespace:ordermanager.Views.PopUps" 
+﻿<UserControl xmlns:Execution="clr-namespace:ordermanager.Views.UserControls.Execution"  xmlns:PopUps="clr-namespace:ordermanager.Views.PopUps" 
              x:Class="ordermanager.Views.UserControls.OrderWorkBench"
              xmlns:local="clr-namespace:ordermanager.Views.UserControls"             
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -111,10 +111,21 @@
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <TabControl x:Name="tabExecutionDetailsControl" Grid.Row="1">
                         <TabItem x:Name="tabOverAllCompletion" Header="  ● OC Report  " Tag="Cutting"></TabItem>
-                        <TabItem x:Name="tabCutting" Header="  ● Cutting  " Tag="Cutting"></TabItem>
-                        <TabItem x:Name="tabProduction" Header=" ●  Production  " Tag="Production"></TabItem>
-                        <TabItem x:Name="tabQuality" Header="  ● Quality  " Tag="Quality"></TabItem>
-                        <TabItem x:Name="tabPackaging" Header="  ● Packaging  " Tag="Packaging"></TabItem>
+                        <TabItem x:Name="tabCutting" Header="  ● Cutting  " Tag="Cutting">
+                            <Execution:CuttingControl x:Name="cuttingControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                        </TabItem>
+                        <TabItem x:Name="tabProduction" Header=" ●  Production  " Tag="Production">
+                            <Execution:ProductionControl x:Name="productionControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                        </TabItem>
+                        <TabItem x:Name="tabQuality" Header="  ● Quality  " Tag="Quality">
+                            <Execution:QualityControl x:Name="qualityControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                        </TabItem>
+                        <TabItem x:Name="tabPackaging" Header="  ● Packaging  " Tag="Packaging">
+                            <Execution:PackagingControl x:Name="packagingControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                        </TabItem>
+                        <TabItem x:Name="tabShipment" Header="  ● Shipment  " Tag="Shipment">
+                            <Execution:ShippingControl x:Name="shippingControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                        </TabItem>
                     </TabControl>
                 </Border>
             </TabItem>

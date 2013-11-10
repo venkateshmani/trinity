@@ -45,6 +45,7 @@
     <Reference Include="EntityFramework">
       <HintPath>packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro, Version=0.0.0.999, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>C:\Users\User\Downloads\ModernUI.1.0.5\net40\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
@@ -325,9 +326,6 @@
     <Compile Include="Views\UserControls\POMaterialDetails.xaml.cs">
       <DependentUpon>POMaterialDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\ProductionControl.xaml.cs">
-      <DependentUpon>ProductionControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\UserControls\PurchaseOrderControl.xaml.cs">
       <DependentUpon>PurchaseOrderControl.xaml</DependentUpon>
     </Compile>
@@ -430,10 +428,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\POMaterialDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserControls\ProductionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
