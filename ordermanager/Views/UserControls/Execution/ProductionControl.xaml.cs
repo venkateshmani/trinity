@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.ViewModel.Execution;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,20 @@ namespace ordermanager.Views.UserControls.Execution
         public ProductionControl()
         {
             InitializeComponent();
+        }
+
+        private ProductionViewModel m_ViewModel = null;
+        public ProductionViewModel ViewModel
+        {
+            get
+            {
+                return m_ViewModel;
+            }
+            set
+            {
+                m_ViewModel = value;
+                this.DataContext = value;
+            }
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
