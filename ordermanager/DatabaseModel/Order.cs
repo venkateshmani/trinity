@@ -19,7 +19,6 @@ namespace ordermanager.DatabaseModel
             this.Histories = new HashSet<History>();
             this.OrderCurrencyConversions = new HashSet<OrderCurrencyConversion>();
             this.OrderProducts = new HashSet<OrderProduct>();
-            this.ProductBreakUpSummaries = new HashSet<ProductBreakUpSummary>();
         }
     
         public long OrderID { get; set; }
@@ -43,6 +42,5 @@ namespace ordermanager.DatabaseModel
         public virtual OrderThrough OrderThrough { get; set; }
         public virtual ICollection<OrderCurrencyConversion> OrderCurrencyConversions { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
-        public virtual ICollection<ProductBreakUpSummary> ProductBreakUpSummaries { get; set; }
     }
 }

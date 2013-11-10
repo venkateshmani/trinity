@@ -16,6 +16,7 @@ namespace ordermanager.DatabaseModel
     {
         public OrderProduct()
         {
+            this.ProductBreakUpSummaries = new HashSet<ProductBreakUpSummary>();
             this.ProductExtraCosts = new HashSet<ProductExtraCost>();
             this.ProductMaterials = new HashSet<ProductMaterial>();
         }
@@ -36,6 +37,7 @@ namespace ordermanager.DatabaseModel
         public virtual ProductBreakUp ProductBreakUp { get; set; }
         public virtual ProductName ProductName { get; set; }
         public virtual UnitsOfMeasurement UnitsOfMeasurement { get; set; }
+        public virtual ICollection<ProductBreakUpSummary> ProductBreakUpSummaries { get; set; }
         public virtual ICollection<ProductExtraCost> ProductExtraCosts { get; set; }
         public virtual ICollection<ProductMaterial> ProductMaterials { get; set; }
     }

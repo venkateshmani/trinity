@@ -27,10 +27,10 @@ namespace ordermanager.DatabaseModel
         public long ProductSizeID { get; set; }
         public int ColorID { get; set; }
         public decimal NumberOfPieces { get; set; }
-        public Nullable<long> OrderID { get; set; }
+        public Nullable<long> ProductID { get; set; }
     
         public virtual Color Color { get; set; }
-        public virtual Order Order { get; set; }
+        public virtual OrderProduct OrderProduct { get; set; }
         public virtual ICollection<Package> Packages { get; set; }
         public virtual ProductSize ProductSize { get; set; }
         public virtual ICollection<ProductCutting> ProductCuttings { get; set; }
