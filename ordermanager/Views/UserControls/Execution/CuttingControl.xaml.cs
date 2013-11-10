@@ -33,7 +33,7 @@ namespace ordermanager.Views.UserControls.Execution
 
             void CuttingControl_Loaded(object sender, RoutedEventArgs e)
             {
-                ViewModel = new CuttingViewModel();
+                //ViewModel = new CuttingViewModel();
             }
 
             public void SetOrder(Order order)

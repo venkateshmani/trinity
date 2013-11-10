@@ -108,11 +108,11 @@ namespace ordermanager.Views.UserControls
                     m_ChangeHistorViewModel.SetOrder(m_Order);
                     break;
                 case "Execution":
-                    cuttingControl.ViewModel = new CuttingViewModel(){Order=m_Order};
-                    productionControl.ViewModel = new ProductionViewModel() { Order = m_Order };
-                    qualityControl.ViewModel = new QualityViewModel(){Order=m_Order};;
-                    packagingControl.ViewModel = new PackagingViewModel() { Order = m_Order };
-                    shippingControl.ViewModel = new ShipmentViewModel() { Order = m_Order };                  
+                    cuttingControl.DataContext = new CuttingViewModel() {Order=m_Order};
+                    //productionControl.ViewModel = new ProductionViewModel() { Order = m_Order };
+                    //qualityControl.ViewModel = new QualityViewModel(){Order=m_Order};;
+                    //packagingControl.ViewModel = new PackagingViewModel() { Order = m_Order };
+                    //shippingControl.ViewModel = new ShipmentViewModel() { Order = m_Order };                  
                     break;
             }
         }

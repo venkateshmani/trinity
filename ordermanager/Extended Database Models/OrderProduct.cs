@@ -802,6 +802,7 @@ namespace ordermanager.DatabaseModel
                                     cuttings.Add(productCutting);
                             }
                         }
+                        AddNewCuttingDateRecord(DateTime.Now.ToShortDateString());
                     }
 
                     return ProductCuttings.Keys.ToList();
