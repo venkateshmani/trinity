@@ -247,6 +247,7 @@
     <Compile Include="ValueConverters\HasErrorToVisibilityConverter.cs" />
     <Compile Include="ValueConverters\StarWidthConverter.cs" />
     <Compile Include="ValueConverters\Subractor.cs" />
+    <Compile Include="ValueConverters\UserFriendlyDateNameCreator.cs" />
     <Compile Include="ViewModel\ChangeHistoryViewModel.cs" />
     <Compile Include="ViewModel\Constants.cs" />
     <Compile Include="ViewModel\DataProviers.cs" />
