@@ -71,7 +71,7 @@
 
         <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Cutting Details" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Quality Details" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
 
@@ -133,18 +133,10 @@
                         <DataGridTemplateColumn Header="ORD. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox IsReadOnly="True"  Text="{Binding QuantityWrapper, StringFormat=n4}" />
+                                    <TextBox IsReadOnly="True"  Text="{Binding NumberOfPiecesWrapper, StringFormat=n4}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="ORD. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBox IsReadOnly="True"  Text="{Binding QuantityWrapper, StringFormat=n4}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                        </DataGridTemplateColumn>                       
 
                         <DataGridTemplateColumn Header="Quantity Passed" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
@@ -161,7 +153,6 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>
