@@ -417,7 +417,7 @@
           <Property Name="CountryID" Type="int" Nullable="false" />
           <Property Name="ProductSizeID" Type="bigint" Nullable="false" />
           <Property Name="NumberOfPieces" Type="decimal" Nullable="false" />
-          <Property Name="ColorID" Type="int" />
+          <Property Name="ColorID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductCutting">
           <Key>
@@ -854,7 +854,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductCountryWiseBreakUp_Color">
-          <End Role="Color" Type="OrderManagerDBModel.Store.Color" Multiplicity="0..1" />
+          <End Role="Color" Type="OrderManagerDBModel.Store.Color" Multiplicity="1" />
           <End Role="ProductCountryWiseBreakUp" Type="OrderManagerDBModel.Store.ProductCountryWiseBreakUp" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Color">
@@ -1682,7 +1682,7 @@
           <Property Name="CountryID" Type="Int32" Nullable="false" />
           <Property Name="ProductSizeID" Type="Int64" Nullable="false" />
           <Property Name="NumberOfPieces" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="ColorID" Type="Int32" />
+          <Property Name="ColorID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Color" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Color" FromRole="ProductCountryWiseBreakUp" ToRole="Color" />
           <NavigationProperty Name="Country" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Country" FromRole="ProductCountryWiseBreakUp" ToRole="Country" />
           <NavigationProperty Name="ProductBreakUp" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductBreakUp" FromRole="ProductCountryWiseBreakUp" ToRole="ProductBreakUp" />
@@ -1939,7 +1939,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductCountryWiseBreakUp_Color">
-          <End Role="Color" Type="OrderManagerDBModel.Color" Multiplicity="0..1" />
+          <End Role="Color" Type="OrderManagerDBModel.Color" Multiplicity="1" />
           <End Role="ProductCountryWiseBreakUp" Type="OrderManagerDBModel.ProductCountryWiseBreakUp" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Color">

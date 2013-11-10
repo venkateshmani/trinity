@@ -19,7 +19,7 @@ namespace ordermanager.DatabaseModel
         public int CountryID { get; set; }
         public long ProductSizeID { get; set; }
         public decimal NumberOfPieces { get; set; }
-        public Nullable<int> ColorID { get; set; }
+        public int ColorID { get; set; }
     
         public virtual Color Color { get; set; }
         public virtual Country Country { get; set; }

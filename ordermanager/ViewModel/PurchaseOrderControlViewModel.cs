@@ -1,5 +1,6 @@
 ﻿using ordermanager.DatabaseModel;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -39,7 +40,7 @@ namespace ordermanager.ViewModel
 
         string m_DeliveryDate = "Delivery Date: ";
         public string DeliveryDate
-        {       
+        {
             get { return m_DeliveryDate; }
             private set
             {
@@ -168,6 +169,8 @@ namespace ordermanager.ViewModel
 
         public bool Save(bool isSubmit, string userComment)
         {
+            Dictionary<long, Dictionary<int, decimal>> summaryDict = new Dictionary<long, Dictionary<int, decimal>>(1);
+
             foreach (OrderProduct dbProduct in Products)
             {
                 foreach (ProductMaterial dbMaterial in dbProduct.ProductMaterials)
@@ -185,6 +188,38 @@ namespace ordermanager.ViewModel
                     if (breakupItem.ProductCountryWiseBreakUpID == 0)
                     {
                         dbProduct.ProductBreakUp.ProductCountryWiseBreakUps.Add(breakupItem);
+                    }
+                    if (isSubmit)
+                    {
+                        if (!summaryDict.ContainsKey(breakupItem.ProductSizeID))
+                        {
+                            Dictionary<int, decimal> tmp = new Dictionary<int, decimal>(1);
+                            summaryDict.Add(breakupItem.ProductSizeID, tmp);
+                        }
+
+                        if (!summaryDict[breakupItem.ProductSizeID].ContainsKey(breakupItem.ColorID))
+                        {
+                            summaryDict[breakupItem.ProductSizeID].Add(breakupItem.ColorID, breakupItem.NumberOfPiecesWrapper);
+                        }
+                        else
+                        {
+                            summaryDict[breakupItem.ProductSizeID][breakupItem.ColorID] += breakupItem.NumberOfPiecesWrapper;
+                        }
+                    }
+                }
+                if (isSubmit)
+                {
+                    foreach (KeyValuePair<long, Dictionary<int, decimal>> kvp in summaryDict)
+                    {
+                        foreach (KeyValuePair<int, decimal> kvp2 in kvp.Value)
+                        {
+                            ProductBreakUpSummary sumyItem = new ProductBreakUpSummary();
+                            sumyItem.ProductID = dbProduct.ProductID;
+                            sumyItem.ProductSizeID = kvp.Key;
+                            sumyItem.ColorID = kvp2.Key;
+                            sumyItem.NumberOfPieces = kvp2.Value;
+                            dbProduct.ProductBreakUpSummaries.Add(sumyItem);
+                        }
                     }
                 }
             }
@@ -237,8 +272,8 @@ namespace ordermanager.ViewModel
                 if (dbProduct.ProductBreakUp != null)
                 {
                     dbProduct.ProductBreakUp.RemoveError("ShipmentModeWrapper");
-                    if (dbProduct.ProductBreakUp.ShipmentModeWrapper ==null)
-                    {                       
+                    if (dbProduct.ProductBreakUp.ShipmentModeWrapper == null)
+                    {
                         dbProduct.ProductBreakUp.AddError("ShipmentModeWrapper", "Select Shipment Mode", false);
                         hasErrors = true;
                     }
