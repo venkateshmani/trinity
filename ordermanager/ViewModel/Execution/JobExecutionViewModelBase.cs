@@ -105,5 +105,6 @@ namespace ordermanager.ViewModel.Execution
 
         #endregion 
        
+        public virtual void AddNewRecord(DateTime date) { }
     }
 }

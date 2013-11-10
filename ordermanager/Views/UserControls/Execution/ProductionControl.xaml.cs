@@ -1,4 +1,6 @@
-﻿using ordermanager.ViewModel.Execution;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.Interfaces_And_Enums;
+using ordermanager.ViewModel.Execution;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,26 +21,42 @@ namespace ordermanager.Views.UserControls.Execution
     /// <summary>
     /// Interaction logic for ProductionControl.xaml
     /// </summary>
-    public partial class ProductionControl : UserControl
+    public partial class ProductionControl : UserControl, IJobExecutionView
     {
         public ProductionControl()
         {
             InitializeComponent();
+            this.Loaded += ProductionControl_Loaded;
         }
 
-        private ProductionViewModel m_ViewModel = null;
-        public ProductionViewModel ViewModel
-        {
-            get
+        #region View Model Initialization
+
+            void ProductionControl_Loaded(object sender, RoutedEventArgs e)
             {
-                return m_ViewModel;
+                ViewModel = new ProductionViewModel();
             }
-            set
+
+            public void SetOrder(Order order)
             {
-                m_ViewModel = value;
-                this.DataContext = value;
+                ViewModel.Order = order;
             }
-        }
+
+
+            private ProductionViewModel m_ViewModel = null;
+            public ProductionViewModel ViewModel
+            {
+                get
+                {
+                    return m_ViewModel;
+                }
+                set
+                {
+                    m_ViewModel = value;
+                    this.DataContext = value;
+                }
+            }
+
+        #endregion 
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {

@@ -9,6 +9,10 @@ namespace ordermanager.ViewModel.Execution
 {
     public class QualityViewModel : JobExecutionViewModelBase
     {
-        
+
+        public override void AddNewRecord(DateTime date)
+        {
+            base.AddNewRecord(date);
+        }
     }
 }

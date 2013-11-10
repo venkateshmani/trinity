@@ -9,6 +9,11 @@ namespace ordermanager.ViewModel.Execution
 {
     public class PackagingViewModel : JobExecutionViewModelBase
     {
-     
+
+
+        public override void AddNewRecord(DateTime date)
+        {
+            base.AddNewRecord(date);
+        }
     }
 }

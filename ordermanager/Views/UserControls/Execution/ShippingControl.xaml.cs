@@ -1,4 +1,6 @@
-﻿using ordermanager.ViewModel.Execution;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.Interfaces_And_Enums;
+using ordermanager.ViewModel.Execution;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,26 +21,43 @@ namespace ordermanager.Views.UserControls.Execution
     /// <summary>
     /// Interaction logic for ShippingControl.xaml
     /// </summary>
-    public partial class ShippingControl : UserControl
+    public partial class ShippingControl : UserControl, IJobExecutionView
     {
         public ShippingControl()
         {
             InitializeComponent();
+            this.Loaded += ShippingControl_Loaded;
         }
 
-        private ShipmentViewModel m_ViewModel = null;
-        public ShipmentViewModel ViewModel
-        {
-            get
+
+        #region View Model Initialization
+
+            void ShippingControl_Loaded(object sender, RoutedEventArgs e)
             {
-                return m_ViewModel;
+                ViewModel = new ShipmentViewModel();
             }
-            set
+
+            public void SetOrder(Order order)
             {
-                m_ViewModel = value;
-                this.DataContext = value;
+                ViewModel.Order = order;
             }
-        }
+
+
+            private ShipmentViewModel m_ViewModel = null;
+            public ShipmentViewModel ViewModel
+            {
+                get
+                {
+                    return m_ViewModel;
+                }
+                set
+                {
+                    m_ViewModel = value;
+                    this.DataContext = value;
+                }
+            }
+
+        #endregion 
 
 
         private void Save_Click(object sender, RoutedEventArgs e)

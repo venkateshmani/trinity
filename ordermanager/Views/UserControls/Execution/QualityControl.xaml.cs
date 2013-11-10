@@ -1,4 +1,6 @@
-﻿using ordermanager.ViewModel.Execution;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.Interfaces_And_Enums;
+using ordermanager.ViewModel.Execution;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,26 +21,42 @@ namespace ordermanager.Views.UserControls.Execution
     /// <summary>
     /// Interaction logic for QualityControl.xaml
     /// </summary>
-    public partial class QualityControl : UserControl
+    public partial class QualityControl : UserControl, IJobExecutionView
     {
         public QualityControl()
         {
             InitializeComponent();
+            this.Loaded += QualityControl_Loaded; 
         }
 
-        private QualityViewModel m_ViewModel = null;
-        public QualityViewModel ViewModel
-        {
-            get
+        #region View Model Initialization
+
+            void QualityControl_Loaded(object sender, RoutedEventArgs e)
             {
-                return m_ViewModel;
+                ViewModel = new QualityViewModel();
             }
-            set
+
+            public void SetOrder(Order order)
             {
-                m_ViewModel = value;
-                this.DataContext = value;
+                ViewModel.Order = order;
             }
-        }
+
+
+            private QualityViewModel m_ViewModel = null;
+            public QualityViewModel ViewModel
+            {
+                get
+                {
+                    return m_ViewModel;
+                }
+                set
+                {
+                    m_ViewModel = value;
+                    this.DataContext = value;
+                }
+            }
+
+        #endregion 
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {

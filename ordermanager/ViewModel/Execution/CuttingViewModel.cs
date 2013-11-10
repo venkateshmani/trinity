@@ -10,7 +10,12 @@ namespace ordermanager.ViewModel.Execution
 {
     public class CuttingViewModel : JobExecutionViewModelBase
     {
-      
 
+
+
+        public override void AddNewRecord(DateTime date)
+        {
+            base.AddNewRecord(date);
+        }
     }
 }

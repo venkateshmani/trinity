@@ -1,4 +1,6 @@
-﻿using ordermanager.ViewModel.Execution;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.Interfaces_And_Enums;
+using ordermanager.ViewModel.Execution;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,27 +21,42 @@ namespace ordermanager.Views.UserControls.Execution
     /// <summary>
     /// Interaction logic for PackagingControl.xaml
     /// </summary>
-    public partial class PackagingControl : UserControl
+    public partial class PackagingControl : UserControl, IJobExecutionView
     {
         public PackagingControl()
         {
             InitializeComponent();
+            this.Loaded += PackagingControl_Loaded;
         }
 
-        private PackagingViewModel m_ViewModel = null;
-        public PackagingViewModel ViewModel
-        {
-            get
-            {
-                return m_ViewModel;
-            }
-            set
-            {
-                m_ViewModel = value;
-                this.DataContext = value;
-            }
-        }
+        #region View Model Initialization
 
+            void PackagingControl_Loaded(object sender, RoutedEventArgs e)
+            {
+                ViewModel = new PackagingViewModel();
+            }
+
+            public void SetOrder(Order order)
+            {
+                ViewModel.Order = order;
+            }
+
+
+            private PackagingViewModel m_ViewModel = null;
+            public PackagingViewModel ViewModel
+            {
+                get
+                {
+                    return m_ViewModel;
+                }
+                set
+                {
+                    m_ViewModel = value;
+                    this.DataContext = value;
+                }
+            }
+
+        #endregion 
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {

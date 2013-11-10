@@ -1,4 +1,6 @@
-﻿using ordermanager.ViewModel.Execution;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.Interfaces_And_Enums;
+using ordermanager.ViewModel.Execution;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,26 +21,41 @@ namespace ordermanager.Views.UserControls.Execution
     /// <summary>
     /// Interaction logic for CuttingControl.xaml
     /// </summary>
-    public partial class CuttingControl : UserControl
+    public partial class CuttingControl : UserControl, IJobExecutionView
     {
         public CuttingControl()
         {
             InitializeComponent();
+            this.Loaded += CuttingControl_Loaded;
         }
 
-        private CuttingViewModel m_ViewModel = null;
-        public CuttingViewModel ViewModel
-        {
-            get
+        #region View Model Initialization
+
+            void CuttingControl_Loaded(object sender, RoutedEventArgs e)
             {
-                return m_ViewModel;
+                ViewModel = new CuttingViewModel();
             }
-            set
+
+            public void SetOrder(Order order)
             {
-                m_ViewModel = value;
-                this.DataContext = value;
+                ViewModel.Order = order;
             }
-        }
+
+            private CuttingViewModel m_ViewModel = null;
+            public CuttingViewModel ViewModel
+            {
+                get
+                {
+                    return m_ViewModel;
+                }
+                set
+                {
+                    m_ViewModel = value;
+                    this.DataContext = value;
+                }
+            }
+
+        #endregion 
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
