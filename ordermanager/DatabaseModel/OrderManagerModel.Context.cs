@@ -38,16 +38,23 @@ namespace ordermanager.DatabaseModel
         public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<OrderStatu> OrderStatus { get; set; }
         public DbSet<OrderThrough> OrderThroughs { get; set; }
+        public DbSet<Package> Packages { get; set; }
         public DbSet<ProductBreakUp> ProductBreakUps { get; set; }
+        public DbSet<ProductBreakUpSummary> ProductBreakUpSummaries { get; set; }
         public DbSet<ProductCountryWiseBreakUp> ProductCountryWiseBreakUps { get; set; }
+        public DbSet<ProductCutting> ProductCuttings { get; set; }
         public DbSet<ProductExtraCost> ProductExtraCosts { get; set; }
         public DbSet<ProductExtraCostType> ProductExtraCostTypes { get; set; }
+        public DbSet<Production> Productions { get; set; }
         public DbSet<ProductMaterialItem> ProductMaterialItems { get; set; }
         public DbSet<ProductMaterial> ProductMaterials { get; set; }
         public DbSet<ProductName> ProductNames { get; set; }
         public DbSet<ProductSize> ProductSizes { get; set; }
+        public DbSet<ProductStock> ProductStocks { get; set; }
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
         public DbSet<PurchaseOrderStatu> PurchaseOrderStatus { get; set; }
+        public DbSet<Quality> Qualities { get; set; }
+        public DbSet<Shipment> Shipments { get; set; }
         public DbSet<ShipmentMode> ShipmentModes { get; set; }
         public DbSet<SubMaterial> SubMaterials { get; set; }
         public DbSet<UnitsOfMeasurement> UnitsOfMeasurements { get; set; }

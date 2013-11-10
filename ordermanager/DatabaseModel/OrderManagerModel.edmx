@@ -19,16 +19,23 @@
           <EntitySet Name="OrderProduct" EntityType="OrderManagerDBModel.Store.OrderProduct" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderStatus" EntityType="OrderManagerDBModel.Store.OrderStatus" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderThrough" EntityType="OrderManagerDBModel.Store.OrderThrough" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Package" EntityType="OrderManagerDBModel.Store.Package" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProductBreakUp" EntityType="OrderManagerDBModel.Store.ProductBreakUp" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProductBreakUpSummary" EntityType="OrderManagerDBModel.Store.ProductBreakUpSummary" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProductCountryWiseBreakUp" EntityType="OrderManagerDBModel.Store.ProductCountryWiseBreakUp" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProductCutting" EntityType="OrderManagerDBModel.Store.ProductCutting" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProductExtraCost" EntityType="OrderManagerDBModel.Store.ProductExtraCost" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProductExtraCostType" EntityType="OrderManagerDBModel.Store.ProductExtraCostType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Production" EntityType="OrderManagerDBModel.Store.Production" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProductMaterialItem" EntityType="OrderManagerDBModel.Store.ProductMaterialItem" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProductMaterials" EntityType="OrderManagerDBModel.Store.ProductMaterials" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProductName" EntityType="OrderManagerDBModel.Store.ProductName" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ProductSize" EntityType="OrderManagerDBModel.Store.ProductSize" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProductStock" EntityType="OrderManagerDBModel.Store.ProductStock" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PurchaseOrders" EntityType="OrderManagerDBModel.Store.PurchaseOrders" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PurchaseOrderStatus" EntityType="OrderManagerDBModel.Store.PurchaseOrderStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Quality" EntityType="OrderManagerDBModel.Store.Quality" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Shipment" EntityType="OrderManagerDBModel.Store.Shipment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ShipmentMode" EntityType="OrderManagerDBModel.Store.ShipmentMode" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SubMaterial" EntityType="OrderManagerDBModel.Store.SubMaterial" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UnitsOfMeasurement" EntityType="OrderManagerDBModel.Store.UnitsOfMeasurement" store:Type="Tables" Schema="dbo" />
@@ -94,9 +101,21 @@
             <End Role="UserRole" EntitySet="UserRole" />
             <End Role="OrderStatus" EntitySet="OrderStatus" />
           </AssociationSet>
+          <AssociationSet Name="FK_Package_ProductBreakUpSummary" Association="OrderManagerDBModel.Store.FK_Package_ProductBreakUpSummary">
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummary" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductBreakUp_ShipmentMode" Association="OrderManagerDBModel.Store.FK_ProductBreakUp_ShipmentMode">
             <End Role="ShipmentMode" EntitySet="ShipmentMode" />
             <End Role="ProductBreakUp" EntitySet="ProductBreakUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductBreakUpSummary_Color" Association="OrderManagerDBModel.Store.FK_ProductBreakUpSummary_Color">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductBreakUpSummary_ProductSize" Association="OrderManagerDBModel.Store.FK_ProductBreakUpSummary_ProductSize">
+            <End Role="ProductSize" EntitySet="ProductSize" />
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummary" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductCountryWiseBreakUp_Color" Association="OrderManagerDBModel.Store.FK_ProductCountryWiseBreakUp_Color">
             <End Role="Color" EntitySet="Color" />
@@ -114,6 +133,10 @@
             <End Role="ProductSize" EntitySet="ProductSize" />
             <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUp" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProductCutting_ProductBreakUpSummary" Association="OrderManagerDBModel.Store.FK_ProductCutting_ProductBreakUpSummary">
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummary" />
+            <End Role="ProductCutting" EntitySet="ProductCutting" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductExtraCost_Currency" Association="OrderManagerDBModel.Store.FK_ProductExtraCost_Currency">
             <End Role="Currency" EntitySet="Currency" />
             <End Role="ProductExtraCost" EntitySet="ProductExtraCost" />
@@ -125,6 +148,10 @@
           <AssociationSet Name="FK_ProductExtraCost_ProductExtraCostType" Association="OrderManagerDBModel.Store.FK_ProductExtraCost_ProductExtraCostType">
             <End Role="ProductExtraCostType" EntitySet="ProductExtraCostType" />
             <End Role="ProductExtraCost" EntitySet="ProductExtraCost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_ProductBreakUpSummary" Association="OrderManagerDBModel.Store.FK_Production_ProductBreakUpSummary">
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummary" />
+            <End Role="Production" EntitySet="Production" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductMaterialItem_Company" Association="OrderManagerDBModel.Store.FK_ProductMaterialItem_Company">
             <End Role="Company" EntitySet="Company" />
@@ -166,6 +193,18 @@
             <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurement" />
             <End Role="ProductMaterials" EntitySet="ProductMaterials" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProductStock_Color" Association="OrderManagerDBModel.Store.FK_ProductStock_Color">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="ProductStock" EntitySet="ProductStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductStock_ProductName" Association="OrderManagerDBModel.Store.FK_ProductStock_ProductName">
+            <End Role="ProductName" EntitySet="ProductName" />
+            <End Role="ProductStock" EntitySet="ProductStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductStock_ProductSize" Association="OrderManagerDBModel.Store.FK_ProductStock_ProductSize">
+            <End Role="ProductSize" EntitySet="ProductSize" />
+            <End Role="ProductStock" EntitySet="ProductStock" />
+          </AssociationSet>
           <AssociationSet Name="FK_PurchaseOrders_Company" Association="OrderManagerDBModel.Store.FK_PurchaseOrders_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
@@ -173,6 +212,14 @@
           <AssociationSet Name="FK_PurchaseOrders_PurchaseOrderStatus" Association="OrderManagerDBModel.Store.FK_PurchaseOrders_PurchaseOrderStatus">
             <End Role="PurchaseOrderStatus" EntitySet="PurchaseOrderStatus" />
             <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quality_ProductBreakUpSummary" Association="OrderManagerDBModel.Store.FK_Quality_ProductBreakUpSummary">
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummary" />
+            <End Role="Quality" EntitySet="Quality" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shipment_ProductBreakUpSummary" Association="OrderManagerDBModel.Store.FK_Shipment_ProductBreakUpSummary">
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummary" />
+            <End Role="Shipment" EntitySet="Shipment" />
           </AssociationSet>
           <AssociationSet Name="FK_SubMaterial_MaterialName" Association="OrderManagerDBModel.Store.FK_SubMaterial_MaterialName">
             <End Role="MaterialName" EntitySet="MaterialName" />
@@ -326,6 +373,16 @@
           <Property Name="OrderThroughID" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Mode" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="PackageID" />
+          </Key>
+          <Property Name="PackageID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Packed" Type="decimal" Nullable="false" />
+          <Property Name="Pending" Type="decimal" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="ProductBreakUpSummaryID" Type="bigint" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProductBreakUp">
           <Key>
             <PropertyRef Name="ProductBreakUpID" />
@@ -337,6 +394,15 @@
           <Property Name="PaymentTerms" Type="text" />
           <Property Name="DocumentsRequired" Type="text" />
         </EntityType>
+        <EntityType Name="ProductBreakUpSummary">
+          <Key>
+            <PropertyRef Name="ProductBreakUpSummaryID" />
+          </Key>
+          <Property Name="ProductBreakUpSummaryID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductSizeID" Type="bigint" Nullable="false" />
+          <Property Name="ColorID" Type="int" Nullable="false" />
+          <Property Name="NumberOfPieces" Type="decimal" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProductCountryWiseBreakUp">
           <Key>
             <PropertyRef Name="ProductCountryWiseBreakUpID" />
@@ -347,6 +413,16 @@
           <Property Name="ProductSizeID" Type="bigint" Nullable="false" />
           <Property Name="NumberOfPieces" Type="decimal" Nullable="false" />
           <Property Name="ColorID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductCutting">
+          <Key>
+            <PropertyRef Name="CuttingID" />
+          </Key>
+          <Property Name="CuttingID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="CutQuantity" Type="decimal" Nullable="false" />
+          <Property Name="Pending" Type="decimal" Nullable="false" />
+          <Property Name="ProductBreakUpSummaryID" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductExtraCost">
           <Key>
@@ -365,6 +441,16 @@
           </Key>
           <Property Name="ExtraCostTypeID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="TypeName" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Production">
+          <Key>
+            <PropertyRef Name="ProductionID" />
+          </Key>
+          <Property Name="ProductionID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompletedQuantity" Type="decimal" Nullable="false" />
+          <Property Name="Pending" Type="decimal" Nullable="false" />
+          <Property Name="ProductBreakUpSummaryID" Type="bigint" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductMaterialItem">
           <Key>
@@ -421,6 +507,17 @@
           <Property Name="ProductSizeID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Size" Type="varchar" Nullable="false" MaxLength="25" />
         </EntityType>
+        <EntityType Name="ProductStock">
+          <Key>
+            <PropertyRef Name="ProductStockID" />
+          </Key>
+          <Property Name="ProductStockID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductNameID" Type="bigint" Nullable="false" />
+          <Property Name="ProductSizeID" Type="bigint" Nullable="false" />
+          <Property Name="ColorID" Type="int" Nullable="false" />
+          <Property Name="CutStock" Type="decimal" Nullable="false" />
+          <Property Name="ProductStock" Type="decimal" Nullable="false" />
+        </EntityType>
         <EntityType Name="PurchaseOrders">
           <Key>
             <PropertyRef Name="PurchaseOrderID" />
@@ -437,6 +534,26 @@
           </Key>
           <Property Name="PurchaseOrderStatusID" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Status" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Quality">
+          <Key>
+            <PropertyRef Name="QualityID" />
+          </Key>
+          <Property Name="QualityID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Passed" Type="decimal" Nullable="false" />
+          <Property Name="Failed" Type="decimal" Nullable="false" />
+          <Property Name="ProductBreakUpSummaryID" Type="bigint" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shipment">
+          <Key>
+            <PropertyRef Name="ShipmentID" />
+          </Key>
+          <Property Name="ShipmentID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Shipped" Type="decimal" Nullable="false" />
+          <Property Name="Rejected" Type="decimal" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="ProductBreakUpSummaryID" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="ShipmentMode">
           <Key>
@@ -671,6 +788,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Package_ProductBreakUpSummary">
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.Store.ProductBreakUpSummary" Multiplicity="1" />
+          <End Role="Package" Type="OrderManagerDBModel.Store.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBreakUpSummary">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductBreakUp_ShipmentMode">
           <End Role="ShipmentMode" Type="OrderManagerDBModel.Store.ShipmentMode" Multiplicity="1" />
           <End Role="ProductBreakUp" Type="OrderManagerDBModel.Store.ProductBreakUp" Multiplicity="*" />
@@ -680,6 +809,30 @@
             </Principal>
             <Dependent Role="ProductBreakUp">
               <PropertyRef Name="ShipmentModeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductBreakUpSummary_Color">
+          <End Role="Color" Type="OrderManagerDBModel.Store.Color" Multiplicity="1" />
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.Store.ProductBreakUpSummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ColorID" />
+            </Principal>
+            <Dependent Role="ProductBreakUpSummary">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductBreakUpSummary_ProductSize">
+          <End Role="ProductSize" Type="OrderManagerDBModel.Store.ProductSize" Multiplicity="1" />
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.Store.ProductBreakUpSummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSize">
+              <PropertyRef Name="ProductSizeID" />
+            </Principal>
+            <Dependent Role="ProductBreakUpSummary">
+              <PropertyRef Name="ProductSizeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -731,6 +884,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductCutting_ProductBreakUpSummary">
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.Store.ProductBreakUpSummary" Multiplicity="1" />
+          <End Role="ProductCutting" Type="OrderManagerDBModel.Store.ProductCutting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBreakUpSummary">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Principal>
+            <Dependent Role="ProductCutting">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductExtraCost_Currency">
           <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="0..1" />
           <End Role="ProductExtraCost" Type="OrderManagerDBModel.Store.ProductExtraCost" Multiplicity="*" />
@@ -764,6 +929,18 @@
             </Principal>
             <Dependent Role="ProductExtraCost">
               <PropertyRef Name="ExtraCostTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_ProductBreakUpSummary">
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.Store.ProductBreakUpSummary" Multiplicity="1" />
+          <End Role="Production" Type="OrderManagerDBModel.Store.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBreakUpSummary">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -887,6 +1064,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductStock_Color">
+          <End Role="Color" Type="OrderManagerDBModel.Store.Color" Multiplicity="1" />
+          <End Role="ProductStock" Type="OrderManagerDBModel.Store.ProductStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ColorID" />
+            </Principal>
+            <Dependent Role="ProductStock">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductStock_ProductName">
+          <End Role="ProductName" Type="OrderManagerDBModel.Store.ProductName" Multiplicity="1" />
+          <End Role="ProductStock" Type="OrderManagerDBModel.Store.ProductStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductName">
+              <PropertyRef Name="ProductNameID" />
+            </Principal>
+            <Dependent Role="ProductStock">
+              <PropertyRef Name="ProductNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductStock_ProductSize">
+          <End Role="ProductSize" Type="OrderManagerDBModel.Store.ProductSize" Multiplicity="1" />
+          <End Role="ProductStock" Type="OrderManagerDBModel.Store.ProductStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSize">
+              <PropertyRef Name="ProductSizeID" />
+            </Principal>
+            <Dependent Role="ProductStock">
+              <PropertyRef Name="ProductSizeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PurchaseOrders_Company">
           <End Role="Company" Type="OrderManagerDBModel.Store.Company" Multiplicity="1" />
           <End Role="PurchaseOrders" Type="OrderManagerDBModel.Store.PurchaseOrders" Multiplicity="*" />
@@ -908,6 +1121,30 @@
             </Principal>
             <Dependent Role="PurchaseOrders">
               <PropertyRef Name="PurchaseOrderStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quality_ProductBreakUpSummary">
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.Store.ProductBreakUpSummary" Multiplicity="1" />
+          <End Role="Quality" Type="OrderManagerDBModel.Store.Quality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBreakUpSummary">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Principal>
+            <Dependent Role="Quality">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shipment_ProductBreakUpSummary">
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.Store.ProductBreakUpSummary" Multiplicity="1" />
+          <End Role="Shipment" Type="OrderManagerDBModel.Store.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBreakUpSummary">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -978,24 +1215,39 @@
           <EntitySet Name="OrderProducts" EntityType="OrderManagerDBModel.OrderProduct" />
           <EntitySet Name="OrderStatus" EntityType="OrderManagerDBModel.OrderStatu" />
           <EntitySet Name="OrderThroughs" EntityType="OrderManagerDBModel.OrderThrough" />
+          <EntitySet Name="Packages" EntityType="OrderManagerDBModel.Package" />
           <EntitySet Name="ProductBreakUps" EntityType="OrderManagerDBModel.ProductBreakUp" />
+          <EntitySet Name="ProductBreakUpSummaries" EntityType="OrderManagerDBModel.ProductBreakUpSummary" />
           <EntitySet Name="ProductCountryWiseBreakUps" EntityType="OrderManagerDBModel.ProductCountryWiseBreakUp" />
+          <EntitySet Name="ProductCuttings" EntityType="OrderManagerDBModel.ProductCutting" />
           <EntitySet Name="ProductExtraCosts" EntityType="OrderManagerDBModel.ProductExtraCost" />
           <EntitySet Name="ProductExtraCostTypes" EntityType="OrderManagerDBModel.ProductExtraCostType" />
+          <EntitySet Name="Productions" EntityType="OrderManagerDBModel.Production" />
           <EntitySet Name="ProductMaterialItems" EntityType="OrderManagerDBModel.ProductMaterialItem" />
           <EntitySet Name="ProductMaterials" EntityType="OrderManagerDBModel.ProductMaterial" />
           <EntitySet Name="ProductNames" EntityType="OrderManagerDBModel.ProductName" />
           <EntitySet Name="ProductSizes" EntityType="OrderManagerDBModel.ProductSize" />
+          <EntitySet Name="ProductStocks" EntityType="OrderManagerDBModel.ProductStock" />
           <EntitySet Name="PurchaseOrders" EntityType="OrderManagerDBModel.PurchaseOrder" />
           <EntitySet Name="PurchaseOrderStatus" EntityType="OrderManagerDBModel.PurchaseOrderStatu" />
+          <EntitySet Name="Qualities" EntityType="OrderManagerDBModel.Quality" />
+          <EntitySet Name="Shipments" EntityType="OrderManagerDBModel.Shipment" />
           <EntitySet Name="ShipmentModes" EntityType="OrderManagerDBModel.ShipmentMode" />
           <EntitySet Name="SubMaterials" EntityType="OrderManagerDBModel.SubMaterial" />
           <EntitySet Name="UnitsOfMeasurements" EntityType="OrderManagerDBModel.UnitsOfMeasurement" />
           <EntitySet Name="Users" EntityType="OrderManagerDBModel.User" />
           <EntitySet Name="UserRoles" EntityType="OrderManagerDBModel.UserRole" />
+          <AssociationSet Name="FK_ProductBreakUpSummary_Color" Association="OrderManagerDBModel.FK_ProductBreakUpSummary_Color">
+            <End Role="Color" EntitySet="Colors" />
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductCountryWiseBreakUp_Color" Association="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Color">
             <End Role="Color" EntitySet="Colors" />
             <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductStock_Color" Association="OrderManagerDBModel.FK_ProductStock_Color">
+            <End Role="Color" EntitySet="Colors" />
+            <End Role="ProductStock" EntitySet="ProductStocks" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_CommissionValueType" Association="OrderManagerDBModel.FK_Order_CommissionValueType">
             <End Role="CommissionValueType" EntitySet="CommissionValueTypes" />
@@ -1097,6 +1349,10 @@
             <End Role="UserRole" EntitySet="UserRoles" />
             <End Role="OrderStatus" EntitySet="OrderStatus" />
           </AssociationSet>
+          <AssociationSet Name="FK_Package_ProductBreakUpSummary" Association="OrderManagerDBModel.FK_Package_ProductBreakUpSummary">
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+            <End Role="Package" EntitySet="Packages" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductBreakUp_ShipmentMode" Association="OrderManagerDBModel.FK_ProductBreakUp_ShipmentMode">
             <End Role="ShipmentMode" EntitySet="ShipmentModes" />
             <End Role="ProductBreakUp" EntitySet="ProductBreakUps" />
@@ -1104,6 +1360,26 @@
           <AssociationSet Name="FK_ProductCountryWiseBreakUp_ProductBreakUp" Association="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductBreakUp">
             <End Role="ProductBreakUp" EntitySet="ProductBreakUps" />
             <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductBreakUpSummary_ProductSize" Association="OrderManagerDBModel.FK_ProductBreakUpSummary_ProductSize">
+            <End Role="ProductSize" EntitySet="ProductSizes" />
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCutting_ProductBreakUpSummary" Association="OrderManagerDBModel.FK_ProductCutting_ProductBreakUpSummary">
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+            <End Role="ProductCutting" EntitySet="ProductCuttings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_ProductBreakUpSummary" Association="OrderManagerDBModel.FK_Production_ProductBreakUpSummary">
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+            <End Role="Production" EntitySet="Productions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quality_ProductBreakUpSummary" Association="OrderManagerDBModel.FK_Quality_ProductBreakUpSummary">
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+            <End Role="Quality" EntitySet="Qualities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shipment_ProductBreakUpSummary" Association="OrderManagerDBModel.FK_Shipment_ProductBreakUpSummary">
+            <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+            <End Role="Shipment" EntitySet="Shipments" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductCountryWiseBreakUp_ProductSize" Association="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductSize">
             <End Role="ProductSize" EntitySet="ProductSizes" />
@@ -1133,6 +1409,14 @@
             <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurements" />
             <End Role="ProductMaterials" EntitySet="ProductMaterials" />
           </AssociationSet>
+          <AssociationSet Name="FK_ProductStock_ProductName" Association="OrderManagerDBModel.FK_ProductStock_ProductName">
+            <End Role="ProductName" EntitySet="ProductNames" />
+            <End Role="ProductStock" EntitySet="ProductStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductStock_ProductSize" Association="OrderManagerDBModel.FK_ProductStock_ProductSize">
+            <End Role="ProductSize" EntitySet="ProductSizes" />
+            <End Role="ProductStock" EntitySet="ProductStocks" />
+          </AssociationSet>
           <AssociationSet Name="FK_PurchaseOrders_PurchaseOrderStatus" Association="OrderManagerDBModel.FK_PurchaseOrders_PurchaseOrderStatus">
             <End Role="PurchaseOrderStatus" EntitySet="PurchaseOrderStatus" />
             <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
@@ -1156,7 +1440,9 @@
           </Key>
           <Property Name="ColorID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ProductBreakUpSummaries" Relationship="OrderManagerDBModel.FK_ProductBreakUpSummary_Color" FromRole="Color" ToRole="ProductBreakUpSummary" />
           <NavigationProperty Name="ProductCountryWiseBreakUps" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Color" FromRole="Color" ToRole="ProductCountryWiseBreakUp" />
+          <NavigationProperty Name="ProductStocks" Relationship="OrderManagerDBModel.FK_ProductStock_Color" FromRole="Color" ToRole="ProductStock" />
         </EntityType>
         <EntityType Name="CommissionValueType">
           <Key>
@@ -1322,6 +1608,17 @@
           <Property Name="Mode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Orders" Relationship="OrderManagerDBModel.FK_Order_OrderThrough" FromRole="OrderThrough" ToRole="Order" />
         </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="PackageID" />
+          </Key>
+          <Property Name="PackageID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Packed" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Pending" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProductBreakUpSummaryID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="ProductBreakUpSummary" Relationship="OrderManagerDBModel.FK_Package_ProductBreakUpSummary" FromRole="Package" ToRole="ProductBreakUpSummary" />
+        </EntityType>
         <EntityType Name="ProductBreakUp">
           <Key>
             <PropertyRef Name="ProductBreakUpID" />
@@ -1335,6 +1632,22 @@
           <NavigationProperty Name="OrderProducts" Relationship="OrderManagerDBModel.FK_OrderProduct_ProductBreakUp" FromRole="ProductBreakUp" ToRole="OrderProduct" />
           <NavigationProperty Name="ShipmentMode" Relationship="OrderManagerDBModel.FK_ProductBreakUp_ShipmentMode" FromRole="ProductBreakUp" ToRole="ShipmentMode" />
           <NavigationProperty Name="ProductCountryWiseBreakUps" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductBreakUp" FromRole="ProductBreakUp" ToRole="ProductCountryWiseBreakUp" />
+        </EntityType>
+        <EntityType Name="ProductBreakUpSummary">
+          <Key>
+            <PropertyRef Name="ProductBreakUpSummaryID" />
+          </Key>
+          <Property Name="ProductBreakUpSummaryID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductSizeID" Type="Int64" Nullable="false" />
+          <Property Name="ColorID" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfPieces" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="Color" Relationship="OrderManagerDBModel.FK_ProductBreakUpSummary_Color" FromRole="ProductBreakUpSummary" ToRole="Color" />
+          <NavigationProperty Name="Packages" Relationship="OrderManagerDBModel.FK_Package_ProductBreakUpSummary" FromRole="ProductBreakUpSummary" ToRole="Package" />
+          <NavigationProperty Name="ProductSize" Relationship="OrderManagerDBModel.FK_ProductBreakUpSummary_ProductSize" FromRole="ProductBreakUpSummary" ToRole="ProductSize" />
+          <NavigationProperty Name="ProductCuttings" Relationship="OrderManagerDBModel.FK_ProductCutting_ProductBreakUpSummary" FromRole="ProductBreakUpSummary" ToRole="ProductCutting" />
+          <NavigationProperty Name="Productions" Relationship="OrderManagerDBModel.FK_Production_ProductBreakUpSummary" FromRole="ProductBreakUpSummary" ToRole="Production" />
+          <NavigationProperty Name="Qualities" Relationship="OrderManagerDBModel.FK_Quality_ProductBreakUpSummary" FromRole="ProductBreakUpSummary" ToRole="Quality" />
+          <NavigationProperty Name="Shipments" Relationship="OrderManagerDBModel.FK_Shipment_ProductBreakUpSummary" FromRole="ProductBreakUpSummary" ToRole="Shipment" />
         </EntityType>
         <EntityType Name="ProductCountryWiseBreakUp">
           <Key>
@@ -1350,6 +1663,17 @@
           <NavigationProperty Name="Country" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Country" FromRole="ProductCountryWiseBreakUp" ToRole="Country" />
           <NavigationProperty Name="ProductBreakUp" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductBreakUp" FromRole="ProductCountryWiseBreakUp" ToRole="ProductBreakUp" />
           <NavigationProperty Name="ProductSize" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductSize" FromRole="ProductCountryWiseBreakUp" ToRole="ProductSize" />
+        </EntityType>
+        <EntityType Name="ProductCutting">
+          <Key>
+            <PropertyRef Name="CuttingID" />
+          </Key>
+          <Property Name="CuttingID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CutQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Pending" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ProductBreakUpSummaryID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="ProductBreakUpSummary" Relationship="OrderManagerDBModel.FK_ProductCutting_ProductBreakUpSummary" FromRole="ProductCutting" ToRole="ProductBreakUpSummary" />
         </EntityType>
         <EntityType Name="ProductExtraCost">
           <Key>
@@ -1372,6 +1696,17 @@
           <Property Name="ExtraCostTypeID" Type="Int16" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="TypeName" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="ProductExtraCosts" Relationship="OrderManagerDBModel.FK_ProductExtraCost_ProductExtraCostType" FromRole="ProductExtraCostType" ToRole="ProductExtraCost" />
+        </EntityType>
+        <EntityType Name="Production">
+          <Key>
+            <PropertyRef Name="ProductionID" />
+          </Key>
+          <Property Name="ProductionID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CompletedQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Pending" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ProductBreakUpSummaryID" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ProductBreakUpSummary" Relationship="OrderManagerDBModel.FK_Production_ProductBreakUpSummary" FromRole="Production" ToRole="ProductBreakUpSummary" />
         </EntityType>
         <EntityType Name="ProductMaterialItem">
           <Key>
@@ -1432,6 +1767,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="StyleID" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="OrderProducts" Relationship="OrderManagerDBModel.FK_OrderProduct_ProductName" FromRole="ProductName" ToRole="OrderProduct" />
+          <NavigationProperty Name="ProductStocks" Relationship="OrderManagerDBModel.FK_ProductStock_ProductName" FromRole="ProductName" ToRole="ProductStock" />
         </EntityType>
         <EntityType Name="ProductSize">
           <Key>
@@ -1439,7 +1775,23 @@
           </Key>
           <Property Name="ProductSizeID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Size" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ProductBreakUpSummaries" Relationship="OrderManagerDBModel.FK_ProductBreakUpSummary_ProductSize" FromRole="ProductSize" ToRole="ProductBreakUpSummary" />
           <NavigationProperty Name="ProductCountryWiseBreakUps" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_ProductSize" FromRole="ProductSize" ToRole="ProductCountryWiseBreakUp" />
+          <NavigationProperty Name="ProductStocks" Relationship="OrderManagerDBModel.FK_ProductStock_ProductSize" FromRole="ProductSize" ToRole="ProductStock" />
+        </EntityType>
+        <EntityType Name="ProductStock">
+          <Key>
+            <PropertyRef Name="ProductStockID" />
+          </Key>
+          <Property Name="ProductStockID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductNameID" Type="Int64" Nullable="false" />
+          <Property Name="ProductSizeID" Type="Int64" Nullable="false" />
+          <Property Name="ColorID" Type="Int32" Nullable="false" />
+          <Property Name="CutStock" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ProductStock1" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="Color" Relationship="OrderManagerDBModel.FK_ProductStock_Color" FromRole="ProductStock" ToRole="Color" />
+          <NavigationProperty Name="ProductName" Relationship="OrderManagerDBModel.FK_ProductStock_ProductName" FromRole="ProductStock" ToRole="ProductName" />
+          <NavigationProperty Name="ProductSize" Relationship="OrderManagerDBModel.FK_ProductStock_ProductSize" FromRole="ProductStock" ToRole="ProductSize" />
         </EntityType>
         <EntityType Name="PurchaseOrder">
           <Key>
@@ -1461,6 +1813,28 @@
           <Property Name="PurchaseOrderStatusID" Type="Byte" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="PurchaseOrders" Relationship="OrderManagerDBModel.FK_PurchaseOrders_PurchaseOrderStatus" FromRole="PurchaseOrderStatus" ToRole="PurchaseOrders" />
+        </EntityType>
+        <EntityType Name="Quality">
+          <Key>
+            <PropertyRef Name="QualityID" />
+          </Key>
+          <Property Name="QualityID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Passed" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Failed" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ProductBreakUpSummaryID" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ProductBreakUpSummary" Relationship="OrderManagerDBModel.FK_Quality_ProductBreakUpSummary" FromRole="Quality" ToRole="ProductBreakUpSummary" />
+        </EntityType>
+        <EntityType Name="Shipment">
+          <Key>
+            <PropertyRef Name="ShipmentID" />
+          </Key>
+          <Property Name="ShipmentID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Shipped" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Rejected" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProductBreakUpSummaryID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="ProductBreakUpSummary" Relationship="OrderManagerDBModel.FK_Shipment_ProductBreakUpSummary" FromRole="Shipment" ToRole="ProductBreakUpSummary" />
         </EntityType>
         <EntityType Name="ShipmentMode">
           <Key>
@@ -1528,6 +1902,18 @@
           <NavigationProperty Name="OrderStatus" Relationship="OrderManagerDBModel.FK_OrderStatus_UserRole" FromRole="UserRole" ToRole="OrderStatus" />
           <NavigationProperty Name="Users" Relationship="OrderManagerDBModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
         </EntityType>
+        <Association Name="FK_ProductBreakUpSummary_Color">
+          <End Role="Color" Type="OrderManagerDBModel.Color" Multiplicity="1" />
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.ProductBreakUpSummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ColorID" />
+            </Principal>
+            <Dependent Role="ProductBreakUpSummary">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductCountryWiseBreakUp_Color">
           <End Role="Color" Type="OrderManagerDBModel.Color" Multiplicity="0..1" />
           <End Role="ProductCountryWiseBreakUp" Type="OrderManagerDBModel.ProductCountryWiseBreakUp" Multiplicity="*" />
@@ -1536,6 +1922,18 @@
               <PropertyRef Name="ColorID" />
             </Principal>
             <Dependent Role="ProductCountryWiseBreakUp">
+              <PropertyRef Name="ColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductStock_Color">
+          <End Role="Color" Type="OrderManagerDBModel.Color" Multiplicity="1" />
+          <End Role="ProductStock" Type="OrderManagerDBModel.ProductStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ColorID" />
+            </Principal>
+            <Dependent Role="ProductStock">
               <PropertyRef Name="ColorID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1840,6 +2238,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Package_ProductBreakUpSummary">
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.ProductBreakUpSummary" Multiplicity="1" />
+          <End Role="Package" Type="OrderManagerDBModel.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBreakUpSummary">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductBreakUp_ShipmentMode">
           <End Role="ShipmentMode" Type="OrderManagerDBModel.ShipmentMode" Multiplicity="1" />
           <End Role="ProductBreakUp" Type="OrderManagerDBModel.ProductBreakUp" Multiplicity="*" />
@@ -1861,6 +2271,66 @@
             </Principal>
             <Dependent Role="ProductCountryWiseBreakUp">
               <PropertyRef Name="ProductBreakUpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductBreakUpSummary_ProductSize">
+          <End Role="ProductSize" Type="OrderManagerDBModel.ProductSize" Multiplicity="1" />
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.ProductBreakUpSummary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSize">
+              <PropertyRef Name="ProductSizeID" />
+            </Principal>
+            <Dependent Role="ProductBreakUpSummary">
+              <PropertyRef Name="ProductSizeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCutting_ProductBreakUpSummary">
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.ProductBreakUpSummary" Multiplicity="1" />
+          <End Role="ProductCutting" Type="OrderManagerDBModel.ProductCutting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBreakUpSummary">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Principal>
+            <Dependent Role="ProductCutting">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_ProductBreakUpSummary">
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.ProductBreakUpSummary" Multiplicity="1" />
+          <End Role="Production" Type="OrderManagerDBModel.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBreakUpSummary">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quality_ProductBreakUpSummary">
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.ProductBreakUpSummary" Multiplicity="1" />
+          <End Role="Quality" Type="OrderManagerDBModel.Quality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBreakUpSummary">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Principal>
+            <Dependent Role="Quality">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shipment_ProductBreakUpSummary">
+          <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.ProductBreakUpSummary" Multiplicity="1" />
+          <End Role="Shipment" Type="OrderManagerDBModel.Shipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBreakUpSummary">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
+            </Principal>
+            <Dependent Role="Shipment">
+              <PropertyRef Name="ProductBreakUpSummaryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1945,6 +2415,30 @@
             </Principal>
             <Dependent Role="ProductMaterials">
               <PropertyRef Name="UOMID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductStock_ProductName">
+          <End Role="ProductName" Type="OrderManagerDBModel.ProductName" Multiplicity="1" />
+          <End Role="ProductStock" Type="OrderManagerDBModel.ProductStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductName">
+              <PropertyRef Name="ProductNameID" />
+            </Principal>
+            <Dependent Role="ProductStock">
+              <PropertyRef Name="ProductNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductStock_ProductSize">
+          <End Role="ProductSize" Type="OrderManagerDBModel.ProductSize" Multiplicity="1" />
+          <End Role="ProductStock" Type="OrderManagerDBModel.ProductStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSize">
+              <PropertyRef Name="ProductSizeID" />
+            </Principal>
+            <Dependent Role="ProductStock">
+              <PropertyRef Name="ProductSizeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2150,6 +2644,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Packages">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.Package">
+              <MappingFragment StoreEntitySet="Package">
+                <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+                <ScalarProperty Name="Packed" ColumnName="Packed" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductBreakUps">
             <EntityTypeMapping TypeName="OrderManagerDBModel.ProductBreakUp">
               <MappingFragment StoreEntitySet="ProductBreakUp">
@@ -2162,6 +2667,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductBreakUpSummaries">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.ProductBreakUpSummary">
+              <MappingFragment StoreEntitySet="ProductBreakUpSummary">
+                <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
+                <ScalarProperty Name="ProductSizeID" ColumnName="ProductSizeID" />
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+                <ScalarProperty Name="NumberOfPieces" ColumnName="NumberOfPieces" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ProductCountryWiseBreakUps">
             <EntityTypeMapping TypeName="OrderManagerDBModel.ProductCountryWiseBreakUp">
               <MappingFragment StoreEntitySet="ProductCountryWiseBreakUp">
@@ -2171,6 +2686,17 @@
                 <ScalarProperty Name="ProductSizeID" ColumnName="ProductSizeID" />
                 <ScalarProperty Name="NumberOfPieces" ColumnName="NumberOfPieces" />
                 <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCuttings">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.ProductCutting">
+              <MappingFragment StoreEntitySet="ProductCutting">
+                <ScalarProperty Name="CuttingID" ColumnName="CuttingID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CutQuantity" ColumnName="CutQuantity" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+                <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2191,6 +2717,17 @@
               <MappingFragment StoreEntitySet="ProductExtraCostType">
                 <ScalarProperty Name="ExtraCostTypeID" ColumnName="ExtraCostTypeID" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productions">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.Production">
+              <MappingFragment StoreEntitySet="Production">
+                <ScalarProperty Name="ProductionID" ColumnName="ProductionID" />
+                <ScalarProperty Name="CompletedQuantity" ColumnName="CompletedQuantity" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+                <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2253,6 +2790,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductStocks">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.ProductStock">
+              <MappingFragment StoreEntitySet="ProductStock">
+                <ScalarProperty Name="ProductStockID" ColumnName="ProductStockID" />
+                <ScalarProperty Name="ProductNameID" ColumnName="ProductNameID" />
+                <ScalarProperty Name="ProductSizeID" ColumnName="ProductSizeID" />
+                <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+                <ScalarProperty Name="CutStock" ColumnName="CutStock" />
+                <ScalarProperty Name="ProductStock1" ColumnName="ProductStock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PurchaseOrders">
             <EntityTypeMapping TypeName="OrderManagerDBModel.PurchaseOrder">
               <MappingFragment StoreEntitySet="PurchaseOrders">
@@ -2269,6 +2818,28 @@
               <MappingFragment StoreEntitySet="PurchaseOrderStatus">
                 <ScalarProperty Name="PurchaseOrderStatusID" ColumnName="PurchaseOrderStatusID" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Qualities">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.Quality">
+              <MappingFragment StoreEntitySet="Quality">
+                <ScalarProperty Name="QualityID" ColumnName="QualityID" />
+                <ScalarProperty Name="Passed" ColumnName="Passed" />
+                <ScalarProperty Name="Failed" ColumnName="Failed" />
+                <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shipments">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.Shipment">
+              <MappingFragment StoreEntitySet="Shipment">
+                <ScalarProperty Name="ShipmentID" ColumnName="ShipmentID" />
+                <ScalarProperty Name="Shipped" ColumnName="Shipped" />
+                <ScalarProperty Name="Rejected" ColumnName="Rejected" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

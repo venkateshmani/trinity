@@ -12,19 +12,14 @@ namespace ordermanager.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductName
+    public partial class Package
     {
-        public ProductName()
-        {
-            this.OrderProducts = new HashSet<OrderProduct>();
-            this.ProductStocks = new HashSet<ProductStock>();
-        }
+        public long PackageID { get; set; }
+        public decimal Packed { get; set; }
+        public decimal Pending { get; set; }
+        public System.DateTime Date { get; set; }
+        public long ProductBreakUpSummaryID { get; set; }
     
-        public long ProductNameID { get; set; }
-        public string Name { get; set; }
-        public string StyleID { get; set; }
-    
-        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
-        public virtual ICollection<ProductStock> ProductStocks { get; set; }
+        public virtual ProductBreakUpSummary ProductBreakUpSummary { get; set; }
     }
 }

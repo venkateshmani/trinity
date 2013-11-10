@@ -16,12 +16,16 @@ namespace ordermanager.DatabaseModel
     {
         public ProductSize()
         {
+            this.ProductBreakUpSummaries = new HashSet<ProductBreakUpSummary>();
             this.ProductCountryWiseBreakUps = new HashSet<ProductCountryWiseBreakUp>();
+            this.ProductStocks = new HashSet<ProductStock>();
         }
     
         public long ProductSizeID { get; set; }
         public string Size { get; set; }
     
+        public virtual ICollection<ProductBreakUpSummary> ProductBreakUpSummaries { get; set; }
         public virtual ICollection<ProductCountryWiseBreakUp> ProductCountryWiseBreakUps { get; set; }
+        public virtual ICollection<ProductStock> ProductStocks { get; set; }
     }
 }

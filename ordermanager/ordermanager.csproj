@@ -144,16 +144,28 @@
     <Compile Include="DatabaseModel\OrderThrough.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\Package.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\ProductBreakUp.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\ProductBreakUpSummary.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\ProductCountryWiseBreakUp.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\ProductCutting.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductExtraCost.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductExtraCostType.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\Production.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductMaterial.cs">
@@ -168,10 +180,19 @@
     <Compile Include="DatabaseModel\ProductSize.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\ProductStock.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\PurchaseOrder.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\PurchaseOrderStatu.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\Quality.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\Shipment.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ShipmentMode.cs">
