@@ -114,18 +114,19 @@
                                               HeadersVisibility="Column"
                                               IsReadOnly="{Binding IsMaterialsReceiptReadOnly}">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Color" Width="0.1*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBox IsReadOnly="True" Text="{Binding SubMaterial.Name}" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
+                       
                         <DataGridTemplateColumn Header="Size" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox IsReadOnly="True" Text="{Binding UnitsOfMeasurement.Units}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Color" Width="0.1*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox IsReadOnly="True" Text="{Binding SubMaterial.Name}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
