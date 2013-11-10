@@ -30,11 +30,6 @@ namespace ordermanager.Views.UserControls.Execution
 
         }
 
-        private void Submit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ExecutionTreeViewControl_SelectionChanged(DatabaseModel.OrderProduct product, DateTime date)
         {
 

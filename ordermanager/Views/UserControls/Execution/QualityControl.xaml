@@ -112,20 +112,20 @@
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"
                                               RowHeaderWidth="25"
                                               HeadersVisibility="Column"
-                                              IsReadOnly="{Binding IsMaterialsReceiptReadOnly}">
+                                              IsReadOnly="{Binding IsReadOnly}">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Color" Width="0.1*">
+                        <DataGridTemplateColumn Header="Size" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox IsReadOnly="True" Text="{Binding SubMaterial.Name}" />
+                                    <TextBox IsReadOnly="True" Text="{Binding SizeWrapper}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Size" Width="0.1*">
+                        <DataGridTemplateColumn Header="Color" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox IsReadOnly="True" Text="{Binding UnitsOfMeasurement.Units}" />
+                                    <TextBox IsReadOnly="True" Text="{Binding ColorWrapper}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -133,10 +133,35 @@
                         <DataGridTemplateColumn Header="ORD. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox IsReadOnly="True"  Text="{Binding Quantity, StringFormat=n4}" />
+                                    <TextBox IsReadOnly="True"  Text="{Binding QuantityWrapper, StringFormat=n4}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="ORD. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox IsReadOnly="True"  Text="{Binding QuantityWrapper, StringFormat=n4}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Quantity Passed" Width="0.1*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding PassedWrapper, StringFormat=n4}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Quantity Failed" Width="0.1*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding FailedWrapper, StringFormat=n4}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>
@@ -157,12 +182,6 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
                                         ToolTip="Save Changes" Click="Save_Click">
-                    <Button.Background>
-                        <SolidColorBrush Color="{StaticResource AccentColor}" />
-                    </Button.Background>
-                </Button>
-                <Button x:Name="submitBtn" Content="Submit" Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Submit to next level" Click="Submit_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>

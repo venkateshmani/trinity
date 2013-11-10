@@ -112,7 +112,7 @@
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"
                                               RowHeaderWidth="25"
                                               HeadersVisibility="Column"
-                                              IsReadOnly="{Binding IsMaterialsReceiptReadOnly}">
+                                              IsReadOnly="{Binding IsReadOnly}">
                     <DataGrid.Columns>
                         
                         <DataGridTemplateColumn Header="Size" Width="0.1*">
@@ -184,12 +184,6 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
                                         ToolTip="Save Changes" Click="Save_Click">
-                    <Button.Background>
-                        <SolidColorBrush Color="{StaticResource AccentColor}" />
-                    </Button.Background>
-                </Button>
-                <Button x:Name="submitBtn" Content="Submit" Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Submit to next level" Click="Submit_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
