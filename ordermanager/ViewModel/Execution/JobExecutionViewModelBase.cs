@@ -37,7 +37,7 @@ namespace ordermanager.ViewModel.Execution
             }
             set
             {
-                Products = value;
+                m_Products = value;
                 OnPropertyChanged("Products");
             }
         }

@@ -68,7 +68,7 @@
         <TreeView x:Name="tvProducts" Grid.Row="2" Grid.Column="0" SelectedItemChanged="tvProducts_SelectedItemChanged" ItemsSource="{Binding Products}" Background="White" VerticalAlignment="Stretch"
                   HorizontalAlignment="Stretch">
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Dates}">
+                <HierarchicalDataTemplate ItemsSource="{Binding ProductCuttingDates}"  PresentationTraceSources.TraceLevel="High">
                     <Grid Width="{Binding ActualWidth, ConverterParameter=20, Converter={StaticResource subractor}, ElementName=tvProducts}" VerticalAlignment="Stretch" Height="30" HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -88,7 +88,7 @@
                                 </Path>
                             </Canvas>
                         </Viewbox>
-                        <TextBlock VerticalAlignment="Center" Text="{Binding StyleID}" TextAlignment="Left" Style="{StaticResource ProductsListContentStyle}" HorizontalAlignment="Left" FontFamily="{StaticResource ContentFontFamily}" Grid.Column="3"/>
+                        <TextBlock VerticalAlignment="Center" PresentationTraceSources.TraceLevel="High" Text="{Binding ProductName.StyleID}" TextAlignment="Left" Style="{StaticResource ProductsListContentStyle}" HorizontalAlignment="Left" FontFamily="{StaticResource ContentFontFamily}" Grid.Column="3"/>
                     </Grid>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
@@ -123,7 +123,7 @@
         <TextBlock x:Name="supplierSelectedInfo" Text="Select a purchase order under the supplier" Grid.Row="2" Grid.Column="2"
                    VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"></TextBlock>
 
-        <Grid Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+        <!--<Grid Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -212,7 +212,7 @@
                    </DataGrid.Columns>
             </DataGrid>
             </Border>
-        </Grid>
+        </Grid>-->
         
         <GridSplitter Grid.Row="0" Grid.Column="1"
                       HorizontalAlignment="Center"

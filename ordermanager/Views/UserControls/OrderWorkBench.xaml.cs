@@ -1,5 +1,6 @@
 ﻿using ordermanager.DatabaseModel;
 using ordermanager.ViewModel;
+using ordermanager.ViewModel.Execution;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -37,7 +38,7 @@ namespace ordermanager.Views.UserControls
             purchaseOrderControl.DataContext = m_PurchaseOrderViewModel;
             m_ChangeHistorViewModel = new ChangeHistoryViewModel();
             changeHistoryControl.DataContext = m_ChangeHistorViewModel;
-            
+
 
             this.Loaded += OrderWorkBench_Loaded;
             tabControl.SelectedIndex = 2;
@@ -69,7 +70,7 @@ namespace ordermanager.Views.UserControls
 
                 //Navigate to appropriate page
                 if (status == OrderStatusEnum.EnquiryCreated ||
-                    status == OrderStatusEnum.MaterialsAdded ||                   
+                    status == OrderStatusEnum.MaterialsAdded ||
                     status == OrderStatusEnum.EnquiryRejected)
                 {
                     tabControl.SelectedItem = tabMaterials;
@@ -105,6 +106,13 @@ namespace ordermanager.Views.UserControls
                     break;
                 case "Change History":
                     m_ChangeHistorViewModel.SetOrder(m_Order);
+                    break;
+                case "Execution":
+                    cuttingControl.ViewModel = new CuttingViewModel(){Order=m_Order};
+                    productionControl.ViewModel = new ProductionViewModel() { Order = m_Order };
+                    qualityControl.ViewModel = new QualityViewModel(){Order=m_Order};;
+                    packagingControl.ViewModel = new PackagingViewModel() { Order = m_Order };
+                    shippingControl.ViewModel = new ShipmentViewModel() { Order = m_Order };                  
                     break;
             }
         }
