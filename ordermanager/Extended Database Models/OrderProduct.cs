@@ -773,7 +773,7 @@ namespace ordermanager.DatabaseModel
 
         #region Execution Dates
 
-        #region Cutting Date Management
+        #region Cutting Management
 
             private Dictionary<string, List<ProductCutting>> ProductCuttings = null;
             public List<string> ProductCuttingDates
@@ -812,7 +812,7 @@ namespace ordermanager.DatabaseModel
             {
                 if (ProductCuttings.ContainsKey(date))
                 {
-                    return ProductCuttings[)];
+                    return ProductCuttings[date];
                 }
 
                 return null;
@@ -832,6 +832,255 @@ namespace ordermanager.DatabaseModel
                     }
                 }
             }
+
+        #endregion 
+
+        #region Production Management
+
+            private Dictionary<string, List<Production>> ProductProductions = null;
+            public List<string> ProductProductionDates
+            {
+                get
+                {
+                    if (ProductProductions == null)
+                    {
+                        ProductProductions = new Dictionary<string, List<Production>>();
+                        foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
+                        {
+                            foreach (Production productProduction in summary.Productions)
+                            {
+                                List<Production> productions = null;
+                                if (ProductProductions.ContainsKey(productProduction.Date.ToShortDateString()))
+                                {
+                                    productions = ProductProductions[productProduction.Date.ToShortDateString()];
+                                }
+                                else
+                                {
+                                    productions = new List<Production>();
+                                    ProductProductions.Add(productProduction.Date.ToShortDateString(), productions);
+                                }
+
+                                if (productions != null)
+                                    productions.Add(productProduction);
+                            }
+                        }
+                    }
+
+                    return ProductProductions.Keys.ToList();
+                }
+            }
+
+            public List<Production> GetProductions(string date)
+            {
+                if (ProductProductions.ContainsKey(date))
+                {
+                    return ProductProductions[date];
+                }
+
+                return null;
+            }
+
+            public void AddNewProductionDateRecord(string date)
+            {
+                if (!ProductProductions.ContainsKey(date))
+                {
+                    List<Production> productions = new List<Production>();
+                    ProductProductions.Add(date, productions);
+                    foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
+                    {
+                        Production newProduction = new Production() { Date = DateTime.Parse(date) };
+                        summary.Productions.Add(newProduction);
+                        productions.Add(newProduction);
+                    }
+                }
+            }
+
+            #endregion 
+
+        #region Quality Management
+
+            private Dictionary<string, List<Quality>> ProductQualityChecks = null;
+            public List<string> ProductQualityCheckDates
+            {
+                get
+                {
+                    if (ProductQualityChecks == null)
+                    {
+                        ProductQualityChecks = new Dictionary<string, List<Quality>>();
+                        foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
+                        {
+                            foreach (Quality productQualityCheck in summary.Qualities)
+                            {
+                                List<Quality> qualityChecks = null;
+                                if (ProductQualityChecks.ContainsKey(productQualityCheck.Date.ToShortDateString()))
+                                {
+                                    qualityChecks = ProductQualityChecks[productQualityCheck.Date.ToShortDateString()];
+                                }
+                                else
+                                {
+                                    qualityChecks = new List<Quality>();
+                                    ProductQualityChecks.Add(productQualityCheck.Date.ToShortDateString(), qualityChecks);
+                                }
+
+                                if (qualityChecks != null)
+                                    qualityChecks.Add(productQualityCheck);
+                            }
+                        }
+                    }
+
+                    return ProductQualityChecks.Keys.ToList();
+                }
+            }
+
+            public List<Quality> GetQualityChecks(string date)
+            {
+                if (ProductQualityChecks.ContainsKey(date))
+                {
+                    return ProductQualityChecks[date];
+                }
+
+                return null;
+            }
+
+            public void AddNewQualityCheckDateRecord(string date)
+            {
+                if (!ProductQualityChecks.ContainsKey(date))
+                {
+                    List<Quality> qualities = new List<Quality>();
+                    ProductQualityChecks.Add(date, qualities);
+                    foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
+                    {
+                        Quality newQualityCheck = new Quality() { Date = DateTime.Parse(date) };
+                        summary.Qualities.Add(newQualityCheck);
+                        qualities.Add(newQualityCheck);
+                    }
+                }
+            }
+         
+        #endregion 
+
+        #region Packaging Management
+
+            private Dictionary<string, List<Package>> ProductPackagings = null;
+            public List<string> ProductPackagingDates
+            {
+                get
+                {
+                    if (ProductPackagings == null)
+                    {
+                        ProductPackagings = new Dictionary<string, List<Package>>();
+                        foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
+                        {
+                            foreach (Package productPackage in summary.Packages)
+                            {
+                                List<Package> packages = null;
+                                if (ProductQualityChecks.ContainsKey(productPackage.Date.ToShortDateString()))
+                                {
+                                    packages = ProductPackagings[productPackage.Date.ToShortDateString()];
+                                }
+                                else
+                                {
+                                    packages = new List<Package>();
+                                    ProductPackagings.Add(productPackage.Date.ToShortDateString(), packages);
+                                }
+
+                                if (packages != null)
+                                    packages.Add(productPackage);
+                            }
+                        }
+                    }
+
+                    return ProductPackagings.Keys.ToList();
+                }
+            }
+
+            public List<Package> GetPackagings(string date)
+            {
+                if (ProductPackagings.ContainsKey(date))
+                {
+                    return ProductPackagings[date];
+                }
+
+                return null;
+            }
+
+            public void AddNewPackageDateRecord(string date)
+            {
+                if (!ProductPackagings.ContainsKey(date))
+                {
+                    List<Package> packages = new List<Package>();
+                    ProductPackagings.Add(date, packages);
+                    foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
+                    {
+                        Package newPackage = new Package() { Date = DateTime.Parse(date) };
+                        summary.Packages.Add(newPackage);
+                        packages.Add(newPackage);
+                    }
+                }
+            }
+
+        #endregion 
+
+        #region Shipping Management
+
+            private Dictionary<string, List<Shipment>> ProductShipments = null;
+            public List<string> ProductShipmentDates
+            {
+                get
+                {
+                    if (ProductShipments == null)
+                    {
+                        ProductShipments = new Dictionary<string, List<Shipment>>();
+                        foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
+                        {
+                            foreach (Shipment productShipment in summary.Shipments)
+                            {
+                                List<Shipment> shipments = null;
+                                if (ProductQualityChecks.ContainsKey(productShipment.Date.ToShortDateString()))
+                                {
+                                    shipments = ProductShipments[productShipment.Date.ToShortDateString()];
+                                }
+                                else
+                                {
+                                    shipments = new List<Shipment>();
+                                    ProductShipments.Add(productShipment.Date.ToShortDateString(), shipments);
+                                }
+
+                                if (shipments != null)
+                                    shipments.Add(productShipment);
+                            }
+                        }
+                    }
+
+                    return ProductShipments.Keys.ToList();
+                }
+            }
+
+            public List<Shipment> GetShipments(string date)
+            {
+                if (ProductShipments.ContainsKey(date))
+                {
+                    return ProductShipments[date];
+                }
+
+                return null;
+            }
+
+            public void AddNewShipmentDateRecord(string date)
+            {
+                if (!ProductShipments.ContainsKey(date))
+                {
+                    List<Shipment> shipments = new List<Shipment>();
+                    ProductShipments.Add(date, shipments);
+                    foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
+                    {
+                        Shipment newShipment = new Shipment() { Date = DateTime.Parse(date) };
+                        summary.Shipments.Add(newShipment);
+                        shipments.Add(newShipment);
+                    }
+                }
+            }
+         
 
         #endregion 
 
