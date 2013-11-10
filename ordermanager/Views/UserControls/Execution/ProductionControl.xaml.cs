@@ -63,9 +63,10 @@ namespace ordermanager.Views.UserControls.Execution
 
         }
 
-        private void ExecutionTreeViewControl_SelectionChanged(DatabaseModel.OrderProduct product, DateTime date)
+        private void tvProducts_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
 
         }
+     
     }
 }

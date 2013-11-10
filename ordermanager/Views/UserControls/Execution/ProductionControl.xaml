@@ -66,8 +66,54 @@
             </Border>
         </Grid>
 
-        <CommonControls:ExecutionTreeViewControl Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                                 SelectionChanged="ExecutionTreeViewControl_SelectionChanged"/>
+        <TreeView x:Name="tvProducts" Grid.Row="2" Grid.Column="0" SelectedItemChanged="tvProducts_SelectedItemChanged" ItemsSource="{Binding Products}" Background="White" VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Dates}">
+                    <Grid Width="{Binding ActualWidth, ConverterParameter=20, Converter={StaticResource subractor}, ElementName=tvProducts}" VerticalAlignment="Stretch" Height="30" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Converter={StaticResource IndexToNumber}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}}" Style="{StaticResource ProductsListContentStyle}" HorizontalAlignment="Left" FontFamily="{StaticResource ContentFontFamily}" Grid.Column="0"/>
+                        <TextBlock VerticalAlignment="Center" Text=". " Style="{StaticResource ProductsListContentStyle}" HorizontalAlignment="Left" FontFamily="{StaticResource ContentFontFamily}" Grid.Column="1"/>
+                        <Viewbox Width="25" Visibility="{Binding HasErrors, Converter={StaticResource hasErrorToVisibilityConverter}}" PresentationTraceSources.TraceLevel="High" StretchDirection="Both" Margin="3,0,3,0" Height="25" Grid.Column="2">
+                            <Canvas Width="48" UseLayoutRounding="False" Height="48" Grid.Column="2" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0">
+                                <Path Width="22.7614" Canvas.Top="10.9702" Stretch="Fill" Canvas.Left="12.4886" Height="28.2798" Data="F1 M 24.25,39.25C 24.25,35.25 26,31.5 26,32.5C 26,33.5 28,29.5 29,27.5C 30,25.5 31,22.75 31,22.75L 35,23C 35,23 36,14.25 34,13.25C 32,12.25 29.9174,13.6505 28,12.5C 23,9.5 15,11.5 16,13.5C 16,13.5 12,15.5 13,16.5C 13,16.5 12,18 13.25,19.5C 12,21 12.5,22.5 13.25,23.5C 12.5,25 12,26.5 15,27.5C 16.8974,28.1325 22,25.75 22,28.5C 22,29.5 20,32.5 20,34.5C 20,38.5 24.25,39.25 24.25,39.25 Z ">
+                                    <Path.Fill>
+                                        <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
+                                    </Path.Fill>
+                                </Path>
+                            </Canvas>
+                        </Viewbox>
+                        <TextBlock VerticalAlignment="Center" Text="{Binding StyleID}" TextAlignment="Left" Style="{StaticResource ProductsListContentStyle}" HorizontalAlignment="Left" FontFamily="{StaticResource ContentFontFamily}" Grid.Column="3"/>
+                    </Grid>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="10,2,0,2" Height="25">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Viewbox Width="20" Visibility="{Binding HasErrors, Converter={StaticResource hasErrorToVisibilityConverter}}" StretchDirection="Both" Margin="3,0,3,0" Height="20" Grid.Column="0">
+                                    <Canvas Width="48" UseLayoutRounding="False" Height="48" Grid.Column="2" Clip="F1 M 0,0L 48,0L 48,48L 0,48L 0,0">
+                                        <Path Width="22.7614" Canvas.Top="10.9702" Stretch="Fill" Canvas.Left="12.4886" Height="28.2798" Data="F1 M 24.25,39.25C 24.25,35.25 26,31.5 26,32.5C 26,33.5 28,29.5 29,27.5C 30,25.5 31,22.75 31,22.75L 35,23C 35,23 36,14.25 34,13.25C 32,12.25 29.9174,13.6505 28,12.5C 23,9.5 15,11.5 16,13.5C 16,13.5 12,15.5 13,16.5C 13,16.5 12,18 13.25,19.5C 12,21 12.5,22.5 13.25,23.5C 12.5,25 12,26.5 15,27.5C 16.8974,28.1325 22,25.75 22,28.5C 22,29.5 20,32.5 20,34.5C 20,38.5 24.25,39.25 24.25,39.25 Z ">
+                                            <Path.Fill>
+                                                <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
+                                            </Path.Fill>
+                                        </Path>
+                                    </Canvas>
+                                </Viewbox>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Date}" TextAlignment="Left" Style="{StaticResource ProductsListContentStyle}" Margin="2,0,0,0" HorizontalAlignment="Left" FontFamily="{StaticResource ContentFontFamily}" FontSize="16" Grid.Column="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
 
         <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
