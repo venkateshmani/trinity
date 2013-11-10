@@ -291,6 +291,21 @@
     <Compile Include="Views\UserControls\Execution\CuttingControl.xaml.cs">
       <DependentUpon>CuttingControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\Execution\OverAllCompleteReportControl.xaml.cs">
+      <DependentUpon>OverAllCompleteReportControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Execution\PackagingControl.xaml.cs">
+      <DependentUpon>PackagingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Execution\ProductionControl.xaml.cs">
+      <DependentUpon>ProductionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Execution\QualityControl.xaml.cs">
+      <DependentUpon>QualityControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Execution\ShippingControl.xaml.cs">
+      <DependentUpon>ShippingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\GRNControl.xaml.cs">
       <DependentUpon>GRNControl.xaml</DependentUpon>
     </Compile>
@@ -379,6 +394,26 @@
     <Page Include="Views\UserControls\Execution\CuttingControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\Execution\OverAllCompleteReportControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Execution\PackagingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Execution\ProductionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Execution\QualityControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Execution\ShippingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\GRNControl.xaml">
       <SubType>Designer</SubType>
