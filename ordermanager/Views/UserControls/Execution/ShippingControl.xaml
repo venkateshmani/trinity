@@ -134,7 +134,7 @@
                         <DataGridTemplateColumn Header="ORD. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox IsReadOnly="True"  Text="{Binding QuantityWrapper, StringFormat=n4}" />
+                                    <TextBox IsReadOnly="True"  Text="{Binding NumberOfPiecesWrapper, StringFormat=n4}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
