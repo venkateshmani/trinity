@@ -770,5 +770,71 @@ namespace ordermanager.DatabaseModel
         }
 
         #endregion
+
+        #region Execution Dates
+
+        #region Cutting Date Management
+
+            private Dictionary<string, List<ProductCutting>> ProductCuttings = null;
+            public List<string> ProductCuttingDates
+            {
+                get
+                {
+                    if (ProductCuttings == null)
+                    {
+                        ProductCuttings = new Dictionary<string, List<ProductCutting>>();
+                        foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
+                        {
+                            foreach (ProductCutting productCutting in summary.ProductCuttings)
+                            {
+                                List<ProductCutting> cuttings = null;
+                                if(ProductCuttings.ContainsKey(productCutting.Date.ToShortDateString()))
+                                {
+                                    cuttings = ProductCuttings[productCutting.Date.ToShortDateString()];
+                                }
+                                else
+                                {
+                                    cuttings = new List<ProductCutting>();
+                                    ProductCuttings.Add(productCutting.Date.ToShortDateString(), cuttings);
+                                }
+
+                                if (cuttings != null)
+                                    cuttings.Add(productCutting);
+                            }
+                        }
+                    }
+
+                    return ProductCuttings.Keys.ToList();
+                }
+            }
+
+            public List<ProductCutting> GetCuttings(string date)
+            {
+                if (ProductCuttings.ContainsKey(date))
+                {
+                    return ProductCuttings[)];
+                }
+
+                return null;
+            }
+
+            public void AddNewCuttingDateRecord(string date)
+            {
+                if (!ProductCuttings.ContainsKey(date))
+                {
+                    List<ProductCutting> cuttings = new List<ProductCutting>();
+                    ProductCuttings.Add(date, cuttings);
+                    foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
+                    {
+                        ProductCutting newCutting = new ProductCutting() { Date = DateTime.Parse(date) };
+                        summary.ProductCuttings.Add(newCutting);
+                        cuttings.Add(newCutting);
+                    }
+                }
+            }
+
+        #endregion 
+
+        #endregion
     }
 }
