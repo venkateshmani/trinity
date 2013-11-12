@@ -46,9 +46,16 @@ namespace ordermanager.Views.UserControls
             tabExecutionDetailsControl.SelectionChanged += tabExecutionDetailsControl_SelectionChanged;
         }
 
+        string lastSelectedExecutionDetailsTab = string.Empty;
         void tabExecutionDetailsControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateExecutionView();
+            TabItem selectedTabItem = tabExecutionDetailsControl.SelectedItem as TabItem;
+            string selectedTabHeader = selectedTabItem.Header.ToString();
+            if(selectedTabHeader != lastSelectedExecutionDetailsTab)
+            {
+                lastSelectedExecutionDetailsTab = selectedTabHeader;
+                UpdateExecutionView();
+            }
         }
 
         public Order Order
