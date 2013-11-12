@@ -28,15 +28,9 @@ namespace ordermanager.Views.UserControls.Execution
         public QualityControl()
         {
             InitializeComponent();
-            this.Loaded += QualityControl_Loaded;
         }
 
         #region View Model Initialization
-
-        void QualityControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            ViewModel = new QualityViewModel();
-        }
 
         public void SetOrder(Order order)
         {
@@ -79,7 +73,7 @@ namespace ordermanager.Views.UserControls.Execution
                 {
                     ViewModel.SelectedDate = tvProducts.SelectedItem.ToString();
                     ViewModel.SelectedProduct = parent.Header as OrderProduct;
-                    executionDetails.ItemsSource = ViewModel.SelectedProduct.GetCuttings(ViewModel.SelectedDate);
+                    executionDetails.ItemsSource = ViewModel.SelectedProduct.GetQualityChecks(ViewModel.SelectedDate);
                     executionDetails.Visibility = System.Windows.Visibility.Visible;
                 }
                 else

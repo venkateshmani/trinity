@@ -28,15 +28,9 @@ namespace ordermanager.Views.UserControls.Execution
         public ProductionControl()
         {
             InitializeComponent();
-            this.Loaded += ProductionControl_Loaded;
         }
 
         #region View Model Initialization
-
-        void ProductionControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            ViewModel = new ProductionViewModel();
-        }
 
         public void SetOrder(Order order)
         {
@@ -79,7 +73,7 @@ namespace ordermanager.Views.UserControls.Execution
                 {
                     ViewModel.SelectedDate = tvProducts.SelectedItem.ToString();
                     ViewModel.SelectedProduct = parent.Header as OrderProduct;
-                    executionDetails.ItemsSource = ViewModel.SelectedProduct.GetCuttings(ViewModel.SelectedDate);
+                    executionDetails.ItemsSource = ViewModel.SelectedProduct.GetProductions(ViewModel.SelectedDate);
                     executionDetails.Visibility = System.Windows.Visibility.Visible;
                 }
                 else

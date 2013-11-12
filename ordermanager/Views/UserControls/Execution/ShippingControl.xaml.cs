@@ -28,16 +28,10 @@ namespace ordermanager.Views.UserControls.Execution
         public ShippingControl()
         {
             InitializeComponent();
-            this.Loaded += ShippingControl_Loaded;
         }
 
 
         #region View Model Initialization
-
-        void ShippingControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            ViewModel = new ShipmentViewModel();
-        }
 
         public void SetOrder(Order order)
         {
@@ -81,7 +75,7 @@ namespace ordermanager.Views.UserControls.Execution
                 {
                     ViewModel.SelectedDate = tvProducts.SelectedItem.ToString();
                     ViewModel.SelectedProduct = parent.Header as OrderProduct;
-                    executionDetails.ItemsSource = ViewModel.SelectedProduct.GetCuttings(ViewModel.SelectedDate);
+                    executionDetails.ItemsSource = ViewModel.SelectedProduct.GetShipments(ViewModel.SelectedDate);
                     executionDetails.Visibility = System.Windows.Visibility.Visible;
                 }
                 else
