@@ -838,7 +838,7 @@ namespace ordermanager.DatabaseModel
                 }
             }
 
-            public void DiscardTodayCuttingDateRecord()
+            public void DiscardTodaysCuttingRecord()
             {
                 string todayDate = DateTime.Now.ToShortDateString();
 
