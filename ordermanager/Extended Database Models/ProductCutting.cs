@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -107,7 +108,42 @@ namespace ordermanager.DatabaseModel
             }
             set
             {
+
+                decimal oldExcessToStock =0;
+                if(ExcessToStock != null)
+                    oldExcessToStock = ExcessToStock.Value;
+
                 ExcessToStock = value;
+
+                decimal newExcessToStock = 0;
+                if (ExcessToStock != null)
+                    newExcessToStock = value.Value;
+
+                ProductStock stock = null;
+
+                if (DBResources.Instance.Context.ProductStocks.Count() != 0)
+                {
+                 stock  =  (from productStock in DBResources.Instance.Context.ProductStocks
+                     where productStock.ProductName == this.ProductBreakUpSummary.OrderProduct.ProductName &&
+                           productStock.ProductSize == this.ProductBreakUpSummary.ProductSize &&
+                           productStock.Color == this.ProductBreakUpSummary.Color
+                     select productStock).FirstOrDefault();
+                }
+
+                if (stock == null)
+                {
+                    ProductStock pStock = DBResources.Instance.Context.ProductStocks.Add(new ProductStock());
+                    pStock.ProductName = this.ProductBreakUpSummary.OrderProduct.ProductName;
+                    pStock.ProductSize = this.ProductBreakUpSummary.ProductSize;
+                    pStock.Color = this.ProductBreakUpSummary.Color;
+                    pStock.CutStock = newExcessToStock;
+                }
+                else
+                {
+                    stock.CutStock -= oldExcessToStock;
+                    stock.CutStock += newExcessToStock;
+                }
+                     
                 OnPropertyChanged("ExcessToStockWrapper");
             }
         }
