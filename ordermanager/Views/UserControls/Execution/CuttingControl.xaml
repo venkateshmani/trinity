@@ -41,8 +41,8 @@
             </Style>
             <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
             <DataProviders:DataProvider x:Key="DataProvider" />
-            <Converters:Subractor x:Key="subractor"/>         
-            <Converters:UserFriendlyDateNameCreator x:Key="UserFriendlyDateNameCreator"/>           
+            <Converters:Subractor x:Key="subractor"/>
+            <Converters:UserFriendlyDateNameCreator x:Key="UserFriendlyDateNameCreator"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -57,7 +57,7 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
         <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="StyleIDs" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
@@ -77,7 +77,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock VerticalAlignment="Center" Text="{Binding Converter={StaticResource IndexToNumber}, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}}" Style="{StaticResource ProductsListContentStyle}" HorizontalAlignment="Left" FontFamily="{StaticResource ContentFontFamily}" Grid.Column="0"/>
-                        <TextBlock VerticalAlignment="Center" Text=". " Style="{StaticResource ProductsListContentStyle}" HorizontalAlignment="Left" FontFamily="{StaticResource ContentFontFamily}" Grid.Column="1"/>                        
+                        <TextBlock VerticalAlignment="Center" Text=". " Style="{StaticResource ProductsListContentStyle}" HorizontalAlignment="Left" FontFamily="{StaticResource ContentFontFamily}" Grid.Column="1"/>
                         <TextBlock VerticalAlignment="Center" Text="{Binding ProductName.StyleID}" TextAlignment="Left" Style="{StaticResource ProductsListContentStyle}" HorizontalAlignment="Left" FontFamily="{StaticResource ContentFontFamily}" Grid.Column="3"/>
                     </Grid>
                     <HierarchicalDataTemplate.ItemTemplate>
@@ -100,11 +100,11 @@
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Cutting Details" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
-        
+
         <TextBlock x:Name="supplierSelectedInfo" Text="Select a purchase order under the supplier" Grid.Row="2" Grid.Column="2"
                    VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"></TextBlock>
 
-        <!--<Grid Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+        <Grid Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -131,7 +131,7 @@
                     </TextBlock.Foreground>
                 </TextBlock>
             </StackPanel>
-            
+
             <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" Margin="5">
                 <DataGrid x:Name="executionDetails" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
@@ -139,62 +139,62 @@
                                               RowHeaderWidth="25"
                                               HeadersVisibility="Column"
                                               IsReadOnly="{Binding IsReadOnly}">
-                <DataGrid.Columns>
-                   
+                    <DataGrid.Columns>
 
-                    <DataGridTemplateColumn Header="Size" Width="0.1*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox IsReadOnly="True" Text="{Binding SizeWrapper}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Size" Width="0.1*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox IsReadOnly="True" Text="{Binding SizeWrapper, Mode=OneWay}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
                         <DataGridTemplateColumn Header="Color" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox IsReadOnly="True" Text="{Binding ColorWrapper}" />
+                                    <TextBox IsReadOnly="True" Text="{Binding ColorWrapper, Mode=OneWay}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                    
+
                         <DataGridTemplateColumn Header="ORD. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox IsReadOnly="True"  Text="{Binding NumberOfPiecesWrapper, StringFormat=n4}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox IsReadOnly="True"  Text="{Binding NumberOfPiecesWrapper, StringFormat=n4, Mode=OneWay}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Cut. Qty" Width="0.1*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding CutQuantityWrapper, StringFormat=n4}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Cut. Qty" Width="0.1*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding CutQuantityWrapper, StringFormat=n4}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Pending. Qty" Width="0.1*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding PendingWrapper, StringFormat=n4}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Pending. Qty" Width="0.1*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox IsReadOnly="True" Text="{Binding PendingWrapper, StringFormat=n4}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Exc. To Stock" Width="0.1*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding ExcessToStockWrapper, StringFormat=n4}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Exc. To Stock" Width="0.1*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox IsReadOnly="True" Text="{Binding ExcessToStockWrapper, StringFormat=n4}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                   </DataGrid.Columns>
-            </DataGrid>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Border>
-        </Grid>-->
-        
+        </Grid>
+
         <GridSplitter Grid.Row="0" Grid.Column="1"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"

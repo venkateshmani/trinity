@@ -86,7 +86,7 @@ namespace ordermanager.ViewModel.Execution
             }
             set
             {
-                IsReadOnly = value;
+                m_IsReadOnly = value;
                 OnPropertyChanged("IsReadOnly");
             }
         }

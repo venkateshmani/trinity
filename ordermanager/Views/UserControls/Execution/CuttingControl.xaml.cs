@@ -31,31 +31,31 @@ namespace ordermanager.Views.UserControls.Execution
 
         #region View Model Initialization
 
-            void CuttingControl_Loaded(object sender, RoutedEventArgs e)
-            {
-                //ViewModel = new CuttingViewModel();
-            }
+        void CuttingControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            //ViewModel = new CuttingViewModel();
+        }
 
-            public void SetOrder(Order order)
-            {
-                ViewModel.Order = order;
-            }
+        public void SetOrder(Order order)
+        {
+            ViewModel.Order = order;
+        }
 
-            private CuttingViewModel m_ViewModel = null;
-            public CuttingViewModel ViewModel
+        private CuttingViewModel m_ViewModel = null;
+        public CuttingViewModel ViewModel
+        {
+            get
             {
-                get
-                {
-                    return m_ViewModel;
-                }
-                set
-                {
-                    m_ViewModel = value;
-                    this.DataContext = value;
-                }
+                return m_ViewModel;
             }
+            set
+            {
+                m_ViewModel = value;
+                this.DataContext = value;
+            }
+        }
 
-        #endregion 
+        #endregion
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
@@ -70,7 +70,9 @@ namespace ordermanager.Views.UserControls.Execution
                 TreeViewItem parent = ItemsControl.ItemsControlFromItemContainer(item) as TreeViewItem;
                 if (parent != null && parent.Header is OrderProduct)
                 {
-                    
+                    ViewModel.SelectedDate = tvProducts.SelectedItem.ToString();
+                    ViewModel.SelectedProduct = parent.Header as OrderProduct;
+                    executionDetails.ItemsSource = ViewModel.SelectedProduct.GetCuttings(ViewModel.SelectedDate);
                 }
             }
         }
