@@ -66,8 +66,8 @@
             </Border>
         </Grid>
 
-        <TreeView x:Name="tvProducts" Grid.Row="2" Grid.Column="0" SelectedItemChanged="tvProducts_SelectedItemChanged" ItemsSource="{Binding Products}" Background="White" VerticalAlignment="Stretch"
-                  HorizontalAlignment="Stretch">
+        <TreeView x:Name="tvProducts" Grid.Row="2" Grid.Column="0"  ItemsSource="{Binding Products}" Background="White" VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch" TreeViewItem.Selected="TreeViewItemSelected">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Dates}">
                     <Grid Width="{Binding ActualWidth, ConverterParameter=20, Converter={StaticResource subractor}, ElementName=tvProducts}" VerticalAlignment="Stretch" Height="30" HorizontalAlignment="Stretch">

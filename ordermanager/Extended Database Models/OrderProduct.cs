@@ -891,6 +891,7 @@ namespace ordermanager.DatabaseModel
                         }
                     }
 
+                    AddNewProductionDateRecord(DateTime.Now.ToShortDateString());
                     return ProductProductions.Keys.ToList();
                 }
             }
@@ -953,7 +954,7 @@ namespace ordermanager.DatabaseModel
                             }
                         }
                     }
-
+                    AddNewQualityCheckDateRecord(DateTime.Now.ToShortDateString());
                     return ProductQualityChecks.Keys.ToList();
                 }
             }
@@ -1016,7 +1017,7 @@ namespace ordermanager.DatabaseModel
                             }
                         }
                     }
-
+                    AddNewPackageDateRecord(DateTime.Now.ToShortDateString());
                     return ProductPackagings.Keys.ToList();
                 }
             }
@@ -1079,7 +1080,7 @@ namespace ordermanager.DatabaseModel
                             }
                         }
                     }
-
+                    AddNewShipmentDateRecord(DateTime.Now.ToShortDateString());
                     return ProductShipments.Keys.ToList();
                 }
             }

@@ -63,7 +63,8 @@ namespace ordermanager.Views.UserControls.Execution
 
         }
 
-        private void tvProducts_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+       
+        private void TreeViewItemSelected(object sender, RoutedEventArgs e)
         {
 
         }
