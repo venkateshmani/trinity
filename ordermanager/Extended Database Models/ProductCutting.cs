@@ -129,9 +129,9 @@ namespace ordermanager.DatabaseModel
                 if (stock == null)
                 {
                     ProductStock pStock = DBResources.Instance.Context.ProductStocks.Add(new ProductStock());
-                    pStock.ProductName = this.ProductBreakUpSummary.OrderProduct.ProductName;
-                    pStock.ProductSize = this.ProductBreakUpSummary.ProductSize;
-                    pStock.Color = this.ProductBreakUpSummary.Color;
+                    pStock.ProductNameID = this.ProductBreakUpSummary.OrderProduct.ProductNameID;
+                    pStock.ProductSizeID = this.ProductBreakUpSummary.ProductSizeID;
+                    pStock.ColorID = this.ProductBreakUpSummary.ColorID;
                     pStock.CutStock = newExcessToStock;
                 }
                 else
