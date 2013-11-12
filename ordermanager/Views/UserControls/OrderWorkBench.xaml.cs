@@ -122,31 +122,34 @@ namespace ordermanager.Views.UserControls
 
         public void UpdateExecutionView()
         {
-            string tabHeader = Convert.ToString(((System.Windows.Controls.HeaderedContentControl)(tabExecutionDetailsControl.SelectedItem)).Header);
-            switch (tabHeader.Trim())
+            if (tabExecutionDetailsControl.SelectedItem != null)
             {
-                case "● OC Report":
-                    break;
-                case "● Cutting":
-                    if(cuttingControl.ViewModel == null || cuttingControl.ViewModel.Order != m_Order) 
-                        cuttingControl.ViewModel = new CuttingViewModel() { Order = m_Order };
-                    break;
-                case "● Production":
-                    if (productionControl.ViewModel == null || productionControl.ViewModel.Order != m_Order) 
-                        productionControl.ViewModel = new ProductionViewModel() { Order = m_Order };
-                    break;
-                case "● Quality":
-                    if (qualityControl.ViewModel == null || qualityControl.ViewModel.Order != m_Order) 
-                        qualityControl.ViewModel = new QualityViewModel() { Order = m_Order };
-                    break;
-                case "● Packaging":
-                    if (packagingControl.ViewModel == null || packagingControl.ViewModel.Order != m_Order) 
-                        packagingControl.ViewModel = new PackagingViewModel() { Order = m_Order };
-                    break;
-                case "● Shipment":
-                    if (shippingControl.ViewModel == null || shippingControl.ViewModel.Order != m_Order) 
-                        shippingControl.ViewModel = new ShipmentViewModel() { Order = m_Order };
-                    break;
+                string tabHeader = Convert.ToString(((System.Windows.Controls.HeaderedContentControl)(tabExecutionDetailsControl.SelectedItem)).Header);
+                switch (tabHeader.Trim())
+                {
+                    case "● OC Report":
+                        break;
+                    case "● Cutting":
+                        if (cuttingControl.ViewModel == null || cuttingControl.ViewModel.Order != m_Order)
+                            cuttingControl.ViewModel = new CuttingViewModel() { Order = m_Order };
+                        break;
+                    case "● Production":
+                        if (productionControl.ViewModel == null || productionControl.ViewModel.Order != m_Order)
+                            productionControl.ViewModel = new ProductionViewModel() { Order = m_Order };
+                        break;
+                    case "● Quality":
+                        if (qualityControl.ViewModel == null || qualityControl.ViewModel.Order != m_Order)
+                            qualityControl.ViewModel = new QualityViewModel() { Order = m_Order };
+                        break;
+                    case "● Packaging":
+                        if (packagingControl.ViewModel == null || packagingControl.ViewModel.Order != m_Order)
+                            packagingControl.ViewModel = new PackagingViewModel() { Order = m_Order };
+                        break;
+                    case "● Shipment":
+                        if (shippingControl.ViewModel == null || shippingControl.ViewModel.Order != m_Order)
+                            shippingControl.ViewModel = new ShipmentViewModel() { Order = m_Order };
+                        break;
+                }
             }
         }
 

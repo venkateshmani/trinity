@@ -145,7 +145,7 @@
                         <DataGridTemplateColumn Header="Size" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox IsReadOnly="True" Text="{Binding SizeWrapper, Mode=OneWay}" />
+                                    <TextBox IsReadOnly="True" Text="{Binding SizeWrapper.Size, Mode=OneWay}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -153,7 +153,7 @@
                         <DataGridTemplateColumn Header="Color" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox IsReadOnly="True" Text="{Binding ColorWrapper, Mode=OneWay}" />
+                                    <TextBox IsReadOnly="True" Text="{Binding ColorWrapper.Name, Mode=OneWay}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -169,7 +169,7 @@
                         <DataGridTemplateColumn Header="Cut. Qty" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding CutQuantityWrapper, StringFormat=n4}" />
+                                    <TextBox Text="{Binding CutQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

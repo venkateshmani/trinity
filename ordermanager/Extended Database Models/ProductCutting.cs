@@ -40,8 +40,12 @@ namespace ordermanager.DatabaseModel
             }
             set
             {
-                CutQuantity = value;
-                OnPropertyChanged("CutQuantityWrapper");
+                if (CutQuantity != value)
+                {
+                    CutQuantity = value;
+                    PendingWrapper = NumberOfPiecesWrapper - value;
+                    OnPropertyChanged("CutQuantityWrapper");
+                }
             }
         }
 

@@ -1,6 +1,8 @@
 ﻿using ordermanager.DatabaseModel;
 using ordermanager.Interfaces_And_Enums;
+using ordermanager.Utilities;
 using ordermanager.ViewModel.Execution;
+using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +61,11 @@ namespace ordermanager.Views.UserControls.Execution
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-
+            CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
+            if ((commentBox.ShowDialog() == true))
+            {
+                m_ViewModel.Save(commentBox.Comment);
+            }
         }
 
         private void TreeViewItemSelected(object sender, RoutedEventArgs e)

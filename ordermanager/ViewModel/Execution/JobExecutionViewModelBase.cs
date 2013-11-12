@@ -1,6 +1,8 @@
-﻿using ordermanager.Interfaces_And_Enums;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.Interfaces_And_Enums;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -22,14 +24,14 @@ namespace ordermanager.ViewModel.Execution
                 m_Order = value;
                 if (m_Order != null)
                 {
-                    Products = Order.OrderProducts.ToList();
+                    Products = new ObservableCollection<OrderProduct>(Order.OrderProducts);
                 }
                 OnPropertyChanged("Order");
             }
         }
 
-        private List<DatabaseModel.OrderProduct> m_Products = null;
-        public List<DatabaseModel.OrderProduct> Products
+        private ObservableCollection<OrderProduct> m_Products = null;
+        public ObservableCollection<OrderProduct> Products
         {
             get
             {
@@ -91,10 +93,17 @@ namespace ordermanager.ViewModel.Execution
             }
         }
 
-      
+
         public virtual bool Save(string userComment)
         {
-            return true;
+            Order.LastModifiedDate = DateTime.Now;
+            //History historyItem = new History();
+            //historyItem.Date = DateTime.Now;
+            //historyItem.UserName = DBResources.Instance.CurrentUser.UserName;
+            //historyItem.Comment = userComment;
+            //historyItem.Order = Order;
+            //Order.Histories.Add(historyItem);
+            return DBResources.Instance.Save();
         }
 
 
@@ -109,8 +118,8 @@ namespace ordermanager.ViewModel.Execution
             }
         }
 
-        #endregion 
-       
+        #endregion
+
         public virtual void AddNewRecord(DateTime date) { }
     }
 }
