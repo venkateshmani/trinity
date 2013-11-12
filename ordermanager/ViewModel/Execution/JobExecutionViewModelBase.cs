@@ -97,12 +97,13 @@ namespace ordermanager.ViewModel.Execution
         public virtual bool Save(string userComment)
         {
             Order.LastModifiedDate = DateTime.Now;
-            //History historyItem = new History();
-            //historyItem.Date = DateTime.Now;
-            //historyItem.UserName = DBResources.Instance.CurrentUser.UserName;
-            //historyItem.Comment = userComment;
-            //historyItem.Order = Order;
-            //Order.Histories.Add(historyItem);
+            History historyItem = new History();
+            historyItem.Date = DateTime.Now;
+            historyItem.UserName = DBResources.Instance.CurrentUser.UserName;
+            historyItem.Comment = userComment;
+            historyItem.Order = Order;
+            historyItem.OrderChanges = "has changed in Execution";
+            Order.Histories.Add(historyItem);
             return DBResources.Instance.Save();
         }
 
