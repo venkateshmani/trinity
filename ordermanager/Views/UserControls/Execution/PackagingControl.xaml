@@ -196,7 +196,7 @@
                         <DataGridTemplateColumn Header="Pending" Width="0.1*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox  Text="{Binding PendingWrapper, StringFormat=n4}" />
+                                    <TextBox  IsReadOnly="True" Text="{Binding PendingWrapper, StringFormat=n4}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -204,7 +204,7 @@
                         <DataGridTemplateColumn Header="Exc. To Stock" Width="0.1*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox  Text="{Binding ExcessToStockWrapper, StringFormat=n4}" />
+                                    <TextBox IsReadOnly="True" Text="{Binding ExcessToStockWrapper, StringFormat=n4}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

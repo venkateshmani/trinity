@@ -195,7 +195,7 @@
                         <DataGridTemplateColumn Header="Quantity Failed" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding FailedWrapper, StringFormat=n4}" />
+                                    <TextBox IsReadOnly="True" Text="{Binding FailedWrapper, StringFormat=n4}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
