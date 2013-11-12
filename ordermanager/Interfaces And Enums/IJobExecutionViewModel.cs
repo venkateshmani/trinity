@@ -12,7 +12,7 @@ namespace ordermanager.Interfaces_And_Enums
         Order Order { get; set; }
         List<OrderProduct> Products { get; set; }
         OrderProduct SelectedProduct { get; set; }
-        DateTime SelectedDate { get; set; }
+        string SelectedDate { get; set; }
 
         bool IsReadOnly { get; set; }
         bool Save(string userComment);

@@ -57,8 +57,8 @@ namespace ordermanager.ViewModel.Execution
             }
         }
 
-        private DateTime m_SelectedDate = DateTime.Today;
-        public DateTime SelectedDate
+        private string m_SelectedDate = string.Empty;
+        public string SelectedDate
         {
             get
             {
@@ -67,6 +67,12 @@ namespace ordermanager.ViewModel.Execution
             set
             {
                 m_SelectedDate = value;
+
+                if (!string.IsNullOrEmpty(value) && value == DateTime.Now.ToShortDateString())
+                    IsReadOnly = true;
+                else
+                    IsReadOnly = false;
+
                 OnPropertyChanged("SelectedDate");
             }
         }
