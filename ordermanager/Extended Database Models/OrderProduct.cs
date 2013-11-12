@@ -773,6 +773,8 @@ namespace ordermanager.DatabaseModel
 
         #region Execution Dates
 
+        
+
         #region Cutting Management
 
             private Dictionary<string, List<ProductCutting>> ProductCuttings = null;
@@ -802,8 +804,9 @@ namespace ordermanager.DatabaseModel
                                     cuttings.Add(productCutting);
                             }
                         }
-                        AddNewCuttingDateRecord(DateTime.Now.ToShortDateString());
                     }
+
+                    AddNewCuttingDateRecord(DateTime.Now.ToShortDateString());
 
                     return ProductCuttings.Keys.ToList();
                 }
@@ -832,6 +835,26 @@ namespace ordermanager.DatabaseModel
                         summary.ProductCuttings.Add(newCutting);
                         cuttings.Add(newCutting);
                     }
+                }
+            }
+
+            public void DiscardTodayCuttingDateRecord()
+            {
+                string todayDate = DateTime.Now.ToShortDateString();
+
+                if (!ProductCuttings.ContainsKey(todayDate))
+                {
+                    List<ProductCutting> cuttings = ProductCuttings[todayDate];
+                    foreach (ProductCutting cutting in cuttings)
+                    {
+                        if (cutting.CuttingID == 0)
+                        {
+                            cutting.ProductBreakUpSummary.ProductCuttings.Remove(cutting);
+                            cutting.ProductBreakUpSummary = null;
+                        }
+                    }
+
+                    ProductCuttings.Remove(todayDate);
                 }
             }
 
