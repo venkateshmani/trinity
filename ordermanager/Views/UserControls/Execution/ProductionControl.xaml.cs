@@ -1,6 +1,8 @@
 ﻿using ordermanager.DatabaseModel;
 using ordermanager.Interfaces_And_Enums;
+using ordermanager.Utilities;
 using ordermanager.ViewModel.Execution;
+using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,42 +33,62 @@ namespace ordermanager.Views.UserControls.Execution
 
         #region View Model Initialization
 
-            void ProductionControl_Loaded(object sender, RoutedEventArgs e)
+        void ProductionControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel = new ProductionViewModel();
+        }
+
+        public void SetOrder(Order order)
+        {
+            ViewModel.Order = order;
+        }
+
+
+        private ProductionViewModel m_ViewModel = null;
+        public ProductionViewModel ViewModel
+        {
+            get
             {
-                ViewModel = new ProductionViewModel();
+                return m_ViewModel;
             }
-
-            public void SetOrder(Order order)
+            set
             {
-                ViewModel.Order = order;
+                m_ViewModel = value;
+                this.DataContext = value;
             }
+        }
 
-
-            private ProductionViewModel m_ViewModel = null;
-            public ProductionViewModel ViewModel
-            {
-                get
-                {
-                    return m_ViewModel;
-                }
-                set
-                {
-                    m_ViewModel = value;
-                    this.DataContext = value;
-                }
-            }
-
-        #endregion 
+        #endregion
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-
+            CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
+            if ((commentBox.ShowDialog() == true))
+            {
+                m_ViewModel.Save(commentBox.Comment, "Production");
+            }
         }
 
-        private void tvProducts_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void TreeViewItemSelected(object sender, RoutedEventArgs e)
         {
-
+            TreeViewItem item = e.OriginalSource as TreeViewItem;
+            if (item != null)
+            {
+                TreeViewItem parent = ItemsControl.ItemsControlFromItemContainer(item) as TreeViewItem;
+                if (parent != null && parent.Header is OrderProduct)
+                {
+                    ViewModel.SelectedDate = tvProducts.SelectedItem.ToString();
+                    ViewModel.SelectedProduct = parent.Header as OrderProduct;
+                    executionDetails.ItemsSource = ViewModel.SelectedProduct.GetCuttings(ViewModel.SelectedDate);
+                    executionDetails.Visibility = System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    m_ViewModel.SelectedProduct = tvProducts.SelectedItem as OrderProduct;
+                    executionDetails.Visibility = System.Windows.Visibility.Hidden;
+                }
+            }
         }
-     
+
     }
 }

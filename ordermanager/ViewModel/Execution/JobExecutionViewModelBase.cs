@@ -94,7 +94,7 @@ namespace ordermanager.ViewModel.Execution
         }
 
 
-        public virtual bool Save(string userComment)
+        public virtual bool Save(string userComment, string executionType)
         {
             Order.LastModifiedDate = DateTime.Now;
             History historyItem = new History();
@@ -102,7 +102,7 @@ namespace ordermanager.ViewModel.Execution
             historyItem.UserName = DBResources.Instance.CurrentUser.UserName;
             historyItem.Comment = userComment;
             historyItem.Order = Order;
-            historyItem.OrderChanges = "has changed in Execution";
+            historyItem.OrderChanges = "has changed in " + executionType;
             Order.Histories.Add(historyItem);
             return DBResources.Instance.Save();
         }

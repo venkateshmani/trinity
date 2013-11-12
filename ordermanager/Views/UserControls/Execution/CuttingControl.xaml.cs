@@ -64,7 +64,7 @@ namespace ordermanager.Views.UserControls.Execution
             CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
             if ((commentBox.ShowDialog() == true))
             {
-                m_ViewModel.Save(commentBox.Comment);
+                m_ViewModel.Save(commentBox.Comment,"Cutting");
             }
         }
 

@@ -16,7 +16,7 @@ namespace ordermanager.Interfaces_And_Enums
         string SelectedDate { get; set; }
 
         bool IsReadOnly { get; set; }
-        bool Save(string userComment);
+        bool Save(string userComment, string executionType);
         void AddNewRecord(DateTime date);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using ordermanager.DatabaseModel;
 using ordermanager.Interfaces_And_Enums;
+using ordermanager.Utilities;
 using ordermanager.ViewModel.Execution;
+using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,47 +28,66 @@ namespace ordermanager.Views.UserControls.Execution
         public QualityControl()
         {
             InitializeComponent();
-            this.Loaded += QualityControl_Loaded; 
+            this.Loaded += QualityControl_Loaded;
         }
 
         #region View Model Initialization
 
-            void QualityControl_Loaded(object sender, RoutedEventArgs e)
+        void QualityControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ViewModel = new QualityViewModel();
+        }
+
+        public void SetOrder(Order order)
+        {
+            ViewModel.Order = order;
+        }
+
+
+        private QualityViewModel m_ViewModel = null;
+        public QualityViewModel ViewModel
+        {
+            get
             {
-                ViewModel = new QualityViewModel();
+                return m_ViewModel;
             }
-
-            public void SetOrder(Order order)
+            set
             {
-                ViewModel.Order = order;
+                m_ViewModel = value;
+                this.DataContext = value;
             }
+        }
 
-
-            private QualityViewModel m_ViewModel = null;
-            public QualityViewModel ViewModel
-            {
-                get
-                {
-                    return m_ViewModel;
-                }
-                set
-                {
-                    m_ViewModel = value;
-                    this.DataContext = value;
-                }
-            }
-
-        #endregion 
+        #endregion
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-
+            CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
+            if ((commentBox.ShowDialog() == true))
+            {
+                m_ViewModel.Save(commentBox.Comment, "Quality");
+            }
         }
 
-       
         private void TreeViewItemSelected(object sender, RoutedEventArgs e)
         {
-
+            TreeViewItem item = e.OriginalSource as TreeViewItem;
+            if (item != null)
+            {
+                TreeViewItem parent = ItemsControl.ItemsControlFromItemContainer(item) as TreeViewItem;
+                if (parent != null && parent.Header is OrderProduct)
+                {
+                    ViewModel.SelectedDate = tvProducts.SelectedItem.ToString();
+                    ViewModel.SelectedProduct = parent.Header as OrderProduct;
+                    executionDetails.ItemsSource = ViewModel.SelectedProduct.GetCuttings(ViewModel.SelectedDate);
+                    executionDetails.Visibility = System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    m_ViewModel.SelectedProduct = tvProducts.SelectedItem as OrderProduct;
+                    executionDetails.Visibility = System.Windows.Visibility.Hidden;
+                }
+            }
         }
     }
 }
