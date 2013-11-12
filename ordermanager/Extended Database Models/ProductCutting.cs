@@ -77,7 +77,17 @@ namespace ordermanager.DatabaseModel
 
             if (pending < 0)
             {
-                ExcessToStockWrapper = Math.Abs(pending);
+                decimal totalExcess = 0;
+
+                foreach (ProductCutting cutting in ProductBreakUpSummary.ProductCuttings)
+                {
+                    if (cutting.Date < this.Date)
+                    {
+                        totalExcess += cutting.ExcessToStockWrapper.Value;
+                    }
+                }
+
+                ExcessToStockWrapper = Math.Abs(pending) - totalExcess; 
                 PendingWrapper = 0;
             }
             else
@@ -86,16 +96,18 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        private decimal m_ExcessToStock = 0m;
-        public decimal ExcessToStockWrapper
+        public decimal? ExcessToStockWrapper
         {
             get
             {
-                return m_ExcessToStock;
+                if (ExcessToStock == null)
+                    return 0;
+
+                return ExcessToStock;
             }
             set
             {
-                m_ExcessToStock = value;
+                ExcessToStock = value;
                 OnPropertyChanged("ExcessToStockWrapper");
             }
         }
