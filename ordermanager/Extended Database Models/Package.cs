@@ -41,7 +41,32 @@ namespace ordermanager.DatabaseModel
             set
             {
                 Packed = value;
+                CalculatePendingQuantity();
                 OnPropertyChanged("PackagedWrapper");
+            }
+        }
+
+        private void CalculatePendingQuantity()
+        {
+            decimal totalPackagedQuantity = 0;
+            foreach (Package package in ProductBreakUpSummary.Packages)
+            {
+                if (package.Date <= this.Date)
+                {
+                    totalPackagedQuantity += package.PackagedWrapper;
+                }
+            }
+
+            decimal pending = NumberOfPiecesWrapper - totalPackagedQuantity;
+
+            if (pending < 0)
+            {
+                ExcessToStockWrapper = Math.Abs(pending);
+                PendingWrapper = 0;
+            }
+            else
+            {
+                PendingWrapper = pending;
             }
         }
 

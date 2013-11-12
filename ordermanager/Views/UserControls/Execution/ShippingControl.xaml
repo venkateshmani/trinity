@@ -171,7 +171,7 @@
                         <DataGridTemplateColumn Header="Shipped" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding ShippedWrapper, StringFormat=n4}" />
+                                    <TextBox Text="{Binding ShippedWrapper, UpdateSourceTrigger=LostFocus, StringFormat=n4}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -179,7 +179,7 @@
                         <DataGridTemplateColumn Header="Rejected" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding RejectedWrapper, StringFormat=n4}" />
+                                    <TextBox Text="{Binding RejectedWrapper, UpdateSourceTrigger=LostFocus, StringFormat=n4}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

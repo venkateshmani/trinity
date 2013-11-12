@@ -170,7 +170,7 @@
                         <DataGridTemplateColumn Header="Quantity Passed" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding PassedWrapper, StringFormat=n4}" />
+                                    <TextBox Text="{Binding PassedWrapper, UpdateSourceTrigger=LostFocus, StringFormat=n4}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

@@ -43,7 +43,7 @@ namespace ordermanager.DatabaseModel
                 if (CutQuantity != value)
                 {
                     CutQuantity = value;
-                    PendingWrapper = NumberOfPiecesWrapper - value;
+                    CalculatePendingQuantity();
                     OnPropertyChanged("CutQuantityWrapper");
                 }
             }
@@ -59,6 +59,30 @@ namespace ordermanager.DatabaseModel
             {
                 Pending = value;
                 OnPropertyChanged("PendingWrapper");
+            }
+        }
+
+        private void CalculatePendingQuantity()
+        {
+            decimal totalCutQuantity = 0;
+            foreach (ProductCutting cutting in ProductBreakUpSummary.ProductCuttings)
+            {
+                if (cutting.Date <= this.Date)
+                {
+                    totalCutQuantity += cutting.CutQuantity;
+                }
+            }
+
+            decimal pending = NumberOfPiecesWrapper - totalCutQuantity;
+
+            if (pending < 0)
+            {
+                ExcessToStockWrapper = Math.Abs(pending);
+                PendingWrapper = 0;
+            }
+            else
+            {
+                PendingWrapper = pending;
             }
         }
 

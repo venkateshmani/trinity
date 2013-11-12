@@ -170,7 +170,7 @@
                         <DataGridTemplateColumn Header="Production Completed" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding CompletedQuantityWrapper, StringFormat=n0}" />
+                                    <TextBox Text="{Binding CompletedQuantityWrapper, UpdateSourceTrigger=LostFocus, StringFormat=n0}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

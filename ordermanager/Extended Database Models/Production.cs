@@ -41,9 +41,11 @@ namespace ordermanager.DatabaseModel
             set
             {
                 CompletedQuantity = value;
+                CalculatePendingQuantity();
                 OnPropertyChanged("CompletedQuantityWrapper");
             }
         }
+
 
         public decimal PendingWrapper
         {
@@ -56,6 +58,20 @@ namespace ordermanager.DatabaseModel
                 Pending = value;
                 OnPropertyChanged("PendingWrapper");
             }
+        }
+
+        private void CalculatePendingQuantity()
+        {
+            decimal totalCompletedQuantity = 0;
+            foreach (Production production in ProductBreakUpSummary.Productions)
+            {
+                if (production.Date <= this.Date)
+                {
+                    totalCompletedQuantity += production.CompletedQuantity;
+                }
+            }
+
+            PendingWrapper = NumberOfPiecesWrapper - totalCompletedQuantity;
         }
     }
 }

@@ -171,7 +171,7 @@
                         <DataGridTemplateColumn Header="Packaged Qty" Width="0.1*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox  Text="{Binding PackagedWrapper, StringFormat=n4}" />
+                                    <TextBox  Text="{Binding PackagedWrapper, UpdateSourceTrigger=LostFocus, StringFormat=n4}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
