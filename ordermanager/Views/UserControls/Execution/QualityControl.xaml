@@ -45,6 +45,7 @@
             <Converters:Subractor x:Key="subractor"/>
             <Converters:FlipBoolValueConverter x:Key="FlipBoolValueConverter"/>
             <Converters:HasErrorToVisibilityConverter x:Key="hasErrorToVisibilityConverter" />
+            <Converters:UserFriendlyDateNameCreator x:Key="UserFriendlyDateNameCreator"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -89,7 +90,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock VerticalAlignment="Center" Text="{Binding}" TextAlignment="Left" Style="{StaticResource ProductsListContentStyle}" Margin="2,0,0,0" HorizontalAlignment="Left" FontFamily="{StaticResource ContentFontFamily}" FontSize="16" Grid.Column="1"/>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Converter={StaticResource UserFriendlyDateNameCreator}}" TextAlignment="Left" Style="{StaticResource ProductsListContentStyle}" Margin="2,0,0,0" HorizontalAlignment="Left" FontFamily="{StaticResource ContentFontFamily}" FontSize="16" Grid.Column="1"/>
                             </Grid>
                         </DataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
