@@ -62,9 +62,17 @@ namespace ordermanager.Views.UserControls.Execution
 
         }
 
-        private void tvProducts_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void TreeViewItemSelected(object sender, RoutedEventArgs e)
         {
-
+            TreeViewItem item = e.OriginalSource as TreeViewItem;
+            if (item != null)
+            {
+                TreeViewItem parent = ItemsControl.ItemsControlFromItemContainer(item) as TreeViewItem;
+                if (parent != null && parent.Header is OrderProduct)
+                {
+                    
+                }
+            }
         }
     }
 }
