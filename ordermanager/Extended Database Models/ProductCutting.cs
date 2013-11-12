@@ -119,16 +119,12 @@ namespace ordermanager.DatabaseModel
                 if (ExcessToStock != null)
                     newExcessToStock = value.Value;
 
-                ProductStock stock = null;
-
-                if (DBResources.Instance.Context.ProductStocks.Count() != 0)
-                {
-                 stock  =  (from productStock in DBResources.Instance.Context.ProductStocks
-                     where productStock.ProductName == this.ProductBreakUpSummary.OrderProduct.ProductName &&
-                           productStock.ProductSize == this.ProductBreakUpSummary.ProductSize &&
-                           productStock.Color == this.ProductBreakUpSummary.Color
-                     select productStock).FirstOrDefault();
-                }
+                
+                var stock  =  (from productStock in DBResources.Instance.Context.ProductStocks
+                             where productStock.ProductNameID == this.ProductBreakUpSummary.OrderProduct.ProductNameID &&
+                             productStock.ProductSizeID == this.ProductBreakUpSummary.ProductSizeID &&
+                             productStock.ColorID == this.ProductBreakUpSummary.ColorID
+                             select productStock).FirstOrDefault();
 
                 if (stock == null)
                 {
