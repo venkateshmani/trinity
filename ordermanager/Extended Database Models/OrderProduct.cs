@@ -1002,7 +1002,7 @@ namespace ordermanager.DatabaseModel
                             foreach (Package productPackage in summary.Packages)
                             {
                                 List<Package> packages = null;
-                                if (ProductQualityChecks.ContainsKey(productPackage.Date.ToShortDateString()))
+                                if (ProductPackagings.ContainsKey(productPackage.Date.ToShortDateString()))
                                 {
                                     packages = ProductPackagings[productPackage.Date.ToShortDateString()];
                                 }
@@ -1065,7 +1065,7 @@ namespace ordermanager.DatabaseModel
                             foreach (Shipment productShipment in summary.Shipments)
                             {
                                 List<Shipment> shipments = null;
-                                if (ProductQualityChecks.ContainsKey(productShipment.Date.ToShortDateString()))
+                                if (ProductShipments.ContainsKey(productShipment.Date.ToShortDateString()))
                                 {
                                     shipments = ProductShipments[productShipment.Date.ToShortDateString()];
                                 }

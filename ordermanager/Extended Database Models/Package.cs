@@ -41,19 +41,21 @@ namespace ordermanager.DatabaseModel
             set
             {
                 Packed = value;
-                CalculatePendingQuantity();
+                CalculatePendingAndExcessStockQuantity();
                 OnPropertyChanged("PackagedWrapper");
             }
         }
 
-        private void CalculatePendingQuantity()
+        private void CalculatePendingAndExcessStockQuantity()
         {
             decimal totalPackagedQuantity = 0;
+            decimal? totalExcessQuantity = 0;
             foreach (Package package in ProductBreakUpSummary.Packages)
             {
                 if (package.Date <= this.Date)
                 {
                     totalPackagedQuantity += package.PackagedWrapper;
+                    totalExcessQuantity += package.ExcessToStockWrapper;
                 }
             }
 
@@ -61,14 +63,15 @@ namespace ordermanager.DatabaseModel
 
             if (pending < 0)
             {
-                ExcessToStockWrapper = Math.Abs(pending);
+                ExcessToStockWrapper = Math.Abs(pending) - totalExcessQuantity;
                 PendingWrapper = 0;
             }
             else
             {
                 PendingWrapper = pending;
+                ExcessToStockWrapper = 0;
             }
-        }
+        }      
 
         public decimal PendingWrapper
         {
@@ -82,20 +85,20 @@ namespace ordermanager.DatabaseModel
                 OnPropertyChanged("PendingWrapper");
             }
         }
-
-        private decimal m_ExcessToStock = 0m;
-        public decimal ExcessToStockWrapper
+      
+        public decimal? ExcessToStockWrapper
         {
             get
             {
-                return m_ExcessToStock;
+                if (ExcessToStock == null)
+                    return 0;
+                return ExcessToStock.Value;
             }
             set
             {
-                m_ExcessToStock = value;
+                ExcessToStock = value;
                 OnPropertyChanged("ExcessToStockWrapper");
             }
         }
-
     }
 }
