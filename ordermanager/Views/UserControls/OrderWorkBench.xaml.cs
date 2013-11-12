@@ -49,13 +49,7 @@ namespace ordermanager.Views.UserControls
         string lastSelectedExecutionDetailsTab = string.Empty;
         void tabExecutionDetailsControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TabItem selectedTabItem = tabExecutionDetailsControl.SelectedItem as TabItem;
-            string selectedTabHeader = selectedTabItem.Header.ToString();
-            if(selectedTabHeader != lastSelectedExecutionDetailsTab)
-            {
-                lastSelectedExecutionDetailsTab = selectedTabHeader;
                 UpdateExecutionView();
-            }
         }
 
         public Order Order
@@ -120,6 +114,9 @@ namespace ordermanager.Views.UserControls
                 case "Change History":
                     m_ChangeHistorViewModel.SetOrder(m_Order);
                     break;               
+                case "Execution":
+                    UpdateExecutionView();
+                    break;
             }
         }
 
@@ -131,19 +128,24 @@ namespace ordermanager.Views.UserControls
                 case "● OC Report":
                     break;
                 case "● Cutting":
-                    cuttingControl.ViewModel = new CuttingViewModel() { Order = m_Order };
+                    if(cuttingControl.ViewModel == null || cuttingControl.ViewModel.Order != m_Order) 
+                        cuttingControl.ViewModel = new CuttingViewModel() { Order = m_Order };
                     break;
                 case "● Production":
-                    productionControl.ViewModel = new ProductionViewModel() { Order = m_Order };
+                    if (productionControl.ViewModel == null || productionControl.ViewModel.Order != m_Order) 
+                        productionControl.ViewModel = new ProductionViewModel() { Order = m_Order };
                     break;
                 case "● Quality":
-                    qualityControl.ViewModel = new QualityViewModel() { Order = m_Order };
+                    if (qualityControl.ViewModel == null || qualityControl.ViewModel.Order != m_Order) 
+                        qualityControl.ViewModel = new QualityViewModel() { Order = m_Order };
                     break;
                 case "● Packaging":
-                    packagingControl.ViewModel = new PackagingViewModel() { Order = m_Order };
+                    if (packagingControl.ViewModel == null || packagingControl.ViewModel.Order != m_Order) 
+                        packagingControl.ViewModel = new PackagingViewModel() { Order = m_Order };
                     break;
                 case "● Shipment":
-                    shippingControl.ViewModel = new ShipmentViewModel() { Order = m_Order };
+                    if (shippingControl.ViewModel == null || shippingControl.ViewModel.Order != m_Order) 
+                        shippingControl.ViewModel = new ShipmentViewModel() { Order = m_Order };
                     break;
             }
         }
