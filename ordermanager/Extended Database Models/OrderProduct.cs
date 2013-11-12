@@ -828,6 +828,7 @@ namespace ordermanager.DatabaseModel
                     foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
                     {
                         ProductCutting newCutting = new ProductCutting() { Date = DateTime.Parse(date) };
+                        newCutting.ProductBreakUpSummary = summary;
                         summary.ProductCuttings.Add(newCutting);
                         cuttings.Add(newCutting);
                     }
@@ -890,6 +891,7 @@ namespace ordermanager.DatabaseModel
                     foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
                     {
                         Production newProduction = new Production() { Date = DateTime.Parse(date) };
+                        newProduction.ProductBreakUpSummary = summary;
                         summary.Productions.Add(newProduction);
                         productions.Add(newProduction);
                     }
@@ -952,6 +954,7 @@ namespace ordermanager.DatabaseModel
                     foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
                     {
                         Quality newQualityCheck = new Quality() { Date = DateTime.Parse(date) };
+                        newQualityCheck.ProductBreakUpSummary = summary;
                         summary.Qualities.Add(newQualityCheck);
                         qualities.Add(newQualityCheck);
                     }
@@ -1014,6 +1017,7 @@ namespace ordermanager.DatabaseModel
                     foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
                     {
                         Package newPackage = new Package() { Date = DateTime.Parse(date) };
+                        newPackage.ProductBreakUpSummary = summary;
                         summary.Packages.Add(newPackage);
                         packages.Add(newPackage);
                     }
@@ -1076,6 +1080,7 @@ namespace ordermanager.DatabaseModel
                     foreach (ProductBreakUpSummary summary in ProductBreakUpSummaries)
                     {
                         Shipment newShipment = new Shipment() { Date = DateTime.Parse(date) };
+                        newShipment.ProductBreakUpSummary = summary;
                         summary.Shipments.Add(newShipment);
                         shipments.Add(newShipment);
                     }
@@ -1084,6 +1089,8 @@ namespace ordermanager.DatabaseModel
          
 
         #endregion 
+
+       
 
         #endregion
     }
