@@ -79,6 +79,12 @@ namespace ordermanager.Views.UserControls.Execution
                     ViewModel.SelectedDate = tvProducts.SelectedItem.ToString();
                     ViewModel.SelectedProduct = parent.Header as OrderProduct;
                     executionDetails.ItemsSource = ViewModel.SelectedProduct.GetCuttings(ViewModel.SelectedDate);
+                    executionDetails.Visibility = System.Windows.Visibility.Visible;  
+                }
+                else
+                {
+                    m_ViewModel.SelectedProduct = tvProducts.SelectedItem as OrderProduct;
+                    executionDetails.Visibility = System.Windows.Visibility.Hidden;   
                 }
             }
         }
