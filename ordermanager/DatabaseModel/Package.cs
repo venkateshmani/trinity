@@ -19,6 +19,7 @@ namespace ordermanager.DatabaseModel
         public decimal Pending { get; set; }
         public System.DateTime Date { get; set; }
         public long ProductBreakUpSummaryID { get; set; }
+        public Nullable<decimal> ExcessToStock { get; set; }
     
         public virtual ProductBreakUpSummary ProductBreakUpSummary { get; set; }
     }
