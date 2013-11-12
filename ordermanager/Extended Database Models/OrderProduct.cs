@@ -1117,5 +1117,78 @@ namespace ordermanager.DatabaseModel
        
 
         #endregion
+
+        #region OC Report
+
+            public decimal NumberOfCutPieces
+            {
+                get
+                {
+                    decimal totalNumberOfCutPieces = 0;
+                    foreach (ProductBreakUpSummary summay in ProductBreakUpSummaries)
+                    {
+                        foreach (ProductCutting cutting in summay.ProductCuttings)
+                        {
+                            totalNumberOfCutPieces += cutting.CutQuantity;
+                        }
+                    }
+
+                    return totalNumberOfCutPieces;
+                }
+            }
+
+            public decimal NumberOfProducedPieces
+            {
+                get
+                {
+                    decimal totalNumberOfProducedPieces = 0;
+                    foreach (ProductBreakUpSummary summay in ProductBreakUpSummaries)
+                    {
+                        foreach (Production production in summay.Productions)
+                        {
+                            totalNumberOfProducedPieces += production.CompletedQuantity;
+                        }
+                    }
+
+                    return totalNumberOfProducedPieces;
+                }
+            }
+
+            public decimal NumberOfQualityPassed
+            {
+                get
+                {
+                    decimal totalNumberOfQualityPassed = 0;
+                    foreach (ProductBreakUpSummary summay in ProductBreakUpSummaries)
+                    {
+                        foreach (Quality quality in summay.Qualities)
+                        {
+                            totalNumberOfQualityPassed += quality.Passed;
+                        }
+                    }
+
+                    return totalNumberOfQualityPassed;
+                }
+            }
+
+            public decimal NumberOfShippedPieces
+            {
+                get
+                {
+                    decimal totalNumberOfShippedPieces = 0;
+                    foreach (ProductBreakUpSummary summay in ProductBreakUpSummaries)
+                    {
+                        foreach (Shipment shipment in summay.Shipments)
+                        {
+                            totalNumberOfShippedPieces += shipment.Shipped;
+                        }
+                    }
+
+                    return totalNumberOfShippedPieces;
+                }
+            }
+
+
+        #endregion 
     }
 }

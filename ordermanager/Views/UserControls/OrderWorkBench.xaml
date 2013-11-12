@@ -110,7 +110,9 @@
             <TabItem x:Name="tabExecution" Header="  Execution  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <TabControl x:Name="tabExecutionDetailsControl" Grid.Row="1">
-                        <TabItem x:Name="tabOverAllCompletion" Header="  ● OC Report  " Tag="Cutting"></TabItem>
+                        <TabItem x:Name="tabOverAllCompletion" Header="  ● OC Report  " Tag="Cutting">
+                            <Execution:OverAllCompleteReportControl x:Name="ocReportControl" />
+                        </TabItem>
                         <TabItem x:Name="tabCutting" Header="  ● Cutting  " Tag="Cutting">
                             <Execution:CuttingControl x:Name="cuttingControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                         </TabItem>

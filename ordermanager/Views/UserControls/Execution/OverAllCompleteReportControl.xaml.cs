@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.DatabaseModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace ordermanager.Views.UserControls.Execution
         public OverAllCompleteReportControl()
         {
             InitializeComponent();
+        }
+
+        public void SetOrder(Order order)
+        {
+            executionDetails.ItemsSource = order.OrderProducts;
         }
     }
 }

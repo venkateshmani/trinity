@@ -128,6 +128,7 @@ namespace ordermanager.Views.UserControls
                 switch (tabHeader.Trim())
                 {
                     case "● OC Report":
+                        ocReportControl.SetOrder(m_Order);
                         break;
                     case "● Cutting":
                         if (cuttingControl.ViewModel == null || cuttingControl.ViewModel.Order != m_Order)
