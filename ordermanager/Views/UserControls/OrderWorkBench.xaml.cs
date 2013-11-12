@@ -43,6 +43,12 @@ namespace ordermanager.Views.UserControls
             this.Loaded += OrderWorkBench_Loaded;
             tabControl.SelectedIndex = 2;
             tabControl.SelectionChanged += tabControl_SelectionChanged;
+            tabExecutionDetailsControl.SelectionChanged += tabExecutionDetailsControl_SelectionChanged;
+        }
+
+        void tabExecutionDetailsControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateExecutionView();
         }
 
         public Order Order
@@ -106,16 +112,35 @@ namespace ordermanager.Views.UserControls
                     break;
                 case "Change History":
                     m_ChangeHistorViewModel.SetOrder(m_Order);
+                    break;               
+            }
+        }
+
+        public void UpdateExecutionView()
+        {
+            string tabHeader = Convert.ToString(((System.Windows.Controls.HeaderedContentControl)(tabExecutionDetailsControl.SelectedItem)).Header);
+            switch (tabHeader.Trim())
+            {
+                case "● OC Report":
                     break;
-                case "Execution":
+                case "● Cutting":
                     cuttingControl.ViewModel = new CuttingViewModel() { Order = m_Order };
-                    //productionControl.ViewModel = new ProductionViewModel() { Order = m_Order };
-                    //qualityControl.ViewModel = new QualityViewModel(){Order=m_Order};;
-                    //packagingControl.ViewModel = new PackagingViewModel() { Order = m_Order };
-                    //shippingControl.ViewModel = new ShipmentViewModel() { Order = m_Order };                  
+                    break;
+                case "● Production":
+                    productionControl.ViewModel = new ProductionViewModel() { Order = m_Order };
+                    break;
+                case "● Quality":
+                    qualityControl.ViewModel = new QualityViewModel() { Order = m_Order };
+                    break;
+                case "● Packaging":
+                    packagingControl.ViewModel = new PackagingViewModel() { Order = m_Order };
+                    break;
+                case "● Shipment":
+                    shippingControl.ViewModel = new ShipmentViewModel() { Order = m_Order };
                     break;
             }
         }
+
 
         private void SetOrder(Order order)
         {

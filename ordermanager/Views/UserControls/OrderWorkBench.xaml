@@ -114,7 +114,7 @@
                         <TabItem x:Name="tabCutting" Header="  ● Cutting  " Tag="Cutting">
                             <Execution:CuttingControl x:Name="cuttingControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                         </TabItem>
-                        <TabItem x:Name="tabProduction" Header=" ●  Production  " Tag="Production">
+                        <TabItem x:Name="tabProduction" Header=" ● Production  " Tag="Production">
                             <Execution:ProductionControl x:Name="productionControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                         </TabItem>
                         <TabItem x:Name="tabQuality" Header="  ● Quality  " Tag="Quality">
