@@ -11,7 +11,7 @@ namespace ordermanager.DatabaseModel
 
         public void Validate()
         {
-            foreach (var item in ProductMaterialItems)
+            foreach (var item in OrderedItems)
             {
                 item.ValidateDataForGRN();
             }
@@ -27,7 +27,7 @@ namespace ordermanager.DatabaseModel
                 if (base.HasErrors)
                     errors = true;
 
-                foreach (var item in ProductMaterialItems)
+                foreach (var item in OrderItems)
                 {
                     if (item.HasErrors)
                         errors = true;

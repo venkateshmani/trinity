@@ -220,6 +220,7 @@
     <Compile Include="Extended Database Models\EntityBase.cs" />
     <Compile Include="Extended Database Models\Order.cs" />
     <Compile Include="Delegates.cs" />
+    <Compile Include="Extended Database Models\OrderedItem.cs" />
     <Compile Include="Extended Database Models\OrderProduct.cs" />
     <Compile Include="Extended Database Models\Package.cs" />
     <Compile Include="Extended Database Models\ProductBreakUp.cs" />
