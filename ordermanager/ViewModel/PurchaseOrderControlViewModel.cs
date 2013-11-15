@@ -191,19 +191,19 @@ namespace ordermanager.ViewModel
                     }
                     if (isSubmit)
                     {
-                        if (!summaryDict.ContainsKey(breakupItem.ProductSizeID))
+                        if (!summaryDict.ContainsKey(breakupItem.ProductSize.ProductSizeID))
                         {
                             Dictionary<int, decimal> tmp = new Dictionary<int, decimal>(1);
-                            summaryDict.Add(breakupItem.ProductSizeID, tmp);
+                            summaryDict.Add(breakupItem.ProductSize.ProductSizeID, tmp);
                         }
 
-                        if (!summaryDict[breakupItem.ProductSizeID].ContainsKey(breakupItem.ColorID))
+                        if (!summaryDict[breakupItem.ProductSize.ProductSizeID].ContainsKey(breakupItem.Color.ColorID))
                         {
-                            summaryDict[breakupItem.ProductSizeID].Add(breakupItem.ColorID, breakupItem.NumberOfPiecesWrapper);
+                            summaryDict[breakupItem.ProductSize.ProductSizeID].Add(breakupItem.Color.ColorID, breakupItem.NumberOfPiecesWrapper);
                         }
                         else
                         {
-                            summaryDict[breakupItem.ProductSizeID][breakupItem.ColorID] += breakupItem.NumberOfPiecesWrapper;
+                            summaryDict[breakupItem.ProductSize.ProductSizeID][breakupItem.Color.ColorID] += breakupItem.NumberOfPiecesWrapper;
                         }
                     }
                 }

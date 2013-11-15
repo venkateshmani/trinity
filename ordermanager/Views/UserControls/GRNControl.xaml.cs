@@ -134,5 +134,10 @@ namespace ordermanager.Views.UserControls
             }
         }
 
+        private void generatePO_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

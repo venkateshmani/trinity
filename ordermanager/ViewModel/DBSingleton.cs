@@ -142,8 +142,9 @@ namespace ordermanager.ViewModel
             PurchaseOrder newPO = new PurchaseOrder();
             newPO.PurchaseOrderNumber = purchseOrderNumber;
             newPO.SupplierID = supplier.CompanyID;
-            newPO.Order = order;
-            
+            newPO.OrderID = order.OrderID;
+            newPO.PurchaseOrderStatusID = 1;
+
             OrderManagerDBEntities newManager = new OrderManagerDBEntities();
             newManager.PurchaseOrders.Add(newPO);
             newManager.SaveChanges();
