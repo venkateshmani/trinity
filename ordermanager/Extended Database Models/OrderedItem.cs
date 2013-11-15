@@ -8,6 +8,27 @@ namespace ordermanager.DatabaseModel
 {
     public partial class OrderedItem : EntityBase
     {
+
+        #region  Data From Navigation Properties
+
+        public string MaterialName
+        {
+            get
+            {
+                return this.ProductMaterialItem.SubMaterial.Name;
+            }
+        }
+
+        public string UnitsOfMeasurement
+        {
+            get
+            {
+                return this.ProductMaterialItem.UnitsOfMeasurement.Units;
+            }
+        }
+
+        #endregion 
+
         public decimal InvoicedQuantityWrapper
         {
             get
