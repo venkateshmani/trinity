@@ -23,9 +23,11 @@ namespace ordermanager.DatabaseModel
         public int SupplierID { get; set; }
         public Nullable<System.DateTime> PurchaseOrderDate { get; set; }
         public string PurchaseOrderNumber { get; set; }
-        public Nullable<byte> PurchaseOrderStatusID { get; set; }
+        public byte PurchaseOrderStatusID { get; set; }
+        public long OrderID { get; set; }
     
         public virtual Company Company { get; set; }
+        public virtual Order Order { get; set; }
         public virtual ICollection<OrderedItem> OrderedItems { get; set; }
         public virtual PurchaseOrderStatu PurchaseOrderStatu { get; set; }
     }

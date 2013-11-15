@@ -164,7 +164,7 @@ namespace ordermanager.DatabaseModel
             get
             {
                 decimal value = 0;
-                if (this.PurchaseOrderNumber ExcessiveQuantity != null && this.ExcessiveQuantity.HasValue)
+                if (this.ExcessiveQuantity != null && this.ExcessiveQuantity.HasValue)
                     value = this.ExcessiveQuantity.Value;
 
                 return value;

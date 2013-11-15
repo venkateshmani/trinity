@@ -214,6 +214,10 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
           </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrders_Order" Association="OrderManagerDBModel.Store.FK_PurchaseOrders_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+          </AssociationSet>
           <AssociationSet Name="FK_PurchaseOrders_PurchaseOrderStatus" Association="OrderManagerDBModel.Store.FK_PurchaseOrders_PurchaseOrderStatus">
             <End Role="PurchaseOrderStatus" EntitySet="PurchaseOrderStatus" />
             <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
@@ -542,7 +546,8 @@
           <Property Name="SupplierID" Type="int" Nullable="false" />
           <Property Name="PurchaseOrderDate" Type="datetime" />
           <Property Name="PurchaseOrderNumber" Type="varchar" MaxLength="150" />
-          <Property Name="PurchaseOrderStatusID" Type="tinyint" />
+          <Property Name="PurchaseOrderStatusID" Type="tinyint" Nullable="false" />
+          <Property Name="OrderID" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="PurchaseOrderStatus">
           <Key>
@@ -1146,8 +1151,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PurchaseOrders_Order">
+          <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
+          <End Role="PurchaseOrders" Type="OrderManagerDBModel.Store.PurchaseOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="PurchaseOrders">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PurchaseOrders_PurchaseOrderStatus">
-          <End Role="PurchaseOrderStatus" Type="OrderManagerDBModel.Store.PurchaseOrderStatus" Multiplicity="0..1" />
+          <End Role="PurchaseOrderStatus" Type="OrderManagerDBModel.Store.PurchaseOrderStatus" Multiplicity="1" />
           <End Role="PurchaseOrders" Type="OrderManagerDBModel.Store.PurchaseOrders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseOrderStatus">
@@ -1359,6 +1376,10 @@
           <AssociationSet Name="FK_OrderProduct_Order" Association="OrderManagerDBModel.FK_OrderProduct_Order">
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderProduct" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrders_Order" Association="OrderManagerDBModel.FK_PurchaseOrders_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderedItem_PurchaseOrders" Association="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders">
             <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
@@ -1592,6 +1613,7 @@
           <NavigationProperty Name="OrderThrough" Relationship="OrderManagerDBModel.FK_Order_OrderThrough" FromRole="Order" ToRole="OrderThrough" />
           <NavigationProperty Name="OrderCurrencyConversions" Relationship="OrderManagerDBModel.FK_OrderCurrencyConversion_Order" FromRole="Order" ToRole="OrderCurrencyConversion" />
           <NavigationProperty Name="OrderProducts" Relationship="OrderManagerDBModel.FK_OrderProduct_Order" FromRole="Order" ToRole="OrderProduct" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Order" FromRole="Order" ToRole="PurchaseOrders" />
         </EntityType>
         <EntityType Name="OrderCurrencyConversion">
           <Key>
@@ -1853,8 +1875,10 @@
           <Property Name="SupplierID" Type="Int32" Nullable="false" />
           <Property Name="PurchaseOrderDate" Type="DateTime" Precision="3" />
           <Property Name="PurchaseOrderNumber" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
-          <Property Name="PurchaseOrderStatusID" Type="Byte" />
+          <Property Name="PurchaseOrderStatusID" Type="Byte" Nullable="false" />
+          <Property Name="OrderID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Company" FromRole="PurchaseOrders" ToRole="Company" />
+          <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Order" FromRole="PurchaseOrders" ToRole="Order" />
           <NavigationProperty Name="OrderedItems" Relationship="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders" FromRole="PurchaseOrders" ToRole="OrderedItem" />
           <NavigationProperty Name="PurchaseOrderStatu" Relationship="OrderManagerDBModel.FK_PurchaseOrders_PurchaseOrderStatus" FromRole="PurchaseOrders" ToRole="PurchaseOrderStatus" />
         </EntityType>
@@ -2224,6 +2248,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PurchaseOrders_Order">
+          <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="1" />
+          <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="PurchaseOrders">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderedItem_PurchaseOrders">
           <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="1" />
           <End Role="OrderedItem" Type="OrderManagerDBModel.OrderedItem" Multiplicity="*" />
@@ -2513,7 +2549,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PurchaseOrders_PurchaseOrderStatus">
-          <End Role="PurchaseOrderStatus" Type="OrderManagerDBModel.PurchaseOrderStatu" Multiplicity="0..1" />
+          <End Role="PurchaseOrderStatus" Type="OrderManagerDBModel.PurchaseOrderStatu" Multiplicity="1" />
           <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseOrderStatus">
@@ -2892,6 +2928,7 @@
                 <ScalarProperty Name="PurchaseOrderDate" ColumnName="PurchaseOrderDate" />
                 <ScalarProperty Name="PurchaseOrderNumber" ColumnName="PurchaseOrderNumber" />
                 <ScalarProperty Name="PurchaseOrderStatusID" ColumnName="PurchaseOrderStatusID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
