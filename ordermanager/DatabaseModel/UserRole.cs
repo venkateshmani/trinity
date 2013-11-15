@@ -33,6 +33,12 @@ namespace ordermanager.DatabaseModel
         public bool CanConfirmOrder { get; set; }
         public bool CanAddSubMaterials { get; set; }
         public bool CanGeneratePurchaseOrder { get; set; }
+        public bool CanModifyExecutionCutting { get; set; }
+        public bool CanModifyExecutionProduction { get; set; }
+        public bool CanModifyExecutionPackaging { get; set; }
+        public bool CanModifyExectionQuality { get; set; }
+        public bool CanModifyExecutionShipping { get; set; }
+        public bool CanModifyGRN { get; set; }
     
         public virtual ICollection<OrderStatu> OrderStatus { get; set; }
         public virtual ICollection<User> Users { get; set; }
