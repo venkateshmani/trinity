@@ -137,11 +137,12 @@ namespace ordermanager.ViewModel
         }
 
 
-        public PurchaseOrder CreateNewPurchaseOrder(Company supplier, string purchseOrderNumber)
+        public PurchaseOrder CreateNewPurchaseOrder(Order order,Company supplier, string purchseOrderNumber)
         {
             PurchaseOrder newPO = new PurchaseOrder();
             newPO.PurchaseOrderNumber = purchseOrderNumber;
             newPO.SupplierID = supplier.CompanyID;
+            newPO.Order = order;
             
             OrderManagerDBEntities newManager = new OrderManagerDBEntities();
             newManager.PurchaseOrders.Add(newPO);

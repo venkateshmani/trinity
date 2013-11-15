@@ -15,42 +15,6 @@ namespace ordermanager.ViewModel
             this.Order = order;
         }
 
-        private ObservableCollection<Company> m_Suppliers = null;
-        public ObservableCollection<Company> Suppliers
-        {
-            get
-            {
-                if (m_Suppliers == null && Order != null)
-                {
-                    m_Suppliers = new ObservableCollection<Company>();
-                    Company supplier;
-                    foreach (OrderProduct product in Order.OrderProducts)
-                    {
-                        foreach (ProductMaterial material in product.ProductMaterials)
-                        {
-                            foreach (ProductMaterialItem materialItem in material.ProductMaterialItems)
-                            {
-                                if (!m_Suppliers.Contains(materialItem.Company))
-                                {
-                                    supplier = materialItem.Company;
-                                    if (materialItem.PurchaseOrder != null)
-                                        supplier.PurchaseOrderDateWrapper = materialItem.PurchaseOrder.PurchaseOrderDate;
-                                    supplier.PropertyChanged -= Supplier_PropertyChanged;
-                                    supplier.PropertyChanged += Supplier_PropertyChanged;
-                                    m_Suppliers.Add(supplier);
-                                }
-                            }
-                        }
-                    }
-                }
-                return m_Suppliers;
-            }
-            set
-            {
-                m_Suppliers = value;
-            }
-        }
-
         void Supplier_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "PurchaseOrderDateWrapper")

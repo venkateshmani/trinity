@@ -105,8 +105,8 @@ namespace ordermanager.Views.UserControls
                 {
                     PurchaseOrder po = tvProducts.SelectedItem as PurchaseOrder;
                     ViewModel.SelectedPurchaseOrder = po;
-                    materialsReciptGrid.ItemsSource = po.ProductMaterialItems;
-                    qualityGrid.ItemsSource = po.ProductMaterialItems;
+                    materialsReciptGrid.ItemsSource = po.OrderedItems;
+                    qualityGrid.ItemsSource = po.OrderedItems;
                     grnDetailsControl.Visibility = System.Windows.Visibility.Visible;
                     supplierSelectedInfo.Visibility = System.Windows.Visibility.Hidden;
                 }

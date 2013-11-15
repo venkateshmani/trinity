@@ -14,7 +14,7 @@ namespace ordermanager.Extended_Database_Models
 
         public PurchaseOrderItems()
         {
-            PurchaseItems = new ObservableCollection<ProductMaterialItem>();
+            OrderedItems = new ObservableCollection<OrderedItem>();
             PurchaseOrderNumber = string.Empty;
             Supplier = null;
         }
@@ -32,27 +32,18 @@ namespace ordermanager.Extended_Database_Models
         }
 
 
-        private ObservableCollection<ProductMaterialItem> m_PurchaseItems = null;
-        public ObservableCollection<ProductMaterialItem> PurchaseItems
+        private ObservableCollection<OrderedItem> m_OrderedItem = null;
+        public ObservableCollection<OrderedItem> OrderedItems
         {
             get
             {
-                return m_PurchaseItems;
+                return m_OrderedItem;
             }
             set
             {
-                m_PurchaseItems = value;
+                m_OrderedItem = value;
             }
         }
-
-        public void SetPurchaseOrder(PurchaseOrder po)
-        {
-            foreach (var ProductMaterialItem in PurchaseItems)
-            {
-                ProductMaterialItem.PurchaseOrder = po;
-            }
-        }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName)
@@ -68,7 +59,7 @@ namespace ordermanager.Extended_Database_Models
             get
             {
                 bool hasErrors = false;
-                foreach (var item in PurchaseItems)
+                foreach (var item in OrderedItems)
                 {
                     if (!hasErrors)
                         hasErrors = item.HasErrors;

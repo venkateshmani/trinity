@@ -69,13 +69,13 @@ namespace ordermanager.Views.UserControls
         {
             string folderPath = e.Argument.ToString();
 
-            foreach (Company supplier in ViewModel.Suppliers)
+            foreach (PurchaseOrder po in Order.PurchaseOrders)
             {
-                if (supplier.PurchaseOrderDateWrapper == null)
-                    supplier.PurchaseOrderDateWrapper = DateTime.Now;
+                if (po.Company.PurchaseOrderDateWrapper == null)
+                    po.Company.PurchaseOrderDateWrapper = DateTime.Now;
                 string filePath = System.IO.Path.Combine(
-                                             folderPath, "PurchaseOrder" + Order.OrderID.ToString() + "_" + supplier.Name + ".pdf");
-                GeneratePurchaseOrder(supplier, filePath);
+                                             folderPath, "PurchaseOrder" + Order.OrderID.ToString() + "_" + po.Company.Name + ".pdf");
+                GeneratePurchaseOrder(po.Company, filePath);
             }
         }
 

@@ -27,7 +27,7 @@ namespace ordermanager.DatabaseModel
                 if (base.HasErrors)
                     errors = true;
 
-                foreach (var item in OrderItems)
+                foreach (var item in OrderedItems)
                 {
                     if (item.HasErrors)
                         errors = true;

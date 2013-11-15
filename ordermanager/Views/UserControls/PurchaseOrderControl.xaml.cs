@@ -125,7 +125,6 @@ namespace ordermanager.Views.UserControls
                     m_ViewModel.SelectedMaterial = material;
                     poProductDetails.Visibility = System.Windows.Visibility.Hidden;
                     poMaterialsDetails.Visibility = System.Windows.Visibility.Visible;
-
                 }
             }
         }
@@ -172,7 +171,7 @@ namespace ordermanager.Views.UserControls
                 PurchaseOrder po = DBResources.Instance.GetPurchaseOrder(purchaseOrderNumber);
                 if (po == null)
                 {
-                    po = DBResources.Instance.CreateNewPurchaseOrder(supplier, purchaseOrderNumber);
+                    po = DBResources.Instance.CreateNewPurchaseOrder(m_ViewModel.Order, supplier, purchaseOrderNumber);
                 }
 
                 if (po != null && !purchaseOrders.ContainsKey(supplier))
@@ -184,10 +183,14 @@ namespace ordermanager.Views.UserControls
             //Assign PO's to Material Items
             foreach (var orderProduct in m_ViewModel.Products)
             {
-                foreach (PurchaseOrderItems poItems in orderProduct.PurchaseOrderItems)
+                foreach (PurchaseOrderItems poItem in orderProduct.PurchaseOrderItems)
                 {
-                    PurchaseOrder po = purchaseOrders[poItems.Supplier];
-                    poItems.SetPurchaseOrder(po);
+                    PurchaseOrder po = purchaseOrders[poItem.Supplier];
+
+                    foreach (OrderedItem itemToOrder in poItem.OrderedItems)
+                    {
+                        po.OrderedItems.Add(itemToOrder);
+                    }
                 }
             }
 
