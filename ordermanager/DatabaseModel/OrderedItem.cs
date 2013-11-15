@@ -28,6 +28,7 @@ namespace ordermanager.DatabaseModel
         public Nullable<decimal> InvoiceValue { get; set; }
         public long PurchaseOrderID { get; set; }
         public decimal OrderedQuantity { get; set; }
+        public Nullable<bool> SpawnedNewPurchaseOrder { get; set; }
     
         public virtual ProductMaterialItem ProductMaterialItem { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }

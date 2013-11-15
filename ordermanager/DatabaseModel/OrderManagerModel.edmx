@@ -373,6 +373,7 @@
           <Property Name="InvoiceValue" Type="decimal" Scale="4" />
           <Property Name="PurchaseOrderID" Type="bigint" Nullable="false" />
           <Property Name="OrderedQuantity" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="SpawnedNewPurchaseOrder" Type="bit" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
@@ -1666,6 +1667,7 @@
           <Property Name="InvoiceValue" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="PurchaseOrderID" Type="Int64" Nullable="false" />
           <Property Name="OrderedQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="SpawnedNewPurchaseOrder" Type="Boolean" />
           <NavigationProperty Name="ProductMaterialItem" Relationship="OrderManagerDBModel.FK_OrderedItem_ProductMaterialItem" FromRole="OrderedItem" ToRole="ProductMaterialItem" />
           <NavigationProperty Name="PurchaseOrder" Relationship="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders" FromRole="OrderedItem" ToRole="PurchaseOrders" />
         </EntityType>
@@ -2767,6 +2769,7 @@
                 <ScalarProperty Name="InvoiceValue" ColumnName="InvoiceValue" />
                 <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
                 <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
+                <ScalarProperty Name="SpawnedNewPurchaseOrder" ColumnName="SpawnedNewPurchaseOrder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
