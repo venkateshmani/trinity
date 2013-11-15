@@ -14,11 +14,6 @@ namespace ordermanager.DatabaseModel
     
     public partial class ProductMaterialItem
     {
-        public ProductMaterialItem()
-        {
-            this.PurchaseOrders = new HashSet<PurchaseOrder>();
-        }
-    
         public long ProductMaterialItemID { get; set; }
         public long MaterialID { get; set; }
         public long SubMaterialNameID { get; set; }
@@ -34,6 +29,5 @@ namespace ordermanager.DatabaseModel
         public virtual ProductMaterial ProductMaterial { get; set; }
         public virtual SubMaterial SubMaterial { get; set; }
         public virtual UnitsOfMeasurement UnitsOfMeasurement { get; set; }
-        public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
     }
 }

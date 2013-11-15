@@ -14,25 +14,19 @@ namespace ordermanager.DatabaseModel
     
     public partial class PurchaseOrder
     {
+        public PurchaseOrder()
+        {
+            this.OrderedItems = new HashSet<OrderedItem>();
+        }
+    
         public long PurchaseOrderID { get; set; }
         public int SupplierID { get; set; }
         public Nullable<System.DateTime> PurchaseOrderDate { get; set; }
         public string PurchaseOrderNumber { get; set; }
         public Nullable<byte> PurchaseOrderStatusID { get; set; }
-        public Nullable<System.DateTime> InvoiceDate { get; set; }
-        public string InvoiceNumber { get; set; }
-        public Nullable<System.DateTime> RecievedDate { get; set; }
-        public Nullable<decimal> InvoicedQuantity { get; set; }
-        public Nullable<decimal> RecievedInHand { get; set; }
-        public Nullable<decimal> ExcessiveQuantity { get; set; }
-        public Nullable<decimal> OtherChargesInINR { get; set; }
-        public Nullable<decimal> QualityPassedQuantity { get; set; }
-        public Nullable<decimal> QualityFailedQuantity { get; set; }
-        public Nullable<long> ProductMaterialItemID { get; set; }
-        public Nullable<decimal> InvoiceValue { get; set; }
     
         public virtual Company Company { get; set; }
-        public virtual ProductMaterialItem ProductMaterialItem { get; set; }
+        public virtual ICollection<OrderedItem> OrderedItems { get; set; }
         public virtual PurchaseOrderStatu PurchaseOrderStatu { get; set; }
     }
 }

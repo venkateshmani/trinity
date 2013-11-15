@@ -16,6 +16,7 @@
           <EntitySet Name="MaterialName" EntityType="OrderManagerDBModel.Store.MaterialName" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Order" EntityType="OrderManagerDBModel.Store.Order" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderCurrencyConversion" EntityType="OrderManagerDBModel.Store.OrderCurrencyConversion" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderedItem" EntityType="OrderManagerDBModel.Store.OrderedItem" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderProduct" EntityType="OrderManagerDBModel.Store.OrderProduct" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderStatus" EntityType="OrderManagerDBModel.Store.OrderStatus" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderThrough" EntityType="OrderManagerDBModel.Store.OrderThrough" store:Type="Tables" Schema="dbo" />
@@ -76,6 +77,10 @@
           <AssociationSet Name="FK_OrderCurrencyConversion_Order" Association="OrderManagerDBModel.Store.FK_OrderCurrencyConversion_Order">
             <End Role="Order" EntitySet="Order" />
             <End Role="OrderCurrencyConversion" EntitySet="OrderCurrencyConversion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderedItem_PurchaseOrders" Association="OrderManagerDBModel.Store.FK_OrderedItem_PurchaseOrders">
+            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+            <End Role="OrderedItem" EntitySet="OrderedItem" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderProduct_Currency" Association="OrderManagerDBModel.Store.FK_OrderProduct_Currency">
             <End Role="Currency" EntitySet="Currency" />
@@ -207,10 +212,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_PurchaseOrders_Company" Association="OrderManagerDBModel.Store.FK_PurchaseOrders_Company">
             <End Role="Company" EntitySet="Company" />
-            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrders_ProductMaterialItem" Association="OrderManagerDBModel.Store.FK_PurchaseOrders_ProductMaterialItem">
-            <End Role="ProductMaterialItem" EntitySet="ProductMaterialItem" />
             <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_PurchaseOrders_PurchaseOrderStatus" Association="OrderManagerDBModel.Store.FK_PurchaseOrders_PurchaseOrderStatus">
@@ -345,6 +346,25 @@
           <Property Name="ValueInINR" Type="decimal" Scale="4" />
           <Property Name="ValueInINRForMaterials" Type="decimal" Scale="4" />
           <Property Name="ValueInINRForSubMaterials" Type="decimal" Scale="4" />
+        </EntityType>
+        <EntityType Name="OrderedItem">
+          <Key>
+            <PropertyRef Name="OrderedItemID" />
+          </Key>
+          <Property Name="OrderedItemID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceDate" Type="datetime" />
+          <Property Name="InvoiceNumber" Type="varchar" MaxLength="150" />
+          <Property Name="RecievedDate" Type="datetime" />
+          <Property Name="InvoicedQuantity" Type="decimal" Scale="4" />
+          <Property Name="RecievedInHand" Type="decimal" Scale="4" />
+          <Property Name="ExcessiveQuantity" Type="decimal" Scale="4" />
+          <Property Name="OtherChargesInINR" Type="decimal" Scale="4" />
+          <Property Name="QualityPassedQuantity" Type="decimal" Scale="4" />
+          <Property Name="QualityFailedQuantity" Type="decimal" Scale="4" />
+          <Property Name="ProductMaterialItemID" Type="bigint" Nullable="false" />
+          <Property Name="InvoiceValue" Type="decimal" Scale="4" />
+          <Property Name="PurchaseOrderID" Type="bigint" Nullable="false" />
+          <Property Name="OrderedQuantity" Type="decimal" Nullable="false" Scale="4" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
@@ -523,17 +543,6 @@
           <Property Name="PurchaseOrderDate" Type="datetime" />
           <Property Name="PurchaseOrderNumber" Type="varchar" MaxLength="150" />
           <Property Name="PurchaseOrderStatusID" Type="tinyint" />
-          <Property Name="InvoiceDate" Type="datetime" />
-          <Property Name="InvoiceNumber" Type="varchar" MaxLength="150" />
-          <Property Name="RecievedDate" Type="datetime" />
-          <Property Name="InvoicedQuantity" Type="decimal" Scale="4" />
-          <Property Name="RecievedInHand" Type="decimal" Scale="4" />
-          <Property Name="ExcessiveQuantity" Type="decimal" Scale="4" />
-          <Property Name="OtherChargesInINR" Type="decimal" Scale="4" />
-          <Property Name="QualityPassedQuantity" Type="decimal" Scale="4" />
-          <Property Name="QualityFailedQuantity" Type="decimal" Scale="4" />
-          <Property Name="ProductMaterialItemID" Type="bigint" />
-          <Property Name="InvoiceValue" Type="decimal" Scale="4" />
         </EntityType>
         <EntityType Name="PurchaseOrderStatus">
           <Key>
@@ -726,6 +735,18 @@
             </Principal>
             <Dependent Role="OrderCurrencyConversion">
               <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderedItem_PurchaseOrders">
+          <End Role="PurchaseOrders" Type="OrderManagerDBModel.Store.PurchaseOrders" Multiplicity="1" />
+          <End Role="OrderedItem" Type="OrderManagerDBModel.Store.OrderedItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrders">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Principal>
+            <Dependent Role="OrderedItem">
+              <PropertyRef Name="PurchaseOrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1125,18 +1146,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PurchaseOrders_ProductMaterialItem">
-          <End Role="ProductMaterialItem" Type="OrderManagerDBModel.Store.ProductMaterialItem" Multiplicity="0..1" />
-          <End Role="PurchaseOrders" Type="OrderManagerDBModel.Store.PurchaseOrders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductMaterialItem">
-              <PropertyRef Name="ProductMaterialItemID" />
-            </Principal>
-            <Dependent Role="PurchaseOrders">
-              <PropertyRef Name="ProductMaterialItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PurchaseOrders_PurchaseOrderStatus">
           <End Role="PurchaseOrderStatus" Type="OrderManagerDBModel.Store.PurchaseOrderStatus" Multiplicity="0..1" />
           <End Role="PurchaseOrders" Type="OrderManagerDBModel.Store.PurchaseOrders" Multiplicity="*" />
@@ -1237,6 +1246,7 @@
           <EntitySet Name="MaterialNames" EntityType="OrderManagerDBModel.MaterialName" />
           <EntitySet Name="Orders" EntityType="OrderManagerDBModel.Order" />
           <EntitySet Name="OrderCurrencyConversions" EntityType="OrderManagerDBModel.OrderCurrencyConversion" />
+          <EntitySet Name="OrderedItems" EntityType="OrderManagerDBModel.OrderedItem" />
           <EntitySet Name="OrderProducts" EntityType="OrderManagerDBModel.OrderProduct" />
           <EntitySet Name="OrderStatus" EntityType="OrderManagerDBModel.OrderStatu" />
           <EntitySet Name="OrderThroughs" EntityType="OrderManagerDBModel.OrderThrough" />
@@ -1350,6 +1360,10 @@
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderProduct" EntitySet="OrderProducts" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderedItem_PurchaseOrders" Association="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders">
+            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+            <End Role="OrderedItem" EntitySet="OrderedItems" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderProduct_ProductBreakUp" Association="OrderManagerDBModel.FK_OrderProduct_ProductBreakUp">
             <End Role="ProductBreakUp" EntitySet="ProductBreakUps" />
             <End Role="OrderProduct" EntitySet="OrderProducts" />
@@ -1429,10 +1443,6 @@
           <AssociationSet Name="FK_ProductMaterialItem_UnitsOfMeasurement" Association="OrderManagerDBModel.FK_ProductMaterialItem_UnitsOfMeasurement">
             <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurements" />
             <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PurchaseOrders_ProductMaterialItem" Association="OrderManagerDBModel.FK_PurchaseOrders_ProductMaterialItem">
-            <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
-            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductMaterials_UnitsOfMeasurement" Association="OrderManagerDBModel.FK_ProductMaterials_UnitsOfMeasurement">
             <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurements" />
@@ -1595,6 +1605,26 @@
           <Property Name="ValueInINRForSubMaterials" Type="Decimal" Precision="18" Scale="4" />
           <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_OrderCurrencyConversion_Currency" FromRole="OrderCurrencyConversion" ToRole="Currency" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_OrderCurrencyConversion_Order" FromRole="OrderCurrencyConversion" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="OrderedItem">
+          <Key>
+            <PropertyRef Name="OrderedItemID" />
+          </Key>
+          <Property Name="OrderedItemID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="RecievedDate" Type="DateTime" Precision="3" />
+          <Property Name="InvoicedQuantity" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="RecievedInHand" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="ExcessiveQuantity" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="OtherChargesInINR" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="QualityPassedQuantity" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="QualityFailedQuantity" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="ProductMaterialItemID" Type="Int64" Nullable="false" />
+          <Property Name="InvoiceValue" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="PurchaseOrderID" Type="Int64" Nullable="false" />
+          <Property Name="OrderedQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <NavigationProperty Name="PurchaseOrder" Relationship="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders" FromRole="OrderedItem" ToRole="PurchaseOrders" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
@@ -1760,7 +1790,6 @@
           <NavigationProperty Name="ProductMaterial" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_ProductMaterials" FromRole="ProductMaterialItem" ToRole="ProductMaterials" />
           <NavigationProperty Name="SubMaterial" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_SubMaterial" FromRole="ProductMaterialItem" ToRole="SubMaterial" />
           <NavigationProperty Name="UnitsOfMeasurement" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_UnitsOfMeasurement" FromRole="ProductMaterialItem" ToRole="UnitsOfMeasurement" />
-          <NavigationProperty Name="PurchaseOrders" Relationship="OrderManagerDBModel.FK_PurchaseOrders_ProductMaterialItem" FromRole="ProductMaterialItem" ToRole="PurchaseOrders" />
         </EntityType>
         <EntityType Name="ProductMaterial">
           <Key>
@@ -1825,19 +1854,8 @@
           <Property Name="PurchaseOrderDate" Type="DateTime" Precision="3" />
           <Property Name="PurchaseOrderNumber" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
           <Property Name="PurchaseOrderStatusID" Type="Byte" />
-          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
-          <Property Name="InvoiceNumber" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
-          <Property Name="RecievedDate" Type="DateTime" Precision="3" />
-          <Property Name="InvoicedQuantity" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="RecievedInHand" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="ExcessiveQuantity" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="OtherChargesInINR" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="QualityPassedQuantity" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="QualityFailedQuantity" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="ProductMaterialItemID" Type="Int64" />
-          <Property Name="InvoiceValue" Type="Decimal" Precision="18" Scale="4" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Company" FromRole="PurchaseOrders" ToRole="Company" />
-          <NavigationProperty Name="ProductMaterialItem" Relationship="OrderManagerDBModel.FK_PurchaseOrders_ProductMaterialItem" FromRole="PurchaseOrders" ToRole="ProductMaterialItem" />
+          <NavigationProperty Name="OrderedItems" Relationship="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders" FromRole="PurchaseOrders" ToRole="OrderedItem" />
           <NavigationProperty Name="PurchaseOrderStatu" Relationship="OrderManagerDBModel.FK_PurchaseOrders_PurchaseOrderStatus" FromRole="PurchaseOrders" ToRole="PurchaseOrderStatus" />
         </EntityType>
         <EntityType Name="PurchaseOrderStatu">
@@ -2206,6 +2224,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderedItem_PurchaseOrders">
+          <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="1" />
+          <End Role="OrderedItem" Type="OrderManagerDBModel.OrderedItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrders">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Principal>
+            <Dependent Role="OrderedItem">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderProduct_ProductBreakUp">
           <End Role="ProductBreakUp" Type="OrderManagerDBModel.ProductBreakUp" Multiplicity="0..1" />
           <End Role="OrderProduct" Type="OrderManagerDBModel.OrderProduct" Multiplicity="*" />
@@ -2446,18 +2476,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PurchaseOrders_ProductMaterialItem">
-          <End Role="ProductMaterialItem" Type="OrderManagerDBModel.ProductMaterialItem" Multiplicity="0..1" />
-          <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductMaterialItem">
-              <PropertyRef Name="ProductMaterialItemID" />
-            </Principal>
-            <Dependent Role="PurchaseOrders">
-              <PropertyRef Name="ProductMaterialItemID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProductMaterials_UnitsOfMeasurement">
           <End Role="UnitsOfMeasurement" Type="OrderManagerDBModel.UnitsOfMeasurement" Multiplicity="0..1" />
           <End Role="ProductMaterials" Type="OrderManagerDBModel.ProductMaterial" Multiplicity="*" />
@@ -2662,6 +2680,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OrderedItems">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.OrderedItem">
+              <MappingFragment StoreEntitySet="OrderedItem">
+                <ScalarProperty Name="OrderedItemID" ColumnName="OrderedItemID" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="RecievedDate" ColumnName="RecievedDate" />
+                <ScalarProperty Name="InvoicedQuantity" ColumnName="InvoicedQuantity" />
+                <ScalarProperty Name="RecievedInHand" ColumnName="RecievedInHand" />
+                <ScalarProperty Name="ExcessiveQuantity" ColumnName="ExcessiveQuantity" />
+                <ScalarProperty Name="OtherChargesInINR" ColumnName="OtherChargesInINR" />
+                <ScalarProperty Name="QualityPassedQuantity" ColumnName="QualityPassedQuantity" />
+                <ScalarProperty Name="QualityFailedQuantity" ColumnName="QualityFailedQuantity" />
+                <ScalarProperty Name="ProductMaterialItemID" ColumnName="ProductMaterialItemID" />
+                <ScalarProperty Name="InvoiceValue" ColumnName="InvoiceValue" />
+                <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+                <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="OrderProducts">
             <EntityTypeMapping TypeName="OrderManagerDBModel.OrderProduct">
               <MappingFragment StoreEntitySet="OrderProduct">
@@ -2854,17 +2892,6 @@
                 <ScalarProperty Name="PurchaseOrderDate" ColumnName="PurchaseOrderDate" />
                 <ScalarProperty Name="PurchaseOrderNumber" ColumnName="PurchaseOrderNumber" />
                 <ScalarProperty Name="PurchaseOrderStatusID" ColumnName="PurchaseOrderStatusID" />
-                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
-                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
-                <ScalarProperty Name="RecievedDate" ColumnName="RecievedDate" />
-                <ScalarProperty Name="InvoicedQuantity" ColumnName="InvoicedQuantity" />
-                <ScalarProperty Name="RecievedInHand" ColumnName="RecievedInHand" />
-                <ScalarProperty Name="ExcessiveQuantity" ColumnName="ExcessiveQuantity" />
-                <ScalarProperty Name="OtherChargesInINR" ColumnName="OtherChargesInINR" />
-                <ScalarProperty Name="QualityPassedQuantity" ColumnName="QualityPassedQuantity" />
-                <ScalarProperty Name="QualityFailedQuantity" ColumnName="QualityFailedQuantity" />
-                <ScalarProperty Name="ProductMaterialItemID" ColumnName="ProductMaterialItemID" />
-                <ScalarProperty Name="InvoiceValue" ColumnName="InvoiceValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
