@@ -13,34 +13,18 @@ namespace ordermanager.ViewModel
         public POControlViewModel(Order order)
         {
             this.Order = order;
+            foreach (PurchaseOrder po in order.PurchaseOrders)
+            {
+                po.PropertyChanged += po_PropertyChanged;
+            }
         }
 
-        void Supplier_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void po_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            //if (e.PropertyName == "PurchaseOrderDateWrapper")
-            //{
-            //    Company comp = sender as Company;
-            //    bool save = false;
-            //    if (comp != null)
-            //    {
-            //        foreach (OrderProduct product in Order.OrderProducts)
-            //        {
-            //            foreach (ProductMaterial material in product.ProductMaterials)
-            //            {
-            //                foreach (ProductMaterialItem materialItem in material.ProductMaterialItems)
-            //                {
-            //                    if (materialItem.Company.CompanyID == comp.CompanyID && materialItem.PurchaseOrder.PurchaseOrderDate != comp.PurchaseOrderDateWrapper)
-            //                    {
-            //                        materialItem.PurchaseOrder.PurchaseOrderDate = comp.PurchaseOrderDateWrapper;
-            //                        save = true;
-            //                    }
-            //                }
-            //            }
-            //        }
-            //        if (save)
-            //            DBResources.Instance.Save();
-            //    }
-            //}
+            if (e.PropertyName == "PurchaseOrderDateWrapper")
+            {
+                DBResources.Instance.Save();
+            }
         }
 
         public Order Order

@@ -58,7 +58,7 @@
 
         <Grid Grid.Row="0" Grid.Column="0">
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Suppliers" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Purchase Order #" Margin="4,0,4,0" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
 
@@ -67,32 +67,36 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ListView x:Name="supplierList" Grid.Row="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Suppliers}" SelectedIndex="-1" SelectionChanged="supplierList_SelectionChanged" >
+            <ListView x:Name="supplierList" Grid.Row="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Order.PurchaseOrders}" SelectedIndex="-1" SelectionChanged="SupplierList_SelectionChanged">
                 <ListView.View>
-                        <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
-                            <GridViewColumn x:Name="supplierColumn" Width="{Binding ActualWidth, ElementName=supplierList, Converter={StaticResource subractor}, ConverterParameter=5}">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>                                            
-                                            <ColumnDefinition Width="100"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexToNumber}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}"/>
-                                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text=".  "   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
-                                        <TextBlock Grid.Column="2" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
-                                        <DatePicker Grid.Column="3" BorderBrush="Transparent" Background="Transparent"  SelectedDate="{Binding PurchaseOrderDateWrapper, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="30" />
-                                    </Grid>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
+                        <GridViewColumn x:Name="supplierColumn" Width="{Binding ActualWidth, ElementName=supplierList, Converter={StaticResource subractor}, ConverterParameter=5}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="Gray" BorderThickness="1" Margin="0,2,0,2" CornerRadius="3">
+                                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="100"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,0,0,0" HorizontalAlignment="Stretch" TextAlignment="Left" Text="{Binding Path=PurchaseOrderNumber}" Width="{Binding ElementName=supplierList, Path=ActualWidth, Converter={StaticResource subractor}, ConverterParameter=20}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                                            <TextBlock Grid.Row="1" Grid.Column="0"  Margin="4,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path= Company.Name }"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" FontSize="12"/>
+                                            <DatePicker Grid.Row="1" Grid.Column="1" Margin="0,0,4,0" BorderBrush="Transparent" Background="Transparent"  SelectedDate="{Binding PurchaseOrderDateWrapper, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" />
+                                        </Grid>
+                                    </Border>
                                 </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
             <Button x:Name="btnGeneratePOs"  Content="Generate All POs"  Width="150" Height="35" Foreground="White"  ToolTip="Generate Purchase Order for all Suppliers and Save PDF" HorizontalAlignment="Center" Click="btnGeneratePOs_Click" Grid.Row="1" Margin="10"
-                    Visibility="{Binding Path=Suppliers.Count, Converter={StaticResource CountToVisibilityConverter}}" >
+                    Visibility="{Binding Path=Order.PurchaseOrders.Count, Converter={StaticResource CountToVisibilityConverter}}" >
                 <Button.Background>
                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                 </Button.Background>
@@ -101,7 +105,7 @@
 
         <Grid Grid.Row="0" Grid.Column="2">
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Purchase Order"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Purchase Order Details"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
 

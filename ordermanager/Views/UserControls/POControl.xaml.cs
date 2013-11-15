@@ -75,23 +75,23 @@ namespace ordermanager.Views.UserControls
                     po.Company.PurchaseOrderDateWrapper = DateTime.Now;
                 string filePath = System.IO.Path.Combine(
                                              folderPath, "PurchaseOrder" + Order.OrderID.ToString() + "_" + po.Company.Name + ".pdf");
-                GeneratePurchaseOrder(po.Company, filePath);
+                GeneratePurchaseOrder(po.Company,po.PurchaseOrderDateWrapper.Value, filePath);
             }
         }
 
-        private void supplierList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SupplierList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Company supplier = supplierList.SelectedItem as Company;
-            if (supplier != null && Order != null)
+            PurchaseOrder poDetails = supplierList.SelectedItem as PurchaseOrder;
+            if (poDetails != null && Order != null)
             {
-                if (supplier.PurchaseOrderDateWrapper == null)
-                    supplier.PurchaseOrderDateWrapper = DateTime.Now;
+                if (poDetails.PurchaseOrderDateWrapper == null)
+                    poDetails.PurchaseOrderDateWrapper = DateTime.Now;
 
                 string tempFilePathForPdf = System.IO.Path.Combine(
-                                             System.IO.Path.GetTempPath(), "OM_PurchaseOrder" + Order.OrderID.ToString() + "_" + supplier.CompanyID.ToString() + ".pdf");
+                                             System.IO.Path.GetTempPath(), "OM_PurchaseOrder" + Order.OrderID.ToString() + "_" + poDetails.Company.CompanyID + ".pdf");
                 string lastOpenedPdfFile = string.Empty;
 
-                if (GeneratePurchaseOrder(supplier, tempFilePathForPdf))
+                if (GeneratePurchaseOrder(poDetails.Company,poDetails.PurchaseOrderDateWrapper.Value, tempFilePathForPdf))
                 {
                     webBrowser.Source = new Uri(tempFilePathForPdf);
                 }
@@ -105,14 +105,14 @@ namespace ordermanager.Views.UserControls
             }
         }
 
-        private bool GeneratePurchaseOrder(Company supplier, string filePath)
+        private bool GeneratePurchaseOrder(Company supplier,DateTime poDate, string filePath)
         {
             try
             {
                 string supplierInformation = GetSupplierInformation(supplier);
                 string purchaseOrderNumber = GetPurchaseOrderNumber(supplier);
                 string quoteNumber = GetQuoteNumber();
-                string quoteDate = GetQuoteDate(supplier.PurchaseOrderDateWrapper.GetValueOrDefault(DateTime.Now));
+                string quoteDate = GetQuoteDate(poDate);
                 
                 purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, quoteNumber, quoteDate);
                 purchaseOrderReportControl.CreateReportAsPDF(Order.OrderID, supplier.CompanyID, filePath);
@@ -189,7 +189,7 @@ namespace ordermanager.Views.UserControls
         public void SetOrder(Order order)
         {
             Order = order;
-            ViewModel = new POControlViewModel(order);            
+            ViewModel = new POControlViewModel(order);          
         }
 
         ProgressUpdateWindow progressWindow = null;

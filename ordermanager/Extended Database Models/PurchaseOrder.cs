@@ -16,7 +16,7 @@ namespace ordermanager.DatabaseModel
                 item.ValidateDataForGRN();
             }
         }
-             
+
 
         public override bool HasErrors
         {
@@ -36,5 +36,19 @@ namespace ordermanager.DatabaseModel
                 return errors;
             }
         }
+
+        public Nullable<System.DateTime> PurchaseOrderDateWrapper
+        {
+            get { return PurchaseOrderDate; }
+            set
+            {
+                if (PurchaseOrderDate != value)
+                {
+                    PurchaseOrderDate = value;
+                    OnPropertyChanged("PurchaseOrderDateWrapper");
+                }
+            }
+        }
+
     }
 }
