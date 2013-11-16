@@ -93,6 +93,7 @@ namespace ordermanager.DatabaseModel
             }
             else
             {
+                ExcessToStockWrapper = 0;
                 PendingWrapper = pending;
             }
         }
