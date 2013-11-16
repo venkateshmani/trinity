@@ -168,6 +168,9 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
+                if (m_Supplier == null && this.SpawnedPurchaseOrder != null && this.SpawnedPurchaseOrder.Company != null)
+                    return this.SpawnedPurchaseOrder.Company;
+
                 return m_Supplier;
             }
             set

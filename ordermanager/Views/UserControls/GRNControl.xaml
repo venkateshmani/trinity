@@ -277,17 +277,20 @@
                                 <DataGridTemplateColumn x:Name="supplierColumn" Header="Supplier" Width="0.3*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="{Binding SupplierVisibility}">
+                                            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
-                                                <ComboBox x:Name="supplierComboBox" Grid.Column="0" IsEditable="True"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                                <ComboBox x:Name="supplierComboBox" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                                                       ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
                                                       DisplayMemberPath="Name" SelectedItem="{Binding Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
                                                       Height="20"  TextBoxBase.TextChanged="SupplierComboBox_TextChanged"
-                                                      />
+                                                      IsReadOnly="{Binding IsReadOnly}"
+                                                      IsEditable="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
+                                                      IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
+                                                      IsTabStop="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
                                                 <Button  x:Name="btnAddSupplier" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
                                                         Cursor="Hand" Click="AddNewSupplier_Click"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Supplier"  Visibility="Collapsed">
                                                     <Rectangle Width="10" Height="10">
@@ -312,7 +315,7 @@
                                 <DataGridTemplateColumn Header="Status Text" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding OrderedItemStatusText}" Visibility="{Binding StatusTextVisibility}"/>
+                                            <TextBox IsReadOnly="True" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding OrderedItemStatusText, Mode=OneWay}" Visibility="{Binding StatusTextVisibility}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
