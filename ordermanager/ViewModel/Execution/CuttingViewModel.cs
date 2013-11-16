@@ -12,6 +12,11 @@ namespace ordermanager.ViewModel.Execution
 {
     public class CuttingViewModel : JobExecutionViewModelBase
     {
+        public bool CanModify
+        {
+            get { return DBResources.Instance.CurrentUser.UserRole.CanModifyExecutionCutting; }
+        }
+
         public override void AddNewRecord(DateTime date)
         {
             base.AddNewRecord(date);

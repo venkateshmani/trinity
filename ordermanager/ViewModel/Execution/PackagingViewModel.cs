@@ -9,7 +9,10 @@ namespace ordermanager.ViewModel.Execution
 {
     public class PackagingViewModel : JobExecutionViewModelBase
     {
-
+        public bool CanModify
+        {
+            get { return DBResources.Instance.CurrentUser.UserRole.CanModifyExecutionPackaging; }
+        }
 
         public override void AddNewRecord(DateTime date)
         {

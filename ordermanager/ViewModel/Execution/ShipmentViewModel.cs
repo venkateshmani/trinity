@@ -9,6 +9,10 @@ namespace ordermanager.ViewModel.Execution
 {
     public class ShipmentViewModel : JobExecutionViewModelBase
     {
+        public bool CanModify
+        {
+            get { return DBResources.Instance.CurrentUser.UserRole.CanModifyExecutionShipping; }
+        }
 
         public override void AddNewRecord(DateTime date)
         {

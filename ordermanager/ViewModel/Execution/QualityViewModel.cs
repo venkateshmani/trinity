@@ -9,6 +9,10 @@ namespace ordermanager.ViewModel.Execution
 {
     public class QualityViewModel : JobExecutionViewModelBase
     {
+        public bool CanModify
+        {
+            get { return DBResources.Instance.CurrentUser.UserRole.CanModifyExectionQuality; }
+        }
 
         public override void AddNewRecord(DateTime date)
         {

@@ -44,6 +44,7 @@
             <DataProviders:DataProvider x:Key="DataProvider" />
             <Converters:Subractor x:Key="subractor"/>
             <Converters:FlipBoolValueConverter x:Key="FlipBoolValueConverter"/>
+            <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <Converters:HasErrorToVisibilityConverter x:Key="hasErrorToVisibilityConverter" />
             <Converters:UserFriendlyDateNameCreator x:Key="UserFriendlyDateNameCreator"/>
         </ResourceDictionary>
@@ -141,7 +142,8 @@
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"
                                               RowHeaderWidth="25"
                                               HeadersVisibility="Column"
-                                              IsReadOnly="{Binding IsReadOnly}">
+                                              IsReadOnly="{Binding IsReadOnly}"
+                                              Tag="{Binding CanModify,  Converter={StaticResource FlipBoolValueConverter}}">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Size" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
@@ -170,7 +172,7 @@
                         <DataGridTemplateColumn Header="Quantity Passed" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding PassedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus}" />
+                                    <TextBox Text="{Binding PassedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus}" IsReadOnly="{ Binding Tag, ElementName=executionDetails}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -178,7 +180,7 @@
                         <DataGridTemplateColumn Header="Quantity Failed" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding FailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus}" />
+                                    <TextBox Text="{Binding FailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus}" IsReadOnly="{ Binding Tag, ElementName=executionDetails}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -201,7 +203,7 @@
         <Grid Grid.Row="3" Grid.ColumnSpan="3" x:Name="gridButtons">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Save Changes" Click="Save_Click">
+                                        ToolTip="Save Changes" Click="Save_Click" Visibility="{Binding CanModify,  Converter={StaticResource BoolToVisibilityConverter}}">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>

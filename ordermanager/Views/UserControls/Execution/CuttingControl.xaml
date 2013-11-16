@@ -43,6 +43,8 @@
             <DataProviders:DataProvider x:Key="DataProvider" />
             <Converters:Subractor x:Key="subractor"/>
             <Converters:UserFriendlyDateNameCreator x:Key="UserFriendlyDateNameCreator"/>
+            <Converters:FlipBoolValueConverter x:Key="FlipBoolValueConverter"/>
+            <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -138,10 +140,9 @@
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"
                                               RowHeaderWidth="25"
                                               HeadersVisibility="Column"
-                                              IsReadOnly="{Binding IsReadOnly}">
+                                              IsReadOnly="{Binding IsReadOnly}"
+                                              Tag="{Binding CanModify,  Converter={StaticResource FlipBoolValueConverter}}">
                     <DataGrid.Columns>
-
-
                         <DataGridTemplateColumn Header="Size" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -169,7 +170,7 @@
                         <DataGridTemplateColumn Header="Cut. Qty" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding CutQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus}" />
+                                    <TextBox Text="{Binding CutQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus}" IsReadOnly="{ Binding Tag, ElementName=executionDetails}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -177,7 +178,7 @@
                         <DataGridTemplateColumn Header="Pending. Qty" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox IsReadOnly="True" Text="{Binding PendingWrapper, StringFormat=n4}" />
+                                    <TextBox IsReadOnly="True" Text="{Binding PendingWrapper, StringFormat=n4}"  />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -209,7 +210,7 @@
         <Grid Grid.Row="3" Grid.ColumnSpan="3" x:Name="gridButtons">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Save Changes" Click="Save_Click">
+                                        ToolTip="Save Changes" Click="Save_Click" Visibility="{Binding CanModify,  Converter={StaticResource BoolToVisibilityConverter}}">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>

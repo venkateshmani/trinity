@@ -9,6 +9,10 @@ namespace ordermanager.ViewModel.Execution
 {
     public class ProductionViewModel : JobExecutionViewModelBase
     {
+        public bool CanModify
+        {
+            get { return DBResources.Instance.CurrentUser.UserRole.CanModifyExecutionProduction; }
+        }
 
         public override void AddNewRecord(DateTime date)
         {
