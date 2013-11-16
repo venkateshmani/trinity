@@ -31,36 +31,6 @@ namespace ordermanager.ViewModel
             {
                 m_SelectedPurchaseOrder = value;
                 NotifyPropertyChanged("SelectedPurchaseOrder");
-                RefereshReadOnlyStates();
-            }
-        }
-
-        public void RefereshReadOnlyStates()
-        {
-            NotifyPropertyChanged("IsQualityReadOnly");
-            NotifyPropertyChanged("IsMaterialsReceiptReadOnly");
-        }
-
-
-        public bool IsQualityReadOnly
-        {
-            get
-            {
-                if (SelectedPurchaseOrder != null && SelectedPurchaseOrder.PurchaseOrderStatusID == 2)
-                    return false;
-
-                return true;
-            }
-        }
-
-        public bool IsMaterialsReceiptReadOnly
-        {
-            get
-            {
-                if (SelectedPurchaseOrder != null && SelectedPurchaseOrder.PurchaseOrderStatusID == 1)
-                    return false;
-
-                return true;
             }
         }
 
@@ -80,15 +50,7 @@ namespace ordermanager.ViewModel
                     }
                 }
 
-                if (DBResources.Instance.Save())
-                {
-                    RefereshReadOnlyStates();
-                }
-                else
-                {
-                    if (isSubmit)
-                        SelectedPurchaseOrder.PurchaseOrderStatusID -= 1;
-                }
+                DBResources.Instance.Save();
             }
         }
 

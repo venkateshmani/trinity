@@ -122,15 +122,14 @@
                    VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden"></TextBlock>
 
         <Grid Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
-            <TabControl x:Name="grnDetailsControl" SelectionChanged="grnDetailsControl_SelectionChanged_1">
+            <TabControl x:Name="grnDetailsControl">
                 <TabItem x:Name="tabMaterialsReceipt" Header="  Materials Receipt  ">
                     <Border BorderBrush="Gray" BorderThickness="1" Margin="5,5,5,5" Grid.Row="1">
                         <DataGrid x:Name="materialsReciptGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"
                                               RowHeaderWidth="25"
-                                              HeadersVisibility="Column"
-                                              IsReadOnly="{Binding IsMaterialsReceiptReadOnly}"  >
+                                              HeadersVisibility="Column">
                         <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Material" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -160,7 +159,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox Text="{Binding InvoiceNumber, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                     IsReadOnly="{Binding DataContext.IsMaterialsReceiptReadOnly,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                                                     IsReadOnly="{Binding IsReadOnly}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -169,7 +168,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <DatePicker SelectedDate="{Binding InvoicedDateWrapper, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
-                                                        IsHitTestVisible="{Binding DataContext.IsMaterialsReceiptReadOnly, Converter={StaticResource FlipBoolValueConverter},RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                                                        IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -178,7 +177,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <DatePicker SelectedDate="{Binding RecievedDateWrapper, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                        IsHitTestVisible="{Binding DataContext.IsMaterialsReceiptReadOnly,Converter={StaticResource FlipBoolValueConverter},RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                                                        IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -188,7 +187,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox Text="{Binding InvoicedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, NotifyOnSourceUpdated=True, ValidatesOnNotifyDataErrors=True}" 
-                                                     IsReadOnly="{Binding DataContext.IsMaterialsReceiptReadOnly,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                                                     IsReadOnly="{Binding IsReadOnly}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -197,7 +196,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox Text="{Binding RecievedInHandWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                     IsReadOnly="{Binding DataContext.IsMaterialsReceiptReadOnly,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                                                     IsReadOnly="{Binding IsReadOnly}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -216,7 +215,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox Text="{Binding OtherChargesInINR, UpdateSourceTrigger=LostFocus}"
-                                                     IsReadOnly="{Binding DataContext.IsMaterialsReceiptReadOnly,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                                                     IsReadOnly="{Binding IsReadOnly}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -232,8 +231,7 @@
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductMaterialsWrapper, UpdateSourceTrigger=PropertyChanged}"
                                               RowHeaderWidth="25"
-                                              HeadersVisibility="All"
-                                              IsReadOnly="{Binding IsQualityReadOnly}">
+                                              HeadersVisibility="All">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Material" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -263,7 +261,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox Text="{Binding QualityPassedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                                                      IsReadOnly="{Binding DataContext.IsQualityReadOnly,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                                                     IsReadOnly="{Binding IsReadOnly}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -276,27 +274,49 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Header="Supplier"  Width="0.2*">
+                                <DataGridTemplateColumn x:Name="supplierColumn" Header="Supplier" Width="0.3*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBox Text="{Binding QualityFailedQuantityWrapper, StringFormat=n4}" IsReadOnly="True" />
+                                            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="{Binding SupplierVisibility}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <ComboBox x:Name="supplierComboBox" Grid.Column="0" IsEditable="True"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                                      ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
+                                                      DisplayMemberPath="Name" SelectedItem="{Binding Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                                      Height="20"  TextBoxBase.TextChanged="SupplierComboBox_TextChanged"
+                                                      />
+                                                <Button  x:Name="btnAddSupplier" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
+                                                        Cursor="Hand" Click="AddNewSupplier_Click"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Supplier"  Visibility="Collapsed">
+                                                    <Rectangle Width="10" Height="10">
+                                                        <Rectangle.Fill>
+                                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                </Button>
+                                                <Button  x:Name="btnEditSupplier" Width="28"  Grid.Row="0" Grid.Column="2" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
+                                                        Cursor="Hand" Click="EditSupplier_Click"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Edit Supplier"  Visibility="Collapsed">
+                                                    <Rectangle Width="10" Height="10">
+                                                        <Rectangle.Fill>
+                                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
+                                                        </Rectangle.Fill>
+                                                    </Rectangle>
+                                                </Button>
+                                            </Grid>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn  Width="0.2*">
+                                <DataGridTemplateColumn Header="Status Text" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button x:Name="generatePO" Content="Generate PO"  Margin="5" Width="150" Height="35" Foreground="White"
-                                              ToolTip="Generate Purchase Order" Click="generatePO_Click">
-                                                <Button.Background>
-                                                    <SolidColorBrush Color="{StaticResource AccentColor}" />
-                                                </Button.Background>
-                                            </Button>
+                                            <TextBlock Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding OrderedItemStatusText}" Visibility="{Binding StatusTextVisibility}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-
+                                
                             </DataGrid.Columns>
                         </DataGrid>
                     </Border>
@@ -316,14 +336,8 @@
 
         <Grid Grid.Row="3" Grid.ColumnSpan="3" x:Name="gridButtons">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="saveBtn" Content="Save"  Margin="5" Width="150" Height="35" Foreground="White"
+                <Button x:Name="saveBtn" Content="Save Changes"  Margin="5" Width="250" Height="35" Foreground="White"
                                         ToolTip="Save Changes" Click="Save_Click">
-                    <Button.Background>
-                        <SolidColorBrush Color="{StaticResource AccentColor}" />
-                    </Button.Background>
-                </Button>
-                <Button x:Name="submitBtn" Content="Submit" Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Submit to next level" Click="Submit_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>

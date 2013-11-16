@@ -14,7 +14,8 @@ namespace ordermanager.ViewModel
             string startYear = string.Empty;
             string endYear = string.Empty;
             int currentYear = int.Parse(DateTime.Now.ToString("yy"));
-            string poUniqueNumber = order.OrderID.ToString() + supplier.CompanyID.ToString();
+            string poUniqueNumber = order.OrderID.ToString() + "-" + supplier.CompanyID.ToString();
+            string timeStamp = DateTime.Now.ToString("ddMMhhmmtt");
 
             if (DateTime.Now.Month >= 4)
             {
@@ -28,7 +29,7 @@ namespace ordermanager.ViewModel
             }
 
 
-            return string.Format("TCIPL/{0}-{1}/MAC/{2}", startYear, endYear, poUniqueNumber);
+            return string.Format("TCIPL/{0}-{1}/MAC/{2}/{3}", startYear, endYear, timeStamp, poUniqueNumber);
         }
     }
 }
