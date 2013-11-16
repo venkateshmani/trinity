@@ -36,9 +36,9 @@ namespace Reports
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.SP_PurchaseOrderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.OrderManagerDBDataSet = new Reports.OrderManagerDBDataSet();
+            this.OrderManagerDBDataSet = new Reports.OrderManagerDBDataSetForPO();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.SP_PurchaseOrderTableAdapter = new Reports.OrderManagerDBDataSetTableAdapters.SP_PurchaseOrderTableAdapter();
+            this.SP_PurchaseOrderTableAdapter = new Reports.OrderManagerDBDataSetForPOTableAdapters.SP_PurchaseOrderTableAdapter();
             this.purchaseOrderReportControl1 = new Reports.PurchaseOrderReportControl();
             ((System.ComponentModel.ISupportInitialize)(this.SP_PurchaseOrderBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderManagerDBDataSet)).BeginInit();
@@ -96,8 +96,8 @@ namespace Reports
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.BindingSource SP_PurchaseOrderBindingSource;
-        private OrderManagerDBDataSet OrderManagerDBDataSet;
-        private OrderManagerDBDataSetTableAdapters.SP_PurchaseOrderTableAdapter SP_PurchaseOrderTableAdapter;
+        private OrderManagerDBDataSetForPO OrderManagerDBDataSet;
+        private OrderManagerDBDataSetForPOTableAdapters.SP_PurchaseOrderTableAdapter SP_PurchaseOrderTableAdapter;
         private PurchaseOrderReportControl purchaseOrderReportControl1;
     }
 }

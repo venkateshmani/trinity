@@ -29,32 +29,39 @@ namespace Reports
             this.reportViewer1.LocalReport.SetParameters(parameters);
         }
 
-        public void DisplayReport(long? orderId, int? supplierId)
+        public void DisplayReport(long? purchaseOrderID)
         {
-            this.SP_PurchaseOrderTableAdapter.Fill(this.OrderManagerDBDataSet.SP_PurchaseOrder, orderId, supplierId);
+            this.SP_PurchaseOrderTableAdapter.Fill(this.OrderManagerDBDataSet.SP_PurchaseOrder, purchaseOrderID);
             this.reportViewer1.RefreshReport();
         }
 
-        public void CreateReportAsPDF(long? orderId, int? supplierId,string fileName)
+        public void CreateReportAsPDF(long? purchaseOrderID, string fileName)
         {
 
-            this.SP_PurchaseOrderTableAdapter.Fill(this.OrderManagerDBDataSet.SP_PurchaseOrder, orderId, supplierId);
-
-            // Variables
-            Warning[] warnings;
-            string[] streamIds;
-            string mimeType = string.Empty;
-            string encoding = string.Empty;
-            string extension = string.Empty;
-
-
-            // Setup the report viewer object and get the array of bytes
-            byte[] bytes = reportViewer1.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
-
-            using (System.IO.FileStream sw = new System.IO.FileStream(fileName, System.IO.FileMode.Create))
+            try
             {
-                sw.Write(bytes, 0, bytes.Length);
-                sw.Close();
+                this.SP_PurchaseOrderTableAdapter.Fill(this.OrderManagerDBDataSet.SP_PurchaseOrder, purchaseOrderID);
+
+                // Variables
+                Warning[] warnings;
+                string[] streamIds;
+                string mimeType = string.Empty;
+                string encoding = string.Empty;
+                string extension = string.Empty;
+
+
+                // Setup the report viewer object and get the array of bytes
+                byte[] bytes = reportViewer1.LocalReport.Render("PDF", null, out mimeType, out encoding, out extension, out streamIds, out warnings);
+
+                using (System.IO.FileStream sw = new System.IO.FileStream(fileName, System.IO.FileMode.Create))
+                {
+                    sw.Write(bytes, 0, bytes.Length);
+                    sw.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
     }

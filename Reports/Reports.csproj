@@ -51,14 +51,14 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrderManagerDBDataSet.cs">
-      <DependentUpon>OrderManagerDBDataSet.xsd</DependentUpon>
+    <Compile Include="OrderManagerDBDataSetForPO.cs">
+      <DependentUpon>OrderManagerDBDataSetForPO.xsd</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="OrderManagerDBDataSet.Designer.cs">
+    <Compile Include="OrderManagerDBDataSetForPO.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OrderManagerDBDataSet.xsd</DependentUpon>
+      <DependentUpon>OrderManagerDBDataSetForPO.xsd</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,16 +84,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="OrderManagerDBDataSet.xsc">
-      <DependentUpon>OrderManagerDBDataSet.xsd</DependentUpon>
+    <None Include="OrderManagerDBDataSetForPO.xsc">
+      <DependentUpon>OrderManagerDBDataSetForPO.xsd</DependentUpon>
     </None>
-    <None Include="OrderManagerDBDataSet.xsd">
+    <None Include="OrderManagerDBDataSetForPO.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>OrderManagerDBDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>OrderManagerDBDataSetForPO.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="OrderManagerDBDataSet.xss">
-      <DependentUpon>OrderManagerDBDataSet.xsd</DependentUpon>
+    <None Include="OrderManagerDBDataSetForPO.xss">
+      <DependentUpon>OrderManagerDBDataSetForPO.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

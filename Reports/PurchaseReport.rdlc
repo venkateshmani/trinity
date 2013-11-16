@@ -735,7 +735,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=FormatNumber(Fields!Quantity.Value,2) &amp; " " &amp; Fields!Units.Value</Value>
+                              <Value>=FormatNumber(Fields!OrderedQuantity.Value,2) &amp; " " &amp; Fields!Units.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -852,6 +852,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -915,7 +916,7 @@
         <Top>2.06644in</Top>
         <Left>0.21982in</Left>
         <Height>0.7926in</Height>
-        <Width>6.88244in</Width>
+        <Width>6.88243in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1206,18 +1207,18 @@ Mail id : admin-gd@triniity.com</Value>
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="OrderManagerDBDataSet">
+    <DataSource Name="OrderManagerDBDataSetForPO">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>b6bba01f-c3af-46fd-93cf-f069b3e5f6ec</rd:DataSourceID>
+      <rd:DataSourceID>d33cb7b7-4df7-489f-a16c-5c74e63afab5</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="PODataSet">
       <Query>
-        <DataSourceName>OrderManagerDBDataSet</DataSourceName>
+        <DataSourceName>OrderManagerDBDataSetForPO</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -1237,8 +1238,8 @@ Mail id : admin-gd@triniity.com</Value>
           <DataField>SubMaterialName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Quantity">
-          <DataField>Quantity</DataField>
+        <Field Name="OrderedQuantity">
+          <DataField>OrderedQuantity</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="Units">
@@ -1271,8 +1272,8 @@ Mail id : admin-gd@triniity.com</Value>
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>OrderManagerDBDataSet</rd:DataSetName>
-        <rd:SchemaPath>D:\SourceCode\trinity\Reports\OrderManagerDBDataSet.xsd</rd:SchemaPath>
+        <rd:DataSetName>OrderManagerDBDataSetForPO</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\User\Documents\GitHub\trinity\Reports\OrderManagerDBDataSetForPO.xsd</rd:SchemaPath>
         <rd:TableName>SP_PurchaseOrder</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>

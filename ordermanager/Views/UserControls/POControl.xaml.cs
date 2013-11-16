@@ -74,8 +74,8 @@ namespace ordermanager.Views.UserControls
                 if (po.Company.PurchaseOrderDateWrapper == null)
                     po.Company.PurchaseOrderDateWrapper = DateTime.Now;
                 string filePath = System.IO.Path.Combine(
-                                             folderPath, "PurchaseOrder" + Order.OrderID.ToString() + "_" + po.Company.Name + ".pdf");
-                GeneratePurchaseOrder(po.Company,po.PurchaseOrderDateWrapper.Value, filePath);
+                                             folderPath, "PurchaseOrder-" + po.PurchaseOrderNumber.Replace("/", "_") + ".pdf");
+                GeneratePurchaseOrder(po, filePath);
             }
         }
 
@@ -88,10 +88,10 @@ namespace ordermanager.Views.UserControls
                     poDetails.PurchaseOrderDateWrapper = DateTime.Now;
 
                 string tempFilePathForPdf = System.IO.Path.Combine(
-                                             System.IO.Path.GetTempPath(), "OM_PurchaseOrder" + Order.OrderID.ToString() + "_" + poDetails.Company.CompanyID + ".pdf");
+                                             System.IO.Path.GetTempPath(), "OM_PurchaseOrder-" + poDetails.PurchaseOrderNumber.Replace("/", "_") + ".pdf");
                 string lastOpenedPdfFile = string.Empty;
 
-                if (GeneratePurchaseOrder(poDetails.Company,poDetails.PurchaseOrderDateWrapper.Value, tempFilePathForPdf))
+                if (GeneratePurchaseOrder(poDetails, tempFilePathForPdf))
                 {
                     webBrowser.Source = new Uri(tempFilePathForPdf);
                 }
@@ -105,17 +105,17 @@ namespace ordermanager.Views.UserControls
             }
         }
 
-        private bool GeneratePurchaseOrder(Company supplier,DateTime poDate, string filePath)
+        private bool GeneratePurchaseOrder(PurchaseOrder po, string filePath)
         {
             try
             {
-                string supplierInformation = GetSupplierInformation(supplier);
-                string purchaseOrderNumber = GetPurchaseOrderNumber(supplier);
+                string supplierInformation = GetSupplierInformation(po.Company);
+                string purchaseOrderNumber = GetPurchaseOrderNumber(po.Company);
                 string quoteNumber = GetQuoteNumber();
-                string quoteDate = GetQuoteDate(poDate);
+                string quoteDate = GetQuoteDate(po.PurchaseOrderDate);
                 
                 purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, quoteNumber, quoteDate);
-                purchaseOrderReportControl.CreateReportAsPDF(Order.OrderID, supplier.CompanyID, filePath);
+                purchaseOrderReportControl.CreateReportAsPDF(po.PurchaseOrderID, filePath);
             }
             catch (Exception e)
             {
@@ -127,9 +127,12 @@ namespace ordermanager.Views.UserControls
 
         }
 
-        private string GetQuoteDate(DateTime date)
-        {  
-            return date.ToString("MM/dd/yyyy");
+        private string GetQuoteDate(DateTime? date)
+        {
+            if (date == null)
+                return string.Empty;
+            
+            return date.Value.ToString("MM/dd/yyyy");
         }
 
         private string GetQuoteNumber()

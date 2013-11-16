@@ -20,9 +20,9 @@ namespace Reports {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("OrderManagerDBDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("OrderManagerDBDataSetForPO")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class OrderManagerDBDataSet : global::System.Data.DataSet {
+    public partial class OrderManagerDBDataSetForPO : global::System.Data.DataSet {
         
         private SP_PurchaseOrderDataTable tableSP_PurchaseOrder;
         
@@ -30,7 +30,7 @@ namespace Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public OrderManagerDBDataSet() {
+        public OrderManagerDBDataSetForPO() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected OrderManagerDBDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected OrderManagerDBDataSetForPO(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -127,7 +127,7 @@ namespace Reports {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            OrderManagerDBDataSet cln = ((OrderManagerDBDataSet)(base.Clone()));
+            OrderManagerDBDataSetForPO cln = ((OrderManagerDBDataSetForPO)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -199,9 +199,9 @@ namespace Reports {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "OrderManagerDBDataSet";
+            this.DataSetName = "OrderManagerDBDataSetForPO";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/OrderManagerDBDataSet.xsd";
+            this.Namespace = "http://tempuri.org/OrderManagerDBDataSetForPO.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableSP_PurchaseOrder = new SP_PurchaseOrderDataTable();
@@ -225,7 +225,7 @@ namespace Reports {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            OrderManagerDBDataSet ds = new OrderManagerDBDataSet();
+            OrderManagerDBDataSetForPO ds = new OrderManagerDBDataSetForPO();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -279,6 +279,8 @@ namespace Reports {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class SP_PurchaseOrderDataTable : global::System.Data.TypedTableBase<SP_PurchaseOrderRow> {
             
+            private global::System.Data.DataColumn columnID;
+            
             private global::System.Data.DataColumn columnOrderID;
             
             private global::System.Data.DataColumn columnProductName;
@@ -287,7 +289,7 @@ namespace Reports {
             
             private global::System.Data.DataColumn columnSubMaterialName;
             
-            private global::System.Data.DataColumn columnQuantity;
+            private global::System.Data.DataColumn columnOrderedQuantity;
             
             private global::System.Data.DataColumn columnUnits;
             
@@ -302,8 +304,6 @@ namespace Reports {
             private global::System.Data.DataColumn columnTotal;
             
             private global::System.Data.DataColumn columnSupplier;
-            
-            private global::System.Data.DataColumn columnId;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -340,6 +340,14 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn IDColumn {
+                get {
+                    return this.columnID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn OrderIDColumn {
                 get {
                     return this.columnOrderID;
@@ -372,9 +380,9 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn QuantityColumn {
+            public global::System.Data.DataColumn OrderedQuantityColumn {
                 get {
-                    return this.columnQuantity;
+                    return this.columnOrderedQuantity;
                 }
             }
             
@@ -436,14 +444,6 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IdColumn {
-                get {
-                    return this.columnId;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -479,22 +479,22 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SP_PurchaseOrderRow AddSP_PurchaseOrderRow(string ProductName, string MaterialName, string SubMaterialName, decimal Quantity, string Units, decimal Cost, string Currency, decimal Amount, int Tax, decimal Total, string Supplier) {
+            public SP_PurchaseOrderRow AddSP_PurchaseOrderRow(string ProductName, string MaterialName, string SubMaterialName, decimal OrderedQuantity, string Units, decimal Cost, string Currency, decimal Amount, int Tax, decimal Total, string Supplier) {
                 SP_PurchaseOrderRow rowSP_PurchaseOrderRow = ((SP_PurchaseOrderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
+                        null,
                         null,
                         ProductName,
                         MaterialName,
                         SubMaterialName,
-                        Quantity,
+                        OrderedQuantity,
                         Units,
                         Cost,
                         Currency,
                         Amount,
                         Tax,
                         Total,
-                        Supplier,
-                        null};
+                        Supplier};
                 rowSP_PurchaseOrderRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSP_PurchaseOrderRow);
                 return rowSP_PurchaseOrderRow;
@@ -502,9 +502,9 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SP_PurchaseOrderRow FindById(int Id) {
+            public SP_PurchaseOrderRow FindByID(int ID) {
                 return ((SP_PurchaseOrderRow)(this.Rows.Find(new object[] {
-                            Id})));
+                            ID})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -524,11 +524,12 @@ namespace Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
+                this.columnID = base.Columns["ID"];
                 this.columnOrderID = base.Columns["OrderID"];
                 this.columnProductName = base.Columns["ProductName"];
                 this.columnMaterialName = base.Columns["MaterialName"];
                 this.columnSubMaterialName = base.Columns["SubMaterialName"];
-                this.columnQuantity = base.Columns["Quantity"];
+                this.columnOrderedQuantity = base.Columns["OrderedQuantity"];
                 this.columnUnits = base.Columns["Units"];
                 this.columnCost = base.Columns["Cost"];
                 this.columnCurrency = base.Columns["Currency"];
@@ -536,12 +537,13 @@ namespace Reports {
                 this.columnTax = base.Columns["Tax"];
                 this.columnTotal = base.Columns["Total"];
                 this.columnSupplier = base.Columns["Supplier"];
-                this.columnId = base.Columns["Id"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
+                this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnID);
                 this.columnOrderID = new global::System.Data.DataColumn("OrderID", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnOrderID);
                 this.columnProductName = new global::System.Data.DataColumn("ProductName", typeof(string), null, global::System.Data.MappingType.Element);
@@ -550,8 +552,8 @@ namespace Reports {
                 base.Columns.Add(this.columnMaterialName);
                 this.columnSubMaterialName = new global::System.Data.DataColumn("SubMaterialName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSubMaterialName);
-                this.columnQuantity = new global::System.Data.DataColumn("Quantity", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnQuantity);
+                this.columnOrderedQuantity = new global::System.Data.DataColumn("OrderedQuantity", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOrderedQuantity);
                 this.columnUnits = new global::System.Data.DataColumn("Units", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUnits);
                 this.columnCost = new global::System.Data.DataColumn("Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
@@ -566,20 +568,21 @@ namespace Reports {
                 base.Columns.Add(this.columnTotal);
                 this.columnSupplier = new global::System.Data.DataColumn("Supplier", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSupplier);
-                this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnId);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnId}, true));
+                                this.columnID}, true));
+                this.columnID.AutoIncrement = true;
+                this.columnID.AllowDBNull = false;
+                this.columnID.Unique = true;
                 this.columnOrderID.AutoIncrement = true;
                 this.columnOrderID.AllowDBNull = false;
                 this.columnOrderID.ReadOnly = true;
                 this.columnProductName.AllowDBNull = false;
                 this.columnProductName.MaxLength = 2147483647;
                 this.columnMaterialName.AllowDBNull = false;
-                this.columnMaterialName.MaxLength = 2147483647;
+                this.columnMaterialName.MaxLength = 50;
                 this.columnSubMaterialName.AllowDBNull = false;
                 this.columnSubMaterialName.MaxLength = 2147483647;
-                this.columnQuantity.AllowDBNull = false;
+                this.columnOrderedQuantity.AllowDBNull = false;
                 this.columnUnits.AllowDBNull = false;
                 this.columnUnits.MaxLength = 10;
                 this.columnCost.AllowDBNull = false;
@@ -590,10 +593,6 @@ namespace Reports {
                 this.columnTotal.ReadOnly = true;
                 this.columnSupplier.AllowDBNull = false;
                 this.columnSupplier.MaxLength = 2147483647;
-                this.columnId.AutoIncrement = true;
-                this.columnId.AutoIncrementSeed = 1;
-                this.columnId.AllowDBNull = false;
-                this.columnId.Unique = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -661,7 +660,7 @@ namespace Reports {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                OrderManagerDBDataSet ds = new OrderManagerDBDataSet();
+                OrderManagerDBDataSetForPO ds = new OrderManagerDBDataSetForPO();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -736,6 +735,17 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ID {
+                get {
+                    return ((int)(this[this.tableSP_PurchaseOrder.IDColumn]));
+                }
+                set {
+                    this[this.tableSP_PurchaseOrder.IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public long OrderID {
                 get {
                     return ((long)(this[this.tableSP_PurchaseOrder.OrderIDColumn]));
@@ -780,12 +790,12 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal Quantity {
+            public decimal OrderedQuantity {
                 get {
-                    return ((decimal)(this[this.tableSP_PurchaseOrder.QuantityColumn]));
+                    return ((decimal)(this[this.tableSP_PurchaseOrder.OrderedQuantityColumn]));
                 }
                 set {
-                    this[this.tableSP_PurchaseOrder.QuantityColumn] = value;
+                    this[this.tableSP_PurchaseOrder.OrderedQuantityColumn] = value;
                 }
             }
             
@@ -883,17 +893,6 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Id {
-                get {
-                    return ((int)(this[this.tableSP_PurchaseOrder.IdColumn]));
-                }
-                set {
-                    this[this.tableSP_PurchaseOrder.IdColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsAmountNull() {
                 return this.IsNull(this.tableSP_PurchaseOrder.AmountColumn);
             }
@@ -964,7 +963,7 @@ namespace Reports {
         }
     }
 }
-namespace Reports.OrderManagerDBDataSetTableAdapters {
+namespace Reports.OrderManagerDBDataSetForPOTableAdapters {
     
     
     /// <summary>
@@ -1092,7 +1091,7 @@ namespace Reports.OrderManagerDBDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("ProductName", "ProductName");
             tableMapping.ColumnMappings.Add("MaterialName", "MaterialName");
             tableMapping.ColumnMappings.Add("SubMaterialName", "SubMaterialName");
-            tableMapping.ColumnMappings.Add("Quantity", "Quantity");
+            tableMapping.ColumnMappings.Add("OrderedQuantity", "OrderedQuantity");
             tableMapping.ColumnMappings.Add("Units", "Units");
             tableMapping.ColumnMappings.Add("Cost", "Cost");
             tableMapping.ColumnMappings.Add("Currency", "Currency");
@@ -1119,27 +1118,20 @@ namespace Reports.OrderManagerDBDataSetTableAdapters {
             this._commandCollection[0].CommandText = "dbo.SP_PurchaseOrder";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@orderId", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 19, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@supplierId", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@purchaseOrderID", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 19, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(OrderManagerDBDataSet.SP_PurchaseOrderDataTable dataTable, global::System.Nullable<long> orderId, global::System.Nullable<int> supplierId) {
+        public virtual int Fill(OrderManagerDBDataSetForPO.SP_PurchaseOrderDataTable dataTable, global::System.Nullable<long> purchaseOrderID) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((orderId.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((long)(orderId.Value));
+            if ((purchaseOrderID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((long)(purchaseOrderID.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((supplierId.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[2].Value = ((int)(supplierId.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1152,21 +1144,15 @@ namespace Reports.OrderManagerDBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual OrderManagerDBDataSet.SP_PurchaseOrderDataTable GetData(global::System.Nullable<long> orderId, global::System.Nullable<int> supplierId) {
+        public virtual OrderManagerDBDataSetForPO.SP_PurchaseOrderDataTable GetData(global::System.Nullable<long> purchaseOrderID) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((orderId.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((long)(orderId.Value));
+            if ((purchaseOrderID.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((long)(purchaseOrderID.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            if ((supplierId.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[2].Value = ((int)(supplierId.Value));
-            }
-            else {
-                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            OrderManagerDBDataSet.SP_PurchaseOrderDataTable dataTable = new OrderManagerDBDataSet.SP_PurchaseOrderDataTable();
+            OrderManagerDBDataSetForPO.SP_PurchaseOrderDataTable dataTable = new OrderManagerDBDataSetForPO.SP_PurchaseOrderDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1240,7 +1226,7 @@ namespace Reports.OrderManagerDBDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateUpdatedRows(OrderManagerDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(OrderManagerDBDataSetForPO dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1250,7 +1236,7 @@ namespace Reports.OrderManagerDBDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateInsertedRows(OrderManagerDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(OrderManagerDBDataSetForPO dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1260,7 +1246,7 @@ namespace Reports.OrderManagerDBDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateDeletedRows(OrderManagerDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(OrderManagerDBDataSetForPO dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             return result;
         }
@@ -1294,7 +1280,7 @@ namespace Reports.OrderManagerDBDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual int UpdateAll(OrderManagerDBDataSet dataSet) {
+        public virtual int UpdateAll(OrderManagerDBDataSetForPO dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

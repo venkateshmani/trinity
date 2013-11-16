@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.SP_PurchaseOrderTableAdapter = new Reports.OrderManagerDBDataSetTableAdapters.SP_PurchaseOrderTableAdapter();
+            this.SP_PurchaseOrderTableAdapter = new Reports.OrderManagerDBDataSetForPOTableAdapters.SP_PurchaseOrderTableAdapter();
             this.SP_PurchaseOrderBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.OrderManagerDBDataSet = new Reports.OrderManagerDBDataSet();
+            this.OrderManagerDBDataSet = new Reports.OrderManagerDBDataSetForPO();
             ((System.ComponentModel.ISupportInitialize)(this.SP_PurchaseOrderBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrderManagerDBDataSet)).BeginInit();
             this.SuspendLayout();
@@ -80,8 +80,8 @@
         #endregion
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
-        private OrderManagerDBDataSetTableAdapters.SP_PurchaseOrderTableAdapter SP_PurchaseOrderTableAdapter;
+        private OrderManagerDBDataSetForPOTableAdapters.SP_PurchaseOrderTableAdapter SP_PurchaseOrderTableAdapter;
         private System.Windows.Forms.BindingSource SP_PurchaseOrderBindingSource;
-        private OrderManagerDBDataSet OrderManagerDBDataSet;
+        private OrderManagerDBDataSetForPO OrderManagerDBDataSet;
     }
 }
