@@ -170,7 +170,7 @@
                         <DataGridTemplateColumn Header="Cut. Qty" Width="0.1*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding CutQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus}" IsReadOnly="{ Binding Tag, ElementName=executionDetails}"/>
+                                    <TextBox Text="{Binding CutQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus}" IsReadOnly="{Binding Tag, ElementName=executionDetails}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

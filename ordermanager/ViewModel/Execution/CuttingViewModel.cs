@@ -12,9 +12,23 @@ namespace ordermanager.ViewModel.Execution
 {
     public class CuttingViewModel : JobExecutionViewModelBase
     {
+        public CuttingViewModel()
+        {
+            base.PropertyChanged += CuttingViewModel_PropertyChanged;
+        }
+
+        void CuttingViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsReadOnly")
+                 OnPropertyChanged("CanModify");
+        }
+
         public bool CanModify
         {
-            get { return DBResources.Instance.CurrentUser.UserRole.CanModifyExecutionCutting; }
+            get 
+            {
+                return DBResources.Instance.CurrentUser.UserRole.CanModifyExecutionCutting && !IsReadOnly; 
+            }
         }
 
         public override void AddNewRecord(DateTime date)

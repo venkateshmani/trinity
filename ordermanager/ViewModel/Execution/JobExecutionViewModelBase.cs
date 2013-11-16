@@ -71,9 +71,9 @@ namespace ordermanager.ViewModel.Execution
                 m_SelectedDate = value;
 
                 if (!string.IsNullOrEmpty(value) && value == DateTime.Now.ToShortDateString())
-                    IsReadOnly = true;
-                else
                     IsReadOnly = false;
+                else
+                    IsReadOnly = true;
 
                 OnPropertyChanged("SelectedDate");
             }
