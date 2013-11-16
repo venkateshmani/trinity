@@ -41,6 +41,7 @@ namespace ordermanager.DatabaseModel
             set
             {
                 Passed = value;
+                FailedWrapper = NumberOfPiecesWrapper - value;
                 OnPropertyChanged("PassedWrapper");
             }
         }
