@@ -17,6 +17,7 @@
           <EntitySet Name="Order" EntityType="OrderManagerDBModel.Store.Order" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderCurrencyConversion" EntityType="OrderManagerDBModel.Store.OrderCurrencyConversion" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderedItem" EntityType="OrderManagerDBModel.Store.OrderedItem" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderedItemStatus" EntityType="OrderManagerDBModel.Store.OrderedItemStatus" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderProduct" EntityType="OrderManagerDBModel.Store.OrderProduct" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderStatus" EntityType="OrderManagerDBModel.Store.OrderStatus" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderThrough" EntityType="OrderManagerDBModel.Store.OrderThrough" store:Type="Tables" Schema="dbo" />
@@ -78,11 +79,19 @@
             <End Role="Order" EntitySet="Order" />
             <End Role="OrderCurrencyConversion" EntitySet="OrderCurrencyConversion" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderedItem_OrderedItemStatus" Association="OrderManagerDBModel.Store.FK_OrderedItem_OrderedItemStatus">
+            <End Role="OrderedItemStatus" EntitySet="OrderedItemStatus" />
+            <End Role="OrderedItem" EntitySet="OrderedItem" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderedItem_ProductMaterialItem" Association="OrderManagerDBModel.Store.FK_OrderedItem_ProductMaterialItem">
             <End Role="ProductMaterialItem" EntitySet="ProductMaterialItem" />
             <End Role="OrderedItem" EntitySet="OrderedItem" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderedItem_PurchaseOrders" Association="OrderManagerDBModel.Store.FK_OrderedItem_PurchaseOrders">
+            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+            <End Role="OrderedItem" EntitySet="OrderedItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderedItem_PurchaseOrders1" Association="OrderManagerDBModel.Store.FK_OrderedItem_PurchaseOrders1">
             <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
             <End Role="OrderedItem" EntitySet="OrderedItem" />
           </AssociationSet>
@@ -374,6 +383,15 @@
           <Property Name="PurchaseOrderID" Type="bigint" Nullable="false" />
           <Property Name="OrderedQuantity" Type="decimal" Nullable="false" Scale="4" />
           <Property Name="SpawnedNewPurchaseOrder" Type="bit" />
+          <Property Name="OrderedItemStatusID" Type="tinyint" Nullable="false" />
+          <Property Name="SpawnedPurchaseOrderID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="OrderedItemStatus">
+          <Key>
+            <PropertyRef Name="OrderedItemStatusID" />
+          </Key>
+          <Property Name="OrderedItemStatusID" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
@@ -748,6 +766,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderedItem_OrderedItemStatus">
+          <End Role="OrderedItemStatus" Type="OrderManagerDBModel.Store.OrderedItemStatus" Multiplicity="1" />
+          <End Role="OrderedItem" Type="OrderManagerDBModel.Store.OrderedItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderedItemStatus">
+              <PropertyRef Name="OrderedItemStatusID" />
+            </Principal>
+            <Dependent Role="OrderedItem">
+              <PropertyRef Name="OrderedItemStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderedItem_ProductMaterialItem">
           <End Role="ProductMaterialItem" Type="OrderManagerDBModel.Store.ProductMaterialItem" Multiplicity="1" />
           <End Role="OrderedItem" Type="OrderManagerDBModel.Store.OrderedItem" Multiplicity="*" />
@@ -769,6 +799,18 @@
             </Principal>
             <Dependent Role="OrderedItem">
               <PropertyRef Name="PurchaseOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderedItem_PurchaseOrders1">
+          <End Role="PurchaseOrders" Type="OrderManagerDBModel.Store.PurchaseOrders" Multiplicity="0..1" />
+          <End Role="OrderedItem" Type="OrderManagerDBModel.Store.OrderedItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrders">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Principal>
+            <Dependent Role="OrderedItem">
+              <PropertyRef Name="SpawnedPurchaseOrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1281,6 +1323,7 @@
           <EntitySet Name="Orders" EntityType="OrderManagerDBModel.Order" />
           <EntitySet Name="OrderCurrencyConversions" EntityType="OrderManagerDBModel.OrderCurrencyConversion" />
           <EntitySet Name="OrderedItems" EntityType="OrderManagerDBModel.OrderedItem" />
+          <EntitySet Name="OrderedItemStatus" EntityType="OrderManagerDBModel.OrderedItemStatu" />
           <EntitySet Name="OrderProducts" EntityType="OrderManagerDBModel.OrderProduct" />
           <EntitySet Name="OrderStatus" EntityType="OrderManagerDBModel.OrderStatu" />
           <EntitySet Name="OrderThroughs" EntityType="OrderManagerDBModel.OrderThrough" />
@@ -1398,11 +1441,19 @@
             <End Role="Order" EntitySet="Orders" />
             <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderedItem_OrderedItemStatus" Association="OrderManagerDBModel.FK_OrderedItem_OrderedItemStatus">
+            <End Role="OrderedItemStatus" EntitySet="OrderedItemStatus" />
+            <End Role="OrderedItem" EntitySet="OrderedItems" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderedItem_ProductMaterialItem" Association="OrderManagerDBModel.FK_OrderedItem_ProductMaterialItem">
             <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
             <End Role="OrderedItem" EntitySet="OrderedItems" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderedItem_PurchaseOrders" Association="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders">
+            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+            <End Role="OrderedItem" EntitySet="OrderedItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderedItem_PurchaseOrders1" Association="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders1">
             <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
             <End Role="OrderedItem" EntitySet="OrderedItems" />
           </AssociationSet>
@@ -1668,8 +1719,20 @@
           <Property Name="PurchaseOrderID" Type="Int64" Nullable="false" />
           <Property Name="OrderedQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <Property Name="SpawnedNewPurchaseOrder" Type="Boolean" />
+          <Property Name="OrderedItemStatusID" Type="Byte" Nullable="false" />
+          <Property Name="SpawnedPurchaseOrderID" Type="Int64" />
+          <NavigationProperty Name="OrderedItemStatu" Relationship="OrderManagerDBModel.FK_OrderedItem_OrderedItemStatus" FromRole="OrderedItem" ToRole="OrderedItemStatus" />
           <NavigationProperty Name="ProductMaterialItem" Relationship="OrderManagerDBModel.FK_OrderedItem_ProductMaterialItem" FromRole="OrderedItem" ToRole="ProductMaterialItem" />
           <NavigationProperty Name="PurchaseOrder" Relationship="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders" FromRole="OrderedItem" ToRole="PurchaseOrders" />
+          <NavigationProperty Name="PurchaseOrder1" Relationship="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders1" FromRole="OrderedItem" ToRole="PurchaseOrders" />
+        </EntityType>
+        <EntityType Name="OrderedItemStatu">
+          <Key>
+            <PropertyRef Name="OrderedItemStatusID" />
+          </Key>
+          <Property Name="OrderedItemStatusID" Type="Byte" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="OrderedItems" Relationship="OrderManagerDBModel.FK_OrderedItem_OrderedItemStatus" FromRole="OrderedItemStatus" ToRole="OrderedItem" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
@@ -1904,6 +1967,7 @@
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Company" FromRole="PurchaseOrders" ToRole="Company" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Order" FromRole="PurchaseOrders" ToRole="Order" />
           <NavigationProperty Name="OrderedItems" Relationship="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders" FromRole="PurchaseOrders" ToRole="OrderedItem" />
+          <NavigationProperty Name="OrderedItems1" Relationship="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders1" FromRole="PurchaseOrders" ToRole="OrderedItem" />
           <NavigationProperty Name="PurchaseOrderStatu" Relationship="OrderManagerDBModel.FK_PurchaseOrders_PurchaseOrderStatus" FromRole="PurchaseOrders" ToRole="PurchaseOrderStatus" />
         </EntityType>
         <EntityType Name="PurchaseOrderStatu">
@@ -2284,6 +2348,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderedItem_OrderedItemStatus">
+          <End Role="OrderedItemStatus" Type="OrderManagerDBModel.OrderedItemStatu" Multiplicity="1" />
+          <End Role="OrderedItem" Type="OrderManagerDBModel.OrderedItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderedItemStatus">
+              <PropertyRef Name="OrderedItemStatusID" />
+            </Principal>
+            <Dependent Role="OrderedItem">
+              <PropertyRef Name="OrderedItemStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderedItem_ProductMaterialItem">
           <End Role="ProductMaterialItem" Type="OrderManagerDBModel.ProductMaterialItem" Multiplicity="1" />
           <End Role="OrderedItem" Type="OrderManagerDBModel.OrderedItem" Multiplicity="*" />
@@ -2305,6 +2381,18 @@
             </Principal>
             <Dependent Role="OrderedItem">
               <PropertyRef Name="PurchaseOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderedItem_PurchaseOrders1">
+          <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="0..1" />
+          <End Role="OrderedItem" Type="OrderManagerDBModel.OrderedItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrders">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Principal>
+            <Dependent Role="OrderedItem">
+              <PropertyRef Name="SpawnedPurchaseOrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2770,6 +2858,16 @@
                 <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
                 <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
                 <ScalarProperty Name="SpawnedNewPurchaseOrder" ColumnName="SpawnedNewPurchaseOrder" />
+                <ScalarProperty Name="OrderedItemStatusID" ColumnName="OrderedItemStatusID" />
+                <ScalarProperty Name="SpawnedPurchaseOrderID" ColumnName="SpawnedPurchaseOrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderedItemStatus">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.OrderedItemStatu">
+              <MappingFragment StoreEntitySet="OrderedItemStatus">
+                <ScalarProperty Name="OrderedItemStatusID" ColumnName="OrderedItemStatusID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

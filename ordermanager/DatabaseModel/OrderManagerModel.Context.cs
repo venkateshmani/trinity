@@ -36,6 +36,7 @@ namespace ordermanager.DatabaseModel
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderCurrencyConversion> OrderCurrencyConversions { get; set; }
         public DbSet<OrderedItem> OrderedItems { get; set; }
+        public DbSet<OrderedItemStatu> OrderedItemStatus { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<OrderStatu> OrderStatus { get; set; }
         public DbSet<OrderThrough> OrderThroughs { get; set; }

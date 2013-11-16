@@ -17,6 +17,7 @@ namespace ordermanager.DatabaseModel
         public PurchaseOrder()
         {
             this.OrderedItems = new HashSet<OrderedItem>();
+            this.OrderedItems1 = new HashSet<OrderedItem>();
         }
     
         public long PurchaseOrderID { get; set; }
@@ -29,6 +30,7 @@ namespace ordermanager.DatabaseModel
         public virtual Company Company { get; set; }
         public virtual Order Order { get; set; }
         public virtual ICollection<OrderedItem> OrderedItems { get; set; }
+        public virtual ICollection<OrderedItem> OrderedItems1 { get; set; }
         public virtual PurchaseOrderStatu PurchaseOrderStatu { get; set; }
     }
 }

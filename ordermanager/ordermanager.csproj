@@ -124,6 +124,9 @@
     <Compile Include="DatabaseModel\OrderedItem.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\OrderedItemStatu.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\OrderManagerModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
