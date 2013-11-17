@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AssetManagerDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="AssetManagerDBModelStoreContainer">
+          <EntitySet Name="Asset" EntityType="AssetManagerDBModel.Store.Asset" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AssetCategory" EntityType="AssetManagerDBModel.Store.AssetCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AssetName" EntityType="AssetManagerDBModel.Store.AssetName" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BrandName" EntityType="AssetManagerDBModel.Store.BrandName" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Company" EntityType="AssetManagerDBModel.Store.Company" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserName" EntityType="AssetManagerDBModel.Store.UserName" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserRole" EntityType="AssetManagerDBModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Asset_AssetName" Association="AssetManagerDBModel.Store.FK_Asset_AssetName">
+            <End Role="AssetName" EntitySet="AssetName" />
+            <End Role="Asset" EntitySet="Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asset_BrandName" Association="AssetManagerDBModel.Store.FK_Asset_BrandName">
+            <End Role="BrandName" EntitySet="BrandName" />
+            <End Role="Asset" EntitySet="Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asset_Company" Association="AssetManagerDBModel.Store.FK_Asset_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Asset" EntitySet="Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssetName_AssetCategory" Association="AssetManagerDBModel.Store.FK_AssetName_AssetCategory">
+            <End Role="AssetCategory" EntitySet="AssetCategory" />
+            <End Role="AssetName" EntitySet="AssetName" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserName_UserRole" Association="AssetManagerDBModel.Store.FK_UserName_UserRole">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="UserName" EntitySet="UserName" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="AssetID" />
+          </Key>
+          <Property Name="AssetID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AssetNameID" Type="bigint" Nullable="false" />
+          <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ValueInINR" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="Quantity" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="BrandNameID" Type="int" />
+          <Property Name="SupplierID" Type="int" />
+        </EntityType>
+        <EntityType Name="AssetCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AssetName">
+          <Key>
+            <PropertyRef Name="AssetNameID" />
+          </Key>
+          <Property Name="AssetNameID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Descritpion" Type="varchar" MaxLength="100" />
+          <Property Name="CategoryID" Type="int" />
+        </EntityType>
+        <EntityType Name="BrandName">
+          <Key>
+            <PropertyRef Name="BrandNameID" />
+          </Key>
+          <Property Name="BrandNameID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="text" Nullable="false" />
+          <Property Name="Address1" Type="text" />
+          <Property Name="Address2" Type="text" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="50" />
+          <Property Name="Telephone" Type="varchar" MaxLength="20" />
+          <Property Name="Fax" Type="varchar" MaxLength="20" />
+          <Property Name="Mobile" Type="varchar" MaxLength="20" />
+          <Property Name="EmaiID" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="UserName">
+          <Key>
+            <PropertyRef Name="UserNameID" />
+          </Key>
+          <Property Name="UserNameID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="UserRoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleID" />
+          </Key>
+          <Property Name="UserRoleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CanEditAssets" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Asset_AssetName">
+          <End Role="AssetName" Type="AssetManagerDBModel.Store.AssetName" Multiplicity="1" />
+          <End Role="Asset" Type="AssetManagerDBModel.Store.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AssetName">
+              <PropertyRef Name="AssetNameID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="AssetNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asset_BrandName">
+          <End Role="BrandName" Type="AssetManagerDBModel.Store.BrandName" Multiplicity="0..1" />
+          <End Role="Asset" Type="AssetManagerDBModel.Store.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandName">
+              <PropertyRef Name="BrandNameID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="BrandNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asset_Company">
+          <End Role="Company" Type="AssetManagerDBModel.Store.Company" Multiplicity="0..1" />
+          <End Role="Asset" Type="AssetManagerDBModel.Store.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssetName_AssetCategory">
+          <End Role="AssetCategory" Type="AssetManagerDBModel.Store.AssetCategory" Multiplicity="0..1" />
+          <End Role="AssetName" Type="AssetManagerDBModel.Store.AssetName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AssetCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="AssetName">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserName_UserRole">
+          <End Role="UserRole" Type="AssetManagerDBModel.Store.UserRole" Multiplicity="1" />
+          <End Role="UserName" Type="AssetManagerDBModel.Store.UserName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="UserRoleID" />
+            </Principal>
+            <Dependent Role="UserName">
+              <PropertyRef Name="UserRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AssetManagerDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AssetManagerDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Assets" EntityType="AssetManagerDBModel.Asset" />
+          <EntitySet Name="AssetCategories" EntityType="AssetManagerDBModel.AssetCategory" />
+          <EntitySet Name="AssetNames" EntityType="AssetManagerDBModel.AssetName" />
+          <EntitySet Name="BrandNames" EntityType="AssetManagerDBModel.BrandName" />
+          <EntitySet Name="Companies" EntityType="AssetManagerDBModel.Company" />
+          <EntitySet Name="UserNames" EntityType="AssetManagerDBModel.UserName" />
+          <EntitySet Name="UserRoles" EntityType="AssetManagerDBModel.UserRole" />
+          <AssociationSet Name="FK_Asset_AssetName" Association="AssetManagerDBModel.FK_Asset_AssetName">
+            <End Role="AssetName" EntitySet="AssetNames" />
+            <End Role="Asset" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asset_BrandName" Association="AssetManagerDBModel.FK_Asset_BrandName">
+            <End Role="BrandName" EntitySet="BrandNames" />
+            <End Role="Asset" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asset_Company" Association="AssetManagerDBModel.FK_Asset_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Asset" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssetName_AssetCategory" Association="AssetManagerDBModel.FK_AssetName_AssetCategory">
+            <End Role="AssetCategory" EntitySet="AssetCategories" />
+            <End Role="AssetName" EntitySet="AssetNames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserName_UserRole" Association="AssetManagerDBModel.FK_UserName_UserRole">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="UserName" EntitySet="UserNames" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="AssetID" />
+          </Key>
+          <Property Name="AssetID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="AssetNameID" Type="Int64" Nullable="false" />
+          <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ValueInINR" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="BrandNameID" Type="Int32" />
+          <Property Name="SupplierID" Type="Int32" />
+          <NavigationProperty Name="AssetName" Relationship="AssetManagerDBModel.FK_Asset_AssetName" FromRole="Asset" ToRole="AssetName" />
+          <NavigationProperty Name="BrandName" Relationship="AssetManagerDBModel.FK_Asset_BrandName" FromRole="Asset" ToRole="BrandName" />
+          <NavigationProperty Name="Company" Relationship="AssetManagerDBModel.FK_Asset_Company" FromRole="Asset" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="AssetCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="AssetNames" Relationship="AssetManagerDBModel.FK_AssetName_AssetCategory" FromRole="AssetCategory" ToRole="AssetName" />
+        </EntityType>
+        <EntityType Name="AssetName">
+          <Key>
+            <PropertyRef Name="AssetNameID" />
+          </Key>
+          <Property Name="AssetNameID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Descritpion" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <NavigationProperty Name="Assets" Relationship="AssetManagerDBModel.FK_Asset_AssetName" FromRole="AssetName" ToRole="Asset" />
+          <NavigationProperty Name="AssetCategory" Relationship="AssetManagerDBModel.FK_AssetName_AssetCategory" FromRole="AssetName" ToRole="AssetCategory" />
+        </EntityType>
+        <EntityType Name="BrandName">
+          <Key>
+            <PropertyRef Name="BrandNameID" />
+          </Key>
+          <Property Name="BrandNameID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Assets" Relationship="AssetManagerDBModel.FK_Asset_BrandName" FromRole="BrandName" ToRole="Asset" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Address1" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Address2" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Country" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Fax" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Mobile" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="EmaiID" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Assets" Relationship="AssetManagerDBModel.FK_Asset_Company" FromRole="Company" ToRole="Asset" />
+        </EntityType>
+        <EntityType Name="UserName">
+          <Key>
+            <PropertyRef Name="UserNameID" />
+          </Key>
+          <Property Name="UserNameID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="UserRoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserRole" Relationship="AssetManagerDBModel.FK_UserName_UserRole" FromRole="UserName" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserRoleID" />
+          </Key>
+          <Property Name="UserRoleID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CanEditAssets" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserNames" Relationship="AssetManagerDBModel.FK_UserName_UserRole" FromRole="UserRole" ToRole="UserName" />
+        </EntityType>
+        <Association Name="FK_Asset_AssetName">
+          <End Role="AssetName" Type="AssetManagerDBModel.AssetName" Multiplicity="1" />
+          <End Role="Asset" Type="AssetManagerDBModel.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AssetName">
+              <PropertyRef Name="AssetNameID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="AssetNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asset_BrandName">
+          <End Role="BrandName" Type="AssetManagerDBModel.BrandName" Multiplicity="0..1" />
+          <End Role="Asset" Type="AssetManagerDBModel.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandName">
+              <PropertyRef Name="BrandNameID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="BrandNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asset_Company">
+          <End Role="Company" Type="AssetManagerDBModel.Company" Multiplicity="0..1" />
+          <End Role="Asset" Type="AssetManagerDBModel.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssetName_AssetCategory">
+          <End Role="AssetCategory" Type="AssetManagerDBModel.AssetCategory" Multiplicity="0..1" />
+          <End Role="AssetName" Type="AssetManagerDBModel.AssetName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AssetCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="AssetName">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserName_UserRole">
+          <End Role="UserRole" Type="AssetManagerDBModel.UserRole" Multiplicity="1" />
+          <End Role="UserName" Type="AssetManagerDBModel.UserName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="UserRoleID" />
+            </Principal>
+            <Dependent Role="UserName">
+              <PropertyRef Name="UserRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AssetManagerDBModelStoreContainer" CdmEntityContainer="AssetManagerDBEntities">
+          <EntitySetMapping Name="Assets">
+            <EntityTypeMapping TypeName="AssetManagerDBModel.Asset">
+              <MappingFragment StoreEntitySet="Asset">
+                <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+                <ScalarProperty Name="AssetNameID" ColumnName="AssetNameID" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="ValueInINR" ColumnName="ValueInINR" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="BrandNameID" ColumnName="BrandNameID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssetCategories">
+            <EntityTypeMapping TypeName="AssetManagerDBModel.AssetCategory">
+              <MappingFragment StoreEntitySet="AssetCategory">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssetNames">
+            <EntityTypeMapping TypeName="AssetManagerDBModel.AssetName">
+              <MappingFragment StoreEntitySet="AssetName">
+                <ScalarProperty Name="AssetNameID" ColumnName="AssetNameID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Descritpion" ColumnName="Descritpion" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BrandNames">
+            <EntityTypeMapping TypeName="AssetManagerDBModel.BrandName">
+              <MappingFragment StoreEntitySet="BrandName">
+                <ScalarProperty Name="BrandNameID" ColumnName="BrandNameID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="AssetManagerDBModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="EmaiID" ColumnName="EmaiID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserNames">
+            <EntityTypeMapping TypeName="AssetManagerDBModel.UserName">
+              <MappingFragment StoreEntitySet="UserName">
+                <ScalarProperty Name="UserNameID" ColumnName="UserNameID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="AssetManagerDBModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="CanEditAssets" ColumnName="CanEditAssets" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetManager", "AssetManager\AssetManager.csproj", "{231A4948-9B88-4A8C-9640-C9A48DD961E8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B5405174-8DCA-47B2-A1DF-F6B708484C8C} = {B5405174-8DCA-47B2-A1DF-F6B708484C8C}
+		{15B3E0D2-6217-493A-A690-158C497F5318} = {15B3E0D2-6217-493A-A690-158C497F5318}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetManager.Web", "AssetManager.Web\AssetManager.Web.csproj", "{B5405174-8DCA-47B2-A1DF-F6B708484C8C}"

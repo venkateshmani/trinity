@@ -26,7 +26,7 @@
             </Button>
         </Border>
         <Border Grid.Row="2" BorderThickness="1" BorderBrush="Gray" Margin="10,10,10,10">
-            <sdk:DataGrid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+            <sdk:DataGrid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
         </Border>
         <Border Grid.Row="3">
             <TextBlock Text="© Copyrighted by DeW. All rights reserved" Foreground="Gray" FontFamily="Segoe UI Light" Margin="10,5,5,5" />
