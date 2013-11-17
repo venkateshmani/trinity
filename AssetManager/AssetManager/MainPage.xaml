@@ -1,17 +1,35 @@
-﻿<UserControl x:Class="AssetManager.MainPage"
+﻿<UserControl
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" x:Class="AssetManager.MainPage"
     mc:Ignorable="d" d:DesignHeight="318.085" d:DesignWidth="586.17">
 
     <Grid x:Name="LayoutRoot"  Background="#FFE9E9E9" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="122*"/>
-            <RowDefinition Height="18*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Asset Manager" VerticalAlignment="Center" HorizontalAlignment="Left"
-                   FontFamily="Segoe UI Light" FontSize="30" Margin="10,5,5,5"/>
+			FontFamily="Segoe UI Light" FontSize="30" Margin="10,5,0,5"/>
+        <Border Grid.Row="1">
+            <Button Width="125" Height="30" HorizontalAlignment="Right" Margin="10,10,10,0" HorizontalContentAlignment="Left"
+                    VerticalContentAlignment="Center">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                        <TextBlock FontFamily="Segoe UI Light" FontSize="16" Text="Add New Asset"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Border>
+        <Border Grid.Row="2" BorderThickness="1" BorderBrush="Gray" Margin="10,10,10,10">
+            <sdk:DataGrid  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </Border>
+        <Border Grid.Row="3">
+            <TextBlock Text="© Copyrighted by DeW. All rights reserved" Foreground="Gray" FontFamily="Segoe UI Light" Margin="10,5,5,5" />
+        </Border>
     </Grid>
 </UserControl>
