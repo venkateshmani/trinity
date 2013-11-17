@@ -91,7 +91,9 @@
     <Compile Include="AssetManagerService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="DatabaseModel\AssetManagerModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AssetManagerModel.Designer.cs</LastGenOutput>

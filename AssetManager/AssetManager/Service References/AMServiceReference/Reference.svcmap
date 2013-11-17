@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6eefa8e3-2e42-402b-92fa-a00559feb6dc" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="59f4bb37-24d6-45be-ac64-7ff292bc169d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
     <ExcludedTypes />
     <ImportXmlTypes>false</ImportXmlTypes>
     <GenerateInternalTypes>false</GenerateInternalTypes>
-    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <GenerateMessageContracts>true</GenerateMessageContracts>
     <NamespaceMappings />
     <CollectionMappings>
       <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
@@ -23,10 +23,10 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/AssetManagerWebService/AssetManagerService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="13537ec6-bba8-4085-afd2-8b016eea6935" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/AssetManagerWebService/AssetManagerService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="b91c01fa-5d47-4000-9c35-bc6ad50c621a" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/AssetManagerWebService/AssetManagerService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="c9f1b66e-0ba5-49e6-b226-afe7baaa3b60" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/AssetManagerWebService/AssetManagerService/mex" />
-    <MetadataFile FileName="AssetManagerWebService.xsd" MetadataType="Schema" ID="43d2d384-4894-4516-9c34-be84c4376c33" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/AssetManagerWebService/AssetManagerService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="cde2c386-35bc-4460-a630-38a51d04501f" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/AssetManagerWebService/AssetManagerService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="11a781a6-98a4-4ba1-81e9-2ee5b92f79d9" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/AssetManagerWebService/AssetManagerService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="d9db62bd-6f5f-4949-8c66-61079a35ab68" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/AssetManagerWebService/AssetManagerService/mex" />
+    <MetadataFile FileName="AssetManagerWebService.xsd" MetadataType="Schema" ID="8e1c3c0c-7a05-42f2-98fc-17f580a2eabf" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/AssetManagerWebService/AssetManagerService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

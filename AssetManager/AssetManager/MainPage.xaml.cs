@@ -16,7 +16,7 @@ namespace AssetManager
     {
         public MainPage()
         {
-            InitializeComponent();
+            InitializeComponent();      
         }
     }
 }
