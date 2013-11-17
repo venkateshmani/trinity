@@ -267,6 +267,12 @@
     <Compile Include="ViewModel\Execution\ShipmentViewModel.cs" />
     <Compile Include="ViewModel\GRNViewModel.cs" />
     <Compile Include="ViewModel\Helper.cs" />
+    <Compile Include="ViewModel\InStockViewModel.cs" />
+    <Compile Include="ViewModel\InStock\MaterialInStock.cs" />
+    <Compile Include="ViewModel\InStock\MaterialStockItem.cs" />
+    <Compile Include="ViewModel\InStock\ProductInStock.cs" />
+    <Compile Include="ViewModel\InStock\ProductStockItem.cs" />
+    <Compile Include="ViewModel\InStock\StockModel.cs" />
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />
     <Compile Include="ViewModel\POControlViewModel.cs" />
     <Compile Include="ViewModel\ProductMaterialsViewModel.cs" />
@@ -327,6 +333,9 @@
     </Compile>
     <Compile Include="Views\UserControls\GRNControl.xaml.cs">
       <DependentUpon>GRNControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\InStockControl.xaml.cs">
+      <DependentUpon>InStockControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\POControl.xaml.cs">
       <DependentUpon>POControl.xaml</DependentUpon>
@@ -428,6 +437,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\GRNControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\InStockControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
