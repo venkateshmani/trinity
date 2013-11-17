@@ -51,7 +51,7 @@ namespace ordermanager.Views.UserControls
         private void stockListCatetogy_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Stock selectedStock = stockListCatetogy.SelectedItem as Stock;
-            if (!selectedStock.IsLoaded)
+            if (selectedStock != null && !selectedStock.IsLoaded)
             {
                 selectedStock.Load();
             }
