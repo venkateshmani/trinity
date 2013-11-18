@@ -6,7 +6,7 @@
              xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
              xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="1000">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -64,11 +64,52 @@
 
           
             <TextBlock Grid.Row="0" Grid.Column="1" Text="Existing Assets" VerticalAlignment="Center" HorizontalAlignment="Center"
-			FontFamily="Segoe UI Light" FontSize="25" Margin="5"/>
-            <Border Grid.Column="1" Grid.Row="1" BorderThickness="1" BorderBrush="Gray" Margin="5">
-                <DataGrid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1"/>
+			FontFamily="Segoe UI Light" FontSize="25" Margin="5"/>         
+            <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Grid.Column="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <DataGrid x:Name="materialsGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
+                                              GridLinesVisibility="All" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="True"
+                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" 
+                                              RowHeaderWidth="25"
+                                              HeadersVisibility="All"  IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn  Header="Asset Name" Width="0.18*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding AssetName}" IsReadOnly="True" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Quantity" Width="0.12*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding Quantity}" IsReadOnly="True" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn  Header="Invoice Number" Width="0.18*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding InvoiceNumber}" IsReadOnly="True" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Invoice Date" Width="0.18*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding InvoiceDate}" IsReadOnly="True" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Value (INR)" Width="0.18*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding ValueInINR}" IsReadOnly="True" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>                      
+                    </DataGrid.Columns>
+                </DataGrid>
             </Border>
-
             <Grid Grid.Row="1" Grid.Column="0" Margin="10,50,10,10" VerticalAlignment="Top" HorizontalAlignment="Center" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
