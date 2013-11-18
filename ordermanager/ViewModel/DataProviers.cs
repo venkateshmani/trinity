@@ -51,6 +51,14 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public ObservableCollection<AssetName> AvailableAssetNames
+        {
+            get
+            {
+                return DBResources.Instance.AvailableAssetNames;
+            }
+        }
+
         public ObservableCollection<Color> Colors
         {
             get
