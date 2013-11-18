@@ -512,6 +512,47 @@ namespace ordermanager.ViewModel
 
         #endregion
 
+        #region Asset Management
+
+        public ObservableCollection<AssetName> m_AssetNames = null;
+        public ObservableCollection<AssetName> AvailableAssetNames
+        {
+            get
+            {
+                if (m_AssetNames == null)
+                {
+                    m_AssetNames = new ObservableCollection<AssetName>(dbContext.AssetNames.ToList());
+                }
+
+                return m_AssetNames;
+            }
+            private set
+            {
+                m_AssetNames = value;
+                OnPropertyChanged("AssetNames");
+            }
+        }
+
+
+        public AssetName CreateNewAssetName(string assetName)
+        {
+            AssetName newAssetName = new AssetName();
+            newAssetName.Name = assetName;
+
+            OrderManagerDBEntities newManager = new OrderManagerDBEntities();
+            newManager.AssetNames.Add(newAssetName);
+            newManager.SaveChanges();
+            newManager.Dispose();
+
+            AvailableAssetNames = new ObservableCollection<AssetName>(dbContext.AssetNames.ToList());
+
+            newAssetName = AvailableAssetNames.Where(a => a.Name == assetName)
+                                          .Select(a => a).First();
+
+            return newAssetName;
+        }
+
+        #endregion 
 
         #region Color Management
 
@@ -574,6 +615,8 @@ namespace ordermanager.ViewModel
                 }
             }
         }
+
+
 
         public void ReloadChangedEntities()
         {
