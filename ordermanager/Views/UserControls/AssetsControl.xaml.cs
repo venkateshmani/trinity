@@ -1,4 +1,5 @@
-﻿using ordermanager.ViewModel;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,47 @@ namespace ordermanager.Views.UserControls
                 m_ViewModel = value;
                 this.DataContext = value;
             }
+        }
+
+        private void AddNewAssetName_Click(object sender, RoutedEventArgs e)
+        {
+            assetName.SelectedItem = m_ViewModel.AddNewAssetName(assetName.Text);
+            addNewAsset.Visibility = System.Windows.Visibility.Collapsed;
+        }
+
+        private void customerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (assetName.SelectedItem == null || string.IsNullOrWhiteSpace(assetName.Text))
+            {
+                addNewAsset.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                addNewAsset.Visibility = System.Windows.Visibility.Collapsed;
+            }
+        }
+
+        private void AssetNameComboBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (assetName.SelectedItem == null || string.IsNullOrWhiteSpace(assetName.Text))
+            {
+                addNewAsset.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                addNewAsset.Visibility = System.Windows.Visibility.Collapsed;
+            }
+        }
+
+        private void AddNewAsset_Click(object sender, RoutedEventArgs e)
+        {
+            Asset asset = new Asset();
+            asset.AssetNameID = (assetName.SelectedItem as AssetName).AssetNameID;           
+            asset.Quantity = Convert.ToDecimal(quantity.Text);
+            asset.InvoiceNumber = invoiceNumber.Text;
+            asset.InvoiceDate = Convert.ToDateTime(invoiceDate.Text);
+            asset.ValueInINR = Convert.ToDecimal(valueInINR.Text);
+            m_ViewModel.AddNewAsset(asset);
         }
     }
 }

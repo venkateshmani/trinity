@@ -74,5 +74,9 @@ namespace ordermanager.ViewModel
             return newlyAddedAsset;
         }
 
+        public AssetName AddNewAssetName(string name)
+        {
+           return DBResources.Instance.CreateNewAssetName(name);
+        }
     }
 }

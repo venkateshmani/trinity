@@ -38,7 +38,7 @@ namespace ordermanager
             if (!DBResources.Instance.CurrentUser.UserRole.CanModifyGRN)
                 tabGRN.Visibility = System.Windows.Visibility.Collapsed;
             //if(!DBResources.Instance.CurrentUser.UserRole.CanModifyAssets)
-            assetsControl.Visibility = System.Windows.Visibility.Collapsed;
+            // assetsControl.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         public MainWindow(LoginScreen loginScreen)
@@ -47,7 +47,7 @@ namespace ordermanager
             m_LoginScreen = loginScreen;
             m_LoginScreen.Hide();
             UpdateUserName();
-            
+
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -107,7 +107,7 @@ namespace ordermanager
                 m_LoginScreen.ClearPassword();
                 m_LoginScreen.ShowDialog();
                 UpdateUserName();
-                
+
             }
             else
                 Application.Current.Shutdown();
@@ -142,7 +142,7 @@ namespace ordermanager
                     viewOrdersTabControl.SelectedIndex = 1;
                     break;
                 case Interfaces_And_Enums.OrderManagerTab.AllOrders:
-                    viewOrdersTabControl.SelectedIndex =  2;
+                    viewOrdersTabControl.SelectedIndex = 2;
                     break;
             }
         }

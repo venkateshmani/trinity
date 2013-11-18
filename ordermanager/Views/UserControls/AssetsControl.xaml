@@ -62,13 +62,13 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-          
+
             <TextBlock Grid.Row="0" Grid.Column="1" Text="Existing Assets" VerticalAlignment="Center" HorizontalAlignment="Center"
-			FontFamily="Segoe UI Light" FontSize="25" Margin="5"/>         
+			FontFamily="Segoe UI Light" FontSize="25" Margin="5"/>
             <Border BorderBrush="Gray" BorderThickness="1" Margin="5" Grid.Column="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <DataGrid x:Name="materialsGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
                                               GridLinesVisibility="All" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="True"
-                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" 
+                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"  ItemsSource="{Binding ExistingAssets}"
                                               RowHeaderWidth="25"
                                               HeadersVisibility="All"  IsReadOnly="True">
                     <DataGrid.Columns>
@@ -106,7 +106,7 @@
                                     <TextBox Text="{Binding ValueInINR}" IsReadOnly="True" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>                      
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Border>
@@ -131,15 +131,27 @@
 
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Add New Asset" VerticalAlignment="Center" HorizontalAlignment="Center"
 			FontFamily="Segoe UI Light" FontSize="25" Margin="5" Grid.ColumnSpan="2"/>
-                    
+
                     <TextBlock Text="Asset Name" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,9,4,9" Grid.Row="1" Grid.Column="0" FontFamily="Segoe UI Light" FontSize="20" />
                     <TextBlock Text="Invoice Date" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,4,5" Grid.Row="2" Grid.Column="0" FontFamily="Segoe UI Light" FontSize="20"/>
                     <TextBlock Text="Invoice Number" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,9,4,9" Grid.Row="3" Grid.Column="0" FontFamily="Segoe UI Light" FontSize="20" />
                     <TextBlock Text="Quantity" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,9,4,9" Grid.Row="4" Grid.Column="0" FontFamily="Segoe UI Light" FontSize="20" />
                     <TextBlock Text="Value in INR" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,9,4,9" Grid.Row="5" Grid.Column="0" FontFamily="Segoe UI Light" FontSize="20" />
-
-                    <TextBox x:Name="assetName" Text="" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,5,0,5" Grid.Row="1" Grid.Column="1" FontFamily="Segoe UI Light" FontSize="20" Width="200"
-                             BorderBrush="Gray"/>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                        <ComboBox x:Name="assetName" Text="" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,5,0,5"  FontFamily="Segoe UI Light" FontSize="20" Width="200"
+                             BorderBrush="Gray" ItemsSource="{Binding AvailableAssets,  Source={StaticResource DataProvider}}" TextBoxBase.TextChanged="AssetNameComboBox_TextChanged" IsEditable="True"/>
+                        <Button Width="28" Height="28" Margin="0, 2, 0, 0" Visibility="Collapsed"
+                        HorizontalAlignment="Left" Grid.Row="0"  Cursor="Hand"
+                        x:Name="addNewAsset"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        ToolTip="Add New Customer" Click="AddNewAssetName_Click">
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                    </StackPanel>
                     <DatePicker x:Name="invoiceDate" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,5,0,6" Grid.Row="2" Grid.Column="1" FontFamily="Segoe UI Light" FontSize="20" Width="223"
                              BorderBrush="Gray"/>
                     <TextBox x:Name="invoiceNumber" Text="" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,5,0,5" Grid.Row="3" Grid.Column="1" FontFamily="Segoe UI Light" FontSize="20" Width="200"
@@ -151,7 +163,7 @@
                 </Grid>
                 <Border Grid.Row="1" VerticalAlignment="Bottom" Margin="10">
                     <Button Width="100" Height="30" HorizontalAlignment="Right" Margin="10,10,10,0" HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center">
+                VerticalContentAlignment="Center" Click="AddNewAsset_Click">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontFamily="Segoe UI Light" FontSize="16" Text="Add"/>
