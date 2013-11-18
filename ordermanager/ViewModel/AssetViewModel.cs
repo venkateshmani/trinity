@@ -23,9 +23,40 @@ namespace ordermanager.ViewModel
                 if (m_ExistingAssets == null)
                 {
                     m_ExistingAssets = new ObservableCollection<Asset>(DBResources.Instance.Context.Assets.ToList());
+                    TotalAssetValue = 0;
+                    foreach (Asset asset in m_ExistingAssets)
+                    {
+                        TotalAssetValue += asset.ValueInINR;
+                    }
                 }
 
                 return m_ExistingAssets;
+            }
+        }
+
+        private decimal m_TotalAssetValue = 0;
+        public decimal TotalAssetValue
+        {
+            get
+            {
+                return m_TotalAssetValue;
+            }
+            set
+            {
+                m_TotalAssetValue = value;
+            }
+        }
+
+
+        public void DeleteAsset(Asset asset)
+        {
+            DBResources.Instance.Context.Assets.Remove(asset);
+            DBResources.Instance.Save();
+
+            if (ExistingAssets != null)
+            {
+                ExistingAssets.Remove(asset);
+                TotalAssetValue -= asset.ValueInINR;
             }
         }
 
@@ -37,6 +68,7 @@ namespace ordermanager.ViewModel
             if (ExistingAssets != null)
             {
                 ExistingAssets.Add(newlyAddedAsset);
+                TotalAssetValue += newlyAddedAsset.ValueInINR;
             }
 
             return newlyAddedAsset;
