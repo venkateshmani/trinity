@@ -6,6 +6,10 @@
     <edmx:StorageModels>
       <Schema Namespace="OrderManagerDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="OrderManagerDBModelStoreContainer">
+          <EntitySet Name="Asset" EntityType="OrderManagerDBModel.Store.Asset" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AssetCategory" EntityType="OrderManagerDBModel.Store.AssetCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AssetName" EntityType="OrderManagerDBModel.Store.AssetName" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BrandName" EntityType="OrderManagerDBModel.Store.BrandName" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Color" EntityType="OrderManagerDBModel.Store.Color" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CommissionValueType" EntityType="OrderManagerDBModel.Store.CommissionValueType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Company" EntityType="OrderManagerDBModel.Store.Company" store:Type="Tables" Schema="dbo" />
@@ -43,6 +47,22 @@
           <EntitySet Name="UnitsOfMeasurement" EntityType="OrderManagerDBModel.Store.UnitsOfMeasurement" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="OrderManagerDBModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserRole" EntityType="OrderManagerDBModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Asset_AssetName" Association="OrderManagerDBModel.Store.FK_Asset_AssetName">
+            <End Role="AssetName" EntitySet="AssetName" />
+            <End Role="Asset" EntitySet="Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asset_BrandName" Association="OrderManagerDBModel.Store.FK_Asset_BrandName">
+            <End Role="BrandName" EntitySet="BrandName" />
+            <End Role="Asset" EntitySet="Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asset_Company" Association="OrderManagerDBModel.Store.FK_Asset_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Asset" EntitySet="Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssetName_AssetCategory" Association="OrderManagerDBModel.Store.FK_AssetName_AssetCategory">
+            <End Role="AssetCategory" EntitySet="AssetCategory" />
+            <End Role="AssetName" EntitySet="AssetName" />
+          </AssociationSet>
           <AssociationSet Name="FK_Company_CompanyType" Association="OrderManagerDBModel.Store.FK_Company_CompanyType">
             <End Role="CompanyType" EntitySet="CompanyType" />
             <End Role="Company" EntitySet="Company" />
@@ -260,6 +280,42 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="AssetID" />
+          </Key>
+          <Property Name="AssetID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AssetNameID" Type="bigint" Nullable="false" />
+          <Property Name="InvoiceDate" Type="datetime" />
+          <Property Name="InvoiceNumber" Type="varchar" MaxLength="50" />
+          <Property Name="ValueInINR" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="Quantity" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="BrandNameID" Type="int" />
+          <Property Name="SupplierID" Type="int" />
+        </EntityType>
+        <EntityType Name="AssetCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AssetName">
+          <Key>
+            <PropertyRef Name="AssetNameID" />
+          </Key>
+          <Property Name="AssetNameID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Descritpion" Type="varchar" MaxLength="100" />
+          <Property Name="CategoryID" Type="int" />
+        </EntityType>
+        <EntityType Name="BrandName">
+          <Key>
+            <PropertyRef Name="BrandNameID" />
+          </Key>
+          <Property Name="BrandNameID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Color">
           <Key>
             <PropertyRef Name="ColorID" />
@@ -658,6 +714,54 @@
           <Property Name="CanModifyExecutionShipping" Type="bit" Nullable="false" />
           <Property Name="CanModifyGRN" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Asset_AssetName">
+          <End Role="AssetName" Type="OrderManagerDBModel.Store.AssetName" Multiplicity="1" />
+          <End Role="Asset" Type="OrderManagerDBModel.Store.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AssetName">
+              <PropertyRef Name="AssetNameID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="AssetNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asset_BrandName">
+          <End Role="BrandName" Type="OrderManagerDBModel.Store.BrandName" Multiplicity="0..1" />
+          <End Role="Asset" Type="OrderManagerDBModel.Store.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandName">
+              <PropertyRef Name="BrandNameID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="BrandNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asset_Company">
+          <End Role="Company" Type="OrderManagerDBModel.Store.Company" Multiplicity="0..1" />
+          <End Role="Asset" Type="OrderManagerDBModel.Store.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssetName_AssetCategory">
+          <End Role="AssetCategory" Type="OrderManagerDBModel.Store.AssetCategory" Multiplicity="0..1" />
+          <End Role="AssetName" Type="OrderManagerDBModel.Store.AssetName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AssetCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="AssetName">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Company_CompanyType">
           <End Role="CompanyType" Type="OrderManagerDBModel.Store.CompanyType" Multiplicity="1" />
           <End Role="Company" Type="OrderManagerDBModel.Store.Company" Multiplicity="*" />
@@ -1312,6 +1416,10 @@
     <edmx:ConceptualModels>
       <Schema Namespace="OrderManagerDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="OrderManagerDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Assets" EntityType="OrderManagerDBModel.Asset" />
+          <EntitySet Name="AssetCategories" EntityType="OrderManagerDBModel.AssetCategory" />
+          <EntitySet Name="AssetNames" EntityType="OrderManagerDBModel.AssetName" />
+          <EntitySet Name="BrandNames" EntityType="OrderManagerDBModel.BrandName" />
           <EntitySet Name="Colors" EntityType="OrderManagerDBModel.Color" />
           <EntitySet Name="CommissionValueTypes" EntityType="OrderManagerDBModel.CommissionValueType" />
           <EntitySet Name="Companies" EntityType="OrderManagerDBModel.Company" />
@@ -1349,6 +1457,22 @@
           <EntitySet Name="UnitsOfMeasurements" EntityType="OrderManagerDBModel.UnitsOfMeasurement" />
           <EntitySet Name="Users" EntityType="OrderManagerDBModel.User" />
           <EntitySet Name="UserRoles" EntityType="OrderManagerDBModel.UserRole" />
+          <AssociationSet Name="FK_Asset_AssetName" Association="OrderManagerDBModel.FK_Asset_AssetName">
+            <End Role="AssetName" EntitySet="AssetNames" />
+            <End Role="Asset" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asset_BrandName" Association="OrderManagerDBModel.FK_Asset_BrandName">
+            <End Role="BrandName" EntitySet="BrandNames" />
+            <End Role="Asset" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asset_Company" Association="OrderManagerDBModel.FK_Asset_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Asset" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssetName_AssetCategory" Association="OrderManagerDBModel.FK_AssetName_AssetCategory">
+            <End Role="AssetCategory" EntitySet="AssetCategories" />
+            <End Role="AssetName" EntitySet="AssetNames" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductBreakUpSummary_Color" Association="OrderManagerDBModel.FK_ProductBreakUpSummary_Color">
             <End Role="Color" EntitySet="Colors" />
             <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
@@ -1566,6 +1690,49 @@
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="AssetID" />
+          </Key>
+          <Property Name="AssetID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="AssetNameID" Type="Int64" Nullable="false" />
+          <Property Name="InvoiceDate" Type="DateTime" Precision="3" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ValueInINR" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="BrandNameID" Type="Int32" />
+          <Property Name="SupplierID" Type="Int32" />
+          <NavigationProperty Name="AssetName" Relationship="OrderManagerDBModel.FK_Asset_AssetName" FromRole="Asset" ToRole="AssetName" />
+          <NavigationProperty Name="BrandName" Relationship="OrderManagerDBModel.FK_Asset_BrandName" FromRole="Asset" ToRole="BrandName" />
+          <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_Asset_Company" FromRole="Asset" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="AssetCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="AssetNames" Relationship="OrderManagerDBModel.FK_AssetName_AssetCategory" FromRole="AssetCategory" ToRole="AssetName" />
+        </EntityType>
+        <EntityType Name="AssetName">
+          <Key>
+            <PropertyRef Name="AssetNameID" />
+          </Key>
+          <Property Name="AssetNameID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Descritpion" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="CategoryID" Type="Int32" />
+          <NavigationProperty Name="Assets" Relationship="OrderManagerDBModel.FK_Asset_AssetName" FromRole="AssetName" ToRole="Asset" />
+          <NavigationProperty Name="AssetCategory" Relationship="OrderManagerDBModel.FK_AssetName_AssetCategory" FromRole="AssetName" ToRole="AssetCategory" />
+        </EntityType>
+        <EntityType Name="BrandName">
+          <Key>
+            <PropertyRef Name="BrandNameID" />
+          </Key>
+          <Property Name="BrandNameID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Assets" Relationship="OrderManagerDBModel.FK_Asset_BrandName" FromRole="BrandName" ToRole="Asset" />
+        </EntityType>
         <EntityType Name="Color">
           <Key>
             <PropertyRef Name="ColorID" />
@@ -1604,6 +1771,7 @@
           <Property Name="CompanyTypeID" Type="Int16" Nullable="false" />
           <Property Name="TIN" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="CST" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Assets" Relationship="OrderManagerDBModel.FK_Asset_Company" FromRole="Company" ToRole="Asset" />
           <NavigationProperty Name="CompanyType" Relationship="OrderManagerDBModel.FK_Company_CompanyType" FromRole="Company" ToRole="CompanyType" />
           <NavigationProperty Name="Orders" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Company" ToRole="Order" />
           <NavigationProperty Name="Orders1" Relationship="OrderManagerDBModel.FK_Order_OrderBy" FromRole="Company" ToRole="Order" />
@@ -2072,6 +2240,54 @@
           <NavigationProperty Name="OrderStatus" Relationship="OrderManagerDBModel.FK_OrderStatus_UserRole" FromRole="UserRole" ToRole="OrderStatus" />
           <NavigationProperty Name="Users" Relationship="OrderManagerDBModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
         </EntityType>
+        <Association Name="FK_Asset_AssetName">
+          <End Role="AssetName" Type="OrderManagerDBModel.AssetName" Multiplicity="1" />
+          <End Role="Asset" Type="OrderManagerDBModel.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AssetName">
+              <PropertyRef Name="AssetNameID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="AssetNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asset_BrandName">
+          <End Role="BrandName" Type="OrderManagerDBModel.BrandName" Multiplicity="0..1" />
+          <End Role="Asset" Type="OrderManagerDBModel.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrandName">
+              <PropertyRef Name="BrandNameID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="BrandNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asset_Company">
+          <End Role="Company" Type="OrderManagerDBModel.Company" Multiplicity="0..1" />
+          <End Role="Asset" Type="OrderManagerDBModel.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssetName_AssetCategory">
+          <End Role="AssetCategory" Type="OrderManagerDBModel.AssetCategory" Multiplicity="0..1" />
+          <End Role="AssetName" Type="OrderManagerDBModel.AssetName" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AssetCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="AssetName">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductBreakUpSummary_Color">
           <End Role="Color" Type="OrderManagerDBModel.Color" Multiplicity="1" />
           <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.ProductBreakUpSummary" Multiplicity="*" />
@@ -2726,6 +2942,46 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="OrderManagerDBModelStoreContainer" CdmEntityContainer="OrderManagerDBEntities">
+          <EntitySetMapping Name="Assets">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.Asset">
+              <MappingFragment StoreEntitySet="Asset">
+                <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+                <ScalarProperty Name="AssetNameID" ColumnName="AssetNameID" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="ValueInINR" ColumnName="ValueInINR" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="BrandNameID" ColumnName="BrandNameID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssetCategories">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.AssetCategory">
+              <MappingFragment StoreEntitySet="AssetCategory">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssetNames">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.AssetName">
+              <MappingFragment StoreEntitySet="AssetName">
+                <ScalarProperty Name="AssetNameID" ColumnName="AssetNameID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Descritpion" ColumnName="Descritpion" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BrandNames">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.BrandName">
+              <MappingFragment StoreEntitySet="BrandName">
+                <ScalarProperty Name="BrandNameID" ColumnName="BrandNameID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Colors">
             <EntityTypeMapping TypeName="OrderManagerDBModel.Color">
               <MappingFragment StoreEntitySet="Color">

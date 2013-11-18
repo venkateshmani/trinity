@@ -16,6 +16,7 @@ namespace ordermanager.DatabaseModel
     {
         public Company()
         {
+            this.Assets = new HashSet<Asset>();
             this.Orders = new HashSet<Order>();
             this.Orders1 = new HashSet<Order>();
             this.ProductMaterialItems = new HashSet<ProductMaterialItem>();
@@ -39,6 +40,7 @@ namespace ordermanager.DatabaseModel
         public string TIN { get; set; }
         public string CST { get; set; }
     
+        public virtual ICollection<Asset> Assets { get; set; }
         public virtual CompanyType CompanyType { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Order> Orders1 { get; set; }
