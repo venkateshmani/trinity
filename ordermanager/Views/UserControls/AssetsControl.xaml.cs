@@ -86,6 +86,13 @@ namespace ordermanager.Views.UserControls
             asset.InvoiceDate = Convert.ToDateTime(invoiceDate.Text);
             asset.ValueInINR = Convert.ToDecimal(valueInINR.Text);
             m_ViewModel.AddNewAsset(asset);
+
+            assetName.SelectedItem = null;
+            quantity.Text = string.Empty;
+            invoiceNumber.Text = string.Empty;
+            invoiceDate.SelectedDate = DateTime.Now;
+            valueInINR.Text = string.Empty;
+
         }
     }
 }
