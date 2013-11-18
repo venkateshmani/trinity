@@ -267,6 +267,7 @@
     <Compile Include="ValueConverters\StarWidthConverter.cs" />
     <Compile Include="ValueConverters\Subractor.cs" />
     <Compile Include="ValueConverters\UserFriendlyDateNameCreator.cs" />
+    <Compile Include="ViewModel\AssetViewModel.cs" />
     <Compile Include="ViewModel\ChangeHistoryViewModel.cs" />
     <Compile Include="ViewModel\Constants.cs" />
     <Compile Include="ViewModel\DataProviers.cs" />
@@ -321,6 +322,9 @@
     </Compile>
     <Compile Include="Views\PopUps\UserManagementWindow.xaml.cs">
       <DependentUpon>UserManagementWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\AssetsControl.xaml.cs">
+      <DependentUpon>AssetsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ChangeHistoryControl.xaml.cs">
       <DependentUpon>ChangeHistoryControl.xaml</DependentUpon>
@@ -419,6 +423,10 @@
     <Page Include="Views\PopUps\UserManagementWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\AssetsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\ChangeHistoryControl.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -115,6 +115,11 @@
                     <my1:InStockControl x:Name="inStockControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 </Border>
             </TabItem>
+            <TabItem x:Name="tabAssets" Header="  Assets  " Cursor="Hand">
+                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    <my1:AssetsControl x:Name="assetsControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                </Border>
+            </TabItem>
         </TabControl>
         <Rectangle x:Name="mask" Grid.Row="0" Grid.RowSpan="2" Fill="Gray" Opacity="0.7" Visibility="Collapsed" />
     </Grid>
