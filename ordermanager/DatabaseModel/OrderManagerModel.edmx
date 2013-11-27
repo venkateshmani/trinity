@@ -1410,6 +1410,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_GetServerTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -1689,6 +1690,7 @@
             <End Role="UserRole" EntitySet="UserRoles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <FunctionImport Name="SP_GetServerTime" ReturnType="Collection(DateTime)" />
         </EntityContainer>
         <EntityType Name="Asset">
           <Key>
@@ -3417,6 +3419,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetServerTime" FunctionName="OrderManagerDBModel.Store.SP_GetServerTime" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

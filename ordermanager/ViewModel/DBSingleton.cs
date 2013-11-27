@@ -11,6 +11,7 @@ using ordermanager.Utilities;
 using System.Data.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace ordermanager.ViewModel
 {
@@ -137,7 +138,7 @@ namespace ordermanager.ViewModel
         }
 
 
-        public PurchaseOrder CreateNewPurchaseOrder(Order order,Company supplier, string purchseOrderNumber)
+        public PurchaseOrder CreateNewPurchaseOrder(Order order, Company supplier, string purchseOrderNumber)
         {
             PurchaseOrder newPO = new PurchaseOrder();
             newPO.PurchaseOrderNumber = purchseOrderNumber;
@@ -552,7 +553,7 @@ namespace ordermanager.ViewModel
             return newAssetName;
         }
 
-        #endregion 
+        #endregion
 
         #region Color Management
 
@@ -594,7 +595,7 @@ namespace ordermanager.ViewModel
             return newColor;
         }
 
-        #endregion 
+        #endregion
         public bool UpdateOrderProducts()
         {
             Save();
@@ -615,8 +616,6 @@ namespace ordermanager.ViewModel
                 }
             }
         }
-
-
 
         public void ReloadChangedEntities()
         {
@@ -689,6 +688,12 @@ namespace ordermanager.ViewModel
         public void Dispose()
         {
             dbContext.Dispose();
+        }
+
+        public DateTime GetServerTime()
+        {
+            List<DateTime?> serverTime = DBResources.Instance.Context.SP_GetServerTime().ToList<DateTime?>();
+            return serverTime[0].GetValueOrDefault(DateTime.Now);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

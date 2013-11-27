@@ -12,6 +12,9 @@ namespace ordermanager.DatabaseModel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class OrderManagerDBEntities : DbContext
     {
@@ -66,5 +69,10 @@ namespace ordermanager.DatabaseModel
         public DbSet<UnitsOfMeasurement> UnitsOfMeasurements { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+    
+        public virtual ObjectResult<Nullable<System.DateTime>> SP_GetServerTime()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.DateTime>>("SP_GetServerTime");
+        }
     }
 }
