@@ -58,11 +58,7 @@ namespace ordermanager.Views.UserControls.Execution
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
-            if ((commentBox.ShowDialog() == true))
-            {
-                m_ViewModel.Save(commentBox.Comment, "Shipment");
-            }
+            m_ViewModel.Save("Saved shipment details.", "Shipment");
         }
 
         private void TreeViewItemSelected(object sender, RoutedEventArgs e)

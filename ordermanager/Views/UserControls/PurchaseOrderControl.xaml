@@ -118,7 +118,7 @@
         </TreeView>
         <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Purchase Order Details" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Product and Material Details" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">

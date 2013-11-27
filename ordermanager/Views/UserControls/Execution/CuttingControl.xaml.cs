@@ -61,11 +61,7 @@ namespace ordermanager.Views.UserControls.Execution
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
-            if ((commentBox.ShowDialog() == true))
-            {
-                m_ViewModel.Save(commentBox.Comment,"Cutting");
-            }
+            m_ViewModel.Save("Saved Cutting details.", "Cutting");
         }
 
         private void TreeViewItemSelected(object sender, RoutedEventArgs e)
@@ -79,12 +75,12 @@ namespace ordermanager.Views.UserControls.Execution
                     ViewModel.SelectedDate = tvProducts.SelectedItem.ToString();
                     ViewModel.SelectedProduct = parent.Header as OrderProduct;
                     executionDetails.ItemsSource = ViewModel.SelectedProduct.GetCuttings(ViewModel.SelectedDate);
-                    executionDetails.Visibility = System.Windows.Visibility.Visible;  
+                    executionDetails.Visibility = System.Windows.Visibility.Visible;
                 }
                 else
                 {
                     m_ViewModel.SelectedProduct = tvProducts.SelectedItem as OrderProduct;
-                    executionDetails.Visibility = System.Windows.Visibility.Hidden;   
+                    executionDetails.Visibility = System.Windows.Visibility.Hidden;
                 }
             }
         }

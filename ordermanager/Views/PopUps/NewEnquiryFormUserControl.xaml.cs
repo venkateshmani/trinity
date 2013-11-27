@@ -102,6 +102,10 @@ namespace ordermanager.Views.PopUps
                         {
                             SetButtonText(positiveDecisionBtn, "Approve");
                             SetButtonText(negativeDecisionBtn, "Reject");
+                            if (m_NewEnquiryViewModel.CanApprove())
+                                positiveDecisionBtn.IsEnabled = true;
+                            else
+                                positiveDecisionBtn.IsEnabled = false;
                         }
                         else if (status == OrderStatusEnum.EnquiryApproved)
                         {
@@ -511,7 +515,7 @@ namespace ordermanager.Views.PopUps
                     if (comboBox != null && comboBox.SelectedItem != null)
                     {
                         ProductName productName = comboBox.SelectedItem as ProductName;
-                        if(productColumn !=null)
+                        if (productColumn != null)
                         {
                             AddEditProductPopupBox addNewProductPopUp = new AddEditProductPopupBox(Util.GetParentWindow(this));
                             addNewProductPopUp.AllowToEditOnlyStyleID = true;

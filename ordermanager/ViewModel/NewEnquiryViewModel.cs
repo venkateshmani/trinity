@@ -300,5 +300,27 @@ namespace ordermanager.ViewModel
                 return hasErrors;
             }
         }
+
+        public bool CanApprove()
+        {
+            OrderStatusEnum status = Helper.GetOrderStatusEnumFromString(Order.OrderStatu.StatusLabel);
+            if (status == OrderStatusEnum.MaterialsCostAdded)
+            {
+                if (DBResources.Instance.CurrentUser.UserRole.CanApproveEnquiry)
+                {
+                    if (DBResources.Instance.CurrentUser.UserRole.AliasName.ToUpper() == "SPECIAL" ||
+                        DBResources.Instance.CurrentUser.UserRole.AliasName.ToUpper() == "ROOT")
+                        return true;
+                    foreach (OrderProduct op in Order.OrderProducts)
+                    {
+                        if (op.IsOurCostHigherThanQuoted)
+                            return false;
+                    }
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
     }
 }

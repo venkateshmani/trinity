@@ -40,8 +40,8 @@ namespace ordermanager.Views.UserControls
 
         private void SetControlState()
         {
-            if (m_ViewModel!=null && m_ViewModel.Order != null)
-            {                
+            if (m_ViewModel != null && m_ViewModel.Order != null)
+            {
                 OrderStatusEnum status = Helper.GetOrderStatusEnumFromString(m_ViewModel.Order.OrderStatu.StatusLabel);
                 if (DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterials && status == OrderStatusEnum.OrderConfirmed)
                 {
@@ -160,7 +160,7 @@ namespace ordermanager.Views.UserControls
             }
         }
 
-        
+
         public void GenerateAndAssignPurchaseOrders()
         {
             //Create or Get and Populate Purchase Orders
@@ -203,19 +203,24 @@ namespace ordermanager.Views.UserControls
             {
                 if (m_ViewModel.Validate())
                 {
-                    CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
-                    if (commentBox.ShowDialog() == true)
+                    if (isSubmit)
                     {
-                        return m_ViewModel.Save(isSubmit, commentBox.Comment);
+                        CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
+                        if ((commentBox.ShowDialog() == true))
+                        {
+                            return m_ViewModel.Save(isSubmit, commentBox.Comment);
+                        }
+                        return false;
                     }
-                    return null;
+                    else
+                        return m_ViewModel.Save(isSubmit, "");
                 }
                 return false;
             }
             return false;
         }
 
-         private void InformUser(string message)
+        private void InformUser(string message)
         {
             PopupBox informer = new PopupBox();
             informer.Message = message;

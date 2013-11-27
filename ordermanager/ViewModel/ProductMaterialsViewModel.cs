@@ -304,11 +304,11 @@ namespace ordermanager.ViewModel
 
                 if (isSubmit)
                 {
-                    historyItem.OrderChanges = "Submitted in Materials Page. Order Stauts Changed to " + Order.OrderStatu.DisplayLabel.ToUpper();
+                    historyItem.OrderChanges = "Submitted in Materials Page. Order Stautus changed to " + Order.OrderStatu.DisplayLabel.ToUpper();
                 }
                 else
                 {
-                    historyItem.OrderChanges = "Saved Changes in Materials";
+                    historyItem.OrderChanges = "Saved changes in Materials";
                 }
 
                 Order.Histories.Add(historyItem);

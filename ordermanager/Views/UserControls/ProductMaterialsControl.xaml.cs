@@ -142,8 +142,7 @@ namespace ordermanager.Views.UserControls
         {
             if (m_ViewModel != null)
             {
-                CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
-
+               
                 m_ViewModel.HasUserClickedSaveOrSubmit = true;
                 if (m_ViewModel.HasError)
                 {
@@ -151,18 +150,22 @@ namespace ordermanager.Views.UserControls
                 }
                 else
                 {
-                    if ((commentBox.ShowDialog() == true))
+                    if (isSubmit)
                     {
-                        if (m_ViewModel.Save(isSubmit, commentBox.Comment))
+                        CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
+                        if ((commentBox.ShowDialog() == true))
                         {
-                            if (isSubmit)
+                            if (m_ViewModel.Save(isSubmit, commentBox.Comment))
                             {
                                 btnAddNewItem.Visibility = System.Windows.Visibility.Hidden;
                                 materialsGrid.IsReadOnly = true;
+                                return true;
                             }
+                            return false;
                         }
-                        return true;
                     }
+                    else
+                        return m_ViewModel.Save(isSubmit, "");
                 }
             }
             return false;
