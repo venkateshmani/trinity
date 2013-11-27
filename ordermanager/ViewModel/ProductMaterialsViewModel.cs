@@ -269,7 +269,7 @@ namespace ordermanager.ViewModel
             {
                 if (isSubmit)
                 {
-                    if (Order.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated)
+                    if (Order.OrderStatusID == (short)OrderStatusEnum.EnquiryCreated || Order.OrderStatusID == (short)OrderStatusEnum.EnquiryRejected)
                         Order.OrderStatusID = (short)OrderStatusEnum.MaterialsAdded;
                     else if (Order.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded)
                         Order.OrderStatusID = (short)OrderStatusEnum.MaterialsCostAdded;

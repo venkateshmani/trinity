@@ -320,7 +320,7 @@ namespace ordermanager.Views.PopUps
             if (commentBox.ShowDialog() == true)
             {
                 string userComment = commentBox.Comment;
-                if (positiveDecisionBtn.Content.ToString() == "Reject")
+                if (negativeDecisionBtn.Content.ToString() == "Reject")
                 {
                     try
                     {
@@ -337,7 +337,7 @@ namespace ordermanager.Views.PopUps
                         MessageBox.Show("Enquiry rejection failed!!!" + Environment.NewLine + ex.Message, "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-                else if (positiveDecisionBtn.Content.ToString() == "Cancel")
+                else if (negativeDecisionBtn.Content.ToString() == "Cancel")
                 {
                     try
                     {
