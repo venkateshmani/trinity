@@ -96,7 +96,7 @@ namespace ordermanager.ViewModel.Execution
 
         public virtual bool Save(string userComment, string executionType)
         {
-            Order.LastModifiedDate = DateTime.Now;
+            Order.LastModifiedDate = DBResources.Instance.GetServerTime();
             History historyItem = new History();
             historyItem.Date = DateTime.Now;
             historyItem.UserName = DBResources.Instance.CurrentUser.UserName;

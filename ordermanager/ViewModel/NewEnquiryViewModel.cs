@@ -225,7 +225,7 @@ namespace ordermanager.ViewModel
                 }
 
                 Order.OrderStatusID = 1;
-                Order.LastModifiedDate = DateTime.Now;
+                Order.LastModifiedDate = DBResources.Instance.GetServerTime();
                 CanAddNewItem = false;
                 return DBResources.CreateNewOrder(Order, userComment);
             }
@@ -238,7 +238,7 @@ namespace ordermanager.ViewModel
             if (newStatus != OrderStatusEnum.None && Order != null)
             {
                 Order.OrderStatusID = (short)newStatus;
-                Order.LastModifiedDate = DateTime.Now;
+                Order.LastModifiedDate = DBResources.Instance.GetServerTime();
 
                 #region History
 

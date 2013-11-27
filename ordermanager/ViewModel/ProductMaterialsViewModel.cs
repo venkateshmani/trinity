@@ -315,7 +315,7 @@ namespace ordermanager.ViewModel
 
                 #endregion
 
-                Order.LastModifiedDate = DateTime.Now;
+                Order.LastModifiedDate = DBResources.Instance.GetServerTime();
                 if (DBResources.Instance.UpdateOrderProducts())
                 {
                     if (isSubmit)
