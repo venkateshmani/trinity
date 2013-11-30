@@ -1,4 +1,6 @@
-﻿<UserControl xmlns:Execution="clr-namespace:ordermanager.Views.UserControls.Execution"  xmlns:PopUps="clr-namespace:ordermanager.Views.PopUps" 
+﻿<UserControl xmlns:Execution="clr-namespace:ordermanager.Views.UserControls.Execution" 
+             xmlns:PopUps="clr-namespace:ordermanager.Views.PopUps" 
+             xmlns:my="clr-namespace:ordermanager.Views.UserControls"
              x:Class="ordermanager.Views.UserControls.OrderWorkBench"
              xmlns:local="clr-namespace:ordermanager.Views.UserControls"             
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -127,6 +129,18 @@
                         </TabItem>
                         <TabItem x:Name="tabShipment" Header="  ● Shipment  " Tag="Shipment">
                             <Execution:ShippingControl x:Name="shippingControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                        </TabItem>
+                    </TabControl>
+                </Border>
+            </TabItem>
+            <TabItem x:Name="tabInvoice" Header="  Invoice  " Cursor="Hand">
+                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    <TabControl Grid.Row="1">
+                        <TabItem x:Name="tabNewInvoice" Header=" Create New Invoice  " Tag="NewInvoice">
+                            <my:CreateNewInvoiceControl x:Name="createNewInvoiceControl" />
+                        </TabItem>
+                        <TabItem x:Name="tabGeneratedInvoice" Header="  Generated Invoices  " Tag="GeneratedInvoice">
+                            <my:GeneratedInvoiceViewerControl x:Name="generatedInvoiceControl" />
                         </TabItem>
                     </TabControl>
                 </Border>

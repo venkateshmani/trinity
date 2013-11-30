@@ -38,12 +38,15 @@ namespace ordermanager.DatabaseModel
         public DbSet<CompanyType> CompanyTypes { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Currency> Currencies { get; set; }
+        public DbSet<GRNReciept> GRNReciepts { get; set; }
         public DbSet<History> Histories { get; set; }
+        public DbSet<JobOrder> JobOrders { get; set; }
+        public DbSet<JobOrderReceipt> JobOrderReceipts { get; set; }
+        public DbSet<JobOrderType> JobOrderTypes { get; set; }
         public DbSet<MaterialName> MaterialNames { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderCurrencyConversion> OrderCurrencyConversions { get; set; }
         public DbSet<OrderedItem> OrderedItems { get; set; }
-        public DbSet<OrderedItemStatu> OrderedItemStatus { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<OrderStatu> OrderStatus { get; set; }
         public DbSet<OrderThrough> OrderThroughs { get; set; }
@@ -63,9 +66,11 @@ namespace ordermanager.DatabaseModel
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
         public DbSet<PurchaseOrderStatu> PurchaseOrderStatus { get; set; }
         public DbSet<Quality> Qualities { get; set; }
+        public DbSet<ReceiptStatu> ReceiptStatus { get; set; }
         public DbSet<Shipment> Shipments { get; set; }
         public DbSet<ShipmentMode> ShipmentModes { get; set; }
         public DbSet<SubMaterial> SubMaterials { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<UnitsOfMeasurement> UnitsOfMeasurements { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }

@@ -12,16 +12,12 @@ namespace ordermanager.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderedItemStatu
+    public partial class sysdiagram
     {
-        public OrderedItemStatu()
-        {
-            this.OrderedItems = new HashSet<OrderedItem>();
-        }
-    
-        public byte OrderedItemStatusID { get; set; }
-        public string Status { get; set; }
-    
-        public virtual ICollection<OrderedItem> OrderedItems { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

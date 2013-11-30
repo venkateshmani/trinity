@@ -12,22 +12,16 @@ namespace ordermanager.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderedItem
+    public partial class ReceiptStatu
     {
-        public OrderedItem()
+        public ReceiptStatu()
         {
             this.GRNReciepts = new HashSet<GRNReciept>();
         }
     
-        public long OrderedItemID { get; set; }
-        public long ProductMaterialItemID { get; set; }
-        public long PurchaseOrderID { get; set; }
-        public decimal OrderedQuantity { get; set; }
-        public Nullable<decimal> ExcessiveQuantity { get; set; }
-        public Nullable<decimal> PendingQuantity { get; set; }
+        public byte ReceiptStatusID { get; set; }
+        public string Status { get; set; }
     
         public virtual ICollection<GRNReciept> GRNReciepts { get; set; }
-        public virtual ProductMaterialItem ProductMaterialItem { get; set; }
-        public virtual PurchaseOrder PurchaseOrder { get; set; }
     }
 }

@@ -9,13 +9,13 @@ namespace ordermanager.DatabaseModel
     public partial class PurchaseOrder : EntityBase
     {
 
-        public void Validate()
-        {
-            foreach (var item in OrderedItems)
-            {
-                item.ValidateDataForGRN();
-            }
-        }
+        //public void Validate()
+        //{
+        //    foreach (var item in OrderedItems)
+        //    {
+        //        item.ValidateDataForGRN();
+        //    }
+        //}
 
 
         public override bool HasErrors

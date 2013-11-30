@@ -16,8 +16,8 @@ namespace ordermanager.DatabaseModel
     {
         public PurchaseOrder()
         {
+            this.GRNReciepts = new HashSet<GRNReciept>();
             this.OrderedItems = new HashSet<OrderedItem>();
-            this.OrderedItems1 = new HashSet<OrderedItem>();
         }
     
         public long PurchaseOrderID { get; set; }
@@ -28,9 +28,9 @@ namespace ordermanager.DatabaseModel
         public long OrderID { get; set; }
     
         public virtual Company Company { get; set; }
+        public virtual ICollection<GRNReciept> GRNReciepts { get; set; }
         public virtual Order Order { get; set; }
         public virtual ICollection<OrderedItem> OrderedItems { get; set; }
-        public virtual ICollection<OrderedItem> OrderedItems1 { get; set; }
         public virtual PurchaseOrderStatu PurchaseOrderStatu { get; set; }
     }
 }

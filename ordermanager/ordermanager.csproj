@@ -45,7 +45,6 @@
     <Reference Include="EntityFramework">
       <HintPath>packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=0.0.0.999, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>C:\Users\User\Downloads\ModernUI.1.0.5\net40\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
@@ -122,7 +121,19 @@
     <Compile Include="DatabaseModel\Currency.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\GRNReciept.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\History.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\JobOrder.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\JobOrderReceipt.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\JobOrderType.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\MaterialName.cs">
@@ -135,9 +146,6 @@
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\OrderedItem.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DatabaseModel\OrderedItemStatu.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\OrderManagerModel.Context.cs">
@@ -212,6 +220,9 @@
     <Compile Include="DatabaseModel\Quality.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\ReceiptStatu.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\Shipment.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
@@ -219,6 +230,9 @@
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\SubMaterial.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\sysdiagram.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\UnitsOfMeasurement.cs">
@@ -231,6 +245,7 @@
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Extended Database Models\Company.cs" />
+    <Compile Include="Extended Database Models\GRNReceipt.cs" />
     <Compile Include="Extended Database Models\Helper.cs" />
     <Compile Include="Extended Database Models\OrderCurrencyConversion.cs" />
     <Compile Include="Extended Database Models\EntityBase.cs" />
@@ -348,11 +363,20 @@
     <Compile Include="Views\UserControls\Execution\ShippingControl.xaml.cs">
       <DependentUpon>ShippingControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\GeneratedInvoiceViewerControl.xaml.cs">
+      <DependentUpon>GeneratedInvoiceViewerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\GRNControl.xaml.cs">
       <DependentUpon>GRNControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\InStockControl.xaml.cs">
       <DependentUpon>InStockControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\CreateNewInvoiceControl.xaml.cs">
+      <DependentUpon>CreateNewInvoiceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\JobWorkControl.xaml.cs">
+      <DependentUpon>JobWorkControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\POControl.xaml.cs">
       <DependentUpon>POControl.xaml</DependentUpon>
@@ -457,11 +481,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\GeneratedInvoiceViewerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\GRNControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\InStockControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\CreateNewInvoiceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\JobWorkControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -605,6 +641,10 @@
     <ProjectReference Include="..\Reports\Reports.csproj">
       <Project>{542f6659-eb9a-4ea2-81f8-8b76da9e0aea}</Project>
       <Name>Reports</Name>
+    </ProjectReference>
+    <ProjectReference Include="MahApps.Metro\MahApps.Metro.csproj">
+      <Project>{5b1710d2-5dc8-4754-91b2-19165de49b3d}</Project>
+      <Name>MahApps.Metro</Name>
     </ProjectReference>
     <ProjectReference Include="MahApps.Metro\MahApps.Metro.NET45.csproj">
       <Project>{942d11c4-29f5-46c4-8c14-4b976d56c637}</Project>
