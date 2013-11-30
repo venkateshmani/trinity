@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +23,14 @@ namespace ordermanager.Views.UserControls
     /// </summary>
     public partial class GRNControl : UserControl
     {
+       
         public GRNControl()
         {
             InitializeComponent();
+          
         }
+
+
     }
 }
+

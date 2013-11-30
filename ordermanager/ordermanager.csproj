@@ -244,6 +244,10 @@
     <Compile Include="DatabaseModel\UserRole.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extended Database Models for UI\Company.cs" />
+    <Compile Include="Extended Database Models for UI\GRNReciept.cs" />
+    <Compile Include="Extended Database Models for UI\OrderedItem.cs" />
+    <Compile Include="Extended Database Models for UI\PurchaseOrder.cs" />
     <Compile Include="Extended Database Models\Company.cs" />
     <Compile Include="Extended Database Models\GRNReciept.cs" />
     <Compile Include="Extended Database Models\Helper.cs" />
@@ -269,6 +273,7 @@
     <Compile Include="Interfaces And Enums\IJobExecutionView.cs" />
     <Compile Include="Interfaces And Enums\IJobExecutionViewModel.cs" />
     <Compile Include="Interfaces And Enums\IMaskable.cs" />
+    <Compile Include="Interfaces And Enums\IVisibilityManager.cs" />
     <Compile Include="Interfaces And Enums\OrderManagerTab.cs" />
     <Compile Include="LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
@@ -307,6 +312,7 @@
     <Compile Include="ViewModel\ProductMaterialsViewModel.cs" />
     <Compile Include="ViewModel\PurchaseOrderControlViewModel.cs" />
     <Compile Include="ViewModel\PurchaseOrderNumberInfo.cs" />
+    <Compile Include="ViewModel\PurchaseOrderSearchControlViewModel.cs" />
     <Compile Include="ViewModel\UserManagementViewModel.cs" />
     <Compile Include="ViewModel\ViewOrdersControlViewModel.cs" />
     <Compile Include="Views\CommonControls\BackForwardButton.xaml.cs">
@@ -321,6 +327,10 @@
     <Compile Include="Views\CommonControls\ProductsListView.xaml.cs">
       <DependentUpon>ProductsListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CommonControls\PurchaseOrderSearchControl.xaml.cs">
+      <DependentUpon>PurchaseOrderSearchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Extensions\StringExtensions.cs" />
     <Compile Include="Views\PasswordChangeDialog.xaml.cs">
       <DependentUpon>PasswordChangeDialog.xaml</DependentUpon>
     </Compile>
@@ -425,6 +435,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CommonControls\PurchaseOrderSearchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PasswordChangeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

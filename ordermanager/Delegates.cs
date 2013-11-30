@@ -16,4 +16,6 @@ namespace ordermanager
 
     public delegate void OnSelectionChanged(OrderProduct product, DateTime date);
 
+    public delegate void TreeViewSelectionChangedDelegate(object selectedObject);
+
 }
