@@ -115,6 +115,11 @@
                     <my1:InStockControl x:Name="inStockControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 </Border>
             </TabItem>
+            <TabItem x:Name="tabJobOrder" Header="  Job Order  " Cursor="Hand">
+                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    <my1:JobWorkControl x:Name="jobOrderControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></my1:JobWorkControl>
+                </Border>
+            </TabItem>
             <TabItem x:Name="tabAssets" Header="  Assets  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <my1:AssetsControl x:Name="assetsControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
