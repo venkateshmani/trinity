@@ -61,6 +61,7 @@ namespace ordermanager.Views.CommonControls
         {
             ViewModel = new PurchaseOrderSearchControlViewModel();
             tvSuppliers.ItemsSource = ViewModel.Suppliers;
+            ApplyFilter();
         }
 
         private void searchText_TextChanged_1(object sender, TextChangedEventArgs e)

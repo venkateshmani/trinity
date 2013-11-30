@@ -379,6 +379,12 @@
     <Compile Include="Views\UserControls\GRNControl.xaml.cs">
       <DependentUpon>GRNControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\GRN\OrderedItemGrnView.xaml.cs">
+      <DependentUpon>OrderedItemGrnView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\GRN\PoGrnSummaryView.xaml.cs">
+      <DependentUpon>PoGrnSummaryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\InStockControl.xaml.cs">
       <DependentUpon>InStockControl.xaml</DependentUpon>
     </Compile>
@@ -500,6 +506,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\GRNControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\GRN\OrderedItemGrnView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\GRN\PoGrnSummaryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

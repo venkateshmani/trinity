@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="ordermanager.Views.UserControls.GRN.PoGrnSummaryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
+             xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
+             d:DesignHeight="500" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Metro.Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Style>
+            <Style x:Key="ProductsListContentStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+            <Style x:Key="ProductInfoStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
+            </Style>
+            <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
+            <Converters:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
+            <Converters:FlipBoolValueConverter x:Key="FlipBoolValueConverter"/>
+            <Converters:Subractor x:Key="subractor"/>
+            <Converters:HasErrorToVisibilityConverter x:Key="hasErrorToVisibilityConverter" />
+            <DataProviders:DataProvider x:Key="DataProvider" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TabControl x:Name="poGrnTabControl" SelectedIndex="1" Grid.Row="1">
+            <TabItem x:Name="tabNewReceipt" Header=" New Receipt ">
+                <Grid VerticalAlignment='Stretch' HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Invoice #" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
+                        <TextBlock Text="Invoice Date" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
+                        
+                        <TextBox x:Name="invoiceNumber" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Width="200" />
+                        <DatePicker x:Name="expectedDeliveryDate" Width="150" 
+                                    Grid.Row="1" Grid.Column="1"
+                                    SelectedDate="{Binding Order.ExpectedDeliveryDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                    HorizontalAlignment="Left"
+                                    Controls:TextboxHelper.Watermark="Select a date"
+                                    SelectedDateChanged="expectedDeliveryDate_SelectedDateChanged"
+                                    VerticalAlignment="Center" 
+                                    Margin="5"/>
+                    </Grid>
+                                <Button x:Name="addNewItemBtn" Grid.Row="2" Content="Add New Receipt"  Margin="5" Width="150" Height="30" Foreground="White"
+                                        ToolTip="Add New Item" HorizontalAlignment="Right" PreviewMouseLeftButtonUp="addNewItemBtn_PreviewMouseLeftButtonUp"
+                                 >
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </Button.Background>
+                    </Button>
+                </Grid>
+                
+            </TabItem>
+            <TabItem x:Name="tabGRNReceipt" Header=" GRN Receipt " />
+        </TabControl>
+    </Grid>
+</UserControl>
+
+    
+    
