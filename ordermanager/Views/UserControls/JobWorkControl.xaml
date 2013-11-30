@@ -74,13 +74,18 @@
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Job Work Receipts" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
-        <TreeView x:Name="tvSuppliers" Grid.Row="3" Grid.Column="0" Background="White" Margin="2" ItemsSource="{Binding Suppliers}">
+        <TreeView x:Name="tvSuppliers" Grid.Row="3" Grid.Column="0" Background="White" Margin="2">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding PurchaseOrders}">
                     <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
                     <HierarchicalDataTemplate.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding Receipts}">
-                            <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                        <HierarchicalDataTemplate ItemsSource="{Binding GRNReciepts}">
+                            <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding PurchaseOrderNumber}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                            <HierarchicalDataTemplate.ItemTemplate>
+                                <HierarchicalDataTemplate>
+                                    <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding OrderedItem.ProductMaterialItem.SubMaterial.Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                                </HierarchicalDataTemplate>
+                            </HierarchicalDataTemplate.ItemTemplate>
                         </HierarchicalDataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>
@@ -99,6 +104,54 @@
                         <DataGrid x:Name="gridKnittingDetails" Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" CanUserResizeColumns="True" 
                         DataContext="{Binding SelectedMaterial}" ItemsSource="{Binding KnittingItemsWrapper}" Background="WhiteSmoke">
+                            <DataGrid.RowDetailsTemplate>
+                                <DataTemplate>
+                                    <DataGrid>
+                                        <DataGrid.Columns>
+                                            <DataGridTemplateColumn Header="Received Quantity" Width="0.1*">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox Text="{Binding ReceivedQuantityWrapper}" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+
+                                            <DataGridTemplateColumn Header="Received Date" Width="0.12*">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox Text="{Binding ReceiptDateWrapper}" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Header="Comments" Width="0.2*">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox Text="{Binding CommentsWrapper}" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Header="Send To" Width="0.1*" >
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="Auto" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <ComboBox x:Name="cmbBoxNext"  Height="20" />
+                                                            <Button x:Name="btnAssign" Content="Assign"  Margin="5" Width="100" Height="30" Foreground="White">
+                                                                <Button.Background>
+                                                                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                                                </Button.Background>
+                                                            </Button>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </DataTemplate>
+                            </DataGrid.RowDetailsTemplate>
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Job Quantity" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
@@ -279,6 +332,49 @@
                         <DataGrid x:Name="gridWashingDetails" Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" CanUserResizeColumns="True" 
                         DataContext="{Binding SelectedMaterial}" ItemsSource="{Binding WashingItemsWrapper}" Background="WhiteSmoke">
+                            <DataGrid.RowDetailsTemplate>
+                                <DataTemplate>
+                                    <DataGrid>
+                                        <DataGrid.Columns>
+                                            <DataGridTemplateColumn Header="Job Quantity" Width="0.1*">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox IsReadOnly="True" Text="{Binding JobQuantity, Mode=OneWay}" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Header="Supplier" Width="0.1*">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox IsReadOnly="True" Text="{Binding Supplier.Name, Mode=OneWay}" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Header="Charges (INR/KG)" Width="0.1*">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox IsReadOnly="True" Text="{Binding ChargesInINR, Mode=OneWay}" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Header="Date" Width="0.12*">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox IsReadOnly="True" Text="{Binding RequiredDate, Mode=OneWay}" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <DataGridTemplateColumn Header="Instructions" Width="0.2*">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <TextBox IsReadOnly="True" Text="{Binding Instructions, Mode=OneWay}" />
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </DataTemplate>
+                            </DataGrid.RowDetailsTemplate>
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Job Quantity" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
