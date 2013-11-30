@@ -24,5 +24,10 @@ namespace ordermanager.Views.UserControls
         {
             InitializeComponent();
         }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

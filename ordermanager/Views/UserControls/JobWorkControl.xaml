@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:ordermanager.Views.UserControls"
              xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
              xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
-             mc:Ignorable="d" DataContextChanged="UserControl_DataContextChanged" d:DesignHeight="506" d:DesignWidth="869">
+             mc:Ignorable="d" d:DesignHeight="506" d:DesignWidth="869">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -63,7 +63,7 @@
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Suppliers and Purchase Orders" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
-        <TreeView x:Name="tvProducts" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Path=Products}" Background="White" Margin="2" SelectedItemChanged="tvProducts_SelectedItemChanged">
+        <TreeView x:Name="tvProducts" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Path=Products}" Background="White" Margin="2">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding ProductMaterials}">
                     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=tvProducts, Path=ActualWidth, Converter={StaticResource subractor}, ConverterParameter=20}" Height="30">
@@ -162,7 +162,7 @@
                     </Button.Background>
                 </Button>
                 <Button x:Name="submitBtn" Content="Submit" Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Submit to next level" Click="Submit_Click">
+                                        ToolTip="Submit to next level">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>

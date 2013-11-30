@@ -564,7 +564,7 @@ namespace ordermanager.DatabaseModel
                                 m_PurchaseOrderAndTheirItems.Add(item.PurchaseOrderNumber, poItems);
                             }
 
-                            OrderedItem itemToOrder = new OrderedItem { ProductMaterialItem = item, OrderedQuantity = item.Quantity, OrderedItemStatusID=1 };
+                            OrderedItem itemToOrder = new OrderedItem { ProductMaterialItem = item, OrderedQuantity = item.Quantity };
                             poItems.OrderedItems.Add(itemToOrder);
                         }
                     }

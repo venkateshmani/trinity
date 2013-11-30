@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager.DatabaseModel    
 {
-    public partial class OrderedItem : EntityBase
+    public partial class GRNReciept : EntityBase
     {
     }
 }

@@ -58,8 +58,7 @@ namespace ordermanager.ViewModel
         {
             get
             {
-                SelectedPurchaseOrder.Validate();
-                return SelectedPurchaseOrder.HasErrors;
+               return SelectedPurchaseOrder.HasErrors;
             }
         }
 
