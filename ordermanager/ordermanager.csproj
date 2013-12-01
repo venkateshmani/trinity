@@ -290,6 +290,7 @@
     <Compile Include="ValueConverters\UserFriendlyDateNameCreator.cs" />
     <Compile Include="ViewModel\AssetViewModel.cs" />
     <Compile Include="ViewModel\ChangeHistoryViewModel.cs" />
+    <Compile Include="ViewModel\Common Controls View Model\CheckedListBoxItem.cs" />
     <Compile Include="ViewModel\Constants.cs" />
     <Compile Include="ViewModel\DataProviers.cs" />
     <Compile Include="ViewModel\DBSingleton.cs" />
@@ -309,7 +310,9 @@
     <Compile Include="ViewModel\InStock\StockModel.cs" />
     <Compile Include="ViewModel\JobWorkViewModel.cs" />
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />
+    <Compile Include="ViewModel\OrderedItemGrnViewModel.cs" />
     <Compile Include="ViewModel\POControlViewModel.cs" />
+    <Compile Include="ViewModel\PoGrnSummaryViewModel.cs" />
     <Compile Include="ViewModel\ProductMaterialsViewModel.cs" />
     <Compile Include="ViewModel\PurchaseOrderControlViewModel.cs" />
     <Compile Include="ViewModel\PurchaseOrderNumberInfo.cs" />
@@ -379,6 +382,15 @@
     </Compile>
     <Compile Include="Views\UserControls\GRNControl.xaml.cs">
       <DependentUpon>GRNControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\GRN\AddItemsWindow.xaml.cs">
+      <DependentUpon>AddItemsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\GRN\OrderedItemGrnView.xaml.cs">
+      <DependentUpon>OrderedItemGrnView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\GRN\PoGrnSummaryView.xaml.cs">
+      <DependentUpon>PoGrnSummaryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\InStockControl.xaml.cs">
       <DependentUpon>InStockControl.xaml</DependentUpon>
@@ -503,6 +515,18 @@
     <Page Include="Views\UserControls\GRNControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\GRN\AddItemsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\GRN\OrderedItemGrnView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\GRN\PoGrnSummaryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\UserControls\InStockControl.xaml">
       <SubType>Designer</SubType>

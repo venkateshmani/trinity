@@ -63,35 +63,103 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Invoice #" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
                         <TextBlock Text="Invoice Date" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
+                        <TextBlock Text="Recieved Date" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
                         
                         <TextBox x:Name="invoiceNumber" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Width="200" />
-                        <DatePicker x:Name="expectedDeliveryDate" Width="150" 
+                        <DatePicker x:Name="invoiceDate" Width="150" 
                                     Grid.Row="1" Grid.Column="1"
-                                    SelectedDate="{Binding Order.ExpectedDeliveryDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                    SelectedDate="{Binding InvoiceDate, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date"
-                                    SelectedDateChanged="expectedDeliveryDate_SelectedDateChanged"
                                     VerticalAlignment="Center" 
                                     Margin="5"/>
+                        <DatePicker x:Name="recievedDate" Width="150" 
+                                    Grid.Row="2" Grid.Column="1"
+                                    SelectedDate="{Binding RecievedDate, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                    HorizontalAlignment="Left"
+                                    Controls:TextboxHelper.Watermark="Select a date"
+                                    VerticalAlignment="Center" 
+                                    Margin="5"/>
+                        
                     </Grid>
-                                <Button x:Name="addNewItemBtn" Grid.Row="2" Content="Add New Receipt"  Margin="5" Width="150" Height="30" Foreground="White"
-                                        ToolTip="Add New Item" HorizontalAlignment="Right" PreviewMouseLeftButtonUp="addNewItemBtn_PreviewMouseLeftButtonUp"
+                                <Button x:Name="addNewReceipt" Grid.Row="2" Content="Add New Receipt"  Margin="5" Width="150" Height="30" Foreground="White"
+                                        ToolTip="Add New Item" HorizontalAlignment="Right" 
                                  >
                         <Button.Background>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </Button.Background>
                     </Button>
+                    <StackPanel Grid.Row="1">
+                        <Button x:Name="addNewItemBtn" Grid.Row="2" Content="Add Item(s)"  Margin="10" Width="150" Height="30" Foreground="White"
+                                        ToolTip="Add New Item" HorizontalAlignment="Left" 
+                                        Click="addNewItemBtn_Click_1"
+                                 >
+                            <Button.Background>
+                                <SolidColorBrush Color="{StaticResource AccentColor}" />
+                            </Button.Background>
+                        </Button>
+                        <Border BorderBrush="Gray" BorderThickness="1" Margin="10">
+                        <DataGrid x:Name="materialsReceiptGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
+                                              GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
+                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"
+                                              RowHeaderWidth="25"
+                                              HeadersVisibility="All" ItemsSource="{Binding Receipts}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Material" Width="0.1*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                                <TextBox IsReadOnly="True" Text="{Binding OrderedItem.ProductMaterialItem.SubMaterial.Name, Mode=OneWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="UOM" Width="0.1*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                                <TextBox IsReadOnly="True" Text="{Binding  OrderedItem.ProductMaterialItem.UnitsOfMeasurement.Units, Mode=OneWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="ORD. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                                <TextBox IsReadOnly="True"  Text="{Binding  OrderedItem.ProductMaterialItem.Quantity, StringFormat=n4, Mode=OneWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Invc. Qty" Width="0.1*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                                <TextBox Text="{Binding InvoicedQuantity, StringFormat=n4, UpdateSourceTrigger=LostFocus, NotifyOnSourceUpdated=True, ValidatesOnNotifyDataErrors=True}" />
+                                       </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Recv. Qty" Width="0.1*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                                <TextBox Text="{Binding RecievedInHand, StringFormat=n4, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                   </StackPanel>
                 </Grid>
-                
             </TabItem>
-            <TabItem x:Name="tabGRNReceipt" Header=" GRN Receipt " />
+            <TabItem x:Name="tabSummary" Header=" Summary " />
         </TabControl>
     </Grid>
 </UserControl>

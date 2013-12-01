@@ -30,6 +30,29 @@ namespace ordermanager.Views.UserControls
           
         }
 
+        private void PurchaseOrderSearchControl_OnTreeViewSelectionChanged_1(object selectedObject)
+        {
+            if (selectedObject is Company)
+            {
+                poGrnSummaryView.Visibility = System.Windows.Visibility.Collapsed;
+                orderedItemGrnView.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else if (selectedObject is PurchaseOrder)
+            {
+                poGrnSummaryView.ViewModel = new PoGrnSummaryViewModel((PurchaseOrder)selectedObject);
+                orderedItemGrnView.ViewModel = null;
+                poGrnSummaryView.Visibility = System.Windows.Visibility.Visible;
+                orderedItemGrnView.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else if (selectedObject is OrderedItem)
+            {
+                orderedItemGrnView.ViewModel = new OrderedItemGrnViewModel((OrderedItem)selectedObject);
+                poGrnSummaryView.ViewModel = null;
+                poGrnSummaryView.Visibility = System.Windows.Visibility.Collapsed;
+                orderedItemGrnView.Visibility = System.Windows.Visibility.Visible;
+            }
+        }
+
 
     }
 }

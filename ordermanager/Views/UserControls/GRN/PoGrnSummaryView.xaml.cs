@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,30 @@ namespace ordermanager.Views.UserControls.GRN
         public PoGrnSummaryView()
         {
             InitializeComponent();
+        }
+
+        private PoGrnSummaryViewModel m_ViewModel = null;
+        public PoGrnSummaryViewModel ViewModel
+        {
+            get
+            {
+                return m_ViewModel;
+            }
+            set
+            {
+                m_ViewModel = value;
+                this.DataContext = value;
+            }
+        }
+
+        private void addNewItemBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            AddItemsWindow addNewItemsWnd = new AddItemsWindow();
+            addNewItemsWnd.AvailableItems = ViewModel.AvailableItemsInPoToCreateGRNReceipt;
+            if (addNewItemsWnd.ShowDialog() == true)
+            {
+                ViewModel.AddItems(addNewItemsWnd.SelectedMaterials);
+            }
         }
     }
 }

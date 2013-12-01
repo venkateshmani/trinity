@@ -1,4 +1,4 @@
-﻿<UserControl xmlns:CommonControls="clr-namespace:ordermanager.Views.CommonControls"  x:Class="ordermanager.Views.UserControls.GRNControl"
+﻿<UserControl xmlns:GRN="clr-namespace:ordermanager.Views.UserControls.GRN"  xmlns:CommonControls="clr-namespace:ordermanager.Views.CommonControls"  x:Class="ordermanager.Views.UserControls.GRNControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -67,7 +67,8 @@
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="GRN Details" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
-        <CommonControls:PurchaseOrderSearchControl Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+        <CommonControls:PurchaseOrderSearchControl Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                   OnTreeViewSelectionChanged="PurchaseOrderSearchControl_OnTreeViewSelectionChanged_1"/>
         <GridSplitter Grid.Row="0" Grid.Column="1"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"
@@ -75,6 +76,7 @@
                       ShowsPreview="True"
                       Width="5" Grid.RowSpan="2" />
         
-        
+        <GRN:PoGrnSummaryView x:Name="poGrnSummaryView" Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <GRN:OrderedItemGrnView x:Name="orderedItemGrnView" Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
     </Grid>
 </UserControl>

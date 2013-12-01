@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,35 @@ namespace ordermanager.Views.UserControls.GRN
         public OrderedItemGrnView()
         {
             InitializeComponent();
+        }
+
+        private OrderedItemGrnViewModel m_ViewModel = null;
+        public OrderedItemGrnViewModel ViewModel
+        {
+            get
+            {
+                return m_ViewModel;
+            }
+            set
+            {
+                m_ViewModel = value;
+                this.DataContext = value;
+            }
+        }
+
+        private void SupplierComboBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void AddNewSupplier_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditSupplier_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
