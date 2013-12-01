@@ -161,27 +161,32 @@ namespace ordermanager.ViewModel
             }
         }
 
-        public ObservableCollection<JobOrderType> AfterKnittingJobs
+        public ObservableCollection<JobOrderType> AfterKnittingJobsTypes
         {
             get { return DBResources.Instance.AfterKnittingJobs; }
         }
-       
-        public ObservableCollection<JobOrderType> AfterDyeingJobs
+
+        public ObservableCollection<JobOrderType> AfterDyeingJobsTypes
         {
             get { return DBResources.Instance.AfterDyeingJobs; }
         }
-        public ObservableCollection<JobOrderType> AfterPrintingJobs
+        public ObservableCollection<JobOrderType> AfterPrintingJobsTypes
         {
             get { return DBResources.Instance.AfterPrintingJobs; }
         }
-        public ObservableCollection<JobOrderType> AfterCompactingJobs
+        public ObservableCollection<JobOrderType> AfterCompactingJobsTypes
         {
             get { return DBResources.Instance.AfterCompactingJobs; }
         }
 
-        public  ObservableCollection<JobOrderType> AfterWashingJobs
+        public ObservableCollection<JobOrderType> AfterWashingJobsTypes
         {
             get { return DBResources.Instance.AfterWashingJobs; }
+        }
+
+        public ObservableCollection<JobOrderType> AllJobsTypes
+        {
+            get { return DBResources.Instance.AllJobsTypes; }
         }
     }
 }

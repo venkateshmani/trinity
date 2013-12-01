@@ -134,7 +134,7 @@
                                             <DataGridTemplateColumn Header="Send To" Width="0.1*" >
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
-                                                        <ComboBox x:Name="cmbBoxNext" ItemsSource="{Binding AfterKnittingJobs, Source={StaticResource DataProvider}}" 
+                                                        <ComboBox x:Name="cmbBoxNext" ItemsSource="{Binding AfterKnittingJobsTypes, Source={StaticResource DataProvider}}" 
                                                                   DisplayMemberPath="Type" SelectedItem="{Binding JobOrderTypeWrapper, Mode=TwoWay, 
                                                             UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" Height="20" />                                                            
                                                     </DataTemplate>
