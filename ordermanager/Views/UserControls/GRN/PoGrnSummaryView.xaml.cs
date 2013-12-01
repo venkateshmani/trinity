@@ -49,5 +49,18 @@ namespace ordermanager.Views.UserControls.GRN
                 ViewModel.AddItems(addNewItemsWnd.SelectedMaterials);
             }
         }
+
+        private void addNewReceipt_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ViewModel.AddReceipt();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
     }
 }

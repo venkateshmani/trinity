@@ -92,7 +92,7 @@
                         
                     </Grid>
                                 <Button x:Name="addNewReceipt" Grid.Row="2" Content="Add New Receipt"  Margin="5" Width="150" Height="30" Foreground="White"
-                                        ToolTip="Add New Item" HorizontalAlignment="Right" 
+                                        ToolTip="Add New Item" HorizontalAlignment="Right" Click="addNewReceipt_Click_1"
                                  >
                         <Button.Background>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
