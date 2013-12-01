@@ -596,6 +596,69 @@ namespace ordermanager.ViewModel
         }
 
         #endregion
+
+        #region [JobOrderType]
+        public ObservableCollection<JobOrderType> m_AfterKnittingJobs = null;
+        public ObservableCollection<JobOrderType> AfterKnittingJobs
+        {
+            get
+            {
+                if (m_AfterKnittingJobs == null)
+                    SetAvailableNextJobOrderTypes();
+                return m_AfterKnittingJobs;
+            }
+        }
+        public ObservableCollection<JobOrderType> m_AfterDyeingJobs = null;
+        public ObservableCollection<JobOrderType> AfterDyeingJobs
+        {
+            get
+            {
+                if (m_AfterDyeingJobs == null)
+                    SetAvailableNextJobOrderTypes();
+                return m_AfterDyeingJobs;
+            }
+        }
+        public ObservableCollection<JobOrderType> m_AfterPrintingJobs = null;
+        public ObservableCollection<JobOrderType> AfterPrintingJobs
+        {
+            get
+            {
+                if (m_AfterPrintingJobs == null)
+                    SetAvailableNextJobOrderTypes();
+                return m_AfterPrintingJobs;
+            }
+        }
+        public ObservableCollection<JobOrderType> m_AfterCompactingJobs = null;
+        public ObservableCollection<JobOrderType> AfterCompactingJobs
+        {
+            get
+            {
+                if (m_AfterCompactingJobs == null)
+                    SetAvailableNextJobOrderTypes();
+                return m_AfterCompactingJobs;
+            }
+        }
+        public ObservableCollection<JobOrderType> m_AfterWashingJobs = null;
+        public ObservableCollection<JobOrderType> AfterWashingJobs
+        {
+            get
+            {
+                if (m_AfterWashingJobs == null)
+                    SetAvailableNextJobOrderTypes();
+                return m_AfterWashingJobs;
+            }
+        }
+        private void SetAvailableNextJobOrderTypes()
+        {
+            ObservableCollection<JobOrderType> jobsTypes = new ObservableCollection<JobOrderType>(dbContext.JobOrderTypes.ToList());
+            m_AfterKnittingJobs = new ObservableCollection<JobOrderType>(jobsTypes.Where(c => c.JobOrderTypeID > 1).Select(c => c).ToList());
+            m_AfterDyeingJobs = new ObservableCollection<JobOrderType>(jobsTypes.Where(c => c.JobOrderTypeID > 1).Select(c => c).ToList());
+            m_AfterPrintingJobs = new ObservableCollection<JobOrderType>(jobsTypes.Where(c => c.JobOrderTypeID > 1).Select(c => c).ToList());
+            m_AfterCompactingJobs = new ObservableCollection<JobOrderType>(jobsTypes.Where(c => c.JobOrderTypeID > 1).Select(c => c).ToList());
+            m_AfterWashingJobs = new ObservableCollection<JobOrderType>(jobsTypes.Where(c => c.JobOrderTypeID > 1).Select(c => c).ToList());
+        }
+        #endregion [JobOrderType]
+
         public bool UpdateOrderProducts()
         {
             Save();

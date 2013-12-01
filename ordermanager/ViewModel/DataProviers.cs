@@ -160,6 +160,28 @@ namespace ordermanager.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-    }
 
+        public ObservableCollection<JobOrderType> AfterKnittingJobs
+        {
+            get { return DBResources.Instance.AfterKnittingJobs; }
+        }
+       
+        public ObservableCollection<JobOrderType> AfterDyeingJobs
+        {
+            get { return DBResources.Instance.AfterDyeingJobs; }
+        }
+        public ObservableCollection<JobOrderType> AfterPrintingJobs
+        {
+            get { return DBResources.Instance.AfterPrintingJobs; }
+        }
+        public ObservableCollection<JobOrderType> AfterCompactingJobs
+        {
+            get { return DBResources.Instance.AfterCompactingJobs; }
+        }
+
+        public  ObservableCollection<JobOrderType> AfterWashingJobs
+        {
+            get { return DBResources.Instance.AfterWashingJobs; }
+        }
+    }
 }
