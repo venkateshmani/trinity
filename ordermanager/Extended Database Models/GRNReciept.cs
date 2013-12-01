@@ -10,6 +10,39 @@ namespace ordermanager.DatabaseModel
     public partial class GRNReciept : EntityBase
     {
 
+        public decimal QualityPassedQuantityWrapper
+        {
+            get
+            {
+                if(QualityPassedQuantity != null)
+                    return QualityPassedQuantity.Value;
+
+                return 0;
+            }
+            set
+            {
+                this.QualityPassedQuantity = value;
+                QualityFailedQuantityWrapper = this.RecievedInHand.Value - this.QualityPassedQuantity.Value;
+                OnPropertyChanged("QualityPassedQuantityWrapper");
+            }
+        }
+
+        public decimal QualityFailedQuantityWrapper
+        {
+            get
+            {
+                if (QualityFailedQuantity != null)
+                    return QualityFailedQuantity.Value;
+
+                return 0;
+            }
+            set
+            {
+                this.QualityFailedQuantity = value;
+                OnPropertyChanged("QualityFailedQuantityWrapper");
+            }
+        }
+
         public string ReceiptNumber
         {
             get

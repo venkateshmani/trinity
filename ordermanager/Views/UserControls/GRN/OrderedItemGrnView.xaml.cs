@@ -54,5 +54,17 @@ namespace ordermanager.Views.UserControls.GRN
         {
 
         }
+
+        private void saveChanges_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ViewModel.Save();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

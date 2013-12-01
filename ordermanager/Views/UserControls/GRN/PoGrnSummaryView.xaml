@@ -74,7 +74,7 @@
                         <TextBlock Text="Invoice Date" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
                         <TextBlock Text="Recieved Date" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
                         
-                        <TextBox x:Name="invoiceNumber" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Width="200" />
+                        <TextBox x:Name="invoiceNumber" Text="{Binding InvoiceNumber}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Width="200" />
                         <DatePicker x:Name="invoiceDate" Width="150" 
                                     Grid.Row="1" Grid.Column="1"
                                     SelectedDate="{Binding InvoiceDate, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"

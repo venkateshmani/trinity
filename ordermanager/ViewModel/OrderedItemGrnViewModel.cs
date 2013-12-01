@@ -39,6 +39,11 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public void Save()
+        {
+            DBResources.Instance.Save();
+        }
+
         public void OnPropertyChanged(string proeprtyName)
         {
             if (PropertyChanged != null)

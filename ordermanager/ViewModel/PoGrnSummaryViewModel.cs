@@ -60,7 +60,7 @@ namespace ordermanager.ViewModel
                 m_InvoiceDate = value;
                 foreach (GRNReciept grnReceipt in Receipts)
                 {
-                    m_InvoiceDate = value;
+                    grnReceipt.InvoiceDate = value;
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace ordermanager.ViewModel
                 m_ReceivedDate = value;
                 foreach (GRNReciept grnReceipt in Receipts)
                 {
-                    m_ReceivedDate = value;
+                    grnReceipt.RecievedDate = value;
                 }
             }
         }

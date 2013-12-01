@@ -62,7 +62,7 @@
                                               ItemsSource="{Binding Receipts}">
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -74,14 +74,32 @@
                             
                             <TextBlock Text="Quantity Passed"  Grid.Row="0" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBlock Text="Quantity Failed" Grid.Row="1" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-
-                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityPassedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                                                     IsReadOnly="{Binding IsReadOnly}" Margin="3" VerticalAlignment="Center"/>
                             
-                            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3">
+                            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
+                               <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityPassedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                                     VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                
+                               <TextBlock x:Name="statusText" Text="{Binding PassedQuantityStatus}" Visibility="Collapsed" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                               <TextBlock Text=" Issue to: " Margin="15,0,0,0" VerticalAlignment="Center"/>
+                               <ComboBox x:Name="issueToComboBox"  VerticalAlignment="Center" 
+                                                      Width="125"
+                                                      ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
+                                                      DisplayMemberPath="Name" SelectedItem="{Binding Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                                      Height="20" />
+                                <Button x:Name="issueBtn" Content="Issue Right Now"  Margin="5" Width="150" Height="30" Foreground="White"
+                                        ToolTip="Generate New Purchase Order" HorizontalAlignment="Right">
+                                    <Button.Background>
+                                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                    </Button.Background>
+                                </Button>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="3">
                                 <TextBox Grid.Row="1" Grid.Column="1" Width="100" Text="{Binding QualityFailedQuantityWrapper, StringFormat=n4}" IsReadOnly="True" VerticalAlignment="Center"/>
-                                <TextBlock Text="Supplier: " Margin="5,0,0,0"/>
-                                <ComboBox x:Name="supplierComboBox" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                <TextBlock x:Name="statusText" Text="{Binding FailedQuantityStatus}" Visibility="Collapsed" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                                <TextBlock Text="Supplier: " Margin="15,0,0,0" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="supplierComboBox"  VerticalAlignment="Center" 
+                                                      Width="125"
                                                       ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
                                                       DisplayMemberPath="Name" SelectedItem="{Binding Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
                                                       Height="20"  TextBoxBase.TextChanged="SupplierComboBox_TextChanged"
@@ -90,6 +108,7 @@
                                                       IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
                                                       IsTabStop="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
                                 <Button  x:Name="btnAddSupplier" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
+                                         VerticalAlignment="Center"
                                                         Cursor="Hand" Click="AddNewSupplier_Click"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Supplier"  Visibility="Collapsed">
                                     <Rectangle Width="10" Height="10">
                                         <Rectangle.Fill>
@@ -98,6 +117,7 @@
                                     </Rectangle>
                                 </Button>
                                 <Button  x:Name="btnEditSupplier" Width="28"  Grid.Row="0" Grid.Column="2" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
+                                                        VerticalAlignment="Center"
                                                         Cursor="Hand" Click="EditSupplier_Click"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Edit Supplier"  Visibility="Collapsed">
                                     <Rectangle Width="10" Height="10">
                                         <Rectangle.Fill>
@@ -114,7 +134,6 @@
                                 </Button>
                             </StackPanel>
                         </Grid>
-                        
                     </DataTemplate>
                 </DataGrid.RowDetailsTemplate>
                 <DataGrid.Columns>
@@ -122,7 +141,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Text="{Binding InvoiceNumber, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                     IsReadOnly="{Binding IsReadOnly}"/>
+                                                     IsReadOnly="True"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -130,17 +149,15 @@
                     <DataGridTemplateColumn Header="Invc. Dt" Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <DatePicker SelectedDate="{Binding InvoicedDateWrapper, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
-                                                        IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
-                            </DataTemplate>
+                                <TextBox Text="{Binding InvoiceDate, StringFormat=MM/dd/yy}" IsReadOnly="True" />
+                           </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
                     <DataGridTemplateColumn Header="Recv. Date" Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <DatePicker SelectedDate="{Binding RecievedDateWrapper, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                        IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
+                                <TextBox Text="{Binding RecievedDate, StringFormat=MM/dd/yy}" IsReadOnly="True" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -149,8 +166,8 @@
                     <DataGridTemplateColumn Header="Invc. Qty" Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding InvoicedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, NotifyOnSourceUpdated=True, ValidatesOnNotifyDataErrors=True}" 
-                                                     IsReadOnly="{Binding IsReadOnly}"/>
+                                <TextBox Text="{Binding InvoicedQuantity, StringFormat=n4, UpdateSourceTrigger=LostFocus, NotifyOnSourceUpdated=True, ValidatesOnNotifyDataErrors=True}" 
+                                                     IsReadOnly="True"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -158,8 +175,8 @@
                     <DataGridTemplateColumn Header="Recv. Qty" Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding RecievedInHandWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                     IsReadOnly="{Binding IsReadOnly}"/>
+                                <TextBox Text="{Binding RecievedInHand, StringFormat=n4, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                    IsReadOnly="True"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -168,7 +185,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Text="{Binding QualityPassedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                                                     IsReadOnly="{Binding IsReadOnly}"/>
+                                                     IsReadOnly="True"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -176,7 +193,8 @@
                     <DataGridTemplateColumn Header="Failed Qty"  Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding QualityFailedQuantityWrapper, StringFormat=n4}" IsReadOnly="True" />
+                                <TextBox Text="{Binding QualityFailedQuantityWrapper, StringFormat=n4}" 
+                                         IsReadOnly="True"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -187,7 +205,7 @@
 
         <Button x:Name="saveChanges" Grid.Row="2" Content="Save Changes"  Margin="5" Width="150" Height="30" Foreground="White"
                                         ToolTip="Save Changes" HorizontalAlignment="Right" 
-                                 >
+                                Click="saveChanges_Click_1"  >
             <Button.Background>
                 <SolidColorBrush Color="{StaticResource AccentColor}" />
             </Button.Background>
