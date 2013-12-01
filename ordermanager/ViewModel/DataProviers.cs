@@ -186,7 +186,10 @@ namespace ordermanager.ViewModel
 
         public ObservableCollection<JobOrderType> AllJobsTypes
         {
-            get { return DBResources.Instance.AllJobsTypes; }
+            get 
+            { 
+                return DBResources.Instance.AllJobsTypes; 
+            }
         }
     }
 }

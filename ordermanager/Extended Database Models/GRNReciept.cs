@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ordermanager.DatabaseModel
 {
@@ -163,5 +164,34 @@ namespace ordermanager.DatabaseModel
         {
             return new ObservableCollection<JobOrder>(JobOrders.Where(jo => jo.JobOrderType.Type == type).Select(jo => jo).ToList());
         }
+
+        #region UI Enablers
+
+        public Visibility QualityPassedStatusVisibility
+        {
+            get
+            {
+                if (this.JobOrders.Count != 0)
+                    return Visibility.Visible;
+
+                return Visibility.Collapsed;
+            }
+        }
+
+        public Visibility QualityFailedStatusVisiblity
+        {
+            get
+            {
+                if (this.QualityFailedQuantityWrapper != 0 && SpawnedNewPurchaseOrder != null && SpawnedNewPurchaseOrder.Value == true)
+                {
+                    return Visibility.Visible;
+                }
+
+                return Visibility.Collapsed;
+            }
+        }
+
+         
+        #endregion 
     }
 }

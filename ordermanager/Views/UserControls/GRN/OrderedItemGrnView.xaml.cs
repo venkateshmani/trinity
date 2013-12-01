@@ -1,4 +1,5 @@
-﻿using ordermanager.ViewModel;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,6 +66,47 @@ namespace ordermanager.Views.UserControls.GRN
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void issueBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null && btn.Tag != null && btn.Tag is GRNReciept)
+            {
+                GRNReciept receipt = btn.Tag as GRNReciept;
+
+                JobOrder newOrder = new JobOrder();
+                newOrder.ChargesInINR = 10;
+                newOrder.JobOrderType = GetJobOrderType(sender);
+                newOrder.SupplierID = 1;
+                newOrder.JobQuantity = receipt.QualityPassedQuantityWrapper;
+                newOrder.Instructions = "Test";
+                newOrder.RequiredDate = DateTime.Now;
+
+                receipt.JobOrders.Add(newOrder);
+                DBResources.Instance.Save();
+            }
+        }
+
+
+        private JobOrderType GetJobOrderType(object sender)
+        {
+            Button issueToBtn = sender as Button;
+            if (issueToBtn != null)
+            {
+                StackPanel parentContainer = issueToBtn.Parent as StackPanel;
+
+                if (parentContainer != null)
+                {
+                    ComboBox comboBox = parentContainer.FindName("issueToComboBox") as ComboBox;
+                    if (comboBox != null)
+                    {
+                        return comboBox.SelectedItem as JobOrderType;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }
