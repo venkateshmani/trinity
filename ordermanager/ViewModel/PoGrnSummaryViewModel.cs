@@ -136,6 +136,7 @@ namespace ordermanager.ViewModel
                 newReceipt.InvoiceDate = this.InvoiceDate;
                 newReceipt.RecievedDate = this.ReceivedDate;
                 this.Receipts.Add(newReceipt);
+                item.GRNReciepts.Add(newReceipt);
             }
         }
 

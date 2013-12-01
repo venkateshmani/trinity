@@ -1,4 +1,6 @@
-﻿using ordermanager.ViewModel;
+﻿using MahApps.Metro.Controls;
+using ordermanager.ViewModel;
+using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,12 +57,21 @@ namespace ordermanager.Views.UserControls.GRN
             try
             {
                 ViewModel.AddReceipt();
+                InformUser("Receipt Added Successfully");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                InformUser("Failed to add receipt");
             }
+        }
 
+        private void InformUser(string message)
+        {
+            PopupBox informer = new PopupBox();
+            informer.Message = message;
+            informer.PopupButton = PopupButton.OK;
+            informer.ShowDialog();
         }
     }
 }

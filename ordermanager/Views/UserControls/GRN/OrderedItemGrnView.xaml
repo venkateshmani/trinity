@@ -58,7 +58,8 @@
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"
                                               RowHeaderWidth="25"
-                                              HeadersVisibility="Column">
+                                              HeadersVisibility="Column"
+                                              ItemsSource="{Binding Receipts}">
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>
                         <Grid>
