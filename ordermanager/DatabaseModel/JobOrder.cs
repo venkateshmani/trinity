@@ -29,6 +29,7 @@ namespace ordermanager.DatabaseModel
         public Nullable<decimal> PendingQuantity { get; set; }
         public long GRNReciptID { get; set; }
     
+        public virtual Company Company { get; set; }
         public virtual GRNReciept GRNReciept { get; set; }
         public virtual JobOrderType JobOrderType { get; set; }
         public virtual ICollection<JobOrderReceipt> JobOrderReceipts { get; set; }

@@ -232,9 +232,6 @@
     <Compile Include="DatabaseModel\SubMaterial.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseModel\sysdiagram.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DatabaseModel\UnitsOfMeasurement.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>

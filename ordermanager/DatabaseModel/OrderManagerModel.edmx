@@ -48,7 +48,6 @@
           <EntitySet Name="Shipment" EntityType="OrderManagerDBModel.Store.Shipment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ShipmentMode" EntityType="OrderManagerDBModel.Store.ShipmentMode" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SubMaterial" EntityType="OrderManagerDBModel.Store.SubMaterial" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="sysdiagrams" EntityType="OrderManagerDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UnitsOfMeasurement" EntityType="OrderManagerDBModel.Store.UnitsOfMeasurement" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="OrderManagerDBModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserRole" EntityType="OrderManagerDBModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
@@ -87,6 +86,10 @@
           <AssociationSet Name="FK_History_Order" Association="OrderManagerDBModel.Store.FK_History_Order">
             <End Role="Order" EntitySet="Order" />
             <End Role="History" EntitySet="History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOrder_Company" Association="OrderManagerDBModel.Store.FK_JobOrder_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="JobOrder" EntitySet="JobOrder" />
           </AssociationSet>
           <AssociationSet Name="FK_JobOrder_GRNReciept" Association="OrderManagerDBModel.Store.FK_JobOrder_GRNReciept">
             <End Role="GRNReciept" EntitySet="GRNReciept" />
@@ -733,16 +736,6 @@
           <Property Name="InStock" Type="decimal" Scale="4" />
           <Property Name="UOMID" Type="smallint" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="UnitsOfMeasurement">
           <Key>
             <PropertyRef Name="UOMID" />
@@ -890,6 +883,18 @@
             </Principal>
             <Dependent Role="History">
               <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOrder_Company">
+          <End Role="Company" Type="OrderManagerDBModel.Store.Company" Multiplicity="1" />
+          <End Role="JobOrder" Type="OrderManagerDBModel.Store.JobOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="JobOrder">
+              <PropertyRef Name="SupplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1578,7 +1583,6 @@
           <EntitySet Name="Shipments" EntityType="OrderManagerDBModel.Shipment" />
           <EntitySet Name="ShipmentModes" EntityType="OrderManagerDBModel.ShipmentMode" />
           <EntitySet Name="SubMaterials" EntityType="OrderManagerDBModel.SubMaterial" />
-          <EntitySet Name="sysdiagrams" EntityType="OrderManagerDBModel.sysdiagram" />
           <EntitySet Name="UnitsOfMeasurements" EntityType="OrderManagerDBModel.UnitsOfMeasurement" />
           <EntitySet Name="Users" EntityType="OrderManagerDBModel.User" />
           <EntitySet Name="UserRoles" EntityType="OrderManagerDBModel.UserRole" />
@@ -1617,6 +1621,10 @@
           <AssociationSet Name="FK_Company_CompanyType" Association="OrderManagerDBModel.FK_Company_CompanyType">
             <End Role="CompanyType" EntitySet="CompanyTypes" />
             <End Role="Company" EntitySet="Companies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOrder_Company" Association="OrderManagerDBModel.FK_JobOrder_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="JobOrder" EntitySet="JobOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Company" Association="OrderManagerDBModel.FK_Order_Company">
             <End Role="Company" EntitySet="Companies" />
@@ -1915,6 +1923,7 @@
           <Property Name="CST" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
           <NavigationProperty Name="Assets" Relationship="OrderManagerDBModel.FK_Asset_Company" FromRole="Company" ToRole="Asset" />
           <NavigationProperty Name="CompanyType" Relationship="OrderManagerDBModel.FK_Company_CompanyType" FromRole="Company" ToRole="CompanyType" />
+          <NavigationProperty Name="JobOrders" Relationship="OrderManagerDBModel.FK_JobOrder_Company" FromRole="Company" ToRole="JobOrder" />
           <NavigationProperty Name="Orders" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Company" ToRole="Order" />
           <NavigationProperty Name="Orders1" Relationship="OrderManagerDBModel.FK_Order_OrderBy" FromRole="Company" ToRole="Order" />
           <NavigationProperty Name="ProductMaterialItems" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_Company" FromRole="Company" ToRole="ProductMaterialItem" />
@@ -1998,6 +2007,7 @@
           <Property Name="JobOrderTypeID" Type="Byte" Nullable="false" />
           <Property Name="PendingQuantity" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="GRNReciptID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_JobOrder_Company" FromRole="JobOrder" ToRole="Company" />
           <NavigationProperty Name="GRNReciept" Relationship="OrderManagerDBModel.FK_JobOrder_GRNReciept" FromRole="JobOrder" ToRole="GRNReciept" />
           <NavigationProperty Name="JobOrderType" Relationship="OrderManagerDBModel.FK_JobOrder_JobOrderType" FromRole="JobOrder" ToRole="JobOrderType" />
           <NavigationProperty Name="JobOrderReceipts" Relationship="OrderManagerDBModel.FK_JobOrderReceipt_JobOrder" FromRole="JobOrder" ToRole="JobOrderReceipt" />
@@ -2379,16 +2389,6 @@
           <NavigationProperty Name="ProductMaterialItems" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_SubMaterial" FromRole="SubMaterial" ToRole="ProductMaterialItem" />
           <NavigationProperty Name="UnitsOfMeasurement" Relationship="OrderManagerDBModel.FK_SubMaterial_UnitsOfMeasurement" FromRole="SubMaterial" ToRole="UnitsOfMeasurement" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="UnitsOfMeasurement">
           <Key>
             <PropertyRef Name="UOMID" />
@@ -2545,6 +2545,18 @@
             </Principal>
             <Dependent Role="Company">
               <PropertyRef Name="CompanyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOrder_Company">
+          <End Role="Company" Type="OrderManagerDBModel.Company" Multiplicity="1" />
+          <End Role="JobOrder" Type="OrderManagerDBModel.JobOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="JobOrder">
+              <PropertyRef Name="SupplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3661,17 +3673,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="InStock" ColumnName="InStock" />
                 <ScalarProperty Name="UOMID" ColumnName="UOMID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="OrderManagerDBModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
