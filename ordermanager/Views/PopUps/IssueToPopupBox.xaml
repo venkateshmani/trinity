@@ -1,0 +1,109 @@
+﻿<Controls:MetroWindow x:Class="ordermanager.Views.PopUps.IssueToPopupBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        ShowInTaskbar="True" 
+        AllowsTransparency="True" 
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        ShowIconOnTitleBar="False"
+        ShowTitleBar="False"
+        ShowCloseButton="True"
+        ShowMaxRestoreButton="False"
+        ShowMinButton="False"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+                        xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
+        Title="Comment Window" Height="393.135" Width="364.16">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Metro.Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="22" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="PopupButtonTemplate"  TargetType="{x:Type Button}" BasedOn="{StaticResource MetroAccentButton}">
+                <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}"/>
+                <Setter Property="Margin" Value="5,0,0,0"/>
+            </Style>
+            <DataProviders:DataProvider x:Key="DataProvider" />
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Controls:MetroWindow.GlowBrush>
+        <SolidColorBrush Color="{DynamicResource AccentColor}" />
+    </Controls:MetroWindow.GlowBrush>
+    <Border>
+        <Border.Background>
+            <SolidColorBrush Color="{StaticResource AccentColor}"/>
+        </Border.Background>
+        <Grid>
+            <Grid Margin="15" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Issue" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" Foreground="White" FontWeight="Light"  FontSize="{DynamicResource SubHeaderFontSize}"/>
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Material Name :" HorizontalAlignment="Right" Margin="3" Grid.Row="0" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+                    <TextBlock Text="Quantity :" HorizontalAlignment="Right" Margin="3" Grid.Row="1" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+                    <TextBlock Text="Charges in INR :" HorizontalAlignment="Right" Margin="3" Grid.Row="2" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+                    <TextBlock Text="Supplier :" HorizontalAlignment="Right" Margin="3" Grid.Row="3" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+                    <TextBlock Text="Instructions :" HorizontalAlignment="Right" Margin="3" Grid.Row="4" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+                    <TextBlock Text="Required Date :" HorizontalAlignment="Right" Margin="3" Grid.Row="5" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+                    <TextBlock Text="Issue to :" HorizontalAlignment="Right" Margin="3" Grid.Row="6" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+                    
+                    <TextBlock Text="{Binding MaterialName}" FontSize="16" FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="1" Margin="3" HorizontalAlignment="Left"/>
+                    <TextBlock Text="{Binding Quantity}" FontSize="16" FontWeight="Bold" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="3" HorizontalAlignment="Left"/>
+                    <TextBox Text="{Binding ChargesInINR, StringFormat=n4}" Width="100" FontSize="16" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="3" HorizontalAlignment="Left"/>
+                    <ComboBox x:Name="supplierComboBox"  VerticalAlignment="Center" 
+                                                      Width="125"
+                                                      ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
+                                                      DisplayMemberPath="Name" SelectedItem="{Binding Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                                      Height="20"  TextBoxBase.TextChanged="SupplierComboBox_TextChanged"
+                                                      IsReadOnly="{Binding IsReadOnly}"
+                                                      IsEditable="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
+                                                      IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
+                                                      IsTabStop="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
+                </Grid>
+                
+                
+                
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0,5,0">
+                    <Button x:Name="updateToDatabaseBtn"  Content="Issue Now"  Width="100" Height="25" Foreground="White" HorizontalAlignment="Left" Click="updateToDatabaseBtn_Click" Style="{StaticResource PopupButtonTemplate}">
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="cancelBtn"  Content="Cancel"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" HorizontalAlignment="Left" Click="cancelBtn_Click" Visibility="Collapsed" >
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Controls:MetroWindow>
