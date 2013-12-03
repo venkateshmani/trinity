@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,18 @@ namespace ordermanager.DatabaseModel
     public partial class JobOrder : EntityBase
     {
         #region Wrappers
+
+        private ObservableCollection<JobOrderReceipt> m_JobOrderReceiptsWrapper = null;
+        public ObservableCollection<JobOrderReceipt> JobOrderReceiptsWrapper
+        {
+            get
+            {
+                if (m_JobOrderReceiptsWrapper == null)
+                    m_JobOrderReceiptsWrapper = new ObservableCollection<JobOrderReceipt>(this.JobOrderReceipts);
+                return m_JobOrderReceiptsWrapper;
+            }
+        }
+
 
         public JobOrderType JobOrderTypeWrapper
         {

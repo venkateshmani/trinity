@@ -441,13 +441,19 @@
           <Property Name="JobOrderTypeID" Type="tinyint" Nullable="false" />
           <Property Name="PendingQuantity" Type="decimal" Scale="4" />
           <Property Name="GRNReciptID" Type="bigint" Nullable="false" />
+          <Property Name="QualityPassed" Type="decimal" Scale="4" />
+          <Property Name="QualityFailed" Type="decimal" Scale="4" />
+          <Property Name="DCNumber" Type="varchar" MaxLength="20" />
+          <Property Name="Comments" Type="varchar" MaxLength="50" />
+          <Property Name="IsIssued" Type="bit" Nullable="false" />
+          <Property Name="IsWaitingFoApproval" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="JobOrderReceipt">
           <Key>
             <PropertyRef Name="JobOrderReceiptID" />
           </Key>
           <Property Name="JobOrderReceiptID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ReceiptDate" Type="datetime" Nullable="false" />
+          <Property Name="ReceiptDate" Type="datetime" />
           <Property Name="Comments" Type="varchar" MaxLength="50" />
           <Property Name="ReceivedQuantity" Type="decimal" Nullable="false" Scale="4" />
           <Property Name="Issued" Type="bit" Nullable="false" />
@@ -2007,6 +2013,12 @@
           <Property Name="JobOrderTypeID" Type="Byte" Nullable="false" />
           <Property Name="PendingQuantity" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="GRNReciptID" Type="Int64" Nullable="false" />
+          <Property Name="QualityPassed" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="QualityFailed" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="DCNumber" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Comments" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="IsIssued" Type="Boolean" Nullable="false" />
+          <Property Name="IsWaitingFoApproval" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_JobOrder_Company" FromRole="JobOrder" ToRole="Company" />
           <NavigationProperty Name="GRNReciept" Relationship="OrderManagerDBModel.FK_JobOrder_GRNReciept" FromRole="JobOrder" ToRole="GRNReciept" />
           <NavigationProperty Name="JobOrderType" Relationship="OrderManagerDBModel.FK_JobOrder_JobOrderType" FromRole="JobOrder" ToRole="JobOrderType" />
@@ -2017,7 +2029,7 @@
             <PropertyRef Name="JobOrderReceiptID" />
           </Key>
           <Property Name="JobOrderReceiptID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReceiptDate" Type="DateTime" Precision="3" />
           <Property Name="Comments" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="ReceivedQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <Property Name="Issued" Type="Boolean" Nullable="false" />
@@ -3350,6 +3362,12 @@
                 <ScalarProperty Name="JobOrderTypeID" ColumnName="JobOrderTypeID" />
                 <ScalarProperty Name="PendingQuantity" ColumnName="PendingQuantity" />
                 <ScalarProperty Name="GRNReciptID" ColumnName="GRNReciptID" />
+                <ScalarProperty Name="QualityPassed" ColumnName="QualityPassed" />
+                <ScalarProperty Name="QualityFailed" ColumnName="QualityFailed" />
+                <ScalarProperty Name="DCNumber" ColumnName="DCNumber" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="IsIssued" ColumnName="IsIssued" />
+                <ScalarProperty Name="IsWaitingFoApproval" ColumnName="IsWaitingFoApproval" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

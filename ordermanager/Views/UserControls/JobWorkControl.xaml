@@ -74,7 +74,7 @@
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Job Work Receipts" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
-        <TreeView x:Name="tvSuppliers" Grid.Row="3" Grid.Column="0" Background="White" Margin="2" ItemsSource="{Binding Suppliers}">
+        <TreeView x:Name="tvSuppliers" Grid.Row="3" Grid.Column="0" Background="White" Margin="2" ItemsSource="{Binding Suppliers}" SelectedItemChanged="tvSuppliers_SelectedItemChanged">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding PurchaseOrders}">
                     <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
@@ -106,60 +106,48 @@
                         DataContext="{Binding SelectedReceipt}" ItemsSource="{Binding KnittingItemsWrapper}" Background="WhiteSmoke">
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
-                                    <DataGrid FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow"  GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" 
-                                         Background="WhiteSmoke">
-                                        <DataGrid.Columns>
-                                            <DataGridTemplateColumn Header="Received Quantity" Width="0.1*">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <TextBox Text="{Binding ReceivedQuantityWrapper}" />
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Button Grid.Row="0" x:Name="btnNewReceipt" Content="Add New Receipt" HorizontalAlignment="Left"  Margin="5" Width="150" Height="30" Foreground="White" Click="btnNewReceipt_Click">
+                                            <Button.Background>
+                                                <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                            </Button.Background>
+                                        </Button>
+                                        <DataGrid x:Name="gridKnittingReceipts" Margin="25,0,25,25"
+                                                  Grid.Row="1" FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" 
+                                                  SelectionUnit="FullRow"  GridLinesVisibility="None" 
+                                                  CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" AutoGenerateColumns="False"
+                                         Background="WhiteSmoke" ItemsSource="{Binding JobOrderReceiptsWrapper}" HorizontalAlignment="Stretch" HeadersVisibility="Column" >
+                                            <DataGrid.Columns>
+                                                <DataGridTemplateColumn Header="Received Quantity" Width="auto">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBox Text="{Binding ReceivedQuantity}" />
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
 
-                                            <DataGridTemplateColumn Header="Received Date" Width="0.12*">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <TextBox Text="{Binding ReceiptDateWrapper}" />
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn Header="Comments" Width="0.2*">
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <TextBox Text="{Binding CommentsWrapper}" />
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn Header="Send To" Width="0.1*" >
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <ComboBox x:Name="cmbBoxNext" ItemsSource="{Binding AfterKnittingJobsTypes, Source={StaticResource DataProvider}}" 
-                                                                  DisplayMemberPath="Type" SelectedItem="{Binding JobOrderTypeWrapper, Mode=TwoWay, 
-                                                            UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" Height="20" />                                                            
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn Header="Instructions" Width="0.1*" >
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <TextBox Text="{Binding InstructionsWrapper}" />
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                            <DataGridTemplateColumn Width="110" >
-                                                <DataGridTemplateColumn.CellTemplate>
-                                                    <DataTemplate>
-                                                        <Button x:Name="btnAssign" Content="Assign"  Margin="5" Width="100" Height="30" Foreground="White">
-                                                            <Button.Background>
-                                                                <SolidColorBrush Color="{StaticResource AccentColor}" />
-                                                            </Button.Background>
-                                                        </Button>
-                                                    </DataTemplate>
-                                                </DataGridTemplateColumn.CellTemplate>
-                                            </DataGridTemplateColumn>
-                                        </DataGrid.Columns>
-                                    </DataGrid>
+                                                <DataGridTemplateColumn Header="Received Date" Width="auto">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBox Text="{Binding ReceiptDate}" />
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>
+                                                <DataGridTemplateColumn Header="Comments" Width="auto">
+                                                    <DataGridTemplateColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBox Text="{Binding Comments}" />
+                                                        </DataTemplate>
+                                                    </DataGridTemplateColumn.CellTemplate>
+                                                </DataGridTemplateColumn>  
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </Grid>
                                 </DataTemplate>
                             </DataGrid.RowDetailsTemplate>
                             <DataGrid.Columns>
@@ -487,7 +475,13 @@
             <Rectangle Height="1" Fill="Gray" VerticalAlignment="Top" />
         </Grid>
         <Grid Grid.Row="4" Grid.ColumnSpan="3" x:Name="gridButtons">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="btnSave" Content="Add New Receipt" HorizontalAlignment="Center"  Margin="5" Width="100" Height="30" Foreground="White" Click="Save_Click">
+                    <Button.Background>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </Button.Background>
+                </Button>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

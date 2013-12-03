@@ -15,7 +15,7 @@ namespace ordermanager.DatabaseModel
     public partial class JobOrderReceipt
     {
         public long JobOrderReceiptID { get; set; }
-        public System.DateTime ReceiptDate { get; set; }
+        public Nullable<System.DateTime> ReceiptDate { get; set; }
         public string Comments { get; set; }
         public decimal ReceivedQuantity { get; set; }
         public bool Issued { get; set; }

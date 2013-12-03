@@ -1,4 +1,5 @@
-﻿using ordermanager.ViewModel;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,12 @@ namespace ordermanager.Views.UserControls
     /// </summary>
     public partial class JobWorkControl : UserControl
     {
+        JobWorkViewModel ViewModel;
         public JobWorkControl()
         {
             InitializeComponent();
-            this.DataContext = new JobWorkViewModel();
+            ViewModel = new JobWorkViewModel();
+            this.DataContext =ViewModel;
             //List<Supplier> supp = new List<Supplier>();
             //supp.Add(new Supplier());
             //supp.Add(new Supplier());
@@ -34,7 +37,33 @@ namespace ordermanager.Views.UserControls
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            
+
+        }
+
+        private void tvSuppliers_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (tvSuppliers.SelectedItem is Company || tvSuppliers.SelectedItem is PurchaseOrder)
+            {
+                tabControlJobWorks.Visibility = System.Windows.Visibility.Collapsed;
+            }
+
+            else if (tvSuppliers.SelectedItem is GRNReciept)
+            {
+                tabControlJobWorks.Visibility = System.Windows.Visibility.Visible;
+                ViewModel.SelectedReceipt = tvSuppliers.SelectedItem as GRNReciept;
+            }
+        }       
+
+        private void btnNewReceipt_Click(object sender, RoutedEventArgs e)
+        {
+           //Button btn =  sender as Button;
+           //Grid gd = btn.Parent as Grid;
+           //if (gd != null)
+           //{
+               JobOrder jOrder = gridKnittingDetails.SelectedItem as JobOrder;
+               if (jOrder != null)
+                   ViewModel.AddJobReceipt(jOrder);
+           //}
         }
     }
 

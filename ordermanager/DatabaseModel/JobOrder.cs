@@ -28,6 +28,12 @@ namespace ordermanager.DatabaseModel
         public byte JobOrderTypeID { get; set; }
         public Nullable<decimal> PendingQuantity { get; set; }
         public long GRNReciptID { get; set; }
+        public Nullable<decimal> QualityPassed { get; set; }
+        public Nullable<decimal> QualityFailed { get; set; }
+        public string DCNumber { get; set; }
+        public string Comments { get; set; }
+        public bool IsIssued { get; set; }
+        public bool IsWaitingFoApproval { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual GRNReciept GRNReciept { get; set; }
