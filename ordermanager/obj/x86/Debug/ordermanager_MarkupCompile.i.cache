@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\King\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\
+C:\Users\User\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\
 ordermanager
 none
 false
 DEBUG;TRACE
-C:\Users\King\Documents\GitHub\trinity\ordermanager\App.xaml
-36777373593
+C:\Users\User\Documents\GitHub\trinity\ordermanager\App.xaml
+411737730432
 
-153-1942329261
-28-1045965986
-LoginScreen.xaml;MainWindow.xaml;Views\PasswordChangeDialog.xaml;Views\PopUps\AddEditProductPopupBox.xaml;Views\PopUps\CommentBox.xaml;Views\PopUps\PopupBox.xaml;Views\PopUps\ProgressUpdateWindow.xaml;Views\PopUps\UserManagementWindow.xaml;Views\UserControls\AssetsControl.xaml;Views\UserControls\ChangeHistoryControl.xaml;Views\UserControls\Execution\CuttingControl.xaml;Views\UserControls\Execution\OverAllCompleteReportControl.xaml;Views\UserControls\Execution\PackagingControl.xaml;Views\UserControls\Execution\ProductionControl.xaml;Views\UserControls\Execution\QualityControl.xaml;Views\UserControls\Execution\ShippingControl.xaml;Views\UserControls\GeneratedInvoiceViewerControl.xaml;Views\UserControls\GRNControl.xaml;Views\UserControls\InStockControl.xaml;Views\UserControls\CreateNewInvoiceControl.xaml;Views\UserControls\JobWorkControl.xaml;Views\UserControls\POControl.xaml;Views\UserControls\POMaterialDetails.xaml;Views\UserControls\PurchaseOrderControl.xaml;Views\PopUps\NewEnquiryForm.xaml;Views\PopUps\NewEnquiryFormUserControl.xaml;Views\CustomerDetailsControl.xaml;Views\UserControls\POProductDetails.xaml;Views\UserControls\ProductMaterialsControl.xaml;Views\UserControls\ViewOrdersControl.xaml;TestWindow.xaml;Views\CommonControls\BackForwardButton.xaml;Views\CommonControls\OMbutton.xaml;Views\CommonControls\OrdersListView.xaml;Views\CommonControls\ProductsListView.xaml;Views\UserControls\OrderWorkBench.xaml;
+169417452977
+29-1703541827
+LoginScreen.xaml;MainWindow.xaml;Views\CommonControls\PurchaseOrderSearchControl.xaml;Views\PasswordChangeDialog.xaml;Views\PopUps\AddEditProductPopupBox.xaml;Views\PopUps\CommentBox.xaml;Views\PopUps\IssueToPopupBox.xaml;Views\PopUps\PopupBox.xaml;Views\PopUps\ProgressUpdateWindow.xaml;Views\PopUps\UserManagementWindow.xaml;Views\UserControls\AssetsControl.xaml;Views\UserControls\ChangeHistoryControl.xaml;Views\UserControls\Execution\CuttingControl.xaml;Views\UserControls\Execution\OverAllCompleteReportControl.xaml;Views\UserControls\Execution\PackagingControl.xaml;Views\UserControls\Execution\ProductionControl.xaml;Views\UserControls\Execution\QualityControl.xaml;Views\UserControls\Execution\ShippingControl.xaml;Views\UserControls\GeneratedInvoiceViewerControl.xaml;Views\UserControls\GRNControl.xaml;Views\UserControls\GRN\AddItemsWindow.xaml;Views\UserControls\GRN\OrderedItemGrnView.xaml;Views\UserControls\GRN\PoGrnSummaryView.xaml;Views\UserControls\InStockControl.xaml;Views\UserControls\CreateNewInvoiceControl.xaml;Views\UserControls\JobWorkControl.xaml;Views\UserControls\POControl.xaml;Views\UserControls\POMaterialDetails.xaml;Views\UserControls\PurchaseOrderControl.xaml;Views\PopUps\NewEnquiryForm.xaml;Views\PopUps\NewEnquiryFormUserControl.xaml;Views\CustomerDetailsControl.xaml;Views\UserControls\POProductDetails.xaml;Views\UserControls\ProductMaterialsControl.xaml;Views\UserControls\ViewOrdersControl.xaml;TestWindow.xaml;Views\CommonControls\BackForwardButton.xaml;Views\CommonControls\OMbutton.xaml;Views\CommonControls\OrdersListView.xaml;Views\CommonControls\ProductsListView.xaml;Views\UserControls\OrderWorkBench.xaml;
 
-False
+True
 

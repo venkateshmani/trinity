@@ -1,5 +1,6 @@
 ﻿using ordermanager.DatabaseModel;
 using ordermanager.ViewModel;
+using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,16 +75,21 @@ namespace ordermanager.Views.UserControls.GRN
             if (btn != null && btn.Tag != null && btn.Tag is GRNReciept)
             {
                 GRNReciept receipt = btn.Tag as GRNReciept;
+                IssueToPopupBox issuePopupBox = new IssueToPopupBox();
+                issuePopupBox.Receipt = receipt;
+                issuePopupBox.JobQuantity = issuePopupBox.Receipt.QualityPassedQuantityWrapper;
+               
+                if (issuePopupBox.ShowDialog() == true)
+                {
+                    if (issuePopupBox.JobOrder.JobOrderType.Type.ToLower() == "stock")
+                    {
 
-                JobOrder newOrder = new JobOrder();
-                newOrder.ChargesInINR = 10;
-                newOrder.JobOrderType = GetJobOrderType(sender);
-                newOrder.SupplierID = 1;
-                newOrder.JobQuantity = receipt.QualityPassedQuantityWrapper;
-                newOrder.Instructions = "Test";
-                newOrder.RequiredDate = DateTime.Now;
-
-                receipt.JobOrders.Add(newOrder);
+                    }
+                    else
+                    {
+                        receipt.JobOrders.Add(issuePopupBox.JobOrder);
+                    }
+                }
                 DBResources.Instance.Save();
             }
         }

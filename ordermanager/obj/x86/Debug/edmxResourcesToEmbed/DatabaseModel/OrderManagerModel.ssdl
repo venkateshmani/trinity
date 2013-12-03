@@ -43,7 +43,6 @@
     <EntitySet Name="Shipment" EntityType="OrderManagerDBModel.Store.Shipment" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ShipmentMode" EntityType="OrderManagerDBModel.Store.ShipmentMode" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SubMaterial" EntityType="OrderManagerDBModel.Store.SubMaterial" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="sysdiagrams" EntityType="OrderManagerDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UnitsOfMeasurement" EntityType="OrderManagerDBModel.Store.UnitsOfMeasurement" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="OrderManagerDBModel.Store.User" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserRole" EntityType="OrderManagerDBModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
@@ -82,6 +81,10 @@
     <AssociationSet Name="FK_History_Order" Association="OrderManagerDBModel.Store.FK_History_Order">
       <End Role="Order" EntitySet="Order" />
       <End Role="History" EntitySet="History" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobOrder_Company" Association="OrderManagerDBModel.Store.FK_JobOrder_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="JobOrder" EntitySet="JobOrder" />
     </AssociationSet>
     <AssociationSet Name="FK_JobOrder_GRNReciept" Association="OrderManagerDBModel.Store.FK_JobOrder_GRNReciept">
       <End Role="GRNReciept" EntitySet="GRNReciept" />
@@ -728,16 +731,6 @@
     <Property Name="InStock" Type="decimal" Scale="4" />
     <Property Name="UOMID" Type="smallint" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="UnitsOfMeasurement">
     <Key>
       <PropertyRef Name="UOMID" />
@@ -885,6 +878,18 @@
       </Principal>
       <Dependent Role="History">
         <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobOrder_Company">
+    <End Role="Company" Type="OrderManagerDBModel.Store.Company" Multiplicity="1" />
+    <End Role="JobOrder" Type="OrderManagerDBModel.Store.JobOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="JobOrder">
+        <PropertyRef Name="SupplierID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

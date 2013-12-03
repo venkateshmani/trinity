@@ -4,6 +4,7 @@
         ShowInTaskbar="True" 
         AllowsTransparency="True" 
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
         ShowIconOnTitleBar="False"
         ShowTitleBar="False"
         ShowCloseButton="True"
@@ -11,8 +12,7 @@
         ShowMinButton="False"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
-                        xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
-        Title="Comment Window" Height="393.135" Width="364.16">
+        Title="Comment Window" Height="487.165" Width="402.966">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -51,7 +51,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Issue" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" Foreground="White" FontWeight="Light"  FontSize="{DynamicResource SubHeaderFontSize}"/>
+                <TextBlock Text="Material Issuer" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" Foreground="White" FontWeight="Light"  FontSize="{DynamicResource SubHeaderFontSize}"/>
                 <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -69,30 +69,43 @@
 
                     <TextBlock Text="Material Name :" HorizontalAlignment="Right" Margin="3" Grid.Row="0" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
                     <TextBlock Text="Quantity :" HorizontalAlignment="Right" Margin="3" Grid.Row="1" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
-                    <TextBlock Text="Charges in INR :" HorizontalAlignment="Right" Margin="3" Grid.Row="2" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
-                    <TextBlock Text="Supplier :" HorizontalAlignment="Right" Margin="3" Grid.Row="3" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
-                    <TextBlock Text="Instructions :" HorizontalAlignment="Right" Margin="3" Grid.Row="4" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
-                    <TextBlock Text="Required Date :" HorizontalAlignment="Right" Margin="3" Grid.Row="5" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
-                    <TextBlock Text="Issue to :" HorizontalAlignment="Right" Margin="3" Grid.Row="6" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
-                    
-                    <TextBlock Text="{Binding MaterialName}" FontSize="16" FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="1" Margin="3" HorizontalAlignment="Left"/>
-                    <TextBlock Text="{Binding Quantity}" FontSize="16" FontWeight="Bold" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="3" HorizontalAlignment="Left"/>
-                    <TextBox Text="{Binding ChargesInINR, StringFormat=n4}" Width="100" FontSize="16" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="3" HorizontalAlignment="Left"/>
+                    <TextBlock Text="Issue to :" HorizontalAlignment="Right" Margin="3" Grid.Row="2" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+                    <TextBlock Text="Charges in INR :" HorizontalAlignment="Right" Margin="3" Grid.Row="3" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+                    <TextBlock Text="Supplier :" HorizontalAlignment="Right" Margin="3" Grid.Row="4" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+                    <TextBlock Text="Instructions :" HorizontalAlignment="Right" Margin="3" Grid.Row="5" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+                    <TextBlock Text="Required Date :" HorizontalAlignment="Right" Margin="3" Grid.Row="6" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+
+
+                    <TextBlock Text="{Binding GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.Name}" FontSize="16" FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="1" Margin="3" HorizontalAlignment="Left"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Text="{Binding GRNReciept.QualityPassedQuantity}" FontSize="16" FontWeight="Bold" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="3" HorizontalAlignment="Left"
+                               VerticalAlignment="Center"/>
+                    <ComboBox x:Name="issueToComboBox" ItemsSource="{Binding AllJobsTypes, Source={StaticResource DataProvider}}" Grid.Row="2" Grid.Column="1"
+                                                                HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center"
+                                                                Width="125"   Height="20" 
+                                                                DisplayMemberPath="Type" SelectedItem="{Binding JobOrderTypeWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                                SelectionChanged="issueToComboBox_SelectionChanged"/>
+                    <TextBox x:Name="chargesInINR" Text="{Binding ChargesInINRWrapper, StringFormat=n4}"  Width="125" FontSize="14" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" Margin="3" HorizontalAlignment="Left" IsEnabled="False"/>
                     <ComboBox x:Name="supplierComboBox"  VerticalAlignment="Center" 
                                                       Width="125"
                                                       ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
                                                       DisplayMemberPath="Name" SelectedItem="{Binding Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
                                                       Height="20"  TextBoxBase.TextChanged="SupplierComboBox_TextChanged"
                                                       IsReadOnly="{Binding IsReadOnly}"
-                                                      IsEditable="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
-                                                      IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
-                                                      IsTabStop="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
+                                                      Grid.Column="1" Grid.Row="4" Margin="3"
+                                                      HorizontalAlignment="Left" IsEnabled="False"/>
+                    <TextBox x:Name="jobInstruction" Grid.Row="5" Grid.Column="1" Height="100" Width="200" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="14"
+                             Text="{Binding Instructions}" IsEnabled="False"/>
+                    <DatePicker x:Name="expectedDeliveryDate" Width="125" Grid.Row="6"  Grid.Column="1" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                    SelectedDate="{Binding RequiredDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                    Controls:TextboxHelper.Watermark="Select a date"
+                                    Height="26" IsEnabled="False" />
                 </Grid>
-                
-                
-                
+
+
+
                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5,0,5,0">
-                    <Button x:Name="updateToDatabaseBtn"  Content="Issue Now"  Width="100" Height="25" Foreground="White" HorizontalAlignment="Left" Click="updateToDatabaseBtn_Click" Style="{StaticResource PopupButtonTemplate}">
+                    <Button x:Name="updateToDatabaseBtn"  Content="Issue Now"  Width="100" Height="32" Foreground="White" HorizontalAlignment="Left" Click="updateToDatabaseBtn_Click" Style="{StaticResource PopupButtonTemplate}">
                         <Button.Background>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </Button.Background>
