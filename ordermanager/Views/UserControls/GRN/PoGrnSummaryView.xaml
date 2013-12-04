@@ -133,7 +133,7 @@
                                 <DataGridTemplateColumn Header="ORD. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                                <TextBox IsReadOnly="True"  Text="{Binding  OrderedItem.ProductMaterialItem.Quantity, StringFormat=n4, Mode=OneWay}" />
+                                                <TextBox IsReadOnly="True"  Text="{Binding  OrderedItem.OrderedQuantity, StringFormat=n4, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

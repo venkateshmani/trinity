@@ -59,7 +59,8 @@
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"
                                               RowHeaderWidth="25"
                                               HeadersVisibility="Column"
-                                              ItemsSource="{Binding Receipts}">
+                                              ItemsSource="{Binding Receipts}"
+                                              SelectionChanged="materialGRNGrid_SelectionChanged" >
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>
                         <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
@@ -96,10 +97,8 @@
                                                       ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
                                                       DisplayMemberPath="Name" SelectedItem="{Binding Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
                                                       Height="20"  TextBoxBase.TextChanged="SupplierComboBox_TextChanged"
-                                                      IsReadOnly="{Binding IsReadOnly}"
-                                                      IsEditable="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
-                                                      IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
-                                                      IsTabStop="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
+                                                      IsEditable="True"/>
+                                                      
                                 <Button  x:Name="btnAddSupplier" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
                                          VerticalAlignment="Center"
                                                         Cursor="Hand" Click="AddNewSupplier_Click"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Supplier"  Visibility="Collapsed">
@@ -120,7 +119,8 @@
                                 </Button>
 
                                 <Button x:Name="generateNewPO" Grid.Row="2" Content="Generate New PO"  Margin="5" Width="150" Height="30" Foreground="White"
-                                        ToolTip="Generate New Purchase Order" HorizontalAlignment="Right">
+                                        ToolTip="Generate New Purchase Order" HorizontalAlignment="Right"
+                                        Click="generateNewPO_Click">
                                     <Button.Background>
                                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                                     </Button.Background>
