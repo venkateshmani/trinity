@@ -31,6 +31,20 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public Order Order
+        {
+            get
+            {
+                return OrderedItem.PurchaseOrder.Order;
+            }
+        }
+
+        public GRNReciept SelectedGRNReceipt
+        {
+            get;
+            set;
+        }
+
         public ObservableCollection<GRNReciept> Receipts
         {
             get
