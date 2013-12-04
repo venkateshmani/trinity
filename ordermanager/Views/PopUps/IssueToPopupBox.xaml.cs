@@ -1,6 +1,7 @@
 ﻿using ordermanager.DatabaseModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,12 +19,18 @@ namespace ordermanager.Views.PopUps
     /// <summary>
     /// Interaction logic for IssueToPopupBox.xaml
     /// </summary>
-    public partial class IssueToPopupBox 
+    public partial class IssueToPopupBox
     {
         JobOrder m_jobOrder = null;
         public IssueToPopupBox()
         {
             InitializeComponent();
+            JobOrder = new JobOrder();
+        }
+        public IssueToPopupBox(ObservableCollection<JobOrderType> nextJobTypes)
+        {
+            InitializeComponent();
+            issueToComboBox.ItemsSource = nextJobTypes;
             JobOrder = new JobOrder();
         }
 
@@ -40,6 +47,14 @@ namespace ordermanager.Views.PopUps
             }
         }
 
+
+        public MaterialName MaterialName
+        {
+            get;
+            set;           
+        }
+
+
         public decimal JobQuantity
         {
             get
@@ -52,7 +67,49 @@ namespace ordermanager.Views.PopUps
             }
         }
 
-        public  GRNReciept Receipt
+        public JobOrderType IssueTo
+        {
+            get;
+            set; 
+        }
+
+        public decimal ChargesInINR
+        {
+            get
+            {
+                return JobOrder.ChargesInINR;
+            }
+            set
+            {
+                JobOrder.ChargesInINR = value;
+            }
+        }
+
+        public Company Supplier
+        {
+            get
+            {
+                return JobOrder.Supplier;
+            }
+            set
+            {
+                JobOrder.Supplier = value;
+            }
+        }
+
+        public string Instructions
+        {
+            get;
+            set;
+        }
+
+        public DateTime RequiredDate
+        {
+            get;
+            set;
+        }
+
+        public GRNReciept Receipt
         {
             get
             {
