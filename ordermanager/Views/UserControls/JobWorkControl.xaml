@@ -96,11 +96,11 @@
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Job Work Details" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
-        <Grid Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+        <Grid Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
 
             <TabControl x:Name="tabControlJobWorks" Grid.Row="1">
                 <TabItem x:Name="tabKnitting" Header="● Knitting  " Tag="Knitting">
-                    <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1" Margin="5,10,5,5">
+                    <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1" Margin="2,10,2,2">
                         <DataGrid x:Name="gridKnittingDetails" Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" 
                         DataContext="{Binding SelectedReceipt}" ItemsSource="{Binding KnittingItemsWrapper}" Background="WhiteSmoke">
@@ -111,35 +111,42 @@
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-
-                                        <TextBlock Text="Quantity Received" Grid.Row="0" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                        <TextBlock Text="Quantity Passed"  Grid.Row="1" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                        <TextBlock Text="Quantity Failed" Grid.Row="2" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        <TextBlock Text="DC Number" Grid.Row="0" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Quantity Received" Grid.Row="1" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Quantity Passed"  Grid.Row="2" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Quantity Failed" Grid.Row="3" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                                     VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                                            <TextBox Width="150" Margin="5,0,5,0" Text="{Binding CommentsWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
+                                                        Controls:TextboxHelper.Watermark="Comments"></TextBox>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                         <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
                                             <DatePicker Width="150" Margin="5,0,5,0" SelectedDate="{Binding ReceiptDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Received Date"></DatePicker>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                        <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" />                                           
-                                            <Button x:Name="btnIssuer" Content="Issue"  Margin="5,0,5,0" Width="150" Height="30" Foreground="White"
-                                             HorizontalAlignment="Right" Click="IssueBtn_Click" Tag="{Binding}">
+                                            <Button x:Name="btnIssueToNextJobAfterKnitting" Content="Issue"  Margin="5,0,5,0" Width="150" Height="30" Foreground="White"
+                                             HorizontalAlignment="Right" Click="IssueToNextJobAfterKnitting_Click" Tag="{Binding}">
                                                 <Button.Background>
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
                                         </StackPanel>
-                                        <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                        <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
-                                            <Button x:Name="btnNewJobOrder" Content="Create New Job Order"  Margin="5,0,5,0" Width="150" Height="30" Foreground="White"
+                                            <Button x:Name="btnNewKnittingJobOrder" Content="Create New Job Order" Click="NewKnittingJobOrder_Click" Margin="5,0,5,0" Width="150" Height="30" Foreground="White"
                                              HorizontalAlignment="Right" Tag="{Binding}">
                                                 <Button.Background>
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
@@ -150,73 +157,153 @@
                                 </DataTemplate>
                             </DataGrid.RowDetailsTemplate>
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Job Quantity" Width="0.1*">
+                                <DataGridTemplateColumn Width="0.1*">
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Text="Job" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Quantity" Grid.Row="1" HorizontalAlignment="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox IsReadOnly="True" Text="{Binding JobQuantity, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Supplier" Width="0.1*">
+                                <DataGridTemplateColumn Header="Supplier" Width="0.12*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox IsReadOnly="True" Text="{Binding Supplier.Name, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Charges (INR/KG)" Width="0.1*">
+                                <DataGridTemplateColumn Width="0.1*">
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Text="Charges" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <TextBlock Text="(INR/KG)" Grid.Row="1" HorizontalAlignment="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox IsReadOnly="True" Text="{Binding ChargesInINR, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Date" Width="0.12*">
+                                <DataGridTemplateColumn Header="Date" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox IsReadOnly="True" Text="{Binding RequiredDate, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Instructions" Width="0.2*">
+                                <DataGridTemplateColumn Header="Instructions" Width="0.15*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox IsReadOnly="True" Text="{Binding Instructions, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="DC Number" Width="0.2*">
+                                <DataGridTemplateColumn Header="DC #" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox IsReadOnly="True" Text="{Binding DCNumberWrapper, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Received Quantity" Width="0.2*">
+                                
+                                <DataGridTemplateColumn Width="0.1*">
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Text="Received" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Quantity" Grid.Row="1" HorizontalAlignment="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox IsReadOnly="True" Text="{Binding ReceivedQuantityWrapper, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Quality Passed" Width="0.2*">
+                                <DataGridTemplateColumn Width="0.09*">
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Text="Quality" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Passed" Grid.Row="1" HorizontalAlignment="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox IsReadOnly="True" Text="{Binding QualityPassedWrapper, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Quality Failed" Width="0.2*">
+                                <DataGridTemplateColumn Width="0.09*">
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Text="Quality" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Failed" Grid.Row="1" HorizontalAlignment="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox IsReadOnly="True" Text="{Binding QualityFailedWrapper, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Received Date" Width="0.2*">
+                                <DataGridTemplateColumn Width="0.1*">
+                                    <DataGridTemplateColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Text="Received" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Date" Grid.Row="1" HorizontalAlignment="Center" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.HeaderTemplate>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox IsReadOnly="True" Text="{Binding ReceiptDateWrapper, Mode=OneWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Comments" Width="0.13*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox IsReadOnly="True" Text="{Binding CommentsWrapper, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -510,7 +597,7 @@
         </Grid>
         <Grid Grid.Row="4" Grid.ColumnSpan="3" x:Name="gridButtons">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="btnSave" Content="Add New Receipt" HorizontalAlignment="Center"  Margin="5" Width="100" Height="30" Foreground="White" Click="Save_Click">
+                <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Center"  Margin="5" Width="100" Height="30" Foreground="White" Click="Save_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
