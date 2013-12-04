@@ -149,6 +149,12 @@
           <ScalarProperty Name="JobOrderTypeID" ColumnName="JobOrderTypeID" />
           <ScalarProperty Name="PendingQuantity" ColumnName="PendingQuantity" />
           <ScalarProperty Name="GRNReciptID" ColumnName="GRNReciptID" />
+          <ScalarProperty Name="QualityPassed" ColumnName="QualityPassed" />
+          <ScalarProperty Name="QualityFailed" ColumnName="QualityFailed" />
+          <ScalarProperty Name="DCNumber" ColumnName="DCNumber" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="IsIssued" ColumnName="IsIssued" />
+          <ScalarProperty Name="IsWaitingFoApproval" ColumnName="IsWaitingFoApproval" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

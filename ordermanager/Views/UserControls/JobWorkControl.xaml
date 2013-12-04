@@ -106,47 +106,46 @@
                         DataContext="{Binding SelectedReceipt}" ItemsSource="{Binding KnittingItemsWrapper}" Background="WhiteSmoke">
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
-                                        <Button Grid.Row="0" x:Name="btnNewReceipt" Content="Add New Receipt" HorizontalAlignment="Left"  Margin="5" Width="150" Height="30" Foreground="White" Click="btnNewReceipt_Click">
-                                            <Button.Background>
-                                                <SolidColorBrush Color="{StaticResource AccentColor}" />
-                                            </Button.Background>
-                                        </Button>
-                                        <DataGrid x:Name="gridKnittingReceipts" Margin="25,0,25,25"
-                                                  Grid.Row="1" FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" 
-                                                  SelectionUnit="FullRow"  GridLinesVisibility="None" 
-                                                  CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" AutoGenerateColumns="False"
-                                         Background="WhiteSmoke" ItemsSource="{Binding JobOrderReceiptsWrapper}" HorizontalAlignment="Stretch" HeadersVisibility="Column" >
-                                            <DataGrid.Columns>
-                                                <DataGridTemplateColumn Header="Received Quantity" Width="auto">
-                                                    <DataGridTemplateColumn.CellTemplate>
-                                                        <DataTemplate>
-                                                            <TextBox Text="{Binding ReceivedQuantity}" />
-                                                        </DataTemplate>
-                                                    </DataGridTemplateColumn.CellTemplate>
-                                                </DataGridTemplateColumn>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
 
-                                                <DataGridTemplateColumn Header="Received Date" Width="auto">
-                                                    <DataGridTemplateColumn.CellTemplate>
-                                                        <DataTemplate>
-                                                            <TextBox Text="{Binding ReceiptDate}" />
-                                                        </DataTemplate>
-                                                    </DataGridTemplateColumn.CellTemplate>
-                                                </DataGridTemplateColumn>
-                                                <DataGridTemplateColumn Header="Comments" Width="auto">
-                                                    <DataGridTemplateColumn.CellTemplate>
-                                                        <DataTemplate>
-                                                            <TextBox Text="{Binding Comments}" />
-                                                        </DataTemplate>
-                                                    </DataGridTemplateColumn.CellTemplate>
-                                                </DataGridTemplateColumn>  
-                                            </DataGrid.Columns>
-                                        </DataGrid>
+                                        <TextBlock Text="Quantity Received" Grid.Row="0" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Quantity Passed"  Grid.Row="1" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Quantity Failed" Grid.Row="2" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                        <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                                     VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                                            <DatePicker Width="150" Margin="5,0,5,0" SelectedDate="{Binding ReceiptDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
+                                                        Controls:TextboxHelper.Watermark="Received Date"></DatePicker>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal"  Grid.Row="1" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                                     VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" />                                           
+                                            <Button x:Name="btnIssuer" Content="Issue"  Margin="5,0,5,0" Width="150" Height="30" Foreground="White"
+                                             HorizontalAlignment="Right" Click="IssueBtn_Click" Tag="{Binding}">
+                                                <Button.Background>
+                                                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                                </Button.Background>
+                                            </Button>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                                     VerticalAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
+                                            <Button x:Name="btnNewJobOrder" Content="Create New Job Order"  Margin="5,0,5,0" Width="150" Height="30" Foreground="White"
+                                             HorizontalAlignment="Right" Tag="{Binding}">
+                                                <Button.Background>
+                                                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                                </Button.Background>
+                                            </Button>
+                                        </StackPanel>
                                     </Grid>
                                 </DataTemplate>
                             </DataGrid.RowDetailsTemplate>
@@ -183,6 +182,41 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBox IsReadOnly="True" Text="{Binding Instructions, Mode=OneWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="DC Number" Width="0.2*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox IsReadOnly="True" Text="{Binding DCNumberWrapper, Mode=OneWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Received Quantity" Width="0.2*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox IsReadOnly="True" Text="{Binding ReceivedQuantityWrapper, Mode=OneWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Quality Passed" Width="0.2*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox IsReadOnly="True" Text="{Binding QualityPassedWrapper, Mode=OneWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Quality Failed" Width="0.2*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox IsReadOnly="True" Text="{Binding QualityFailedWrapper, Mode=OneWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Received Date" Width="0.2*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox IsReadOnly="True" Text="{Binding ReceiptDateWrapper, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

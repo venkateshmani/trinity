@@ -65,6 +65,11 @@ namespace ordermanager.Views.UserControls
                    ViewModel.AddJobReceipt(jOrder);
            //}
         }
+
+        private void IssueBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 

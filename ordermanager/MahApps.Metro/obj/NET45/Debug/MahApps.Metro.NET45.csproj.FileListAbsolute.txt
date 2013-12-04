@@ -11,7 +11,6 @@ D:\Work\trinity\ordermanager\MahApps.Metro\bin\Debug\NET45\ko\System.Windows.Int
 D:\Work\trinity\ordermanager\MahApps.Metro\bin\Debug\NET45\ru\System.Windows.Interactivity.resources.dll
 D:\Work\trinity\ordermanager\MahApps.Metro\bin\Debug\NET45\zh-Hans\System.Windows.Interactivity.resources.dll
 D:\Work\trinity\ordermanager\MahApps.Metro\bin\Debug\NET45\zh-Hant\System.Windows.Interactivity.resources.dll
-D:\Work\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Metro.Resources\Icons.baml
 D:\Work\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Styles\Controls.ContextMenu.baml
 D:\Work\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Styles\Controls.Label.baml
 D:\Work\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Styles\Controls.ListBox.baml
@@ -449,3 +448,5 @@ C:\Users\User\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debu
 C:\Users\User\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.g.resources
 C:\Users\User\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.dll
 C:\Users\User\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.pdb
+D:\Work\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.NET45.csprojResolveAssemblyReference.cache
+D:\Work\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Themes\MetroPopup.baml

@@ -31,7 +31,7 @@ namespace ordermanager.ViewModel
         {
             if (jobOrder != null)
             {
-                jobOrder.JobOrderReceiptsWrapper.Add(new JobOrderReceipt());               
+               // jobOrder.JobOrderReceiptsWrapper.Add(new JobOrderReceipt());               
                 return true;
             }
             return false;
@@ -48,17 +48,17 @@ namespace ordermanager.ViewModel
                     { 
                         foreach(JobOrder jo in recpt.JobOrders)
                         {
-                            foreach (JobOrderReceipt joRecpt in jo.JobOrderReceiptsWrapper)
-                            {
-                                if (joRecpt.JobOrderReceiptID == 0)
-                                { 
-                                    JobOrderReceipt jor= new JobOrderReceipt();
-                                    jor.ReceiptDate = joRecpt.ReceiptDate;
-                                    jor.ReceivedQuantity = joRecpt.ReceivedQuantity;
-                                    jor.Comments = joRecpt.Comments;
-                                    jo.JobOrderReceipts.Add(jor);
-                                }
-                            }
+                            //foreach (JobOrderReceipt joRecpt in jo.JobOrderReceiptsWrapper)
+                            //{
+                            //    if (joRecpt.JobOrderReceiptID == 0)
+                            //    { 
+                            //        JobOrderReceipt jor= new JobOrderReceipt();
+                            //        jor.ReceiptDate = joRecpt.ReceiptDate;
+                            //        jor.ReceivedQuantity = joRecpt.ReceivedQuantity;
+                            //        jor.Comments = joRecpt.Comments;
+                            //        jo.JobOrderReceipts.Add(jor);
+                            //    }
+                            //}
                         }
                     }
                 }

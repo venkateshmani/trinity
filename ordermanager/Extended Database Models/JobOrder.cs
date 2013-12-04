@@ -11,14 +11,21 @@ namespace ordermanager.DatabaseModel
     {
         #region Wrappers
 
-        private ObservableCollection<JobOrderReceipt> m_JobOrderReceiptsWrapper = null;
-        public ObservableCollection<JobOrderReceipt> JobOrderReceiptsWrapper
+        private JobOrderReceipt m_JobOrderReceiptWrapper = null;
+        public JobOrderReceipt JobOrderReceiptsWrapper
         {
             get
             {
-                if (m_JobOrderReceiptsWrapper == null)
-                    m_JobOrderReceiptsWrapper = new ObservableCollection<JobOrderReceipt>(this.JobOrderReceipts);
-                return m_JobOrderReceiptsWrapper;
+                if (m_JobOrderReceiptWrapper == null)
+                {
+                    if (JobOrderReceipts.Count == 0)
+                    {
+                        m_JobOrderReceiptWrapper = new JobOrderReceipt();
+                        this.JobOrderReceipts.Add(m_JobOrderReceiptWrapper);
+                    }
+                    m_JobOrderReceiptWrapper = JobOrderReceipts.FirstOrDefault<JobOrderReceipt>();
+                }
+                return m_JobOrderReceiptWrapper;
             }
         }
 
@@ -59,6 +66,102 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public Nullable<decimal> QualityPassedWrapper
+        {
+            get
+            {
+                return QualityPassed;
+            }
+            set
+            {
+                if (QualityPassed != value)
+                {
+                    QualityPassed = value;
+                    OnPropertyChanged("QualityPassedWrapper");
+                    QualityFailedWrapper = ReceivedQuantityWrapper - value;
+                }
+            }
+        }
+        public Nullable<decimal> QualityFailedWrapper
+        {
+            get
+            {
+                return QualityFailed;
+            }
+            set
+            {
+                if (QualityFailed != value)
+                {
+                    QualityFailed = value;
+                    OnPropertyChanged("QualityFailedWrapper");
+                }
+            }
+        }
+        public string DCNumberWrapper
+        {
+            get
+            {
+                return DCNumber;
+            }
+            set
+            {
+                if (DCNumber != value)
+                {
+                    DCNumber = value;
+                    OnPropertyChanged("DCNumberWrapper");
+                }
+            }
+        }
+
+        public decimal ReceivedQuantityWrapper
+        {
+            get
+            {
+                return JobOrderReceiptsWrapper.ReceivedQuantity;
+            }
+            set
+            {
+                if (JobOrderReceiptsWrapper.ReceivedQuantity != value)
+                {
+                    JobOrderReceiptsWrapper.ReceivedQuantity = value;
+                    OnPropertyChanged("ReceivedQuantityWrapper");
+                    QualityFailedWrapper = value - QualityPassed;
+                }
+            }
+        }
+
+        public DateTime? ReceiptDateWrapper
+        {
+            get
+            {
+                return JobOrderReceiptsWrapper.ReceiptDate;
+            }
+            set
+            {
+                if (JobOrderReceiptsWrapper.ReceiptDate != value)
+                {
+                    JobOrderReceiptsWrapper.ReceiptDate = value;
+                    OnPropertyChanged("ReceiptDateWrapper");
+                }
+            }
+        }
+
+        public string CommentsWrapper
+        {
+            get
+            {
+                return JobOrderReceiptsWrapper.Comments;
+            }
+            set
+            {
+                if (JobOrderReceiptsWrapper.Comments != value)
+                {
+                    JobOrderReceiptsWrapper.Comments = value;
+                    OnPropertyChanged("CommentsWrapper");
+                }
+            }
+        }
+
         public Company Supplier
         {
             get
@@ -71,17 +174,17 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        #endregion 
+        #endregion
 
         #region Validation
 
         public void Validate()
         {
             ValidateJobOrderType();
-            if(JobOrderType != null && JobOrderType.Type.ToLower() != "stock")
+            if (JobOrderType != null && JobOrderType.Type.ToLower() != "stock")
             {
                 ValidateChargesInINR();
-                ValidateRequiredDate(); 
+                ValidateRequiredDate();
                 ValidateSupplier();
             }
         }
@@ -110,7 +213,7 @@ namespace ordermanager.DatabaseModel
                 RemoveError("RequiredDateWrapper", "Select a date");
             }
         }
-        
+
         private void ValidateChargesInINR()
         {
             if (ChargesInINR == 0)
