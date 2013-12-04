@@ -283,6 +283,7 @@
     <Compile Include="Utilities\Util.cs" />
     <Compile Include="ValueConverters\BoolToHighlighter.cs" />
     <Compile Include="ValueConverters\HasErrorToVisibilityConverter.cs" />
+    <Compile Include="ValueConverters\QuantityToVisiblityConverter.cs" />
     <Compile Include="ValueConverters\StarWidthConverter.cs" />
     <Compile Include="ValueConverters\Subractor.cs" />
     <Compile Include="ValueConverters\UserFriendlyDateNameCreator.cs" />

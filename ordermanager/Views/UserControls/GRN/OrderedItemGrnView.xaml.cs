@@ -192,6 +192,7 @@ namespace ordermanager.Views.UserControls.GRN
                     }
                 }
                 DBResources.Instance.Save();
+                ViewModel.SelectedGRNReceipt.RefreshUIEnablers();
             }
         }
 
@@ -244,6 +245,7 @@ namespace ordermanager.Views.UserControls.GRN
 
                 ViewModel.Order.PurchaseOrders.Add(newPurchaseOrder);
                 DBResources.Instance.Save();
+                ViewModel.SelectedGRNReceipt.RefreshUIEnablers();
                 InformUser("New Purchase Order Generated Successfully");
             }
             else

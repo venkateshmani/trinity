@@ -57,6 +57,79 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public Visibility IssueButtonVisibility
+        {
+            get
+            {
+                if (this.JobOrders.Count > 0 || this.QualityPassedQuantity == 0)
+                {
+                    return System.Windows.Visibility.Collapsed;
+                }
+
+                return System.Windows.Visibility.Visible;
+            }
+        }
+            
+
+        public bool CanEditQuantityPassed
+        {
+            get
+            {
+                if (this.JobOrders.Count > 0 ||
+                    (this.QualityFailedQuantityWrapper > 0 && this.SpawnedNewPurchaseOrder != null && this.SpawnedNewPurchaseOrder.Value))
+                    return false;
+ 
+                return true;
+            }
+        }
+
+        public bool CanGeneratePurchaseOrder
+        {
+            get
+            {
+                if (this.QualityFailedQuantityWrapper > 0 &&
+                    this.SpawnedNewPurchaseOrder == null)
+                    return true;
+
+                return false;
+            }
+        }
+
+        public string PassedQuantityStatus
+        {
+            get
+            {
+                if (this.JobOrders.Count > 0)
+                {
+                    return "Issued";
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public string FailedQuantityStatus
+        {
+            get
+            {
+                if (this.PurchaseOrder != null)
+                {
+                    return "New PO: " + this.PurchaseOrder.PurchaseOrderNumber;
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public void RefreshUIEnablers()
+        {
+            OnPropertyChanged("CanEditQuantityPassed");
+            OnPropertyChanged("CanGeneratePurchaseOrder");
+            OnPropertyChanged("IssueButtonVisibility");
+            OnPropertyChanged("FailedQuantityStatus");
+            OnPropertyChanged("PassedQuantityStatus");
+        }
+
         private ObservableCollection<JobOrder> m_KnittingItemsWrapper = null;
         private ObservableCollection<JobOrder> m_DyeingItemsWrapper = null;
         private ObservableCollection<JobOrder> m_PrintingItemsWrapper = null;
