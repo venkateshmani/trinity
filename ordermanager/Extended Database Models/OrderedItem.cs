@@ -9,6 +9,24 @@ namespace ordermanager.DatabaseModel
     public partial class OrderedItem : EntityBase, ICloneable
     {
 
+        public string MaterialName
+        {
+            get
+            {
+                return this.ProductMaterialItem.SubMaterial.Name;
+            }
+        }
+
+
+        public string UnitsOfMeasurement
+        {
+            get
+            {
+                return this.ProductMaterialItem.UnitsOfMeasurement.Units;
+            }
+        }
+
+
         public decimal TotalInvoicedQuantity
         {
             get

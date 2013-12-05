@@ -159,7 +159,77 @@
                    </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabSummary" Header=" Summary " />
+            <TabItem x:Name="tabSummary" Header=" Summary ">
+                <Border BorderBrush="Gray" BorderThickness="1" Margin="25" Grid.Row="1">
+                    <DataGrid x:Name="materialsReciptSummaryGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
+                                              GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
+                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"
+                                              ItemsSource="{Binding PurchaseOrder.OrderedItems}"
+                                              RowHeaderWidth="25"
+                                              HeadersVisibility="Column">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Material" Width="0.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True" Text="{Binding MaterialName, Mode=OneWay}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="UOM" Width="0.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True" Text="{Binding UnitsOfMeasurement, Mode=OneWay}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="ORD. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True"  Text="{Binding OrderedQuantity, StringFormat=n4, Mode=OneWay}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Invc. Qty" Width="0.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding TotalInvoicedQuantity, StringFormat=n4, Mode=OneWay}" 
+                                                     IsReadOnly="True" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Recv. Qty" Width="0.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding TotalRecievedInHandQuantity, StringFormat=n4, Mode=OneWay}"
+                                                     IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+
+                            <DataGridTemplateColumn Header="Exc. Qty" Width="0.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True"  Text="{Binding ExcessQuantityRecieved, StringFormat=n4, Mode=OneWay}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            
+                            <DataGridTemplateColumn Header="Pending. Qty" Width="0.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True"  Text="{Binding PendingQuantityToRecieve, StringFormat=n4, Mode=OneWay}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>
