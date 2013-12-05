@@ -113,6 +113,7 @@ namespace ordermanager.Views.CommonControls
         {
             if (OnTreeViewSelectionChanged != null)
             {
+                DBResources.Instance.DiscardChanges();
                 OnTreeViewSelectionChanged(tvSuppliers.SelectedItem);
             }
         }
