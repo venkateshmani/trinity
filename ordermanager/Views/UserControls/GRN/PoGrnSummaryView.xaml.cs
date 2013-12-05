@@ -63,6 +63,7 @@ namespace ordermanager.Views.UserControls.GRN
                     InformUser("Receipt Added Successfully");
                     poGrnTabControl.SelectedIndex = 1;
                     ViewModel.RefreshPurchaseOrder();
+                    ViewModel = new PoGrnSummaryViewModel(ViewModel.PurchaseOrder);
                 }
                 else
                 {

@@ -140,7 +140,6 @@ namespace ordermanager.ViewModel
             }
         }
 
-
         public void RefreshPurchaseOrder()
         {
             OnPropertyChanged("PurchaseOrder");
