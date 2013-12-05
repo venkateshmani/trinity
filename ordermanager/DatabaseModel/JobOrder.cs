@@ -33,7 +33,8 @@ namespace ordermanager.DatabaseModel
         public string DCNumber { get; set; }
         public string Comments { get; set; }
         public bool IsIssued { get; set; }
-        public bool IsWaitingFoApproval { get; set; }
+        public bool IsWaitingForApproval { get; set; }
+        public bool HasApproved { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual GRNReciept GRNReciept { get; set; }

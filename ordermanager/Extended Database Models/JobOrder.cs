@@ -11,6 +11,12 @@ namespace ordermanager.DatabaseModel
     {
         #region Wrappers
 
+        decimal tolerance = 0.05M;
+        bool m_CanIssueToNextJob = false;
+        bool m_CanCreateNewJobForFailedQuantity = false;
+        bool m_IsSpecialApprovalRequired = false;
+        bool m_SendToSpecialApproval = false;
+
         private JobOrderReceipt m_JobOrderReceiptWrapper = null;
         public JobOrderReceipt JobOrderReceiptsWrapper
         {
@@ -78,10 +84,29 @@ namespace ordermanager.DatabaseModel
                 {
                     QualityPassed = value;
                     OnPropertyChanged("QualityPassedWrapper");
+                    if (!IsIssued)
+                    {
+                        if (value >= JobQuantity * (1 - tolerance) && value <= JobQuantity)
+                        {
+                            CanIssueToNextJob = true;
+                        }
+                        else
+                        {
+                            if (!HasApproved)
+                                CanIssueToNextJob = false;
+                            else
+                                CanIssueToNextJob = true;
+                        }
+                    }
                     QualityFailedWrapper = ReceivedQuantityWrapper - value;
+                    if (QualityFailedWrapper > 0)
+                        CanCreateNewJobForFailedQuantity = true;
+                    else
+                        CanCreateNewJobForFailedQuantity = false;
                 }
             }
         }
+
         public Nullable<decimal> QualityFailedWrapper
         {
             get
@@ -97,6 +122,7 @@ namespace ordermanager.DatabaseModel
                 }
             }
         }
+
         public string DCNumberWrapper
         {
             get
@@ -171,6 +197,34 @@ namespace ordermanager.DatabaseModel
             set
             {
                 Company = value;
+            }
+        }
+
+        public bool CanIssueToNextJob
+        {
+            get
+            { return m_CanIssueToNextJob; }
+            set
+            {
+                if (m_CanIssueToNextJob != value)
+                {
+                    m_CanIssueToNextJob = value;
+                    OnPropertyChanged("CanIssueToNextJob");
+                }
+            }
+        }
+
+        public bool CanCreateNewJobForFailedQuantity
+        {
+            get
+            { return m_CanCreateNewJobForFailedQuantity; }
+            set
+            {
+                if (m_CanCreateNewJobForFailedQuantity != value)
+                {
+                    m_CanCreateNewJobForFailedQuantity = value;
+                    OnPropertyChanged("CanCreateNewJobForFailedQuantity");
+                }
             }
         }
 

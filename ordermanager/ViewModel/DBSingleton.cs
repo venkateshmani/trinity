@@ -665,10 +665,10 @@ namespace ordermanager.ViewModel
         {
             m_AllJobsTypes = new ObservableCollection<JobOrderType>(dbContext.JobOrderTypes.ToList());
             m_AfterKnittingJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 1).Select(c => c).ToList());
-            m_AfterDyeingJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 1).Select(c => c).ToList());
-            m_AfterPrintingJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 1).Select(c => c).ToList());
-            m_AfterCompactingJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 1).Select(c => c).ToList());
-            m_AfterWashingJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 1).Select(c => c).ToList());
+            m_AfterDyeingJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 2).Select(c => c).ToList());
+            m_AfterPrintingJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 3).Select(c => c).ToList());
+            m_AfterCompactingJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 4).Select(c => c).ToList());
+            m_AfterWashingJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 5).Select(c => c).ToList());
         }
         #endregion [JobOrderType]
 

@@ -76,9 +76,9 @@
                     <TextBlock Text="Required Date :" HorizontalAlignment="Right" Margin="3" Grid.Row="6" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
 
 
-                    <TextBlock Text="{Binding GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.Name}" FontSize="16" FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="1" Margin="3" HorizontalAlignment="Left"
+                    <TextBlock x:Name="materialName" Text="{Binding GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.Name}" FontSize="16" FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="1" Margin="3" HorizontalAlignment="Left"
                                VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding GRNReciept.QualityPassedQuantity}" FontSize="16" FontWeight="Bold" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="3" HorizontalAlignment="Left"
+                    <TextBlock x:Name="quantity" Text="{Binding GRNReciept.QualityPassedQuantity}" FontSize="16" FontWeight="Bold" Foreground="White" Grid.Row="1" Grid.Column="1" Margin="3" HorizontalAlignment="Left"
                                VerticalAlignment="Center"/>
                     <ComboBox x:Name="issueToComboBox" ItemsSource="{Binding AllJobsTypes, Source={StaticResource DataProvider}}" Grid.Row="2" Grid.Column="1"
                                                                 HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center"
