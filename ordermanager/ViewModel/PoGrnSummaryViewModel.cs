@@ -141,7 +141,14 @@ namespace ordermanager.ViewModel
         }
 
 
-      
+        public void RefreshPurchaseOrder()
+        {
+            OnPropertyChanged("PurchaseOrder");
+            foreach (OrderedItem item in PurchaseOrder.OrderedItems)
+            {
+                item.RefreshAllProperties();
+            }
+        }
 
         public void AddReceipt()
         {

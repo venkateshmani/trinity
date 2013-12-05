@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace ordermanager.DatabaseModel
 {
@@ -100,6 +101,15 @@ namespace ordermanager.DatabaseModel
         {
             get;
             set;
+        }
+
+        public void RefreshAllProperties()
+        {
+            PropertyInfo[] pInfos = this.GetType().GetProperties();
+            foreach (PropertyInfo pInfo in pInfos)
+            {
+                OnPropertyChanged(pInfo.Name);
+            }
         }
 
         #endregion
