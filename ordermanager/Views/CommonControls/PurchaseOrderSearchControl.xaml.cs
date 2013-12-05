@@ -61,16 +61,33 @@ namespace ordermanager.Views.CommonControls
         {
             ViewModel = new PurchaseOrderSearchControlViewModel();
             tvSuppliers.ItemsSource = ViewModel.Suppliers;
-            //ApplyFilter();
         }
 
         private void searchText_TextChanged_1(object sender, TextChangedEventArgs e)
         {
-            //ApplyFilter();
+           // ApplyFilter();
         }
+
 
         public void ApplyFilter()
         {
+            string findText = searchText.Text;
+            foreach (object supplier in tvSuppliers.Items)
+            {
+                TreeViewItem supplierTreeItem = tvSuppliers.ItemContainerGenerator.ContainerFromItem(supplier) as TreeViewItem;
+
+                foreach (object purchaseOrder in supplierTreeItem.Items)
+                {
+                    TreeViewItem purchaseOrderTreeItem = supplierTreeItem.ItemContainerGenerator.ContainerFromItem(purchaseOrder) as TreeViewItem;
+
+                    foreach (object material in purchaseOrderTreeItem.Items)
+                    {
+                        TreeViewItem materialTreeItem = tvSuppliers.ItemContainerGenerator.ContainerFromItem(material) as TreeViewItem;
+                        
+                    }
+                }
+            }
+
             foreach (Company supplier in ViewModel.Suppliers)
             {
                 bool supplierNameMatchesSearchCriteria = false;
