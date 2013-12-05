@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,8 +15,6 @@ namespace ordermanager.DatabaseModel
         decimal tolerance = 0.05M;
         bool m_CanIssueToNextJob = false;
         bool m_CanCreateNewJobForFailedQuantity = false;
-        bool m_IsSpecialApprovalRequired = false;
-        bool m_SendToSpecialApproval = false;
 
         private JobOrderReceipt m_JobOrderReceiptWrapper = null;
         public JobOrderReceipt JobOrderReceiptsWrapper
@@ -30,11 +29,11 @@ namespace ordermanager.DatabaseModel
                         this.JobOrderReceipts.Add(m_JobOrderReceiptWrapper);
                     }
                     m_JobOrderReceiptWrapper = JobOrderReceipts.FirstOrDefault<JobOrderReceipt>();
+                    SetAccess();
                 }
                 return m_JobOrderReceiptWrapper;
             }
         }
-
 
         public JobOrderType JobOrderTypeWrapper
         {
@@ -83,26 +82,9 @@ namespace ordermanager.DatabaseModel
                 if (QualityPassed != value)
                 {
                     QualityPassed = value;
-                    OnPropertyChanged("QualityPassedWrapper");
-                    if (!IsIssued)
-                    {
-                        if (value >= JobQuantity * (1 - tolerance) && value <= JobQuantity)
-                        {
-                            CanIssueToNextJob = true;
-                        }
-                        else
-                        {
-                            if (!HasApproved)
-                                CanIssueToNextJob = false;
-                            else
-                                CanIssueToNextJob = true;
-                        }
-                    }
+                    OnPropertyChanged("QualityPassedWrapper");                    
                     QualityFailedWrapper = ReceivedQuantityWrapper - value;
-                    if (QualityFailedWrapper > 0)
-                        CanCreateNewJobForFailedQuantity = true;
-                    else
-                        CanCreateNewJobForFailedQuantity = false;
+                    SetAccess();
                 }
             }
         }
@@ -119,6 +101,10 @@ namespace ordermanager.DatabaseModel
                 {
                     QualityFailed = value;
                     OnPropertyChanged("QualityFailedWrapper");
+                    if (value > 0)
+                        CanCreateNewJobForFailedQuantity = true;
+                    else
+                        CanCreateNewJobForFailedQuantity = false;
                 }
             }
         }
@@ -226,6 +212,67 @@ namespace ordermanager.DatabaseModel
                     OnPropertyChanged("CanCreateNewJobForFailedQuantity");
                 }
             }
+        }
+
+        bool m_SendToSpecialApproval;
+        public bool SendToSpecialApproval
+        {
+            get
+            {
+                return m_SendToSpecialApproval;
+            }
+            set
+            {
+                if (m_SendToSpecialApproval != value)
+                {
+                    m_SendToSpecialApproval = value;
+                    OnPropertyChanged("SendToSpecialApproval");
+                }
+            }
+        }
+
+        public bool SpecialApprovalNeeded
+        {
+            get
+            {
+                if (IsWaitingForApproval && !HasApproved && (DBResources.Instance.CurrentUser.UserRole.AliasName.ToUpper() == "SPECIAL" || DBResources.Instance.CurrentUser.UserRole.AliasName.ToUpper() == "ROOT"))
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        private void SetAccess()
+        {
+            if (!JobOrderReceiptsWrapper.Issued)
+            {
+                if (QualityPassed >= JobQuantity * (1 - tolerance) && QualityPassed <= JobQuantity)
+                {
+                    CanIssueToNextJob = true;
+                }
+                else
+                {
+                    if (!HasApproved)
+                    {
+                        CanIssueToNextJob = false;
+                        SendToSpecialApproval = true;
+                    }
+                    else
+                    {
+                        SendToSpecialApproval = false;
+                        CanIssueToNextJob = true;
+                    }
+                }
+            }
+            else
+            {
+                SendToSpecialApproval = false;
+                CanIssueToNextJob = false;
+            }
+            if (QualityFailedWrapper > 0)
+                CanCreateNewJobForFailedQuantity = true;
+            else
+                CanCreateNewJobForFailedQuantity = false;
         }
 
         #endregion

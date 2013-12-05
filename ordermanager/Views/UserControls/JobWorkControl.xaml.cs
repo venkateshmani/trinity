@@ -19,21 +19,22 @@ namespace ordermanager.Views.UserControls
             this.DataContext = ViewModel;
         }
 
-        private void CreateNewJobOrderForFailedQuantity(JobOrder parentOrder)
-        {
-            JobOrder newJob = new JobOrder();
-            newJob.JobQuantity = parentOrder.QualityFailed.GetValueOrDefault(0);
-            newJob.JobOrderType = parentOrder.JobOrderType;
-            newJob.Supplier = parentOrder.Supplier;
-            newJob.Instructions = parentOrder.Instructions;
-            newJob.RequiredDate = parentOrder.RequiredDate;
-            newJob.ChargesInINR = parentOrder.ChargesInINR;
-            ViewModel.IssueNewJob(newJob);
-        }
-
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.Save();
+        }
+
+        private void IssueNextJob(JobOrder jOrder)
+        {
+            JobOrder newJob = new JobOrder();
+            newJob.JobQuantity = jOrder.QualityPassed.GetValueOrDefault(0);
+            newJob.GRNReciept = ViewModel.SelectedReceipt;
+            IssueToPopupBox issuePopup = new IssueToPopupBox(newJob, DBResources.Instance.AfterKnittingJobs);
+            issuePopup.ShowDialog();
+            if (issuePopup.ShowDialog() == true)
+            {
+                ViewModel.IssueNewJob(issuePopup.JobOrder);
+            }
         }
 
         private void tvSuppliers_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -53,64 +54,58 @@ namespace ordermanager.Views.UserControls
             }
         }
 
-
-
         private void IssueToNextJobAfterKnitting_Click(object sender, RoutedEventArgs e)
-        {
+        {   
             JobOrder jOrder = gridKnittingDetails.SelectedItem as JobOrder;
             if (jOrder != null)
             {
-                JobOrder newJob = new JobOrder();
-                newJob.JobQuantity = jOrder.QualityPassed.GetValueOrDefault(0);               
-                newJob.Supplier = jOrder.Supplier;   
-                IssueToPopupBox issuePopup = new IssueToPopupBox(newJob,DBResources.Instance.AfterKnittingJobs);               
-                issuePopup.ShowDialog();
-                if (issuePopup.ShowDialog() == true)
-                {                    
-                    ViewModel.IssueNewJob(issuePopup.JobOrder);
-                }
+                IssueNextJob(jOrder);
             }
         }
-
 
         private void IssueToNextJobAfterDyeing_Click(object sender, RoutedEventArgs e)
         {
             JobOrder jOrder = gridDyeingDetails.SelectedItem as JobOrder;
             if (jOrder != null)
             {
-                JobOrder newJob = new JobOrder();
-                newJob.JobQuantity = jOrder.QualityPassed.GetValueOrDefault(0);              
-                newJob.GRNReciept = ViewModel.SelectedReceipt;
-                IssueToPopupBox issuePopup = new IssueToPopupBox(newJob, DBResources.Instance.AfterDyeingJobs);
-                issuePopup.ShowDialog();
-                if (issuePopup.ShowDialog() == true)
-                {
-                    ViewModel.IssueNewJob(issuePopup.JobOrder);
-                }
+                IssueNextJob(jOrder);
             }
         }
 
         private void IssueToNextJobAfterPrinting_Click(object sender, RoutedEventArgs e)
         {
-
+            JobOrder jOrder = gridPrintingDetails.SelectedItem as JobOrder;
+            if (jOrder != null)
+            {
+                IssueNextJob(jOrder);
+            }
         }
 
         private void IssueToNextJobAfterCompacting_Click(object sender, RoutedEventArgs e)
         {
-
+            JobOrder jOrder = gridCompactingDetails.SelectedItem as JobOrder;
+            if (jOrder != null)
+            {
+                IssueNextJob(jOrder);
+            }
         }
 
         private void IssueToNextJobAfterWashing_Click(object sender, RoutedEventArgs e)
         {
-
+            JobOrder jOrder = gridWashingDetails.SelectedItem as JobOrder;
+            if (jOrder != null)
+            {
+                IssueNextJob(jOrder);
+            }
         }
+
 
         private void NewKnittingJobOrder_Click(object sender, RoutedEventArgs e)
         {
             JobOrder jOrder = gridKnittingDetails.SelectedItem as JobOrder;
             if (jOrder != null)
             {
-                CreateNewJobOrderForFailedQuantity(jOrder);
+                ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
             }
         }
 
@@ -119,7 +114,7 @@ namespace ordermanager.Views.UserControls
             JobOrder jOrder = gridDyeingDetails.SelectedItem as JobOrder;
             if (jOrder != null)
             {
-                CreateNewJobOrderForFailedQuantity(jOrder);
+               ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
             }
         }
 
@@ -129,7 +124,7 @@ namespace ordermanager.Views.UserControls
             JobOrder jOrder = gridPrintingDetails.SelectedItem as JobOrder;
             if (jOrder != null)
             {
-                CreateNewJobOrderForFailedQuantity(jOrder);
+                ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
             }
         }
 
@@ -138,7 +133,7 @@ namespace ordermanager.Views.UserControls
             JobOrder jOrder = gridCompactingDetails.SelectedItem as JobOrder;
             if (jOrder != null)
             {
-                CreateNewJobOrderForFailedQuantity(jOrder);
+                ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
             }
         }
 
@@ -147,7 +142,7 @@ namespace ordermanager.Views.UserControls
             JobOrder jOrder = gridWashingDetails.SelectedItem as JobOrder;
             if (jOrder != null)
             {
-                CreateNewJobOrderForFailedQuantity(jOrder);
+                ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
             }
         }
 
@@ -156,18 +151,26 @@ namespace ordermanager.Views.UserControls
             JobOrder jOrder = gridOtherDetails.SelectedItem as JobOrder;
             if (jOrder != null)
             {
-                CreateNewJobOrderForFailedQuantity(jOrder);
+                ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
             }
         }
 
         private void btnSendForSpecialApproval_Click(object sender, RoutedEventArgs e)
         {
-
+            JobOrder jOrder = gridKnittingDetails.SelectedItem as JobOrder;
+            if (jOrder != null)
+            {
+                ViewModel.SendForSpecialApproval(jOrder);
+            }
         }
 
         private void btnSpecialApproval_Click(object sender, RoutedEventArgs e)
         {
-
+            JobOrder jOrder = gridKnittingDetails.SelectedItem as JobOrder;
+            if (jOrder != null)
+            {
+                ViewModel.SpecialApproval(jOrder);
+            }
         }
     }
 }

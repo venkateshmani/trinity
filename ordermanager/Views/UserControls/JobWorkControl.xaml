@@ -124,32 +124,32 @@
                                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
-                                            <TextBox Width="150" Margin="5,0,5,0" Text="{Binding CommentsWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
+                                            <TextBox Width="160" Margin="5,0,5,0" Text="{Binding CommentsWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Comments"></TextBox>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                         <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
-                                            <DatePicker Width="150" Margin="5,0,5,0" SelectedDate="{Binding ReceiptDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
+                                            <DatePicker Width="160" Margin="5,0,5,0" SelectedDate="{Binding ReceiptDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Received Date"></DatePicker>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" />                                           
-                                            <Button x:Name="btnIssueToNextJobAfterKnitting" Content="Issue"  Margin="5,0,5,0" Width="150" Height="30" Foreground="White"
+                                            <Button x:Name="btnIssueToNextJobAfterKnitting" Content="Issue"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Click="IssueToNextJobAfterKnitting_Click" Tag="{Binding}" Visibility="{Binding CanIssueToNextJob,  Converter={StaticResource BoolToVisibilityConverter}}">
                                                 <Button.Background>
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
-                                            <Button x:Name="btnSendForSpecialApproval" Content="Send For Special Approval"  Margin="5,0,5,0" Width="150" Height="30" Foreground="White"
+                                            <Button x:Name="btnSendForSpecialApproval" Content="Send For Special Approval"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Click="btnSendForSpecialApproval_Click"  Tag="{Binding}" Visibility="{Binding SendToSpecialApproval,  Converter={StaticResource BoolToVisibilityConverter}}">
                                                 <Button.Background>
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
-                                            <Button x:Name="btnSpecialApproval" Content="Approve"  Margin="5,0,5,0" Width="150" Height="30" Foreground="White"
-                                             HorizontalAlignment="Right" Click="btnSpecialApproval_Click"  Tag="{Binding}" Visibility="{Binding IsWaitingFoApproval,  Converter={StaticResource BoolToVisibilityConverter}}">
+                                            <Button x:Name="btnSpecialApproval" Content="Approve"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
+                                             HorizontalAlignment="Right" Click="btnSpecialApproval_Click"  Tag="{Binding}" Visibility="{Binding SpecialApprovalNeeded,  Converter={StaticResource BoolToVisibilityConverter}}">
                                                 <Button.Background>
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
@@ -158,8 +158,8 @@
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
-                                            <Button x:Name="btnNewKnittingJobOrder" Content="Create New Job Order" Click="NewKnittingJobOrder_Click" Margin="5,0,5,0" Width="150" Height="30" Foreground="White"
-                                             HorizontalAlignment="Right" Tag="{Binding}">
+                                            <Button x:Name="btnNewKnittingJobOrder" Content="Create New Job Order" Click="NewKnittingJobOrder_Click" Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
+                                             HorizontalAlignment="Right" Tag="{Binding}" Visibility="{Binding CanCreateNewJobForFailedQuantity,  Converter={StaticResource BoolToVisibilityConverter}}">
                                                 <Button.Background>
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>

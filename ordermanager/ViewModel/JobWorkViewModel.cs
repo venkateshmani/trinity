@@ -39,32 +39,34 @@ namespace ordermanager.ViewModel
             return false;
         }
 
+        public bool SendForSpecialApproval(JobOrder jOrder)
+        {
+            jOrder.IsWaitingForApproval = true;
+            return DBResources.Instance.Save();
+        }
+
+        public bool SpecialApproval(JobOrder jOrder)
+        {
+            jOrder.IsWaitingForApproval = false;
+            jOrder.HasApproved = true;
+            return DBResources.Instance.Save();
+        }
+
+        public bool CreateNewJobOrderForFailedQuantity(JobOrder parentOrder)
+        {
+            JobOrder newJob = new JobOrder();
+            newJob.JobQuantity = parentOrder.QualityFailed.GetValueOrDefault(0);
+            newJob.JobOrderType = parentOrder.JobOrderType;
+            newJob.Supplier = parentOrder.Supplier;
+            newJob.Instructions = parentOrder.Instructions;
+            newJob.RequiredDate = parentOrder.RequiredDate;
+            newJob.ChargesInINR = parentOrder.ChargesInINR;
+            return IssueNewJob(newJob);
+        }
+
+
         public bool Save()
         {
-            ////bool 
-            //foreach (Company sup in Suppliers)
-            //{
-            //    foreach (PurchaseOrder po in sup.PurchaseOrders)
-            //    {
-            //        foreach (GRNReciept recpt in po.GRNReciepts)
-            //        { 
-            //            foreach(JobOrder jo in recpt.JobOrders)
-            //            {
-            //                //foreach (JobOrderReceipt joRecpt in jo.JobOrderReceiptsWrapper)
-            //                //{
-            //                //    if (joRecpt.JobOrderReceiptID == 0)
-            //                //    { 
-            //                //        JobOrderReceipt jor= new JobOrderReceipt();
-            //                //        jor.ReceiptDate = joRecpt.ReceiptDate;
-            //                //        jor.ReceivedQuantity = joRecpt.ReceivedQuantity;
-            //                //        jor.Comments = joRecpt.Comments;
-            //                //        jo.JobOrderReceipts.Add(jor);
-            //                //    }
-            //                //}
-            //            }
-            //        }
-            //    }
-            //}
             return DBResources.Instance.Save();
         }
 
@@ -81,6 +83,5 @@ namespace ordermanager.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
     }
 }
