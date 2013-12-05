@@ -27,11 +27,16 @@ namespace ordermanager.Views.PopUps
             InitializeComponent();
             JobOrder = new JobOrder();
         }
-
-        public IssueToPopupBox(ObservableCollection<JobOrderType> nextJobTypes)
+        public IssueToPopupBox(JobOrder jOrder, ObservableCollection<JobOrderType> nextJobTypes)
         {
             InitializeComponent();
+            JobOrder = jOrder;
+            materialName.Text = jOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.Name;
+            quantity.Text = jOrder.QualityPassed.GetValueOrDefault(0).ToString();
             issueToComboBox.ItemsSource = nextJobTypes;
+            //chargesInINR.Text = jOrder.ChargesInINRWrapper.ToString();
+            //jobInstruction.Text = jOrder.Instructions;
+            expectedDeliveryDate.SelectedDate = DateTime.Now;
         }
 
         public JobOrder JobOrder
@@ -48,11 +53,11 @@ namespace ordermanager.Views.PopUps
         }
 
 
-        public MaterialName MaterialName
-        {
-            get;
-            set;           
-        }
+        //public MaterialName MaterialName
+        //{
+        //    get;
+        //    set;
+        //}
 
 
         public decimal JobQuantity
@@ -67,41 +72,41 @@ namespace ordermanager.Views.PopUps
             }
         }
 
-        public JobOrderType IssueTo
-        {
-            get;
-            set; 
-        }
+        //public JobOrderType IssueTo
+        //{
+        //    get;
+        //    set;
+        //}
 
-        public decimal ChargesInINR
-        {
-            get
-            {
-                return JobOrder.ChargesInINR;
-            }
-            set
-            {
-                JobOrder.ChargesInINR = value;
-            }
-        }
+        //public decimal ChargesInINR
+        //{
+        //    get
+        //    {
+        //        return JobOrder.ChargesInINR;
+        //    }
+        //    set
+        //    {
+        //        JobOrder.ChargesInINR = value;
+        //    }
+        //}
 
-        public Company Supplier
-        {
-            get
-            {
-                return JobOrder.Supplier;
-            }
-            set
-            {
-                JobOrder.Supplier = value;
-            }
-        }
+        //public Company Supplier
+        //{
+        //    get
+        //    {
+        //        return JobOrder.Supplier;
+        //    }
+        //    set
+        //    {
+        //        JobOrder.Supplier = value;
+        //    }
+        //}
 
-        public string Instructions
-        {
-            get;
-            set;
-        }
+        //public string Instructions
+        //{
+        //    get;
+        //    set;
+        //}
 
         public DateTime RequiredDate
         {

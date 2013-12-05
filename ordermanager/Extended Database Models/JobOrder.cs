@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,6 +11,10 @@ namespace ordermanager.DatabaseModel
     public partial class JobOrder : EntityBase
     {
         #region Wrappers
+
+        decimal tolerance = 0.05M;
+        bool m_CanIssueToNextJob = false;
+        bool m_CanCreateNewJobForFailedQuantity = false;
 
         private JobOrderReceipt m_JobOrderReceiptWrapper = null;
         public JobOrderReceipt JobOrderReceiptsWrapper
@@ -24,11 +29,11 @@ namespace ordermanager.DatabaseModel
                         this.JobOrderReceipts.Add(m_JobOrderReceiptWrapper);
                     }
                     m_JobOrderReceiptWrapper = JobOrderReceipts.FirstOrDefault<JobOrderReceipt>();
+                    SetAccess();
                 }
                 return m_JobOrderReceiptWrapper;
             }
         }
-
 
         public JobOrderType JobOrderTypeWrapper
         {
@@ -77,11 +82,13 @@ namespace ordermanager.DatabaseModel
                 if (QualityPassed != value)
                 {
                     QualityPassed = value;
-                    OnPropertyChanged("QualityPassedWrapper");
+                    OnPropertyChanged("QualityPassedWrapper");                    
                     QualityFailedWrapper = ReceivedQuantityWrapper - value;
+                    SetAccess();
                 }
             }
         }
+
         public Nullable<decimal> QualityFailedWrapper
         {
             get
@@ -94,9 +101,14 @@ namespace ordermanager.DatabaseModel
                 {
                     QualityFailed = value;
                     OnPropertyChanged("QualityFailedWrapper");
+                    if (value > 0)
+                        CanCreateNewJobForFailedQuantity = true;
+                    else
+                        CanCreateNewJobForFailedQuantity = false;
                 }
             }
         }
+
         public string DCNumberWrapper
         {
             get
@@ -172,6 +184,95 @@ namespace ordermanager.DatabaseModel
             {
                 Company = value;
             }
+        }
+
+        public bool CanIssueToNextJob
+        {
+            get
+            { return m_CanIssueToNextJob; }
+            set
+            {
+                if (m_CanIssueToNextJob != value)
+                {
+                    m_CanIssueToNextJob = value;
+                    OnPropertyChanged("CanIssueToNextJob");
+                }
+            }
+        }
+
+        public bool CanCreateNewJobForFailedQuantity
+        {
+            get
+            { return m_CanCreateNewJobForFailedQuantity; }
+            set
+            {
+                if (m_CanCreateNewJobForFailedQuantity != value)
+                {
+                    m_CanCreateNewJobForFailedQuantity = value;
+                    OnPropertyChanged("CanCreateNewJobForFailedQuantity");
+                }
+            }
+        }
+
+        bool m_SendToSpecialApproval;
+        public bool SendToSpecialApproval
+        {
+            get
+            {
+                return m_SendToSpecialApproval;
+            }
+            set
+            {
+                if (m_SendToSpecialApproval != value)
+                {
+                    m_SendToSpecialApproval = value;
+                    OnPropertyChanged("SendToSpecialApproval");
+                }
+            }
+        }
+
+        public bool SpecialApprovalNeeded
+        {
+            get
+            {
+                if (IsWaitingForApproval && !HasApproved && (DBResources.Instance.CurrentUser.UserRole.AliasName.ToUpper() == "SPECIAL" || DBResources.Instance.CurrentUser.UserRole.AliasName.ToUpper() == "ROOT"))
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        private void SetAccess()
+        {
+            if (!JobOrderReceiptsWrapper.Issued)
+            {
+                if (QualityPassed >= JobQuantity * (1 - tolerance) && QualityPassed <= JobQuantity)
+                {
+                    CanIssueToNextJob = true;
+                }
+                else
+                {
+                    if (!HasApproved)
+                    {
+                        CanIssueToNextJob = false;
+                        SendToSpecialApproval = true;
+                    }
+                    else
+                    {
+                        SendToSpecialApproval = false;
+                        CanIssueToNextJob = true;
+                    }
+                }
+            }
+            else
+            {
+                SendToSpecialApproval = false;
+                CanIssueToNextJob = false;
+            }
+            if (QualityFailedWrapper > 0)
+                CanCreateNewJobForFailedQuantity = true;
+            else
+                CanCreateNewJobForFailedQuantity = false;
         }
 
         #endregion
