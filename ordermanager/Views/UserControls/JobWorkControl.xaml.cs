@@ -29,8 +29,7 @@ namespace ordermanager.Views.UserControls
             JobOrder newJob = new JobOrder();
             newJob.JobQuantity = jOrder.QualityPassed.GetValueOrDefault(0);
             newJob.GRNReciept = ViewModel.SelectedReceipt;
-            IssueToPopupBox issuePopup = new IssueToPopupBox(newJob, DBResources.Instance.AfterKnittingJobs);
-            issuePopup.ShowDialog();
+            IssueToPopupBox issuePopup = new IssueToPopupBox(newJob, DBResources.Instance.AfterKnittingJobs);          
             if (issuePopup.ShowDialog() == true)
             {
                 ViewModel.IssueNewJob(issuePopup.JobOrder);

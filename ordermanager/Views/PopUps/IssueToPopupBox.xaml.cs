@@ -30,9 +30,9 @@ namespace ordermanager.Views.PopUps
         public IssueToPopupBox(JobOrder jOrder, ObservableCollection<JobOrderType> nextJobTypes)
         {
             InitializeComponent();
-            JobOrder = jOrder;
+            JobOrder = jOrder;           
             materialName.Text = jOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.Name;
-            quantity.Text = jOrder.QualityPassed.GetValueOrDefault(0).ToString();
+            quantity.Text = jOrder.JobQuantity.ToString();
             issueToComboBox.ItemsSource = nextJobTypes;
             //chargesInINR.Text = jOrder.ChargesInINRWrapper.ToString();
             //jobInstruction.Text = jOrder.Instructions;
