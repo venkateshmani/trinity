@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using ordermanager.DatabaseModel;
+using ordermanager.Interfaces_And_Enums;
 using ordermanager.ViewModel;
 using ordermanager.Views.PopUps;
 using System;
@@ -184,15 +185,22 @@ namespace ordermanager.Views.UserControls.GRN
                 {
                     if (issuePopupBox.JobOrder.JobOrderType.Type.ToLower() == "stock")
                     {
+                        if (ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.InStock == null)
+                        {
+                            ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.InStock = 0;
+                        }
 
+                        ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.InStock += receipt.QualityPassedQuantityWrapper;
+                        receipt.ReceiptStatusID = (byte)RecieptStatus.IssuedToStock;
                     }
                     else
                     {
                         receipt.JobOrders.Add(issuePopupBox.JobOrder);
                     }
+
+                    DBResources.Instance.Save();
+                    ViewModel.SelectedGRNReceipt.RefreshUIEnablers();
                 }
-                DBResources.Instance.Save();
-                ViewModel.SelectedGRNReceipt.RefreshUIEnablers();
             }
         }
 
@@ -230,7 +238,7 @@ namespace ordermanager.Views.UserControls.GRN
             if (Supplier != null)
             {
                 PurchaseOrder newPurchaseOrder = new PurchaseOrder();
-                newPurchaseOrder.PurchaseOrderNumber = Constants.GetPurchaseOrderNumber(ViewModel.SelectedGRNReceipt.PurchaseOrder.Company, ViewModel.SelectedGRNReceipt.PurchaseOrder.Order);
+                newPurchaseOrder.PurchaseOrderNumber = Constants.GetPurchaseOrderNumber(ViewModel.SelectedGRNReceipt.OrderedItem.PurchaseOrder.Company, ViewModel.SelectedGRNReceipt.OrderedItem.PurchaseOrder.Order);
                 newPurchaseOrder.PurchaseOrderStatusID = 1;
                 newPurchaseOrder.Company = Supplier;
 
@@ -271,7 +279,7 @@ namespace ordermanager.Views.UserControls.GRN
 
         private void materialGRNGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (materialGRNGrid != null)
+            if (materialGRNGrid != null && ViewModel != null)
             {
                 ViewModel.SelectedGRNReceipt = materialGRNGrid.SelectedItem as GRNReciept;
             }

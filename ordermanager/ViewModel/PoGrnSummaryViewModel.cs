@@ -151,10 +151,10 @@ namespace ordermanager.ViewModel
 
         public void AddReceipt()
         {
-            foreach (var grnReceipt in Receipts)
-            {
-                grnReceipt.PurchaseOrder = this.PurchaseOrder;
-            }
+            //foreach (var grnReceipt in Receipts)
+            //{
+            //    grnReceipt.PurchaseOrder = this.PurchaseOrder;
+            //}
 
             DBResources.Instance.Save();
         }

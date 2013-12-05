@@ -25,6 +25,7 @@ namespace ordermanager.DatabaseModel
                 this.QualityPassedQuantity = value;
                 QualityFailedQuantityWrapper = this.RecievedInHand.Value - this.QualityPassedQuantity.Value;
                 OnPropertyChanged("QualityPassedQuantityWrapper");
+                RefreshUIEnablers();
             }
         }
 
@@ -61,7 +62,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                if (this.JobOrders.Count > 0 || this.QualityPassedQuantity == 0)
+                if (this.JobOrders.Count > 0 || this.QualityPassedQuantity == 0 || this.ReceiptStatu != null)
                 {
                     return System.Windows.Visibility.Collapsed;
                 }
@@ -99,7 +100,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                if (this.JobOrders.Count > 0)
+                if (this.JobOrders.Count > 0 || this.ReceiptStatu != null)
                 {
                     return "Issued";
                 }

@@ -27,11 +27,11 @@ namespace ordermanager.Views.PopUps
             InitializeComponent();
             JobOrder = new JobOrder();
         }
+
         public IssueToPopupBox(ObservableCollection<JobOrderType> nextJobTypes)
         {
             InitializeComponent();
             issueToComboBox.ItemsSource = nextJobTypes;
-            JobOrder = new JobOrder();
         }
 
         public JobOrder JobOrder
@@ -40,7 +40,7 @@ namespace ordermanager.Views.PopUps
             {
                 return m_jobOrder;
             }
-            private set
+            set
             {
                 m_jobOrder = value;
                 this.DataContext = value;
