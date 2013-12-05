@@ -271,7 +271,10 @@ namespace ordermanager.Views.UserControls.GRN
 
         private void materialGRNGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ViewModel.SelectedGRNReceipt = materialGRNGrid.SelectedItem as GRNReciept;
+            if (materialGRNGrid != null)
+            {
+                ViewModel.SelectedGRNReceipt = materialGRNGrid.SelectedItem as GRNReciept;
+            }
         }
       
     }

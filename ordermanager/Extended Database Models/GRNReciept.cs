@@ -238,6 +238,39 @@ namespace ordermanager.DatabaseModel
             return new ObservableCollection<JobOrder>(JobOrders.Where(jo => jo.JobOrderType.Type == type).Select(jo => jo).ToList());
         }
 
+
+        public decimal InvoicedQuantityWrapper
+        {
+            get
+            {
+                if (this.InvoicedQuantity != null)
+                    return this.InvoicedQuantity.Value;
+
+                return 0;
+            }
+            set
+            {
+                this.InvoicedQuantity = value;
+                ValidateInvoicedQuantity();
+            }
+        }
+
+        public decimal RecievedInHandWrapper
+        {
+            get
+            {
+                if (this.RecievedInHand != null)
+                    return this.RecievedInHand.Value;
+
+                return 0;
+            }
+            set
+            {
+                this.RecievedInHand = value;
+                ValidateRecievedInHandQuantity();
+            }
+        }
+
         #region UI Enablers
 
         public Visibility QualityPassedStatusVisibility
@@ -265,6 +298,41 @@ namespace ordermanager.DatabaseModel
         }
 
          
+        #endregion 
+
+
+        #region Validation
+
+        public void ValidateForNewReciept()
+        {
+            ValidateInvoicedQuantity();
+            ValidateRecievedInHandQuantity();
+        }
+
+        public void ValidateInvoicedQuantity()
+        {
+            if (this.InvoicedQuantity == null || this.InvoicedQuantity.Value == 0)
+            {
+                AddError("InvoicedQuantityWrapper", "Enter the quantity mentioned in the Invoice", false);
+            }
+            else
+            {
+                RemoveError("InvoicedQuantityWrapper", "Enter the quantity mentioned in the Invoice");
+            }
+        }
+
+        public void ValidateRecievedInHandQuantity()
+        {
+            if (this.RecievedInHand == null || this.RecievedInHand.Value == 0)
+            {
+                AddError("RecievedInHandWrapper", "Enter the quantity recieved in hand", false);
+            }
+            else
+            {
+                RemoveError("RecievedInHandWrapper", "Enter the quantity recieved in hand");
+            }
+        }
+
         #endregion 
     }
 }

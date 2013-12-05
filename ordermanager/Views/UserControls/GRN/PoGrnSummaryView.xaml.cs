@@ -56,8 +56,16 @@ namespace ordermanager.Views.UserControls.GRN
         {
             try
             {
-                ViewModel.AddReceipt();
-                InformUser("Receipt Added Successfully");
+                ViewModel.HasUserClickedSaveOrSubmit = true;
+                if (!ViewModel.HasErrors)
+                {
+                    ViewModel.AddReceipt();
+                    InformUser("Receipt Added Successfully");
+                }
+                else
+                {
+                    InformUser("Fill in the highlighted fields and try again");
+                }
             }
             catch (Exception ex)
             {

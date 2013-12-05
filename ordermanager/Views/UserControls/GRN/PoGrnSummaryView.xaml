@@ -141,7 +141,7 @@
                                 <DataGridTemplateColumn Header="Invc. Qty" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                                <TextBox Text="{Binding InvoicedQuantity, StringFormat=n4, UpdateSourceTrigger=LostFocus, NotifyOnSourceUpdated=True, ValidatesOnNotifyDataErrors=True}" />
+                                                <TextBox Text="{Binding InvoicedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, NotifyOnSourceUpdated=True, ValidatesOnNotifyDataErrors=True}" />
                                        </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -149,7 +149,7 @@
                                 <DataGridTemplateColumn Header="Recv. Qty" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                                <TextBox Text="{Binding RecievedInHand, StringFormat=n4, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                                <TextBox Text="{Binding RecievedInHandWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

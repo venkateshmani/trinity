@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager.ViewModel
 {
-    public class PoGrnSummaryViewModel : INotifyPropertyChanged
+    public class PoGrnSummaryViewModel : EntityBase, INotifyPropertyChanged
     {
         public PoGrnSummaryViewModel(PurchaseOrder purchaseOrder)
         {
@@ -140,6 +140,9 @@ namespace ordermanager.ViewModel
             }
         }
 
+
+      
+
         public void AddReceipt()
         {
             foreach (var grnReceipt in Receipts)
@@ -159,5 +162,50 @@ namespace ordermanager.ViewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        #region Validation
+
+    
+
+        public override bool HasErrors
+        {
+            get
+            {
+
+                bool hasErrors = false;
+
+                if (HasUserClickedSaveOrSubmit)
+                {
+                    ValidateInvoiceNumber();
+                    hasErrors = base.HasErrors;
+
+                    foreach (GRNReciept receipt in Receipts)
+                    {
+                        receipt.ValidateForNewReciept();
+
+                        if (!hasErrors)
+                        {
+                            hasErrors = receipt.HasErrors;
+                        }
+                    }
+                }
+
+                return hasErrors;
+            }
+        }
+
+        private void ValidateInvoiceNumber()
+        {
+            if (string.IsNullOrEmpty(InvoiceNumber.Trim()))
+            {
+                AddError("InvoiceNumber", "Enter the invoice number", false);
+            }
+            else
+            {
+                RemoveError("InvoiceNumber", "Enter the invoice number");
+            }
+        }
+                
+        #endregion 
     }
 }
