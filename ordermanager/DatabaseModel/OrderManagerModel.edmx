@@ -784,6 +784,7 @@
           <Property Name="CanModifyExectionQuality" Type="bit" Nullable="false" />
           <Property Name="CanModifyExecutionShipping" Type="bit" Nullable="false" />
           <Property Name="CanModifyGRN" Type="bit" Nullable="false" />
+          <Property Name="CanModifyJobOrder" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Asset_AssetName">
           <End Role="AssetName" Type="OrderManagerDBModel.Store.AssetName" Multiplicity="1" />
@@ -2451,6 +2452,7 @@
           <Property Name="CanModifyExectionQuality" Type="Boolean" Nullable="false" />
           <Property Name="CanModifyExecutionShipping" Type="Boolean" Nullable="false" />
           <Property Name="CanModifyGRN" Type="Boolean" Nullable="false" />
+          <Property Name="CanModifyJobOrder" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="OrderStatus" Relationship="OrderManagerDBModel.FK_OrderStatus_UserRole" FromRole="UserRole" ToRole="OrderStatus" />
           <NavigationProperty Name="Users" Relationship="OrderManagerDBModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
         </EntityType>
@@ -3739,6 +3741,7 @@
                 <ScalarProperty Name="CanModifyExectionQuality" ColumnName="CanModifyExectionQuality" />
                 <ScalarProperty Name="CanModifyExecutionShipping" ColumnName="CanModifyExecutionShipping" />
                 <ScalarProperty Name="CanModifyGRN" ColumnName="CanModifyGRN" />
+                <ScalarProperty Name="CanModifyJobOrder" ColumnName="CanModifyJobOrder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

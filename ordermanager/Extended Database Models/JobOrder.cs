@@ -82,7 +82,7 @@ namespace ordermanager.DatabaseModel
                 if (QualityPassed != value)
                 {
                     QualityPassed = value;
-                    OnPropertyChanged("QualityPassedWrapper");                    
+                    OnPropertyChanged("QualityPassedWrapper");
                     QualityFailedWrapper = ReceivedQuantityWrapper - value;
                     SetAccess();
                 }
@@ -244,35 +244,53 @@ namespace ordermanager.DatabaseModel
 
         private void SetAccess()
         {
-            if (!JobOrderReceiptsWrapper.Issued)
+            if (DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder)
             {
-                if (QualityPassed >= JobQuantity * (1 - tolerance) && QualityPassed <= JobQuantity)
+               
+                if (!JobOrderReceiptsWrapper.Issued)
                 {
-                    CanIssueToNextJob = true;
-                }
-                else
-                {
-                    if (!HasApproved)
+                    if (QualityPassed >= JobQuantity * (1 - tolerance) && QualityPassed <= JobQuantity)
                     {
-                        CanIssueToNextJob = false;
-                        SendToSpecialApproval = true;
+                        CanIssueToNextJob = true;
                     }
                     else
                     {
-                        SendToSpecialApproval = false;
-                        CanIssueToNextJob = true;
+                        if (!HasApproved)
+                        {
+                            CanIssueToNextJob = false;
+                            SendToSpecialApproval = true;
+                        }
+                        else
+                        {
+                            SendToSpecialApproval = false;
+                            CanIssueToNextJob = true;
+                        }
                     }
                 }
+                else
+                {
+                    SendToSpecialApproval = false;
+                    CanIssueToNextJob = false;
+                }
+                if (QualityFailedWrapper > 0)
+                    CanCreateNewJobForFailedQuantity = true;
+                else
+                    CanCreateNewJobForFailedQuantity = false;
             }
             else
             {
                 SendToSpecialApproval = false;
                 CanIssueToNextJob = false;
-            }
-            if (QualityFailedWrapper > 0)
-                CanCreateNewJobForFailedQuantity = true;
-            else
                 CanCreateNewJobForFailedQuantity = false;
+            }
+        }
+
+        public bool IsReadOnly
+        {
+            get
+            {
+                return !DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder;
+            }
         }
 
         #endregion
