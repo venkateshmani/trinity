@@ -7,6 +7,7 @@
         ShowIconOnTitleBar="True"
         ShowTitleBar="False"
         ShowCloseButton="False"
+        WindowStartupLocation="CenterScreen"
         ShowMaxRestoreButton="False"
         ShowMinButton="False"
         Title="ProgressUpdateWindow" Height="161.894" Width="514.473">

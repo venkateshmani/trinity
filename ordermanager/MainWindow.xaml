@@ -116,9 +116,18 @@
                 </Border>
             </TabItem>
             <TabItem x:Name="tabJobOrder" Header="  Job Order  " Cursor="Hand">
-                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                    <my1:JobWorkControl x:Name="jobOrderControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></my1:JobWorkControl>
-                </Border>
+                <TabControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" SelectedIndex="1">
+                        <TabItem x:Name="tabPoView" Header="  PO View  " FontSize="16">
+                            <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                                <my1:JobWorkControl x:Name="jobOrderControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></my1:JobWorkControl>
+                            </Border>
+                        </TabItem>
+                        <TabItem x:Name="tabJoView" Header="  JO View  ">
+                            <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                                <my1:JobOrderJOView x:Name="joView" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                            </Border>
+                        </TabItem>
+                </TabControl>
             </TabItem>
             <TabItem x:Name="tabAssets" Header="  Assets  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">

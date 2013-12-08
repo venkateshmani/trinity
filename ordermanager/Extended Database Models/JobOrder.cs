@@ -109,6 +109,44 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        private string m_jobOrderNumber = string.Empty;
+        public string JobOrderNumber
+        {
+            get
+            {
+                if (JobOrderTypeWrapper != null && m_jobOrderNumber == string.Empty)
+                {
+                    string jobOrderType = JobOrderTypeWrapper.Type.ToLower();
+                    if (jobOrderType.Contains("knit"))
+                    {
+                        m_jobOrderNumber = "K" + this.JobOrderID.ToString();
+                    }
+                    else if (jobOrderType.Contains("dye"))
+                    {
+                        m_jobOrderNumber = "D" + this.JobOrderID.ToString();
+                    }
+                    else if (jobOrderType.Contains("print"))
+                    {
+                        m_jobOrderNumber = "P" + this.JobOrderID.ToString();
+                    }
+                    else if (jobOrderType.Contains("compact"))
+                    {
+                        m_jobOrderNumber = "C" + this.JobOrderID.ToString();
+                    }
+                    else if (jobOrderType.Contains("wash"))
+                    {
+                        m_jobOrderNumber = "W" + this.JobOrderID.ToString();
+                    }
+                    else if (jobOrderType.Contains("other"))
+                    {
+                        m_jobOrderNumber = "O" + this.JobOrderID.ToString();
+                    }
+
+                }
+                return m_jobOrderNumber;
+            }
+        }
+
         public string DCNumberWrapper
         {
             get
