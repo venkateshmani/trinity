@@ -308,6 +308,7 @@
     <Compile Include="ViewModel\InStock\ProductInStock.cs" />
     <Compile Include="ViewModel\InStock\ProductStockItem.cs" />
     <Compile Include="ViewModel\InStock\StockModel.cs" />
+    <Compile Include="ViewModel\JobbOrderJOViewModel.cs" />
     <Compile Include="ViewModel\JobWorkViewModel.cs" />
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />
     <Compile Include="ViewModel\OrderedItemGrnViewModel.cs" />
@@ -400,6 +401,9 @@
     </Compile>
     <Compile Include="Views\UserControls\CreateNewInvoiceControl.xaml.cs">
       <DependentUpon>CreateNewInvoiceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\JobOrderJOView.xaml.cs">
+      <DependentUpon>JobOrderJOView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\JobWorkControl.xaml.cs">
       <DependentUpon>JobWorkControl.xaml</DependentUpon>
@@ -540,6 +544,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\CreateNewInvoiceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\JobOrderJOView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
