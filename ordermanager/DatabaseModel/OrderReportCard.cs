@@ -18,6 +18,7 @@ namespace ordermanager.DatabaseModel
         public byte OrderReportCardTypeID { get; set; }
         public decimal ProgressPercentage { get; set; }
         public long OrderID { get; set; }
+        public System.DateTime RequiredFinishDate { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual OrderReportCardType OrderReportCardType { get; set; }

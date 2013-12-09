@@ -568,6 +568,7 @@
     <Property Name="OrderReportCardTypeID" Type="tinyint" Nullable="false" />
     <Property Name="ProgressPercentage" Type="decimal" Nullable="false" Scale="2" />
     <Property Name="OrderID" Type="bigint" Nullable="false" />
+    <Property Name="RequiredFinishDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="OrderReportCardType">
     <Key>

@@ -573,6 +573,7 @@
           <Property Name="OrderReportCardTypeID" Type="tinyint" Nullable="false" />
           <Property Name="ProgressPercentage" Type="decimal" Nullable="false" Scale="2" />
           <Property Name="OrderID" Type="bigint" Nullable="false" />
+          <Property Name="RequiredFinishDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderReportCardType">
           <Key>
@@ -2283,6 +2284,7 @@
           <Property Name="OrderReportCardTypeID" Type="Byte" Nullable="false" />
           <Property Name="ProgressPercentage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="OrderID" Type="Int64" Nullable="false" />
+          <Property Name="RequiredFinishDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_OrderReportCard_Order" FromRole="OrderReportCard" ToRole="Order" />
           <NavigationProperty Name="OrderReportCardType" Relationship="OrderManagerDBModel.FK_OrderReportCard_OrderReportCardType" FromRole="OrderReportCard" ToRole="OrderReportCardType" />
         </EntityType>
@@ -3698,6 +3700,7 @@
                 <ScalarProperty Name="OrderReportCardTypeID" ColumnName="OrderReportCardTypeID" />
                 <ScalarProperty Name="ProgressPercentage" ColumnName="ProgressPercentage" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="RequiredFinishDate" ColumnName="RequiredFinishDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

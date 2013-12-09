@@ -271,6 +271,7 @@
           <ScalarProperty Name="OrderReportCardTypeID" ColumnName="OrderReportCardTypeID" />
           <ScalarProperty Name="ProgressPercentage" ColumnName="ProgressPercentage" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="RequiredFinishDate" ColumnName="RequiredFinishDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
