@@ -49,8 +49,16 @@ namespace ordermanager.Views.UserControls
 
         private void AddNewAssetName_Click(object sender, RoutedEventArgs e)
         {
-            assetName.SelectedItem = m_ViewModel.AddNewAssetName(assetName.Text);
-            addNewAsset.Visibility = System.Windows.Visibility.Collapsed;
+            AddNewAsset();
+        }
+
+        private void AddNewAsset()
+        {
+            if(!string.IsNullOrEmpty(assetName.Text))
+            {
+                assetName.SelectedItem = m_ViewModel.AddNewAssetName(assetName.Text);
+                addNewAsset.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void customerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -80,6 +88,9 @@ namespace ordermanager.Views.UserControls
         private void AddNewAsset_Click(object sender, RoutedEventArgs e)
         {
             Asset asset = new Asset();
+            if (assetName.SelectedItem == null)
+                AddNewAsset();
+
             asset.AssetNameID = (assetName.SelectedItem as AssetName).AssetNameID;           
             asset.Quantity = Convert.ToDecimal(quantity.Text);
             asset.InvoiceNumber = invoiceNumber.Text;
