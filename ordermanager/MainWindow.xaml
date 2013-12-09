@@ -110,11 +110,6 @@
                     <my1:GRNControl x:Name="grnControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></my1:GRNControl>
                 </Border>
             </TabItem>
-            <TabItem x:Name="tabStock" Header="  In Stock  " Cursor="Hand">
-                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                    <my1:InStockControl x:Name="inStockControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-                </Border>
-            </TabItem>
             <TabItem x:Name="tabJobOrder" Header="  Job Order  " Cursor="Hand">
                 <TabControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" SelectedIndex="1">
                         <TabItem x:Name="tabPoView" Header="  PO View  " FontSize="16">
@@ -128,6 +123,11 @@
                             </Border>
                         </TabItem>
                 </TabControl>
+            </TabItem>
+            <TabItem x:Name="tabStock" Header="  In Stock  " Cursor="Hand">
+                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    <my1:InStockControl x:Name="inStockControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                </Border>
             </TabItem>
             <TabItem x:Name="tabAssets" Header="  Assets  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">

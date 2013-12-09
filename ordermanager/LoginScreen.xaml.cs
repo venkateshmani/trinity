@@ -64,28 +64,35 @@ namespace ordermanager
 
         private void LogIn()
         {
-            string userName = tbUserName.Text.Trim();
-            string password = tbPassword.Password.Trim();
-
-            LoginResult res = DBResources.Instance.AuthenticateUser(userName, password);
-
-            if (!res.Authenticated)
+            try
             {
-                MessageBox.Show(res.Message, "Authentication Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (res.NeedPasswordReset)
-            {
-                MessageBox.Show("Reset your password!!!", "Change Password", MessageBoxButton.OK, MessageBoxImage.Information);
-                this.Hide();
-                PasswordChangeDialog dialog = new PasswordChangeDialog();
-                dialog.ShowDialog();
-                if (dialog.DialogResult != true)
-                    Application.Current.Shutdown();
-            }
+                string userName = tbUserName.Text.Trim();
+                string password = tbPassword.Password.Trim();
 
-            MainWindow mainWindow = new MainWindow(this);
-            mainWindow.ShowDialog();
+                LoginResult res = DBResources.Instance.AuthenticateUser(userName, password);
+
+                if (!res.Authenticated)
+                {
+                    MessageBox.Show(res.Message, "Authentication Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                if (res.NeedPasswordReset)
+                {
+                    MessageBox.Show("Reset your password!!!", "Change Password", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Hide();
+                    PasswordChangeDialog dialog = new PasswordChangeDialog();
+                    dialog.ShowDialog();
+                    if (dialog.DialogResult != true)
+                        Application.Current.Shutdown();
+                }
+
+                MainWindow mainWindow = new MainWindow(this);
+                mainWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

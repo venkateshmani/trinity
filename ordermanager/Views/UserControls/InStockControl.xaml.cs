@@ -54,9 +54,8 @@ namespace ordermanager.Views.UserControls
             if (selectedStock != null && !selectedStock.IsLoaded)
             {
                 selectedStock.Load();
+                stockGrid.ItemsSource = selectedStock.Items;
             }
-
-            stockGrid.ItemsSource = selectedStock.Items;
         }
     }
 }
