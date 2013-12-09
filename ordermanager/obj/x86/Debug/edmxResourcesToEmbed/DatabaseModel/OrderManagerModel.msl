@@ -154,7 +154,8 @@
           <ScalarProperty Name="DCNumber" ColumnName="DCNumber" />
           <ScalarProperty Name="Comments" ColumnName="Comments" />
           <ScalarProperty Name="IsIssued" ColumnName="IsIssued" />
-          <ScalarProperty Name="IsWaitingFoApproval" ColumnName="IsWaitingFoApproval" />
+          <ScalarProperty Name="IsWaitingForApproval" ColumnName="IsWaitingForApproval" />
+          <ScalarProperty Name="HasApproved" ColumnName="HasApproved" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -167,6 +168,25 @@
           <ScalarProperty Name="ReceivedQuantity" ColumnName="ReceivedQuantity" />
           <ScalarProperty Name="Issued" ColumnName="Issued" />
           <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobOrderTolerances">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.JobOrderTolerance">
+        <MappingFragment StoreEntitySet="JobOrderTolerance">
+          <ScalarProperty Name="JobOrderToleranceID" ColumnName="JobOrderToleranceID" />
+          <ScalarProperty Name="JobOrderToleraceTypeID" ColumnName="JobOrderToleraceTypeID" />
+          <ScalarProperty Name="ToleranceValueInPercentage" ColumnName="ToleranceValueInPercentage" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobOrderToleranceTypes">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.JobOrderToleranceType">
+        <MappingFragment StoreEntitySet="JobOrderToleranceType">
+          <ScalarProperty Name="JobOrderToleranceTypeID" ColumnName="JobOrderToleranceTypeID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="DefaultToleranceInPercentage" ColumnName="DefaultToleranceInPercentage" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -241,6 +261,24 @@
           <ScalarProperty Name="OrderValue" ColumnName="OrderValue" />
           <ScalarProperty Name="ProductBreakUpID" ColumnName="ProductBreakUpID" />
           <ScalarProperty Name="TotalConsumptionCost" ColumnName="TotalConsumptionCost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderReportCards">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.OrderReportCard">
+        <MappingFragment StoreEntitySet="OrderReportCard">
+          <ScalarProperty Name="OrderReportCardID" ColumnName="OrderReportCardID" />
+          <ScalarProperty Name="OrderReportCardTypeID" ColumnName="OrderReportCardTypeID" />
+          <ScalarProperty Name="ProgressPercentage" ColumnName="ProgressPercentage" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderReportCardTypes">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.OrderReportCardType">
+        <MappingFragment StoreEntitySet="OrderReportCardType">
+          <ScalarProperty Name="OrderReportCardTypeID" ColumnName="OrderReportCardTypeID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -523,6 +561,7 @@
           <ScalarProperty Name="CanModifyExectionQuality" ColumnName="CanModifyExectionQuality" />
           <ScalarProperty Name="CanModifyExecutionShipping" ColumnName="CanModifyExecutionShipping" />
           <ScalarProperty Name="CanModifyGRN" ColumnName="CanModifyGRN" />
+          <ScalarProperty Name="CanModifyJobOrder" ColumnName="CanModifyJobOrder" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

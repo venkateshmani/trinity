@@ -133,6 +133,12 @@
     <Compile Include="DatabaseModel\JobOrderReceipt.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\JobOrderTolerance.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\JobOrderToleranceType.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\JobOrderType.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
@@ -164,6 +170,12 @@
       <DependentUpon>OrderManagerModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\OrderProduct.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\OrderReportCard.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\OrderReportCardType.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\OrderStatu.cs">
@@ -654,9 +666,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="App.Config" />
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
     <EntityDeploy Include="DatabaseModel\OrderManagerModel.edmx">

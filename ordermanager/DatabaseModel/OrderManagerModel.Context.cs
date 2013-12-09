@@ -42,12 +42,16 @@ namespace ordermanager.DatabaseModel
         public DbSet<History> Histories { get; set; }
         public DbSet<JobOrder> JobOrders { get; set; }
         public DbSet<JobOrderReceipt> JobOrderReceipts { get; set; }
+        public DbSet<JobOrderTolerance> JobOrderTolerances { get; set; }
+        public DbSet<JobOrderToleranceType> JobOrderToleranceTypes { get; set; }
         public DbSet<JobOrderType> JobOrderTypes { get; set; }
         public DbSet<MaterialName> MaterialNames { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderCurrencyConversion> OrderCurrencyConversions { get; set; }
         public DbSet<OrderedItem> OrderedItems { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<OrderReportCard> OrderReportCards { get; set; }
+        public DbSet<OrderReportCardType> OrderReportCardTypes { get; set; }
         public DbSet<OrderStatu> OrderStatus { get; set; }
         public DbSet<OrderThrough> OrderThroughs { get; set; }
         public DbSet<Package> Packages { get; set; }

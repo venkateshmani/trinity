@@ -17,8 +17,10 @@ namespace ordermanager.DatabaseModel
         public Order()
         {
             this.Histories = new HashSet<History>();
+            this.JobOrderTolerances = new HashSet<JobOrderTolerance>();
             this.OrderCurrencyConversions = new HashSet<OrderCurrencyConversion>();
             this.OrderProducts = new HashSet<OrderProduct>();
+            this.OrderReportCards = new HashSet<OrderReportCard>();
             this.PurchaseOrders = new HashSet<PurchaseOrder>();
         }
     
@@ -39,10 +41,12 @@ namespace ordermanager.DatabaseModel
         public virtual Company Company { get; set; }
         public virtual Company Company1 { get; set; }
         public virtual ICollection<History> Histories { get; set; }
+        public virtual ICollection<JobOrderTolerance> JobOrderTolerances { get; set; }
         public virtual OrderStatu OrderStatu { get; set; }
         public virtual OrderThrough OrderThrough { get; set; }
         public virtual ICollection<OrderCurrencyConversion> OrderCurrencyConversions { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+        public virtual ICollection<OrderReportCard> OrderReportCards { get; set; }
         public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
     }
 }

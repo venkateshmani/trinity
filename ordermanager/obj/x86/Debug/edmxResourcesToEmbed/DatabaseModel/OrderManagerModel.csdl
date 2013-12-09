@@ -15,12 +15,16 @@
     <EntitySet Name="Histories" EntityType="OrderManagerDBModel.History" />
     <EntitySet Name="JobOrders" EntityType="OrderManagerDBModel.JobOrder" />
     <EntitySet Name="JobOrderReceipts" EntityType="OrderManagerDBModel.JobOrderReceipt" />
+    <EntitySet Name="JobOrderTolerances" EntityType="OrderManagerDBModel.JobOrderTolerance" />
+    <EntitySet Name="JobOrderToleranceTypes" EntityType="OrderManagerDBModel.JobOrderToleranceType" />
     <EntitySet Name="JobOrderTypes" EntityType="OrderManagerDBModel.JobOrderType" />
     <EntitySet Name="MaterialNames" EntityType="OrderManagerDBModel.MaterialName" />
     <EntitySet Name="Orders" EntityType="OrderManagerDBModel.Order" />
     <EntitySet Name="OrderCurrencyConversions" EntityType="OrderManagerDBModel.OrderCurrencyConversion" />
     <EntitySet Name="OrderedItems" EntityType="OrderManagerDBModel.OrderedItem" />
     <EntitySet Name="OrderProducts" EntityType="OrderManagerDBModel.OrderProduct" />
+    <EntitySet Name="OrderReportCards" EntityType="OrderManagerDBModel.OrderReportCard" />
+    <EntitySet Name="OrderReportCardTypes" EntityType="OrderManagerDBModel.OrderReportCardType" />
     <EntitySet Name="OrderStatus" EntityType="OrderManagerDBModel.OrderStatu" />
     <EntitySet Name="OrderThroughs" EntityType="OrderManagerDBModel.OrderThrough" />
     <EntitySet Name="Packages" EntityType="OrderManagerDBModel.Package" />
@@ -154,6 +158,14 @@
       <End Role="JobOrder" EntitySet="JobOrders" />
       <End Role="JobOrderReceipt" EntitySet="JobOrderReceipts" />
     </AssociationSet>
+    <AssociationSet Name="FK_JobOrderTolerance_JobOrderToleranceType" Association="OrderManagerDBModel.FK_JobOrderTolerance_JobOrderToleranceType">
+      <End Role="JobOrderToleranceType" EntitySet="JobOrderToleranceTypes" />
+      <End Role="JobOrderTolerance" EntitySet="JobOrderTolerances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobOrderTolerance_Order" Association="OrderManagerDBModel.FK_JobOrderTolerance_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="JobOrderTolerance" EntitySet="JobOrderTolerances" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProductMaterials_MaterialName" Association="OrderManagerDBModel.FK_ProductMaterials_MaterialName">
       <End Role="MaterialName" EntitySet="MaterialNames" />
       <End Role="ProductMaterials" EntitySet="ProductMaterials" />
@@ -177,6 +189,10 @@
     <AssociationSet Name="FK_OrderProduct_Order" Association="OrderManagerDBModel.FK_OrderProduct_Order">
       <End Role="Order" EntitySet="Orders" />
       <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderReportCard_Order" Association="OrderManagerDBModel.FK_OrderReportCard_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderReportCard" EntitySet="OrderReportCards" />
     </AssociationSet>
     <AssociationSet Name="FK_PurchaseOrders_Order" Association="OrderManagerDBModel.FK_PurchaseOrders_Order">
       <End Role="Order" EntitySet="Orders" />
@@ -213,6 +229,10 @@
     <AssociationSet Name="FK_ProductMaterials_OrderProduct" Association="OrderManagerDBModel.FK_ProductMaterials_OrderProduct">
       <End Role="OrderProduct" EntitySet="OrderProducts" />
       <End Role="ProductMaterials" EntitySet="ProductMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderReportCard_OrderReportCardType" Association="OrderManagerDBModel.FK_OrderReportCard_OrderReportCardType">
+      <End Role="OrderReportCardType" EntitySet="OrderReportCardTypes" />
+      <End Role="OrderReportCard" EntitySet="OrderReportCards" />
     </AssociationSet>
     <AssociationSet Name="FK_OrderStatus_UserRole" Association="OrderManagerDBModel.FK_OrderStatus_UserRole">
       <End Role="UserRole" EntitySet="UserRoles" />
@@ -472,7 +492,8 @@
     <Property Name="DCNumber" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
     <Property Name="Comments" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="IsIssued" Type="Boolean" Nullable="false" />
-    <Property Name="IsWaitingFoApproval" Type="Boolean" Nullable="false" />
+    <Property Name="IsWaitingForApproval" Type="Boolean" Nullable="false" />
+    <Property Name="HasApproved" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_JobOrder_Company" FromRole="JobOrder" ToRole="Company" />
     <NavigationProperty Name="GRNReciept" Relationship="OrderManagerDBModel.FK_JobOrder_GRNReciept" FromRole="JobOrder" ToRole="GRNReciept" />
     <NavigationProperty Name="JobOrderType" Relationship="OrderManagerDBModel.FK_JobOrder_JobOrderType" FromRole="JobOrder" ToRole="JobOrderType" />
@@ -489,6 +510,26 @@
     <Property Name="Issued" Type="Boolean" Nullable="false" />
     <Property Name="JobOrderID" Type="Int64" Nullable="false" />
     <NavigationProperty Name="JobOrder" Relationship="OrderManagerDBModel.FK_JobOrderReceipt_JobOrder" FromRole="JobOrderReceipt" ToRole="JobOrder" />
+  </EntityType>
+  <EntityType Name="JobOrderTolerance">
+    <Key>
+      <PropertyRef Name="JobOrderToleranceID" />
+    </Key>
+    <Property Name="JobOrderToleranceID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="JobOrderToleraceTypeID" Type="Byte" Nullable="false" />
+    <Property Name="ToleranceValueInPercentage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="OrderID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="JobOrderToleranceType" Relationship="OrderManagerDBModel.FK_JobOrderTolerance_JobOrderToleranceType" FromRole="JobOrderTolerance" ToRole="JobOrderToleranceType" />
+    <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_JobOrderTolerance_Order" FromRole="JobOrderTolerance" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="JobOrderToleranceType">
+    <Key>
+      <PropertyRef Name="JobOrderToleranceTypeID" />
+    </Key>
+    <Property Name="JobOrderToleranceTypeID" Type="Byte" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="DefaultToleranceInPercentage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <NavigationProperty Name="JobOrderTolerances" Relationship="OrderManagerDBModel.FK_JobOrderTolerance_JobOrderToleranceType" FromRole="JobOrderToleranceType" ToRole="JobOrderTolerance" />
   </EntityType>
   <EntityType Name="JobOrderType">
     <Key>
@@ -527,10 +568,12 @@
     <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Order" ToRole="Company" />
     <NavigationProperty Name="Company1" Relationship="OrderManagerDBModel.FK_Order_OrderBy" FromRole="Order" ToRole="Company" />
     <NavigationProperty Name="Histories" Relationship="OrderManagerDBModel.FK_History_Order" FromRole="Order" ToRole="History" />
+    <NavigationProperty Name="JobOrderTolerances" Relationship="OrderManagerDBModel.FK_JobOrderTolerance_Order" FromRole="Order" ToRole="JobOrderTolerance" />
     <NavigationProperty Name="OrderStatu" Relationship="OrderManagerDBModel.FK_Order_OrderStatus" FromRole="Order" ToRole="OrderStatus" />
     <NavigationProperty Name="OrderThrough" Relationship="OrderManagerDBModel.FK_Order_OrderThrough" FromRole="Order" ToRole="OrderThrough" />
     <NavigationProperty Name="OrderCurrencyConversions" Relationship="OrderManagerDBModel.FK_OrderCurrencyConversion_Order" FromRole="Order" ToRole="OrderCurrencyConversion" />
     <NavigationProperty Name="OrderProducts" Relationship="OrderManagerDBModel.FK_OrderProduct_Order" FromRole="Order" ToRole="OrderProduct" />
+    <NavigationProperty Name="OrderReportCards" Relationship="OrderManagerDBModel.FK_OrderReportCard_Order" FromRole="Order" ToRole="OrderReportCard" />
     <NavigationProperty Name="PurchaseOrders" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Order" FromRole="Order" ToRole="PurchaseOrders" />
   </EntityType>
   <EntityType Name="OrderCurrencyConversion">
@@ -582,6 +625,25 @@
     <NavigationProperty Name="ProductBreakUpSummaries" Relationship="OrderManagerDBModel.FK_ProductBreakUpSummary_OrderProduct" FromRole="OrderProduct" ToRole="ProductBreakUpSummary" />
     <NavigationProperty Name="ProductExtraCosts" Relationship="OrderManagerDBModel.FK_ProductExtraCost_OrderProduct" FromRole="OrderProduct" ToRole="ProductExtraCost" />
     <NavigationProperty Name="ProductMaterials" Relationship="OrderManagerDBModel.FK_ProductMaterials_OrderProduct" FromRole="OrderProduct" ToRole="ProductMaterials" />
+  </EntityType>
+  <EntityType Name="OrderReportCard">
+    <Key>
+      <PropertyRef Name="OrderReportCardID" />
+    </Key>
+    <Property Name="OrderReportCardID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderReportCardTypeID" Type="Byte" Nullable="false" />
+    <Property Name="ProgressPercentage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="OrderID" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_OrderReportCard_Order" FromRole="OrderReportCard" ToRole="Order" />
+    <NavigationProperty Name="OrderReportCardType" Relationship="OrderManagerDBModel.FK_OrderReportCard_OrderReportCardType" FromRole="OrderReportCard" ToRole="OrderReportCardType" />
+  </EntityType>
+  <EntityType Name="OrderReportCardType">
+    <Key>
+      <PropertyRef Name="OrderReportCardTypeID" />
+    </Key>
+    <Property Name="OrderReportCardTypeID" Type="Byte" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="OrderReportCards" Relationship="OrderManagerDBModel.FK_OrderReportCard_OrderReportCardType" FromRole="OrderReportCardType" ToRole="OrderReportCard" />
   </EntityType>
   <EntityType Name="OrderStatu">
     <Key>
@@ -903,6 +965,7 @@
     <Property Name="CanModifyExectionQuality" Type="Boolean" Nullable="false" />
     <Property Name="CanModifyExecutionShipping" Type="Boolean" Nullable="false" />
     <Property Name="CanModifyGRN" Type="Boolean" Nullable="false" />
+    <Property Name="CanModifyJobOrder" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="OrderStatus" Relationship="OrderManagerDBModel.FK_OrderStatus_UserRole" FromRole="UserRole" ToRole="OrderStatus" />
     <NavigationProperty Name="Users" Relationship="OrderManagerDBModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
   </EntityType>
@@ -1230,6 +1293,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_JobOrderTolerance_JobOrderToleranceType">
+    <End Role="JobOrderToleranceType" Type="OrderManagerDBModel.JobOrderToleranceType" Multiplicity="1" />
+    <End Role="JobOrderTolerance" Type="OrderManagerDBModel.JobOrderTolerance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOrderToleranceType">
+        <PropertyRef Name="JobOrderToleranceTypeID" />
+      </Principal>
+      <Dependent Role="JobOrderTolerance">
+        <PropertyRef Name="JobOrderToleraceTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobOrderTolerance_Order">
+    <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="1" />
+    <End Role="JobOrderTolerance" Type="OrderManagerDBModel.JobOrderTolerance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="JobOrderTolerance">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProductMaterials_MaterialName">
     <End Role="MaterialName" Type="OrderManagerDBModel.MaterialName" Multiplicity="1" />
     <End Role="ProductMaterials" Type="OrderManagerDBModel.ProductMaterial" Multiplicity="*" />
@@ -1298,6 +1385,18 @@
         <PropertyRef Name="OrderID" />
       </Principal>
       <Dependent Role="OrderProduct">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderReportCard_Order">
+    <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="1" />
+    <End Role="OrderReportCard" Type="OrderManagerDBModel.OrderReportCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderReportCard">
         <PropertyRef Name="OrderID" />
       </Dependent>
     </ReferentialConstraint>
@@ -1407,6 +1506,18 @@
       </Principal>
       <Dependent Role="ProductMaterials">
         <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderReportCard_OrderReportCardType">
+    <End Role="OrderReportCardType" Type="OrderManagerDBModel.OrderReportCardType" Multiplicity="1" />
+    <End Role="OrderReportCard" Type="OrderManagerDBModel.OrderReportCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderReportCardType">
+        <PropertyRef Name="OrderReportCardTypeID" />
+      </Principal>
+      <Dependent Role="OrderReportCard">
+        <PropertyRef Name="OrderReportCardTypeID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
