@@ -2,6 +2,7 @@
 using ordermanager.ViewModel;
 using ordermanager.Views.PopUps;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 namespace ordermanager.Views.UserControls
@@ -15,6 +16,7 @@ namespace ordermanager.Views.UserControls
         public JobWorkControl()
         {
             InitializeComponent();
+            tabControlJobWorks.Visibility = System.Windows.Visibility.Collapsed;
             ViewModel = new JobWorkViewModel();
             this.DataContext = ViewModel;
         }
@@ -24,14 +26,15 @@ namespace ordermanager.Views.UserControls
             ViewModel.Save();
         }
 
-        private void IssueNextJob(JobOrder jOrder)
+        private void IssueNextJob(JobOrder jOrder, ObservableCollection<JobOrderType> jobTypes)
         {
             JobOrder newJob = new JobOrder();
             newJob.JobQuantity = jOrder.QualityPassed.GetValueOrDefault(0);
-            newJob.GRNReciept = ViewModel.SelectedReceipt;
-            IssueToPopupBox issuePopup = new IssueToPopupBox(newJob, DBResources.Instance.AfterKnittingJobs);          
+            newJob.GRNReciept = jOrder.GRNReciept;
+            IssueToPopupBox issuePopup = new IssueToPopupBox(newJob, jobTypes);
             if (issuePopup.ShowDialog() == true)
             {
+                jOrder.IsIssued = true;
                 ViewModel.IssueNewJob(issuePopup.JobOrder);
             }
         }
@@ -54,257 +57,174 @@ namespace ordermanager.Views.UserControls
         }
 
         #region [Issue To Next Job]
+        private void IssueToNextJob(JobOrder jOrder, ObservableCollection<JobOrderType> orderTypes)
+        {
+            if (jOrder != null && jOrder.ValidateIssueAndReceiptDetails())
+            {
+                IssueNextJob(jOrder, orderTypes);
+            }
+        }
         private void IssueToNextJobAfterKnitting_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridKnittingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                IssueNextJob(jOrder);
-            }
+            IssueToNextJob(gridKnittingDetails.SelectedItem as JobOrder, DBResources.Instance.AfterKnittingJobs);
         }
 
         private void IssueToNextJobAfterDyeing_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridDyeingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                IssueNextJob(jOrder);
-            }
+            IssueToNextJob(gridKnittingDetails.SelectedItem as JobOrder, DBResources.Instance.AfterDyeingJobs);
         }
 
         private void IssueToNextJobAfterPrinting_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridPrintingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                IssueNextJob(jOrder);
-            }
+            IssueToNextJob(gridPrintingDetails.SelectedItem as JobOrder, DBResources.Instance.AfterPrintingJobs);
         }
 
         private void IssueToNextJobAfterCompacting_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridCompactingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                IssueNextJob(jOrder);
-            }
+            IssueToNextJob(gridCompactingDetails.SelectedItem as JobOrder, DBResources.Instance.AfterCompactingJobs);
         }
 
         private void IssueToNextJobAfterWashing_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridWashingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                IssueNextJob(jOrder);
-            }
-        } 
+            IssueToNextJob(gridWashingDetails.SelectedItem as JobOrder, DBResources.Instance.AfterWashingJobs);
+        }
         #endregion
 
         #region [New Job Order For Failed Quantity]
-        private void NewKnittingJobOrder_Click(object sender, RoutedEventArgs e)
+        private void CreateNewJobOrderForFailedQuantity(JobOrder jOrder)
         {
-            JobOrder jOrder = gridKnittingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
+            if (jOrder != null && jOrder.ValidateIssueAndReceiptDetails())
             {
                 ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
             }
+        }
+
+        private void NewKnittingJobOrder_Click(object sender, RoutedEventArgs e)
+        {
+            CreateNewJobOrderForFailedQuantity(gridKnittingDetails.SelectedItem as JobOrder);
         }
 
         private void NewDyeingJobOrder_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridDyeingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
-            }
+            CreateNewJobOrderForFailedQuantity(gridDyeingDetails.SelectedItem as JobOrder);
         }
-
 
         private void NewPrintingJobOrder_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridPrintingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
-            }
+            CreateNewJobOrderForFailedQuantity(gridPrintingDetails.SelectedItem as JobOrder);
         }
 
         private void NewCompactingJobOrder_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridCompactingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
-            }
+            CreateNewJobOrderForFailedQuantity(gridCompactingDetails.SelectedItem as JobOrder);
         }
 
         private void NewWashingJobOrder_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridWashingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
-            }
+            CreateNewJobOrderForFailedQuantity(gridWashingDetails.SelectedItem as JobOrder);
         }
 
         private void NewOtherJobOrder_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridOtherDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
-            }
-        } 
+            CreateNewJobOrderForFailedQuantity(gridOtherDetails.SelectedItem as JobOrder);
+        }
         #endregion
 
         #region [Send For Special Approval]
-        private void SendForKinttingSpecialApproval_Click(object sender, RoutedEventArgs e)
+        private void SendForSpecialApproval(JobOrder jOrder)
         {
-            JobOrder jOrder = gridKnittingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
+            if (jOrder != null && jOrder.ValidateIssueAndReceiptDetails())
             {
                 ViewModel.SendForSpecialApproval(jOrder);
             }
+        }
+
+        private void SendForKinttingSpecialApproval_Click(object sender, RoutedEventArgs e)
+        {
+            SendForSpecialApproval(gridKnittingDetails.SelectedItem as JobOrder);
         }
 
         private void SendForDyeingSpecialApproval_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridDyeingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.SendForSpecialApproval(jOrder);
-            }
+            SendForSpecialApproval(gridDyeingDetails.SelectedItem as JobOrder);
         }
 
         private void SendForPrintingSpecialApproval_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridPrintingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.SendForSpecialApproval(jOrder);
-            }
+            SendForSpecialApproval(gridPrintingDetails.SelectedItem as JobOrder);
         }
 
         private void SendForCompactingSpecialApproval_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridCompactingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.SendForSpecialApproval(jOrder);
-            }
+            SendForSpecialApproval(gridCompactingDetails.SelectedItem as JobOrder);
         }
 
         private void SendForWashingSpecialApproval_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridWashingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.SendForSpecialApproval(jOrder);
-            }
+            SendForSpecialApproval(gridWashingDetails.SelectedItem as JobOrder);
         }
 
         private void SendForOtherSpecialApproval_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridOtherDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.SendForSpecialApproval(jOrder);
-            }
+            SendForSpecialApproval(gridOtherDetails.SelectedItem as JobOrder);
         }
         #endregion [Send For Special Approval]
 
         #region [Special Approval]
-        private void KnittingSpecialApproval_Click(object sender, RoutedEventArgs e)
+        private void SpecialApproval(JobOrder jOrder)
         {
-            JobOrder jOrder = gridKnittingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
+            if (jOrder != null && jOrder.ValidateIssueAndReceiptDetails())
             {
                 ViewModel.SpecialApproval(jOrder);
             }
+        }
+
+        private void KnittingSpecialApproval_Click(object sender, RoutedEventArgs e)
+        {
+            SpecialApproval(gridKnittingDetails.SelectedItem as JobOrder);
         }
 
         private void DyeingSpecialApproval_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridDyeingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.SpecialApproval(jOrder);
-            }
+            SpecialApproval(gridDyeingDetails.SelectedItem as JobOrder);
         }
 
         private void PrintingSpecialApproval_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridPrintingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.SpecialApproval(jOrder);
-            }
+            SpecialApproval(gridPrintingDetails.SelectedItem as JobOrder);
         }
 
         private void CompactingSpecialApproval_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridCompactingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.SpecialApproval(jOrder);
-            }
+            SpecialApproval(gridCompactingDetails.SelectedItem as JobOrder);
         }
 
         private void WashingSpecialApproval_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridWashingDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.SpecialApproval(jOrder);
-            }
+            SpecialApproval(gridWashingDetails.SelectedItem as JobOrder);
         }
 
         private void OtherSpecialApproval_Click(object sender, RoutedEventArgs e)
         {
-            JobOrder jOrder = gridOtherDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
-            {
-                ViewModel.SpecialApproval(jOrder);
-            }
+            SpecialApproval(gridOtherDetails.SelectedItem as JobOrder);
         }
         #endregion [Special Approval]
 
         private void PurchaseOrderSearchControl_OnTreeViewSelectionChanged(object selectedObject)
         {
-            
-            //if (tvSuppliers.SelectedItem is Company || tvSuppliers.SelectedItem is PurchaseOrder)
-            //{
-            //    tabControlJobWorks.Visibility = System.Windows.Visibility.Collapsed;
-            //    ViewModel.DiscardChanges();
-            //}
-            //else if (tvSuppliers.SelectedItem is GRNReciept)
-            //{
-            //    GRNReciept recp = tvSuppliers.SelectedItem as GRNReciept;
-            //    if (ViewModel.SelectedReceipt != recp)
-            //        ViewModel.DiscardChanges();
-            //    tabControlJobWorks.Visibility = System.Windows.Visibility.Visible;
-            //    ViewModel.SelectedReceipt = recp;
-            //}
-            
-            //if (selectedObject is Company || selectedObject is PurchaseOrder)
-            //{
-            //    tabControlJobWorks.Visibility = System.Windows.Visibility.Collapsed;
-                
-            //}
-            //else if (selectedObject is PurchaseOrder)
-            //{
-            //    poGrnSummaryView.ViewModel = new PoGrnSummaryViewModel((PurchaseOrder)selectedObject);
-            //    orderedItemGrnView.ViewModel = null;
-            //    poGrnSummaryView.Visibility = System.Windows.Visibility.Visible;
-            //    orderedItemGrnView.Visibility = System.Windows.Visibility.Collapsed;
-            //}
-            //else if (selectedObject is OrderedItem)
-            //{
-            //    orderedItemGrnView.ViewModel = new OrderedItemGrnViewModel((OrderedItem)selectedObject);
-            //    poGrnSummaryView.ViewModel = null;
-            //    poGrnSummaryView.Visibility = System.Windows.Visibility.Collapsed;
-            //    orderedItemGrnView.Visibility = System.Windows.Visibility.Visible;
-            //}
+            if (selectedObject is Company || selectedObject is PurchaseOrder)
+            {
+                tabControlJobWorks.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else if (selectedObject is OrderedItem)
+            {
+                OrderedItem item = selectedObject as OrderedItem;
+
+                ViewModel.DiscardChanges();
+                tabControlJobWorks.Visibility = System.Windows.Visibility.Visible;
+                ViewModel.SelectedOrderedItem = item;
+
+            }
         }
     }
 }

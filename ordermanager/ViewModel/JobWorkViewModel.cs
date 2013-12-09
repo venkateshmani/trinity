@@ -16,14 +16,14 @@ namespace ordermanager.ViewModel
             get { return DBResources.Instance.Suppliers; }
         }
 
-        GRNReciept m_SelectedReceipt;
-        public GRNReciept SelectedReceipt
+        OrderedItem m_SelectedOrderedItem;
+        public OrderedItem SelectedOrderedItem
         {
-            get { return m_SelectedReceipt; }
+            get { return m_SelectedOrderedItem; }
             set
             {
-                m_SelectedReceipt = value;
-                OnPropertyChanged("SelectedReceipt");
+                m_SelectedOrderedItem = value;
+                OnPropertyChanged("SelectedOrderedItem");
             }
         }
 
@@ -31,10 +31,9 @@ namespace ordermanager.ViewModel
         {
             if (jobOrder != null)
             {
-                SelectedReceipt.JobOrders.Add(jobOrder);
-                Save();
-                // jobOrder.JobOrderReceiptsWrapper.Add(new JobOrderReceipt());               
-                return true;
+                jobOrder.GRNReciept.JobOrders.Add(jobOrder);
+             
+              return  Save();                          
             }
             return false;
         }
@@ -81,6 +80,14 @@ namespace ordermanager.ViewModel
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public bool CanSave
+        {
+            get
+            {
+                return DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder;
             }
         }
     }

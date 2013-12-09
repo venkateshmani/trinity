@@ -246,12 +246,12 @@ namespace ordermanager.DatabaseModel
         {
             if (DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder)
             {
-               
-                if (!JobOrderReceiptsWrapper.Issued)
+                if (!IsIssued)
                 {
-                    if (QualityPassed >= JobQuantity * (1 - tolerance) && QualityPassed <= JobQuantity)
+                    if (QualityPassedWrapper >= JobQuantity * (1 - tolerance) && QualityPassedWrapper <= JobQuantity)
                     {
                         CanIssueToNextJob = true;
+                        SendToSpecialApproval = false;
                     }
                     else
                     {
@@ -276,6 +276,12 @@ namespace ordermanager.DatabaseModel
                     CanCreateNewJobForFailedQuantity = true;
                 else
                     CanCreateNewJobForFailedQuantity = false;
+                if (ReceivedQuantityWrapper <= 0 || QualityPassedWrapper == null || QualityPassedWrapper <= 0)
+                {
+                    SendToSpecialApproval = false;
+                    CanIssueToNextJob = false;
+                    CanCreateNewJobForFailedQuantity = false;
+                }
             }
             else
             {
@@ -289,7 +295,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                return !DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder;
+                return (!DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder || IsIssued);
             }
         }
 
@@ -355,6 +361,31 @@ namespace ordermanager.DatabaseModel
             {
                 RemoveError("JobOrderTypeWrapper", "Select where to issue the material");
             }
+        }
+
+        public bool ValidateIssueAndReceiptDetails()
+        {
+            if (string.IsNullOrEmpty(DCNumberWrapper))
+                AddError("DCNumberWrapper", "DC Number is required.", false);
+            else
+                RemoveError("DCNumberWrapper");
+
+            if (ReceivedQuantityWrapper <= 0 || ReceivedQuantityWrapper > JobQuantity)
+                AddError("ReceivedQuantityWrapper", string.Format("Received quantity should be greater than 0 and less than or equal to {0}.", JobQuantity), false);
+            else
+                RemoveError("ReceivedQuantityWrapper");
+            if(ReceivedQuantityWrapper <QualityPassedWrapper)
+                AddError("QualityPassedWrapper", "Quality passed cannot be more than Received Quantity.", false);
+            else
+                RemoveError("QualityPassedWrapper");
+
+            if(ReceiptDateWrapper ==null)
+                AddError("ReceiptDateWrapper", "Select received date.", false);
+            else
+                RemoveError("ReceiptDateWrapper");
+
+            return !HasErrors;
+
         }
 
         #endregion

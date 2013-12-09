@@ -50,7 +50,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="75"/>
+            <RowDefinition Height="0"/>
             <RowDefinition Height="29.851" />
             <RowDefinition Height="9.149"/>
             <RowDefinition Height="*" />
@@ -62,16 +62,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
-            <Label Content="Enter Purchase Order ID" Style="{StaticResource DescriptionHeaderStyle}" />
-            <TextBox Width="300"  Margin="10,0,0,0"></TextBox>
-            <Button x:Name="btnSearch" Content="Search"  Margin="10,0,0,0" Width="100" Height="30" Foreground="White"
-                                        ToolTip="Save Changes" >
-                <Button.Background>
-                    <SolidColorBrush Color="{StaticResource AccentColor}" />
-                </Button.Background>
-            </Button>
-        </StackPanel>
+      
         <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Job Work Receipts" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
@@ -101,13 +92,13 @@
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Job Work Details" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
-        <Grid Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5">
+        <Grid Grid.Row="3" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5" DataContext="{Binding SelectedOrderedItem}">
             <TabControl x:Name="tabControlJobWorks" Grid.Row="1">
                 <TabItem x:Name="tabKnitting" Header="● Knitting  " Tag="Knitting">
                     <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1" Margin="2,10,2,2">
                         <DataGrid x:Name="gridKnittingDetails" Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" 
-                        DataContext="{Binding SelectedReceipt}" ItemsSource="{Binding KnittingItemsWrapper}" Background="WhiteSmoke">
+                         ItemsSource="{Binding KnittingItemsWrapper}" Background="WhiteSmoke">
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
                                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
@@ -331,7 +322,7 @@
                     <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1" Margin="2,10,2,2">
                         <DataGrid x:Name="gridDyeingDetails" Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" 
-                        DataContext="{Binding SelectedReceipt}" ItemsSource="{Binding DyeingItemsWrapper}" Background="WhiteSmoke">
+                        ItemsSource="{Binding DyeingItemsWrapper}" Background="WhiteSmoke">
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
                                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
@@ -555,7 +546,7 @@
                     <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1" Margin="2,10,2,2">
                         <DataGrid x:Name="gridPrintingDetails" Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" 
-                        DataContext="{Binding SelectedReceipt}" ItemsSource="{Binding PrintingItemsWrapper}" Background="WhiteSmoke">
+                        ItemsSource="{Binding PrintingItemsWrapper}" Background="WhiteSmoke">
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
                                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
@@ -779,7 +770,7 @@
                     <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1" Margin="2,10,2,2">
                         <DataGrid x:Name="gridCompactingDetails" Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" 
-                        DataContext="{Binding SelectedReceipt}" ItemsSource="{Binding CompactingItemsWrapper}" Background="WhiteSmoke">
+                        ItemsSource="{Binding CompactingItemsWrapper}" Background="WhiteSmoke">
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
                                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
@@ -1003,7 +994,7 @@
                     <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1" Margin="2,10,2,2">
                         <DataGrid x:Name="gridWashingDetails" Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" 
-                        DataContext="{Binding SelectedReceipt}" ItemsSource="{Binding WashingItemsWrapper}" Background="WhiteSmoke">
+                       ItemsSource="{Binding WashingItemsWrapper}" Background="WhiteSmoke">
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
                                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
@@ -1227,7 +1218,7 @@
                     <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1" Margin="2,10,2,2">
                         <DataGrid x:Name="gridOtherDetails" Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" 
-                        DataContext="{Binding SelectedReceipt}" ItemsSource="{Binding OtherItemsWrapper}" Background="WhiteSmoke">
+                       ItemsSource="{Binding OtherItemsWrapper}" Background="WhiteSmoke">
                             <DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
                                     <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
@@ -1459,7 +1450,8 @@
         </Grid>
         <Grid Grid.Row="4" Grid.ColumnSpan="3" x:Name="gridButtons">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Center"  Margin="5" Width="100" Height="30" Foreground="White" Click="Save_Click">
+                <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Center"  Margin="5" Width="100" Height="30" Foreground="White" Click="Save_Click" 
+                        Visibility="{Binding CanSave, Converter={StaticResource BoolToVisibilityConverter}}" PresentationTraceSources.TraceLevel="High">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
