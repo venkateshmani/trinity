@@ -32,8 +32,7 @@ namespace ordermanager.ViewModel
             if (jobOrder != null)
             {
                 jobOrder.GRNReciept.JobOrders.Add(jobOrder);
-             
-              return  Save();                          
+                return Save();
             }
             return false;
         }
@@ -51,17 +50,17 @@ namespace ordermanager.ViewModel
             return DBResources.Instance.Save();
         }
 
-        public bool CreateNewJobOrderForFailedQuantity(JobOrder parentOrder)
-        {
-            JobOrder newJob = new JobOrder();
-            newJob.JobQuantity = parentOrder.QualityFailed.GetValueOrDefault(0);
-            newJob.JobOrderType = parentOrder.JobOrderType;
-            newJob.Supplier = parentOrder.Supplier;
-            newJob.Instructions = parentOrder.Instructions;
-            newJob.RequiredDate = parentOrder.RequiredDate;
-            newJob.ChargesInINR = parentOrder.ChargesInINR;
-            return IssueNewJob(newJob);
-        }
+        //public bool CreateNewJobOrderForFailedQuantity(JobOrder parentOrder)
+        //{
+        //    JobOrder newJob = new JobOrder();
+        //    newJob.JobQuantity = parentOrder.QualityFailed.GetValueOrDefault(0);
+        //    newJob.JobOrderType = parentOrder.JobOrderType;
+        //    newJob.Supplier = parentOrder.Supplier;
+        //    newJob.Instructions = parentOrder.Instructions;
+        //    newJob.RequiredDate = parentOrder.RequiredDate;
+        //    newJob.ChargesInINR = parentOrder.ChargesInINR;
+        //    return IssueNewJob(newJob);
+        //}
 
 
         public bool Save()

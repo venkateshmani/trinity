@@ -39,6 +39,19 @@ namespace ordermanager.Views.PopUps
             issueToComboBox.ItemsSource = nextJobTypes;           
         }
 
+        public IssueToPopupBox(JobOrder jOrder)
+            : this()
+        {
+            JobOrder = jOrder;
+            JobOrder.RequiredDateWrapper = DateTime.Now;
+            materialName.Text = jOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.Name;
+            quantity.Text = jOrder.JobQuantity.ToString();          
+            issueToComboBox.SelectedItem = jOrder.JobOrderTypeWrapper;
+            issueToComboBox.IsHitTestVisible = false;
+            supplierComboBox.SelectedItem = jOrder.Supplier;
+            supplierComboBox.IsHitTestVisible = false;
+        }
+
         public JobOrder JobOrder
         {
             get

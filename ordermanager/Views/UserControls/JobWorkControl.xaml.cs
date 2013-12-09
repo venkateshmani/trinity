@@ -39,6 +39,27 @@ namespace ordermanager.Views.UserControls
             }
         }
 
+        private void CreateNewJobOrderForFailedQuantity(JobOrder jOrder)
+        {
+            if (jOrder != null && jOrder.ValidateIssueAndReceiptDetails())
+            {
+                JobOrder newJob = new JobOrder();
+                newJob.GRNReciept = jOrder.GRNReciept;
+                newJob.JobQuantity = jOrder.QualityFailed.GetValueOrDefault(0);
+                newJob.JobOrderType = jOrder.JobOrderType;
+                newJob.Supplier = jOrder.Supplier;
+                newJob.Instructions = jOrder.Instructions;
+                newJob.RequiredDate = jOrder.RequiredDate;
+                newJob.ChargesInINR = jOrder.ChargesInINR;
+                IssueToPopupBox issuePopup = new IssueToPopupBox(newJob);
+                if (issuePopup.ShowDialog() == true)
+                {
+                    ViewModel.IssueNewJob(issuePopup.JobOrder);
+                }
+            }
+        }
+
+
         private void tvSuppliers_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             //if (tvSuppliers.SelectedItem is Company || tvSuppliers.SelectedItem is PurchaseOrder)
@@ -90,14 +111,7 @@ namespace ordermanager.Views.UserControls
         }
         #endregion
 
-        #region [New Job Order For Failed Quantity]
-        private void CreateNewJobOrderForFailedQuantity(JobOrder jOrder)
-        {
-            if (jOrder != null && jOrder.ValidateIssueAndReceiptDetails())
-            {
-                ViewModel.CreateNewJobOrderForFailedQuantity(jOrder);
-            }
-        }
+        #region [New Job Order For Failed Quantity]       
 
         private void NewKnittingJobOrder_Click(object sender, RoutedEventArgs e)
         {
