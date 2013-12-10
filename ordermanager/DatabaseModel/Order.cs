@@ -36,6 +36,8 @@ namespace ordermanager.DatabaseModel
         public System.DateTime LastModifiedDate { get; set; }
         public Nullable<decimal> TotalOrderValue { get; set; }
         public Nullable<System.DateTime> InternalDeliveryDate { get; set; }
+        public Nullable<System.DateTime> OrderApprovedDate { get; set; }
+        public Nullable<System.DateTime> OrderConfirmedDate { get; set; }
     
         public virtual CommissionValueType CommissionValueType { get; set; }
         public virtual Company Company { get; set; }
