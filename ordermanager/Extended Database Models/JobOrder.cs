@@ -12,11 +12,13 @@ namespace ordermanager.DatabaseModel
     {
         #region Wrappers
 
-        decimal tolerance = 0.05M;
-        bool m_CanIssueToNextJob = false;
-        bool m_CanCreateNewJobForFailedQuantity = false;
-
+        private decimal m_Tolerance = -1M;
+        private bool m_CanIssueToNextJob = false;
+        private bool m_CanCreateNewJobForFailedQuantity = false;
+        private bool m_SendToSpecialApproval = false;
+        private string m_jobOrderNumber = string.Empty;
         private JobOrderReceipt m_JobOrderReceiptWrapper = null;
+
         public JobOrderReceipt JobOrderReceiptsWrapper
         {
             get
@@ -92,7 +94,7 @@ namespace ordermanager.DatabaseModel
         public Nullable<decimal> QualityFailedWrapper
         {
             get
-            {
+            {               
                 return QualityFailed;
             }
             set
@@ -109,7 +111,6 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        private string m_jobOrderNumber = string.Empty;
         public string JobOrderNumber
         {
             get
@@ -184,6 +185,8 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
+                if (JobOrderReceiptsWrapper.ReceiptDate == null)
+                    return DateTime.Now;
                 return JobOrderReceiptsWrapper.ReceiptDate;
             }
             set
@@ -252,7 +255,6 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        bool m_SendToSpecialApproval;
         public bool SendToSpecialApproval
         {
             get
@@ -280,13 +282,21 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public bool IsReadOnly
+        {
+            get
+            {
+                return (!DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder || IsIssued);
+            }
+        }
+
         private void SetAccess()
         {
             if (DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder)
             {
                 if (!IsIssued)
                 {
-                    if (QualityPassedWrapper >= JobQuantity * (1 - tolerance) && QualityPassedWrapper <= JobQuantity)
+                    if (QualityPassedWrapper >= JobQuantity * (1 - Tolerance) && QualityPassedWrapper <= JobQuantity)
                     {
                         CanIssueToNextJob = true;
                         SendToSpecialApproval = false;
@@ -329,11 +339,19 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        public bool IsReadOnly
+        private decimal Tolerance
         {
             get
             {
-                return (!DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder || IsIssued);
+                if (m_Tolerance == -1)
+                {
+                    List<JobOrderTolerance> jTol = GRNReciept.OrderedItem.PurchaseOrder.Order.JobOrderTolerances.Where(tol => tol.JobOrderToleranceType.Type == JobOrderType.Type).Select(tol => tol).ToList();
+                    if (jTol == null || jTol.Count == 0)
+                        m_Tolerance = 0;
+                    else
+                        m_Tolerance = jTol[0].ToleranceValueInPercentage;
+                }
+                return m_Tolerance;
             }
         }
 
@@ -412,12 +430,12 @@ namespace ordermanager.DatabaseModel
                 AddError("ReceivedQuantityWrapper", string.Format("Received quantity should be greater than 0 and less than or equal to {0}.", JobQuantity), false);
             else
                 RemoveError("ReceivedQuantityWrapper");
-            if(ReceivedQuantityWrapper <QualityPassedWrapper)
+            if (ReceivedQuantityWrapper < QualityPassedWrapper)
                 AddError("QualityPassedWrapper", "Quality passed cannot be more than Received Quantity.", false);
             else
                 RemoveError("QualityPassedWrapper");
 
-            if(ReceiptDateWrapper ==null)
+            if (ReceiptDateWrapper == null)
                 AddError("ReceiptDateWrapper", "Select received date.", false);
             else
                 RemoveError("ReceiptDateWrapper");
