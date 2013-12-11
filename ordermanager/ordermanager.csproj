@@ -322,6 +322,7 @@
     <Compile Include="ViewModel\InStock\StockModel.cs" />
     <Compile Include="ViewModel\JobbOrderJOViewModel.cs" />
     <Compile Include="ViewModel\JobWorkViewModel.cs" />
+    <Compile Include="ViewModel\ManageControlViewModel.cs" />
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />
     <Compile Include="ViewModel\OrderedItemGrnViewModel.cs" />
     <Compile Include="ViewModel\POControlViewModel.cs" />
@@ -419,6 +420,9 @@
     </Compile>
     <Compile Include="Views\UserControls\JobWorkControl.xaml.cs">
       <DependentUpon>JobWorkControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ManageControl.xaml.cs">
+      <DependentUpon>ManageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\POControl.xaml.cs">
       <DependentUpon>POControl.xaml</DependentUpon>
@@ -564,6 +568,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\JobWorkControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\ManageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

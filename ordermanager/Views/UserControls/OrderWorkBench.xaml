@@ -150,6 +150,11 @@
                     <local:ChangeHistoryControl x:Name="changeHistoryControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
                 </Border>
             </TabItem>
+            <TabItem x:Name="tabManage" Header="  Manage" Cursor="Hand">
+                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    <local:ManageControl x:Name="manageControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
+                </Border>
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>
