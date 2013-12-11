@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="ordermanager.Views.UserControls.ViewOrdersControl"
+﻿<UserControl xmlns:CommonControls="clr-namespace:ordermanager.Views.CommonControls"  x:Class="ordermanager.Views.UserControls.ViewOrdersControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
+             xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
              mc:Ignorable="d" d:DesignHeight="593.4" d:DesignWidth="1416">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -41,6 +42,7 @@
                 <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style>
             <DataProviders:DataProvider x:Key="DataProvider" />
+            <Converters:StarWidthConverter x:Key="starWidthConverter"></Converters:StarWidthConverter>
             <CollectionViewSource x:Key="orderViewSource" Filter="CollectionViewSource_Filter" />
         </ResourceDictionary>
     </UserControl.Resources>
@@ -101,6 +103,11 @@
             </Grid>
             <ListView Name="lvOrders" Grid.Row="1" ItemsSource="{Binding Source={StaticResource orderViewSource}}"
                       MouseLeftButtonUp="lvOrders_MouseLeftButtonUp">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
                         <GridViewColumn Header="OrderID">
@@ -137,6 +144,13 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Margin="10,5,10,5" TextAlignment="Right" Text="{Binding Path=OrderValue}"   VerticalAlignment="Center"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="OrderReportCard" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CommonControls:OrderReportCardListControl Order="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="450"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

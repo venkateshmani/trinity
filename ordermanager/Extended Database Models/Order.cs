@@ -75,6 +75,7 @@ namespace ordermanager.DatabaseModel
                 set
                 {
                     InternalDeliveryDate = value;
+                    this.OrderReportCardsHelperDict["Shipment"].RequiredFinishDateWrapper = value;
                     OnPropertyChanged("InternalDeliveryDateWrapper");
                     ValidateInternalDeliveryDate();
                 }
@@ -127,6 +128,24 @@ namespace ordermanager.DatabaseModel
 
         #region Helpers
 
+
+            private Dictionary<string, OrderReportCard> m_orderReportCardsDict = null;
+            public Dictionary<string, OrderReportCard> OrderReportCardsHelperDict
+            {
+                get
+                {
+                    if (m_orderReportCardsDict == null)
+                    {
+                        m_orderReportCardsDict = new Dictionary<string, OrderReportCard>();
+                        foreach (OrderReportCard reportCard in this.OrderReportCards)
+                        {
+                            m_orderReportCardsDict.Add(reportCard.OrderReportCardType.Type, reportCard);
+                        }
+                    }
+                    return m_orderReportCardsDict;
+                }
+            }
+    
             private ObservableCollection<Company> m_Suppliers = null;
             public ObservableCollection<Company> Suppliers
             {
@@ -165,7 +184,7 @@ namespace ordermanager.DatabaseModel
 
         #endregion 
 
-            #region Data Validation
+        #region Data Validation
 
             //Add the property validation methods in to this method to ensure validation on create button click
         public void Validate()

@@ -494,6 +494,27 @@ namespace ordermanager.ViewModel
         public Order CreateNewOrder()
         {
             Order newOrder = dbContext.Orders.Create();
+
+            //Prepare Order Report Card
+            foreach (OrderReportCardType type in dbContext.OrderReportCardTypes)
+            {
+                OrderReportCard reportCard = new OrderReportCard();
+                reportCard.OrderReportCardType = type;
+                reportCard.Order = newOrder;
+                newOrder.OrderReportCards.Add(reportCard);
+            }
+
+
+            //Prepare Job Order Tolerances
+            foreach (JobOrderToleranceType type in dbContext.JobOrderToleranceTypes)
+            {
+                JobOrderTolerance toleranceEntry = new JobOrderTolerance();
+                toleranceEntry.Order = newOrder;
+                toleranceEntry.JobOrderToleranceType = type;
+                toleranceEntry.ToleranceValueInPercentage = type.DefaultToleranceInPercentage;
+                newOrder.JobOrderTolerances.Add(toleranceEntry);
+            }
+
             newOrder.OrderDate = DateTime.Now;
             return newOrder;
         }

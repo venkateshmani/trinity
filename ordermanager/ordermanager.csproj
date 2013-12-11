@@ -267,6 +267,7 @@
     <Compile Include="Delegates.cs" />
     <Compile Include="Extended Database Models\OrderedItem.cs" />
     <Compile Include="Extended Database Models\OrderProduct.cs" />
+    <Compile Include="Extended Database Models\OrderReportCard.cs" />
     <Compile Include="Extended Database Models\Package.cs" />
     <Compile Include="Extended Database Models\ProductBreakUp.cs" />
     <Compile Include="Extended Database Models\ProductCountryWiseBreakUp.cs" />
@@ -338,6 +339,12 @@
     </Compile>
     <Compile Include="Views\CommonControls\OMbutton.xaml.cs">
       <DependentUpon>OMbutton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CommonControls\OrderReportCardItemControl.xaml.cs">
+      <DependentUpon>OrderReportCardItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CommonControls\OrderReportCardListControl.xaml.cs">
+      <DependentUpon>OrderReportCardListControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CommonControls\OrdersListView.xaml.cs">
       <DependentUpon>OrdersListView.xaml</DependentUpon>
@@ -471,6 +478,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CommonControls\OrderReportCardItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CommonControls\OrderReportCardListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\CommonControls\PurchaseOrderSearchControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
