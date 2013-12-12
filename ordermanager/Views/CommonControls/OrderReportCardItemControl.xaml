@@ -39,8 +39,7 @@
             </Style>
             <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
             <Converters:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
-            <Converters:FlipBoolValueConverter x:Key="FlipBoolValueConverter"/>
-            <Converters:PercentageConverter x:Key="PercentageConverter"/>
+            <Converters:FlipBoolValueConverter x:Key="FlipBoolValueConverter"/>          
             <Converters:Subractor x:Key="subractor"/>
             <Converters:HasErrorToVisibilityConverter x:Key="hasErrorToVisibilityConverter" />
             <DataProviders:DataProvider x:Key="DataProvider" />
