@@ -11,7 +11,7 @@ namespace ordermanager.DatabaseModel
     {
         #region UI Properties
 
-            private decimal m_NumberOfDays = -1;
+            private decimal m_NumberOfDays = 0;
             public decimal NumberOfDays
             {
                 get
@@ -55,6 +55,7 @@ namespace ordermanager.DatabaseModel
                 set
                 {
                     RequiredFinishDate = value;
+                    CascadeDateCalculation();
                     OnPropertyChanged("RequiredFinishDateWrapper");
                 }
             }
@@ -83,7 +84,7 @@ namespace ordermanager.DatabaseModel
 
         #region Proxy Properties
 
-        private decimal NumberOfDaysProxy
+            private decimal NumberOfDaysProxy
             {
                 get
                 {
@@ -92,6 +93,7 @@ namespace ordermanager.DatabaseModel
                 set
                 {
                     m_NumberOfDays = value;
+                    ValidateNumberOfDays();
                     OnPropertyChanged("NumberOfDays");
                 }
             }
@@ -111,12 +113,41 @@ namespace ordermanager.DatabaseModel
 
         #endregion 
 
-        private void CalculateNumberOfDays()
+
+        #region Validation
+
+            public void Validate()
+            {
+
+            }
+
+            private void ValidateNumberOfDays()
+            {
+                if (NumberOfDaysProxy <= 0 && StartDate != null)
+                {
+                    AddError("NumberOfDays", "This Value will set an invalid date, Number of Days should be greater than zero", false);
+                }
+                else
+                {
+                    RemoveError("NumberOfDays", "This Value will set an invalid date, Number of Days should be greater than zero");
+                }
+            }
+
+        #endregion 
+
+        public void CalculateNumberOfDays()
         {
-            NumberOfDaysProxy = (decimal)RequiredFinishDate.Value.Subtract(StartDate.Value).Days; 
+            if (StartDate != null && RequiredFinishDate != null)
+            {
+                NumberOfDaysProxy = (decimal)RequiredFinishDate.Value.Subtract(StartDate.Value).Days;
+            }
+            else
+            {
+                NumberOfDaysProxy = 0;
+            }
         }
 
-        private void SetDatesThroughNumberOfDays()
+        public void SetDatesThroughNumberOfDays()
         {
             if (StartDate != null)
             {
@@ -129,6 +160,28 @@ namespace ordermanager.DatabaseModel
             //TODO: Later :) 
         }
 
+
+
+        private void CascadeDateCalculation()
+        {
+            switch (OrderReportCardType.Type)
+            {
+                case "Sourcing":
+                    this.Order.OrderReportCardsHelperDict["Production"].SetDatesThroughNumberOfDays();
+                    break;
+                case "Production":
+                    this.Order.OrderReportCardsHelperDict["Quality"].SetDatesThroughNumberOfDays();
+                    break;
+                case "Quality":
+                    this.Order.OrderReportCardsHelperDict["Packaging"].SetDatesThroughNumberOfDays();
+                    break;
+                case "Packaging":
+                    this.Order.OrderReportCardsHelperDict["Shipment"].CalculateNumberOfDays();
+                    break;
+                case "Shipment":
+                    break;
+            }
+        }
 
         private DateTime? StartDate
         {
@@ -165,6 +218,5 @@ namespace ordermanager.DatabaseModel
                 return startDate;
             }
         }
-
     }
 }

@@ -76,6 +76,7 @@ namespace ordermanager.DatabaseModel
                 {
                     InternalDeliveryDate = value;
                     this.OrderReportCardsHelperDict["Shipment"].RequiredFinishDateWrapper = value;
+                    this.OrderReportCardsHelperDict["Shipment"].CalculateNumberOfDays(); 
                     OnPropertyChanged("InternalDeliveryDateWrapper");
                     ValidateInternalDeliveryDate();
                 }
