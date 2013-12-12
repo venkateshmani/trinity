@@ -256,6 +256,7 @@
     <Compile Include="Extended Database Models for UI\Company.cs" />
     <Compile Include="Extended Database Models for UI\GRNReciept.cs" />
     <Compile Include="Extended Database Models for UI\OrderedItem.cs" />
+    <Compile Include="Extended Database Models for UI\OrderReportCard.cs" />
     <Compile Include="Extended Database Models for UI\PurchaseOrder.cs" />
     <Compile Include="Extended Database Models\Company.cs" />
     <Compile Include="Extended Database Models\GRNReciept.cs" />

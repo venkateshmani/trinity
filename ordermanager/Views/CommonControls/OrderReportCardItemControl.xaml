@@ -7,7 +7,7 @@
              xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
              xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="75" Background="Transparent" Width="75">
+             d:DesignHeight="30" d:DesignWidth="75" Background="Transparent" Width="75" DataContextChanged="UserControl_DataContextChanged">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -40,24 +40,24 @@
             <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
             <Converters:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
             <Converters:FlipBoolValueConverter x:Key="FlipBoolValueConverter"/>
+            <Converters:PercentageConverter x:Key="PercentageConverter"/>
             <Converters:Subractor x:Key="subractor"/>
             <Converters:HasErrorToVisibilityConverter x:Key="hasErrorToVisibilityConverter" />
             <DataProviders:DataProvider x:Key="DataProvider" />
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid x:Name="gridProgress">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="LightGray" Height="15" Margin="5,0,5,0" StrokeThickness="1.5">
-            </Rectangle>
-            <Rectangle VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="Transparent" Height="15" Margin='5,0,5,0'>
-                
-            </Rectangle>
-        </Grid>
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Text="{Binding OrderReportCardType.Type}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="*"  />   
+            <ColumnDefinition  Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle x:Name="rectBack" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="{Binding ReportBackColor}" Fill="{Binding ReportBackColor}" Height="15" Margin="5,0,0,0" StrokeThickness="1.5" />
+        <Rectangle x:Name="rectFront" Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Stroke="{Binding ReportForeColor}" Fill="{Binding ReportForeColor}" Height="15" Margin="0,0,5,0"/>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding OrderReportCardType.Type}"/>
     </Grid>
-        
+
 </UserControl>

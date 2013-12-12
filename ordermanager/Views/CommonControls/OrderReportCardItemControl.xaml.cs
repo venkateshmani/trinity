@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.DatabaseModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace ordermanager.Views.CommonControls
         public OrderReportCardItemControl()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            OrderReportCard card = e.NewValue as OrderReportCard;
+            if (card != null)            
+            {
+                gridProgress.ColumnDefinitions[0].Width = new GridLength((double)card.ProgressPercentage, GridUnitType.Star);
+                gridProgress.ColumnDefinitions[1].Width = new GridLength((double)(100-card.ProgressPercentage), GridUnitType.Star);
+            }
         }
     }
 }
