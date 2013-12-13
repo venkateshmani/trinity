@@ -250,12 +250,12 @@ namespace ordermanager.Views.PopUps
 
                 if (positiveDecisionBtn.Content.ToString() == "Create")
                 {
-                    if (NewEnquiryViewModel.HasErrors)
-                    {
-                        string message = string.Format("Failed to Create !. Fill in the highlighted fields and Click Create again");
-                        InformUser(message);
-                        return;
-                    }
+                    //if (NewEnquiryViewModel.HasErrors)
+                    //{
+                    //    string message = string.Format("Failed to Create !. Fill in the highlighted fields and Click Create again");
+                    //    InformUser(message);
+                    //    return;
+                    //}
                     Order newOrder = NewEnquiryViewModel.CreateNewOrder(userComment);
                     if (newOrder != null)
                     {

@@ -217,6 +217,7 @@ namespace ordermanager.DatabaseModel
         {
             foreach (OrderReportCard reportCard in OrderReportCards)
             {
+                reportCard.HasUserClickedSaveOrSubmit = true;
                 reportCard.Validate();
             }
         }
