@@ -35,6 +35,7 @@ namespace ordermanager.DatabaseModel
         public bool IsIssued { get; set; }
         public bool IsWaitingForApproval { get; set; }
         public bool HasApproved { get; set; }
+        public bool FailedQuantityIssued { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual GRNReciept GRNReciept { get; set; }

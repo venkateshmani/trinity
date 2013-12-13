@@ -468,6 +468,7 @@
           <Property Name="IsIssued" Type="bit" Nullable="false" />
           <Property Name="IsWaitingForApproval" Type="bit" Nullable="false" />
           <Property Name="HasApproved" Type="bit" Nullable="false" />
+          <Property Name="FailedQuantityIssued" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="JobOrderReceipt">
           <Key>
@@ -2146,6 +2147,7 @@
           <Property Name="IsIssued" Type="Boolean" Nullable="false" />
           <Property Name="IsWaitingForApproval" Type="Boolean" Nullable="false" />
           <Property Name="HasApproved" Type="Boolean" Nullable="false" />
+          <Property Name="FailedQuantityIssued" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_JobOrder_Company" FromRole="JobOrder" ToRole="Company" />
           <NavigationProperty Name="GRNReciept" Relationship="OrderManagerDBModel.FK_JobOrder_GRNReciept" FromRole="JobOrder" ToRole="GRNReciept" />
           <NavigationProperty Name="JobOrderType" Relationship="OrderManagerDBModel.FK_JobOrder_JobOrderType" FromRole="JobOrder" ToRole="JobOrderType" />
@@ -3589,6 +3591,7 @@
                 <ScalarProperty Name="IsIssued" ColumnName="IsIssued" />
                 <ScalarProperty Name="IsWaitingForApproval" ColumnName="IsWaitingForApproval" />
                 <ScalarProperty Name="HasApproved" ColumnName="HasApproved" />
+                <ScalarProperty Name="FailedQuantityIssued" ColumnName="FailedQuantityIssued" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
