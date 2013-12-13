@@ -11,12 +11,12 @@ namespace ordermanager.DatabaseModel
     {
         #region UI Properties
 
-            private decimal m_NumberOfDays = 0;
+            private decimal m_NumberOfDays = -10000;
             public decimal NumberOfDays
             {
                 get
                 {
-                    if (m_NumberOfDays == 0)
+                    if (m_NumberOfDays == -10000)
                     {
                         CalculateNumberOfDays();
                     }
@@ -128,13 +128,16 @@ namespace ordermanager.DatabaseModel
 
             private void ValidateNumberOfDays()
             {
-                if (NumberOfDaysProxy <= 0 && StartDate != null)
+                if (HasUserClickedSaveOrSubmit)
                 {
-                    AddError("NumberOfDays", "This Value will set an invalid date, Number of Days should be greater than zero", false);
-                }
-                else
-                {
-                    RemoveError("NumberOfDays", "This Value will set an invalid date, Number of Days should be greater than zero");
+                    if (NumberOfDaysProxy <= 0 && StartDate != null)
+                    {
+                        AddError("NumberOfDays", "This Value will set an invalid date, Number of Days should be greater than zero", false);
+                    }
+                    else
+                    {
+                        RemoveError("NumberOfDays", "This Value will set an invalid date, Number of Days should be greater than zero");
+                    }
                 }
             }
 

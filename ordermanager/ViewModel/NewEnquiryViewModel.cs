@@ -240,11 +240,11 @@ namespace ordermanager.ViewModel
                 Order.OrderStatusID = (short)newStatus;
                 Order.LastModifiedDate = DBResources.Instance.GetServerTime();
 
-                if ((short)newStatus == (short)OrderStatusEnum.EnquiryApproved)
+                if (newStatus == OrderStatusEnum.EnquiryApproved)
                 {
                     Order.OrderApprovedDate = DBResources.Instance.GetServerTime();
                 }
-                else if ((short)newStatus == (short)OrderStatusEnum.OrderConfirmed)
+                else if (newStatus == OrderStatusEnum.OrderConfirmed)
                 {
                     Order.OrderConfirmedDate = DBResources.Instance.GetServerTime();
                 }
@@ -262,7 +262,17 @@ namespace ordermanager.ViewModel
                 #endregion 
 
                 bool isSuccessful = DBResources.Save();
+                
+                //Refresh UI 
                 Order.OnPropertyChanged("TargetDatesGridVisibility");
+                if (newStatus == OrderStatusEnum.OrderConfirmed)
+                {
+                    foreach(OrderReportCard reportCard in Order.OrderReportCards)
+                    {
+                        reportCard.OnPropertyChanged("IsReadOnly");
+                    }
+                }
+
                 return isSuccessful;
             }
             return false;
