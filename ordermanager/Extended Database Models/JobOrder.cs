@@ -320,7 +320,7 @@ namespace ordermanager.DatabaseModel
                     SendToSpecialApproval = false;
                     CanIssueToNextJob = false;
                 }
-                if (QualityFailedWrapper > 0)
+                if (QualityFailedWrapper > 0 && !FailedQuantityIssued)
                     CanCreateNewJobForFailedQuantity = true;
                 else
                     CanCreateNewJobForFailedQuantity = false;
