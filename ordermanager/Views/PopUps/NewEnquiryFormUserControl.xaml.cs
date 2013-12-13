@@ -236,6 +236,13 @@ namespace ordermanager.Views.PopUps
 
         private void positiveDecisionBtn_Click(object sender, RoutedEventArgs e)
         {
+            if (NewEnquiryViewModel.HasErrors)
+            {
+                string message = string.Format("Failed!. Fill in the highlighted fields and Click Create again");
+                InformUser(message);
+                return;
+            }
+
             CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
             if (commentBox.ShowDialog() == true)
             {
@@ -262,6 +269,7 @@ namespace ordermanager.Views.PopUps
                 {
                     try
                     {
+
                         if (NewEnquiryViewModel.UpdateOrderStatus("approved the Order", userComment, OrderStatusEnum.EnquiryApproved))
                         {
                             SetButtonText(positiveDecisionBtn, "Confirm");
@@ -282,15 +290,18 @@ namespace ordermanager.Views.PopUps
                 {
                     try
                     {
-                        if (NewEnquiryViewModel.UpdateOrderStatus("confirmed the Order", userComment, OrderStatusEnum.OrderConfirmed))
+                        if (!NewEnquiryViewModel.HasErrors)
                         {
-                            SetButtonsVisibility(System.Windows.Visibility.Collapsed);
-                            string message = "Enquiry confirmed successfully";
-                            InformUser(message);
-                            NewEnquiryViewModel.OnPropertyChanged("CanUpdateEnquiry"); //Call to rebind in UI
+                            if (NewEnquiryViewModel.UpdateOrderStatus("confirmed the Order", userComment, OrderStatusEnum.OrderConfirmed))
+                            {
+                                SetButtonsVisibility(System.Windows.Visibility.Collapsed);
+                                string message = "Enquiry confirmed successfully";
+                                InformUser(message);
+                                NewEnquiryViewModel.OnPropertyChanged("CanUpdateEnquiry"); //Call to rebind in UI
+                            }
+                            else
+                                MessageBox.Show("Enquiry confirming failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
-                        else
-                            MessageBox.Show("Enquiry confirming failed!!!", "Failed", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     catch (Exception ex)
                     {

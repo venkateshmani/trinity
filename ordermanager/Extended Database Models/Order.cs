@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -123,6 +124,21 @@ namespace ordermanager.DatabaseModel
                     ValidateCommissionType();
                 }
             }
+
+
+            public System.Windows.Visibility TargetDatesGridVisibility
+            {
+                get
+                {
+                    if (OrderStatusID >= (int)OrderStatusEnum.EnquiryApproved)
+                    {
+                        return System.Windows.Visibility.Visible;
+                    }
+
+                    return System.Windows.Visibility.Collapsed;
+                }
+            }
+                 
     
 
         #endregion 
@@ -196,6 +212,15 @@ namespace ordermanager.DatabaseModel
             ValidateOrderThrough();
             ValidateCommissionType();
         }
+
+        public void ValidateReportCards()
+        {
+            foreach (OrderReportCard reportCard in OrderReportCards)
+            {
+                reportCard.Validate();
+            }
+        }
+             
 
         private void ValidateCommissionType()
         {

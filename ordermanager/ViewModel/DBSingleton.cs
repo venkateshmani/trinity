@@ -777,7 +777,7 @@ namespace ordermanager.ViewModel
                             ve.PropertyName, ve.ErrorMessage));
                     }
                 }
-                //System.IO.File.AppendAllLines(@"D:\errors.txt", outputLines);
+                System.IO.File.AppendAllLines(@"D:\errors.txt", outputLines);
                 throw;
             }
         }

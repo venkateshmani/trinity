@@ -16,12 +16,17 @@ namespace ordermanager.DatabaseModel
             {
                 get
                 {
+                    if (m_NumberOfDays == 0)
+                    {
+                        CalculateNumberOfDays();
+                    }
                     return m_NumberOfDays;
                 }
                 set
                 {
                     m_NumberOfDays = value;
                     SetDatesThroughNumberOfDays();
+                    ValidateNumberOfDays();
                     OnPropertyChanged("NumberOfDays");
                 }
             }
@@ -68,7 +73,7 @@ namespace ordermanager.DatabaseModel
                     if (OrderReportCardType.Type == "Shipment")
                         return true;
 
-                    if (this.Order != null && this.Order.OrderApprovedDate != null && this.Order.OrderConfirmedDate == null)
+                    if (this.Order != null && this.Order.OrderApprovedDate != null && this.Order.OrderConfirmedDate != null)
                         return true;
 
                     return m_IsReadOnly;
@@ -118,7 +123,7 @@ namespace ordermanager.DatabaseModel
 
             public void Validate()
             {
-
+                ValidateNumberOfDays();
             }
 
             private void ValidateNumberOfDays()

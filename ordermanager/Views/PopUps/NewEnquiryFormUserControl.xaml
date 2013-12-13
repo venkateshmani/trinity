@@ -228,7 +228,7 @@
                     </StackPanel>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Margin="10">
+            <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Margin="10" Visibility="{Binding Order.TargetDatesGridVisibility}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -254,7 +254,7 @@
                             <DataGridTemplateColumn Header="% Days" Width="0.2*" Visibility="Collapsed">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding NumberOfDaysInPercentage, StringFormat=n}"/>
+                                        <TextBox Text="{Binding NumberOfDaysInPercentage, StringFormat=n}" IsReadOnly="{Binding IsReadOnly}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
