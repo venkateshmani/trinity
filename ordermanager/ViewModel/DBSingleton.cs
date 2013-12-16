@@ -787,10 +787,16 @@ namespace ordermanager.ViewModel
             dbContext.Dispose();
         }
 
+        private DateTime? cachedDateTime = null;
         public DateTime GetServerTime()
         {
-            List<DateTime?> serverTime = DBResources.Instance.Context.SP_GetServerTime().ToList<DateTime?>();
-            return serverTime[0].GetValueOrDefault(DateTime.Now);
+            if (cachedDateTime == null)
+            {
+                List<DateTime?> serverTime = DBResources.Instance.Context.SP_GetServerTime().ToList<DateTime?>();
+                cachedDateTime = serverTime[0].GetValueOrDefault(DateTime.Now);
+            }
+
+            return cachedDateTime.Value;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

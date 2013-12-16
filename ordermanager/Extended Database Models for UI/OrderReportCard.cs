@@ -15,8 +15,9 @@ namespace ordermanager.DatabaseModel
             get
             {
                 if (RequiredFinishDate <= DBResources.Instance.GetServerTime())
-                    return Brushes.Silver;
-                return new SolidColorBrush(System.Windows.Media.Color.FromArgb(75, 229, 64, 40));// Brushes.DeepPink;
+                    return Brushes.WhiteSmoke;
+
+                return new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 191, 46, 46));// Brushes.DeepPink;
             }
         }
        
@@ -24,9 +25,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                if (ProgressPercentage == 100.0M)
-                    return Brushes.DodgerBlue;
-                return new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 97, 174, 36));
+                return new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 17,158, 218));
             }
         }
     }
