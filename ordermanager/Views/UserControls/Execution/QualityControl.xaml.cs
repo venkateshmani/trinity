@@ -56,6 +56,7 @@ namespace ordermanager.Views.UserControls.Execution
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            m_ViewModel.Order.CalculateQuality();
             m_ViewModel.Save("Saved quality details.", "Quality");
         }
 

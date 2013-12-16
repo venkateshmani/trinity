@@ -327,5 +327,187 @@ namespace ordermanager.DatabaseModel
         }
 
         #endregion 
+
+        #region Progress Calculations
+
+            public OrderReportCard SourcingReportCard
+            {
+                get
+                {
+                    return OrderReportCardsHelperDict["Sourcing"];
+                }
+            }
+
+            public OrderReportCard ProductionReportCard
+            {
+                get
+                {
+                    return OrderReportCardsHelperDict["Production"];
+                }
+            }
+
+            public OrderReportCard QualityReportCard
+            {
+                get
+                {
+                    return OrderReportCardsHelperDict["Quality"];
+                }
+            }
+
+            public OrderReportCard PackagingReportCard
+            {
+                get
+                {
+                    return OrderReportCardsHelperDict["Packaging"];
+                }
+            }
+
+            public OrderReportCard ShipmentReportCard
+            {
+                get
+                {
+                    return OrderReportCardsHelperDict["Shipement"];
+                }
+            }
+
+            public void CalculateSourcing()
+            {
+                decimal progressInPercentage = 0;
+                
+                int numberOfPurchaseOrdersCompleted = 0;
+                foreach (PurchaseOrder po in PurchaseOrders)
+                {
+                    if (po.PurchaseOrderStatu.Status == "Completed")
+                        numberOfPurchaseOrdersCompleted += 1;
+                }
+
+                if (PurchaseOrders != null && PurchaseOrders.Count != 0)
+                {
+                    progressInPercentage = (decimal)(numberOfPurchaseOrdersCompleted / PurchaseOrders.Count) * 100;
+                }
+                
+                SourcingReportCard.ProgressPercentage = progressInPercentage;
+            }
+
+            public void CalculateProduction()
+            {
+                decimal progressInPercentage = 0;
+
+                decimal completedQuantity = 0;
+                decimal totalQuantity = 0;
+
+                foreach (OrderProduct product in OrderProducts)
+                {
+                    foreach (ProductBreakUpSummary summary in product.ProductBreakUpSummaries)
+                    {
+                        foreach (Production production in summary.Productions)
+                        {
+                            completedQuantity +=  production.CompletedQuantity;
+                        }
+                    }
+
+                    totalQuantity += product.ExpectedQuantity;
+                }
+
+                progressInPercentage = (completedQuantity / totalQuantity) * 100;
+                if (progressInPercentage > 100)
+                {
+                    progressInPercentage = 100;
+                }
+
+                ProductionReportCard.ProgressPercentage = progressInPercentage;
+            }
+
+            public void CalculateQuality()
+            {
+                decimal progressInPercentage = 0;
+
+                decimal completedQuantity = 0;
+                decimal totalQuantity = 0;
+
+                foreach (OrderProduct product in OrderProducts)
+                {
+                    foreach (ProductBreakUpSummary summary in product.ProductBreakUpSummaries)
+                    {
+                        foreach (Quality quality in summary.Qualities)
+                        {
+                            completedQuantity += quality.PassedWrapper + quality.FailedWrapper;
+                        }
+                    }
+
+                    totalQuantity += product.ExpectedQuantity;
+                }
+
+                progressInPercentage = (completedQuantity / totalQuantity) * 100;
+                if (progressInPercentage > 100)
+                {
+                    progressInPercentage = 100;
+                }
+
+
+                QualityReportCard.ProgressPercentage = progressInPercentage;
+            }
+
+            public void CalculatePackaging()
+            {
+                decimal progressInPercentage = 0;
+
+                decimal completedQuantity = 0;
+                decimal totalQuantity = 0;
+
+                foreach (OrderProduct product in OrderProducts)
+                {
+                    foreach (ProductBreakUpSummary summary in product.ProductBreakUpSummaries)
+                    {
+                        foreach (Package package in summary.Packages)
+                        {
+                            completedQuantity += package.PackagedWrapper;
+                        }
+                    }
+
+                    totalQuantity += product.ExpectedQuantity;
+                }
+
+                progressInPercentage = (completedQuantity / totalQuantity) * 100;
+
+                if (progressInPercentage > 100)
+                {
+                    progressInPercentage = 100;
+                }
+
+                PackagingReportCard.ProgressPercentage = progressInPercentage;
+            }
+
+            public void CalculateShipement()
+            {
+                decimal progressInPercentage = 0;
+
+                decimal completedQuantity = 0;
+                decimal totalQuantity = 0;
+
+                foreach (OrderProduct product in OrderProducts)
+                {
+                    foreach (ProductBreakUpSummary summary in product.ProductBreakUpSummaries)
+                    {
+                        foreach (Shipment shipment in summary.Shipments)
+                        {
+                            completedQuantity += shipment.ShippedWrapper;
+                        }
+                    }
+
+                    totalQuantity += product.ExpectedQuantity;
+                }
+
+                progressInPercentage = (completedQuantity / totalQuantity) * 100;
+
+                if (progressInPercentage > 100)
+                {
+                    progressInPercentage = 100;
+                }
+
+                ShipmentReportCard.ProgressPercentage = progressInPercentage;
+            }
+
+        #endregion 
     }
 }

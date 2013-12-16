@@ -57,6 +57,7 @@ namespace ordermanager.Views.UserControls.Execution
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            m_ViewModel.Order.CalculatePackaging();
             m_ViewModel.Save("Saved packaging details.", "Packaging");
         }
 

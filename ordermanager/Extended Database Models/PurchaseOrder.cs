@@ -50,5 +50,20 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public void DetermineStatus()
+        {
+            //Check for received goods count
+
+
+            //Check for passed quantity issued to stock
+
+
+
+            //Check for pruchase order for failed quantity
+
+            
+        }
+
+
     }
 }

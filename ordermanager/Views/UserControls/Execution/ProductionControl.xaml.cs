@@ -56,6 +56,7 @@ namespace ordermanager.Views.UserControls.Execution
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            m_ViewModel.Order.CalculateProduction();
             m_ViewModel.Save("Saved production details.", "Production");
         }
 
