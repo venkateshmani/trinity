@@ -62,7 +62,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-      
+
         <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2">
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Job Work Receipts" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
@@ -1251,6 +1251,12 @@
                                         <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}"/>
+                                            <Button x:Name="btnIssueToNextJobAfterOther" Content="Issue"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
+                                             HorizontalAlignment="Right" Click="IssueToNextJobAfterOther_Click" Tag="{Binding}" Visibility="{Binding CanIssueToNextJob,  Converter={StaticResource BoolToVisibilityConverter}}">
+                                                <Button.Background>
+                                                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                                </Button.Background>
+                                            </Button>
                                             <Button x:Name="btnSendForOtherSpecialApproval" Content="Send For Special Approval"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Click="SendForOtherSpecialApproval_Click"  Tag="{Binding}" Visibility="{Binding SendToSpecialApproval,  Converter={StaticResource BoolToVisibilityConverter}}">
                                                 <Button.Background>

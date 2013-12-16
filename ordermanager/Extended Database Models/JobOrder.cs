@@ -94,7 +94,7 @@ namespace ordermanager.DatabaseModel
         public Nullable<decimal> QualityFailedWrapper
         {
             get
-            {               
+            {
                 return QualityFailed;
             }
             set
@@ -303,7 +303,13 @@ namespace ordermanager.DatabaseModel
                     }
                     else
                     {
-                        if (!HasApproved)
+                        if (IsWaitingForApproval)
+                        {
+                            CanIssueToNextJob = false;
+                            SendToSpecialApproval = false;
+                        }
+
+                        else if (!HasApproved)
                         {
                             CanIssueToNextJob = false;
                             SendToSpecialApproval = true;
@@ -337,6 +343,7 @@ namespace ordermanager.DatabaseModel
                 CanIssueToNextJob = false;
                 CanCreateNewJobForFailedQuantity = false;
             }
+            OnPropertyChanged("SpecialApprovalNeeded");
         }
 
         private decimal Tolerance
@@ -442,6 +449,11 @@ namespace ordermanager.DatabaseModel
 
             return !HasErrors;
 
+        }
+
+        public void Refresh()
+        {
+            SetAccess();
         }
 
         #endregion

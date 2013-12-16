@@ -88,28 +88,28 @@
                     </Button>
                 </TabItem.Header>
             </TabItem>
-            <TabItem x:Name="tabViewEnquiry" Header="  View Enquiry  " Cursor="Hand">
+            <TabItem x:Name="tabViewEnquiry" Header="  View Enquiry" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <PopUps:NewEnquiryFormUserControl x:Name="viewEnquiry" Margin="20,10,10,0" IsNewEnquiry="False" />
                 </Border>
             </TabItem>
-            <TabItem x:Name="tabMaterials" Header="  Materials  " Cursor="Hand">
+            <TabItem x:Name="tabMaterials" Header="  Materials" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <local:ProductMaterialsControl x:Name="materialsControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:ProductMaterialsControl>
                 </Border>
             </TabItem>
-            <TabItem x:Name="tabMaterialDetails" Header="  Material Details  " Cursor="Hand">
+            <TabItem x:Name="tabMaterialDetails" Header="  Material Details" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <local:PurchaseOrderControl x:Name="purchaseOrderControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
                 </Border>
             </TabItem>
-            <TabItem x:Name="tabPurchaseOrder" Header="  Purchase Order  " Cursor="Hand">
+            <TabItem x:Name="tabPurchaseOrder" Header="  Purchase Order" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <local:POControl x:Name="poControl"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 </Border>
             </TabItem>
            
-            <TabItem x:Name="tabExecution" Header="  Execution  " Cursor="Hand">
+            <TabItem x:Name="tabExecution" Header="  Execution" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <TabControl x:Name="tabExecutionDetailsControl" Grid.Row="1">
                         <TabItem x:Name="tabOverAllCompletion" Header="  ● OC Report  " Tag="Cutting">
@@ -133,7 +133,7 @@
                     </TabControl>
                 </Border>
             </TabItem>
-            <TabItem x:Name="tabInvoice" Header="  Invoice  " Cursor="Hand">
+            <TabItem x:Name="tabInvoice" Header="  Invoice" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <TabControl Grid.Row="1">
                         <TabItem x:Name="tabNewInvoice" Header=" Create New Invoice  " Tag="NewInvoice">
@@ -145,7 +145,7 @@
                     </TabControl>
                 </Border>
             </TabItem>
-            <TabItem x:Name="tabChangeHistory" Header="  Change History  " Cursor="Hand">
+            <TabItem x:Name="tabChangeHistory" Header="  History" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <local:ChangeHistoryControl x:Name="changeHistoryControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
                 </Border>

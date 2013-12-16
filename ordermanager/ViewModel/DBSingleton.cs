@@ -670,6 +670,16 @@ namespace ordermanager.ViewModel
                 return m_AfterWashingJobs;
             }
         }
+        public ObservableCollection<JobOrderType> m_AfterOtherJobs = null;
+        public ObservableCollection<JobOrderType> AfterOtherJobs
+        {
+            get
+            {
+                if (m_AfterOtherJobs == null)
+                    SetAvailableNextJobOrderTypes();
+                return m_AfterOtherJobs;
+            }
+        }
 
         ObservableCollection<JobOrderType> m_AllJobsTypes = null;
         public ObservableCollection<JobOrderType> AllJobsTypes
@@ -690,6 +700,7 @@ namespace ordermanager.ViewModel
             m_AfterPrintingJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 3).Select(c => c).ToList());
             m_AfterCompactingJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 4).Select(c => c).ToList());
             m_AfterWashingJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 5).Select(c => c).ToList());
+            m_AfterOtherJobs = new ObservableCollection<JobOrderType>(m_AllJobsTypes.Where(c => c.JobOrderTypeID > 6).Select(c => c).ToList());
         }
         #endregion [JobOrderType]
 

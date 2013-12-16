@@ -35,7 +35,16 @@ namespace ordermanager.Views.UserControls
             if (issuePopup.ShowDialog() == true)
             {
                 jOrder.IsIssued = true;
-                ViewModel.IssueNewJob(issuePopup.JobOrder);
+                if (issuePopup.JobOrder.JobOrderType.Type.ToLower() == "stock")
+                {
+                    if (ViewModel.IssueToStock(issuePopup.JobOrder.JobQuantity))
+                        jOrder.Refresh();
+                }
+                else
+                {
+                    if (ViewModel.IssueNewJob(issuePopup.JobOrder))
+                        jOrder.Refresh();
+                }
             }
         }
 
@@ -51,10 +60,13 @@ namespace ordermanager.Views.UserControls
                 newJob.Instructions = jOrder.Instructions;
                 newJob.RequiredDate = jOrder.RequiredDate;
                 newJob.ChargesInINR = jOrder.ChargesInINR;
+
                 IssueToPopupBox issuePopup = new IssueToPopupBox(newJob);
                 if (issuePopup.ShowDialog() == true)
                 {
-                    ViewModel.IssueNewJob(issuePopup.JobOrder);
+                    jOrder.FailedQuantityIssued = true;
+                    if (ViewModel.IssueNewJob(issuePopup.JobOrder))
+                        jOrder.Refresh();
                 }
             }
         }
@@ -109,9 +121,14 @@ namespace ordermanager.Views.UserControls
         {
             IssueToNextJob(gridWashingDetails.SelectedItem as JobOrder, DBResources.Instance.AfterWashingJobs);
         }
+
+        private void IssueToNextJobAfterOther_Click(object sender, RoutedEventArgs e)
+        {
+            IssueToNextJob(gridOtherDetails.SelectedItem as JobOrder, DBResources.Instance.AfterOtherJobs);
+        }
         #endregion
 
-        #region [New Job Order For Failed Quantity]       
+        #region [New Job Order For Failed Quantity]
 
         private void NewKnittingJobOrder_Click(object sender, RoutedEventArgs e)
         {
@@ -240,5 +257,7 @@ namespace ordermanager.Views.UserControls
 
             }
         }
+
+       
     }
 }

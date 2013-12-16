@@ -27,41 +27,53 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public bool IssueToStock(decimal quantityToStock)
+        {
+            if (SelectedOrderedItem.ProductMaterialItem.SubMaterial.InStock == null)
+                SelectedOrderedItem.ProductMaterialItem.SubMaterial.InStock = 0;
+            SelectedOrderedItem.ProductMaterialItem.SubMaterial.InStock += quantityToStock;
+            return Save();
+        }
+
         public bool IssueNewJob(JobOrder jobOrder)
         {
+            bool res = false;
             if (jobOrder != null)
             {
+                if (jobOrder.JobOrderType.Type.ToLower() == "stock")
+                {
+                    if (SelectedOrderedItem.ProductMaterialItem.SubMaterial.InStock == null)
+                        SelectedOrderedItem.ProductMaterialItem.SubMaterial.InStock = 0;
+                    SelectedOrderedItem.ProductMaterialItem.SubMaterial.InStock += jobOrder.QualityPassedWrapper;
+                }
                 jobOrder.GRNReciept.JobOrders.Add(jobOrder);
-                return Save();
+                res = Save();
+                if (res)
+                    jobOrder.Refresh();
             }
-            return false;
+            return res;
         }
 
         public bool SendForSpecialApproval(JobOrder jOrder)
         {
+            bool res = false;
             jOrder.IsWaitingForApproval = true;
-            return DBResources.Instance.Save();
+            res = Save();
+            if (res)
+                jOrder.Refresh();
+            return res;
         }
 
         public bool SpecialApproval(JobOrder jOrder)
         {
+            bool res = false;
             jOrder.IsWaitingForApproval = false;
             jOrder.HasApproved = true;
-            return DBResources.Instance.Save();
+            res = Save();
+            if (res)
+                jOrder.Refresh();
+            return res;
         }
-
-        //public bool CreateNewJobOrderForFailedQuantity(JobOrder parentOrder)
-        //{
-        //    JobOrder newJob = new JobOrder();
-        //    newJob.JobQuantity = parentOrder.QualityFailed.GetValueOrDefault(0);
-        //    newJob.JobOrderType = parentOrder.JobOrderType;
-        //    newJob.Supplier = parentOrder.Supplier;
-        //    newJob.Instructions = parentOrder.Instructions;
-        //    newJob.RequiredDate = parentOrder.RequiredDate;
-        //    newJob.ChargesInINR = parentOrder.ChargesInINR;
-        //    return IssueNewJob(newJob);
-        //}
-
 
         public bool Save()
         {
