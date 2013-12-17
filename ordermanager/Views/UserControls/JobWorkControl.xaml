@@ -67,24 +67,7 @@
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Job Work Receipts" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
-        </Grid>
-        <!--<TreeView x:Name="tvSuppliers" Grid.Row="3" Grid.Column="0" Background="White" Margin="2" ItemsSource="{Binding Suppliers}" SelectedItemChanged="tvSuppliers_SelectedItemChanged">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding PurchaseOrders}">
-                    <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
-                    <HierarchicalDataTemplate.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding GRNReciepts}">
-                            <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding PurchaseOrderNumber}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
-                            <HierarchicalDataTemplate.ItemTemplate>
-                                <HierarchicalDataTemplate>
-                                    <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding OrderedItem.ProductMaterialItem.SubMaterial.Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
-                                </HierarchicalDataTemplate>
-                            </HierarchicalDataTemplate.ItemTemplate>
-                        </HierarchicalDataTemplate>
-                    </HierarchicalDataTemplate.ItemTemplate>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>-->
+        </Grid>     
         <CommonControls:PurchaseOrderSearchControl Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                    OnTreeViewSelectionChanged="PurchaseOrderSearchControl_OnTreeViewSelectionChanged"/>
         <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="2">
@@ -137,18 +120,20 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                          
                                             <Button x:Name="btnSendForKnittingSpecialApproval" Content="Send For Special Approval"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Click="SendForKinttingSpecialApproval_Click"  Tag="{Binding}" Visibility="{Binding SendToSpecialApproval,  Converter={StaticResource BoolToVisibilityConverter}}">
                                                 <Button.Background>
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
-                                            </Button>
+                                            </Button>                                           
                                             <Button x:Name="btnKnittingSpecialApproval" Content="Approve"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Click="KnittingSpecialApproval_Click"  Tag="{Binding}" Visibility="{Binding SpecialApprovalNeeded,  Converter={StaticResource BoolToVisibilityConverter}}">
                                                 <Button.Background>
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                            <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
@@ -159,6 +144,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                            <TextBlock Text="New Job Order Created" Margin="5,0,5,0" Visibility="{Binding FailedQuantityIssued, Converter={StaticResource BoolToVisibilityConverter}}"></TextBlock>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
