@@ -4,19 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9539c612a1944f6ebd0e1459d7bd2afb" Name="Diagram1">
-        <EntityTypeShape EntityType="OrderManagerDBModel.Asset" Width="1.5" PointX="11.25" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.AssetCategory" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.AssetName" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.BrandName" Width="1.5" PointX="9" PointY="9.75" IsExpanded="true" />
+      <Diagram DiagramId="94757ca865954cfe914c2f7514135f4b" Name="Diagram1">
+        <EntityTypeShape EntityType="OrderManagerDBModel.Asset" Width="1.5" PointX="14.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.AssetCategory" Width="1.5" PointX="2.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.AssetName" Width="1.5" PointX="5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.BrandName" Width="1.5" PointX="12" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.Color" Width="1.5" PointX="10.5" PointY="33.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.CommissionValueType" Width="1.5" PointX="3" PointY="17.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Company" Width="1.5" PointX="3" PointY="28.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.CommissionValueType" Width="1.5" PointX="3" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Company" Width="1.5" PointX="3" PointY="28.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.CompanyType" Width="1.5" PointX="0.75" PointY="30.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Country" Width="1.5" PointX="15.5" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Country" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.Currency" Width="1.5" PointX="8.25" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.GRNReciept" Width="1.5" PointX="22.5" PointY="23.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.History" Width="1.5" PointX="7.5" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Invoice" Width="1.5" PointX="11.25" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.JobOrder" Width="1.5" PointX="24.75" PointY="23.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.JobOrderReceipt" Width="1.5" PointX="27" PointY="24.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.JobOrderTolerance" Width="1.5" PointX="7.5" PointY="18.875" IsExpanded="true" />
@@ -30,11 +31,11 @@
         <EntityTypeShape EntityType="OrderManagerDBModel.OrderReportCard" Width="1.5" PointX="10.5" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.OrderReportCardType" Width="1.5" PointX="8.25" PointY="16.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.OrderStatu" Width="1.5" PointX="3" PointY="21.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.OrderThrough" Width="1.5" PointX="3" PointY="34.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.OrderThrough" Width="1.5" PointX="3" PointY="34.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.Package" Width="1.5" PointX="15" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.ProductBreakUp" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.ProductBreakUpSummary" Width="1.5" PointX="12.75" PointY="26.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ProductCountryWiseBreakUp" Width="1.5" PointX="17.75" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ProductCountryWiseBreakUp" Width="1.5" PointX="12.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.ProductCutting" Width="1.5" PointX="15" PointY="23.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.ProductExtraCost" Width="1.5" PointX="9.75" PointY="29.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.ProductExtraCostType" Width="1.5" PointX="7.5" PointY="36.125" IsExpanded="true" />
@@ -49,7 +50,7 @@
         <EntityTypeShape EntityType="OrderManagerDBModel.Quality" Width="1.5" PointX="15" PointY="30" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.ReceiptStatu" Width="1.5" PointX="20.25" PointY="27.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.Shipment" Width="1.5" PointX="15" PointY="32.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ShipmentMode" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ShipmentMode" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.SubMaterial" Width="1.5" PointX="15.75" PointY="16.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.UnitsOfMeasurement" Width="1.5" PointX="5.25" PointY="29.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.User" Width="1.5" PointX="3" PointY="24.75" IsExpanded="true" />
@@ -63,11 +64,14 @@
         <AssociationConnector Association="OrderManagerDBModel.FK_ProductStock_Color" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_Order_CommissionValueType" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_Company_CompanyType" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderManagerDBModel.FK_Invoice_Company" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_JobOrder_Company" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_Order_Company" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_Order_OrderBy" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_ProductMaterialItem_Company" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_PurchaseOrders_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderManagerDBModel.FK_Invoice_Destination" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderManagerDBModel.FK_Invoice_Origin" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Country" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_OrderCurrencyConversion_Currency" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_OrderProduct_Currency" ManuallyRouted="false" />
@@ -79,6 +83,7 @@
         <AssociationConnector Association="OrderManagerDBModel.FK_GRNReciept_ReceiptStatus" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_JobOrder_GRNReciept" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_History_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderManagerDBModel.FK_Invoice_ShipmentMode" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_JobOrder_JobOrderType" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_JobOrderReceipt_JobOrder" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_JobOrderTolerance_JobOrderToleranceType" ManuallyRouted="false" />

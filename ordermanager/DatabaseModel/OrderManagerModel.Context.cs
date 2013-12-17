@@ -40,6 +40,7 @@ namespace ordermanager.DatabaseModel
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<GRNReciept> GRNReciepts { get; set; }
         public DbSet<History> Histories { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
         public DbSet<JobOrder> JobOrders { get; set; }
         public DbSet<JobOrderReceipt> JobOrderReceipts { get; set; }
         public DbSet<JobOrderTolerance> JobOrderTolerances { get; set; }

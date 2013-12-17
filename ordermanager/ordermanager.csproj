@@ -127,6 +127,9 @@
     <Compile Include="DatabaseModel\History.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\Invoice.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\JobOrder.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>

@@ -16,12 +16,16 @@ namespace ordermanager.DatabaseModel
     {
         public Country()
         {
+            this.Invoices = new HashSet<Invoice>();
+            this.Invoices1 = new HashSet<Invoice>();
             this.ProductCountryWiseBreakUps = new HashSet<ProductCountryWiseBreakUp>();
         }
     
         public int CountryID { get; set; }
         public string Name { get; set; }
     
+        public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual ICollection<Invoice> Invoices1 { get; set; }
         public virtual ICollection<ProductCountryWiseBreakUp> ProductCountryWiseBreakUps { get; set; }
     }
 }

@@ -16,12 +16,14 @@ namespace ordermanager.DatabaseModel
     {
         public ShipmentMode()
         {
+            this.Invoices = new HashSet<Invoice>();
             this.ProductBreakUps = new HashSet<ProductBreakUp>();
         }
     
         public byte ShipmentModeID { get; set; }
         public string Mode { get; set; }
     
+        public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<ProductBreakUp> ProductBreakUps { get; set; }
     }
 }
