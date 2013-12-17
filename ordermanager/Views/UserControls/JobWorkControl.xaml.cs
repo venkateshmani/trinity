@@ -69,25 +69,7 @@ namespace ordermanager.Views.UserControls
                         jOrder.Refresh();
                 }
             }
-        }
-
-
-        private void tvSuppliers_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            //if (tvSuppliers.SelectedItem is Company || tvSuppliers.SelectedItem is PurchaseOrder)
-            //{
-            //    tabControlJobWorks.Visibility = System.Windows.Visibility.Collapsed;
-            //    ViewModel.DiscardChanges();
-            //}
-            //else if (tvSuppliers.SelectedItem is GRNReciept)
-            //{
-            //    GRNReciept recp = tvSuppliers.SelectedItem as GRNReciept;
-            //    if (ViewModel.SelectedReceipt != recp)
-            //        ViewModel.DiscardChanges();
-            //    tabControlJobWorks.Visibility = System.Windows.Visibility.Visible;
-            //    ViewModel.SelectedReceipt = recp;
-            //}
-        }
+        }   
 
         #region [Issue To Next Job]
         private void IssueToNextJob(JobOrder jOrder, ObservableCollection<JobOrderType> orderTypes)

@@ -290,12 +290,27 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        string m_IssueStatus = string.Empty;
+        public string IssueStatus
+        {
+            get { return m_IssueStatus; }
+            set
+            {
+                if (m_IssueStatus != value)
+                {
+                    m_IssueStatus = value;
+                    OnPropertyChanged("IssueStatus");
+                }
+            }
+        }
+
         private void SetAccess()
         {
             if (DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder)
             {
                 if (!IsIssued)
                 {
+                    IssueStatus = string.Empty;
                     if (QualityPassedWrapper >= JobQuantity * (1 - Tolerance) && QualityPassedWrapper <= JobQuantity)
                     {
                         CanIssueToNextJob = true;
@@ -307,8 +322,8 @@ namespace ordermanager.DatabaseModel
                         {
                             CanIssueToNextJob = false;
                             SendToSpecialApproval = false;
+                            IssueStatus = "Waiting For Special Approval";
                         }
-
                         else if (!HasApproved)
                         {
                             CanIssueToNextJob = false;
@@ -325,6 +340,7 @@ namespace ordermanager.DatabaseModel
                 {
                     SendToSpecialApproval = false;
                     CanIssueToNextJob = false;
+                    IssueStatus = "Issued";
                 }
                 if (QualityFailedWrapper > 0 && !FailedQuantityIssued)
                     CanCreateNewJobForFailedQuantity = true;
