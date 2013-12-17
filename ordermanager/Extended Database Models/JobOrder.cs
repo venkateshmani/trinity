@@ -360,6 +360,7 @@ namespace ordermanager.DatabaseModel
                 CanCreateNewJobForFailedQuantity = false;
             }
             OnPropertyChanged("SpecialApprovalNeeded");
+            OnPropertyChanged("FailedQuantityIssued");
         }
 
         private decimal Tolerance

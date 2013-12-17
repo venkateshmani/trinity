@@ -133,7 +133,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
-                                            <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0"></TextBlock>
+                                            <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
@@ -144,7 +144,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
-                                            <TextBlock Text="New Job Order Created" Margin="5,0,5,0" Visibility="{Binding FailedQuantityIssued, Converter={StaticResource BoolToVisibilityConverter}}"></TextBlock>
+                                            <TextBlock Text="New Job Order Created" Margin="5,0,5,0" Visibility="{Binding FailedQuantityIssued, Converter={StaticResource BoolToVisibilityConverter}}"  VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -359,6 +359,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                            <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
@@ -369,6 +370,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                            <TextBlock Text="New Job Order Created" Margin="5,0,5,0" Visibility="{Binding FailedQuantityIssued, Converter={StaticResource BoolToVisibilityConverter}}"  VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -583,6 +585,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                            <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
@@ -593,6 +596,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                            <TextBlock Text="New Job Order Created" Margin="5,0,5,0" Visibility="{Binding FailedQuantityIssued, Converter={StaticResource BoolToVisibilityConverter}}"  VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -807,6 +811,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                            <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
@@ -817,6 +822,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                            <TextBlock Text="New Job Order Created" Margin="5,0,5,0" Visibility="{Binding FailedQuantityIssued, Converter={StaticResource BoolToVisibilityConverter}}"  VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -1031,6 +1037,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                            <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
@@ -1041,6 +1048,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                            <TextBlock Text="New Job Order Created" Margin="5,0,5,0" Visibility="{Binding FailedQuantityIssued, Converter={StaticResource BoolToVisibilityConverter}}"  VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -1255,6 +1263,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                            <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                                             <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
@@ -1265,6 +1274,7 @@
                                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                                 </Button.Background>
                                             </Button>
+                                            <TextBlock Text="New Job Order Created" Margin="5,0,5,0" Visibility="{Binding FailedQuantityIssued, Converter={StaticResource BoolToVisibilityConverter}}"  VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
