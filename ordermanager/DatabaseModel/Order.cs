@@ -16,6 +16,7 @@ namespace ordermanager.DatabaseModel
     {
         public Order()
         {
+            this.CartonBoxes = new HashSet<CartonBox>();
             this.Histories = new HashSet<History>();
             this.JobOrderTolerances = new HashSet<JobOrderTolerance>();
             this.OrderCurrencyConversions = new HashSet<OrderCurrencyConversion>();
@@ -39,6 +40,7 @@ namespace ordermanager.DatabaseModel
         public Nullable<System.DateTime> OrderApprovedDate { get; set; }
         public Nullable<System.DateTime> OrderConfirmedDate { get; set; }
     
+        public virtual ICollection<CartonBox> CartonBoxes { get; set; }
         public virtual CommissionValueType CommissionValueType { get; set; }
         public virtual Company Company { get; set; }
         public virtual Company Company1 { get; set; }

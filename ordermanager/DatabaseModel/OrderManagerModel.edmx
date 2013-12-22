@@ -10,6 +10,7 @@
           <EntitySet Name="AssetCategory" EntityType="OrderManagerDBModel.Store.AssetCategory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="AssetName" EntityType="OrderManagerDBModel.Store.AssetName" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="BrandName" EntityType="OrderManagerDBModel.Store.BrandName" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CartonBox" EntityType="OrderManagerDBModel.Store.CartonBox" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Color" EntityType="OrderManagerDBModel.Store.Color" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CommissionValueType" EntityType="OrderManagerDBModel.Store.CommissionValueType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Company" EntityType="OrderManagerDBModel.Store.Company" store:Type="Tables" Schema="dbo" />
@@ -71,6 +72,10 @@
           <AssociationSet Name="FK_AssetName_AssetCategory" Association="OrderManagerDBModel.Store.FK_AssetName_AssetCategory">
             <End Role="AssetCategory" EntitySet="AssetCategory" />
             <End Role="AssetName" EntitySet="AssetName" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartonBox_Order" Association="OrderManagerDBModel.Store.FK_CartonBox_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="CartonBox" EntitySet="CartonBox" />
           </AssociationSet>
           <AssociationSet Name="FK_Company_CompanyType" Association="OrderManagerDBModel.Store.FK_Company_CompanyType">
             <End Role="CompanyType" EntitySet="CompanyType" />
@@ -199,6 +204,10 @@
           <AssociationSet Name="FK_OrderStatus_UserRole" Association="OrderManagerDBModel.Store.FK_OrderStatus_UserRole">
             <End Role="UserRole" EntitySet="UserRole" />
             <End Role="OrderStatus" EntitySet="OrderStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_CartonBox" Association="OrderManagerDBModel.Store.FK_Package_CartonBox">
+            <End Role="CartonBox" EntitySet="CartonBox" />
+            <End Role="Package" EntitySet="Package" />
           </AssociationSet>
           <AssociationSet Name="FK_Package_ProductBreakUpSummary" Association="OrderManagerDBModel.Store.FK_Package_ProductBreakUpSummary">
             <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummary" />
@@ -376,6 +385,15 @@
           </Key>
           <Property Name="BrandNameID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CartonBox">
+          <Key>
+            <PropertyRef Name="CartonBoxID" />
+          </Key>
+          <Property Name="CartonBoxID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="OrderID" Type="bigint" Nullable="false" />
+          <Property Name="InvoiceGenerated" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Color">
           <Key>
@@ -646,6 +664,7 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="ProductBreakUpSummaryID" Type="bigint" Nullable="false" />
           <Property Name="ExcessToStock" Type="decimal" />
+          <Property Name="CartonBoxID" Type="bigint" />
         </EntityType>
         <EntityType Name="ProductBreakUp">
           <Key>
@@ -923,6 +942,18 @@
             </Principal>
             <Dependent Role="AssetName">
               <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartonBox_Order">
+          <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
+          <End Role="CartonBox" Type="OrderManagerDBModel.Store.CartonBox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="CartonBox">
+              <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1307,6 +1338,18 @@
             </Principal>
             <Dependent Role="OrderStatus">
               <PropertyRef Name="NextUserRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_CartonBox">
+          <End Role="CartonBox" Type="OrderManagerDBModel.Store.CartonBox" Multiplicity="0..1" />
+          <End Role="Package" Type="OrderManagerDBModel.Store.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CartonBox">
+              <PropertyRef Name="CartonBoxID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="CartonBoxID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1741,6 +1784,7 @@
           <EntitySet Name="AssetCategories" EntityType="OrderManagerDBModel.AssetCategory" />
           <EntitySet Name="AssetNames" EntityType="OrderManagerDBModel.AssetName" />
           <EntitySet Name="BrandNames" EntityType="OrderManagerDBModel.BrandName" />
+          <EntitySet Name="CartonBoxes" EntityType="OrderManagerDBModel.CartonBox" />
           <EntitySet Name="Colors" EntityType="OrderManagerDBModel.Color" />
           <EntitySet Name="CommissionValueTypes" EntityType="OrderManagerDBModel.CommissionValueType" />
           <EntitySet Name="Companies" EntityType="OrderManagerDBModel.Company" />
@@ -1802,6 +1846,14 @@
           <AssociationSet Name="FK_AssetName_AssetCategory" Association="OrderManagerDBModel.FK_AssetName_AssetCategory">
             <End Role="AssetCategory" EntitySet="AssetCategories" />
             <End Role="AssetName" EntitySet="AssetNames" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartonBox_Order" Association="OrderManagerDBModel.FK_CartonBox_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="CartonBox" EntitySet="CartonBoxes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_CartonBox" Association="OrderManagerDBModel.FK_Package_CartonBox">
+            <End Role="CartonBox" EntitySet="CartonBoxes" />
+            <End Role="Package" EntitySet="Packages" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductBreakUpSummary_Color" Association="OrderManagerDBModel.FK_ProductBreakUpSummary_Color">
             <End Role="Color" EntitySet="Colors" />
@@ -2116,6 +2168,17 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Assets" Relationship="OrderManagerDBModel.FK_Asset_BrandName" FromRole="BrandName" ToRole="Asset" />
         </EntityType>
+        <EntityType Name="CartonBox">
+          <Key>
+            <PropertyRef Name="CartonBoxID" />
+          </Key>
+          <Property Name="CartonBoxID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="OrderID" Type="Int64" Nullable="false" />
+          <Property Name="InvoiceGenerated" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_CartonBox_Order" FromRole="CartonBox" ToRole="Order" />
+          <NavigationProperty Name="Packages" Relationship="OrderManagerDBModel.FK_Package_CartonBox" FromRole="CartonBox" ToRole="Package" />
+        </EntityType>
         <EntityType Name="Color">
           <Key>
             <PropertyRef Name="ColorID" />
@@ -2345,6 +2408,7 @@
           <Property Name="InternalDeliveryDate" Type="DateTime" Precision="3" />
           <Property Name="OrderApprovedDate" Type="DateTime" Precision="3" />
           <Property Name="OrderConfirmedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CartonBoxes" Relationship="OrderManagerDBModel.FK_CartonBox_Order" FromRole="Order" ToRole="CartonBox" />
           <NavigationProperty Name="CommissionValueType" Relationship="OrderManagerDBModel.FK_Order_CommissionValueType" FromRole="Order" ToRole="CommissionValueType" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Order" ToRole="Company" />
           <NavigationProperty Name="Company1" Relationship="OrderManagerDBModel.FK_Order_OrderBy" FromRole="Order" ToRole="Company" />
@@ -2456,6 +2520,8 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ProductBreakUpSummaryID" Type="Int64" Nullable="false" />
           <Property Name="ExcessToStock" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CartonBoxID" Type="Int64" />
+          <NavigationProperty Name="CartonBox" Relationship="OrderManagerDBModel.FK_Package_CartonBox" FromRole="Package" ToRole="CartonBox" />
           <NavigationProperty Name="ProductBreakUpSummary" Relationship="OrderManagerDBModel.FK_Package_ProductBreakUpSummary" FromRole="Package" ToRole="ProductBreakUpSummary" />
         </EntityType>
         <EntityType Name="ProductBreakUp">
@@ -2797,6 +2863,30 @@
             </Principal>
             <Dependent Role="AssetName">
               <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartonBox_Order">
+          <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="1" />
+          <End Role="CartonBox" Type="OrderManagerDBModel.CartonBox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="CartonBox">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_CartonBox">
+          <End Role="CartonBox" Type="OrderManagerDBModel.CartonBox" Multiplicity="0..1" />
+          <End Role="Package" Type="OrderManagerDBModel.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CartonBox">
+              <PropertyRef Name="CartonBoxID" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="CartonBoxID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3650,6 +3740,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CartonBoxes">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.CartonBox">
+              <MappingFragment StoreEntitySet="CartonBox">
+                <ScalarProperty Name="CartonBoxID" ColumnName="CartonBoxID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="InvoiceGenerated" ColumnName="InvoiceGenerated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Colors">
             <EntityTypeMapping TypeName="OrderManagerDBModel.Color">
               <MappingFragment StoreEntitySet="Color">
@@ -3941,6 +4041,7 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
                 <ScalarProperty Name="ExcessToStock" ColumnName="ExcessToStock" />
+                <ScalarProperty Name="CartonBoxID" ColumnName="CartonBoxID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -5,6 +5,7 @@
     <EntitySet Name="AssetCategories" EntityType="OrderManagerDBModel.AssetCategory" />
     <EntitySet Name="AssetNames" EntityType="OrderManagerDBModel.AssetName" />
     <EntitySet Name="BrandNames" EntityType="OrderManagerDBModel.BrandName" />
+    <EntitySet Name="CartonBoxes" EntityType="OrderManagerDBModel.CartonBox" />
     <EntitySet Name="Colors" EntityType="OrderManagerDBModel.Color" />
     <EntitySet Name="CommissionValueTypes" EntityType="OrderManagerDBModel.CommissionValueType" />
     <EntitySet Name="Companies" EntityType="OrderManagerDBModel.Company" />
@@ -13,6 +14,7 @@
     <EntitySet Name="Currencies" EntityType="OrderManagerDBModel.Currency" />
     <EntitySet Name="GRNReciepts" EntityType="OrderManagerDBModel.GRNReciept" />
     <EntitySet Name="Histories" EntityType="OrderManagerDBModel.History" />
+    <EntitySet Name="Invoices" EntityType="OrderManagerDBModel.Invoice" />
     <EntitySet Name="JobOrders" EntityType="OrderManagerDBModel.JobOrder" />
     <EntitySet Name="JobOrderReceipts" EntityType="OrderManagerDBModel.JobOrderReceipt" />
     <EntitySet Name="JobOrderTolerances" EntityType="OrderManagerDBModel.JobOrderTolerance" />
@@ -66,6 +68,14 @@
       <End Role="AssetCategory" EntitySet="AssetCategories" />
       <End Role="AssetName" EntitySet="AssetNames" />
     </AssociationSet>
+    <AssociationSet Name="FK_CartonBox_Order" Association="OrderManagerDBModel.FK_CartonBox_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="CartonBox" EntitySet="CartonBoxes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_CartonBox" Association="OrderManagerDBModel.FK_Package_CartonBox">
+      <End Role="CartonBox" EntitySet="CartonBoxes" />
+      <End Role="Package" EntitySet="Packages" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProductBreakUpSummary_Color" Association="OrderManagerDBModel.FK_ProductBreakUpSummary_Color">
       <End Role="Color" EntitySet="Colors" />
       <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
@@ -86,6 +96,10 @@
       <End Role="CompanyType" EntitySet="CompanyTypes" />
       <End Role="Company" EntitySet="Companies" />
     </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Company" Association="OrderManagerDBModel.FK_Invoice_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
     <AssociationSet Name="FK_JobOrder_Company" Association="OrderManagerDBModel.FK_JobOrder_Company">
       <End Role="Company" EntitySet="Companies" />
       <End Role="JobOrder" EntitySet="JobOrders" />
@@ -105,6 +119,14 @@
     <AssociationSet Name="FK_PurchaseOrders_Company" Association="OrderManagerDBModel.FK_PurchaseOrders_Company">
       <End Role="Company" EntitySet="Companies" />
       <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Destination" Association="OrderManagerDBModel.FK_Invoice_Destination">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Origin" Association="OrderManagerDBModel.FK_Invoice_Origin">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Invoice" EntitySet="Invoices" />
     </AssociationSet>
     <AssociationSet Name="FK_ProductCountryWiseBreakUp_Country" Association="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Country">
       <End Role="Country" EntitySet="Countries" />
@@ -149,6 +171,10 @@
     <AssociationSet Name="FK_History_Order" Association="OrderManagerDBModel.FK_History_Order">
       <End Role="Order" EntitySet="Orders" />
       <End Role="History" EntitySet="Histories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_ShipmentMode" Association="OrderManagerDBModel.FK_Invoice_ShipmentMode">
+      <End Role="ShipmentMode" EntitySet="ShipmentModes" />
+      <End Role="Invoice" EntitySet="Invoices" />
     </AssociationSet>
     <AssociationSet Name="FK_JobOrder_JobOrderType" Association="OrderManagerDBModel.FK_JobOrder_JobOrderType">
       <End Role="JobOrderType" EntitySet="JobOrderTypes" />
@@ -363,6 +389,17 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="Assets" Relationship="OrderManagerDBModel.FK_Asset_BrandName" FromRole="BrandName" ToRole="Asset" />
   </EntityType>
+  <EntityType Name="CartonBox">
+    <Key>
+      <PropertyRef Name="CartonBoxID" />
+    </Key>
+    <Property Name="CartonBoxID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Number" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="OrderID" Type="Int64" Nullable="false" />
+    <Property Name="InvoiceGenerated" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_CartonBox_Order" FromRole="CartonBox" ToRole="Order" />
+    <NavigationProperty Name="Packages" Relationship="OrderManagerDBModel.FK_Package_CartonBox" FromRole="CartonBox" ToRole="Package" />
+  </EntityType>
   <EntityType Name="Color">
     <Key>
       <PropertyRef Name="ColorID" />
@@ -403,6 +440,7 @@
     <Property Name="CST" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
     <NavigationProperty Name="Assets" Relationship="OrderManagerDBModel.FK_Asset_Company" FromRole="Company" ToRole="Asset" />
     <NavigationProperty Name="CompanyType" Relationship="OrderManagerDBModel.FK_Company_CompanyType" FromRole="Company" ToRole="CompanyType" />
+    <NavigationProperty Name="Invoices" Relationship="OrderManagerDBModel.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
     <NavigationProperty Name="JobOrders" Relationship="OrderManagerDBModel.FK_JobOrder_Company" FromRole="Company" ToRole="JobOrder" />
     <NavigationProperty Name="Orders" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Company" ToRole="Order" />
     <NavigationProperty Name="Orders1" Relationship="OrderManagerDBModel.FK_Order_OrderBy" FromRole="Company" ToRole="Order" />
@@ -423,6 +461,8 @@
     </Key>
     <Property Name="CountryID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Invoices" Relationship="OrderManagerDBModel.FK_Invoice_Destination" FromRole="Country" ToRole="Invoice" />
+    <NavigationProperty Name="Invoices1" Relationship="OrderManagerDBModel.FK_Invoice_Origin" FromRole="Country" ToRole="Invoice" />
     <NavigationProperty Name="ProductCountryWiseBreakUps" Relationship="OrderManagerDBModel.FK_ProductCountryWiseBreakUp_Country" FromRole="Country" ToRole="ProductCountryWiseBreakUp" />
   </EntityType>
   <EntityType Name="Currency">
@@ -474,6 +514,28 @@
     <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_History_Order" FromRole="History" ToRole="Order" />
   </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExporterRefNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="BuyerRefNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ConsigneeID" Type="Int32" Nullable="false" />
+    <Property Name="OriginCountryID" Type="Int32" Nullable="false" />
+    <Property Name="DestinationCountryID" Type="Int32" Nullable="false" />
+    <Property Name="CarriageByID" Type="Byte" Nullable="false" />
+    <Property Name="PlaceOfReceiptByPrecarrier" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="LoadingPlace" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="DischargePlace" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="IsProforma" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_Invoice_Company" FromRole="Invoice" ToRole="Company" />
+    <NavigationProperty Name="Country" Relationship="OrderManagerDBModel.FK_Invoice_Destination" FromRole="Invoice" ToRole="Country" />
+    <NavigationProperty Name="Country1" Relationship="OrderManagerDBModel.FK_Invoice_Origin" FromRole="Invoice" ToRole="Country" />
+    <NavigationProperty Name="ShipmentMode" Relationship="OrderManagerDBModel.FK_Invoice_ShipmentMode" FromRole="Invoice" ToRole="ShipmentMode" />
+  </EntityType>
   <EntityType Name="JobOrder">
     <Key>
       <PropertyRef Name="JobOrderID" />
@@ -494,6 +556,7 @@
     <Property Name="IsIssued" Type="Boolean" Nullable="false" />
     <Property Name="IsWaitingForApproval" Type="Boolean" Nullable="false" />
     <Property Name="HasApproved" Type="Boolean" Nullable="false" />
+    <Property Name="FailedQuantityIssued" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_JobOrder_Company" FromRole="JobOrder" ToRole="Company" />
     <NavigationProperty Name="GRNReciept" Relationship="OrderManagerDBModel.FK_JobOrder_GRNReciept" FromRole="JobOrder" ToRole="GRNReciept" />
     <NavigationProperty Name="JobOrderType" Relationship="OrderManagerDBModel.FK_JobOrder_JobOrderType" FromRole="JobOrder" ToRole="JobOrderType" />
@@ -564,6 +627,9 @@
     <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="TotalOrderValue" Type="Decimal" Precision="18" Scale="4" />
     <Property Name="InternalDeliveryDate" Type="DateTime" Precision="3" />
+    <Property Name="OrderApprovedDate" Type="DateTime" Precision="3" />
+    <Property Name="OrderConfirmedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CartonBoxes" Relationship="OrderManagerDBModel.FK_CartonBox_Order" FromRole="Order" ToRole="CartonBox" />
     <NavigationProperty Name="CommissionValueType" Relationship="OrderManagerDBModel.FK_Order_CommissionValueType" FromRole="Order" ToRole="CommissionValueType" />
     <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Order" ToRole="Company" />
     <NavigationProperty Name="Company1" Relationship="OrderManagerDBModel.FK_Order_OrderBy" FromRole="Order" ToRole="Company" />
@@ -634,7 +700,7 @@
     <Property Name="OrderReportCardTypeID" Type="Byte" Nullable="false" />
     <Property Name="ProgressPercentage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
     <Property Name="OrderID" Type="Int64" Nullable="false" />
-    <Property Name="RequiredFinishDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RequiredFinishDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_OrderReportCard_Order" FromRole="OrderReportCard" ToRole="Order" />
     <NavigationProperty Name="OrderReportCardType" Relationship="OrderManagerDBModel.FK_OrderReportCard_OrderReportCardType" FromRole="OrderReportCard" ToRole="OrderReportCardType" />
   </EntityType>
@@ -675,6 +741,8 @@
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ProductBreakUpSummaryID" Type="Int64" Nullable="false" />
     <Property Name="ExcessToStock" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CartonBoxID" Type="Int64" />
+    <NavigationProperty Name="CartonBox" Relationship="OrderManagerDBModel.FK_Package_CartonBox" FromRole="Package" ToRole="CartonBox" />
     <NavigationProperty Name="ProductBreakUpSummary" Relationship="OrderManagerDBModel.FK_Package_ProductBreakUpSummary" FromRole="Package" ToRole="ProductBreakUpSummary" />
   </EntityType>
   <EntityType Name="ProductBreakUp">
@@ -903,6 +971,7 @@
     </Key>
     <Property Name="ShipmentModeID" Type="Byte" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="Mode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Invoices" Relationship="OrderManagerDBModel.FK_Invoice_ShipmentMode" FromRole="ShipmentMode" ToRole="Invoice" />
     <NavigationProperty Name="ProductBreakUps" Relationship="OrderManagerDBModel.FK_ProductBreakUp_ShipmentMode" FromRole="ShipmentMode" ToRole="ProductBreakUp" />
   </EntityType>
   <EntityType Name="SubMaterial">
@@ -1018,6 +1087,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_CartonBox_Order">
+    <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="1" />
+    <End Role="CartonBox" Type="OrderManagerDBModel.CartonBox" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="CartonBox">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_CartonBox">
+    <End Role="CartonBox" Type="OrderManagerDBModel.CartonBox" Multiplicity="0..1" />
+    <End Role="Package" Type="OrderManagerDBModel.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CartonBox">
+        <PropertyRef Name="CartonBoxID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="CartonBoxID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProductBreakUpSummary_Color">
     <End Role="Color" Type="OrderManagerDBModel.Color" Multiplicity="1" />
     <End Role="ProductBreakUpSummary" Type="OrderManagerDBModel.ProductBreakUpSummary" Multiplicity="*" />
@@ -1078,6 +1171,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Invoice_Company">
+    <End Role="Company" Type="OrderManagerDBModel.Company" Multiplicity="1" />
+    <End Role="Invoice" Type="OrderManagerDBModel.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="ConsigneeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_JobOrder_Company">
     <End Role="Company" Type="OrderManagerDBModel.Company" Multiplicity="1" />
     <End Role="JobOrder" Type="OrderManagerDBModel.JobOrder" Multiplicity="*" />
@@ -1135,6 +1240,30 @@
       </Principal>
       <Dependent Role="PurchaseOrders">
         <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Destination">
+    <End Role="Country" Type="OrderManagerDBModel.Country" Multiplicity="1" />
+    <End Role="Invoice" Type="OrderManagerDBModel.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="DestinationCountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Origin">
+    <End Role="Country" Type="OrderManagerDBModel.Country" Multiplicity="1" />
+    <End Role="Invoice" Type="OrderManagerDBModel.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="OriginCountryID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1267,6 +1396,18 @@
       </Principal>
       <Dependent Role="History">
         <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_ShipmentMode">
+    <End Role="ShipmentMode" Type="OrderManagerDBModel.ShipmentMode" Multiplicity="1" />
+    <End Role="Invoice" Type="OrderManagerDBModel.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipmentMode">
+        <PropertyRef Name="ShipmentModeID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="CarriageByID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

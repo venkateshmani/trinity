@@ -103,6 +103,9 @@
     <Compile Include="DatabaseModel\BrandName.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\CartonBox.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\Color.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
@@ -264,6 +267,7 @@
     <Compile Include="Extended Database Models\Company.cs" />
     <Compile Include="Extended Database Models\GRNReciept.cs" />
     <Compile Include="Extended Database Models\Helper.cs" />
+    <Compile Include="Extended Database Models\Invoice.cs" />
     <Compile Include="Extended Database Models\JobOrder.cs" />
     <Compile Include="Extended Database Models\OrderCurrencyConversion.cs" />
     <Compile Include="Extended Database Models\EntityBase.cs" />
@@ -405,7 +409,10 @@
     <Compile Include="Views\UserControls\Execution\ShippingControl.xaml.cs">
       <DependentUpon>ShippingControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\GeneratedInvoiceViewerControl.xaml.cs">
+    <Compile Include="Views\UserControls\Invoice\CatronBoxBrowser.xaml.cs">
+      <DependentUpon>CatronBoxBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Invoice\GeneratedInvoiceViewerControl.xaml.cs">
       <DependentUpon>GeneratedInvoiceViewerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\GRNControl.xaml.cs">
@@ -423,7 +430,7 @@
     <Compile Include="Views\UserControls\InStockControl.xaml.cs">
       <DependentUpon>InStockControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\CreateNewInvoiceControl.xaml.cs">
+    <Compile Include="Views\UserControls\Invoice\CreateNewInvoiceControl.xaml.cs">
       <DependentUpon>CreateNewInvoiceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\JobOrderJOView.xaml.cs">
@@ -554,7 +561,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\GeneratedInvoiceViewerControl.xaml">
+    <Page Include="Views\UserControls\Invoice\CatronBoxBrowser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Invoice\GeneratedInvoiceViewerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -578,7 +589,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\CreateNewInvoiceControl.xaml">
+    <Page Include="Views\UserControls\Invoice\CreateNewInvoiceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

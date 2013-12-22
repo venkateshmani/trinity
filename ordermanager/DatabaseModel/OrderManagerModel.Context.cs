@@ -32,6 +32,7 @@ namespace ordermanager.DatabaseModel
         public DbSet<AssetCategory> AssetCategories { get; set; }
         public DbSet<AssetName> AssetNames { get; set; }
         public DbSet<BrandName> BrandNames { get; set; }
+        public DbSet<CartonBox> CartonBoxes { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<CommissionValueType> CommissionValueTypes { get; set; }
         public DbSet<Company> Companies { get; set; }

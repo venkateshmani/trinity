@@ -107,6 +107,19 @@ namespace ordermanager.ViewModel
                 return null;
         }
 
+        public ObservableCollection<CartonBox> GetCartonBoxes(long OrderID)
+        {
+            return null;
+        }
+
+        public ObservableCollection<Company> Customers
+        {
+            get
+            {
+                return DBResources.Instance.Customers;
+            }
+        }
+
         public ObservableCollection<Company> Companies
         {
             get

@@ -41,6 +41,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CartonBoxes">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.CartonBox">
+        <MappingFragment StoreEntitySet="CartonBox">
+          <ScalarProperty Name="CartonBoxID" ColumnName="CartonBoxID" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="InvoiceGenerated" ColumnName="InvoiceGenerated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Colors">
       <EntityTypeMapping TypeName="OrderManagerDBModel.Color">
         <MappingFragment StoreEntitySet="Color">
@@ -137,6 +147,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Invoices">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.Invoice">
+        <MappingFragment StoreEntitySet="Invoice">
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="ExporterRefNumber" ColumnName="ExporterRefNumber" />
+          <ScalarProperty Name="BuyerRefNumber" ColumnName="BuyerRefNumber" />
+          <ScalarProperty Name="ConsigneeID" ColumnName="ConsigneeID" />
+          <ScalarProperty Name="OriginCountryID" ColumnName="OriginCountryID" />
+          <ScalarProperty Name="DestinationCountryID" ColumnName="DestinationCountryID" />
+          <ScalarProperty Name="CarriageByID" ColumnName="CarriageByID" />
+          <ScalarProperty Name="PlaceOfReceiptByPrecarrier" ColumnName="PlaceOfReceiptByPrecarrier" />
+          <ScalarProperty Name="LoadingPlace" ColumnName="LoadingPlace" />
+          <ScalarProperty Name="DischargePlace" ColumnName="DischargePlace" />
+          <ScalarProperty Name="IsProforma" ColumnName="IsProforma" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="JobOrders">
       <EntityTypeMapping TypeName="OrderManagerDBModel.JobOrder">
         <MappingFragment StoreEntitySet="JobOrder">
@@ -156,6 +185,7 @@
           <ScalarProperty Name="IsIssued" ColumnName="IsIssued" />
           <ScalarProperty Name="IsWaitingForApproval" ColumnName="IsWaitingForApproval" />
           <ScalarProperty Name="HasApproved" ColumnName="HasApproved" />
+          <ScalarProperty Name="FailedQuantityIssued" ColumnName="FailedQuantityIssued" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -221,6 +251,8 @@
           <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
           <ScalarProperty Name="TotalOrderValue" ColumnName="TotalOrderValue" />
           <ScalarProperty Name="InternalDeliveryDate" ColumnName="InternalDeliveryDate" />
+          <ScalarProperty Name="OrderApprovedDate" ColumnName="OrderApprovedDate" />
+          <ScalarProperty Name="OrderConfirmedDate" ColumnName="OrderConfirmedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -310,6 +342,7 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
           <ScalarProperty Name="ExcessToStock" ColumnName="ExcessToStock" />
+          <ScalarProperty Name="CartonBoxID" ColumnName="CartonBoxID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -1,4 +1,5 @@
-﻿using ordermanager.ViewModel;
+﻿using System.Windows.Controls;
+using ordermanager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,19 @@ namespace ordermanager.DatabaseModel
                 Packed = value;
                 CalculatePendingAndExcessStockQuantity();
                 OnPropertyChanged("PackagedWrapper");
+            }
+        }
+
+        public CartonBox CartonBoxWrapper
+        {
+            get
+            {
+                return CartonBox;
+            }
+            set
+            {
+                CartonBox = value;
+                OnPropertyChanged("CartonBoxWrapper");
             }
         }
 

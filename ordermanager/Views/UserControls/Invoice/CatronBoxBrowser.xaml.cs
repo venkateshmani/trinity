@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ordermanager.Views.UserControls
+namespace ordermanager.Views.UserControls.Invoice
 {
     /// <summary>
-    /// Interaction logic for InvoiceControl.xaml
+    /// Interaction logic for CatronBoxBrowser.xaml
     /// </summary>
-    public partial class CreateNewInvoiceControl : UserControl
+    public partial class CatronBoxBrowser 
     {
-        public CreateNewInvoiceControl()
+        public CatronBoxBrowser()
         {
             InitializeComponent();
+
         }
     }
 }

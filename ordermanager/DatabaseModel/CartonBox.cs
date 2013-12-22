@@ -12,17 +12,19 @@ namespace ordermanager.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Package
+    public partial class CartonBox
     {
-        public long PackageID { get; set; }
-        public decimal Packed { get; set; }
-        public decimal Pending { get; set; }
-        public System.DateTime Date { get; set; }
-        public long ProductBreakUpSummaryID { get; set; }
-        public Nullable<decimal> ExcessToStock { get; set; }
-        public Nullable<long> CartonBoxID { get; set; }
+        public CartonBox()
+        {
+            this.Packages = new HashSet<Package>();
+        }
     
-        public virtual CartonBox CartonBox { get; set; }
-        public virtual ProductBreakUpSummary ProductBreakUpSummary { get; set; }
+        public long CartonBoxID { get; set; }
+        public string Number { get; set; }
+        public long OrderID { get; set; }
+        public bool InvoiceGenerated { get; set; }
+    
+        public virtual Order Order { get; set; }
+        public virtual ICollection<Package> Packages { get; set; }
     }
 }
