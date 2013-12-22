@@ -452,7 +452,6 @@ D:\Work\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.dll
 D:\Work\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.pdb
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\bin\Debug\NET45\MahApps.Metro.dll
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\bin\Debug\NET45\MahApps.Metro.pdb
-C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.NET45.csprojResolveAssemblyReference.cache
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Styles\Controls.ContextMenu.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Styles\Controls.Label.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Styles\Controls.ListBox.baml

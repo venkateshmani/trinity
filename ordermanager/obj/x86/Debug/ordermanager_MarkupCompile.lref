@@ -12,6 +12,7 @@ FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Exe
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Execution\ProductionControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Execution\QualityControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Execution\ShippingControl.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Invoice\CatronBoxBrowser.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Invoice\GeneratedInvoiceViewerControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\GRNControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\GRN\OrderedItemGrnView.xaml;;
@@ -29,5 +30,4 @@ FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Pro
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\ViewOrdersControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\TestWindow.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\OrderWorkBench.xaml;;
-FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Invoice\CatronBoxBrowser.xaml;;
 
