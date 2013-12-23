@@ -1,5 +1,6 @@
 ﻿using ordermanager.DatabaseModel;
 using ordermanager.ViewModel;
+using ordermanager.ViewModel.Invoice;
 using ordermanager.Views.UserControls.Invoice;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,17 @@ namespace ordermanager.Views.UserControls
         public CreateNewInvoiceControl()
         {
             InitializeComponent();
+        }
+
+        private CreateNewInvoiceViewModel m_ViewModel = null;
+        public CreateNewInvoiceViewModel ViewModel
+        {
+            get { return m_ViewModel; }
+            set
+            {
+                m_ViewModel = value;
+                this.DataContext = value;
+            }
         }
 
        

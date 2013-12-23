@@ -5,7 +5,7 @@
         xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
-        Title="CatronBoxBrowser" Height="300" Width="300">
+        Title="CatronBoxBrowser" Height="500" Width="706">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -44,9 +44,58 @@
       </ResourceDictionary>
     </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.4*"/>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.6*"/>
         </Grid.ColumnDefinitions>
+        <Border  Grid.Row="1" Grid.Column="0">
+        <ListView x:Name="cartonBoxList" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Products}" SelectedIndex="{Binding Path=SelectedIndex, Mode=OneWay}" SelectionChanged="CartonBoxList_OnSelectionChanged">
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
+                    <GridViewColumn x:Name="cartonBoxColumn" Header="Product" Width="{Binding ActualWidth, ElementName=productsList, Converter={StaticResource subractor}, ConverterParameter=5}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexToNumber}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}"/>
+                                    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text=".  "   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center"  Style="{StaticResource ProductsListContentStyle}" />
+                                    <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" DataContext="{Binding Path=ProductName}" Text="{Binding Path=Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        </Border>
+
+        <GridSplitter Grid.Row="0" Grid.Column="1"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      Background="LightGray" 
+                      ShowsPreview="True"
+                      Width="5" Grid.RowSpan="2" />
+        
+        <Grid Grid.Row="1" Grid.Column="2" Margin="5">
+            <Border BorderThickness="1" BorderBrush="Gray" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <DataGrid VerticalAlignment="Stretch">
+                 
+                </DataGrid>
+            </Border>
+        </Grid>
+        
+        
     </Grid>
 </Controls:MetroWindow>

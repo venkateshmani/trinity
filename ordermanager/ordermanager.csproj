@@ -329,6 +329,9 @@
     <Compile Include="ViewModel\InStock\ProductInStock.cs" />
     <Compile Include="ViewModel\InStock\ProductStockItem.cs" />
     <Compile Include="ViewModel\InStock\StockModel.cs" />
+    <Compile Include="ViewModel\Invoice\CartonBoxBrowserViewModel.cs" />
+    <Compile Include="ViewModel\Invoice\CreateNewInvoiceViewModel.cs" />
+    <Compile Include="ViewModel\Invoice\GeneratedPurchaseOrderViewModel.cs" />
     <Compile Include="ViewModel\JobbOrderJOViewModel.cs" />
     <Compile Include="ViewModel\JobWorkViewModel.cs" />
     <Compile Include="ViewModel\ManageControlViewModel.cs" />
@@ -341,6 +344,7 @@
     <Compile Include="ViewModel\PurchaseOrderNumberInfo.cs" />
     <Compile Include="ViewModel\PurchaseOrderSearchControlViewModel.cs" />
     <Compile Include="ViewModel\UserManagementViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\ViewOrdersControlViewModel.cs" />
     <Compile Include="Views\CommonControls\BackForwardButton.xaml.cs">
       <DependentUpon>BackForwardButton.xaml</DependentUpon>

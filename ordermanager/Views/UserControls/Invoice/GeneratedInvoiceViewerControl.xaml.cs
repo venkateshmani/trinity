@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ordermanager.ViewModel.Invoice;
 
 namespace ordermanager.Views.UserControls
 {
@@ -23,6 +24,17 @@ namespace ordermanager.Views.UserControls
         public GeneratedInvoiceViewerControl()
         {
             InitializeComponent();
+        }
+
+        private GeneratedPurchaseOrderViewModel m_ViewModel = null;
+        public GeneratedPurchaseOrderViewModel ViewModel
+        {
+            get { return m_ViewModel; }
+            set
+            {
+                m_ViewModel = value;
+                this.DataContext = value;
+            }
         }
     }
 }
