@@ -18,6 +18,7 @@ namespace ordermanager.DatabaseModel
         {
             this.CartonBoxes = new HashSet<CartonBox>();
             this.Histories = new HashSet<History>();
+            this.Invoices = new HashSet<Invoice>();
             this.JobOrderTolerances = new HashSet<JobOrderTolerance>();
             this.OrderCurrencyConversions = new HashSet<OrderCurrencyConversion>();
             this.OrderProducts = new HashSet<OrderProduct>();
@@ -45,6 +46,7 @@ namespace ordermanager.DatabaseModel
         public virtual Company Company { get; set; }
         public virtual Company Company1 { get; set; }
         public virtual ICollection<History> Histories { get; set; }
+        public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<JobOrderTolerance> JobOrderTolerances { get; set; }
         public virtual OrderStatu OrderStatu { get; set; }
         public virtual OrderThrough OrderThrough { get; set; }

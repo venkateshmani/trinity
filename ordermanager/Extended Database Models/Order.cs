@@ -84,6 +84,24 @@ namespace ordermanager.DatabaseModel
             }
 
 
+            public ObservableCollection<CartonBox> ShippableCartonBoxes
+            {
+                get
+                {
+                    ObservableCollection<CartonBox> cartonBoxesYetToBePacked = new ObservableCollection<CartonBox>();
+
+                    foreach (CartonBox cartonBox in CartonBoxes)
+                    {
+                        if (!cartonBox.InvoiceGenerated)
+                        {
+                            cartonBoxesYetToBePacked.Add(cartonBox);
+                        }
+                    }
+
+                    return cartonBoxesYetToBePacked;
+                }
+            }
+
             public virtual OrderThrough OrderThroughWrapper
             {
                 get
@@ -98,11 +116,14 @@ namespace ordermanager.DatabaseModel
                 }
             }
 
-            public virtual decimal? CommissionValueWrapper
+            public virtual decimal CommissionValueWrapper
             {
                 get
                 {
-                    return CommissionValue;
+                    if (CommissionValue == null)
+                        return 0;
+
+                    return CommissionValue.Value;
                 }
                 set
                 {

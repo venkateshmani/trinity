@@ -58,6 +58,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="InvoiceUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InvoiceUserControl.Designer.cs">
+      <DependentUpon>InvoiceUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="OrderManagerDBDataSetForPO.cs">
       <DependentUpon>OrderManagerDBDataSetForPO.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -79,6 +85,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Invoice.rdlc" />
+    <EmbeddedResource Include="InvoiceUserControl.resx">
+      <DependentUpon>InvoiceUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PurchaseOrderReportControl.resx">
       <DependentUpon>PurchaseOrderReportControl.cs</DependentUpon>
     </EmbeddedResource>

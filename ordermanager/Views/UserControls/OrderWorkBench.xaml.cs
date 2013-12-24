@@ -1,6 +1,7 @@
 ﻿using ordermanager.DatabaseModel;
 using ordermanager.ViewModel;
 using ordermanager.ViewModel.Execution;
+using ordermanager.ViewModel.Invoice;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,6 +29,9 @@ namespace ordermanager.Views.UserControls
         ProductMaterialsViewModel m_MaterialsViewModel;
         PurchaseOrderControlViewModel m_PurchaseOrderViewModel;
         ChangeHistoryViewModel m_ChangeHistorViewModel;
+        CreateNewInvoiceViewModel m_CreateInvoiceViewModel = null;
+        GeneratedPurchaseOrderViewModel m_GeneratedInvoiceViewModel = null;
+
         Order m_Order = null;
         public OrderWorkBench()
         {
@@ -39,6 +43,11 @@ namespace ordermanager.Views.UserControls
             m_ChangeHistorViewModel = new ChangeHistoryViewModel();
             changeHistoryControl.DataContext = m_ChangeHistorViewModel;
 
+            m_CreateInvoiceViewModel = new CreateNewInvoiceViewModel();
+            createNewInvoiceControl.ViewModel = m_CreateInvoiceViewModel;
+
+            m_GeneratedInvoiceViewModel = new GeneratedPurchaseOrderViewModel();
+            generatedInvoiceControl.ViewModel = m_GeneratedInvoiceViewModel;
 
             this.Loaded += OrderWorkBench_Loaded;
             tabControl.SelectedIndex = 2;
@@ -104,7 +113,7 @@ namespace ordermanager.Views.UserControls
             {
                 case "Materials":
                     m_MaterialsViewModel.SetOrder(m_Order);
-                    break;
+                    break;  
                 case "Material Details":
                     m_PurchaseOrderViewModel.SetOrder(m_Order);
                     break;
@@ -113,7 +122,11 @@ namespace ordermanager.Views.UserControls
                     break;
                 case "Change History":
                     m_ChangeHistorViewModel.SetOrder(m_Order);
-                    break;               
+                    break;
+                case "Invoice":
+                    m_CreateInvoiceViewModel.SetOrder(m_Order);
+                    m_GeneratedInvoiceViewModel.SetOrder(m_Order);
+                    break;
                 case "Execution":
                     UpdateExecutionView();
                     break;

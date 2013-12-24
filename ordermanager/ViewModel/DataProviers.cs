@@ -109,7 +109,19 @@ namespace ordermanager.ViewModel
 
         public ObservableCollection<CartonBox> GetCartonBoxes(long OrderID)
         {
-            return null;
+            Order order = DBResources.Instance.Context.Orders.Find(OrderID);
+
+            ObservableCollection<CartonBox> cartonBoxesYetToBePacked = new ObservableCollection<CartonBox>();
+
+            foreach (CartonBox cartonBox in order.CartonBoxes)
+            {
+                if (!cartonBox.InvoiceGenerated)
+                {
+                    cartonBoxesYetToBePacked.Add(cartonBox);
+                }
+            }
+
+            return cartonBoxesYetToBePacked;
         }
 
         public ObservableCollection<Company> Customers

@@ -36,5 +36,15 @@ namespace ordermanager.Views.UserControls
                 this.DataContext = value;
             }
         }
+
+        private void invoiceList_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+                
+        }
+
+        private void btnGenerateInvoices_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

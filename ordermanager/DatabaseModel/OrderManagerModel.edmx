@@ -105,6 +105,10 @@
             <End Role="Country" EntitySet="Country" />
             <End Role="Invoice" EntitySet="Invoice" />
           </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Order" Association="OrderManagerDBModel.Store.FK_Invoice_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
           <AssociationSet Name="FK_Invoice_Origin" Association="OrderManagerDBModel.Store.FK_Invoice_Origin">
             <End Role="Country" EntitySet="Country" />
             <End Role="Invoice" EntitySet="Invoice" />
@@ -500,6 +504,7 @@
           <Property Name="LoadingPlace" Type="varchar" MaxLength="20" />
           <Property Name="DischargePlace" Type="varchar" MaxLength="20" />
           <Property Name="IsProforma" Type="bit" Nullable="false" />
+          <Property Name="OrderID" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="JobOrder">
           <Key>
@@ -1038,6 +1043,18 @@
             </Principal>
             <Dependent Role="Invoice">
               <PropertyRef Name="DestinationCountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Invoice_Order">
+          <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
+          <End Role="Invoice" Type="OrderManagerDBModel.Store.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1951,6 +1968,10 @@
             <End Role="Order" EntitySet="Orders" />
             <End Role="History" EntitySet="Histories" />
           </AssociationSet>
+          <AssociationSet Name="FK_Invoice_Order" Association="OrderManagerDBModel.FK_Invoice_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
           <AssociationSet Name="FK_Invoice_ShipmentMode" Association="OrderManagerDBModel.FK_Invoice_ShipmentMode">
             <End Role="ShipmentMode" EntitySet="ShipmentModes" />
             <End Role="Invoice" EntitySet="Invoices" />
@@ -2310,9 +2331,11 @@
           <Property Name="LoadingPlace" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="DischargePlace" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="IsProforma" Type="Boolean" Nullable="false" />
+          <Property Name="OrderID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_Invoice_Company" FromRole="Invoice" ToRole="Company" />
           <NavigationProperty Name="Country" Relationship="OrderManagerDBModel.FK_Invoice_Destination" FromRole="Invoice" ToRole="Country" />
           <NavigationProperty Name="Country1" Relationship="OrderManagerDBModel.FK_Invoice_Origin" FromRole="Invoice" ToRole="Country" />
+          <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_Invoice_Order" FromRole="Invoice" ToRole="Order" />
           <NavigationProperty Name="ShipmentMode" Relationship="OrderManagerDBModel.FK_Invoice_ShipmentMode" FromRole="Invoice" ToRole="ShipmentMode" />
         </EntityType>
         <EntityType Name="JobOrder">
@@ -2413,6 +2436,7 @@
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Order" ToRole="Company" />
           <NavigationProperty Name="Company1" Relationship="OrderManagerDBModel.FK_Order_OrderBy" FromRole="Order" ToRole="Company" />
           <NavigationProperty Name="Histories" Relationship="OrderManagerDBModel.FK_History_Order" FromRole="Order" ToRole="History" />
+          <NavigationProperty Name="Invoices" Relationship="OrderManagerDBModel.FK_Invoice_Order" FromRole="Order" ToRole="Invoice" />
           <NavigationProperty Name="JobOrderTolerances" Relationship="OrderManagerDBModel.FK_JobOrderTolerance_Order" FromRole="Order" ToRole="JobOrderTolerance" />
           <NavigationProperty Name="OrderStatu" Relationship="OrderManagerDBModel.FK_Order_OrderStatus" FromRole="Order" ToRole="OrderStatus" />
           <NavigationProperty Name="OrderThrough" Relationship="OrderManagerDBModel.FK_Order_OrderThrough" FromRole="Order" ToRole="OrderThrough" />
@@ -3178,6 +3202,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Invoice_Order">
+          <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="1" />
+          <End Role="Invoice" Type="OrderManagerDBModel.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Invoice_ShipmentMode">
           <End Role="ShipmentMode" Type="OrderManagerDBModel.ShipmentMode" Multiplicity="1" />
           <End Role="Invoice" Type="OrderManagerDBModel.Invoice" Multiplicity="*" />
@@ -3862,6 +3898,7 @@
                 <ScalarProperty Name="LoadingPlace" ColumnName="LoadingPlace" />
                 <ScalarProperty Name="DischargePlace" ColumnName="DischargePlace" />
                 <ScalarProperty Name="IsProforma" ColumnName="IsProforma" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

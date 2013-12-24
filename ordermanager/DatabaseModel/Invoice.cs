@@ -27,10 +27,12 @@ namespace ordermanager.DatabaseModel
         public string LoadingPlace { get; set; }
         public string DischargePlace { get; set; }
         public bool IsProforma { get; set; }
+        public long OrderID { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual Country Country { get; set; }
         public virtual Country Country1 { get; set; }
+        public virtual Order Order { get; set; }
         public virtual ShipmentMode ShipmentMode { get; set; }
     }
 }

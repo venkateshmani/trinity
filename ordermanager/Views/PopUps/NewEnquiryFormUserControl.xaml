@@ -214,9 +214,9 @@
                             <TextBox Width="60" BorderBrush="LightGray"
                                  HorizontalContentAlignment="Right" 
                                  VerticalContentAlignment="Center"
-                                 Controls:TextboxHelper.Watermark="0" Text="{Binding Order.CommissionValueWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True, StringFormat=n4}"
                                  PreviewTextInput="TextBox_PreviewTextInput"
-                                 DataObject.Pasting="PastingHandler" 
+                                 DataObject.Pasting="PastingHandler"
+                                 Controls:TextboxHelper.Watermark="0" Text="{Binding Order.CommissionValueWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True, StringFormat=n4}"
                                  IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
                                  />
                             <ComboBox Width="73" Margin="5,0,0,0"

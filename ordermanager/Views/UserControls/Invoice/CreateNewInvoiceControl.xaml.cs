@@ -158,6 +158,7 @@ namespace ordermanager.Views.UserControls
         private void SelectedCartonBoxBtn_OnClick(object sender, RoutedEventArgs e)
         {
             CatronBoxBrowser browser = new CatronBoxBrowser();
+            browser.ViewModel = new CartonBoxBrowserViewModel(ViewModel.Order);
             browser.ShowDialog();
         }
     }

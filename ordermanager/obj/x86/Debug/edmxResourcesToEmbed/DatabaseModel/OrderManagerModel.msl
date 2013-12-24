@@ -163,6 +163,7 @@
           <ScalarProperty Name="LoadingPlace" ColumnName="LoadingPlace" />
           <ScalarProperty Name="DischargePlace" ColumnName="DischargePlace" />
           <ScalarProperty Name="IsProforma" ColumnName="IsProforma" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

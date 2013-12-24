@@ -203,9 +203,48 @@
                     </Button>
                 </StackPanel>
                 <Border Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="Gray" BorderThickness="1">
-                     <DataGrid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" CanUserAddRows="False" CanUserDeleteRows="True"
-                          AutoGenerateColumns="False">
-                        </DataGrid>
+                    <DataGrid x:Name="cartonBoxDetails" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
+                                              GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
+                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"
+                                              RowHeaderWidth="25"
+                                              HeadersVisibility="Column"
+                                              IsReadOnly="True">
+                        <DataGrid.Columns>
+
+                            <DataGridTemplateColumn Header="Style ID" Width="0.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True" Text="{Binding StyleID, Mode=OneWay}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Size" Width="0.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True" Text="{Binding SizeWrapper.Size, Mode=OneWay}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Color" Width="0.1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True" Text="{Binding ColorWrapper.Name, Mode=OneWay}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Quantity" Width="0.1*" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox  Text="{Binding PackagedWrapper, UpdateSourceTrigger=LostFocus, StringFormat=n4}" IsReadOnly="True" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Border>
             </Grid>
         </Grid>

@@ -100,6 +100,10 @@
       <End Role="Country" EntitySet="Country" />
       <End Role="Invoice" EntitySet="Invoice" />
     </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Order" Association="OrderManagerDBModel.Store.FK_Invoice_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="Invoice" EntitySet="Invoice" />
+    </AssociationSet>
     <AssociationSet Name="FK_Invoice_Origin" Association="OrderManagerDBModel.Store.FK_Invoice_Origin">
       <End Role="Country" EntitySet="Country" />
       <End Role="Invoice" EntitySet="Invoice" />
@@ -495,6 +499,7 @@
     <Property Name="LoadingPlace" Type="varchar" MaxLength="20" />
     <Property Name="DischargePlace" Type="varchar" MaxLength="20" />
     <Property Name="IsProforma" Type="bit" Nullable="false" />
+    <Property Name="OrderID" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="JobOrder">
     <Key>
@@ -1033,6 +1038,18 @@
       </Principal>
       <Dependent Role="Invoice">
         <PropertyRef Name="DestinationCountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Order">
+    <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
+    <End Role="Invoice" Type="OrderManagerDBModel.Store.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="OrderID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

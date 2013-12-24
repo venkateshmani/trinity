@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ordermanager.ViewModel.Invoice;
+using ordermanager.DatabaseModel;
 
 namespace ordermanager.Views.UserControls.Invoice
 {
@@ -23,7 +24,6 @@ namespace ordermanager.Views.UserControls.Invoice
         public CatronBoxBrowser()
         {
             InitializeComponent();
-
         }
 
         private CartonBoxBrowserViewModel m_ViewModel = null;
@@ -39,7 +39,17 @@ namespace ordermanager.Views.UserControls.Invoice
 
         private void CartonBoxList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            CartonBox selectedCartonBox = cartonBoxList.SelectedItem as CartonBox;
+            if (selectedCartonBox != null)
+            {
+                cartonBoxDetails.ItemsSource = selectedCartonBox.Packages;
+            }
+        }
+
+        private void positiveDecisionBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+            this.Close();
         }
     }
 }

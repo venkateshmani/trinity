@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.DatabaseModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,17 @@ namespace ordermanager.ViewModel.Invoice
             
         }
 
-
+        private Order m_Order = null;
+        public Order Order
+        {
+            get
+            {
+                return m_Order;
+            }
+            set
+            {
+                m_Order = value;
+            }
+        }
     }
 }

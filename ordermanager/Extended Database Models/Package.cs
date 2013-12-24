@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace ordermanager.DatabaseModel
 {
@@ -17,6 +18,15 @@ namespace ordermanager.DatabaseModel
                 return ProductBreakUpSummary.ProductSize;
             }
         }
+
+        public string StyleID
+        {
+            get
+            {
+                return ProductBreakUpSummary.OrderProduct.ProductName.StyleID;
+            }
+        }
+      
 
         public Color ColorWrapper
         {

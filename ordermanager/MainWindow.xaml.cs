@@ -146,5 +146,10 @@ namespace ordermanager
                     break;
             }
         }
+
+        private void calculatorBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("calc.exe");
+        }
     }
 }

@@ -9,6 +9,7 @@
              xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
              xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"  d:DesignHeight="506" d:DesignWidth="1288.284">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -48,6 +49,12 @@
             <Converters:HasErrorToVisibilityConverter x:Key="hasErrorToVisibilityConverter" />
             <Converters:UserFriendlyDateNameCreator x:Key="UserFriendlyDateNameCreator"/>            
             <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <ObjectDataProvider x:Key="GetCartonBoxes" ObjectType="{x:Type DataProviders:DataProvider}"
+                MethodName="GetCartonBoxes">
+                <ObjectDataProvider.MethodParameters>
+                    <sys:String>Material1</sys:String>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -178,6 +185,33 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
+
+                        <DataGridTemplateColumn Header="Carton Box #" Width="0.1*" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <ComboBox x:Name="cartonBoxNumberLists" Grid.Column="0" IsEditable="True"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                                     ItemsSource="{Binding Source={StaticResource GetCartonBoxes}}" DisplayMemberPath="Number"
+                                                    SelectedItem="{Binding CartonBoxWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                    Height="20" TextBoxBase.TextChanged="cartonBoxNumber_TextChanged_1"
+                                                    IsHitTestVisible="{Binding IsEditable}" IsReadOnly="{ Binding Tag, ElementName=executionDetails}" />
+                                        <Button  x:Name="btnAddCartonBox" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
+                                                        Cursor="Hand" Click="btnAddCartonBox_Click_1" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Item"  Visibility="Collapsed">
+                                            <Rectangle Width="10" Height="10">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
                         <DataGridTemplateColumn Header="Pending" Width="0.1*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
