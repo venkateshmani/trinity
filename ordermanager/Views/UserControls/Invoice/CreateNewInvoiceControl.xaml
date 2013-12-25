@@ -43,13 +43,13 @@
             <Converters:Subractor x:Key="subractor"/>
             <Converters:HasErrorToVisibilityConverter x:Key="hasErrorToVisibilityConverter" />
             <DataProviders:DataProvider x:Key="DataProvider" />
-            
+
             <Style x:Key="headerStyle" TargetType="TextBlock">
                 <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="HorizontalAlignment" Value="Right"/>
                 <Setter Property="Margin" Value="5" />
             </Style>
-            
+
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -57,13 +57,13 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="20,5,20,5">
+        <Grid Grid.Row="0" Margin="20,5,20,5" DataContext="{Binding NewInvoice}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-        
+
             <Grid Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -106,7 +106,7 @@
                                   SelectedItem="{Binding Consignee}"
                                   IsEditable="True"
                                   SelectionChanged="customerComboBox_SelectionChanged_1"/>
-                    
+
                         <Button Width="28"
                             Height="28"
                             Margin="0, 2, 0, 0"
@@ -193,9 +193,9 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-            
+
                 <StackPanel Orientation="Horizontal" Grid.Row="0">
-                    <Button x:Name="selectedCartonBoxBtn" Content="Select Carton Boxes"  Width="150" Height="25" Foreground="White" Margin="5" ToolTip="Add New Item" HorizontalAlignment="Left"
+                    <Button x:Name="selectedCartonBoxBtn" Content="Select Carton Boxes"  Width="150" Height="25" Foreground="White" Margin="0,5,0,5" ToolTip="Add New Item" HorizontalAlignment="Left"
                             Click="SelectedCartonBoxBtn_OnClick">
                         <Button.Background>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
@@ -206,9 +206,8 @@
                     <DataGrid x:Name="cartonBoxDetails" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"
-                                              RowHeaderWidth="25"
-                                              HeadersVisibility="Column"
-                                              IsReadOnly="True">
+                                              RowHeaderWidth="25" HeadersVisibility="Column"
+                                              ItemsSource="{Binding InvoiceCartonBoxSummaries, Mode=OneWay}" >
                         <DataGrid.Columns>
 
                             <DataGridTemplateColumn Header="Style ID" Width="0.1*">
@@ -222,7 +221,7 @@
                             <DataGridTemplateColumn Header="Size" Width="0.1*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox IsReadOnly="True" Text="{Binding SizeWrapper.Size, Mode=OneWay}" />
+                                        <TextBox IsReadOnly="True" Text="{Binding Size, Mode=OneWay}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -230,7 +229,7 @@
                             <DataGridTemplateColumn Header="Color" Width="0.1*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox IsReadOnly="True" Text="{Binding ColorWrapper.Name, Mode=OneWay}" />
+                                        <TextBox IsReadOnly="True" Text="{Binding Color, Mode=OneWay}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -238,23 +237,37 @@
                             <DataGridTemplateColumn Header="Quantity" Width="0.1*" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox  Text="{Binding PackagedWrapper, UpdateSourceTrigger=LostFocus, StringFormat=n4}" IsReadOnly="True" />
+                                        <TextBox  Text="{Binding Quantity, StringFormat=n4}" IsReadOnly="True" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
+                            <DataGridTemplateColumn Header="Cost/Unit" Width="0.1*" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding CostPerUnit, StringFormat=n4}" IsReadOnly="True" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Total Cost" Width="0.1*" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding TotalCost, StringFormat=n4, Mode=OneWay}"  IsReadOnly="True" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>
             </Grid>
         </Grid>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="3">
-            <Button Content="Generate"  Width="100" Height="25" Foreground="White" Margin="5" ToolTip="Add New Item" HorizontalAlignment="Left">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">
+            <Button Content="Generate" x:Name="btnGenerateInvoice" IsEnabled="False"  Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Invoice" HorizontalAlignment="Left" Click="btnGenerateInvoice_Click">
                 <Button.Background>
                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                 </Button.Background>
             </Button>
-            <Button Content="Discard"  Width="100" Height="25" Margin="5" Foreground="White"  ToolTip="Add New Item" HorizontalAlignment="Left">
+            <Button Content="Discard" x:Name="btnDiscard" Width="100" Height="30" Margin="5" Foreground="White"  ToolTip="Discard Invoice" HorizontalAlignment="Left" Click="btnDiscard_Click">
                 <Button.Background>
                     <SolidColorBrush Color="{StaticResource ValidationColor5}" />
                 </Button.Background>

@@ -43,8 +43,7 @@
                 <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
             </Style>
             <Converters:StarWidthConverter x:Key="starWidthConverter"></Converters:StarWidthConverter>
-            <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
-            <local:MaterialsProvider x:Key="materialsProvider" />
+            <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>          
         </ResourceDictionary>
     </UserControl.Resources>
 

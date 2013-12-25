@@ -6,29 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ordermanager.Extended_Database_Models
+namespace ordermanager.DatabaseModel
 {
-    //public class PurchaseOrder
-    //{
-    //    ObservableCollection<ProductMaterialItem> m_Items;
-    //    ObservableCollection<SubMaterial> m_SubMaterials;
-    //    MaterialName m_MaterialName;
-    //    public PurchaseOrder(MaterialName materialName, ObservableCollection<SubMaterial> availableSubMaterials, ObservableCollection<ProductMaterialItem> productMaterialItems)
-    //    {
-    //        m_MaterialName = materialName;
-    //        m_SubMaterials = availableSubMaterials;
-    //        m_Items = productMaterialItems;
-    //    }
-
-    //    public ObservableCollection<ProductMaterialItem> ProductMaterialItemsWrapper
-    //    {
-    //        get { return m_Items; }
-    //        set { m_Items = value; }
-    //    }
-    //    public ObservableCollection<SubMaterial> AvailableSubMaterials
-    //    {
-    //        get { return m_SubMaterials; }
-    //        set { m_SubMaterials = value; }
-    //    }
-    //}
+    public class InvoiceCartonBoxSummary
+    {
+        public string StyleID
+        { get; set; }
+        public string Size
+        { get; set; }
+        public string Color
+        { get; set; }
+        public decimal Quantity
+        { get; set; }
+        public decimal CostPerUnit
+        { get; set; }
+        public decimal TotalCost
+        {
+            get { return Quantity * CostPerUnit; }          
+        }
+    }
 }

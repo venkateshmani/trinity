@@ -50,6 +50,12 @@ namespace ordermanager.Views.UserControls.Invoice
         {
             this.DialogResult = true;
             this.Close();
+        }       
+
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
         }
     }
 }

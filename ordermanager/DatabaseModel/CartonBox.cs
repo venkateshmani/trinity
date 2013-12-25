@@ -23,7 +23,9 @@ namespace ordermanager.DatabaseModel
         public string Number { get; set; }
         public long OrderID { get; set; }
         public bool InvoiceGenerated { get; set; }
+        public Nullable<long> InvoiceID { get; set; }
     
+        public virtual Invoice Invoice { get; set; }
         public virtual Order Order { get; set; }
         public virtual ICollection<Package> Packages { get; set; }
     }

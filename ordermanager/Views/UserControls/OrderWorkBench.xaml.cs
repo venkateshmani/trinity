@@ -221,36 +221,6 @@ namespace ordermanager.Views.UserControls
             public string ProductName { get; set; }
             public string Quantity { get; set; }
             public int ItemIndexNumber { get; set; }
-        }
-
-        private void productsList_SizeChanged_1(object sender, SizeChangedEventArgs e)
-        {
-            // productColumn.Width = productsList.ActualWidth - 5;  //5 for Border
-        }
-    }
-
-    public class MaterialsProvider
-    {
-        private ObservableCollection<string> dtMaterialsProvider = null;
-        public MaterialsProvider()
-        {
-            dtMaterialsProvider = new ObservableCollection<string>();
-            dtMaterialsProvider.Add("Materials 1");
-            dtMaterialsProvider.Add("Materials 2");
-            dtMaterialsProvider.Add("Materials 3");
-            dtMaterialsProvider.Add("Materials 4");
-            dtMaterialsProvider.Add("Materials 4");
-            dtMaterialsProvider.Add("Materials 4");
-            dtMaterialsProvider.Add("Materials 4");
-            dtMaterialsProvider.Add("Materials 4");
-        }
-
-        public ObservableCollection<string> AvailableMaterials
-        {
-            get
-            {
-                return dtMaterialsProvider;
-            }
-        }
-    }
+        }       
+    }   
 }

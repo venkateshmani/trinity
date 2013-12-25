@@ -4,6 +4,7 @@ using ordermanager.ViewModel.Invoice;
 using ordermanager.Views.UserControls.Invoice;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,11 +37,11 @@ namespace ordermanager.Views.UserControls
             set
             {
                 m_ViewModel = value;
-                this.DataContext = value;
+                this.DataContext = m_ViewModel;
             }
         }
 
-       
+
         private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
             var newCustomer = NewCompany("Customer", customerComboBox.Text);
@@ -139,7 +140,7 @@ namespace ordermanager.Views.UserControls
                             break;
                         }
                     }
-                    
+
                     if (addbtn != null)
                     {
                         if (countryComboBox.SelectedItem != null || string.IsNullOrEmpty(countryComboBox.Text))
@@ -152,14 +153,43 @@ namespace ordermanager.Views.UserControls
                         }
                     }
                 }
-            }          
+            }
         }
 
         private void SelectedCartonBoxBtn_OnClick(object sender, RoutedEventArgs e)
         {
             CatronBoxBrowser browser = new CatronBoxBrowser();
             browser.ViewModel = new CartonBoxBrowserViewModel(ViewModel.Order);
-            browser.ShowDialog();
+            if (browser.ShowDialog() == true)
+            {
+                ViewModel.UpdateCartonBoxSummaries();
+                cartonBoxDetails.ItemsSource = ViewModel.InvoiceCartonBoxSummaries;
+                if (ViewModel.InvoiceCartonBoxSummaries.Count > 0)
+                    btnGenerateInvoice.IsEnabled = true;
+                else
+                    btnGenerateInvoice.IsEnabled = false;
+            }
+        }
+
+        private void btnGenerateInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            if (ViewModel.NewInvoice.Validate())
+            {
+                if (!ViewModel.CreateNewInvoice())
+                    MessageBox.Show("Failed to create invoice");
+                else
+                {
+                    cartonBoxDetails.ItemsSource = ViewModel.InvoiceCartonBoxSummaries;
+                    btnGenerateInvoice.IsEnabled = false;
+                }
+            }
+        }
+
+        private void btnDiscard_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Discard();
+            cartonBoxDetails.ItemsSource = ViewModel.InvoiceCartonBoxSummaries;
+            btnGenerateInvoice.IsEnabled = false;
         }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ordermanager.DatabaseModel
 {
-    public partial class Invoice : EntityBase 
+    public partial class Invoice : EntityBase
     {
-        
+
         public string InvoiceNumberWrapper
         {
             get
@@ -35,7 +36,7 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        public string ExporterRefNumberWrapper 
+        public string ExporterRefNumberWrapper
         {
             get
             {
@@ -48,7 +49,7 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        public string BuyerRefNumberWrapper 
+        public string BuyerRefNumberWrapper
         {
             get
             {
@@ -87,7 +88,7 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        public string DischargePlaceWrapper 
+        public string DischargePlaceWrapper
         {
             get
             {
@@ -126,7 +127,7 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        public Country Origin 
+        public Country Origin
         {
             get
             {
@@ -151,6 +152,7 @@ namespace ordermanager.DatabaseModel
                 OnPropertyChanged("Destination");
             }
         }
+
         public ShipmentMode ShipmentModeWrapper
         {
             get
@@ -162,6 +164,58 @@ namespace ordermanager.DatabaseModel
                 ShipmentMode = value;
                 OnPropertyChanged("ShipmentModeWrapper");
             }
+        }
+
+        public bool Validate()
+        {
+            if (string.IsNullOrWhiteSpace(InvoiceNumberWrapper))
+                AddError("InvoiceNumberWrapper", "Enter Invoice Number", false);
+            else
+                RemoveError("InvoiceNumberWrapper");
+            if (string.IsNullOrWhiteSpace(ExporterRefNumberWrapper))
+                AddError("ExporterRefNumberWrapper", "Enter Exporter Reference Number", false);
+            else
+                RemoveError("ExporterRefNumberWrapper");
+            if (string.IsNullOrWhiteSpace(BuyerRefNumberWrapper))
+                AddError("BuyerRefNumberWrapper", "Enter Buyer Reference Number", false);
+            else
+                RemoveError("BuyerRefNumberWrapper");
+            if (string.IsNullOrWhiteSpace(PlaceOfReceiptByPrecarrierWrapper))
+                AddError("PlaceOfReceiptByPrecarrierWrapper", "Enter port of receipt by precarrier", false);
+            else
+                RemoveError("PlaceOfReceiptByPrecarrierWrapper");
+            if (string.IsNullOrWhiteSpace(LoadingPlaceWrapper))
+                AddError("LoadingPlaceWrapper", "Enter port of loading", false);
+            else
+                RemoveError("LoadingPlaceWrapper");
+            if (string.IsNullOrWhiteSpace(DischargePlaceWrapper))
+                AddError("DischargePlaceWrapper", "Enter port of discharge", false);
+            else
+                RemoveError("DischargePlaceWrapper");
+
+            if (Consignee == null)
+                AddError("Consignee", "Select consignee", false);
+            else
+                RemoveError("Consignee");
+            if (Origin == null)
+                AddError("Origin", "Select origin", false);
+            else
+                RemoveError("Origin");
+            if (Destination == null)
+                AddError("Destination", "Select destination", false);
+            else
+                RemoveError("Destination");
+
+            if (ShipmentModeWrapper == null)
+                AddError("ShipmentModeWrapper", "Select carriage by", false);
+            else
+                RemoveError("ShipmentModeWrapper");
+            if (InvoiceDateWrapper == null)
+                AddError("InvoiceDateWrapper", "Select invoice date", false);
+            else
+                RemoveError("InvoiceDateWrapper");
+            
+            return !HasErrors;
         }
     }
 }

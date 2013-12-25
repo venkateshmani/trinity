@@ -14,6 +14,11 @@ namespace ordermanager.DatabaseModel
     
     public partial class Invoice
     {
+        public Invoice()
+        {
+            this.CartonBoxes = new HashSet<CartonBox>();
+        }
+    
         public long InvoiceID { get; set; }
         public string InvoiceNumber { get; set; }
         public System.DateTime InvoiceDate { get; set; }
@@ -29,6 +34,7 @@ namespace ordermanager.DatabaseModel
         public bool IsProforma { get; set; }
         public long OrderID { get; set; }
     
+        public virtual ICollection<CartonBox> CartonBoxes { get; set; }
         public virtual Company Company { get; set; }
         public virtual Country Country { get; set; }
         public virtual Country Country1 { get; set; }
