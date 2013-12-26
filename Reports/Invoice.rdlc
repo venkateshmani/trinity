@@ -772,7 +772,7 @@ Mail id : admin-gd@triniity.com</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox16</rd:DefaultName>
-            <Top>2.0361in</Top>
+            <Top>2.02499in</Top>
             <Left>5.20987in</Left>
             <Height>0.20833in</Height>
             <Width>1.75in</Width>
@@ -1120,14 +1120,14 @@ Mail id : admin-gd@triniity.com</Value>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="StyleID">
+                    <Textbox Name="ProductName">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!StyleID.Value</Value>
+                              <Value>=Fields!ProductName.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI Light</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -1139,7 +1139,7 @@ Mail id : admin-gd@triniity.com</Value>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>StyleID</rd:DefaultName>
+                      <rd:DefaultName>ProductName</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1152,6 +1152,7 @@ Mail id : admin-gd@triniity.com</Value>
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -1300,21 +1301,23 @@ Mail id : admin-gd@triniity.com</Value>
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox36">
+                    <Textbox Name="TotalCost">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!TotalCost.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox36</rd:DefaultName>
+                      <rd:DefaultName>TotalCost</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1489,10 +1492,6 @@ goods descriped and that all particulars are true and correct.</Value>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="CartonBoxNumber">
-          <DataField>CartonBoxNumber</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="Quantity">
           <DataField>Quantity</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
@@ -1509,14 +1508,18 @@ goods descriped and that all particulars are true and correct.</Value>
           <DataField>Size</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="StyleID">
-          <DataField>StyleID</DataField>
+        <Field Name="TotalCost">
+          <DataField>TotalCost</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ProductName">
+          <DataField>ProductName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>OrderManagerDBDataSetForInvoice</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\Venkatesh\Documents\GitHub\trinity\Reports\OrderManagerDBDataSetForInvoice.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\Work\trinity\trinity\Reports\OrderManagerDBDataSetForInvoice.xsd</rd:SchemaPath>
         <rd:TableName>SP_InvoiceDetails</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>

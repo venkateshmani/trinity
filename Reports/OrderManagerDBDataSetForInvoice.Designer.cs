@@ -279,8 +279,6 @@ namespace Reports {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class SP_InvoiceDetailsDataTable : global::System.Data.TypedTableBase<SP_InvoiceDetailsRow> {
             
-            private global::System.Data.DataColumn columnCartonBoxNumber;
-            
             private global::System.Data.DataColumn columnQuantity;
             
             private global::System.Data.DataColumn columnColor;
@@ -289,7 +287,9 @@ namespace Reports {
             
             private global::System.Data.DataColumn columnSize;
             
-            private global::System.Data.DataColumn columnStyleID;
+            private global::System.Data.DataColumn columnTotalCost;
+            
+            private global::System.Data.DataColumn columnProductName;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -326,14 +326,6 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CartonBoxNumberColumn {
-                get {
-                    return this.columnCartonBoxNumber;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn QuantityColumn {
                 get {
                     return this.columnQuantity;
@@ -366,9 +358,17 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn StyleIDColumn {
+            public global::System.Data.DataColumn TotalCostColumn {
                 get {
-                    return this.columnStyleID;
+                    return this.columnTotalCost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn ProductNameColumn {
+                get {
+                    return this.columnProductName;
                 }
             }
             
@@ -409,15 +409,15 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SP_InvoiceDetailsRow AddSP_InvoiceDetailsRow(string CartonBoxNumber, decimal Quantity, string Color, decimal CostPerUnit, string Size, string StyleID) {
+            public SP_InvoiceDetailsRow AddSP_InvoiceDetailsRow(decimal Quantity, string Color, decimal CostPerUnit, string Size, decimal TotalCost, string ProductName) {
                 SP_InvoiceDetailsRow rowSP_InvoiceDetailsRow = ((SP_InvoiceDetailsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        CartonBoxNumber,
                         Quantity,
                         Color,
                         CostPerUnit,
                         Size,
-                        StyleID};
+                        TotalCost,
+                        ProductName};
                 rowSP_InvoiceDetailsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSP_InvoiceDetailsRow);
                 return rowSP_InvoiceDetailsRow;
@@ -440,19 +440,17 @@ namespace Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnCartonBoxNumber = base.Columns["CartonBoxNumber"];
                 this.columnQuantity = base.Columns["Quantity"];
                 this.columnColor = base.Columns["Color"];
                 this.columnCostPerUnit = base.Columns["CostPerUnit"];
                 this.columnSize = base.Columns["Size"];
-                this.columnStyleID = base.Columns["StyleID"];
+                this.columnTotalCost = base.Columns["TotalCost"];
+                this.columnProductName = base.Columns["ProductName"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnCartonBoxNumber = new global::System.Data.DataColumn("CartonBoxNumber", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCartonBoxNumber);
                 this.columnQuantity = new global::System.Data.DataColumn("Quantity", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnQuantity);
                 this.columnColor = new global::System.Data.DataColumn("Color", typeof(string), null, global::System.Data.MappingType.Element);
@@ -461,17 +459,16 @@ namespace Reports {
                 base.Columns.Add(this.columnCostPerUnit);
                 this.columnSize = new global::System.Data.DataColumn("Size", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSize);
-                this.columnStyleID = new global::System.Data.DataColumn("StyleID", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnStyleID);
-                this.columnCartonBoxNumber.AllowDBNull = false;
-                this.columnCartonBoxNumber.MaxLength = 50;
+                this.columnTotalCost = new global::System.Data.DataColumn("TotalCost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalCost);
+                this.columnProductName = new global::System.Data.DataColumn("ProductName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProductName);
                 this.columnQuantity.AllowDBNull = false;
                 this.columnColor.AllowDBNull = false;
                 this.columnColor.MaxLength = 50;
                 this.columnCostPerUnit.ReadOnly = true;
                 this.columnSize.AllowDBNull = false;
                 this.columnSize.MaxLength = 25;
-                this.columnStyleID.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -614,17 +611,6 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CartonBoxNumber {
-                get {
-                    return ((string)(this[this.tableSP_InvoiceDetails.CartonBoxNumberColumn]));
-                }
-                set {
-                    this[this.tableSP_InvoiceDetails.CartonBoxNumberColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public decimal Quantity {
                 get {
                     return ((decimal)(this[this.tableSP_InvoiceDetails.QuantityColumn]));
@@ -674,17 +660,33 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string StyleID {
+            public decimal TotalCost {
                 get {
                     try {
-                        return ((string)(this[this.tableSP_InvoiceDetails.StyleIDColumn]));
+                        return ((decimal)(this[this.tableSP_InvoiceDetails.TotalCostColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'StyleID\' in table \'SP_InvoiceDetails\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalCost\' in table \'SP_InvoiceDetails\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSP_InvoiceDetails.StyleIDColumn] = value;
+                    this[this.tableSP_InvoiceDetails.TotalCostColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string ProductName {
+                get {
+                    try {
+                        return ((string)(this[this.tableSP_InvoiceDetails.ProductNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ProductName\' in table \'SP_InvoiceDetails\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_InvoiceDetails.ProductNameColumn] = value;
                 }
             }
             
@@ -702,14 +704,26 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsStyleIDNull() {
-                return this.IsNull(this.tableSP_InvoiceDetails.StyleIDColumn);
+            public bool IsTotalCostNull() {
+                return this.IsNull(this.tableSP_InvoiceDetails.TotalCostColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetStyleIDNull() {
-                this[this.tableSP_InvoiceDetails.StyleIDColumn] = global::System.Convert.DBNull;
+            public void SetTotalCostNull() {
+                this[this.tableSP_InvoiceDetails.TotalCostColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsProductNameNull() {
+                return this.IsNull(this.tableSP_InvoiceDetails.ProductNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetProductNameNull() {
+                this[this.tableSP_InvoiceDetails.ProductNameColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -872,12 +886,10 @@ namespace Reports.OrderManagerDBDataSetForInvoiceTableAdapters {
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "SP_InvoiceDetails";
-            tableMapping.ColumnMappings.Add("CartonBoxNumber", "CartonBoxNumber");
             tableMapping.ColumnMappings.Add("Quantity", "Quantity");
             tableMapping.ColumnMappings.Add("Color", "Color");
             tableMapping.ColumnMappings.Add("CostPerUnit", "CostPerUnit");
             tableMapping.ColumnMappings.Add("Size", "Size");
-            tableMapping.ColumnMappings.Add("StyleID", "StyleID");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
