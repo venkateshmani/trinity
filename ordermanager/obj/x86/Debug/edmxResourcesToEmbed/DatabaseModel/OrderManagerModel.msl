@@ -48,6 +48,7 @@
           <ScalarProperty Name="Number" ColumnName="Number" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="InvoiceGenerated" ColumnName="InvoiceGenerated" />
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

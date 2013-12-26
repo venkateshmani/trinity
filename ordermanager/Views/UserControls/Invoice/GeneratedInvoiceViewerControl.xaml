@@ -71,7 +71,7 @@
             <ListView x:Name="invoiceList" Grid.Row="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Order.Invoices}" SelectedIndex="-1"  SelectionChanged="invoiceList_SelectionChanged_1">
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
-                        <GridViewColumn x:Name="supplierColumn" Width="{Binding ActualWidth, ElementName=supplierList, Converter={StaticResource subractor}, ConverterParameter=5}">
+                        <GridViewColumn x:Name="invoiceColumn" Width="{Binding ActualWidth, ElementName=invoiceList, Converter={StaticResource subractor}, ConverterParameter=5}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="3">
@@ -125,7 +125,7 @@
             </interop:AirspaceDecorator>
             <WindowsFormsHost x:Name="windowsFormHost" VerticalAlignment="Stretch"
                               HorizontalAlignment="Stretch">
-                <Reports:PurchaseOrderReportControl x:Name="purchaseOrderReportControl" Dock="Fill" />
+                <Reports:InvoiceUserControl x:Name="invoiceUserControl" Dock="Fill" />
             </WindowsFormsHost>
         </Grid>
         <Grid Grid.Row="2" Grid.ColumnSpan="3">

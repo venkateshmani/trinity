@@ -68,6 +68,10 @@
       <End Role="AssetCategory" EntitySet="AssetCategory" />
       <End Role="AssetName" EntitySet="AssetName" />
     </AssociationSet>
+    <AssociationSet Name="FK_CartonBox_Invoice" Association="OrderManagerDBModel.Store.FK_CartonBox_Invoice">
+      <End Role="Invoice" EntitySet="Invoice" />
+      <End Role="CartonBox" EntitySet="CartonBox" />
+    </AssociationSet>
     <AssociationSet Name="FK_CartonBox_Order" Association="OrderManagerDBModel.Store.FK_CartonBox_Order">
       <End Role="Order" EntitySet="Order" />
       <End Role="CartonBox" EntitySet="CartonBox" />
@@ -393,6 +397,7 @@
     <Property Name="Number" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="OrderID" Type="bigint" Nullable="false" />
     <Property Name="InvoiceGenerated" Type="bit" Nullable="false" />
+    <Property Name="InvoiceID" Type="bigint" />
   </EntityType>
   <EntityType Name="Color">
     <Key>
@@ -942,6 +947,18 @@
       </Principal>
       <Dependent Role="AssetName">
         <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartonBox_Invoice">
+    <End Role="Invoice" Type="OrderManagerDBModel.Store.Invoice" Multiplicity="0..1" />
+    <End Role="CartonBox" Type="OrderManagerDBModel.Store.CartonBox" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceID" />
+      </Principal>
+      <Dependent Role="CartonBox">
+        <PropertyRef Name="InvoiceID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

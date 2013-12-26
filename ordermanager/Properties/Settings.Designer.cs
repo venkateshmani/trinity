@@ -26,7 +26,7 @@ namespace ordermanager.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=User-PC;Initial Catalog=OrderManagerDB;Persist Security Info=True;Use" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=VENKATESH-PC\\SQLEXPRESS;Initial Catalog=OrderManagerDB;Persist Security Info=True;Use" +
             "r ID=sa;Password=password;Pooling=False")]
         public string OrderManagerDBConnectionString {
             get {

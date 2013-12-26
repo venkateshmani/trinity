@@ -13,18 +13,5 @@ namespace ordermanager.ViewModel.Invoice
         {
             
         }
-
-        private Order m_Order = null;
-        public Order Order
-        {
-            get
-            {
-                return m_Order;
-            }
-            set
-            {
-                m_Order = value;
-            }
-        }
     }
 }

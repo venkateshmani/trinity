@@ -58,11 +58,17 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="InvoiceReportParameters.cs" />
     <Compile Include="InvoiceUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="InvoiceUserControl.Designer.cs">
       <DependentUpon>InvoiceUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OrderManagerDBDataSetForInvoice.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderManagerDBDataSetForInvoice.xsd</DependentUpon>
     </Compile>
     <Compile Include="OrderManagerDBDataSetForPO.cs">
       <DependentUpon>OrderManagerDBDataSetForPO.xsd</DependentUpon>
@@ -103,6 +109,17 @@
     </Compile>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="OrderManagerDBDataSetForInvoice.xsc">
+      <DependentUpon>OrderManagerDBDataSetForInvoice.xsd</DependentUpon>
+    </None>
+    <None Include="OrderManagerDBDataSetForInvoice.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrderManagerDBDataSetForInvoice.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OrderManagerDBDataSetForInvoice.xss">
+      <DependentUpon>OrderManagerDBDataSetForInvoice.xsd</DependentUpon>
     </None>
     <None Include="OrderManagerDBDataSetForPO.xsc">
       <DependentUpon>OrderManagerDBDataSetForPO.xsd</DependentUpon>
