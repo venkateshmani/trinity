@@ -42,14 +42,10 @@ namespace ordermanager.ViewModel.Execution
 
             if (existingCartonBox == null)
             {
-                CartonBox newCartonBox = new CartonBox();
+                CartonBox newCartonBox = DBResources.Instance.Context.CartonBoxes.Create();
                 newCartonBox.Number = boxNumber;
-                newCartonBox.OrderID = this.Order.OrderID;
-
-                OrderManagerDBEntities newManager = new OrderManagerDBEntities();
-                newManager.CartonBoxes.Add(newCartonBox);
-                newManager.SaveChanges();
-                newManager.Dispose();
+                newCartonBox.Order = Order;
+                this.Order.CartonBoxes.Add(newCartonBox);
                 
                 return true;
             }

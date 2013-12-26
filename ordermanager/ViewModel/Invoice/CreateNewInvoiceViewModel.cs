@@ -13,8 +13,17 @@ namespace ordermanager.ViewModel.Invoice
     {
         public CreateNewInvoiceViewModel()
         {
-            NewInvoice = new DatabaseModel.Invoice();            
+            NewInvoice = new DatabaseModel.Invoice(); 
             NewInvoice.InvoiceDateWrapper = DateTime.Now;
+            this.PropertyChanged += CreateNewInvoiceViewModel_PropertyChanged;
+        }
+
+        void CreateNewInvoiceViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Order")
+            {
+                NewInvoice.InvoiceNumber = Constants.GetInvoiceNumber(this.Order);
+            }
         }
 
         DatabaseModel.Invoice m_NewInvoice;
