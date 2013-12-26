@@ -21,18 +21,18 @@ namespace Reports
         public void SetParameters(InvoiceReportParameters parameters)
         {
             ReportParameter[] reportParameters = new ReportParameter[12];
-            reportParameters[0] = new ReportParameter("InvoiceTitle", "A");
-            reportParameters[1] = new ReportParameter("InvoiceNumber", "B");
-            reportParameters[2] = new ReportParameter("InvoiceDate", "C");
-            reportParameters[3] = new ReportParameter("OurOrderNumber", "D");
-            reportParameters[4] = new ReportParameter("YourOrderNumber", "E");
-            reportParameters[5] = new ReportParameter("Origin", "F");
-            reportParameters[6] = new ReportParameter("Destination","G");
-            reportParameters[7] = new ReportParameter("CarriageBy", "H");
-            reportParameters[8] = new ReportParameter("PlaceOfReceiptByPrecarrier", "I");
-            reportParameters[9] = new ReportParameter("PortOfLoading", "J");
-            reportParameters[10] = new ReportParameter("PortOfDischarge", "K");
-            reportParameters[11] = new ReportParameter("ConsigneeAddress", "L");
+            reportParameters[0] = new ReportParameter("InvoiceTitle", parameters.InvoiceTitle);
+            reportParameters[1] = new ReportParameter("InvoiceNumber", parameters.InvoiceNumber);
+            reportParameters[2] = new ReportParameter("InvoiceDate", parameters.InvoiceDate);
+            reportParameters[3] = new ReportParameter("OurOrderNumber", parameters.OurOrderNumber);
+            reportParameters[4] = new ReportParameter("YourOrderNumber", parameters.YourOrderNumber);
+            reportParameters[5] = new ReportParameter("Origin", parameters.Origin);
+            reportParameters[6] = new ReportParameter("Destination", parameters.Destination);
+            reportParameters[7] = new ReportParameter("CarriageBy", parameters.CarriageBy);
+            reportParameters[8] = new ReportParameter("PlaceOfReceiptByPrecarrier", parameters.PlaceOfReceiptByPrecarrier);
+            reportParameters[9] = new ReportParameter("PortOfLoading", parameters.PortOfLoading);
+            reportParameters[10] = new ReportParameter("PortOfDischarge", parameters.PortOfDischarge);
+            reportParameters[11] = new ReportParameter("ConsigneeAddress", parameters.ConsigneeAddress);
 
             this.reportViewer1.LocalReport.SetParameters(reportParameters);
         }

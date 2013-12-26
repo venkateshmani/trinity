@@ -14,6 +14,7 @@
                     <Value>Triinity Color India Private Limited</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -28,6 +29,7 @@ Phone No : 0424 - 2215933
 Mail id : admin-gd@triniity.com</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -37,7 +39,7 @@ Mail id : admin-gd@triniity.com</Value>
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>0.27083in</Top>
             <Left>0.11333in</Left>
-            <Height>1.14583in</Height>
+            <Height>0.77083in</Height>
             <Width>2.61458in</Width>
             <Style>
               <Border>
@@ -59,6 +61,7 @@ Mail id : admin-gd@triniity.com</Value>
                     <Value>Exporter</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -92,6 +95,7 @@ Mail id : admin-gd@triniity.com</Value>
                     <Value>Consignee</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -100,7 +104,7 @@ Mail id : admin-gd@triniity.com</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>1.48611in</Top>
+            <Top>1.21943in</Top>
             <Left>0.11333in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
@@ -125,6 +129,7 @@ Mail id : admin-gd@triniity.com</Value>
                     <Value>=Parameters!ConsigneeAddress.Value</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -133,7 +138,7 @@ Mail id : admin-gd@triniity.com</Value>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>1.72916in</Top>
+            <Top>1.53887in</Top>
             <Left>0.11333in</Left>
             <Height>1.14583in</Height>
             <Width>2.61458in</Width>
@@ -157,6 +162,8 @@ Mail id : admin-gd@triniity.com</Value>
                   <TextRun>
                     <Value>Invoice # :</Value>
                     <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -192,6 +199,8 @@ Mail id : admin-gd@triniity.com</Value>
                   <TextRun>
                     <Value>Invoice Date :</Value>
                     <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -227,6 +236,8 @@ Mail id : admin-gd@triniity.com</Value>
                   <TextRun>
                     <Value>Our Order # :</Value>
                     <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -262,6 +273,8 @@ Mail id : admin-gd@triniity.com</Value>
                   <TextRun>
                     <Value>Your Order # :</Value>
                     <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -297,6 +310,8 @@ Mail id : admin-gd@triniity.com</Value>
                   <TextRun>
                     <Value>Origin :</Value>
                     <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -332,6 +347,8 @@ Mail id : admin-gd@triniity.com</Value>
                   <TextRun>
                     <Value>Destination :</Value>
                     <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -367,6 +384,8 @@ Mail id : admin-gd@triniity.com</Value>
                   <TextRun>
                     <Value>Carriage By :</Value>
                     <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -402,6 +421,8 @@ Mail id : admin-gd@triniity.com</Value>
                   <TextRun>
                     <Value>Place of Receipt By Precarrier :</Value>
                     <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -437,6 +458,8 @@ Mail id : admin-gd@triniity.com</Value>
                   <TextRun>
                     <Value>Port of Loading :</Value>
                     <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -472,6 +495,8 @@ Mail id : admin-gd@triniity.com</Value>
                   <TextRun>
                     <Value>Port of Discharge :</Value>
                     <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -506,7 +531,10 @@ Mail id : admin-gd@triniity.com</Value>
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!InvoiceNumber.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -536,7 +564,10 @@ Mail id : admin-gd@triniity.com</Value>
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!InvoiceDate.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -566,7 +597,10 @@ Mail id : admin-gd@triniity.com</Value>
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!OurOrderNumber.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -596,7 +630,10 @@ Mail id : admin-gd@triniity.com</Value>
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!YourOrderNumber.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -626,7 +663,10 @@ Mail id : admin-gd@triniity.com</Value>
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!Origin.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -656,7 +696,10 @@ Mail id : admin-gd@triniity.com</Value>
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!Destination.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -686,7 +729,10 @@ Mail id : admin-gd@triniity.com</Value>
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!CarriageBy.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -716,7 +762,10 @@ Mail id : admin-gd@triniity.com</Value>
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!PlaceOfReceiptByPrecarrier.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -746,7 +795,10 @@ Mail id : admin-gd@triniity.com</Value>
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!PortOfLoading.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -776,7 +828,10 @@ Mail id : admin-gd@triniity.com</Value>
                 <TextRuns>
                   <TextRun>
                     <Value>=Parameters!PortOfDischarge.Value</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>8pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -817,19 +872,19 @@ Mail id : admin-gd@triniity.com</Value>
               <Width>1.93375in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>0.79416in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.89208in</Width>
+              <Width>0.6525in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>2.13404in</Width>
+              <Width>1.26934in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1in</Width>
+              <Width>1.10417in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.31013in</Width>
+              <Width>1.20596in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -846,7 +901,11 @@ Mail id : admin-gd@triniity.com</Value>
                           <TextRuns>
                             <TextRun>
                               <Value>Item Name</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI Light</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -879,7 +938,11 @@ Mail id : admin-gd@triniity.com</Value>
                           <TextRuns>
                             <TextRun>
                               <Value>Size</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI Light</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -912,7 +975,11 @@ Mail id : admin-gd@triniity.com</Value>
                           <TextRuns>
                             <TextRun>
                               <Value>Color</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI Light</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -945,7 +1012,11 @@ Mail id : admin-gd@triniity.com</Value>
                           <TextRuns>
                             <TextRun>
                               <Value>Quantity</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI Light</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -978,7 +1049,11 @@ Mail id : admin-gd@triniity.com</Value>
                           <TextRuns>
                             <TextRun>
                               <Value>Rate</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI Light</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1011,7 +1086,11 @@ Mail id : admin-gd@triniity.com</Value>
                           <TextRuns>
                             <TextRun>
                               <Value>Total Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI Light</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>SemiBold</FontWeight>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1049,7 +1128,10 @@ Mail id : admin-gd@triniity.com</Value>
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!StyleID.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI Light</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1082,7 +1164,10 @@ Mail id : admin-gd@triniity.com</Value>
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Size.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI Light</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1115,7 +1200,10 @@ Mail id : admin-gd@triniity.com</Value>
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Color.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI Light</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1148,7 +1236,10 @@ Mail id : admin-gd@triniity.com</Value>
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!Quantity.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI Light</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1181,7 +1272,10 @@ Mail id : admin-gd@triniity.com</Value>
                           <TextRuns>
                             <TextRun>
                               <Value>=Fields!CostPerUnit.Value</Value>
-                              <Style />
+                              <Style>
+                                <FontFamily>Segoe UI Light</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
                             </TextRun>
                           </TextRuns>
                           <Style>
@@ -1261,12 +1355,14 @@ Mail id : admin-gd@triniity.com</Value>
         <DataSetName>InvoiceDataSet</DataSetName>
         <Top>3.30209in</Top>
         <Height>0.69792in</Height>
-        <Width>8.27in</Width>
+        <Width>6.95988in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
+          <FontFamily>Segoe UI Light</FontFamily>
+          <FontSize>8pt</FontSize>
         </Style>
       </Tablix>
     </ReportItems>
@@ -1290,6 +1386,7 @@ Mail id : admin-gd@triniity.com</Value>
                   <Value>=Parameters!InvoiceTitle.Value</Value>
                   <Style>
                     <FontFamily>Segoe UI</FontFamily>
+                    <FontSize>8pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>

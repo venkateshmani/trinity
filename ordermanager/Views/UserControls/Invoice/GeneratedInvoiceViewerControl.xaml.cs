@@ -67,6 +67,28 @@ namespace ordermanager.Views.UserControls
             try
             {
                 Reports.InvoiceReportParameters parameters = new Reports.InvoiceReportParameters();
+
+                if (invoice.IsProforma)
+                {
+                    parameters.InvoiceTitle = "Proforma Invoice";
+                }
+                else
+                {
+                    parameters.InvoiceTitle = "Invoice";
+                }
+
+                parameters.InvoiceNumber = invoice.InvoiceNumber;
+                parameters.InvoiceDate = invoice.InvoiceDate.ToShortDateString();
+                parameters.OurOrderNumber = invoice.ExporterRefNumber;
+                parameters.YourOrderNumber = invoice.ExporterRefNumber;
+                parameters.Origin = invoice.Origin.Name;
+                parameters.Destination = invoice.Destination.Name;
+                parameters.CarriageBy = invoice.ShipmentMode.Mode;
+                parameters.PlaceOfReceiptByPrecarrier = invoice.PlaceOfReceiptByPrecarrier;
+                parameters.PortOfLoading = invoice.LoadingPlace;
+                parameters.PortOfDischarge = invoice.DischargePlace;
+                parameters.ConsigneeAddress = GetAddress(invoice.Company);
+
                 invoiceUserControl.SetParameters(parameters);
                 invoiceUserControl.CreateReportAsPDF(invoice.InvoiceID, filePath);
             }
@@ -80,7 +102,7 @@ namespace ordermanager.Views.UserControls
 
         }
 
-        private string GetSupplierInformation(Company supplier)
+        private string GetAddress(Company supplier)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(supplier.Name + ",");
