@@ -22,7 +22,8 @@ namespace ordermanager.ViewModel.Invoice
         {
             if (e.PropertyName == "Order")
             {
-                NewInvoice.InvoiceNumber = Constants.GetInvoiceNumber(this.Order);
+                NewInvoice.InvoiceNumberWrapper = Constants.GetInvoiceNumber(this.Order);
+                NewInvoice.ExporterRefNumberWrapper = this.Order.OrderID.ToString();
             }
         }
 
