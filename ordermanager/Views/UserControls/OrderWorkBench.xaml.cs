@@ -120,7 +120,7 @@ namespace ordermanager.Views.UserControls
                 case "Purchase Order":
                     poControl.SetOrder(m_Order);
                     break;
-                case "Change History":
+                case "History":
                     m_ChangeHistorViewModel.SetOrder(m_Order);
                     break;
                 case "Invoice":
