@@ -307,7 +307,7 @@ namespace ordermanager.DatabaseModel
                 return 0;
             }
         }
-        
+
         #region Currency Management
 
         public decimal CurrencyValueInINR
@@ -397,7 +397,7 @@ namespace ordermanager.DatabaseModel
             if (UnitsOfMeasurement != null)
                 uomMultipler = UnitsOfMeasurement.Multiplier;
 
-            ConsumptionCostWrapper = CostPerUnitWrapper * ConsumptionWrapper * CurrencyValueInINR * uomMultipler + OtherCostInINRWrapper;
+            ConsumptionCostWrapper = (CostPerUnitWrapper * ConsumptionWrapper * CurrencyValueInINR * uomMultipler) + (OtherCostInINRWrapper * ConsumptionWrapper * uomMultipler);
         }
 
         decimal m_TotalSubMaterialsPurchaseCostWrapper = -1.0m;
