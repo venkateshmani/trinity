@@ -710,7 +710,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OrderManagerModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DatabaseModel\OrderManagerModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OrderManagerModel.edmx</DependentUpon>
