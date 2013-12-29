@@ -13,6 +13,19 @@ namespace ordermanager.DatabaseModel
     {
         #region Property Wrappers
 
+            public OrderStatu OrderStatusWrapper
+            {
+                get
+                {
+                    return OrderStatu;
+                }
+                set
+                {
+                    OrderStatu = value;
+                    OnPropertyChanged("OrderStatusWrapper");
+                }
+            }
+
             public virtual Company Customer
             {
                 get

@@ -219,6 +219,7 @@
                                                             <ColumnDefinition Width="Auto" />
                                                         </Grid.ColumnDefinitions>
                                                         <ComboBox x:Name="materialsComboBox" Grid.Column="0" 
+                                                           MouseWheel="materialsComboBox_MouseWheel_1"
                                                       IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
                                                       IsEditable="{Binding Path=DataContext.CanEditMaterials,ElementName=This}"
                                                       IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
@@ -260,6 +261,7 @@
                                                             <ColumnDefinition Width="Auto"/>
                                                         </Grid.ColumnDefinitions>
                                                         <ComboBox x:Name="uomComboBox" Grid.Column="0"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                                  MouseWheel="materialsComboBox_MouseWheel_1"
                                                       Height="20" ItemsSource="{Binding UOMs, Source={StaticResource DataProvider}}" DisplayMemberPath="Units"
                                                       SelectedItem="{Binding  UnitsOfMeasurementWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                       IsReadOnly="{Binding Path=DataContext.CanEditMaterials, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
@@ -296,6 +298,7 @@
                                                             <ColumnDefinition Width="Auto"/>
                                                         </Grid.ColumnDefinitions>
                                                         <ComboBox x:Name="currencyComboBox" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                                  MouseWheel="materialsComboBox_MouseWheel_1"
                                                       Height="20" ItemsSource="{Binding Currencies, Source={StaticResource DataProvider}}" DisplayMemberPath="Symbol"
                                                       SelectedItem="{Binding CurrencyWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                       IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
@@ -444,6 +447,7 @@
                                                             <ColumnDefinition Width="Auto" />
                                                         </Grid.ColumnDefinitions>
                                                         <ComboBox x:Name="extraTypeComboBox" Grid.Column="0" 
+                                                                  MouseWheel="materialsComboBox_MouseWheel_1"
                                                            IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
                                                            IsEditable="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"
                                                            IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"

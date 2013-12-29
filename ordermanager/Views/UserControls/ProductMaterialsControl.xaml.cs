@@ -269,5 +269,10 @@ namespace ordermanager.Views.UserControls
             budgetReportControl.CreateReportAsPDF(ViewModel.Order.OrderID, ViewModel.SelectedProduct.ProductID, tempFilePathForPdf);
             System.Diagnostics.Process.Start(tempFilePathForPdf);
         }
+
+        private void materialsComboBox_MouseWheel_1(object sender, MouseWheelEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }
