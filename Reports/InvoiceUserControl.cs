@@ -42,7 +42,7 @@ namespace Reports
             
             try
             {
-                this.SP_InvoiceDetailsTableAdapter.Fill(this.OrderManagerDBDataSetForInvoice.SP_InvoiceDetails, invoiceID);
+                this.SP_InvoiceDetailsTableAdapter.Fill(this.OrderManagerDBDataSetForInvoiceGeneration.SP_InvoiceDetails, invoiceID);
 
                 // Variables
                 Warning[] warnings;

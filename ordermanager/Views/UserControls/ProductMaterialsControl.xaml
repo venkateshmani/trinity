@@ -109,6 +109,11 @@
             <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Materials"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
+            <Button x:Name="btnGeneratePDF" HorizontalAlignment="Right" Content="PDF"  Width="100" Height="25" Foreground="White"  ToolTip="PDF" Click="btnGeneratePDF_Click_1">
+                <Button.Background>
+                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                </Button.Background>
+            </Button>
         </Grid>
 
         <Grid x:Name="productDetailsGrid"  Grid.Row="1" Grid.Column="2" DataContext="{Binding ElementName=productsList, Path=SelectedItem}">

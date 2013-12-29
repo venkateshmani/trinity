@@ -3,8 +3,10 @@ using ordermanager.DatabaseModel;
 using ordermanager.Utilities;
 using ordermanager.ViewModel;
 using ordermanager.Views.PopUps;
+using Reports;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,10 +28,21 @@ namespace ordermanager.Views.UserControls
     public partial class ProductMaterialsControl : UserControl
     {
         ProductMaterialsViewModel m_ViewModel;
+        BudgetReportControl budgetReportControl = null;
 
         public ProductMaterialsControl()
         {
             InitializeComponent();
+            budgetReportControl = new BudgetReportControl();
+        }
+
+        public ProductMaterialsViewModel ViewModel
+        {
+            get
+            {
+                return m_ViewModel;
+
+            }
         }
 
         private void productsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -223,6 +236,38 @@ namespace ordermanager.Views.UserControls
                     }
                 }
             }
+        }
+
+        private void btnGeneratePDF_Click_1(object sender, RoutedEventArgs e)
+        {
+            //Generate Parameters
+            BudgetReportParameters parameters = new BudgetReportParameters();
+            parameters.Buyer = ViewModel.Order.Company.Name;
+            parameters.CurrencyValueInINR = ViewModel.SelectedProduct.CurrencyValueInINR.ToString();
+            parameters.DateOfGeneration = DBResources.Instance.GetServerTime().ToShortDateString();
+            parameters.ExpectedQuantity = ViewModel.SelectedProduct.ExpectedQuantity.ToString();
+            parameters.OrderDate = ViewModel.Order.OrderDate.ToShortDateString();
+            parameters.OrderedProductCurrency = ViewModel.SelectedProduct.Currency.Symbol;
+            parameters.OrderID = ViewModel.Order.OrderID.ToString();
+            parameters.OurPrice = ViewModel.SelectedProduct.OurCostInProductCurrenyValue.ToString() + " " + parameters.OrderedProductCurrency;
+            parameters.PerUnitBuyerTargetPrice = ViewModel.SelectedProduct.CustomerTargetPrice.ToString() + " " + parameters.OrderedProductCurrency;
+            parameters.ProductName = ViewModel.SelectedProduct.ProductName.Name;
+            parameters.ProfitOrLoss = ViewModel.SelectedProduct.ProfitOrLossAmount.ToString() + " " + parameters.OrderedProductCurrency;
+            parameters.StyleID = ViewModel.SelectedProduct.ProductName.StyleID;
+            parameters.TotalValue = ViewModel.SelectedProduct.OrderValue + " " + "INR";
+            parameters.NumberOfItems = ViewModel.SelectedProduct.ProductMaterials.Count.ToString();
+
+            string tempFilePathForPdf = System.IO.Path.Combine(
+                                           System.IO.Path.GetTempPath(), "OM_Budget-" + parameters.OrderID + "-" + parameters.StyleID + "-" + parameters.DateOfGeneration.Replace(@"/","_") + ".pdf");
+
+            if (File.Exists(tempFilePathForPdf))
+            {
+                File.Delete(tempFilePathForPdf);
+            }
+
+            budgetReportControl.SetParameters(parameters);
+            budgetReportControl.CreateReportAsPDF(ViewModel.Order.OrderID, ViewModel.SelectedProduct.ProductID, tempFilePathForPdf);
+            System.Diagnostics.Process.Start(tempFilePathForPdf);
         }
     }
 }

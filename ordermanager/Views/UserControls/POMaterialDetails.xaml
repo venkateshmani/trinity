@@ -133,6 +133,7 @@
                 <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
                     <DataGrid x:Name="gridDetails" Grid.Row="1"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" CanUserResizeColumns="True" 
+                        HeadersVisibility="All"
                         DataContext="{Binding SelectedMaterial}" ItemsSource="{Binding ProductMaterialItemsWrapper}" Background="WhiteSmoke">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn x:Name="subMaterialColumn" Header="Item Name" Width="0.3*">
