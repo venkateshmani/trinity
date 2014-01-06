@@ -225,5 +225,11 @@ namespace ordermanager.Views.UserControls
             gridDetails.DataContextChanged += DataGrid_DataContextChanged;
 
         }
+
+      
+        private void ComboBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

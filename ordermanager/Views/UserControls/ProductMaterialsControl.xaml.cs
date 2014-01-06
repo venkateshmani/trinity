@@ -270,7 +270,7 @@ namespace ordermanager.Views.UserControls
             System.Diagnostics.Process.Start(tempFilePathForPdf);
         }
 
-        private void materialsComboBox_MouseWheel_1(object sender, MouseWheelEventArgs e)
+        private void materialsComboBox_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             e.Handled = true;
         }
