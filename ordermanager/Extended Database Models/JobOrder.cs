@@ -177,7 +177,8 @@ namespace ordermanager.DatabaseModel
                     JobOrderReceiptsWrapper.ReceivedQuantity = value;
                     OnPropertyChanged("ReceivedQuantityWrapper");
                     QualityFailedWrapper = value - QualityPassed;
-                }
+                    SetAccess();
+                }               
             }
         }
 
