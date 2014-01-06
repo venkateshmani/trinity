@@ -119,6 +119,7 @@
         <Grid x:Name="productDetailsGrid"  Grid.Row="1" Grid.Column="2" DataContext="{Binding ElementName=productsList, Path=SelectedItem}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Row="0">
@@ -130,7 +131,7 @@
                 </TextBlock>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Grid.Row="1" >
                 <TextBlock Text="Quantity:" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
                 <TextBlock Text="{Binding Path = ExpectedQuantity, StringFormat=n4}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
                     <TextBlock.Foreground>
@@ -144,7 +145,7 @@
                 </TextBlock>
             </StackPanel>
 
-            <Grid  VerticalAlignment="Bottom" Grid.Row="0" HorizontalAlignment="Right" Height="62">
+            <Grid  VerticalAlignment="Bottom" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" Height="62">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -182,7 +183,7 @@
             </Grid>
 
 
-            <TabControl x:Name="tabControl" Grid.Row="1">
+            <TabControl x:Name="tabControl" Grid.Row="2">
                 <TabItem x:Name="tabViewMaterialsDetails" Header="  Materials Details  " Cursor="Hand" >
                     <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                         <Grid x:Name="gridDetails" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -352,7 +353,7 @@
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.HeaderTemplate>
                                             <DataGridTemplateColumn.CellTemplate>
-                                                
+
                                                 <DataTemplate>
                                                     <TextBox Text="{Binding OtherCostInINRWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                  IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
@@ -395,8 +396,8 @@
                                                     <TextBox Text="{Binding ConsumptionCostWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}" FontWeight="Bold" IsReadOnly="True"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>                                      
-                                       </DataGrid.Columns>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
                                 </DataGrid>
                             </Border>
                             <!--<Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,10" Visibility="Collapsed">
@@ -436,7 +437,7 @@
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductExtraCostWrapper, UpdateSourceTrigger=PropertyChanged}"
                                               RowHeaderWidth="25" HeadersVisibility="All" >
-                                              
+
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn x:Name="extraTypeColumn" Header="Extra Cost Name" Width="0.25*" >
                                             <DataGridTemplateColumn.CellTemplate>
