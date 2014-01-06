@@ -1,4 +1,4 @@
-﻿<UserControl xmlns:Execution="clr-namespace:ordermanager.Views.UserControls.Execution" 
+﻿<UserControl xmlns:PurchaseOrderControls="clr-namespace:ordermanager.Views.UserControls.PurchaseOrderControls"  xmlns:Execution="clr-namespace:ordermanager.Views.UserControls.Execution" 
              xmlns:PopUps="clr-namespace:ordermanager.Views.PopUps" 
              xmlns:my="clr-namespace:ordermanager.Views.UserControls"
              x:Class="ordermanager.Views.UserControls.OrderWorkBench"
@@ -104,7 +104,7 @@
             </TabItem>
             <TabItem x:Name="tabPurchaseOrder" Header="  Purchase Order" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                    <local:POControl x:Name="poControl"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    <PurchaseOrderControls:PurchaseOrderMasterControl x:Name="poControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 </Border>
             </TabItem>
            

@@ -339,6 +339,7 @@
     <Compile Include="ViewModel\PoGrnSummaryViewModel.cs" />
     <Compile Include="ViewModel\ProductMaterialsViewModel.cs" />
     <Compile Include="ViewModel\PurchaseOrderControlViewModel.cs" />
+    <Compile Include="ViewModel\PurchaseOrderControl\CreateNewPurchaseOrderViewModel.cs" />
     <Compile Include="ViewModel\PurchaseOrderNumberInfo.cs" />
     <Compile Include="ViewModel\PurchaseOrderSearchControlViewModel.cs" />
     <Compile Include="ViewModel\UserManagementViewModel.cs" />
@@ -444,7 +445,13 @@
     <Compile Include="Views\UserControls\ManageControl.xaml.cs">
       <DependentUpon>ManageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\POControl.xaml.cs">
+    <Compile Include="Views\UserControls\PurchaseOrderControls\BillOfMaterialBrowser.xaml.cs">
+      <DependentUpon>BillOfMaterialBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PurchaseOrderControls\CreateNewPurchaseOrderControl.xaml.cs">
+      <DependentUpon>CreateNewPurchaseOrderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PurchaseOrderControls\POControl.xaml.cs">
       <DependentUpon>POControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\POMaterialDetails.xaml.cs">
@@ -471,6 +478,9 @@
     </Compile>
     <Compile Include="Views\UserControls\ProductMaterialsControl.xaml.cs">
       <DependentUpon>ProductMaterialsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PurchaseOrderControls\PurchaseOrderMasterControl.xaml.cs">
+      <DependentUpon>PurchaseOrderMasterControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\ViewOrdersControl.xaml.cs">
       <DependentUpon>ViewOrdersControl.xaml</DependentUpon>
@@ -607,7 +617,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\POControl.xaml">
+    <Page Include="Views\UserControls\PurchaseOrderControls\BillOfMaterialBrowser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\PurchaseOrderControls\CreateNewPurchaseOrderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\PurchaseOrderControls\POControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -638,6 +656,10 @@
     <Page Include="Views\UserControls\ProductMaterialsControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserControls\PurchaseOrderControls\PurchaseOrderMasterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\ViewOrdersControl.xaml">
       <SubType>Designer</SubType>
