@@ -56,15 +56,31 @@ namespace ordermanager.ViewModel
 
         public bool IssueNewJob(JobOrder jobOrder)
         {
+            bool res = false;
             if (jobOrder != null)
             {
-                jobOrder.GRNReciept.JobOrders.Add(jobOrder);
-                Save();
-                return true;
+                if (jobOrder.JobOrderType.Type.ToLower() == "stock")
+                {
+                    if (jobOrder.GRNReciept != null)
+                    {
+                        if (jobOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.InStock == null)
+                            jobOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.InStock = 0;
+                        jobOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.InStock += jobOrder.JobQuantity;
+                    }
+                    else
+                        return false;
+                }
+                else
+                {
+                    jobOrder.GRNReciept.JobOrders.Add(jobOrder);
+                }
+                res = Save();
+                if (res)
+                    jobOrder.Refresh();
             }
-            return false;
+            return res;
         }
-
+        
         public bool Save()
         {
             return DBResources.Instance.Save();
@@ -72,17 +88,25 @@ namespace ordermanager.ViewModel
 
         public bool SendForSpecialApproval(JobOrder jOrder)
         {
+            bool res = false;
             jOrder.IsWaitingForApproval = true;
-            return DBResources.Instance.Save();
+            res = Save();
+            if (res)
+                jOrder.Refresh();
+            return res;
         }
 
         public bool SpecialApproval(JobOrder jOrder)
         {
+            bool res = false;
             jOrder.IsWaitingForApproval = false;
             jOrder.HasApproved = true;
-            return DBResources.Instance.Save();
+            res = Save();
+            if (res)
+                jOrder.Refresh();
+            return res;
         }
-    
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
@@ -91,7 +115,5 @@ namespace ordermanager.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
-
     }
 }

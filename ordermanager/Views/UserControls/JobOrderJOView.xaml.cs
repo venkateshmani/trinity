@@ -4,6 +4,7 @@ using ordermanager.ViewModel;
 using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -102,7 +103,7 @@ namespace ordermanager.Views.UserControls
         private void SupplierList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ViewModel.SelectedSupplier = supplierList.SelectedItem as Company;
-        }   
+        }
 
         private void btnIsue_Click(object sender, RoutedEventArgs e)
         {
@@ -115,13 +116,41 @@ namespace ordermanager.Views.UserControls
 
         private void IssueNextJob(JobOrder jOrder)
         {
+            ObservableCollection<JobOrderType> nextTypes;
+            switch (jOrder.JobOrderTypeID)
+            {
+                case 1:
+                    nextTypes = DBResources.Instance.AfterKnittingJobs;
+                    break;
+                case 2:
+                    nextTypes = DBResources.Instance.AfterDyeingJobs;
+                    break;
+                case 3:
+                    nextTypes = DBResources.Instance.AfterPrintingJobs;
+                    break;
+                case 4:
+                    nextTypes = DBResources.Instance.AfterCompactingJobs;
+                    break;
+                case 5:
+                    nextTypes = DBResources.Instance.AfterWashingJobs;
+                    break;
+                case 6:
+                    nextTypes = DBResources.Instance.AfterOtherJobs;
+                    break;
+                default:
+                    return;
+            }
+
+
             JobOrder newJob = new JobOrder();
             newJob.JobQuantity = jOrder.QualityPassed.GetValueOrDefault(0);
             newJob.GRNReciept = jOrder.GRNReciept;
-            IssueToPopupBox issuePopup = new IssueToPopupBox(newJob, DBResources.Instance.AfterKnittingJobs);
+            IssueToPopupBox issuePopup = new IssueToPopupBox(newJob, nextTypes);
             if (issuePopup.ShowDialog() == true)
             {
-                ViewModel.IssueNewJob(issuePopup.JobOrder);
+                jOrder.IsIssued = true;
+                if (ViewModel.IssueNewJob(issuePopup.JobOrder))
+                    jOrder.Refresh();
             }
         }
 
@@ -159,23 +188,27 @@ namespace ordermanager.Views.UserControls
 
         private void btnReissue_Click(object sender, RoutedEventArgs e)
         {
-            try
+            JobOrder jOrder = jobOrderDetails.SelectedItem as JobOrder;
+            if (jOrder != null && jOrder.ValidateIssueAndReceiptDetails())
             {
-                JobOrder parentOrder = jobOrderDetails.SelectedItem as JobOrder;
                 JobOrder newJob = new JobOrder();
-                newJob.JobQuantity = parentOrder.QualityFailed.GetValueOrDefault(0);
-                newJob.JobOrderType = parentOrder.JobOrderType;
-                newJob.Supplier = parentOrder.Supplier;
-                newJob.Instructions = parentOrder.Instructions;
-                newJob.RequiredDate = parentOrder.RequiredDate;
-                newJob.ChargesInINR = parentOrder.ChargesInINR;
-                ViewModel.IssueNewJob(newJob);
+                newJob.GRNReciept = jOrder.GRNReciept;
+                newJob.JobQuantity = jOrder.QualityFailed.GetValueOrDefault(0);
+                newJob.JobOrderType = jOrder.JobOrderType;
+                newJob.Supplier = jOrder.Supplier;
+                newJob.Instructions = jOrder.Instructions;
+                newJob.RequiredDate = jOrder.RequiredDate;
+                newJob.ChargesInINR = jOrder.ChargesInINR;
+
+                IssueToPopupBox issuePopup = new IssueToPopupBox(newJob);
+                if (issuePopup.ShowDialog() == true)
+                {
+                    jOrder.FailedQuantityIssued = true;
+                    if (ViewModel.IssueNewJob(issuePopup.JobOrder))
+                        jOrder.Refresh();
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-                
+
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)

@@ -42,12 +42,13 @@ namespace ordermanager.ViewModel
             {
                 if (jobOrder.JobOrderType.Type.ToLower() == "stock")
                 {
-                    if (SelectedOrderedItem.ProductMaterialItem.SubMaterial.InStock == null)
-                        SelectedOrderedItem.ProductMaterialItem.SubMaterial.InStock = 0;
-                    SelectedOrderedItem.ProductMaterialItem.SubMaterial.InStock += jobOrder.QualityPassedWrapper;
+                    res=IssueToStock(jobOrder.JobQuantity);                    
                 }
-                jobOrder.GRNReciept.JobOrders.Add(jobOrder);
-                res = Save();
+                else
+                {
+                    jobOrder.GRNReciept.JobOrders.Add(jobOrder);
+                    res = Save();
+                }               
                 if (res)
                     jobOrder.Refresh();
             }

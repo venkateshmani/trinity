@@ -286,7 +286,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                return (!DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder || IsIssued);
+                return (!DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder || IsIssued || HasApproved);
             }
         }
 
@@ -361,6 +361,7 @@ namespace ordermanager.DatabaseModel
             }
             OnPropertyChanged("SpecialApprovalNeeded");
             OnPropertyChanged("FailedQuantityIssued");
+            OnPropertyChanged("IsReadOnly");
         }
 
         private decimal Tolerance
