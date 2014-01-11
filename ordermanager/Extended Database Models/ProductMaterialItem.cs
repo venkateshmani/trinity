@@ -126,6 +126,25 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public string POStatus
+        {
+            get
+            {
+                if (Company == null)
+                    return "Not Generated";
+
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine(Company.Name);
+
+                if (LastPOGeneratedOn != null)
+                {
+                    sb.Append(LastPOGeneratedOn.Value.ToShortDateString());
+                }
+
+                return sb.ToString();
+            }
+        }
+
 
         #endregion [Wrappers]
         

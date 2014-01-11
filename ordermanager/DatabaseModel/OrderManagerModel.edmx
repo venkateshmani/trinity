@@ -791,6 +791,7 @@
           <Property Name="CurrencyID" Type="smallint" Nullable="false" />
           <Property Name="Cost" Type="decimal" Nullable="false" Scale="4" />
           <Property Name="SupplierID" Type="int" />
+          <Property Name="LastPOGeneratedOn" Type="datetime" />
         </EntityType>
         <EntityType Name="ProductMaterials">
           <Key>
@@ -2777,6 +2778,7 @@
           <Property Name="CurrencyID" Type="Int16" Nullable="false" />
           <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <Property Name="SupplierID" Type="Int32" />
+          <Property Name="LastPOGeneratedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_Company" FromRole="ProductMaterialItem" ToRole="Company" />
           <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_Currency" FromRole="ProductMaterialItem" ToRole="Currency" />
           <NavigationProperty Name="OrderedItems" Relationship="OrderManagerDBModel.FK_OrderedItem_ProductMaterialItem" FromRole="ProductMaterialItem" ToRole="OrderedItem" />
@@ -4364,6 +4366,7 @@
                 <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="LastPOGeneratedOn" ColumnName="LastPOGeneratedOn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

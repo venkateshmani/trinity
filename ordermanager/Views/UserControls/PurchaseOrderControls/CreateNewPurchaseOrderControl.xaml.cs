@@ -133,6 +133,7 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                     {
                         OrderedItem itemToOrder = new OrderedItem { ProductMaterialItem = item, OrderedQuantity = item.Quantity };
                         item.SupplierWrapper = ViewModel.PurchaseOrder.Company;
+                        item.LastPOGeneratedOn = DBResources.Instance.GetServerTime();
                         ViewModel.PurchaseOrder.OrderedItems.Add(itemToOrder);
                         Order.PurchaseOrders.Add(ViewModel.PurchaseOrder);
                     }

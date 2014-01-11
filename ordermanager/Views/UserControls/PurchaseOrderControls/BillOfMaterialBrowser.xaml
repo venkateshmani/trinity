@@ -58,7 +58,7 @@
         <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1">
             <DataGrid x:Name="gridDetails" Grid.Row="1" FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                                 HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                                GridLinesVisibility="All" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="True" 
+                                GridLinesVisibility="All" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" 
                                 HeadersVisibility="All"
                                 ItemsSource="{Binding PurchasableMaterials}" Background="WhiteSmoke">
                 <DataGrid.Columns>
@@ -130,7 +130,7 @@
                     <DataGridTemplateColumn x:Name="poStatus" Header=" PO Status " Width="0.3*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                <TextBox Text="{Binding POStatus, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

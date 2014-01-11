@@ -124,7 +124,7 @@
                     </Button.Background>
                 </Button>
                 <Button x:Name="btnDeleteItem"  Content="Delete"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Delete Selected Item" HorizontalAlignment="Left" Click="DeleteItem_Click"
-                        Visibility="{Binding AddDeleteButtonVisibility}">
+                        Visibility="Collapsed">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource ValidationColor5}" />
                     </Button.Background>
@@ -268,6 +268,15 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn x:Name="poStatus" Header=" PO Status " Width="0.3*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding POStatus, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>
