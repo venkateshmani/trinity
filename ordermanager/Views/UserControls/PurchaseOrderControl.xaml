@@ -144,12 +144,12 @@
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
                 </Button>
-                <Button x:Name="submitBtn" Content="Submit" Margin="5" Width="150" Height="35" Foreground="White"
+                <!--<Button x:Name="submitBtn" Content="Submit" Margin="5" Width="150" Height="35" Foreground="White"
                                         ToolTip="Submit to next level" Click="Submit_Click">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
-                </Button>
+                </Button>-->
             </StackPanel>
         </Grid>
     </Grid>

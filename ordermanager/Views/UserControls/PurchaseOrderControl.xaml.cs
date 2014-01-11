@@ -43,7 +43,7 @@ namespace ordermanager.Views.UserControls
             if (m_ViewModel != null && m_ViewModel.Order != null)
             {
                 OrderStatusEnum status = Helper.GetOrderStatusEnumFromString(m_ViewModel.Order.OrderStatu.StatusLabel);
-                if (DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterials && status == OrderStatusEnum.OrderConfirmed)
+                if ((DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterials || DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterialsCost) && status == OrderStatusEnum.OrderConfirmed)
                 {
                     gridButtons.Visibility = System.Windows.Visibility.Visible;
                     poProductDetails.IsReadOnly = false;

@@ -91,10 +91,15 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        decimal m_ItemCostWrapper;
+        decimal m_ItemCostWrapper = -1;
         public virtual decimal ItemCostWrapper
         {
-            get { return m_ItemCostWrapper; }
+            get 
+            {
+                if (m_ItemCostWrapper == -1)
+                    CalculateItemCost();
+                return m_ItemCostWrapper; 
+            }
             set
             {
                 if (m_ItemCostWrapper != value)
@@ -123,7 +128,6 @@ namespace ordermanager.DatabaseModel
 
 
         #endregion [Wrappers]
-
         
         #region [Helpers]
 
@@ -140,15 +144,33 @@ namespace ordermanager.DatabaseModel
                 OnPropertyChanged("IsSelectedToGeneratePO");
             }
         }
-             
 
-        public bool IsEditable
+        public bool CanAddMaterials
         {
             get
             {
                 if (!DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterials)
                     return false;
 
+                return IsEditable;
+            }
+        }
+
+        public bool CanAddCosts
+        {
+            get
+            {
+                if (!DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterialsCost)
+                    return false;
+
+                return IsEditable;
+            }
+        }
+
+        public bool IsEditable
+        {
+            get
+            {
                 if( this.ProductMaterial != null && this.ProductMaterial.OrderProduct != null &&
                     this.ProductMaterial.OrderProduct.Order != null &&
                     this.ProductMaterial.OrderProduct.Order.OrderStatusID != (short)OrderStatusEnum.OrderConfirmed)
