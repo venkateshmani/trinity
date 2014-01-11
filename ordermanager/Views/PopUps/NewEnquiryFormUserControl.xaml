@@ -70,6 +70,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -226,6 +227,13 @@
                                   IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
                         </StackPanel>
                     </StackPanel>
+                    <TextBlock Text="Customer Order No." Style="{StaticResource inLineTextBlockStyle}" Grid.Row="3"/>
+                    <TextBox Width="250" BorderBrush="LightGray" Grid.Row="3" Grid.Column="1" Margin="5"
+                                 HorizontalAlignment="Left"
+                                 HorizontalContentAlignment="Left" 
+                                 VerticalContentAlignment="Center"
+                                 Text="{Binding Order.CustomerOrderNumber, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                 IsHitTestVisible="{Binding CanUpdateEnquiry}" />
                 </Grid>
             </Grid>
             <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Margin="10" Visibility="{Binding Order.TargetDatesGridVisibility}">
