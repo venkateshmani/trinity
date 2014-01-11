@@ -56,11 +56,15 @@ namespace ordermanager.Views.PopUps
 
                     ourPriceColumn.Visibility = System.Windows.Visibility.Visible;
                     profitLoss.Visibility = System.Windows.Visibility.Visible;
+                    totalOurPriceColumn.Visibility = System.Windows.Visibility.Visible;
+                    totalProfitLossColumn.Visibility = System.Windows.Visibility.Visible;
                 }
                 else
                 {
                     NewEnquiryViewModel = new NewEnquiryViewModel();
                     ourPriceColumn.Visibility = System.Windows.Visibility.Hidden;
+                    totalOurPriceColumn.Visibility = System.Windows.Visibility.Hidden;
+                    totalProfitLossColumn.Visibility = System.Windows.Visibility.Hidden;
                     profitLoss.Visibility = System.Windows.Visibility.Hidden;
                 }
             }

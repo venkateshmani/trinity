@@ -70,6 +70,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -226,6 +227,13 @@
                                   IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"/>
                         </StackPanel>
                     </StackPanel>
+                    <TextBlock Text="Customer Order No." Style="{StaticResource inLineTextBlockStyle}" Grid.Row="3"/>
+                    <TextBox Width="250" BorderBrush="LightGray" Grid.Row="3" Grid.Column="1" Margin="5"
+                                 HorizontalAlignment="Left"
+                                 HorizontalContentAlignment="Left" 
+                                 VerticalContentAlignment="Center"
+                                 Text="{Binding Order.CustomerOrderNumber, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                 IsHitTestVisible="{Binding CanUpdateEnquiry}" />
                 </Grid>
             </Grid>
             <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="1" Margin="10" Visibility="{Binding Order.TargetDatesGridVisibility}">
@@ -447,7 +455,19 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn x:Name="currencyValueInINR" Header="Currency Value In INR" Width="0.19*">
+                        <DataGridTemplateColumn x:Name="currencyValueInINR" Width="0.2*">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="CURRENCY VALUE" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBlock Text="In INR" Grid.Row="1" HorizontalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}"
@@ -459,6 +479,18 @@
                         </DataGridTemplateColumn>
 
                         <DataGridTemplateColumn x:Name="buyerTargetPriceColumn" Header="Buyer Target Price" Width="0.18*">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="BUYER TARGET" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBlock Text="PRICE" Grid.Row="1" HorizontalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}" 
@@ -470,10 +502,22 @@
                         </DataGridTemplateColumn>
 
 
-                        <DataGridTemplateColumn x:Name="ourPriceColumn" Header="Our Price" Width="0.18*">
+                        <DataGridTemplateColumn x:Name="ourPriceColumn" Width="0.18*">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="OUT PRICE" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Per Unit" Grid.Row="1" HorizontalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding OurCostInProductCurrenyValue, Mode=OneWay, StringFormat=n4}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="0,3,3,3" 
+                                    <TextBox Text="{Binding OurCostInProductCurrenyValue, Mode=OneWay, StringFormat=n4}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,3,3,3" 
                                              IsHitTestVisible="False"
                                              Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"
                                              />
@@ -481,17 +525,87 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn x:Name="profitLoss" Header="Profit/Loss" Width="0.18*">
+                        <DataGridTemplateColumn x:Name="profitLoss" Width="0.18*">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="PROFIT/LOSS" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Per Unit" Grid.Row="1" HorizontalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding ProfitOrLossAmount, Mode=OneWay, StringFormat=n4}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="0,0,3,0"
+                                    <TextBox Text="{Binding ProfitOrLossAmount, Mode=OneWay, StringFormat=n4}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,0,3,0"
                                              IsHitTestVisible="False"
                                              Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn x:Name="orderValueColumn" Header="Order Value" Width="0.16*">
+                        <DataGridTemplateColumn x:Name="totalOurPriceColumn" Width="0.18*">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="OUR PRICE" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Total" Grid.Row="1" HorizontalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding TotalOurCostInProductCurrenyValue, Mode=OneWay, StringFormat=n4}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,3,3,3" 
+                                             IsHitTestVisible="False"
+                                             Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"
+                                             />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn x:Name="totalProfitLossColumn" Header="Profit/Loss (Total)" Width="0.18*">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="PROFIT/LOSS" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Total" Grid.Row="1" HorizontalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Text="{Binding TotalProfitOrLossAmount, Mode=OneWay, StringFormat=n4}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,0,3,0"
+                                             IsHitTestVisible="False"
+                                             Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        
+                        <DataGridTemplateColumn x:Name="orderValueColumn" Header="Order Value" Width="0.3*">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="ORDER" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBlock Text="VALUE" Grid.Row="1" HorizontalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Right" Orientation="Horizontal">

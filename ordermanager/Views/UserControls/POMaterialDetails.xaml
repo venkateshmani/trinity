@@ -124,7 +124,7 @@
                     </Button.Background>
                 </Button>
                 <Button x:Name="btnDeleteItem"  Content="Delete"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Delete Selected Item" HorizontalAlignment="Left" Click="DeleteItem_Click"
-                        Visibility="{Binding AddDeleteButtonVisibility}">
+                        Visibility="Collapsed">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource ValidationColor5}" />
                     </Button.Background>
@@ -149,7 +149,7 @@
                                                     ItemsSource="{Binding Source={StaticResource GetAvailableSubMaterials}}" DisplayMemberPath="Name"
                                                     SelectedItem="{Binding SubMaterialWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                     Height="20" TextBoxBase.TextChanged="SubMaterialsComboBox_TextChanged" PreviewMouseWheel="ComboBox_PreviewMouseWheel"
-                                                    IsHitTestVisible="{Binding IsEditable}"  />
+                                                    IsHitTestVisible="{Binding CanAddMaterials}"  />
                                             <Button  x:Name="btnAddNewSubMaterial" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
                                                         Cursor="Hand" Click="AddNewSubMaterial_Click"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Item"  Visibility="Collapsed">
                                                 <Rectangle Width="10" Height="10">
@@ -162,19 +162,11 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="aliasColumn" Header="Alias" Width="0.2*">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBox Text="{Binding Alias, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                 IsHitTestVisible="{Binding IsEditable}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding QuantityWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
-                                                 IsHitTestVisible="{Binding IsEditable}" />
+                                                 IsHitTestVisible="{Binding CanAddMaterials}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -189,17 +181,24 @@
                                             <ComboBox x:Name="uomComboBox" Grid.Column="0" IsEditable="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                       Height="20" ItemsSource="{Binding UOMs, Source={StaticResource DataProvider}}" DisplayMemberPath="Units"
                                                       SelectedItem="{Binding  UnitsOfMeasurementWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                      IsHitTestVisible="{Binding IsEditable}" PreviewMouseWheel="ComboBox_PreviewMouseWheel"/>                                           
+                                                      IsHitTestVisible="{Binding CanAddMaterials}" PreviewMouseWheel="ComboBox_PreviewMouseWheel"/>                                           
                                         </Grid>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                          
+                            <DataGridTemplateColumn x:Name="aliasColumn" Header="Alias" Width="0.2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Alias, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                 IsHitTestVisible="{Binding CanAddCosts}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="costPerUnitColumn" Header="Cost" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding CostWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                 IsHitTestVisible="{Binding IsEditable}" />
+                                                 IsHitTestVisible="{Binding CanAddCosts}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -214,7 +213,7 @@
                                             <ComboBox x:Name="currencyComboBox" Grid.Column="0" IsEditable="True" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                     Height="20" ItemsSource="{Binding Currencies, Source={StaticResource DataProvider}}" DisplayMemberPath="Symbol"
                                                     SelectedItem="{Binding CurrencyWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                    IsHitTestVisible="{Binding IsEditable}" PreviewMouseWheel="ComboBox_PreviewMouseWheel"/>
+                                                    IsHitTestVisible="{Binding CanAddCosts}" PreviewMouseWheel="ComboBox_PreviewMouseWheel"/>
                                             <Button  x:Name="btnAddCurrency" Width="28"   Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left"  
                                                     Cursor="Hand" Visibility="Collapsed" Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Currency">
                                                 <Rectangle Width="10" Height="10">
@@ -227,48 +226,57 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="currencyValueInINR" Header="Currency Value In INR" Width="0.22*">
+                            <DataGridTemplateColumn x:Name="currencyValueInINR" Width="0.22*">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="CURRENCY" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="VALUE" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="In INR" Grid.Row="2" HorizontalAlignment="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}"
-                                                 IsHitTestVisible="{Binding IsEditable}" />
+                                                 IsHitTestVisible="{Binding CanAddCosts}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="supplierColumn" Header="Supplier" Width="0.3*">
-                                <DataGridTemplateColumn.CellTemplate>
+                            <DataGridTemplateColumn x:Name="totalCost" Header="Total Cost In INR" Width="0.22*">
+                                <DataGridTemplateColumn.HeaderTemplate>
                                     <DataTemplate>
-                                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <ComboBox x:Name="supplierComboBox" Grid.Column="0" IsEditable="True"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                                                      ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
-                                                      DisplayMemberPath="Name" SelectedItem="{Binding SupplierWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
-                                                      Height="20"  TextBoxBase.TextChanged="SupplierComboBox_TextChanged" PreviewMouseWheel="ComboBox_PreviewMouseWheel"
-                                                      IsHitTestVisible="{Binding IsEditable}" />
-                                            <Button  x:Name="btnAddSupplier" Width="28"  Grid.Row="0" Grid.Column="1" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
-                                                        Cursor="Hand" Click="AddNewSupplier_Click"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Add New Supplier"  Visibility="Collapsed">
-                                                <Rectangle Width="10" Height="10">
-                                                    <Rectangle.Fill>
-                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
-                                            </Button>
-                                            <Button  x:Name="btnEditSupplier" Width="28"  Grid.Row="0" Grid.Column="2" Height="28" Margin="0, 2, 0, 0" HorizontalAlignment="Left" 
-                                                        Cursor="Hand" Click="EditSupplier_Click"  Style="{DynamicResource MetroCircleButtonStyle}" ToolTip="Edit Supplier"  Visibility="Collapsed">
-                                                <Rectangle Width="10" Height="10">
-                                                    <Rectangle.Fill>
-                                                        <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
-                                            </Button>
+                                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="TOTAL COST" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="In INR" Grid.Row="1" HorizontalAlignment="Center" />
                                         </Grid>
                                     </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding ItemCostWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}"
+                                                IsReadOnly="True" />
+                                    </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn x:Name="poStatus" Header=" PO Status " Width="0.3*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding POStatus, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>

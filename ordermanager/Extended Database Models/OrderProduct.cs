@@ -234,6 +234,37 @@ namespace ordermanager.DatabaseModel
 
 
         /// <summary>
+        /// Total Our Cost
+        /// </summary>
+        public decimal TotalOurCostInProductCurrenyValue
+        {
+            get
+            {
+                decimal cost = 0;
+
+                if (CurrencyConversion == null)
+                    SelectOrAddCurrencyConversion();
+
+                if (CurrencyConversion.ValueInINR != null)
+                {
+                    cost = PerUnitTotalProductMaterialsCost / CurrencyConversion.ValueInINR.Value;
+                }
+
+                cost = cost * ExpectedQuantityWrapper * UnitsOfMeasurement.Multiplier;
+
+                return cost;
+            }
+        }
+
+        public decimal TotalProfitOrLossAmount
+        {
+            get
+            {
+                return OrderValue - TotalOurCostInProductCurrenyValue;
+            }
+        }
+
+        /// <summary>
         /// Per unit value
         /// </summary>
         public decimal OurCostInProductCurrenyValue
@@ -276,6 +307,8 @@ namespace ordermanager.DatabaseModel
             OnPropertyChanged("OurCostInProductCurrenyValue");
             OnPropertyChanged("IsOurCostHigherThanQuoted");
             OnPropertyChanged("ProfitOrLossAmount");
+            OnPropertyChanged("TotalOurCostInProductCurrenyValue");
+            OnPropertyChanged("TotalProfitOrLossAmount");
         }
 
         private decimal m_PerUnitTotalProductMaterialsCost = 0;

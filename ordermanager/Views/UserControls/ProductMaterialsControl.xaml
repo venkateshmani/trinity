@@ -54,7 +54,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.28*"/>
+            <ColumnDefinition Width="0.21*"/>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -399,20 +399,6 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Border>
-                            <!--<Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,10" Visibility="Collapsed">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
-                                    <TextBlock Text="Other Cost:" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
-                                    <TextBox Text="{Binding OtherCost.CostWrapper,StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-                                 IsReadOnly="{Binding Path=DataContext.CanEditExtraCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                 IsHitTestVisible="{Binding Path=DataContext.CanEditExtraCost,ElementName=This}"
-                                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="100" Height="20" Foreground="Gray" Margin="10,0,0,0"/>
-                                    <TextBlock Text="INR" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" Margin="3,0,0,0"/>
-                                    <TextBox Text="{Binding OtherCost.DescriptionWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" 
-                                 IsReadOnly="{Binding Path=DataContext.CanEditExtraCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                 IsHitTestVisible="{Binding Path=DataContext.CanEditExtraCost,ElementName=This}"
-                                 VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Width="400" Height="20" Foreground="Gray" Margin="40,0,0,0" Controls:TextboxHelper.Watermark=" Enter reason for other cost here"/>
-                                </StackPanel>
-                            </Grid>-->
                         </Grid>
                     </Border>
                 </TabItem>

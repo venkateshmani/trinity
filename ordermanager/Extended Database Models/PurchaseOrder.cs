@@ -86,6 +86,7 @@ namespace ordermanager.DatabaseModel
             ValidatePurchaseOrderDateWrapper();
         }
 
+
         private void ValidateSupplier()
         {
             if (Supplier == null)
