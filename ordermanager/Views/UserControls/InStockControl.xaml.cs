@@ -50,11 +50,27 @@ namespace ordermanager.Views.UserControls
 
         private void stockListCatetogy_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Stock selectedStock = stockListCatetogy.SelectedItem as Stock;
-            if (selectedStock != null && !selectedStock.IsLoaded)
+            //Stock selectedStock = stockListCatetogy.SelectedItem as Stock;
+            //if (selectedStock != null && !selectedStock.IsLoaded)
+            //{
+            //    selectedStock.Load();
+            //    stockGrid.ItemsSource = selectedStock.Items;
+            //}
+        }
+
+        private void IssueClick(object sender, RoutedEventArgs e)
+        {
+            MaterialStockItem item = gridMaterialStock.SelectedItem as MaterialStockItem;
+            if (item != null && item.Validate())
             {
-                selectedStock.Load();
-                stockGrid.ItemsSource = selectedStock.Items;
+                try
+                {
+                    item.Issue();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Failed to issue. Message: " + ex.Message);
+                }
             }
         }
     }

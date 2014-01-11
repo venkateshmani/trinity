@@ -47,82 +47,69 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.28*"/>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-
-        <Grid Grid.Row="0" Grid.Column="0">
-            <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Stock Category" Margin="4" Style="{StaticResource DescriptionHeaderStyle}"/>
-            </Border>
-        </Grid>
-
-        <ListView x:Name="stockListCatetogy" Grid.Row="1" Grid.Column="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Stocks}" SelectedIndex="{Binding Path=SelectedIndex, Mode=OneWay}" SelectionChanged="stockListCatetogy_SelectionChanged">
-            <ListView.View>
-                <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
-                    <GridViewColumn Width="{Binding ActualWidth, ElementName=Items, Converter={StaticResource subractor}, ConverterParameter=5}">
-                        <GridViewColumn.CellTemplate>
+        <TabControl x:Name="tabControl" Margin="5">
+            <TabItem x:Name="tabProductStock" Header="Product Stock " Cursor="Hand">
+                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    <Grid x:Name="stockDetails"  Grid.Row="1" Grid.Column="2" DataContext="{Binding ElementName=productsList, Path=SelectedItem}">
+                        <Border  VerticalAlignment="Stretch" HorizontalAlignment="Center" BorderBrush="Gray" BorderThickness="1" >
+                            <DataGrid x:Name="stockGrid" AutoGenerateColumns="True" VerticalAlignment="Stretch" HorizontalAlignment="Center"  IsReadOnly="True" MinWidth="500" SelectedIndex="0" GridLinesVisibility="All" CanUserAddRows="False" CanUserDeleteRows="False"
+                          HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray" ItemsSource="{Binding ProductStockItems}"/>
+                        </Border>
+                    </Grid>
+                </Border>
+            </TabItem>
+            <TabItem x:Name="tabMaterialStock" Header="  Material Stock" Cursor="Hand">
+                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    <DataGrid x:Name="gridMaterialStock" FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
+                        GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" 
+                         ItemsSource="{Binding MaterialStockItems}" Background="WhiteSmoke">
+                        <DataGrid.RowDetailsTemplate>
                             <DataTemplate>
-                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="4">
+                                <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>                                   
+                                    </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                                    <TextBlock Text="Order #" Grid.Row="0" Grid.Column="0" Margin="3"  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Quantity" Grid.Row="1" Grid.Column="0" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <TextBox Width="100"  Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding OrderNumber, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" IsReadOnly="{Binding CanIssue, Converter={StaticResource FlipBoolValueConverter}}"/>
+                                    <TextBlock Text="{Binding CustomerName}"  Grid.Row="0" Grid.Column="2" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <TextBox Width="100"  Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding QuantityToIssue, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}" IsReadOnly="{Binding CanIssue, Converter={StaticResource FlipBoolValueConverter}}"/>
+                                    <Button x:Name="btnIssue" Grid.Row="1" Grid.Column="2" Content="Issue"   Margin="3" Width="100" Height="28" Foreground="White" 
+                                             HorizontalAlignment="Right" Click="IssueClick" IsEnabled="{Binding CanIssue}" >
+                                        <Button.Background>
+                                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                                        </Button.Background>
+                                    </Button>
                                 </Grid>
                             </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-
-
-        <Grid Grid.Row="0" Grid.Column="2">
-            <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Stock Details"  Margin="4" Grid.Row="0" Style="{StaticResource DescriptionHeaderStyle}" />
-            </Border>
-        </Grid>
-
-        <Grid x:Name="stockDetails"  Grid.Row="1" Grid.Column="2" DataContext="{Binding ElementName=productsList, Path=SelectedItem}">
-            <Border  VerticalAlignment="Stretch" HorizontalAlignment="Center" BorderBrush="Gray" BorderThickness="1" Margin="50">
-                <DataGrid x:Name="stockGrid" AutoGenerateColumns="True" VerticalAlignment="Stretch" HorizontalAlignment="Center"  IsReadOnly="True" MinWidth="500" SelectedIndex="0" GridLinesVisibility="All" CanUserAddRows="False" CanUserDeleteRows="False"
-                          HorizontalGridLinesBrush="Gray" VerticalGridLinesBrush="Gray"/>
-            </Border>
-        </Grid>
-
-        <GridSplitter Grid.Row="0" Grid.Column="1"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Stretch"
-                      Background="LightGray" 
-                      ShowsPreview="True"
-                      Width="5" Grid.RowSpan="2" />
-
-        <Grid Grid.Row="2" Grid.ColumnSpan="3">
-            <Rectangle Height="1" Fill="Gray" />
-        </Grid>
-
-        <Grid x:Name="gridButtons" Grid.Row="3" Grid.ColumnSpan="3">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Button x:Name="sendBackBtn" Content="Send Back"  Margin="5" Width="150" Height="35" Foreground="White"
-                                        ToolTip="Send back to previous level" Visibility="Hidden">
-                    <Button.Background>
-                        <SolidColorBrush Color="{StaticResource AccentColor}" />
-                    </Button.Background>
-                </Button>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Visibility="{Binding Path=DataContext.ActionButtonsVisibility, ElementName=This}"/>
-        </Grid>
+                        </DataGrid.RowDetailsTemplate>
+                        <DataGrid.Columns>                         
+                            <DataGridTemplateColumn Header="Material Name" Width="2*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True" Text="{Binding MaterialName, Mode=OneWay}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                         
+                            <DataGridTemplateColumn Header="Quantity In Stock" Width="1*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox IsReadOnly="True" Text="{Binding Stock, Mode=OneWay}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>                           
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </TabItem>
+        </TabControl>     
     </Grid>
 </UserControl>
