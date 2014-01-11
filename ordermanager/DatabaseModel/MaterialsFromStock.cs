@@ -18,6 +18,7 @@ namespace ordermanager.DatabaseModel
         public long OrderID { get; set; }
         public long SubMaterialsNameID { get; set; }
         public decimal Quantity { get; set; }
+        public System.DateTime IssuedDate { get; set; }
     
         public virtual Order Order { get; set; }
         public virtual SubMaterial SubMaterial { get; set; }

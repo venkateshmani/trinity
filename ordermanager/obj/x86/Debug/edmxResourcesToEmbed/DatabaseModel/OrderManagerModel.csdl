@@ -643,6 +643,7 @@
     <Property Name="OrderID" Type="Int64" Nullable="false" />
     <Property Name="SubMaterialsNameID" Type="Int64" Nullable="false" />
     <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="IssuedDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_Order" FromRole="MaterialsFromStock" ToRole="Order" />
     <NavigationProperty Name="SubMaterial" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_SubMaterial" FromRole="MaterialsFromStock" ToRole="SubMaterial" />
   </EntityType>

@@ -246,6 +246,7 @@
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="SubMaterialsNameID" ColumnName="SubMaterialsNameID" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

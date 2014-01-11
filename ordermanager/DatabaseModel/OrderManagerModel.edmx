@@ -603,6 +603,7 @@
           <Property Name="OrderID" Type="bigint" Nullable="false" />
           <Property Name="SubMaterialsNameID" Type="bigint" Nullable="false" />
           <Property Name="Quantity" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="IssuedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -2529,6 +2530,7 @@
           <Property Name="OrderID" Type="Int64" Nullable="false" />
           <Property Name="SubMaterialsNameID" Type="Int64" Nullable="false" />
           <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="IssuedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_Order" FromRole="MaterialsFromStock" ToRole="Order" />
           <NavigationProperty Name="SubMaterial" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_SubMaterial" FromRole="MaterialsFromStock" ToRole="SubMaterial" />
         </EntityType>
@@ -4155,6 +4157,7 @@
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="SubMaterialsNameID" ColumnName="SubMaterialsNameID" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -598,6 +598,7 @@
     <Property Name="OrderID" Type="bigint" Nullable="false" />
     <Property Name="SubMaterialsNameID" Type="bigint" Nullable="false" />
     <Property Name="Quantity" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="IssuedDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
