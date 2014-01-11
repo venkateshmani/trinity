@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.ViewModel.PurchaseOrderControl;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +25,37 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
         public BillOfMaterialBrowser()
         {
             InitializeComponent();
+        }
+
+        public BillOfMaterialBrowser(Order order, ObservableCollection<ProductMaterialItem> purchasableMaterials)
+            : this()
+        {
+            ViewModel = new BillOfMaterialBrowserViewModel(order, purchasableMaterials);
+        }
+
+        private BillOfMaterialBrowserViewModel m_ViewModel = null;
+        public BillOfMaterialBrowserViewModel ViewModel
+        {
+            get
+            {
+                return m_ViewModel;
+            }
+            set
+            {
+                m_ViewModel = value;
+                this.DataContext = value;
+            }
+        }
+
+        private void positiveDecisionBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+            this.Close();
+        }
+
+        private void cancelBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

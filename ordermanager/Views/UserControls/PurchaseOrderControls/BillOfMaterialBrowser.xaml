@@ -43,7 +43,113 @@
             <DataProviders:DataProvider x:Key="DataProvider" />
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
 
+    <Controls:MetroWindow.GlowBrush>
+        <SolidColorBrush Color="{DynamicResource AccentColor}" />
+    </Controls:MetroWindow.GlowBrush>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1">
+            <DataGrid x:Name="gridDetails" Grid.Row="1" FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
+                                HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                                GridLinesVisibility="All" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="True" 
+                                HeadersVisibility="All"
+                                ItemsSource="{Binding PurchasableMaterials}" Background="WhiteSmoke">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="  " Width="0.1*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsSelectedToGeneratePO, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                   
+                    <DataGridTemplateColumn x:Name="subMaterialColumn" Header="Item Name" Width="0.3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding SubMaterial.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                        IsReadOnly="True" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="aliasColumn" Header="Alias" Width="0.15*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Alias, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                         IsReadOnly="True" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.15*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding QuantityWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                                         IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="unitOfMeasurementColumn" Header="UOM" Width="0.1*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding UnitsOfMeasurementWrapper.Units, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                                       IsReadOnly="True" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn x:Name="costPerUnitColumn" Header="Cost" Width="0.15*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding CostWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                         IsHitTestVisible="{Binding IsEditable}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency" Width="0.16*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Currency.Symbol, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                         IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="totalValue" Header="Total Value" Width="0.2*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding ItemCostWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                         IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn x:Name="poStatus" Header=" PO Status " Width="0.3*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button x:Name="positiveDecisionBtn" Content="OK" Width="100" Height="35" Foreground="White" Margin="3"
+                       Click="positiveDecisionBtn_Click"  >
+                <Button.Background>
+                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                </Button.Background>
+            </Button>
+            <Button x:Name="cancelBtn" Content="Cancel" Width="100" Height="35" Foreground="White" Margin="5,3,8,3"
+                        Click="cancelBtn_Click"  Visibility="Collapsed">
+                <Button.Background>
+                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                </Button.Background>
+            </Button>
+        </StackPanel>
     </Grid>
 </Controls:MetroWindow> 

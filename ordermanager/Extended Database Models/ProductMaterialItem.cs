@@ -127,6 +127,21 @@ namespace ordermanager.DatabaseModel
         
         #region [Helpers]
 
+        private bool m_IsSelectedToGeneratePO = false;
+        public bool IsSelectedToGeneratePO
+        {
+            get
+            {
+                return m_IsSelectedToGeneratePO;
+            }
+            set
+            {
+                m_IsSelectedToGeneratePO = value;
+                OnPropertyChanged("IsSelectedToGeneratePO");
+            }
+        }
+             
+
         public bool IsEditable
         {
             get

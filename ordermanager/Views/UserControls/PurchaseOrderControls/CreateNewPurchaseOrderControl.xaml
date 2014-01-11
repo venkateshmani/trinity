@@ -79,7 +79,7 @@
                               ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
                               DisplayMemberPath="Name"
                               IsEditable="True"
-                              SelectedItem="{Binding Order.Customer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                              SelectedItem="{Binding PurchaseOrder.Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                               SelectionChanged="supplierComboBox_SelectionChanged_1"
                               IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
 
@@ -122,13 +122,13 @@
                 <DatePicker x:Name="poDate" Width="150" 
                                     Margin="5" 
                                     Grid.Row="1" Grid.Column="1"
-                                    SelectedDate="{Binding PurchaseOrder.PurchaseOrderDate, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                    SelectedDate="{Binding PurchaseOrder.PurchaseOrderDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date"
                                     IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" Height="26" VerticalAlignment="Bottom" />
 
                 <TextBlock Text="Purchase Order No. :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" />
-                <TextBlock Text="###" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" />
+                <TextBlock Text="{Binding PurchaseOrder.PurchaseOrderNumberWrapper}" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" />
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
@@ -142,16 +142,17 @@
                     </Button.Background>
                 </Button>
                 <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gray">
-                    <DataGrid x:Name="gridDetails" FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
-                            GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" CanUserResizeColumns="True" 
-                            HeadersVisibility="All"
-                            DataContext="{Binding SelectedMaterial}" ItemsSource="{Binding ProductMaterialItemsWrapper}" Background="WhiteSmoke">
+                    <DataGrid x:Name="gridDetails" Grid.Row="1" FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
+                                HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                                GridLinesVisibility="All" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="True" 
+                                HeadersVisibility="All"
+                                ItemsSource="{Binding SelectedItems}" Background="WhiteSmoke">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn x:Name="subMaterialColumn" Header="Item Name" Width="0.3*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Alias, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                    IsReadOnly="True" />
+                                        <TextBox Text="{Binding SubMaterial.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                        IsReadOnly="True" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -159,7 +160,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding Alias, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                     IsReadOnly="True" />
+                                                         IsReadOnly="True" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -167,15 +168,15 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding QuantityWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
-                                                     IsReadOnly="True"/>
+                                                         IsReadOnly="True"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="unitOfMeasurementColumn" Header="UOM" Width="0.1*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding QuantityWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
-                                                   IsReadOnly="True" />
+                                        <TextBox Text="{Binding UnitsOfMeasurementWrapper.Units, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                                       IsReadOnly="True" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -184,23 +185,23 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding CostWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                     IsHitTestVisible="{Binding IsEditable}" />
+                                                         IsHitTestVisible="{Binding IsEditable}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency" Width="0.16*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding CostWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                     IsReadOnly="True"/>
+                                        <TextBox Text="{Binding Currency.Symbol, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                         IsReadOnly="True"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="totalValue" Header="Total Value" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding CostWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                     IsReadOnly="True"/>
+                                        <TextBox Text="{Binding ItemCostWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                         IsReadOnly="True"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -209,7 +210,7 @@
                 </Border>
             </Grid>
             <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">
-                <Button Content="Generate" x:Name="btnGeneratePO" IsEnabled="False"  Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="btnGeneratePO_Click_1">
+                <Button Content="Generate" x:Name="btnGeneratePO" Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="btnGeneratePO_Click_1">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>

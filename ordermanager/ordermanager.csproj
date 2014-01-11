@@ -339,6 +339,7 @@
     <Compile Include="ViewModel\PoGrnSummaryViewModel.cs" />
     <Compile Include="ViewModel\ProductMaterialsViewModel.cs" />
     <Compile Include="ViewModel\PurchaseOrderControlViewModel.cs" />
+    <Compile Include="ViewModel\PurchaseOrderControl\BillOfMaterialBrowserViewModel.cs" />
     <Compile Include="ViewModel\PurchaseOrderControl\CreateNewPurchaseOrderViewModel.cs" />
     <Compile Include="ViewModel\PurchaseOrderNumberInfo.cs" />
     <Compile Include="ViewModel\PurchaseOrderSearchControlViewModel.cs" />

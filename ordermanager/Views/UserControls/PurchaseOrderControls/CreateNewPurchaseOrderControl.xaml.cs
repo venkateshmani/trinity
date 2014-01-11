@@ -1,6 +1,8 @@
-﻿using ordermanager.DatabaseModel;
+﻿using MahApps.Metro.Controls;
+using ordermanager.DatabaseModel;
 using ordermanager.ViewModel;
 using ordermanager.ViewModel.PurchaseOrderControl;
+using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,9 +44,26 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
             }
         }
 
+        private Order m_Order = null;
+        public Order Order
+        {
+            get
+            {
+                return m_Order;
+            }
+            set
+            {
+                m_Order = value;
+            }
+        }
+
         public void SetOrder(Order order)
         {
-            ViewModel = new CreateNewPurchaseOrderViewModel(order);
+            if (ViewModel == null || ViewModel.Order != order)
+            {
+                this.Order = order;
+                ViewModel = new CreateNewPurchaseOrderViewModel(order);
+            }
         }
 
         #region Supplier Management
@@ -107,19 +126,55 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
 
             private void btnGeneratePO_Click_1(object sender, RoutedEventArgs e)
             {
+                ViewModel.PurchaseOrder.Validate();
+                if (!ViewModel.PurchaseOrder.HasErrors)
+                {
+                    foreach (ProductMaterialItem item in ViewModel.SelectedItems)
+                    {
+                        OrderedItem itemToOrder = new OrderedItem { ProductMaterialItem = item, OrderedQuantity = item.Quantity };
+                        item.SupplierWrapper = ViewModel.PurchaseOrder.Company;
+                        ViewModel.PurchaseOrder.OrderedItems.Add(itemToOrder);
+                        Order.PurchaseOrders.Add(ViewModel.PurchaseOrder);
+                    }
 
+                    DBResources.Instance.Save();
+                    InformUser("Purchase Order Successfully Created");
+                    Reset();
+                }
+                else
+                {
+                    InformUser("Fix the Highlighted Errors and try again");
+                }
+            }
+
+            private void InformUser(string message)
+            {
+                PopupBox informer = new PopupBox();
+                informer.Message = message;
+                informer.PopupButton = PopupButton.OK;
+                informer.ShowDialog();
             }
 
             private void btnDiscard_Click(object sender, RoutedEventArgs e)
             {
+                Reset();
+            }
 
+            public void Reset()
+            {
+                ViewModel.ResetUserSelection();
+                ViewModel = null;
+                ViewModel = new CreateNewPurchaseOrderViewModel(Order);
             }
 
         #endregion 
 
         private void btnChooseItems_Click_1(object sender, RoutedEventArgs e)
         {
-
+            BillOfMaterialBrowser bomBrowser = new BillOfMaterialBrowser(ViewModel.Order, ViewModel.PurchasableMaterials);
+            bomBrowser.ShowDialog();
         }
+
+       
     }
 }

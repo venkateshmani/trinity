@@ -21,13 +21,16 @@ FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\InS
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Invoice\CreateNewInvoiceControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\JobOrderJOView.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\JobWorkControl.xaml;;
-FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\POControl.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\PurchaseOrderControls\POControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\POMaterialDetails.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\PurchaseOrderControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\PopUps\NewEnquiryFormUserControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\POProductDetails.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\ProductMaterialsControl.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\PurchaseOrderControls\PurchaseOrderMasterControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\ViewOrdersControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\TestWindow.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\OrderWorkBench.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\PurchaseOrderControls\CreateNewPurchaseOrderControl.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\PurchaseOrderControls\BillOfMaterialBrowser.xaml;;
 

@@ -225,7 +225,6 @@
 	<table name="AppSearch">
 		<col key="yes" def="s72">Property</col>
 		<col key="yes" def="s72">Signature_</col>
-		<row><td>DOTNETVERSION40CLIENT</td><td>DotNet40Client</td></row>
 		<row><td>DOTNETVERSION45FULL</td><td>DotNet45Full</td></row>
 	</table>
 
@@ -345,10 +344,10 @@
 		<row><td>MahApps.Metro.Primary_output</td><td>{7BBCA8EB-A32A-496E-BC0C-3F017C487244}</td><td>INSTALLDIR</td><td>2</td><td/><td>mahapps.metro.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.DwayneNeed.Primary_output</td><td>{E0A4858A-ECCC-470C-9C19-652A14F1B5DB}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.dwayneneed.primary</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.DwayneNeed.Win32.Primary_output</td><td>{5656A542-0B5F-4824-962E-B5DE99405B87}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.dwayneneed.win32.p</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Microsoft.ReportViewer.Common.dll</td><td>{1FD465A4-D359-4C66-86EC-E03CE039281D}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.commo</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>{9A851BBD-EBA9-4C64-868C-51D24E3964DB}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.proce</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Microsoft.ReportViewer.WinForms.dll</td><td>{32340E6E-D470-4430-8BE1-52DE7221EE5D}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.winfo</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
-		<row><td>Microsoft.SqlServer.Types.dll</td><td>{669C1B10-320F-4C69-A618-7DC9D866ABBC}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.sqlserver.types.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Microsoft.ReportViewer.Common.dll</td><td>{8367CF0B-2D1D-42A0-A8C9-5C4AB64CB005}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.commo</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>{73D9CD54-646E-493E-A559-AB1CC1793F67}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.proce</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Microsoft.ReportViewer.WinForms.dll</td><td>{1D401E75-B1B0-4D22-BBB7-659EE99550D8}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.reportviewer.winfo</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Microsoft.SqlServer.Types.dll</td><td>{701B6B6E-8B2B-47C3-B356-A8C1D0AB64A6}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.sqlserver.types.dl</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Reports.Primary_output</td><td>{EAE944C3-C6CA-444C-8735-D22460A4E0AB}</td><td>INSTALLDIR</td><td>2</td><td/><td>reports.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ordermanager.Primary_output</td><td>{A6FA1238-EFEB-4AD9-A21D-A4633534CCF3}</td><td>INSTALLDIR</td><td>2</td><td/><td>ordermanager.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
@@ -1899,10 +1898,10 @@
 		<row><td>mahapps.metro.primary_output</td><td>MahApps.Metro.Primary_output</td><td>MahApps.Metro.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;MahApps.Metro&gt;|Built</td><td>3</td><td/></row>
 		<row><td>microsoft.dwayneneed.primary</td><td>Microsoft.DwayneNeed.Primary_output</td><td>Microsoft.DwayneNeed.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;Microsoft.DwayneNeed&gt;|Built</td><td>3</td><td/></row>
 		<row><td>microsoft.dwayneneed.win32.p</td><td>Microsoft.DwayneNeed.Win32.Primary_output</td><td>Microsoft.DwayneNeed.Win32.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;Microsoft.DwayneNeed.Win32&gt;|Built</td><td>3</td><td/></row>
-		<row><td>microsoft.reportviewer.commo</td><td>Microsoft.ReportViewer.Common.dll</td><td>MICROS~1.DLL|Microsoft.ReportViewer.Common.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\GitHub\trinity\ReferencedDlls\Microsoft.ReportViewer.Common.dll</td><td>1</td><td/></row>
-		<row><td>microsoft.reportviewer.proce</td><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>MICROS~1.DLL|Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\GitHub\trinity\ReferencedDlls\Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>1</td><td/></row>
-		<row><td>microsoft.reportviewer.winfo</td><td>Microsoft.ReportViewer.WinForms.dll</td><td>MICROS~1.DLL|Microsoft.ReportViewer.WinForms.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\GitHub\trinity\ReferencedDlls\Microsoft.ReportViewer.WinForms.dll</td><td>1</td><td/></row>
-		<row><td>microsoft.sqlserver.types.dl</td><td>Microsoft.SqlServer.Types.dll</td><td>MICROS~1.DLL|Microsoft.SqlServer.Types.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\GitHub\trinity\ReferencedDlls\Microsoft.SqlServer.Types.dll</td><td>1</td><td/></row>
+		<row><td>microsoft.reportviewer.commo</td><td>Microsoft.ReportViewer.Common.dll</td><td>MICROS~1.DLL|Microsoft.ReportViewer.Common.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Venkatesh\Documents\GitHub\trinity\ReferencedDlls\Microsoft.ReportViewer.Common.dll</td><td>1</td><td/></row>
+		<row><td>microsoft.reportviewer.proce</td><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>MICROS~1.DLL|Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Venkatesh\Documents\GitHub\trinity\ReferencedDlls\Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td>1</td><td/></row>
+		<row><td>microsoft.reportviewer.winfo</td><td>Microsoft.ReportViewer.WinForms.dll</td><td>MICROS~1.DLL|Microsoft.ReportViewer.WinForms.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Venkatesh\Documents\GitHub\trinity\ReferencedDlls\Microsoft.ReportViewer.WinForms.dll</td><td>1</td><td/></row>
+		<row><td>microsoft.sqlserver.types.dl</td><td>Microsoft.SqlServer.Types.dll</td><td>MICROS~1.DLL|Microsoft.SqlServer.Types.dll</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\Venkatesh\Documents\GitHub\trinity\ReferencedDlls\Microsoft.SqlServer.Types.dll</td><td>1</td><td/></row>
 		<row><td>ordermanager.primary_output</td><td>ordermanager.Primary_output</td><td>ordermanager.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ordermanager&gt;|Built</td><td>3</td><td/></row>
 		<row><td>reports.primary_output</td><td>Reports.Primary_output</td><td>Reports.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;Reports&gt;|Built</td><td>3</td><td/></row>
 	</table>
@@ -2052,10 +2051,10 @@
 		<row><td>MahApps.Metro.Primary_output</td><td/><td/><td>_3290A819_AC4F_4413_85F5_4E9F28FEE457_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.DwayneNeed.Primary_output</td><td/><td/><td>_7F37F492_BED0_4329_A7CF_5F4E7129C882_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.DwayneNeed.Win32.Primary_output</td><td/><td/><td>_AB5E771D_326A_4D21_88CD_A121D850AD00_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Microsoft.ReportViewer.Common.dll</td><td/><td/><td>_97E07D9D_D8FC_4BAD_A7D6_E437CA5325DD_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td/><td/><td>_E166AE39_E222_4E7E_A738_2724D0FDD205_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Microsoft.ReportViewer.WinForms.dll</td><td/><td/><td>_3244F2D3_7908_4992_A879_D0C115AC7ECF_FILTER</td><td/><td/><td/><td/></row>
-		<row><td>Microsoft.SqlServer.Types.dll</td><td/><td/><td>_011B895B_2022_4A90_A90E_6C7BB563787A_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Microsoft.ReportViewer.Common.dll</td><td/><td/><td>_1A57FB98_D776_4ED7_94C2_76A693B0FA63_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Microsoft.ReportViewer.ProcessingObjectModel.DLL</td><td/><td/><td>_B61577CF_635E_46A0_BAD3_C738C4036152_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Microsoft.ReportViewer.WinForms.dll</td><td/><td/><td>_24FE1617_C3EF_414F_A9D0_8AC80FBC83A2_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Microsoft.SqlServer.Types.dll</td><td/><td/><td>_3B66E60E_1378_4F0A_A76A_FEDFBA9E7086_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Reports.Primary_output</td><td/><td/><td>_3C42239E_2701_44C6_9C9C_3012E15DC1CB_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ordermanager.Primary_output</td><td/><td/><td>_9708AF44_23A9_45C4_81BB_B8FC59E5267E_FILTER</td><td/><td/><td/><td/></row>
 	</table>
@@ -2681,11 +2680,11 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>DevWarriors</td><td>0</td><td/><td>-1658758638</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>DevWarriors</td><td>0</td><td/><td>-299796274</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-1658762734</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-1658762734</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT</td><td>1033</td><td>Microsoft .NET Framework 4.0 Client Package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-1658766702</td></row>
-		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-1658764654</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>-299771698</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1033</td><td>The operating system is not adequate for running [ProductName].</td><td>0</td><td/><td>-1658762734</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-1658762734</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-1658762734</td></row>
@@ -3784,8 +3783,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-1658762734</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-1658762734</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-1658762734</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.DevWarriors.com</td><td>0</td><td/><td>-1658758638</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>DevWarriors</td><td>0</td><td/><td>-1658758638</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.DevWarriors.com</td><td>0</td><td/><td>-299796274</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>DevWarriors</td><td>0</td><td/><td>-299796274</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>-1524530516</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-1658762734</td></row>
 	</table>
@@ -4086,7 +4085,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col key="yes" def="s255">Condition</col>
 		<col def="l255">Description</col>
 		<row><td>(Not Version9X) And (Not VersionNT=400) And (Not VersionNT=500) And (Not VersionNT=501)</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION_OS##</td></row>
-		<row><td>DOTNETVERSION40CLIENT&gt;="#1"</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION40CLIENT##</td></row>
 		<row><td>DOTNETVERSION45FULL&gt;="#1"</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL##</td></row>
 	</table>
 
@@ -4416,7 +4414,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>RestartManagerOption</td><td>CloseRestart</td><td/></row>
 		<row><td>SERIALNUMBER</td><td/><td/></row>
 		<row><td>SERIALNUMVALSUCCESSRETVAL</td><td>1</td><td/></row>
-		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR;DOTNETVERSION45FULL;DOTNETVERSION40CLIENT</td><td/></row>
+		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR;DOTNETVERSION45FULL</td><td/></row>
 		<row><td>SelectedSetupType</td><td>##IDS__DisplayName_Typical##</td><td/></row>
 		<row><td>SetupType</td><td>Typical</td><td/></row>
 		<row><td>UpgradeCode</td><td>{E4FEB16B-B19F-4D88-AC66-7F192D2E50DC}</td><td/></row>
@@ -4461,7 +4459,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s255">Key</col>
 		<col def="S255">Name</col>
 		<col def="I2">Type</col>
-		<row><td>DotNet40Client</td><td>2</td><td>SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client</td><td>Install</td><td>2</td></row>
 		<row><td>DotNet45Full</td><td>2</td><td>SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full</td><td>Version</td><td>2</td></row>
 	</table>
 
