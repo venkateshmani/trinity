@@ -48,6 +48,7 @@ namespace ordermanager.DatabaseModel
         public DbSet<JobOrderToleranceType> JobOrderToleranceTypes { get; set; }
         public DbSet<JobOrderType> JobOrderTypes { get; set; }
         public DbSet<MaterialName> MaterialNames { get; set; }
+        public DbSet<MaterialsFromStock> MaterialsFromStocks { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderCurrencyConversion> OrderCurrencyConversions { get; set; }
         public DbSet<OrderedItem> OrderedItems { get; set; }
@@ -76,6 +77,7 @@ namespace ordermanager.DatabaseModel
         public DbSet<Shipment> Shipments { get; set; }
         public DbSet<ShipmentMode> ShipmentModes { get; set; }
         public DbSet<SubMaterial> SubMaterials { get; set; }
+        public DbSet<Temp> Temps { get; set; }
         public DbSet<UnitsOfMeasurement> UnitsOfMeasurements { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }

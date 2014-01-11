@@ -33,6 +33,7 @@ namespace ordermanager.DatabaseModel
         public Nullable<long> SpawnedPurchaseOrderID { get; set; }
         public Nullable<byte> ReceiptStatusID { get; set; }
         public long OrderedItemID { get; set; }
+        public string VechileNo { get; set; }
     
         public virtual OrderedItem OrderedItem { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }

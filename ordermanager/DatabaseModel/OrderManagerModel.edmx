@@ -26,6 +26,7 @@
           <EntitySet Name="JobOrderToleranceType" EntityType="OrderManagerDBModel.Store.JobOrderToleranceType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="JobOrderType" EntityType="OrderManagerDBModel.Store.JobOrderType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MaterialName" EntityType="OrderManagerDBModel.Store.MaterialName" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MaterialsFromStock" EntityType="OrderManagerDBModel.Store.MaterialsFromStock" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Order" EntityType="OrderManagerDBModel.Store.Order" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderCurrencyConversion" EntityType="OrderManagerDBModel.Store.OrderCurrencyConversion" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderedItem" EntityType="OrderManagerDBModel.Store.OrderedItem" store:Type="Tables" Schema="dbo" />
@@ -54,6 +55,16 @@
           <EntitySet Name="Shipment" EntityType="OrderManagerDBModel.Store.Shipment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ShipmentMode" EntityType="OrderManagerDBModel.Store.ShipmentMode" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SubMaterial" EntityType="OrderManagerDBModel.Store.SubMaterial" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Temp" EntityType="OrderManagerDBModel.Store.Temp" store:Type="Tables" store:Schema="dbo" store:Name="Temp">
+            <DefiningQuery>SELECT 
+      [Temp].[CartonBoxNumber] AS [CartonBoxNumber], 
+      [Temp].[Quantity] AS [Quantity], 
+      [Temp].[Color] AS [Color], 
+      [Temp].[CostPerUnit] AS [CostPerUnit], 
+      [Temp].[Size] AS [Size], 
+      [Temp].[Name] AS [Name]
+      FROM [dbo].[Temp] AS [Temp]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="UnitsOfMeasurement" EntityType="OrderManagerDBModel.Store.UnitsOfMeasurement" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="OrderManagerDBModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserRole" EntityType="OrderManagerDBModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
@@ -144,6 +155,14 @@
           <AssociationSet Name="FK_JobOrderTolerance_Order" Association="OrderManagerDBModel.Store.FK_JobOrderTolerance_Order">
             <End Role="Order" EntitySet="Order" />
             <End Role="JobOrderTolerance" EntitySet="JobOrderTolerance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialsFromStock_Order" Association="OrderManagerDBModel.Store.FK_MaterialsFromStock_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="MaterialsFromStock" EntitySet="MaterialsFromStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialsFromStock_SubMaterial" Association="OrderManagerDBModel.Store.FK_MaterialsFromStock_SubMaterial">
+            <End Role="SubMaterial" EntitySet="SubMaterial" />
+            <End Role="MaterialsFromStock" EntitySet="MaterialsFromStock" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_CommissionValueType" Association="OrderManagerDBModel.Store.FK_Order_CommissionValueType">
             <End Role="CommissionValueType" EntitySet="CommissionValueType" />
@@ -480,6 +499,7 @@
           <Property Name="SpawnedPurchaseOrderID" Type="bigint" />
           <Property Name="ReceiptStatusID" Type="tinyint" />
           <Property Name="OrderedItemID" Type="bigint" Nullable="false" />
+          <Property Name="VechileNo" Type="varchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="History">
           <Key>
@@ -575,6 +595,15 @@
           <Property Name="MaterialNameID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
+        <EntityType Name="MaterialsFromStock">
+          <Key>
+            <PropertyRef Name="MaterialsFromStockID" />
+          </Key>
+          <Property Name="MaterialsFromStockID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="bigint" Nullable="false" />
+          <Property Name="SubMaterialsNameID" Type="bigint" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Nullable="false" Scale="4" />
+        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -593,6 +622,7 @@
           <Property Name="InternalDeliveryDate" Type="datetime" />
           <Property Name="OrderApprovedDate" Type="datetime" />
           <Property Name="OrderConfirmedDate" Type="datetime" />
+          <Property Name="CustomerOrderNumber" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="OrderCurrencyConversion">
           <Key>
@@ -812,6 +842,7 @@
           <Property Name="PurchaseOrderNumber" Type="varchar" MaxLength="150" />
           <Property Name="PurchaseOrderStatusID" Type="tinyint" Nullable="false" />
           <Property Name="OrderID" Type="bigint" Nullable="false" />
+          <Property Name="TermsAndConditions" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="PurchaseOrderStatus">
           <Key>
@@ -863,6 +894,24 @@
           <Property Name="Name" Type="text" Nullable="false" />
           <Property Name="InStock" Type="decimal" Scale="4" />
           <Property Name="UOMID" Type="smallint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'OrderManagerDB.dbo.Temp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Temp">
+          <Key>
+            <PropertyRef Name="CartonBoxNumber" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="Color" />
+            <PropertyRef Name="Size" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="CartonBoxNumber" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Quantity" Type="decimal" Nullable="false" />
+          <Property Name="Color" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CostPerUnit" Type="numeric" Precision="36" Scale="4" />
+          <Property Name="Size" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="Name" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="UnitsOfMeasurement">
           <Key>
@@ -1168,6 +1217,30 @@
             </Principal>
             <Dependent Role="JobOrderTolerance">
               <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialsFromStock_Order">
+          <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
+          <End Role="MaterialsFromStock" Type="OrderManagerDBModel.Store.MaterialsFromStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="MaterialsFromStock">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialsFromStock_SubMaterial">
+          <End Role="SubMaterial" Type="OrderManagerDBModel.Store.SubMaterial" Multiplicity="1" />
+          <End Role="MaterialsFromStock" Type="OrderManagerDBModel.Store.MaterialsFromStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubMaterial">
+              <PropertyRef Name="SubMaterialsNameID" />
+            </Principal>
+            <Dependent Role="MaterialsFromStock">
+              <PropertyRef Name="SubMaterialsNameID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1834,6 +1907,7 @@
           <EntitySet Name="JobOrderToleranceTypes" EntityType="OrderManagerDBModel.JobOrderToleranceType" />
           <EntitySet Name="JobOrderTypes" EntityType="OrderManagerDBModel.JobOrderType" />
           <EntitySet Name="MaterialNames" EntityType="OrderManagerDBModel.MaterialName" />
+          <EntitySet Name="MaterialsFromStocks" EntityType="OrderManagerDBModel.MaterialsFromStock" />
           <EntitySet Name="Orders" EntityType="OrderManagerDBModel.Order" />
           <EntitySet Name="OrderCurrencyConversions" EntityType="OrderManagerDBModel.OrderCurrencyConversion" />
           <EntitySet Name="OrderedItems" EntityType="OrderManagerDBModel.OrderedItem" />
@@ -1862,6 +1936,7 @@
           <EntitySet Name="Shipments" EntityType="OrderManagerDBModel.Shipment" />
           <EntitySet Name="ShipmentModes" EntityType="OrderManagerDBModel.ShipmentMode" />
           <EntitySet Name="SubMaterials" EntityType="OrderManagerDBModel.SubMaterial" />
+          <EntitySet Name="Temps" EntityType="OrderManagerDBModel.Temp" />
           <EntitySet Name="UnitsOfMeasurements" EntityType="OrderManagerDBModel.UnitsOfMeasurement" />
           <EntitySet Name="Users" EntityType="OrderManagerDBModel.User" />
           <EntitySet Name="UserRoles" EntityType="OrderManagerDBModel.UserRole" />
@@ -2020,6 +2095,14 @@
           <AssociationSet Name="FK_SubMaterial_MaterialName" Association="OrderManagerDBModel.FK_SubMaterial_MaterialName">
             <End Role="MaterialName" EntitySet="MaterialNames" />
             <End Role="SubMaterial" EntitySet="SubMaterials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialsFromStock_Order" Association="OrderManagerDBModel.FK_MaterialsFromStock_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="MaterialsFromStock" EntitySet="MaterialsFromStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialsFromStock_SubMaterial" Association="OrderManagerDBModel.FK_MaterialsFromStock_SubMaterial">
+            <End Role="SubMaterial" EntitySet="SubMaterials" />
+            <End Role="MaterialsFromStock" EntitySet="MaterialsFromStocks" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_OrderStatus" Association="OrderManagerDBModel.FK_Order_OrderStatus">
             <End Role="OrderStatus" EntitySet="OrderStatus" />
@@ -2320,6 +2403,7 @@
           <Property Name="SpawnedPurchaseOrderID" Type="Int64" />
           <Property Name="ReceiptStatusID" Type="Byte" />
           <Property Name="OrderedItemID" Type="Int64" Nullable="false" />
+          <Property Name="VechileNo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="OrderedItem" Relationship="OrderManagerDBModel.FK_GRNReciept_OrderedItem" FromRole="GRNReciept" ToRole="OrderedItem" />
           <NavigationProperty Name="PurchaseOrder" Relationship="OrderManagerDBModel.FK_GRNReciept_PurchaseOrders" FromRole="GRNReciept" ToRole="PurchaseOrders" />
           <NavigationProperty Name="ReceiptStatu" Relationship="OrderManagerDBModel.FK_GRNReciept_ReceiptStatus" FromRole="GRNReciept" ToRole="ReceiptStatus" />
@@ -2437,6 +2521,17 @@
           <NavigationProperty Name="ProductMaterials" Relationship="OrderManagerDBModel.FK_ProductMaterials_MaterialName" FromRole="MaterialName" ToRole="ProductMaterials" />
           <NavigationProperty Name="SubMaterials" Relationship="OrderManagerDBModel.FK_SubMaterial_MaterialName" FromRole="MaterialName" ToRole="SubMaterial" />
         </EntityType>
+        <EntityType Name="MaterialsFromStock">
+          <Key>
+            <PropertyRef Name="MaterialsFromStockID" />
+          </Key>
+          <Property Name="MaterialsFromStockID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int64" Nullable="false" />
+          <Property Name="SubMaterialsNameID" Type="Int64" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_Order" FromRole="MaterialsFromStock" ToRole="Order" />
+          <NavigationProperty Name="SubMaterial" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_SubMaterial" FromRole="MaterialsFromStock" ToRole="SubMaterial" />
+        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderID" />
@@ -2455,6 +2550,7 @@
           <Property Name="InternalDeliveryDate" Type="DateTime" Precision="3" />
           <Property Name="OrderApprovedDate" Type="DateTime" Precision="3" />
           <Property Name="OrderConfirmedDate" Type="DateTime" Precision="3" />
+          <Property Name="CustomerOrderNumber" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="CartonBoxes" Relationship="OrderManagerDBModel.FK_CartonBox_Order" FromRole="Order" ToRole="CartonBox" />
           <NavigationProperty Name="CommissionValueType" Relationship="OrderManagerDBModel.FK_Order_CommissionValueType" FromRole="Order" ToRole="CommissionValueType" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Order" ToRole="Company" />
@@ -2462,6 +2558,7 @@
           <NavigationProperty Name="Histories" Relationship="OrderManagerDBModel.FK_History_Order" FromRole="Order" ToRole="History" />
           <NavigationProperty Name="Invoices" Relationship="OrderManagerDBModel.FK_Invoice_Order" FromRole="Order" ToRole="Invoice" />
           <NavigationProperty Name="JobOrderTolerances" Relationship="OrderManagerDBModel.FK_JobOrderTolerance_Order" FromRole="Order" ToRole="JobOrderTolerance" />
+          <NavigationProperty Name="MaterialsFromStocks" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_Order" FromRole="Order" ToRole="MaterialsFromStock" />
           <NavigationProperty Name="OrderStatu" Relationship="OrderManagerDBModel.FK_Order_OrderStatus" FromRole="Order" ToRole="OrderStatus" />
           <NavigationProperty Name="OrderThrough" Relationship="OrderManagerDBModel.FK_Order_OrderThrough" FromRole="Order" ToRole="OrderThrough" />
           <NavigationProperty Name="OrderCurrencyConversions" Relationship="OrderManagerDBModel.FK_OrderCurrencyConversion_Order" FromRole="Order" ToRole="OrderCurrencyConversion" />
@@ -2748,6 +2845,7 @@
           <Property Name="PurchaseOrderNumber" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
           <Property Name="PurchaseOrderStatusID" Type="Byte" Nullable="false" />
           <Property Name="OrderID" Type="Int64" Nullable="false" />
+          <Property Name="TermsAndConditions" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Company" FromRole="PurchaseOrders" ToRole="Company" />
           <NavigationProperty Name="GRNReciepts" Relationship="OrderManagerDBModel.FK_GRNReciept_PurchaseOrders" FromRole="PurchaseOrders" ToRole="GRNReciept" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Order" FromRole="PurchaseOrders" ToRole="Order" />
@@ -2811,8 +2909,24 @@
           <Property Name="InStock" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="UOMID" Type="Int16" />
           <NavigationProperty Name="MaterialName" Relationship="OrderManagerDBModel.FK_SubMaterial_MaterialName" FromRole="SubMaterial" ToRole="MaterialName" />
+          <NavigationProperty Name="MaterialsFromStocks" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_SubMaterial" FromRole="SubMaterial" ToRole="MaterialsFromStock" />
           <NavigationProperty Name="ProductMaterialItems" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_SubMaterial" FromRole="SubMaterial" ToRole="ProductMaterialItem" />
           <NavigationProperty Name="UnitsOfMeasurement" Relationship="OrderManagerDBModel.FK_SubMaterial_UnitsOfMeasurement" FromRole="SubMaterial" ToRole="UnitsOfMeasurement" />
+        </EntityType>
+        <EntityType Name="Temp">
+          <Key>
+            <PropertyRef Name="CartonBoxNumber" />
+            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="Color" />
+            <PropertyRef Name="Size" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="CartonBoxNumber" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="CostPerUnit" Type="Decimal" Precision="36" Scale="4" />
+          <Property Name="Size" Type="String" Nullable="false" MaxLength="25" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="UnitsOfMeasurement">
           <Key>
@@ -3331,6 +3445,30 @@
             </Principal>
             <Dependent Role="SubMaterial">
               <PropertyRef Name="MaterialNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialsFromStock_Order">
+          <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="1" />
+          <End Role="MaterialsFromStock" Type="OrderManagerDBModel.MaterialsFromStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="MaterialsFromStock">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialsFromStock_SubMaterial">
+          <End Role="SubMaterial" Type="OrderManagerDBModel.SubMaterial" Multiplicity="1" />
+          <End Role="MaterialsFromStock" Type="OrderManagerDBModel.MaterialsFromStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubMaterial">
+              <PropertyRef Name="SubMaterialsNameID" />
+            </Principal>
+            <Dependent Role="MaterialsFromStock">
+              <PropertyRef Name="SubMaterialsNameID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3904,6 +4042,7 @@
                 <ScalarProperty Name="SpawnedPurchaseOrderID" ColumnName="SpawnedPurchaseOrderID" />
                 <ScalarProperty Name="ReceiptStatusID" ColumnName="ReceiptStatusID" />
                 <ScalarProperty Name="OrderedItemID" ColumnName="OrderedItemID" />
+                <ScalarProperty Name="VechileNo" ColumnName="VechileNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4009,6 +4148,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MaterialsFromStocks">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.MaterialsFromStock">
+              <MappingFragment StoreEntitySet="MaterialsFromStock">
+                <ScalarProperty Name="MaterialsFromStockID" ColumnName="MaterialsFromStockID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="SubMaterialsNameID" ColumnName="SubMaterialsNameID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="OrderManagerDBModel.Order">
               <MappingFragment StoreEntitySet="Order">
@@ -4026,6 +4175,7 @@
                 <ScalarProperty Name="InternalDeliveryDate" ColumnName="InternalDeliveryDate" />
                 <ScalarProperty Name="OrderApprovedDate" ColumnName="OrderApprovedDate" />
                 <ScalarProperty Name="OrderConfirmedDate" ColumnName="OrderConfirmedDate" />
+                <ScalarProperty Name="CustomerOrderNumber" ColumnName="CustomerOrderNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4266,6 +4416,7 @@
                 <ScalarProperty Name="PurchaseOrderNumber" ColumnName="PurchaseOrderNumber" />
                 <ScalarProperty Name="PurchaseOrderStatusID" ColumnName="PurchaseOrderStatusID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4323,6 +4474,18 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="InStock" ColumnName="InStock" />
                 <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Temps">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.Temp">
+              <MappingFragment StoreEntitySet="Temp">
+                <ScalarProperty Name="CartonBoxNumber" ColumnName="CartonBoxNumber" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

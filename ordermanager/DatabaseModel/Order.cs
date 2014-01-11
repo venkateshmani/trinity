@@ -20,6 +20,7 @@ namespace ordermanager.DatabaseModel
             this.Histories = new HashSet<History>();
             this.Invoices = new HashSet<Invoice>();
             this.JobOrderTolerances = new HashSet<JobOrderTolerance>();
+            this.MaterialsFromStocks = new HashSet<MaterialsFromStock>();
             this.OrderCurrencyConversions = new HashSet<OrderCurrencyConversion>();
             this.OrderProducts = new HashSet<OrderProduct>();
             this.OrderReportCards = new HashSet<OrderReportCard>();
@@ -40,6 +41,7 @@ namespace ordermanager.DatabaseModel
         public Nullable<System.DateTime> InternalDeliveryDate { get; set; }
         public Nullable<System.DateTime> OrderApprovedDate { get; set; }
         public Nullable<System.DateTime> OrderConfirmedDate { get; set; }
+        public string CustomerOrderNumber { get; set; }
     
         public virtual ICollection<CartonBox> CartonBoxes { get; set; }
         public virtual CommissionValueType CommissionValueType { get; set; }
@@ -48,6 +50,7 @@ namespace ordermanager.DatabaseModel
         public virtual ICollection<History> Histories { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<JobOrderTolerance> JobOrderTolerances { get; set; }
+        public virtual ICollection<MaterialsFromStock> MaterialsFromStocks { get; set; }
         public virtual OrderStatu OrderStatu { get; set; }
         public virtual OrderThrough OrderThrough { get; set; }
         public virtual ICollection<OrderCurrencyConversion> OrderCurrencyConversions { get; set; }

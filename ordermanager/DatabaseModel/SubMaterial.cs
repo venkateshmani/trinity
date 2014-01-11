@@ -16,6 +16,7 @@ namespace ordermanager.DatabaseModel
     {
         public SubMaterial()
         {
+            this.MaterialsFromStocks = new HashSet<MaterialsFromStock>();
             this.ProductMaterialItems = new HashSet<ProductMaterialItem>();
         }
     
@@ -26,6 +27,7 @@ namespace ordermanager.DatabaseModel
         public Nullable<short> UOMID { get; set; }
     
         public virtual MaterialName MaterialName { get; set; }
+        public virtual ICollection<MaterialsFromStock> MaterialsFromStocks { get; set; }
         public virtual ICollection<ProductMaterialItem> ProductMaterialItems { get; set; }
         public virtual UnitsOfMeasurement UnitsOfMeasurement { get; set; }
     }

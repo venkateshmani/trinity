@@ -21,6 +21,7 @@
     <EntitySet Name="JobOrderToleranceType" EntityType="OrderManagerDBModel.Store.JobOrderToleranceType" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="JobOrderType" EntityType="OrderManagerDBModel.Store.JobOrderType" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MaterialName" EntityType="OrderManagerDBModel.Store.MaterialName" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MaterialsFromStock" EntityType="OrderManagerDBModel.Store.MaterialsFromStock" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Order" EntityType="OrderManagerDBModel.Store.Order" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="OrderCurrencyConversion" EntityType="OrderManagerDBModel.Store.OrderCurrencyConversion" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="OrderedItem" EntityType="OrderManagerDBModel.Store.OrderedItem" store:Type="Tables" Schema="dbo" />
@@ -49,6 +50,16 @@
     <EntitySet Name="Shipment" EntityType="OrderManagerDBModel.Store.Shipment" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ShipmentMode" EntityType="OrderManagerDBModel.Store.ShipmentMode" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="SubMaterial" EntityType="OrderManagerDBModel.Store.SubMaterial" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Temp" EntityType="OrderManagerDBModel.Store.Temp" store:Type="Tables" store:Schema="dbo" store:Name="Temp">
+      <DefiningQuery>SELECT 
+      [Temp].[CartonBoxNumber] AS [CartonBoxNumber], 
+      [Temp].[Quantity] AS [Quantity], 
+      [Temp].[Color] AS [Color], 
+      [Temp].[CostPerUnit] AS [CostPerUnit], 
+      [Temp].[Size] AS [Size], 
+      [Temp].[Name] AS [Name]
+      FROM [dbo].[Temp] AS [Temp]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="UnitsOfMeasurement" EntityType="OrderManagerDBModel.Store.UnitsOfMeasurement" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="User" EntityType="OrderManagerDBModel.Store.User" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="UserRole" EntityType="OrderManagerDBModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
@@ -139,6 +150,14 @@
     <AssociationSet Name="FK_JobOrderTolerance_Order" Association="OrderManagerDBModel.Store.FK_JobOrderTolerance_Order">
       <End Role="Order" EntitySet="Order" />
       <End Role="JobOrderTolerance" EntitySet="JobOrderTolerance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaterialsFromStock_Order" Association="OrderManagerDBModel.Store.FK_MaterialsFromStock_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="MaterialsFromStock" EntitySet="MaterialsFromStock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaterialsFromStock_SubMaterial" Association="OrderManagerDBModel.Store.FK_MaterialsFromStock_SubMaterial">
+      <End Role="SubMaterial" EntitySet="SubMaterial" />
+      <End Role="MaterialsFromStock" EntitySet="MaterialsFromStock" />
     </AssociationSet>
     <AssociationSet Name="FK_Order_CommissionValueType" Association="OrderManagerDBModel.Store.FK_Order_CommissionValueType">
       <End Role="CommissionValueType" EntitySet="CommissionValueType" />
@@ -475,6 +494,7 @@
     <Property Name="SpawnedPurchaseOrderID" Type="bigint" />
     <Property Name="ReceiptStatusID" Type="tinyint" />
     <Property Name="OrderedItemID" Type="bigint" Nullable="false" />
+    <Property Name="VechileNo" Type="varchar" MaxLength="15" />
   </EntityType>
   <EntityType Name="History">
     <Key>
@@ -570,6 +590,15 @@
     <Property Name="MaterialNameID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
   </EntityType>
+  <EntityType Name="MaterialsFromStock">
+    <Key>
+      <PropertyRef Name="MaterialsFromStockID" />
+    </Key>
+    <Property Name="MaterialsFromStockID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="bigint" Nullable="false" />
+    <Property Name="SubMaterialsNameID" Type="bigint" Nullable="false" />
+    <Property Name="Quantity" Type="decimal" Nullable="false" Scale="4" />
+  </EntityType>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="OrderID" />
@@ -588,6 +617,7 @@
     <Property Name="InternalDeliveryDate" Type="datetime" />
     <Property Name="OrderApprovedDate" Type="datetime" />
     <Property Name="OrderConfirmedDate" Type="datetime" />
+    <Property Name="CustomerOrderNumber" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="OrderCurrencyConversion">
     <Key>
@@ -807,6 +837,7 @@
     <Property Name="PurchaseOrderNumber" Type="varchar" MaxLength="150" />
     <Property Name="PurchaseOrderStatusID" Type="tinyint" Nullable="false" />
     <Property Name="OrderID" Type="bigint" Nullable="false" />
+    <Property Name="TermsAndConditions" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="PurchaseOrderStatus">
     <Key>
@@ -858,6 +889,24 @@
     <Property Name="Name" Type="text" Nullable="false" />
     <Property Name="InStock" Type="decimal" Scale="4" />
     <Property Name="UOMID" Type="smallint" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'OrderManagerDB.dbo.Temp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="Temp">
+    <Key>
+      <PropertyRef Name="CartonBoxNumber" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="Color" />
+      <PropertyRef Name="Size" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="CartonBoxNumber" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Quantity" Type="decimal" Nullable="false" />
+    <Property Name="Color" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="CostPerUnit" Type="numeric" Precision="36" Scale="4" />
+    <Property Name="Size" Type="varchar" Nullable="false" MaxLength="25" />
+    <Property Name="Name" Type="text" Nullable="false" />
   </EntityType>
   <EntityType Name="UnitsOfMeasurement">
     <Key>
@@ -1163,6 +1212,30 @@
       </Principal>
       <Dependent Role="JobOrderTolerance">
         <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaterialsFromStock_Order">
+    <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
+    <End Role="MaterialsFromStock" Type="OrderManagerDBModel.Store.MaterialsFromStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="MaterialsFromStock">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaterialsFromStock_SubMaterial">
+    <End Role="SubMaterial" Type="OrderManagerDBModel.Store.SubMaterial" Multiplicity="1" />
+    <End Role="MaterialsFromStock" Type="OrderManagerDBModel.Store.MaterialsFromStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubMaterial">
+        <PropertyRef Name="SubMaterialsNameID" />
+      </Principal>
+      <Dependent Role="MaterialsFromStock">
+        <PropertyRef Name="SubMaterialsNameID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

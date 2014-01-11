@@ -133,6 +133,7 @@
           <ScalarProperty Name="SpawnedPurchaseOrderID" ColumnName="SpawnedPurchaseOrderID" />
           <ScalarProperty Name="ReceiptStatusID" ColumnName="ReceiptStatusID" />
           <ScalarProperty Name="OrderedItemID" ColumnName="OrderedItemID" />
+          <ScalarProperty Name="VechileNo" ColumnName="VechileNo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -238,6 +239,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MaterialsFromStocks">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.MaterialsFromStock">
+        <MappingFragment StoreEntitySet="MaterialsFromStock">
+          <ScalarProperty Name="MaterialsFromStockID" ColumnName="MaterialsFromStockID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="SubMaterialsNameID" ColumnName="SubMaterialsNameID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="OrderManagerDBModel.Order">
         <MappingFragment StoreEntitySet="Order">
@@ -255,6 +266,7 @@
           <ScalarProperty Name="InternalDeliveryDate" ColumnName="InternalDeliveryDate" />
           <ScalarProperty Name="OrderApprovedDate" ColumnName="OrderApprovedDate" />
           <ScalarProperty Name="OrderConfirmedDate" ColumnName="OrderConfirmedDate" />
+          <ScalarProperty Name="CustomerOrderNumber" ColumnName="CustomerOrderNumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -495,6 +507,7 @@
           <ScalarProperty Name="PurchaseOrderNumber" ColumnName="PurchaseOrderNumber" />
           <ScalarProperty Name="PurchaseOrderStatusID" ColumnName="PurchaseOrderStatusID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -552,6 +565,18 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="InStock" ColumnName="InStock" />
           <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Temps">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.Temp">
+        <MappingFragment StoreEntitySet="Temp">
+          <ScalarProperty Name="CartonBoxNumber" ColumnName="CartonBoxNumber" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

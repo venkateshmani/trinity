@@ -26,6 +26,7 @@ namespace ordermanager.DatabaseModel
         public string PurchaseOrderNumber { get; set; }
         public byte PurchaseOrderStatusID { get; set; }
         public long OrderID { get; set; }
+        public string TermsAndConditions { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual ICollection<GRNReciept> GRNReciepts { get; set; }

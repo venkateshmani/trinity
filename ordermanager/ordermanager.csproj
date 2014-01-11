@@ -148,6 +148,9 @@
     <Compile Include="DatabaseModel\MaterialName.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\MaterialsFromStock.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\Order.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
@@ -245,6 +248,9 @@
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\SubMaterial.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\Temp.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\UnitsOfMeasurement.cs">
@@ -733,9 +739,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OrderManagerModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="App.Config" />
     <None Include="DatabaseModel\OrderManagerModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OrderManagerModel.edmx</DependentUpon>
