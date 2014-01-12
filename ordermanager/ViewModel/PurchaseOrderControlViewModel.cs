@@ -268,7 +268,6 @@ namespace ordermanager.ViewModel
             bool hasErrors = false;
             foreach (OrderProduct dbProduct in Products)
             {
-
                 if (dbProduct.ProductBreakUp != null)
                 {
                     dbProduct.ProductBreakUp.RemoveError("ShipmentModeWrapper");
@@ -286,10 +285,21 @@ namespace ordermanager.ViewModel
                             hasErrors = true;
                     }
                 }
+                decimal totalQuantity = 0;
                 foreach (ProductCountryWiseBreakUp breakupItem in dbProduct.ProductBreakUpWrapper.ProductCountryWiseBreakUpWrapper)
                 {
+                    totalQuantity += breakupItem.NumberOfPieces;
                     if (!breakupItem.Validate())
                         hasErrors = true;
+                }
+                decimal per = Convert.ToDecimal(dbProduct.ProductBreakUpWrapper.Tolerance) / 100;
+                dbProduct.RemoveError("ExpectedQuantity");
+                dbProduct.ProductBreakUpWrapper.RemoveError("ToleranceWrapper");
+                if (totalQuantity > (1.0M + per) * dbProduct.ExpectedQuantity || totalQuantity < (1.0M - per) * dbProduct.ExpectedQuantity)
+                {
+                    dbProduct.AddError("ExpectedQuantity", "ExpectedQuantity", false);
+                    dbProduct.ProductBreakUpWrapper.AddError("ToleranceWrapper", string.Format("The total quantity {0} is not in the allowed tolerance limits of {1} and {2}.", totalQuantity, (1.0M - per) * dbProduct.ExpectedQuantity,(1.0M + per) * dbProduct.ExpectedQuantity), false);
+                    hasErrors = true;
                 }
             }
             return !hasErrors;
