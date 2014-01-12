@@ -68,7 +68,7 @@
         <Grid Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
             <Border BorderBrush="Gray" BorderThickness="1">
                 <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
-                          ItemsSource="{Binding MaterialsSummary}" PresentationTraceSources.TraceLevel="High">
+                          ItemsSource="{Binding MaterialsSummary}" PresentationTraceSources.TraceLevel="High" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Material" Binding="{Binding Material.Name}" />
                         <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
@@ -80,7 +80,7 @@
         <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
             <Border BorderBrush="Gray" BorderThickness="1">
                 <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
-                          ItemsSource="{Binding MaterialsFromStock}">
+                          ItemsSource="{Binding MaterialsFromStock}" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Material" Binding="{Binding SubMaterial.Name}" />
                         <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
