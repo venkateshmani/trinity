@@ -889,6 +889,8 @@
     <Property Name="CurrencyID" Type="Int16" Nullable="false" />
     <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
     <Property Name="SupplierID" Type="Int32" />
+    <Property Name="LastPOGeneratedOn" Type="DateTime" Precision="3" />
+    <Property Name="TaxInINR" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
     <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_Company" FromRole="ProductMaterialItem" ToRole="Company" />
     <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_Currency" FromRole="ProductMaterialItem" ToRole="Currency" />
     <NavigationProperty Name="OrderedItems" Relationship="OrderManagerDBModel.FK_OrderedItem_ProductMaterialItem" FromRole="ProductMaterialItem" ToRole="OrderedItem" />
@@ -1092,6 +1094,7 @@
     <Property Name="CanModifyExecutionShipping" Type="Boolean" Nullable="false" />
     <Property Name="CanModifyGRN" Type="Boolean" Nullable="false" />
     <Property Name="CanModifyJobOrder" Type="Boolean" Nullable="false" />
+    <Property Name="CanAddSubMaterialsCost" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="OrderStatus" Relationship="OrderManagerDBModel.FK_OrderStatus_UserRole" FromRole="UserRole" ToRole="OrderStatus" />
     <NavigationProperty Name="Users" Relationship="OrderManagerDBModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
   </EntityType>

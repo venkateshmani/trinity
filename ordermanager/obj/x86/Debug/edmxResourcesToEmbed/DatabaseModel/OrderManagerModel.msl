@@ -451,6 +451,8 @@
           <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
           <ScalarProperty Name="Cost" ColumnName="Cost" />
           <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="LastPOGeneratedOn" ColumnName="LastPOGeneratedOn" />
+          <ScalarProperty Name="TaxInINR" ColumnName="TaxInINR" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -624,6 +626,7 @@
           <ScalarProperty Name="CanModifyExecutionShipping" ColumnName="CanModifyExecutionShipping" />
           <ScalarProperty Name="CanModifyGRN" ColumnName="CanModifyGRN" />
           <ScalarProperty Name="CanModifyJobOrder" ColumnName="CanModifyJobOrder" />
+          <ScalarProperty Name="CanAddSubMaterialsCost" ColumnName="CanAddSubMaterialsCost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

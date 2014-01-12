@@ -786,6 +786,8 @@
     <Property Name="CurrencyID" Type="smallint" Nullable="false" />
     <Property Name="Cost" Type="decimal" Nullable="false" Scale="4" />
     <Property Name="SupplierID" Type="int" />
+    <Property Name="LastPOGeneratedOn" Type="datetime" />
+    <Property Name="TaxInINR" Type="decimal" Nullable="false" Scale="4" />
   </EntityType>
   <EntityType Name="ProductMaterials">
     <Key>
@@ -951,6 +953,7 @@
     <Property Name="CanModifyExecutionShipping" Type="bit" Nullable="false" />
     <Property Name="CanModifyGRN" Type="bit" Nullable="false" />
     <Property Name="CanModifyJobOrder" Type="bit" Nullable="false" />
+    <Property Name="CanAddSubMaterialsCost" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_Asset_AssetName">
     <End Role="AssetName" Type="OrderManagerDBModel.Store.AssetName" Multiplicity="1" />

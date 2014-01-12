@@ -18,13 +18,14 @@ namespace Reports
             InitializeComponent();
         }
 
-        public void SetParameters(string supplierInformation, string purchaseOrderNumber, string quoteNumber, string quoteDate)
+        public void SetParameters(string supplierInformation, string purchaseOrderNumber, string quoteNumber, string quoteDate, string termsAndConditions)
         {
-            ReportParameter[] parameters = new ReportParameter[4];
+            ReportParameter[] parameters = new ReportParameter[5];
             parameters[0] = new ReportParameter("SupplierInformation", supplierInformation);
             parameters[1] = new ReportParameter("PurchaseOrderNumber", purchaseOrderNumber);
             parameters[2] = new ReportParameter("QuoteNumber", quoteNumber);
             parameters[3] = new ReportParameter("QuoteDate", quoteDate);
+            parameters[4] = new ReportParameter("TermsAndConditions", termsAndConditions);
 
             this.reportViewer1.LocalReport.SetParameters(parameters);
         }
