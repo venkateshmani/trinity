@@ -792,6 +792,7 @@
           <Property Name="Cost" Type="decimal" Nullable="false" Scale="4" />
           <Property Name="SupplierID" Type="int" />
           <Property Name="LastPOGeneratedOn" Type="datetime" />
+          <Property Name="TaxInINR" Type="decimal" Nullable="false" Scale="4" />
         </EntityType>
         <EntityType Name="ProductMaterials">
           <Key>
@@ -2779,6 +2780,7 @@
           <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <Property Name="SupplierID" Type="Int32" />
           <Property Name="LastPOGeneratedOn" Type="DateTime" Precision="3" />
+          <Property Name="TaxInINR" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_Company" FromRole="ProductMaterialItem" ToRole="Company" />
           <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_Currency" FromRole="ProductMaterialItem" ToRole="Currency" />
           <NavigationProperty Name="OrderedItems" Relationship="OrderManagerDBModel.FK_OrderedItem_ProductMaterialItem" FromRole="ProductMaterialItem" ToRole="OrderedItem" />
@@ -4367,6 +4369,7 @@
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="LastPOGeneratedOn" ColumnName="LastPOGeneratedOn" />
+                <ScalarProperty Name="TaxInINR" ColumnName="TaxInINR" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -29,6 +29,7 @@ namespace ordermanager.DatabaseModel
         public decimal Cost { get; set; }
         public Nullable<int> SupplierID { get; set; }
         public Nullable<System.DateTime> LastPOGeneratedOn { get; set; }
+        public decimal TaxInINR { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual Currency Currency { get; set; }

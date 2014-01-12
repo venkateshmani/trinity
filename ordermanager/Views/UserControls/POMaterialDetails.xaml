@@ -194,7 +194,19 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="costPerUnitColumn" Header="Cost" Width="0.2*">
+                            <DataGridTemplateColumn x:Name="costPerUnitColumn" Width="0.2*">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="Cost" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="Pen Unit" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding CostWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
@@ -202,6 +214,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+                            
                             <DataGridTemplateColumn x:Name="currencyColumn" Header="Currency" Width="0.16*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -244,6 +257,28 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}"
+                                                 IsHitTestVisible="{Binding CanAddCosts}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn x:Name="taxPerUnitINR" Width="0.22*">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="TAX" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="Per Unit" Grid.Row="1"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="In INR" Grid.Row="2" HorizontalAlignment="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding TaxPerUnitWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}"
                                                  IsHitTestVisible="{Binding CanAddCosts}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

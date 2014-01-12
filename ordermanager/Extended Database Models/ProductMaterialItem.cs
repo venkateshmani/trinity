@@ -26,6 +26,22 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public virtual decimal TaxPerUnitWrapper
+        {
+            get
+            {
+                return TaxInINR;
+            }
+            set
+            {
+                TaxInINR = value;
+                CalculateItemCost();
+                OnPropertyChanged("TaxPerUnitWrapper");
+            }
+        }
+
+
+
         public virtual Currency CurrencyWrapper
         {
             get
@@ -302,7 +318,7 @@ namespace ordermanager.DatabaseModel
             if (UnitsOfMeasurement != null)
                 uomMultipler = UnitsOfMeasurement.Multiplier;
 
-            ItemCostWrapper = Cost * Quantity * CurrencyValueInINR * uomMultipler;
+            ItemCostWrapper = (Cost + TaxPerUnitWrapper) * Quantity * CurrencyValueInINR * uomMultipler;
         }
         #endregion [Helpers]
 
