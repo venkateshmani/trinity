@@ -327,6 +327,8 @@
     <Compile Include="ViewModel\Execution\ShipmentViewModel.cs" />
     <Compile Include="ViewModel\GRNViewModel.cs" />
     <Compile Include="ViewModel\Helper.cs" />
+    <Compile Include="ViewModel\Information\MaterialsFromStockSummary.cs" />
+    <Compile Include="ViewModel\Information\OrderInformationViewModel.cs" />
     <Compile Include="ViewModel\InStockViewModel.cs" />
     <Compile Include="ViewModel\InStock\MaterialInStock.cs" />
     <Compile Include="ViewModel\InStock\MaterialStockItem.cs" />
@@ -418,6 +420,9 @@
     </Compile>
     <Compile Include="Views\UserControls\Execution\ShippingControl.xaml.cs">
       <DependentUpon>ShippingControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Information\MaterialsFromStock.xaml.cs">
+      <DependentUpon>MaterialsFromStock.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\Invoice\CatronBoxBrowser.xaml.cs">
       <DependentUpon>CatronBoxBrowser.xaml</DependentUpon>
@@ -577,6 +582,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\Execution\ShippingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\Information\MaterialsFromStock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

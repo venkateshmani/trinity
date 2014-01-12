@@ -1,4 +1,4 @@
-﻿<UserControl xmlns:PurchaseOrderControls="clr-namespace:ordermanager.Views.UserControls.PurchaseOrderControls"  xmlns:Execution="clr-namespace:ordermanager.Views.UserControls.Execution" 
+﻿<UserControl xmlns:Information="clr-namespace:ordermanager.Views.UserControls.Information"  xmlns:PurchaseOrderControls="clr-namespace:ordermanager.Views.UserControls.PurchaseOrderControls"  xmlns:Execution="clr-namespace:ordermanager.Views.UserControls.Execution" 
              xmlns:PopUps="clr-namespace:ordermanager.Views.PopUps" 
              xmlns:my="clr-namespace:ordermanager.Views.UserControls"
              x:Class="ordermanager.Views.UserControls.OrderWorkBench"
@@ -10,7 +10,7 @@
              xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              mc:Ignorable="d" 
-             d:DesignHeight="619" d:DesignWidth="1068">
+             d:DesignHeight="619" d:DesignWidth="1300">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -149,9 +149,13 @@
                     <local:ChangeHistoryControl x:Name="changeHistoryControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
                 </Border>
             </TabItem>
-            <TabItem x:Name="tabManage" Header="  Manage" Cursor="Hand">
+            <TabItem x:Name="tabInforamtion" Header="  Info" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                    <local:ManageControl x:Name="manageControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
+                    <TabControl x:Name="tabInformationDetails">
+                        <TabItem Header=" Materials From Stock ">
+                           <Information:MaterialsFromStock x:Name="tabMaterialFromStock" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" /> 
+                        </TabItem>
+                    </TabControl>
                 </Border>
             </TabItem>
         </TabControl>

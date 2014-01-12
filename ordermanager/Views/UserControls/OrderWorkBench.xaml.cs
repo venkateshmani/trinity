@@ -130,6 +130,24 @@ namespace ordermanager.Views.UserControls
                 case "Execution":
                     UpdateExecutionView();
                     break;
+                case "Info":
+                    UpdateInformationView();
+                    break;
+
+            }
+        }
+
+        public void UpdateInformationView()
+        {
+            if (tabInformationDetails.SelectedItem != null)
+            {
+                string tabHeader = Convert.ToString(((System.Windows.Controls.HeaderedContentControl)(tabInformationDetails.SelectedItem)).Header);
+                switch (tabHeader.Trim())
+                {
+                    case "Materials From Stock":
+                        tabMaterialFromStock.SetOrder(m_Order);
+                        break;
+                }
             }
         }
 
