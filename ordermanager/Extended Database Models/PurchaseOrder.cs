@@ -24,7 +24,7 @@ namespace ordermanager.DatabaseModel
             get
             {
                 bool errors = false;
-
+                
                 if (base.HasErrors)
                     errors = true;
 

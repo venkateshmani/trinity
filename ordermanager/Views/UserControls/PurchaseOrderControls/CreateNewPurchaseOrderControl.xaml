@@ -67,6 +67,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -129,6 +130,11 @@
 
                 <TextBlock Text="Purchase Order No. :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" />
                 <TextBlock Text="{Binding PurchaseOrder.PurchaseOrderNumberWrapper}" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" />
+                
+                <TextBlock Text="Terms and Conditions :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="3" />
+                <TextBox Text="{Binding PurchaseOrder.TermsAndConditions}" Width="500" Margin="5"
+                         Height="80"
+                         Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" />
             </Grid>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
