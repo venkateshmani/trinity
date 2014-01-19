@@ -13,6 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ordermanager.Views;
+using System.Reflection;
+using System.Diagnostics;
+using System.Configuration;
+
 namespace ordermanager
 {
     /// <summary>
@@ -24,6 +28,14 @@ namespace ordermanager
         {
             InitializeComponent();
             this.IsVisibleChanged += LoginScreen_IsVisibleChanged;
+            this.Loaded += LoginScreen_Loaded;
+        }
+
+        void LoginScreen_Loaded(object sender, RoutedEventArgs e)
+        {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                versionTxt.Text = "V" + fvi.FileVersion;
         }
 
         void LoginScreen_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)

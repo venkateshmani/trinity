@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         Icon="/Resources/Icons/OrderManagerIcon1.ico"   
-        Title="Login" Height="350.5" Width="554.978" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" ShowCloseButton="False" ShowTitleBar="False">
+        Title="Login" Height="453.096" Width="359.602" Background="#FF353432" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" ShowCloseButton="False" ShowTitleBar="False">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -24,42 +24,64 @@
     </Window.Resources>
 
     <Controls:MetroWindow.GlowBrush>
-        <SolidColorBrush Color="{DynamicResource AccentColor}" />
+        <SolidColorBrush Color="#FF353432" />
     </Controls:MetroWindow.GlowBrush>
 
-    <Border>
-        <Border.Background>
-            <SolidColorBrush Color="{StaticResource AccentColor}" />
-        </Border.Background>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Border Background="#FF353432">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="#FF353432" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="10,10,10,0">
+                <TextBlock FontFamily="{DynamicResource ContentFontFamily}" FontSize="{StaticResource HeaderFontSize}" Text="Order Manager" Foreground="White"></TextBlock>
+            </StackPanel>
+            <TextBlock x:Name="versionTxt" Margin="15,0,10,10" Grid.Row="1" FontFamily="{DynamicResource ContentFontFamily}" FontSize="10" Text="Vxx.xx.xx" Foreground="White"></TextBlock>
+            <TextBlock Margin="15,15,10,10" Grid.Row="2" FontFamily="{DynamicResource ContentFontFamily}" FontSize="10" Text="Licensed to TRINIITY COLOUR INDIA PVT LTD." Foreground="White"></TextBlock>
+            <TextBlock Margin="15,15,10,5" Grid.Row="3" FontFamily="{DynamicResource ContentFontFamily}" FontSize="10" Text="© 2014 Venkatesh Mani Selvaraj &amp; Chowdry P Bolla " Foreground="White"></TextBlock>
+            <TextBlock Margin="15,0,10,10" Grid.Row="4" FontFamily="{DynamicResource ContentFontFamily}" FontSize="10" Text="    For any queries feel free to write to vmselvaraj@outlook.com" Foreground="White"></TextBlock>
+            
+            </Grid>
+        
+         <Grid  Background="#FF353432"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="1" Margin="0,0,0,15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="75"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" Margin="-60,0,0,0">
-                <TextBlock x:Name="tbCompanyName" Margin="10" FontFamily="{DynamicResource ContentFontFamily}" FontSize="{StaticResource HeaderFontSize}" Text="Order Manager" Foreground="White"></TextBlock>
+            <Border Grid.Row="0">
+                <TextBlock x:Name="tbCompanyName" Margin="0" FontFamily="{DynamicResource ContentFontFamily}" FontSize="30" Text="Log in" Foreground="White" VerticalAlignment="Bottom"></TextBlock>
             </Border>
-            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,30,0,0">
+            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,10,0,0" HorizontalAlignment="Right">
                 <TextBox x:Name="tbUserName" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" Height="40" Width="320"   Foreground="Gray" FontSize="{StaticResource NormalFontSize}"
         		Controls:TextboxHelper.Watermark="User Name" ToolTip="User name"/>
                 <PasswordBox x:Name="tbPassword" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="40" Width="320" Margin="0,10,0,0"  Foreground="Gray" FontSize="{StaticResource NormalFontSize}"
         		Controls:TextboxHelper.Watermark="Password" ToolTip="Password" PreviewKeyDown="tbPassword_PreviewKeyDown"/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  Margin="0,25,0,0" >
-                    <Button x:Name="btnLogin" Content="Login"   Width="120" Height="30" Foreground="White" FontSize="{StaticResource NormalFontSize}"
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  Margin="0,25,0,10" Grid.Row="2" >
+                <Button x:Name="btnLogin" Content="Login"  Width="120" Height="30" Foreground="White" FontSize="{StaticResource NormalFontSize}"
         			ToolTip="Login" HorizontalAlignment="Right" Click="btnLogin_Click">
-                        <Button.Background>
-                            <SolidColorBrush Color="{StaticResource AccentColor}" />
-                        </Button.Background>
-                    </Button>
-                    <Button x:Name="btnExit" Content="Exit"  Margin="5,0,0,0" Width="80" Height="30" Foreground="White"
-        			ToolTip="Exit" HorizontalAlignment="Right" FontSize="{StaticResource NormalFontSize}" Click="btnExit_Click">
-                        <Button.Background>
-                            <SolidColorBrush Color="{StaticResource Gray1}" />
-                        </Button.Background>
-                    </Button>
-                </StackPanel>
+                    <Button.Background>
+                        <SolidColorBrush Color="{StaticResource AccentColor}" />
+                    </Button.Background>
+                </Button>
+                <Button x:Name="btnExit" Content="Close"  Margin="5,0,0,0" Width="80" Height="30" Foreground="White"
+        			ToolTip="Close" HorizontalAlignment="Right" FontSize="{StaticResource NormalFontSize}" Click="btnExit_Click">
+                    <Button.Background>
+                        <SolidColorBrush Color="{StaticResource ValidationColor5}"/>
+                    </Button.Background>
+                </Button>
             </StackPanel>
         </Grid>
+    </Grid>
     </Border>
 </Controls:MetroWindow>
