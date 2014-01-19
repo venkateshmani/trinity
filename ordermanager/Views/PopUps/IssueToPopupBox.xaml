@@ -5,6 +5,7 @@
         AllowsTransparency="True" 
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:DataProviders="clr-namespace:ordermanager.ViewModel"
+        xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
         ShowIconOnTitleBar="False"
         ShowTitleBar="False"
         ShowCloseButton="True"
@@ -34,6 +35,7 @@
                 <Setter Property="Margin" Value="5,0,0,0"/>
             </Style>
             <DataProviders:DataProvider x:Key="DataProvider" />
+            <Converters:FlipBoolValueConverter x:Key="FlipBoolValueConverter"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -86,14 +88,49 @@
                                                                 DisplayMemberPath="Type" SelectedItem="{Binding JobOrderTypeWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                                 SelectionChanged="issueToComboBox_SelectionChanged"/>
                     <TextBox x:Name="chargesInINR" Text="{Binding ChargesInINRWrapper, StringFormat={}{0:#0.####}}"  Width="125" FontSize="14" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" Margin="3" HorizontalAlignment="Left" IsEnabled="False"/>
-                    <ComboBox x:Name="supplierComboBox"  VerticalAlignment="Center" 
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4" Margin="3">
+                        <ComboBox x:Name="supplierComboBox"  VerticalAlignment="Center" 
                                                       Width="125"
                                                       ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
                                                       DisplayMemberPath="Name" SelectedItem="{Binding Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
                                                       Height="20"  TextBoxBase.TextChanged="SupplierComboBox_TextChanged"
-                                                      IsReadOnly="{Binding IsReadOnly}"
-                                                      Grid.Column="1" Grid.Row="4" Margin="3"
+                                                      SelectionChanged="supplierComboBox_SelectionChanged_1"  
                                                       HorizontalAlignment="Left" IsEnabled="False"/>
+                        <Button Width="28"
+                        Height="28"
+                        Margin="0, 2, 0, 0"
+                        HorizontalAlignment="Left"
+                        Grid.Row="0"
+                        Cursor="Hand"
+                        x:Name="editExistingCustomerBtn"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        ToolTip="Edit Customer Details" Click="editExistingCustomerBtn_Click"
+                        Visibility="Collapsed">
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+
+                        <Button Width="28"
+                        Height="28"
+                        Margin="0, 2, 0, 0"
+                        HorizontalAlignment="Left"
+                        Grid.Row="0"
+                        Cursor="Hand"
+                        x:Name="addNewCustomerBtn"
+                        IsEnabled="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
+                        ToolTip="Add New Customer" Click="addNewCustomerBtn_Click"
+                        >
+                            <Rectangle Width="10" Height="10">
+                                <Rectangle.Fill>
+                                    <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_add}" />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                        </Button>
+                    </StackPanel>
                     <TextBox x:Name="jobInstruction" Grid.Row="5" Grid.Column="1" Height="100" Width="200" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="14"
                              Text="{Binding Instructions}" IsEnabled="False"/>
                     <DatePicker x:Name="expectedDeliveryDate" Width="125" Grid.Row="6"  Grid.Column="1" Margin="3" HorizontalAlignment="Left" VerticalAlignment="Center"

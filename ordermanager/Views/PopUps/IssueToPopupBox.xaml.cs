@@ -1,4 +1,5 @@
 ﻿using ordermanager.DatabaseModel;
+using ordermanager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -182,6 +183,66 @@ namespace ordermanager.Views.PopUps
             supplierComboBox.IsEnabled = isEnabled;
             jobInstruction.IsEnabled = isEnabled;
             expectedDeliveryDate.IsEnabled = isEnabled;
+        }
+
+        private void supplierComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            if (supplierComboBox.SelectedItem == null)
+            {
+                addNewCustomerBtn.Visibility = System.Windows.Visibility.Visible;
+                editExistingCustomerBtn.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                addNewCustomerBtn.Visibility = System.Windows.Visibility.Collapsed;
+                editExistingCustomerBtn.Visibility = System.Windows.Visibility.Visible;
+            }            
+        }
+
+        private void editExistingCustomerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (supplierComboBox.IsEnabled)
+            {
+                EditCompany(supplierComboBox.SelectedItem as Company);
+            }
+        }
+
+        private void addNewCustomerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (supplierComboBox.IsEnabled)
+            {
+                var newSupplier = NewCompany("Supplier", supplierComboBox.Text);
+                if (newSupplier != null)
+                {
+                    supplierComboBox.SelectedItem = newSupplier;
+                }
+            }
+        }
+
+        private void EditCompany(Company company)
+        {
+                CustomerDetailsControl details = new CustomerDetailsControl(company.CompanyType.Type);
+                details.DataContext = company;
+
+                if (details.ShowDialog() == true)
+                {
+                    DBResources.Instance.Save();
+                }
+        }
+
+        private Company NewCompany(string type, string companyName)
+        {
+
+            CustomerDetailsControl details = new CustomerDetailsControl(type);
+            Company newCompany = new Company();
+            newCompany.Name = companyName;
+            details.DataContext = newCompany;
+            if (details.ShowDialog() == true)
+            {
+                return DBResources.Instance.SaveNewCompany(newCompany, type);
+            }
+           
+            return null;
         }
     }
 }
