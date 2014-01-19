@@ -93,7 +93,7 @@
                                     <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" DataContext="{Binding Path=ProductName}" Text="{Binding Path=Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
                                     <Border Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity, StringFormat=n4}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                                            <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity, StringFormat={}{0:#0.####}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
                                             <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=UnitsOfMeasurement.Units}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" Margin="6,0,0,0"/>
                                         </StackPanel>
                                     </Border>
@@ -133,7 +133,7 @@
 
             <StackPanel Orientation="Horizontal" Grid.Row="1" >
                 <TextBlock Text="Quantity:" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
-                <TextBlock Text="{Binding Path = ExpectedQuantity, StringFormat=n4}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                <TextBlock Text="{Binding Path = ExpectedQuantity, StringFormat={}{0:#0.####}}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </TextBlock.Foreground>
@@ -156,7 +156,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Per Unit Order Value:" Grid.Row="0" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" HorizontalAlignment="Right"/>
                 <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path =PerUnitOrderValue,StringFormat=n4}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Margin="5,0,0,0" HorizontalAlignment="Left" >
+                    <TextBlock Text="{Binding Path =PerUnitOrderValue,StringFormat={}{0:#0.####}}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Margin="5,0,0,0" HorizontalAlignment="Left" >
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>
@@ -169,7 +169,7 @@
                 </StackPanel>
                 <TextBlock Text="Per Unit Total Consumption Cost:" Grid.Row="1" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" HorizontalAlignment="Right"/>
                 <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="{Binding Path=PerUnitTotalProductMaterialsCost, StringFormat=n4}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Margin="5,0,0,0" HorizontalAlignment="Left" >
+                    <TextBlock Text="{Binding Path=PerUnitTotalProductMaterialsCost, StringFormat={}{0:#0.####}}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Margin="5,0,0,0" HorizontalAlignment="Left" >
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>
@@ -283,7 +283,7 @@
                                         <DataGridTemplateColumn x:Name="costPerUnitColumn" Width="0.15*" Header="Cost">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBox Text="{Binding CostPerUnitWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                    <TextBox Text="{Binding CostPerUnitWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                  IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
                                                  IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"/>
                                                 </DataTemplate>
@@ -332,7 +332,7 @@
                                             </DataGridTemplateColumn.HeaderTemplate>
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}"
+                                                    <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat={}{0:#0.####}}"
                                                  IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
                                                  IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"/>
                                                 </DataTemplate>
@@ -354,7 +354,7 @@
                                             <DataGridTemplateColumn.CellTemplate>
 
                                                 <DataTemplate>
-                                                    <TextBox Text="{Binding OtherCostInINRWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                    <TextBox Text="{Binding OtherCostInINRWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                  IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
                                                  IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"/>
                                                 </DataTemplate>
@@ -375,7 +375,7 @@
                                             </DataGridTemplateColumn.HeaderTemplate>
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBox Text="{Binding OtherCostNameWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                    <TextBox Text="{Binding OtherCostNameWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                  IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
                                                  IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"/>
                                                 </DataTemplate>
@@ -392,7 +392,7 @@
                                             </DataGridTemplateColumn.HeaderTemplate>
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBox Text="{Binding ConsumptionCostWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}" FontWeight="Bold" IsReadOnly="True"/>
+                                                    <TextBox Text="{Binding ConsumptionCostWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat={}{0:#0.####}}" FontWeight="Bold" IsReadOnly="True"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
@@ -460,7 +460,7 @@
                                         <DataGridTemplateColumn x:Name="extracost" Width="0.25*" Header="Extra Cost">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBox Text="{Binding CostWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                    <TextBox Text="{Binding CostWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                  IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
                                                  IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"/>
                                                 </DataTemplate>
@@ -472,7 +472,7 @@
                             <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="2,2,2,10" Visibility="Collapsed">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Stretch">
                                     <TextBlock Text="Other Cost:" Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
-                                    <TextBox Text="{Binding OtherCost.CostWrapper,StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
+                                    <TextBox Text="{Binding OtherCost.CostWrapper,StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
                                  IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
                                  IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"
                                  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Width="100" Height="20" Foreground="Gray" Margin="10,0,0,0"/>

@@ -237,7 +237,7 @@
                             <DataGridTemplateColumn Header="Quantity" Width="0.1*" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox  Text="{Binding Quantity, StringFormat=n4}" IsReadOnly="True" />
+                                        <TextBox  Text="{Binding Quantity, StringFormat={}{0:#0.####}}" IsReadOnly="True" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -245,14 +245,14 @@
                             <DataGridTemplateColumn Header="Cost/Unit" Width="0.1*" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding CostPerUnit, StringFormat=n4}" IsReadOnly="True" />
+                                        <TextBox Text="{Binding CostPerUnit, StringFormat={}{0:#0.####}}" IsReadOnly="True" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn Header="Total Cost" Width="0.1*" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding TotalCost, StringFormat=n4, Mode=OneWay}"  IsReadOnly="True" />
+                                        <TextBox Text="{Binding TotalCost, StringFormat={}{0:#0.####}, Mode=OneWay}"  IsReadOnly="True" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

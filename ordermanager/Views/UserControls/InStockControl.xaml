@@ -80,7 +80,7 @@
                                     <TextBlock Text="Quantity" Grid.Row="1" Grid.Column="0" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                     <TextBox Width="100"  Grid.Row="0" Grid.Column="1" Margin="3" Text="{Binding OrderNumber, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" IsReadOnly="{Binding CanIssue, Converter={StaticResource FlipBoolValueConverter}}"/>
                                     <TextBlock Text="{Binding CustomerName}"  Grid.Row="0" Grid.Column="2" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                    <TextBox Width="100"  Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding QuantityToIssue, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}" IsReadOnly="{Binding CanIssue, Converter={StaticResource FlipBoolValueConverter}}"/>
+                                    <TextBox Width="100"  Grid.Row="1" Grid.Column="1" Margin="3" Text="{Binding QuantityToIssue, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat={}{0:#0.####}}" IsReadOnly="{Binding CanIssue, Converter={StaticResource FlipBoolValueConverter}}"/>
                                     <Button x:Name="btnIssue" Grid.Row="1" Grid.Column="2" Content="Issue"   Margin="3" Width="100" Height="28" Foreground="White" 
                                              HorizontalAlignment="Right" Click="IssueClick" IsEnabled="{Binding CanIssue}" >
                                         <Button.Background>

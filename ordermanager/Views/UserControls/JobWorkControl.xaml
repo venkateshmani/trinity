@@ -100,19 +100,19 @@
                                         <TextBlock Text="Quantity Passed"  Grid.Row="2" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <TextBlock Text="Quantity Failed" Grid.Row="3" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}" />
                                             <TextBox Width="160" Margin="5,0,5,0" Text="{Binding CommentsWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Comments" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}"/>
                                             <DatePicker Width="160" Margin="5,0,5,0" SelectedDate="{Binding ReceiptDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Received Date" IsEnabled="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"></DatePicker>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}"/>
                                             <Button x:Name="btnIssueToNextJobAfterKnitting" Content="Issue"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Click="IssueToNextJobAfterKnitting_Click" Tag="{Binding}" Visibility="{Binding CanIssueToNextJob,  Converter={StaticResource BoolToVisibilityConverter}}">
@@ -136,7 +136,7 @@
                                             <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
                                             <Button x:Name="btnNewKnittingJobOrder" Content="Create New Job Order" Click="NewKnittingJobOrder_Click" Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Tag="{Binding}" Visibility="{Binding CanCreateNewJobForFailedQuantity,  Converter={StaticResource BoolToVisibilityConverter}}">
@@ -327,19 +327,19 @@
                                         <TextBlock Text="Quantity Passed"  Grid.Row="2" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <TextBlock Text="Quantity Failed" Grid.Row="3" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}" />
                                             <TextBox Width="160" Margin="5,0,5,0" Text="{Binding CommentsWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Comments" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}" />
                                             <DatePicker Width="160" Margin="5,0,5,0" SelectedDate="{Binding ReceiptDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Received Date" IsEnabled="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"></DatePicker>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}" />
                                             <Button x:Name="btnIssueToNextJobAfterDyeing" Content="Issue"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Click="IssueToNextJobAfterDyeing_Click" Tag="{Binding}" Visibility="{Binding CanIssueToNextJob,  Converter={StaticResource BoolToVisibilityConverter}}">
@@ -362,7 +362,7 @@
                                             <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
                                             <Button x:Name="btnNewDyeingJobOrder" Content="Create New Job Order" Click="NewDyeingJobOrder_Click" Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Tag="{Binding}" Visibility="{Binding CanCreateNewJobForFailedQuantity,  Converter={StaticResource BoolToVisibilityConverter}}">
@@ -553,19 +553,19 @@
                                         <TextBlock Text="Quantity Passed"  Grid.Row="2" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <TextBlock Text="Quantity Failed" Grid.Row="3" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}"/>
                                             <TextBox Width="160" Margin="5,0,5,0" Text="{Binding CommentsWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Comments" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}" />
                                             <DatePicker Width="160" Margin="5,0,5,0" SelectedDate="{Binding ReceiptDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Received Date" IsEnabled="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"></DatePicker>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}"/>
                                             <Button x:Name="btnIssueToNextJobAfterPrinting" Content="Issue"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Click="IssueToNextJobAfterPrinting_Click" Tag="{Binding}" Visibility="{Binding CanIssueToNextJob,  Converter={StaticResource BoolToVisibilityConverter}}">
@@ -588,7 +588,7 @@
                                             <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
                                             <Button x:Name="btnNewPrintingJobOrder" Content="Create New Job Order" Click="NewPrintingJobOrder_Click" Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Tag="{Binding}" Visibility="{Binding CanCreateNewJobForFailedQuantity,  Converter={StaticResource BoolToVisibilityConverter}}">
@@ -779,19 +779,19 @@
                                         <TextBlock Text="Quantity Passed"  Grid.Row="2" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <TextBlock Text="Quantity Failed" Grid.Row="3" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}" />
                                             <TextBox Width="160" Margin="5,0,5,0" Text="{Binding CommentsWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Comments" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}" />
                                             <DatePicker Width="160" Margin="5,0,5,0" SelectedDate="{Binding ReceiptDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Received Date" IsEnabled="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"></DatePicker>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}" />
                                             <Button x:Name="btnIssueToNextJobAfterCompacting" Content="Issue"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Click="IssueToNextJobAfterCompacting_Click" Tag="{Binding}" Visibility="{Binding CanIssueToNextJob,  Converter={StaticResource BoolToVisibilityConverter}}">
@@ -814,7 +814,7 @@
                                             <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
                                             <Button x:Name="btnNewCompactingJobOrder" Content="Create New Job Order" Click="NewCompactingJobOrder_Click" Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Tag="{Binding}" Visibility="{Binding CanCreateNewJobForFailedQuantity,  Converter={StaticResource BoolToVisibilityConverter}}">
@@ -1005,19 +1005,19 @@
                                         <TextBlock Text="Quantity Passed"  Grid.Row="2" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <TextBlock Text="Quantity Failed" Grid.Row="3" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}"/>
                                             <TextBox Width="160" Margin="5,0,5,0" Text="{Binding CommentsWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Comments" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}" />
                                             <DatePicker Width="160" Margin="5,0,5,0" SelectedDate="{Binding ReceiptDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Received Date" IsEnabled="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"></DatePicker>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}" />
                                             <Button x:Name="btnIssueToNextJobAfterWashing" Content="Issue"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Click="IssueToNextJobAfterWashing_Click" Tag="{Binding}" Visibility="{Binding CanIssueToNextJob,  Converter={StaticResource BoolToVisibilityConverter}}">
@@ -1040,7 +1040,7 @@
                                             <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
                                             <Button x:Name="btnNewWashingJobOrder" Content="Create New Job Order" Click="NewWashingJobOrder_Click" Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Tag="{Binding}" Visibility="{Binding CanCreateNewJobForFailedQuantity,  Converter={StaticResource BoolToVisibilityConverter}}">
@@ -1231,19 +1231,19 @@
                                         <TextBlock Text="Quantity Passed"  Grid.Row="2" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <TextBlock Text="Quantity Failed" Grid.Row="3" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox  Width="100"  Text="{Binding DCNumberWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}"/>
                                             <TextBox Width="160" Margin="5,0,5,0" Text="{Binding CommentsWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Comments" IsReadOnly="{Binding IsReadOnly}"></TextBox>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox  Width="100"  Text="{Binding ReceivedQuantityWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}"/>
                                             <DatePicker Width="160" Margin="5,0,5,0" SelectedDate="{Binding ReceiptDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}"
                                                         Controls:TextboxHelper.Watermark="Received Date" IsEnabled="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"></DatePicker>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="2" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox Width="100" Text="{Binding QualityPassedWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="{Binding IsReadOnly}"/>
                                             <Button x:Name="btnIssueToNextJobAfterOther" Content="Issue"  Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Click="IssueToNextJobAfterOther_Click" Tag="{Binding}" Visibility="{Binding CanIssueToNextJob,  Converter={StaticResource BoolToVisibilityConverter}}">
@@ -1266,7 +1266,7 @@
                                             <TextBlock Text="{Binding IssueStatus}" Margin="5,0,5,0" VerticalAlignment="Center"></TextBlock>
                                         </StackPanel>
                                         <StackPanel Orientation="Horizontal"  Grid.Row="3" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                            <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityFailedWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" IsReadOnly="True" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
                                             <Button x:Name="btnNewOtherJobOrder" Content="Create New Job Order" Click="NewOtherJobOrder_Click" Margin="5,0,5,0" Width="160" Height="28" Foreground="White"
                                              HorizontalAlignment="Right" Tag="{Binding}" Visibility="{Binding CanCreateNewJobForFailedQuantity,  Converter={StaticResource BoolToVisibilityConverter}}">

@@ -78,7 +78,7 @@
                             <TextBlock Text="Quantity Failed : " Grid.Row="1" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             
                             <StackPanel Orientation="Horizontal"  Grid.Row="0" Grid.Column="1" Margin="3" VerticalAlignment="Center" HorizontalAlignment="Left">
-                                <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityPassedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                <TextBox Grid.Row="0" Grid.Column="1" Width="100" Text="{Binding QualityPassedQuantityWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center"
                                                      IsHitTestVisible="{Binding CanEditQuantityPassed}"   />
                                 <TextBlock Text="{Binding PassedQuantityStatus}" Margin="15,0,0,0" VerticalAlignment="Center" FontWeight="Bold"/>
@@ -92,7 +92,7 @@
                             </StackPanel>
                             <TextBlock Text="0.0000" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" Grid.Row="1" Grid.Column="1"/>
                             <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Margin="3" Visibility="{Binding QualityFailedQuantityWrapper, Converter={StaticResource qualityToVisibilityConverter}}">
-                                <TextBox Grid.Row="1" Grid.Column="1" Width="100" Text="{Binding QualityFailedQuantityWrapper, StringFormat=n4}" IsReadOnly="True" VerticalAlignment="Center"
+                                <TextBox Grid.Row="1" Grid.Column="1" Width="100" Text="{Binding QualityFailedQuantityWrapper, StringFormat={}{0:#0.####}}" IsReadOnly="True" VerticalAlignment="Center"
                                          VerticalContentAlignment="Center"/>
                                 <TextBlock Text="Supplier: " Margin="15,0,0,0" VerticalAlignment="Center"/>
                                 <ComboBox x:Name="supplierComboBox"  VerticalAlignment="Center" 
@@ -162,7 +162,7 @@
                     <DataGridTemplateColumn Header="Invc. Qty" Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding InvoicedQuantity, StringFormat=n4, UpdateSourceTrigger=LostFocus, NotifyOnSourceUpdated=True, ValidatesOnNotifyDataErrors=True}" 
+                                <TextBox Text="{Binding InvoicedQuantity, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, NotifyOnSourceUpdated=True, ValidatesOnNotifyDataErrors=True}" 
                                                      IsReadOnly="True"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -171,7 +171,7 @@
                     <DataGridTemplateColumn Header="Recv. Qty" Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding RecievedInHand, StringFormat=n4, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                <TextBox Text="{Binding RecievedInHand, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                     IsReadOnly="True"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -180,7 +180,7 @@
                     <DataGridTemplateColumn Header="Passed Qty"  Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding QualityPassedQuantityWrapper, StringFormat=n4, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                                <TextBox Text="{Binding QualityPassedQuantityWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                                                      IsReadOnly="True"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -189,7 +189,7 @@
                     <DataGridTemplateColumn Header="Failed Qty"  Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBox Text="{Binding QualityFailedQuantityWrapper, StringFormat=n4}" 
+                                <TextBox Text="{Binding QualityFailedQuantityWrapper, StringFormat={}{0:#0.####}}" 
                                          IsReadOnly="True"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

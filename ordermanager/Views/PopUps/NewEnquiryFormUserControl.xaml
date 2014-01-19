@@ -217,7 +217,7 @@
                                  VerticalContentAlignment="Center"
                                  PreviewTextInput="TextBox_PreviewTextInput"
                                  DataObject.Pasting="PastingHandler"
-                                 Controls:TextboxHelper.Watermark="0" Text="{Binding Order.CommissionValueWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True, StringFormat=n4}"
+                                 Controls:TextboxHelper.Watermark="0" Text="{Binding Order.CommissionValueWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, NotifyOnValidationError=True, StringFormat={}{0:#0.####}}"
                                  IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
                                  />
                             <ComboBox Width="73" Margin="5,0,0,0"
@@ -368,7 +368,7 @@
                         <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.16*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding ExpectedQuantityWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}"
+                                    <TextBox Text="{Binding ExpectedQuantityWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat={}{0:#0.####}}"
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler"
                                             IsHitTestVisible="{Binding DataContext.CanUpdateEnquiry,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
@@ -470,7 +470,7 @@
                             </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}"
+                                    <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat={}{0:#0.####}}"
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler"
                                             IsHitTestVisible="{Binding IsReadOnly, ElementName=productsRequired, Converter={StaticResource FlipBoolValueConverter}}"/>
@@ -493,7 +493,7 @@
                             </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}" 
+                                    <TextBox Text="{Binding CustomerTargetPriceWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat={}{0:#0.####}}" 
                                             PreviewTextInput="TextBox_PreviewTextInput"
                                             DataObject.Pasting="PastingHandler" 
                                             IsHitTestVisible="{Binding DataContext.CanUpdateEnquiry,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
@@ -517,7 +517,7 @@
                             </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding OurCostInProductCurrenyValue, Mode=OneWay, StringFormat=n4}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,3,3,3" 
+                                    <TextBox Text="{Binding OurCostInProductCurrenyValue, Mode=OneWay, StringFormat={}{0:#0.####}}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,3,3,3" 
                                              IsHitTestVisible="False"
                                              Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"
                                              />
@@ -540,7 +540,7 @@
                             </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding ProfitOrLossAmount, Mode=OneWay, StringFormat=n4}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,0,3,0"
+                                    <TextBox Text="{Binding ProfitOrLossAmount, Mode=OneWay, StringFormat={}{0:#0.####}}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,0,3,0"
                                              IsHitTestVisible="False"
                                              Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"/>
                                 </DataTemplate>
@@ -562,7 +562,7 @@
                             </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding TotalOurCostInProductCurrenyValue, Mode=OneWay, StringFormat=n4}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,3,3,3" 
+                                    <TextBox Text="{Binding TotalOurCostInProductCurrenyValue, Mode=OneWay, StringFormat={}{0:#0.####}}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,3,3,3" 
                                              IsHitTestVisible="False"
                                              Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"
                                              />
@@ -585,7 +585,7 @@
                             </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBox Text="{Binding TotalProfitOrLossAmount, Mode=OneWay, StringFormat=n4}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,0,3,0"
+                                    <TextBox Text="{Binding TotalProfitOrLossAmount, Mode=OneWay, StringFormat={}{0:#0.####}}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Margin="0,0,3,0"
                                              IsHitTestVisible="False"
                                              Foreground="{Binding IsOurCostHigherThanQuoted, Converter={StaticResource BoolToHighlighter}}"/>
                                 </DataTemplate>
@@ -609,7 +609,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Right" Orientation="Horizontal">
-                                        <TextBlock Text="{Binding OrderValueWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding OrderValueWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat={}{0:#0.####}}" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold" />
                                         <TextBlock Text=" INR" FontSize="16" FontWeight="Bold" />
                                     </StackPanel>
                                 </DataTemplate>

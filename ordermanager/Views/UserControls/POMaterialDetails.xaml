@@ -66,7 +66,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="1">
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Consumption:"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" />
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=SelectedMaterial.Consumption, StringFormat=n4}"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=SelectedMaterial.Consumption, StringFormat={}{0:#0.####}}"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
                 <TextBlock.Foreground>
                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                 </TextBlock.Foreground>
@@ -89,7 +89,7 @@
             </Grid.ColumnDefinitions>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Estimated Consumption Cost:"  Margin="4" Grid.Row="0" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" />
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=SelectedMaterial.TotalConsumptionCost, StringFormat=n4}"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding Path=SelectedMaterial.TotalConsumptionCost, StringFormat={}{0:#0.####}}"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </TextBlock.Foreground>
@@ -102,7 +102,7 @@
             </StackPanel>
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="Purchase Cost:"  Margin="4" Grid.Row="1" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" />
             <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding SelectedMaterial.TotalSubMaterialsPurchaseCostWrapper, StringFormat=n4}"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="{Binding SelectedMaterial.TotalSubMaterialsPurchaseCostWrapper, StringFormat={}{0:#0.####}}"  Margin="4" Grid.Row="0" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </TextBlock.Foreground>
@@ -165,7 +165,7 @@
                             <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding QuantityWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                        <TextBox Text="{Binding QuantityWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
                                                  IsHitTestVisible="{Binding CanAddMaterials}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -209,7 +209,7 @@
                                 </DataGridTemplateColumn.HeaderTemplate>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding CostWrapper, StringFormat=n4, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                        <TextBox Text="{Binding CostWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                  IsHitTestVisible="{Binding CanAddCosts}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -256,7 +256,7 @@
                                 </DataGridTemplateColumn.HeaderTemplate>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}"
+                                        <TextBox Text="{Binding CurrencyValueInINR, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat={}{0:#0.####}}"
                                                  IsHitTestVisible="{Binding CanAddCosts}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -278,7 +278,7 @@
                                 </DataGridTemplateColumn.HeaderTemplate>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding TaxPerUnitWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}"
+                                        <TextBox Text="{Binding TaxPerUnitWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat={}{0:#0.####}}"
                                                  IsHitTestVisible="{Binding CanAddCosts}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -298,7 +298,7 @@
                                 </DataGridTemplateColumn.HeaderTemplate>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding ItemCostWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat=n4}"
+                                        <TextBox Text="{Binding ItemCostWrapper, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True, StringFormat={}{0:#0.####}}"
                                                 IsReadOnly="True" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

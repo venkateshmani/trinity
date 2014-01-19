@@ -123,7 +123,7 @@
                             <DataGridTemplateColumn Header="Quantity" Width="0.1*" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox  Text="{Binding PackagedWrapper, UpdateSourceTrigger=LostFocus, StringFormat=n4}" IsReadOnly="True" />
+                                        <TextBox  Text="{Binding PackagedWrapper, UpdateSourceTrigger=LostFocus, StringFormat={}{0:#0.####}}" IsReadOnly="True" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
