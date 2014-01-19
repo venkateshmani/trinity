@@ -256,6 +256,15 @@ namespace ordermanager.Views.UserControls
             parameters.StyleID = ViewModel.SelectedProduct.ProductName.StyleID;
             parameters.TotalValue = ViewModel.SelectedProduct.OrderValue + " " + "INR";
             parameters.NumberOfItems = ViewModel.SelectedProduct.ProductMaterials.Count.ToString();
+            parameters.OrderConfirmComment = "No Comments";
+
+            foreach (History history in ViewModel.Order.Histories)
+            {
+                if (history.OrderChanges.Contains("confirmed the Order"))
+                {
+                    parameters.OrderConfirmComment = history.Comment;
+                }
+            }
 
             string tempFilePathForPdf = System.IO.Path.Combine(
                                            System.IO.Path.GetTempPath(), "OM_Budget-" + parameters.OrderID + "-" + parameters.StyleID + "-" + parameters.DateOfGeneration.Replace(@"/","_") + ".pdf");

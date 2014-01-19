@@ -1,4 +1,4 @@
-﻿C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MainWindow.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\CommonControls\OrderReportCardItemControl.xaml;;
@@ -12,6 +12,7 @@ FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Exe
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Execution\ProductionControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Execution\QualityControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Execution\ShippingControl.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Information\MaterialsFromStock.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Invoice\CatronBoxBrowser.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Invoice\GeneratedInvoiceViewerControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\GRNControl.xaml;;

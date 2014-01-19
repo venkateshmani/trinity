@@ -768,3 +768,5 @@ C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\Use
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\PurchaseOrderControls\CreateNewPurchaseOrderControl.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\PurchaseOrderControls\BillOfMaterialBrowser.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\PurchaseOrderControls\BillOfMaterialBrowser.baml
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Information\MaterialsFromStock.g.cs
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Information\MaterialsFromStock.baml

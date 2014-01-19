@@ -102,7 +102,10 @@
                 </StackPanel>
             </Grid>
             <ListView Name="lvOrders" Grid.Row="1" ItemsSource="{Binding Source={StaticResource orderViewSource}}"
-                      MouseLeftButtonUp="lvOrders_MouseLeftButtonUp">
+                      MouseLeftButtonUp="lvOrders_MouseLeftButtonUp"
+                      VirtualizingPanel.IsContainerVirtualizable="True"
+                      VirtualizingPanel.IsVirtualizing="True"
+                      VirtualizingPanel.IsVirtualizingWhenGrouping="True">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

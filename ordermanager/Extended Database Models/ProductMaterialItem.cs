@@ -331,7 +331,6 @@ namespace ordermanager.DatabaseModel
             ValidateCost();
             ValidateCurrencyValueInINR();
             ValidateUOM();
-            ValidateSupplier();
             return !HasErrors;
         }
 

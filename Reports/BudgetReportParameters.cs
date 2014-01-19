@@ -22,6 +22,7 @@ namespace Reports
         public string OurPrice {get;set;}
         public string ProfitOrLoss {get;set;}
         public string NumberOfItems { get; set; }
+        public string OrderConfirmComment { get; set; }
 
     }
 }
