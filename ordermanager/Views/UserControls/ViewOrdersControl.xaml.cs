@@ -77,11 +77,24 @@ namespace ordermanager.Views.UserControls
             fromDateFilter.SelectedDate = null;
             toDateFilter.SelectedDate = null;
             searchText.Text = string.Empty;
+            orderIDtxtBox.Text = string.Empty;
         }
         
         private void CollectionViewSource_Filter(object sender, FilterEventArgs e)
         {
             Order order = e.Item as Order;
+
+
+            //Order ID Filter
+            int orderID = 0;
+            if(int.TryParse(orderIDtxtBox.Text, out orderID))
+            {
+                if (order.OrderID != orderID)
+                {
+                    e.Accepted = false;
+                    return;
+                }
+            }
 
             //Company Name Search
             if (companyNameFilter.SelectedItem != null)
@@ -119,6 +132,11 @@ namespace ordermanager.Views.UserControls
 
         #region Filter Triggers
 
+            private void orderID_TextChanged_1(object sender, TextChangedEventArgs e)
+            {
+                ordersCollectionViewSource.View.Refresh();
+            }
+
             private void companyNameFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
                 ordersCollectionViewSource.View.Refresh();
@@ -148,5 +166,7 @@ namespace ordermanager.Views.UserControls
                 OnOrderClick(lvOrders.SelectedItem);
             }
         }
+
+       
     }
 }

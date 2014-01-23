@@ -54,7 +54,8 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-
+                    <TextBlock Text="Order ID"  Style="{StaticResource ProductInfoStyle}" Foreground="Gray"/>
+                    <TextBox x:Name="orderIDtxtBox" Width="150" Margin="5,5,25,5" TextChanged="orderID_TextChanged_1"/>
                     <Rectangle Width="15" Height="15" ToolTip="Filters">
                         <Rectangle.Fill>
                             <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_filter}" />

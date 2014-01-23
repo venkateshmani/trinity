@@ -243,18 +243,18 @@ namespace ordermanager.Views.UserControls
             //Generate Parameters
             BudgetReportParameters parameters = new BudgetReportParameters();
             parameters.Buyer = ViewModel.Order.Company.Name;
-            parameters.CurrencyValueInINR = ViewModel.SelectedProduct.CurrencyValueInINR.ToString();
+            parameters.CurrencyValueInINR = GetFormattedValueString(ViewModel.SelectedProduct.CurrencyValueInINR);
             parameters.DateOfGeneration = DBResources.Instance.GetServerTime().ToShortDateString();
-            parameters.ExpectedQuantity = ViewModel.SelectedProduct.ExpectedQuantity.ToString();
+            parameters.ExpectedQuantity = GetFormattedValueString( ViewModel.SelectedProduct.ExpectedQuantity);
             parameters.OrderDate = ViewModel.Order.OrderDate.ToShortDateString();
             parameters.OrderedProductCurrency = ViewModel.SelectedProduct.Currency.Symbol;
             parameters.OrderID = ViewModel.Order.OrderID.ToString();
-            parameters.OurPrice = ViewModel.SelectedProduct.OurCostInProductCurrenyValue.ToString() + " " + parameters.OrderedProductCurrency;
-            parameters.PerUnitBuyerTargetPrice = ViewModel.SelectedProduct.CustomerTargetPrice.ToString() + " " + parameters.OrderedProductCurrency;
+            parameters.OurPrice = GetFormattedValueString(ViewModel.SelectedProduct.OurCostInProductCurrenyValue)  + " " + parameters.OrderedProductCurrency;
+            parameters.PerUnitBuyerTargetPrice = GetFormattedValueString(ViewModel.SelectedProduct.CustomerTargetPrice) + " " + parameters.OrderedProductCurrency;
             parameters.ProductName = ViewModel.SelectedProduct.ProductName.Name;
-            parameters.ProfitOrLoss = ViewModel.SelectedProduct.ProfitOrLossAmount.ToString() + " " + parameters.OrderedProductCurrency;
+            parameters.ProfitOrLoss = GetFormattedValueString(ViewModel.SelectedProduct.ProfitOrLossAmount) + " " + parameters.OrderedProductCurrency;
             parameters.StyleID = ViewModel.SelectedProduct.ProductName.StyleID;
-            parameters.TotalValue = ViewModel.SelectedProduct.OrderValue + " " + "INR";
+            parameters.TotalValue = GetFormattedValueString(ViewModel.SelectedProduct.OrderValue) + " " + "INR";
             parameters.NumberOfItems = ViewModel.SelectedProduct.ProductMaterials.Count.ToString();
             parameters.OrderConfirmComment = "No Comments";
 
@@ -277,6 +277,11 @@ namespace ordermanager.Views.UserControls
             budgetReportControl.SetParameters(parameters);
             budgetReportControl.CreateReportAsPDF(ViewModel.Order.OrderID, ViewModel.SelectedProduct.ProductID, tempFilePathForPdf);
             System.Diagnostics.Process.Start(tempFilePathForPdf);
+        }
+
+        private string GetFormattedValueString(decimal value)
+        {
+            return String.Format(((Math.Round(value) == value) ? "{0:0}" : "{0:0.00}"), value);
         }
 
         private void materialsComboBox_MouseWheel(object sender, MouseWheelEventArgs e)

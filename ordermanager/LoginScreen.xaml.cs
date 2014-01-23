@@ -16,6 +16,7 @@ using ordermanager.Views;
 using System.Reflection;
 using System.Diagnostics;
 using System.Configuration;
+using ordermanager.Utilities;
 
 namespace ordermanager
 {
@@ -24,11 +25,13 @@ namespace ordermanager
     /// </summary>
     public partial class LoginScreen
     {
+        RegistryHandler registryHandler = null;
         public LoginScreen()
         {
             InitializeComponent();
             this.IsVisibleChanged += LoginScreen_IsVisibleChanged;
             this.Loaded += LoginScreen_Loaded;
+            registryHandler = new RegistryHandler("OrderManager");
         }
 
         void LoginScreen_Loaded(object sender, RoutedEventArgs e)
@@ -36,6 +39,15 @@ namespace ordermanager
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
                 versionTxt.Text = "V" + fvi.FileVersion;
+
+                string userName = registryHandler.Read("UserName");
+                if (userName != null)
+                {
+                    tbUserName.Text = userName;
+                }
+
+                tbPassword.Password = "v1";
+                LogIn();
         }
 
         void LoginScreen_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -98,6 +110,8 @@ namespace ordermanager
                         Application.Current.Shutdown();
                 }
 
+                registryHandler.Write("UserName", userName);
+                
                 MainWindow mainWindow = new MainWindow(this);
                 mainWindow.ShowDialog();
             }

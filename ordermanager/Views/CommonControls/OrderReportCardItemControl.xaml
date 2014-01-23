@@ -54,8 +54,12 @@
             <ColumnDefinition  Width="*"  />
             <ColumnDefinition  Width="*"/>
         </Grid.ColumnDefinitions>
-        <Border x:Name="rectBack" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Background="{Binding ReportBackColor}" Height="15"   CornerRadius="2"/>
-        <Border x:Name="rectFront" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{Binding ReportForeColor}" Height="15" CornerRadius="2" />
+        <!--<Border x:Name="rectBack" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Background="{Binding ReportBackColor}" Height="15"   CornerRadius="2"/>
+        <Border x:Name="rectFront" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{Binding ReportForeColor}" Height="15" CornerRadius="2" />-->
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <TextBlock FontSize="20" Text="{Binding ProgressPercentage,StringFormat={}{0:#0}}" HorizontalAlignment="Center"  Foreground="{Binding ReportForeColor}"/>
+            <TextBlock FontSize="10" VerticalAlignment="Bottom" Text="%" HorizontalAlignment="Center"  Foreground="{Binding ReportForeColor}"/>
+        </StackPanel>
         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding OrderReportCardType.Type}"/>
     </Grid>
 

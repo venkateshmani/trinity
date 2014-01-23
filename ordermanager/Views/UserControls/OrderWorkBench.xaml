@@ -92,12 +92,12 @@
                     <PopUps:NewEnquiryFormUserControl x:Name="viewEnquiry" Margin="20,10,10,0" IsNewEnquiry="False" />
                 </Border>
             </TabItem>
-            <TabItem x:Name="tabMaterials" Header="  Materials" Cursor="Hand">
+            <TabItem x:Name="tabMaterials" Header="  Budget" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <local:ProductMaterialsControl x:Name="materialsControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:ProductMaterialsControl>
                 </Border>
             </TabItem>
-            <TabItem x:Name="tabMaterialDetails" Header="  Material Details" Cursor="Hand">
+            <TabItem x:Name="tabMaterialDetails" Header="  BOM" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <local:PurchaseOrderControl x:Name="purchaseOrderControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
                 </Border>

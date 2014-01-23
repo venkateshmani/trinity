@@ -306,6 +306,7 @@
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\ExtendedMethods.cs" />
+    <Compile Include="Utilities\RegistryHandler.cs" />
     <Compile Include="Utilities\Util.cs" />
     <Compile Include="ValueConverters\BoolToHighlighter.cs" />
     <Compile Include="ValueConverters\HasErrorToVisibilityConverter.cs" />
@@ -748,7 +749,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OrderManagerModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DatabaseModel\OrderManagerModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OrderManagerModel.edmx</DependentUpon>

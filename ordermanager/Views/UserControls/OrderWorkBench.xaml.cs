@@ -111,10 +111,10 @@ namespace ordermanager.Views.UserControls
             string tabHeader = Convert.ToString(((System.Windows.Controls.HeaderedContentControl)(tabControl.SelectedItem)).Header);
             switch (tabHeader.Trim())
             {
-                case "Materials":
+                case "Budget":
                     m_MaterialsViewModel.SetOrder(m_Order);
                     break;  
-                case "Material Details":
+                case "BOM":
                     m_PurchaseOrderViewModel.SetOrder(m_Order);
                     break;
                 case "Purchase Order":

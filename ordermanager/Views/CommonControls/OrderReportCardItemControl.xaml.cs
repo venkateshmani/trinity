@@ -29,15 +29,15 @@ namespace ordermanager.Views.CommonControls
         private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             OrderReportCard card = e.NewValue as OrderReportCard;
-            try
-            {
-                if (card != null)
-                {
-                    gridProgress.ColumnDefinitions[0].Width = new GridLength((double)card.ProgressPercentage, GridUnitType.Star);
-                    gridProgress.ColumnDefinitions[1].Width = new GridLength((double)(100 - card.ProgressPercentage), GridUnitType.Star);
-                }
-            }
-            catch { }
+            //try
+            //{
+            //    if (card != null)
+            //    {
+            //        gridProgress.ColumnDefinitions[0].Width = new GridLength((double)card.ProgressPercentage, GridUnitType.Star);
+            //        gridProgress.ColumnDefinitions[1].Width = new GridLength((double)(100 - card.ProgressPercentage), GridUnitType.Star);
+            //    }
+            //}
+            //catch { }
         }
     }
 }

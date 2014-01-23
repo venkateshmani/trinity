@@ -807,10 +807,29 @@ namespace ordermanager.DatabaseModel
 
         #region Execution Dates
 
-        
+
+        public void RefreshExecutionTabProperties()
+        {
+            //Ugly code: But this is the only option for the time and money given
+            ProductCuttings = null;
+            var pcd = ProductCuttingDates;
+
+            ProductProductions = null;
+            var ppd = ProductProductionDates;
+
+            ProductQualityChecks = null;
+            var pqcd = ProductQualityCheckDates;
+
+            ProductPackagings = null;
+            var ppkd = ProductPackagingDates;
+
+            ProductShipments = null;
+            var ppsd = ProductShipmentDates;
+        }
 
         #region Cutting Management
 
+            
             private Dictionary<string, List<ProductCutting>> ProductCuttings = null;
             public List<string> ProductCuttingDates
             {

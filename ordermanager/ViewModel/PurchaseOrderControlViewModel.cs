@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Linq;
 
 namespace ordermanager.ViewModel
 {
@@ -183,35 +184,45 @@ namespace ordermanager.ViewModel
                         }
                     }
                 }
+
                 foreach (ProductCountryWiseBreakUp breakupItem in dbProduct.ProductBreakUpWrapper.ProductCountryWiseBreakUpWrapper)
                 {
                     if (breakupItem.ProductCountryWiseBreakUpID == 0)
                     {
                         dbProduct.ProductBreakUp.ProductCountryWiseBreakUps.Add(breakupItem);
                     }
-                    if (isSubmit)
+                    
+                    if (!summaryDict.ContainsKey(breakupItem.ProductSize.ProductSizeID))
                     {
-                        if (!summaryDict.ContainsKey(breakupItem.ProductSize.ProductSizeID))
-                        {
-                            Dictionary<int, decimal> tmp = new Dictionary<int, decimal>(1);
-                            summaryDict.Add(breakupItem.ProductSize.ProductSizeID, tmp);
-                        }
-
-                        if (!summaryDict[breakupItem.ProductSize.ProductSizeID].ContainsKey(breakupItem.Color.ColorID))
-                        {
-                            summaryDict[breakupItem.ProductSize.ProductSizeID].Add(breakupItem.Color.ColorID, breakupItem.NumberOfPiecesWrapper);
-                        }
-                        else
-                        {
-                            summaryDict[breakupItem.ProductSize.ProductSizeID][breakupItem.Color.ColorID] += breakupItem.NumberOfPiecesWrapper;
-                        }
+                        Dictionary<int, decimal> tmp = new Dictionary<int, decimal>(1);
+                        summaryDict.Add(breakupItem.ProductSize.ProductSizeID, tmp);
                     }
-                }
-                if (isSubmit)
-                {
-                    foreach (KeyValuePair<long, Dictionary<int, decimal>> kvp in summaryDict)
+
+                    if (!summaryDict[breakupItem.ProductSize.ProductSizeID].ContainsKey(breakupItem.Color.ColorID))
                     {
-                        foreach (KeyValuePair<int, decimal> kvp2 in kvp.Value)
+                        summaryDict[breakupItem.ProductSize.ProductSizeID].Add(breakupItem.Color.ColorID, breakupItem.NumberOfPiecesWrapper);
+                    }
+                    else
+                    {
+                        summaryDict[breakupItem.ProductSize.ProductSizeID][breakupItem.Color.ColorID] += breakupItem.NumberOfPiecesWrapper;
+                    }
+                    
+                }
+
+                for (int i = 0; i < dbProduct.ProductBreakUpSummaries.Count; )
+                {
+                    dbProduct.ProductBreakUpSummaries.Remove(dbProduct.ProductBreakUpSummaries.ElementAt(i));
+                }
+                    
+                foreach (KeyValuePair<long, Dictionary<int, decimal>> kvp in summaryDict)
+                {
+                    foreach (KeyValuePair<int, decimal> kvp2 in kvp.Value)
+                    {
+                        var productBreakUpSummaryInDB = (from record in dbProduct.ProductBreakUpSummaries
+                                                            where record.ProductSizeID == kvp.Key && record.ColorID == kvp2.Value
+                                                            select record).SingleOrDefault();
+
+                        if (productBreakUpSummaryInDB == null)
                         {
                             ProductBreakUpSummary sumyItem = new ProductBreakUpSummary();
                             sumyItem.ProductID = dbProduct.ProductID;
@@ -220,8 +231,15 @@ namespace ordermanager.ViewModel
                             sumyItem.NumberOfPieces = kvp2.Value;
                             dbProduct.ProductBreakUpSummaries.Add(sumyItem);
                         }
+                        else
+                        {
+                            productBreakUpSummaryInDB.NumberOfPieces = kvp2.Value;
+                        }
                     }
                 }
+
+                //Ugly code: But this is the only option for the time and money given
+                dbProduct.RefreshExecutionTabProperties();
             }
 
             if (isSubmit)
