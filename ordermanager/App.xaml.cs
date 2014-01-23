@@ -18,14 +18,25 @@ namespace ordermanager
             EventManager.RegisterClassHandler(typeof(TextBox),
                                              TextBox.GotMouseCaptureEvent,
                                              new RoutedEventHandler(TextBox_GotMouseCaptureEvent));
+
+            EventManager.RegisterClassHandler(typeof(TextBox),
+                                             TextBox.GotFocusEvent,
+                                             new RoutedEventHandler(TextBox_GotFocusEvent));
+
+           
             
             base.OnStartup(e);
+           
+        }
+
+        private void TextBox_GotFocusEvent(object sender, RoutedEventArgs e)
+        {
+            (sender as TextBox).SelectAll();
         }
 
         private void TextBox_GotMouseCaptureEvent(object sender, RoutedEventArgs e)
         {
             (sender as TextBox).SelectAll();
-           
         }
     }
 }

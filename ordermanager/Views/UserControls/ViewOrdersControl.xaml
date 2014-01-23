@@ -24,7 +24,7 @@
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
             <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
-                <Setter Property="Visibility" Value="Collapsed" />
+                <Setter Property="Visibility" Value="Visible" />
             </Style>
             <Style x:Key="ProductInfoStyle" TargetType="{x:Type TextBlock}">
                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -113,18 +113,19 @@
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.View>
-                    <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
-                        <GridViewColumn Header="OrderID">
+                    <GridView VirtualizingPanel.IsContainerVirtualizable="True"
+                      VirtualizingPanel.IsVirtualizing="True"
+                      VirtualizingPanel.IsVirtualizingWhenGrouping="True">
+                        <GridViewColumn Header="Order ID">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock TextAlignment="Center" Text="{Binding Path=OrderID}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource DescriptionHeaderStyle}"/>
-                                        <TextBlock Text="Order ID" Style="{StaticResource HeaderStyle}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="CustomerName">
+                        <GridViewColumn Header="Customer">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical">
@@ -134,24 +135,17 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="OrderStatus">
+                        <GridViewColumn Header="Status">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Margin="10,5,10,5" VerticalAlignment="Center">
+                                    <StackPanel Margin="10,2,10,2" VerticalAlignment="Center">
                                         <TextBlock TextAlignment="Right" Text="{Binding Path=OrderStatu.DisplayLabel}"  HorizontalAlignment="Center" Style="{StaticResource DescriptionHeaderStyle}"/>
                                         <TextBlock TextAlignment="Right" Text="{Binding Path=OrderDate}"  FontSize="10" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="OrderValue" >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Margin="10,5,10,5" TextAlignment="Right" Text="{Binding Path=OrderValue}"   VerticalAlignment="Center"/>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="OrderReportCard" Width="Auto">
+                        <GridViewColumn Header="Progress" Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <CommonControls:OrderReportCardListControl Order="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="450"/>
