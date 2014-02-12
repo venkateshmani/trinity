@@ -32,6 +32,7 @@ namespace ordermanager.DatabaseModel
             { 
                 m_PriceTerms = value;
                 CollateTermsAndCondtions();
+                ValidateTermsAndConditions();
                 OnPropertyChanged("PriceTerms");
             }
         }
@@ -46,6 +47,7 @@ namespace ordermanager.DatabaseModel
             {
                 m_Freigt = value;
                 CollateTermsAndCondtions();
+                ValidateTermsAndConditions();
                 OnPropertyChanged("Freigt");
             }
         }
@@ -60,6 +62,7 @@ namespace ordermanager.DatabaseModel
             {
                 m_PaymentTerms = value;
                 CollateTermsAndCondtions();
+                ValidateTermsAndConditions();
                 OnPropertyChanged("PaymentTerms");
             }
         }
@@ -74,6 +77,7 @@ namespace ordermanager.DatabaseModel
             {
                 m_DeliveryDate = value;
                 CollateTermsAndCondtions();
+                ValidateTermsAndConditions();
                 OnPropertyChanged("DeliveryDate");
             }
         }
@@ -88,6 +92,7 @@ namespace ordermanager.DatabaseModel
             {
                 m_QualitySpecifications = value;
                 CollateTermsAndCondtions();
+                ValidateTermsAndConditions();
                 OnPropertyChanged("QualitySpecifications");
             }
         }
@@ -102,6 +107,7 @@ namespace ordermanager.DatabaseModel
             {
                 m_QuantityAllowance = value;
                 CollateTermsAndCondtions();
+                ValidateTermsAndConditions();
                 OnPropertyChanged("QuantityAllowance");
             }
         }
@@ -139,7 +145,7 @@ namespace ordermanager.DatabaseModel
                 bool hasAttribute = Attribute.IsDefined(pInfo, typeof(TermsAndConditionsAttribute));
                 if (hasAttribute)
                 {
-                    if (!IsValidTermsAndConditions(termsAndConditionsErrorMessage))
+                    if (!IsValidTermsAndConditions(pInfo.GetValue(this) as String))
                     {
                         AddTCError(pInfo.Name);
                     }
@@ -164,9 +170,11 @@ namespace ordermanager.DatabaseModel
 
         private bool IsValidTermsAndConditions(string termsAndConditions)
         {
-            string lowerCaseString = termsAndConditions.ToLower().Trim();
+            if (string.IsNullOrEmpty(termsAndConditions))
+                return false;
 
-            if(string.IsNullOrEmpty(lowerCaseString) || lowerCaseString == "na" || lowerCaseString == "N/A" || lowerCaseString == "not applicable"
+            string lowerCaseString = termsAndConditions.ToLower().Trim();
+            if(lowerCaseString == "na" || lowerCaseString == "N/A" || lowerCaseString == "not applicable"
                 || lowerCaseString == "notapplicable")
             {
                 return false;
