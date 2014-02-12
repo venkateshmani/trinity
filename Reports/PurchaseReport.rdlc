@@ -14,7 +14,6 @@
                     <Value>Details Of the Supplier</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
-                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -23,6 +22,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox41</rd:DefaultName>
+            <Top>0.02778in</Top>
             <Left>0.03751in</Left>
             <Height>0.2617in</Height>
             <Width>2.77254in</Width>
@@ -53,9 +53,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox43</rd:DefaultName>
-            <Top>0.27559in</Top>
+            <Top>0.28948in</Top>
             <Left>0.05in</Left>
-            <Height>1.60828in</Height>
+            <Height>1.30509in</Height>
             <Width>3.35035in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -69,8 +69,9 @@
             </Style>
           </Textbox>
           <Line Name="Line4">
+            <Top>0.01389in</Top>
             <Left>3.4698in</Left>
-            <Height>1.99735in</Height>
+            <Height>1.6536in</Height>
             <Width>0in</Width>
             <ZIndex>2</ZIndex>
             <Style>
@@ -99,7 +100,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox48</rd:DefaultName>
-            <Top>0.08809in</Top>
+            <Top>0.10198in</Top>
             <Left>3.58439in</Left>
             <Height>0.25in</Height>
             <Width>0.73081in</Width>
@@ -135,7 +136,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox48</rd:DefaultName>
-            <Top>0.40753in</Top>
+            <Top>0.42142in</Top>
             <Left>3.5844in</Left>
             <Height>0.25in</Height>
             <Width>0.7308in</Width>
@@ -161,6 +162,7 @@
                     <Value>=Parameters!PurchaseOrderNumber.Value</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
@@ -171,7 +173,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox48</rd:DefaultName>
-            <Top>0.08809in</Top>
+            <Top>0.10197in</Top>
             <Left>4.35659in</Left>
             <Height>0.25in</Height>
             <Width>2.46335in</Width>
@@ -197,6 +199,7 @@
                     <Value>=Today()</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
@@ -207,7 +210,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox48</rd:DefaultName>
-            <Top>0.40753in</Top>
+            <Top>0.42142in</Top>
             <Left>4.35825in</Left>
             <Height>0.25in</Height>
             <Width>2.44919in</Width>
@@ -243,10 +246,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox48</rd:DefaultName>
-            <Top>1.32693in</Top>
+            <Top>0.8929in</Top>
             <Left>3.57676in</Left>
             <Height>0.25in</Height>
-            <Width>1.33941in</Width>
+            <Width>1.17638in</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -266,7 +269,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Date</Value>
+                    <Value>QuotationDate</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -279,10 +282,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox48</rd:DefaultName>
-            <Top>1.63387in</Top>
-            <Left>3.56913in</Left>
+            <Top>1.21235in</Top>
+            <Left>3.5844in</Left>
             <Height>0.25in</Height>
-            <Width>0.7308in</Width>
+            <Width>1.16874in</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -305,6 +308,7 @@
                     <Value>=Parameters!QuoteNumber.Value</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
@@ -315,8 +319,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox48</rd:DefaultName>
-            <Top>1.32693in</Top>
-            <Left>5.04048in</Left>
+            <Top>0.8929in</Top>
+            <Left>4.8087in</Left>
             <Height>0.25in</Height>
             <Width>1.49584in</Width>
             <ZIndex>9</ZIndex>
@@ -341,6 +345,7 @@
                     <Value>=Parameters!QuoteDate.Value</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Normal</FontWeight>
                     </Style>
                   </TextRun>
@@ -351,8 +356,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox48</rd:DefaultName>
-            <Top>1.63248in</Top>
-            <Left>5.04048in</Left>
+            <Top>1.19845in</Top>
+            <Left>4.81177in</Left>
             <Height>0.25in</Height>
             <Width>1.49277in</Width>
             <ZIndex>10</ZIndex>
@@ -369,9 +374,9 @@
           </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>0.1in</Top>
+        <Top>0.08611in</Top>
         <Left>0.21982in</Left>
-        <Height>1.99735in</Height>
+        <Height>1.66749in</Height>
         <Width>6.88244in</Width>
         <Style>
           <Border>
@@ -386,22 +391,25 @@
               <Width>0.66661in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.52188in</Width>
+              <Width>1.15035in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.88459in</Width>
+              <Width>0.6988in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>0.78418in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.9589in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.01612in</Width>
+              <Width>0.95096in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.85975in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.97458in</Width>
+              <Width>0.8383in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -420,6 +428,7 @@
                               <Value>S.No.</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -456,6 +465,7 @@
                               <Value>Name of the Product &amp; Spec</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -482,6 +492,43 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
+                    <Textbox Name="Textbox6">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Alias</Value>
+                              <Style>
+                                <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
+                                <FontWeight>Bold</FontWeight>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Center</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox6</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
                     <Textbox Name="Textbox64">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
@@ -492,6 +539,7 @@
                               <Value>Quantity</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -528,6 +576,7 @@
                               <Value>Rate</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -564,6 +613,7 @@
                               <Value>Amount</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -600,6 +650,7 @@
                               <Value>Tax</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -636,6 +687,7 @@
                               <Value>Total</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
                               </Style>
                             </TextRun>
@@ -721,6 +773,40 @@
                         </Paragraph>
                       </Paragraphs>
                       <rd:DefaultName>SubMaterialName</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <VerticalAlign>Middle</VerticalAlign>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox7">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style>
+                                <FontFamily>Segoe UI</FontFamily>
+                                <FontSize>8pt</FontSize>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox7</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -928,6 +1014,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -941,10 +1028,10 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>PODataSet</DataSetName>
-        <Top>2.31644in</Top>
+        <Top>1.98311in</Top>
         <Left>0.21982in</Left>
         <Height>0.7926in</Height>
-        <Width>6.88243in</Width>
+        <Width>6.90785in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -959,7 +1046,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Total Price CIF Chennai:</Value>
+                <Value>Total Value:</Value>
                 <Style>
                   <FontFamily>Segoe UI</FontFamily>
                   <FontWeight>Bold</FontWeight>
@@ -972,8 +1059,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox74</rd:DefaultName>
-        <Top>3.2514in</Top>
-        <Left>3.5676in</Left>
+        <Top>2.9389in</Top>
+        <Left>3.54122in</Left>
         <Height>0.25in</Height>
         <Width>1.96243in</Width>
         <ZIndex>2</ZIndex>
@@ -1008,8 +1095,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox74</rd:DefaultName>
-        <Top>3.2514in</Top>
-        <Left>5.54392in</Left>
+        <Top>2.9389in</Top>
+        <Left>5.53143in</Left>
         <Height>0.25in</Height>
         <Width>1.55834in</Width>
         <ZIndex>3</ZIndex>
@@ -1033,6 +1120,8 @@
               <TextRun>
                 <Value>Terms and Conditions:</Value>
                 <Style>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -1067,7 +1156,10 @@
             <TextRuns>
               <TextRun>
                 <Value>=Parameters!TermsAndConditions.Value</Value>
-                <Style />
+                <Style>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>8pt</FontSize>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -1194,7 +1286,7 @@
   <Width>8.27in</Width>
   <Page>
     <PageHeader>
-      <Height>1.92363in</Height>
+      <Height>2.2153in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -1205,12 +1297,120 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>27 Annamalai Nagar, Off. Mettur Road, Erode - 638 011
-Phone No : 0424 - 2215933
-Mail id : admin-gd@triniity.com</Value>
+                  <Value>Registered office at : </Value>
+                  <Style>
+                    <FontStyle>Normal</FontStyle>
+                    <FontFamily>Segoe UI</FontFamily>
+                    <FontWeight>Bold</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                    <Color>#000000</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>17, Annamalai Nagar, Opp Mettur Road, </Value>
+                  <Style>
+                    <FontStyle>Normal</FontStyle>
+                    <FontFamily>Segoe UI</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                    <Color>#000000</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Erode, </Value>
+                  <Style>
+                    <FontStyle>Normal</FontStyle>
+                    <FontFamily>Segoe UI</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                    <Color>#000000</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Tamil Nadu,</Value>
+                  <Style>
+                    <FontStyle>Normal</FontStyle>
+                    <FontFamily>Segoe UI</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                    <Color>#000000</Color>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>India</Value>
+                  <Style>
+                    <FontStyle>Normal</FontStyle>
+                    <FontFamily>Segoe UI</FontFamily>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Normal</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                    <Color>#000000</Color>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>. </Value>
+                  <Style>
+                    <FontStyle>Normal</FontStyle>
+                    <FontFamily>Segoe UI</FontFamily>
+                    <FontWeight>Normal</FontWeight>
+                    <TextDecoration>None</TextDecoration>
+                    <Color>#000000</Color>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>Pincode-638011.</Value>
                   <Style>
                     <FontFamily>Segoe UI</FontFamily>
-                    <FontSize>12pt</FontSize>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+              </TextRuns>
+              <Style />
+            </Paragraph>
+            <Paragraph>
+              <TextRuns>
+                <TextRun>
+                  <Value>Phone No : 0424 - 2215933</Value>
+                  <Style>
+                    <FontFamily>Segoe UI</FontFamily>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value xml:space="preserve">
+</Value>
+                  <Style>
+                    <FontFamily>Segoe UI</FontFamily>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value>Mail id : stores-gd@triniity.com</Value>
+                  <Style>
+                    <FontFamily>Segoe UI</FontFamily>
+                    <FontSize>8pt</FontSize>
                   </Style>
                 </TextRun>
               </TextRuns>
@@ -1218,10 +1418,10 @@ Mail id : admin-gd@triniity.com</Value>
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox29</rd:DefaultName>
-          <Top>0.59233in</Top>
+          <Top>0.57845in</Top>
           <Left>0.21983in</Left>
-          <Height>0.68875in</Height>
-          <Width>4.44062in</Width>
+          <Height>1.1556in</Height>
+          <Width>4.75313in</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -1244,7 +1444,6 @@ Mail id : admin-gd@triniity.com</Value>
                       <Value>TIN NO. : 3342 3043478/01.01.2007</Value>
                       <Style>
                         <FontFamily>Segoe UI</FontFamily>
-                        <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -1277,7 +1476,6 @@ Mail id : admin-gd@triniity.com</Value>
                       <Value>C.S.T. : 882535 / 23.02.2006</Value>
                       <Style>
                         <FontFamily>Segoe UI</FontFamily>
-                        <FontSize>12pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -1289,7 +1487,7 @@ Mail id : admin-gd@triniity.com</Value>
               </Paragraphs>
               <rd:DefaultName>Textbox36</rd:DefaultName>
               <Top>0.0125in</Top>
-              <Left>4.10381in</Left>
+              <Left>3.49757in</Left>
               <Height>0.25in</Height>
               <Width>2.71612in</Width>
               <ZIndex>1</ZIndex>
@@ -1304,9 +1502,8 @@ Mail id : admin-gd@triniity.com</Value>
               </Style>
             </Textbox>
             <Line Name="Line3">
-              <Top>0.0125in</Top>
               <Left>3.46979in</Left>
-              <Height>0.3106in</Height>
+              <Height>0.29028in</Height>
               <Width>0in</Width>
               <ZIndex>2</ZIndex>
               <Style>
@@ -1317,9 +1514,9 @@ Mail id : admin-gd@triniity.com</Value>
             </Line>
           </ReportItems>
           <KeepTogether>true</KeepTogether>
-          <Top>1.47553in</Top>
+          <Top>1.85557in</Top>
           <Left>0.21983in</Left>
-          <Height>0.3231in</Height>
+          <Height>0.29028in</Height>
           <Width>6.88243in</Width>
           <ZIndex>1</ZIndex>
           <Style>
@@ -1347,25 +1544,10 @@ Mail id : admin-gd@triniity.com</Value>
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Triniity</Value>
+                  <Value>Triniity Colour India Private Limited</Value>
                   <Style>
                     <FontFamily>Segoe UI</FontFamily>
-                    <FontSize>14pt</FontSize>
-                    <FontWeight>Bold</FontWeight>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value xml:space="preserve"> </Value>
-                  <Style>
-                    <FontFamily>Segoe UI</FontFamily>
-                    <FontWeight>Bold</FontWeight>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>Colour India Private Limited  </Value>
-                  <Style>
-                    <FontFamily>Segoe UI</FontFamily>
-                    <FontSize>14pt</FontSize>
+                    <FontSize>12pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
@@ -1377,7 +1559,7 @@ Mail id : admin-gd@triniity.com</Value>
           <Top>0.28678in</Top>
           <Left>0.21982in</Left>
           <Height>0.29167in</Height>
-          <Width>4.44064in</Width>
+          <Width>4.75314in</Width>
           <ZIndex>2</ZIndex>
           <Style>
             <Border>

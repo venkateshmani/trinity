@@ -176,7 +176,7 @@ namespace ordermanager.DatabaseModel
                     OrderProduct.RemoveError(MaterialName.Name);
                     if (TotalSubMaterialsPurchaseCostWrapper > (ConsumptionCostWrapper * ProductQuantity))
                     {
-                        AddError("TotalSubMaterialsPurchaseCostWrapper", "Total purchase cost can't be more than consumption cost", false);
+                        AddError("Tot.alSubMaterialsPurchaseCostWrapper", "Total purchase cost can't be more than consumption cost", false);
                         OrderProduct.AddError(MaterialName.Name, MaterialName.Name + " has some errors", false);
                     }
                 }
