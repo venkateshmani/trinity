@@ -29,6 +29,7 @@
               <Mapping SourceColumn="OrderedQuantity" DataSetColumn="OrderedQuantity" />
               <Mapping SourceColumn="Units" DataSetColumn="Units" />
               <Mapping SourceColumn="Cost" DataSetColumn="Cost" />
+              <Mapping SourceColumn="Alias" DataSetColumn="Alias" />
               <Mapping SourceColumn="Currency" DataSetColumn="Currency" />
               <Mapping SourceColumn="Amount" DataSetColumn="Amount" />
               <Mapping SourceColumn="Tax" DataSetColumn="Tax" />
@@ -45,10 +46,9 @@
   <xs:element name="OrderManagerDBDataSetForPO" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="OrderManagerDBDataSetForPO" msprop:Generator_UserDSName="OrderManagerDBDataSetForPO">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="SP_PurchaseOrder" msprop:Generator_TableClassName="SP_PurchaseOrderDataTable" msprop:Generator_TableVarName="tableSP_PurchaseOrder" msprop:Generator_RowChangedName="SP_PurchaseOrderRowChanged" msprop:Generator_TablePropName="SP_PurchaseOrder" msprop:Generator_RowDeletingName="SP_PurchaseOrderRowDeleting" msprop:Generator_RowChangingName="SP_PurchaseOrderRowChanging" msprop:Generator_RowEvHandlerName="SP_PurchaseOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="SP_PurchaseOrderRowDeleted" msprop:Generator_RowClassName="SP_PurchaseOrderRow" msprop:Generator_UserTableName="SP_PurchaseOrder" msprop:Generator_RowEvArgName="SP_PurchaseOrderRowChangeEvent">
+        <xs:element name="SP_PurchaseOrder" msprop:Generator_TableClassName="SP_PurchaseOrderDataTable" msprop:Generator_TableVarName="tableSP_PurchaseOrder" msprop:Generator_TablePropName="SP_PurchaseOrder" msprop:Generator_RowDeletingName="SP_PurchaseOrderRowDeleting" msprop:Generator_RowChangingName="SP_PurchaseOrderRowChanging" msprop:Generator_RowEvHandlerName="SP_PurchaseOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="SP_PurchaseOrderRowDeleted" msprop:Generator_UserTableName="SP_PurchaseOrder" msprop:Generator_RowChangedName="SP_PurchaseOrderRowChanged" msprop:Generator_RowEvArgName="SP_PurchaseOrderRowChangeEvent" msprop:Generator_RowClassName="SP_PurchaseOrderRow">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID" msdata:AutoIncrement="true" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
               <xs:element name="OrderID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_ColumnVarNameInTable="columnOrderID" msprop:Generator_ColumnPropNameInRow="OrderID" msprop:Generator_ColumnPropNameInTable="OrderIDColumn" msprop:Generator_UserColumnName="OrderID" type="xs:long" />
               <xs:element name="ProductName" msprop:Generator_ColumnVarNameInTable="columnProductName" msprop:Generator_ColumnPropNameInRow="ProductName" msprop:Generator_ColumnPropNameInTable="ProductNameColumn" msprop:Generator_UserColumnName="ProductName">
                 <xs:simpleType>
@@ -80,6 +80,13 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="Cost" msprop:Generator_ColumnVarNameInTable="columnCost" msprop:Generator_ColumnPropNameInRow="Cost" msprop:Generator_ColumnPropNameInTable="CostColumn" msprop:Generator_UserColumnName="Cost" type="xs:decimal" />
+              <xs:element name="Alias" msprop:Generator_ColumnVarNameInTable="columnAlias" msprop:Generator_ColumnPropNameInRow="Alias" msprop:Generator_ColumnPropNameInTable="AliasColumn" msprop:Generator_UserColumnName="Alias" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="Currency" msprop:Generator_ColumnVarNameInTable="columnCurrency" msprop:Generator_ColumnPropNameInRow="Currency" msprop:Generator_ColumnPropNameInTable="CurrencyColumn" msprop:Generator_UserColumnName="Currency">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -88,7 +95,7 @@
                 </xs:simpleType>
               </xs:element>
               <xs:element name="Amount" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAmount" msprop:Generator_ColumnPropNameInRow="Amount" msprop:Generator_ColumnPropNameInTable="AmountColumn" msprop:Generator_UserColumnName="Amount" type="xs:decimal" minOccurs="0" />
-              <xs:element name="Tax" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTax" msprop:Generator_ColumnPropNameInRow="Tax" msprop:Generator_ColumnPropNameInTable="TaxColumn" msprop:Generator_UserColumnName="Tax" type="xs:int" minOccurs="0" />
+              <xs:element name="Tax" msprop:Generator_ColumnVarNameInTable="columnTax" msprop:Generator_ColumnPropNameInRow="Tax" msprop:Generator_ColumnPropNameInTable="TaxColumn" msprop:Generator_UserColumnName="Tax" type="xs:decimal" />
               <xs:element name="Total" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnTotal" msprop:Generator_ColumnPropNameInRow="Total" msprop:Generator_ColumnPropNameInTable="TotalColumn" msprop:Generator_UserColumnName="Total" type="xs:decimal" minOccurs="0" />
               <xs:element name="Supplier" msprop:Generator_ColumnVarNameInTable="columnSupplier" msprop:Generator_ColumnPropNameInRow="Supplier" msprop:Generator_ColumnPropNameInTable="SupplierColumn" msprop:Generator_UserColumnName="Supplier">
                 <xs:simpleType>
@@ -104,7 +111,7 @@
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:SP_PurchaseOrder" />
-      <xs:field xpath="mstns:ID" />
+      <xs:field xpath="mstns:OrderID" />
     </xs:unique>
   </xs:element>
 </xs:schema>

@@ -91,10 +91,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OrderManagerDBDataSetForInvoiceGeneration.xsd</DependentUpon>
     </Compile>
-    <Compile Include="OrderManagerDBDataSetForPO.cs">
-      <DependentUpon>OrderManagerDBDataSetForPO.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="OrderManagerDBDataSetForPO.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
