@@ -756,7 +756,16 @@ namespace ordermanager.ViewModel
             }
         }
 
+        Task reloaderTask = null;
         public void ReloadChangedEntities()
+        {
+            if (reloaderTask != null)
+                reloaderTask.Wait();
+
+            reloaderTask = Task.Factory.StartNew(() => Reload());
+        }
+
+        private void Reload()
         {
             foreach (DbEntityEntry entry in Context.ChangeTracker.Entries())
             {
@@ -766,6 +775,7 @@ namespace ordermanager.ViewModel
                     entry.Reload();
             }
         }
+             
 
         public void DiscardChanges()
         {
@@ -796,15 +806,18 @@ namespace ordermanager.ViewModel
             }
         }
 
-        
 
+        Task dbUpdateTask = null;
         public bool Save()
         {
             try
             {
+                if (dbUpdateTask != null)
+                    dbUpdateTask.Wait();
+
                 AttachTheMissingNavigationProperties();
-                dbContext.SaveChanges();
                 LastUpdated = GetServerTime(true);
+                dbUpdateTask = Task.Factory.StartNew(() => dbContext.SaveChanges());
                 return true;
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException e)
