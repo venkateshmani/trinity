@@ -391,16 +391,16 @@
               <Width>0.66661in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.15035in</Width>
+              <Width>1.18194in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.6988in</Width>
+              <Width>0.86866in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.78418in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.9589in</Width>
+              <Width>0.73204in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>0.95096in</Width>
@@ -471,7 +471,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -499,7 +499,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Item Code no.</Value>
+                              <Value> Item Code no.</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -508,7 +508,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Left</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -545,7 +545,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -582,7 +582,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -619,7 +619,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -656,7 +656,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -693,7 +693,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -789,14 +789,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox7">
+                    <Textbox Name="Alias">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!Alias.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -806,7 +806,7 @@
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox7</rd:DefaultName>
+                      <rd:DefaultName>Alias</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -830,7 +830,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=FormatNumber(Fields!OrderedQuantity.Value,2) &amp; " " &amp; Fields!Units.Value</Value>
+                              <Value>=FormatNumber(Fields!OrderedQuantity.Value,2) &amp; " " &amp;  Fields!Units.Value</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -838,7 +838,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -866,7 +866,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=FormatNumber(Fields!Cost.Value,2) &amp; " " &amp; Fields!Currency.Value</Value>
+                              <Value>=Fields!Currency.Value &amp; " " &amp; FormatNumber(Fields!Cost.Value,2)</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -874,7 +874,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -902,7 +902,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=FormatNumber(Fields!Amount.Value,2) &amp; " " &amp; Fields!Currency.Value</Value>
+                              <Value>=Fields!Currency.Value &amp; " " &amp;  FormatNumber(Fields!Amount.Value,2)</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -910,7 +910,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -938,7 +938,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=FormatNumber(Fields!Tax.Value,2) &amp; " " &amp; Fields!Currency.Value</Value>
+                              <Value>=Fields!Currency.Value  &amp; " " &amp;  FormatNumber(Fields!Tax.Value,2)</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -946,7 +946,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -974,7 +974,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=FormatNumber(Fields!Total.Value,2) &amp; " " &amp; Fields!Currency.Value</Value>
+                              <Value>=Fields!Currency.Value  &amp; " " &amp; FormatNumber(Fields!Amount.Value + Fields!Tax.Value,2)</Value>
                               <Style>
                                 <FontFamily>Segoe UI</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -982,7 +982,7 @@
                             </TextRun>
                           </TextRuns>
                           <Style>
-                            <TextAlign>Center</TextAlign>
+                            <TextAlign>Right</TextAlign>
                           </Style>
                         </Paragraph>
                       </Paragraphs>
@@ -1031,7 +1031,7 @@
         <Top>1.98311in</Top>
         <Left>0.21982in</Left>
         <Height>0.7926in</Height>
-        <Width>6.90785in</Width>
+        <Width>6.88244in</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -1083,7 +1083,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=FormatNumber(Sum(Fields!Total.Value),2) &amp; " " &amp; Fields!Currency.Value</Value>
+                <Value>=Fields!Currency.Value  &amp; " " &amp;  FormatNumber(Sum(Fields!Amount.Value, "PODataSet") + Sum(Fields!Tax.Value, "PODataSet"),2)</Value>
                 <Style>
                   <FontFamily>Segoe UI</FontFamily>
                 </Style>
@@ -1631,6 +1631,10 @@
           <DataField>Cost</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="Alias">
+          <DataField>Alias</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Currency">
           <DataField>Currency</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -1641,7 +1645,7 @@
         </Field>
         <Field Name="Tax">
           <DataField>Tax</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="Total">
           <DataField>Total</DataField>
@@ -1654,7 +1658,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>OrderManagerDBDataSetForPO</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\User\Documents\GitHub\trinity\Reports\OrderManagerDBDataSetForPO.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\Users\Venkatesh\Documents\GitHub\trinity\Reports\OrderManagerDBDataSetForPO.xsd</rd:SchemaPath>
         <rd:TableName>SP_PurchaseOrder</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>

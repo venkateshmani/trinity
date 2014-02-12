@@ -279,8 +279,6 @@ namespace Reports {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class SP_PurchaseOrderDataTable : global::System.Data.TypedTableBase<SP_PurchaseOrderRow> {
             
-            private global::System.Data.DataColumn columnID;
-            
             private global::System.Data.DataColumn columnOrderID;
             
             private global::System.Data.DataColumn columnProductName;
@@ -294,6 +292,8 @@ namespace Reports {
             private global::System.Data.DataColumn columnUnits;
             
             private global::System.Data.DataColumn columnCost;
+            
+            private global::System.Data.DataColumn columnAlias;
             
             private global::System.Data.DataColumn columnCurrency;
             
@@ -336,14 +336,6 @@ namespace Reports {
             protected SP_PurchaseOrderDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn IDColumn {
-                get {
-                    return this.columnID;
-                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -399,6 +391,14 @@ namespace Reports {
             public global::System.Data.DataColumn CostColumn {
                 get {
                     return this.columnCost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn AliasColumn {
+                get {
+                    return this.columnAlias;
                 }
             }
             
@@ -479,10 +479,9 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SP_PurchaseOrderRow AddSP_PurchaseOrderRow(string ProductName, string MaterialName, string SubMaterialName, decimal OrderedQuantity, string Units, decimal Cost, string Currency, decimal Amount, int Tax, decimal Total, string Supplier) {
+            public SP_PurchaseOrderRow AddSP_PurchaseOrderRow(string ProductName, string MaterialName, string SubMaterialName, decimal OrderedQuantity, string Units, decimal Cost, string Alias, string Currency, decimal Amount, decimal Tax, decimal Total, string Supplier) {
                 SP_PurchaseOrderRow rowSP_PurchaseOrderRow = ((SP_PurchaseOrderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        null,
                         null,
                         ProductName,
                         MaterialName,
@@ -490,6 +489,7 @@ namespace Reports {
                         OrderedQuantity,
                         Units,
                         Cost,
+                        Alias,
                         Currency,
                         Amount,
                         Tax,
@@ -502,9 +502,9 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SP_PurchaseOrderRow FindByID(int ID) {
+            public SP_PurchaseOrderRow FindByOrderID(long OrderID) {
                 return ((SP_PurchaseOrderRow)(this.Rows.Find(new object[] {
-                            ID})));
+                            OrderID})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -524,7 +524,6 @@ namespace Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnID = base.Columns["ID"];
                 this.columnOrderID = base.Columns["OrderID"];
                 this.columnProductName = base.Columns["ProductName"];
                 this.columnMaterialName = base.Columns["MaterialName"];
@@ -532,6 +531,7 @@ namespace Reports {
                 this.columnOrderedQuantity = base.Columns["OrderedQuantity"];
                 this.columnUnits = base.Columns["Units"];
                 this.columnCost = base.Columns["Cost"];
+                this.columnAlias = base.Columns["Alias"];
                 this.columnCurrency = base.Columns["Currency"];
                 this.columnAmount = base.Columns["Amount"];
                 this.columnTax = base.Columns["Tax"];
@@ -542,8 +542,6 @@ namespace Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnID);
                 this.columnOrderID = new global::System.Data.DataColumn("OrderID", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnOrderID);
                 this.columnProductName = new global::System.Data.DataColumn("ProductName", typeof(string), null, global::System.Data.MappingType.Element);
@@ -558,24 +556,24 @@ namespace Reports {
                 base.Columns.Add(this.columnUnits);
                 this.columnCost = new global::System.Data.DataColumn("Cost", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCost);
+                this.columnAlias = new global::System.Data.DataColumn("Alias", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAlias);
                 this.columnCurrency = new global::System.Data.DataColumn("Currency", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCurrency);
                 this.columnAmount = new global::System.Data.DataColumn("Amount", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAmount);
-                this.columnTax = new global::System.Data.DataColumn("Tax", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnTax = new global::System.Data.DataColumn("Tax", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTax);
                 this.columnTotal = new global::System.Data.DataColumn("Total", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotal);
                 this.columnSupplier = new global::System.Data.DataColumn("Supplier", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSupplier);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnID}, true));
-                this.columnID.AutoIncrement = true;
-                this.columnID.AllowDBNull = false;
-                this.columnID.Unique = true;
+                                this.columnOrderID}, true));
                 this.columnOrderID.AutoIncrement = true;
                 this.columnOrderID.AllowDBNull = false;
                 this.columnOrderID.ReadOnly = true;
+                this.columnOrderID.Unique = true;
                 this.columnProductName.AllowDBNull = false;
                 this.columnProductName.MaxLength = 2147483647;
                 this.columnMaterialName.AllowDBNull = false;
@@ -586,10 +584,11 @@ namespace Reports {
                 this.columnUnits.AllowDBNull = false;
                 this.columnUnits.MaxLength = 10;
                 this.columnCost.AllowDBNull = false;
+                this.columnAlias.MaxLength = 2147483647;
                 this.columnCurrency.AllowDBNull = false;
                 this.columnCurrency.MaxLength = 50;
                 this.columnAmount.ReadOnly = true;
-                this.columnTax.ReadOnly = true;
+                this.columnTax.AllowDBNull = false;
                 this.columnTotal.ReadOnly = true;
                 this.columnSupplier.AllowDBNull = false;
                 this.columnSupplier.MaxLength = 2147483647;
@@ -735,17 +734,6 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int ID {
-                get {
-                    return ((int)(this[this.tableSP_PurchaseOrder.IDColumn]));
-                }
-                set {
-                    this[this.tableSP_PurchaseOrder.IDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public long OrderID {
                 get {
                     return ((long)(this[this.tableSP_PurchaseOrder.OrderIDColumn]));
@@ -823,6 +811,22 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Alias {
+                get {
+                    try {
+                        return ((string)(this[this.tableSP_PurchaseOrder.AliasColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Alias\' in table \'SP_PurchaseOrder\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_PurchaseOrder.AliasColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Currency {
                 get {
                     return ((string)(this[this.tableSP_PurchaseOrder.CurrencyColumn]));
@@ -850,14 +854,9 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Tax {
+            public decimal Tax {
                 get {
-                    try {
-                        return ((int)(this[this.tableSP_PurchaseOrder.TaxColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Tax\' in table \'SP_PurchaseOrder\' is DBNull.", e);
-                    }
+                    return ((decimal)(this[this.tableSP_PurchaseOrder.TaxColumn]));
                 }
                 set {
                     this[this.tableSP_PurchaseOrder.TaxColumn] = value;
@@ -893,6 +892,18 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsAliasNull() {
+                return this.IsNull(this.tableSP_PurchaseOrder.AliasColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetAliasNull() {
+                this[this.tableSP_PurchaseOrder.AliasColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsAmountNull() {
                 return this.IsNull(this.tableSP_PurchaseOrder.AmountColumn);
             }
@@ -901,18 +912,6 @@ namespace Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetAmountNull() {
                 this[this.tableSP_PurchaseOrder.AmountColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsTaxNull() {
-                return this.IsNull(this.tableSP_PurchaseOrder.TaxColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetTaxNull() {
-                this[this.tableSP_PurchaseOrder.TaxColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1094,6 +1093,7 @@ namespace Reports.OrderManagerDBDataSetForPOTableAdapters {
             tableMapping.ColumnMappings.Add("OrderedQuantity", "OrderedQuantity");
             tableMapping.ColumnMappings.Add("Units", "Units");
             tableMapping.ColumnMappings.Add("Cost", "Cost");
+            tableMapping.ColumnMappings.Add("Alias", "Alias");
             tableMapping.ColumnMappings.Add("Currency", "Currency");
             tableMapping.ColumnMappings.Add("Amount", "Amount");
             tableMapping.ColumnMappings.Add("Tax", "Tax");
