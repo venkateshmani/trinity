@@ -156,29 +156,30 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Per Unit Order Value:" Grid.Row="0" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" HorizontalAlignment="Right"/>
                 <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path =PerUnitOrderValue,StringFormat={}{0:#0.####}}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Margin="5,0,0,0" HorizontalAlignment="Left" >
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Text="INR"  Margin="5,0,0,0">
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Text="INR">
+                    <TextBlock Text="{Binding Path =PerUnitOrderValue,StringFormat={}{0:#0.####}}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" HorizontalAlignment="Left" >
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>
-                    </TextBlock>
+                    </TextBlock>                   
                 </StackPanel>
                 <TextBlock Text="Per Unit Total Consumption Cost:" Grid.Row="1" Grid.Column="0" Style="{StaticResource ProductInfoStyle}" Foreground="Gray" HorizontalAlignment="Right"/>
                 <StackPanel Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="{Binding Path=PerUnitTotalProductMaterialsCost, StringFormat={}{0:#0.####}}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Margin="5,0,0,0" HorizontalAlignment="Left" >
+                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Text="INR"  Margin="5,0,0,0">
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>
                     </TextBlock>
-                    <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Text="INR">
+                    <TextBlock Text="{Binding Path=PerUnitTotalProductMaterialsCost, StringFormat={}{0:#0.####}}" Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" HorizontalAlignment="Left" >
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>
                     </TextBlock>
+                   
                 </StackPanel>
             </Grid>
 
@@ -283,9 +284,14 @@
                                         <DataGridTemplateColumn x:Name="costPerUnitColumn" Width="0.15*" Header="Cost">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBox Text="{Binding CostPerUnitWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                    <Border BorderBrush="Silver" BorderThickness="1">
+                                                        <DockPanel LastChildFill="True" VerticalAlignment="Center">
+                                                            <TextBlock Text="{Binding CurrencyWrapper.Symbol}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2,0,1,0" Foreground="Black"></TextBlock>
+                                                            <TextBox Text="{Binding CostPerUnitWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                                  IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"/>
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"  Margin="0,0,1,0"  HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="Transparent"/>
+                                                        </DockPanel>
+                                                    </Border>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
@@ -386,7 +392,7 @@
                                                 <DataTemplate>
                                                     <StackPanel  VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
                                                         <TextBlock Text="CONSUMPTION"  HorizontalAlignment="Center"/>
-                                                        <TextBlock Text="COST" HorizontalAlignment="Center" />
+                                                        <TextBlock Text="COST (INR)" HorizontalAlignment="Center" />
                                                     </StackPanel>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.HeaderTemplate>

@@ -55,6 +55,7 @@ namespace ordermanager.DatabaseModel
                 SelectOrAddCurrencyConversion();
                 CalculateItemCost();
                 OnPropertyChanged("CurrencyValueInINR");
+                OnPropertyChanged("CurrencyWrapper");
             }
         }
 
