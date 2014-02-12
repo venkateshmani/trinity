@@ -93,10 +93,7 @@ namespace ordermanager.Views.UserControls
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (Persist(false))
-            {
-                InformUser("Saved Successfully !!");
-            }
+            Persist(false);
         }
 
         private void InformUser(string message)

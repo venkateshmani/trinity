@@ -47,14 +47,15 @@ namespace ordermanager
                 }
 
                 tbPassword.Password = "v1";
-                LogIn();
+                //LogIn();
         }
 
+        Task dbInitializingTask = null;
         void LoginScreen_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (this.IsVisible && DBResources.Instance != null)
+            if (this.IsVisible)
             {
-                DBResources.Instance.ReInstanceDbContext();
+                dbInitializingTask = Task.Factory.StartNew(() => DBResources.Instance.ReInstanceDbContext());
             }
         }
 
@@ -65,6 +66,7 @@ namespace ordermanager
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+            dbInitializingTask.Wait();
             LogIn();
         }
 

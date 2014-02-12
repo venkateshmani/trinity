@@ -56,6 +56,14 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public DBResources DBResources
+        {
+            get
+            {
+                return DBResources.Instance;
+            }
+        }
+
         public bool SetOrder(Order order)
         {
             if (m_Order != order)

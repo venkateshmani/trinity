@@ -40,7 +40,8 @@ namespace ordermanager.Views.UserControls
 
         void ViewOrdersControl_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel = new ViewOrdersControlViewModel(ShowAllOrders);
+            if(ViewModel == null)
+                ViewModel = new ViewOrdersControlViewModel(ShowAllOrders);
         }
 
         CollectionViewSource ordersCollectionViewSource = null;
@@ -164,6 +165,7 @@ namespace ordermanager.Views.UserControls
             if (OnOrderClick != null && lvOrders.SelectedItem != null)
             {
                 OnOrderClick(lvOrders.SelectedItem);
+                DBResources.Instance.LastUpdated = null; //Reset
             }
         }
 

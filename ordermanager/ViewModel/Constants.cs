@@ -27,7 +27,7 @@ namespace ordermanager.ViewModel
                 endYear = currentYear.ToString();
             }
 
-            return string.Format("{0}/TCIPL/{1}/{2}-{3}", customerCode, poUniqueNumber, startYear, endYear);
+            return string.Format("TCIPL/{0}-{1}/{2}/{3}",startYear, endYear, customerCode, poUniqueNumber);
         }
 
         public static string GetInvoiceNumber(Order order)

@@ -25,6 +25,14 @@ namespace ordermanager.ViewModel
             }
         }
 
+        public DBResources DBResources
+        {
+            get
+            {
+                return DBResources.Instance;
+            }
+        }
+
         public OrderProduct SelectedProduct
         {
             get { return m_SelectedProduct; }

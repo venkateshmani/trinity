@@ -120,13 +120,8 @@
                 </StackPanel>
 
                 <TextBlock Text="Purchase Order Date :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="1" />
-                <DatePicker x:Name="poDate" Width="150" 
-                                    Margin="5" 
-                                    Grid.Row="1" Grid.Column="1"
-                                    SelectedDate="{Binding PurchaseOrder.PurchaseOrderDateWrapper, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                    HorizontalAlignment="Left"
-                                    Controls:TextboxHelper.Watermark="Select a date"
-                                    IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" Height="26" VerticalAlignment="Bottom" />
+                <TextBlock Text="{Binding  PurchaseOrder.PurchaseOrderDateWrapper, StringFormat=dd/MM/yy}" Margin="5" 
+                                    Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
 
                 <TextBlock Text="Purchase Order No. :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" />
                 <TextBlock Text="{Binding PurchaseOrder.PurchaseOrderNumberWrapper}" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" />

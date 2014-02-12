@@ -136,11 +136,6 @@ namespace ordermanager.Views.UserControls
                 string message = string.Format("Failed to Save !. Fill in the highlighted fields and Save");
                 InformUser(message);
             }
-            else
-            {
-                string message = string.Format("Successfully Saved !");
-                InformUser(message);
-            }
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)

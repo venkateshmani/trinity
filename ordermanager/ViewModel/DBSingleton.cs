@@ -53,6 +53,37 @@ namespace ordermanager.ViewModel
             _DBSingleton = new DBResources();
         }
 
+        public string LastUpdatedStatusString
+        {
+            get
+            {
+                string statusString = string.Empty;
+                if (LastUpdated != null)
+                {
+                    statusString = "Last saved at " + LastUpdated.Value.ToLongTimeString();
+                }
+
+                return statusString;
+            }
+        }
+
+
+        private DateTime? m_LastUpdated = null;
+        public DateTime? LastUpdated
+        {
+            get
+            {
+                return m_LastUpdated;
+            }
+            set
+            {
+                m_LastUpdated = value;
+                OnPropertyChanged("LastUpdated");
+                OnPropertyChanged("LastUpdatedStatusString");
+            }
+        }
+        
+
         #region Supporting Collections
 
         #region Companies
@@ -773,6 +804,7 @@ namespace ordermanager.ViewModel
             {
                 AttachTheMissingNavigationProperties();
                 dbContext.SaveChanges();
+                LastUpdated = GetServerTime(true);
                 return true;
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException e)
@@ -802,10 +834,17 @@ namespace ordermanager.ViewModel
             dbContext.Dispose();
         }
 
+
         private DateTime? cachedDateTime = null;
+
         public DateTime GetServerTime()
         {
-            if (cachedDateTime == null)
+            return GetServerTime(false);
+        }
+
+        public DateTime GetServerTime(bool refetch)
+        {
+            if (cachedDateTime == null || refetch)
             {
                 List<DateTime?> serverTime = DBResources.Instance.Context.SP_GetServerTime().ToList<DateTime?>();
                 cachedDateTime = serverTime[0].GetValueOrDefault(DateTime.Now);
@@ -853,27 +892,24 @@ namespace ordermanager.ViewModel
             private set;
         }
 
+        
         public LoginResult AuthenticateUser(string userName, string password)
         {
-            List<User> users = dbContext.Users.ToList();
-            if (users != null && users.Count > 0)
+            User user = dbContext.Users.Where(u => u.UserName == userName).Select(u => u)
+                                                        .FirstOrDefault();
+            if (user != null)
             {
-                User user = dbContext.Users.Where(u => u.UserName == userName).Select(u => u)
-                                                         .FirstOrDefault();
-                if (user != null)
+                string passwordValueInDatabase = user.Password;
+                if (user.Password == password || passwordValueInDatabase.Decrypt() == password)  //Later condition is just only for development
                 {
-                    string passwordValueInDatabase = user.Password;
-                    if (user.Password == password || passwordValueInDatabase.Decrypt() == password)  //Later condition is just only for development
-                    {
-                        CurrentUser = user;
-                        return new LoginResult() { Authenticated = true, NeedPasswordReset = (passwordValueInDatabase == user.UserName) };
-                    }
-                    else
-                        return new LoginResult() { Authenticated = false, Message = "Authentication failed." };
-
+                    CurrentUser = user;
+                    return new LoginResult() { Authenticated = true, NeedPasswordReset = (passwordValueInDatabase == user.UserName) };
                 }
-                return new LoginResult() { Authenticated = false, Message = "User not found" };
+                else
+                    return new LoginResult() { Authenticated = false, Message = "Authentication failed." };
+
             }
+
             return new LoginResult() { Authenticated = false, Message = "User not found" };
         }
 

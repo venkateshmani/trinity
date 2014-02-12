@@ -38,6 +38,7 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                 {
                     m_PurchaseOrder = new PurchaseOrder();
                     m_PurchaseOrder.PurchaseOrderStatusID = 1;
+                    m_PurchaseOrder.PurchaseOrderDateWrapper = DBResources.Instance.GetServerTime();
                     m_PurchaseOrder.PropertyChanged += m_PurchaseOrder_PropertyChanged;
                 }
                 return m_PurchaseOrder;

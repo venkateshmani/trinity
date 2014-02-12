@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -212,6 +213,7 @@ namespace ordermanager.Views.UserControls
         void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateView();
+            e.Handled = true;
         }
 
         private void Button_PreviewMouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
