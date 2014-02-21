@@ -270,6 +270,19 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
 
                 SetUIAccesibility(PurchaseOrderState.Approved);
             }
+            else if (positiveBtn.Content.ToString() == "PDF")
+            {
+                PurchaseOrderPDFGenerator pdfGenerator = new PurchaseOrderPDFGenerator(ViewModel.PurchaseOrder);
+                string generatedFile = pdfGenerator.GeneratePurchaseOrder();
+                if (string.IsNullOrEmpty(generatedFile))
+                {
+                    InformUser("Failed to Generate !");
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(generatedFile);
+                }
+            }
         }
 
         private void SetUIAccesibility(PurchaseOrderState state)

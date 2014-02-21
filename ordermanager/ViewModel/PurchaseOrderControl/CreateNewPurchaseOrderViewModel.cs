@@ -20,19 +20,6 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
             PurchaseOrder = po;
         }
 
-        private Order m_Order = null;
-        public Order Order
-        {
-            get
-            {
-                return m_Order;
-            }
-            set
-            {
-                m_Order = value;
-            }
-        }
-
         private bool m_IsReadOnly = false;
         public bool IsReadOnly
         {

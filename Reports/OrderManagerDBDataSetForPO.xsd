@@ -46,7 +46,7 @@
   <xs:element name="OrderManagerDBDataSetForPO" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="OrderManagerDBDataSetForPO" msprop:Generator_UserDSName="OrderManagerDBDataSetForPO">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="SP_PurchaseOrder" msprop:Generator_TableClassName="SP_PurchaseOrderDataTable" msprop:Generator_TableVarName="tableSP_PurchaseOrder" msprop:Generator_TablePropName="SP_PurchaseOrder" msprop:Generator_RowDeletingName="SP_PurchaseOrderRowDeleting" msprop:Generator_RowChangingName="SP_PurchaseOrderRowChanging" msprop:Generator_RowEvHandlerName="SP_PurchaseOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="SP_PurchaseOrderRowDeleted" msprop:Generator_UserTableName="SP_PurchaseOrder" msprop:Generator_RowChangedName="SP_PurchaseOrderRowChanged" msprop:Generator_RowEvArgName="SP_PurchaseOrderRowChangeEvent" msprop:Generator_RowClassName="SP_PurchaseOrderRow">
+        <xs:element name="SP_PurchaseOrder" msprop:Generator_TableClassName="SP_PurchaseOrderDataTable" msprop:Generator_TableVarName="tableSP_PurchaseOrder" msprop:Generator_RowChangedName="SP_PurchaseOrderRowChanged" msprop:Generator_TablePropName="SP_PurchaseOrder" msprop:Generator_RowDeletingName="SP_PurchaseOrderRowDeleting" msprop:Generator_RowChangingName="SP_PurchaseOrderRowChanging" msprop:Generator_RowEvHandlerName="SP_PurchaseOrderRowChangeEventHandler" msprop:Generator_RowDeletedName="SP_PurchaseOrderRowDeleted" msprop:Generator_RowClassName="SP_PurchaseOrderRow" msprop:Generator_UserTableName="SP_PurchaseOrder" msprop:Generator_RowEvArgName="SP_PurchaseOrderRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="OrderID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_ColumnVarNameInTable="columnOrderID" msprop:Generator_ColumnPropNameInRow="OrderID" msprop:Generator_ColumnPropNameInTable="OrderIDColumn" msprop:Generator_UserColumnName="OrderID" type="xs:long" />
@@ -109,9 +109,5 @@
         </xs:element>
       </xs:choice>
     </xs:complexType>
-    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
-      <xs:selector xpath=".//mstns:SP_PurchaseOrder" />
-      <xs:field xpath="mstns:OrderID" />
-    </xs:unique>
   </xs:element>
 </xs:schema>

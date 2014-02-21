@@ -502,13 +502,6 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SP_PurchaseOrderRow FindByOrderID(long OrderID) {
-                return ((SP_PurchaseOrderRow)(this.Rows.Find(new object[] {
-                            OrderID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
                 SP_PurchaseOrderDataTable cln = ((SP_PurchaseOrderDataTable)(base.Clone()));
                 cln.InitVars();
@@ -568,12 +561,9 @@ namespace Reports {
                 base.Columns.Add(this.columnTotal);
                 this.columnSupplier = new global::System.Data.DataColumn("Supplier", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSupplier);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnOrderID}, true));
                 this.columnOrderID.AutoIncrement = true;
                 this.columnOrderID.AllowDBNull = false;
                 this.columnOrderID.ReadOnly = true;
-                this.columnOrderID.Unique = true;
                 this.columnProductName.AllowDBNull = false;
                 this.columnProductName.MaxLength = 2147483647;
                 this.columnMaterialName.AllowDBNull = false;

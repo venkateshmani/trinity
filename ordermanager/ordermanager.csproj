@@ -501,6 +501,7 @@
     <Compile Include="Views\UserControls\PurchaseOrderControls\PurchaseOrderMasterControl.xaml.cs">
       <DependentUpon>PurchaseOrderMasterControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\PurchaseOrderControl\PurchaseOrderPDFGenerator.cs" />
     <Compile Include="Views\UserControls\ViewOrdersControl.xaml.cs">
       <DependentUpon>ViewOrdersControl.xaml</DependentUpon>
     </Compile>
