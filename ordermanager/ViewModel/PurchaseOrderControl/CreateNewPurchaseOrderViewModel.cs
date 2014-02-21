@@ -8,12 +8,16 @@ using System.Threading.Tasks;
 
 namespace ordermanager.ViewModel.PurchaseOrderControl
 {
-    public class CreateNewPurchaseOrderViewModel
+    public class CreateNewPurchaseOrderViewModel : ViewModelBase
     {
         public CreateNewPurchaseOrderViewModel(Order order)
         {
             Order = order;
-            SelectedItems = new ObservableCollection<ProductMaterialItem>();
+        }
+
+        public CreateNewPurchaseOrderViewModel(Order order, PurchaseOrder po) : this(order)
+        {
+            PurchaseOrder = po;
         }
 
         private Order m_Order = null;
@@ -26,6 +30,33 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
             set
             {
                 m_Order = value;
+            }
+        }
+
+        private bool m_IsReadOnly = false;
+        public bool IsReadOnly
+        {
+            get
+            {
+                if (PurchaseOrder.Approval != null)
+                {
+                    if (PurchaseOrder.Approval.IsApproved == null || PurchaseOrder.Approval.IsApproved == true)
+                    {
+                        m_IsReadOnly = true;
+                    }
+                    else
+                    {
+                        m_IsReadOnly = false;
+                    }
+                }
+
+
+                return m_IsReadOnly;
+            }
+            set
+            {
+                m_IsReadOnly = value;
+                OnPropertyChanged("IsReadOnly");
             }
         }
 
@@ -42,6 +73,12 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                     m_PurchaseOrder.PropertyChanged += m_PurchaseOrder_PropertyChanged;
                 }
                 return m_PurchaseOrder;
+            }
+            set
+            {
+                m_PurchaseOrder = value;
+                if(m_PurchaseOrder != null)
+                    m_PurchaseOrder.PropertyChanged += m_PurchaseOrder_PropertyChanged; 
             }
         }
 
@@ -84,15 +121,22 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
         {
             get
             {
+                if (m_SelectedItems == null)
+                {
+                    foreach (var item in PurchaseOrder.ProductMaterialItems)
+                    {
+                        item.IsSelectedToGeneratePO = true;
+                    }
+                    m_SelectedItems = new ObservableCollection<ProductMaterialItem>(PurchaseOrder.ProductMaterialItems);
+                }
+
                 return m_SelectedItems;
             }
             set
             {
                 m_SelectedItems = value;
             }
-
         }
-        
 
         void purchasableMaterial_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -105,6 +149,7 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                 }
                 else
                 {
+                    item.PurchaseOrder = null;
                     SelectedItems.Remove(item);
                 }
             }

@@ -28,6 +28,8 @@ namespace ordermanager.DatabaseModel
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Approval> Approvals { get; set; }
+        public DbSet<ApprovalEntityType> ApprovalEntityTypes { get; set; }
         public DbSet<Asset> Assets { get; set; }
         public DbSet<AssetCategory> AssetCategories { get; set; }
         public DbSet<AssetName> AssetNames { get; set; }

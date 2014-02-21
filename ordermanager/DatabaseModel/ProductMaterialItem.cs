@@ -30,11 +30,13 @@ namespace ordermanager.DatabaseModel
         public Nullable<int> SupplierID { get; set; }
         public Nullable<System.DateTime> LastPOGeneratedOn { get; set; }
         public decimal TaxInINR { get; set; }
+        public Nullable<long> PurchaseOrderID { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual Currency Currency { get; set; }
         public virtual ICollection<OrderedItem> OrderedItems { get; set; }
         public virtual ProductMaterial ProductMaterial { get; set; }
+        public virtual PurchaseOrder PurchaseOrder { get; set; }
         public virtual SubMaterial SubMaterial { get; set; }
         public virtual UnitsOfMeasurement UnitsOfMeasurement { get; set; }
     }

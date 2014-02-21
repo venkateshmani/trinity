@@ -41,6 +41,7 @@ namespace ordermanager.DatabaseModel
         public bool CanModifyGRN { get; set; }
         public bool CanModifyJobOrder { get; set; }
         public bool CanAddSubMaterialsCost { get; set; }
+        public bool CanApprovePurchaseOrder { get; set; }
     
         public virtual ICollection<OrderStatu> OrderStatus { get; set; }
         public virtual ICollection<User> Users { get; set; }

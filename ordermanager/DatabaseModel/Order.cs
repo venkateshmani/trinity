@@ -16,6 +16,7 @@ namespace ordermanager.DatabaseModel
     {
         public Order()
         {
+            this.Approvals = new HashSet<Approval>();
             this.CartonBoxes = new HashSet<CartonBox>();
             this.Histories = new HashSet<History>();
             this.Invoices = new HashSet<Invoice>();
@@ -43,6 +44,7 @@ namespace ordermanager.DatabaseModel
         public Nullable<System.DateTime> OrderConfirmedDate { get; set; }
         public string CustomerOrderNumber { get; set; }
     
+        public virtual ICollection<Approval> Approvals { get; set; }
         public virtual ICollection<CartonBox> CartonBoxes { get; set; }
         public virtual CommissionValueType CommissionValueType { get; set; }
         public virtual Company Company { get; set; }

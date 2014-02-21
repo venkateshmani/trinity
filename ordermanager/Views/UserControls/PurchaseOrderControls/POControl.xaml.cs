@@ -27,9 +27,11 @@ namespace ordermanager.Views.UserControls
     public partial class POControl : System.Windows.Controls.UserControl
     {
         private BackgroundWorker m_POGenerator = null;
+        private Reports.PurchaseOrderReportControl purchaseOrderReportControl = null;
         public POControl()
         {
             InitializeComponent();
+            purchaseOrderReportControl = new Reports.PurchaseOrderReportControl();
             this.IsVisibleChanged += POControl_IsVisibleChanged;
             m_POGenerator = new BackgroundWorker();
             m_POGenerator.WorkerReportsProgress = true;
@@ -37,7 +39,7 @@ namespace ordermanager.Views.UserControls
             m_POGenerator.DoWork += m_POGenerator_DoWork;
             m_POGenerator.WorkerSupportsCancellation = true;
             m_POGenerator.RunWorkerCompleted += m_POGenerator_RunWorkerCompleted;
-            webBrowser.Navigate("about:blank");
+         //   webBrowser.Navigate("about:blank");
         }
 
         void POControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -51,7 +53,7 @@ namespace ordermanager.Views.UserControls
             }
             else
             {
-                webBrowser.Navigate("about:blank");
+                //webBrowser.Navigate("about:blank");
             }
         }
 
@@ -84,24 +86,26 @@ namespace ordermanager.Views.UserControls
             PurchaseOrder poDetails = supplierList.SelectedItem as PurchaseOrder;
             if (poDetails != null && Order != null)
             {
-                if (poDetails.PurchaseOrderDateWrapper == null)
-                    poDetails.PurchaseOrderDateWrapper = DateTime.Now;
+                poEditControl.SetOrder(poDetails.Order, poDetails);
+                
+                //if (poDetails.PurchaseOrderDateWrapper == null)
+                //    poDetails.PurchaseOrderDateWrapper = DateTime.Now;
 
-                string tempFilePathForPdf = System.IO.Path.Combine(
-                                             System.IO.Path.GetTempPath(), "OM_PurchaseOrder-" + poDetails.PurchaseOrderNumber.Replace("/", "_") + ".pdf");
-                string lastOpenedPdfFile = string.Empty;
+                //string tempFilePathForPdf = System.IO.Path.Combine(
+                //                             System.IO.Path.GetTempPath(), "OM_PurchaseOrder-" + poDetails.PurchaseOrderNumber.Replace("/", "_") + ".pdf");
+                //string lastOpenedPdfFile = string.Empty;
 
-                if (GeneratePurchaseOrder(poDetails, tempFilePathForPdf))
-                {
-                    webBrowser.Source = new Uri(tempFilePathForPdf);
-                }
+                //if (GeneratePurchaseOrder(poDetails, tempFilePathForPdf))
+                //{
+                //    webBrowser.Source = new Uri(tempFilePathForPdf);
+                //}
 
-                if (System.IO.File.Exists(lastOpenedPdfFile))
-                {
-                    System.IO.File.Delete(lastOpenedPdfFile);
-                }
+                //if (System.IO.File.Exists(lastOpenedPdfFile))
+                //{
+                //    System.IO.File.Delete(lastOpenedPdfFile);
+                //}
 
-                lastOpenedPdfFile = tempFilePathForPdf;
+                //lastOpenedPdfFile = tempFilePathForPdf;
             }
         }
 

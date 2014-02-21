@@ -30,7 +30,5 @@ namespace ordermanager.DatabaseModel
         public virtual ICollection<ProductMaterialItem> ProductMaterialItems { get; set; }
         public virtual ICollection<ProductMaterial> ProductMaterials { get; set; }
         public virtual ICollection<SubMaterial> SubMaterials { get; set; }
-        public virtual UnitsOfMeasurement UnitsOfMeasurement1 { get; set; }
-        public virtual UnitsOfMeasurement UnitsOfMeasurement2 { get; set; }
     }
 }

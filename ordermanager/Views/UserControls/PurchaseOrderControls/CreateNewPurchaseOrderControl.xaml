@@ -42,6 +42,7 @@
             <Converters:FlipBoolValueConverter x:Key="FlipBoolValueConverter"/>
             <Converters:Subractor x:Key="subractor"/>
             <Converters:HasErrorToVisibilityConverter x:Key="hasErrorToVisibilityConverter" />
+            <Converters:ReadOnlyToVisibilityConverter x:Key="readOnlyToVisibilityConverter" />
             <DataProviders:DataProvider x:Key="DataProvider" />
             <Style x:Key="inLineTextBlockStyle" TargetType="TextBlock">
                 <Setter Property="VerticalAlignment" Value="Center"/>
@@ -86,13 +87,14 @@
                 
                 <TextBlock Text="Supplier :"  Style="{StaticResource inLineTextBlockStyle}" Grid.Row="0" Grid.Column="0" />
                 <StackPanel  Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-                    <ComboBox x:Name="supplierComboBox" Width="300" Margin="5" 
+                    <ComboBox x:Name="supplierComboBox" Width="200" Margin="5" 
                               ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
                               DisplayMemberPath="Name"
                               IsEditable="True"
                               SelectedItem="{Binding PurchaseOrder.Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                               SelectionChanged="supplierComboBox_SelectionChanged_1"
-                              IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" />
+                              IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
+                              IsReadOnly="{Binding IsReadOnly}" />
 
                     <Button Width="28"
                         Height="28"
@@ -137,41 +139,41 @@
                 <TextBlock Text="{Binding PurchaseOrder.PurchaseOrderNumberWrapper}" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" />
                 
                 <TextBlock Text="Price Terms :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="3" />
-                <TextBox Text="{Binding PurchaseOrder.PriceTerms}" Width="301" Margin="5,5,0,5"
+                <TextBox Text="{Binding PurchaseOrder.PriceTerms}" Width="200" Margin="5,5,0,5"
                          Height="60" TextWrapping="Wrap"
                          AcceptsReturn="True"
-                         Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" />
+                         Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
 
                 <TextBlock Text="Freigt :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="4" />
-                <TextBox Text="{Binding PurchaseOrder.Freigt}" Width="301" Margin="5,5,0,5"
+                <TextBox Text="{Binding PurchaseOrder.Freigt}" Width="200" Margin="5,5,0,5"
                          Height="60" TextWrapping="Wrap"
                          AcceptsReturn="True"
-                         Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" />
+                         Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
 
                 <TextBlock Text="Payment Terms :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="5" />
-                <TextBox Text="{Binding PurchaseOrder.PaymentTerms}" Width="301" Margin="5,5,0,5"
+                <TextBox Text="{Binding PurchaseOrder.PaymentTerms}" Width="200" Margin="5,5,0,5"
                          Height="60" TextWrapping="Wrap"
                          AcceptsReturn="True"
-                         Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" />
+                         Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
 
                 <TextBlock Text="Delivery Date :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="6" />
-                <TextBox Text="{Binding PurchaseOrder.DeliveryDate}" Width="301" Margin="5,5,0,5"
+                <TextBox Text="{Binding PurchaseOrder.DeliveryDate}" Width="200" Margin="5,5,0,5"
                          Height="60" TextWrapping="Wrap"
                          AcceptsReturn="True"
-                         Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" />
+                         Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
 
 
                 <TextBlock Text="Quality Specifications :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="7" />
-                <TextBox Text="{Binding PurchaseOrder.QualitySpecifications}" Width="301" Margin="5,5,0,5"
+                <TextBox Text="{Binding PurchaseOrder.QualitySpecifications}" Width="200" Margin="5,5,0,5"
                          Height="60" TextWrapping="Wrap"
                          AcceptsReturn="True"
-                         Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" />
+                         Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
 
                 <TextBlock Text="Quantity Allowance :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="8" />
-                <TextBox Text="{Binding PurchaseOrder.QuantityAllowance}" Width="301" Margin="5,5,0,5"
+                <TextBox Text="{Binding PurchaseOrder.QuantityAllowance}" Width="200" Margin="5,5,0,5"
                          Height="60" TextWrapping="Wrap"
                          AcceptsReturn="True"
-                         Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" />
+                         Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
 
 
             </Grid>
@@ -183,7 +185,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Button Content="Choose Items" x:Name="btnChooseItems" Width="125" Height="30" Foreground="White" Margin="10,5,5,5" ToolTip="Choose Items" HorizontalAlignment="Left"
-                       Click="btnChooseItems_Click_1" >
+                       Click="btnChooseItems_Click_1">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
@@ -273,12 +275,12 @@
                 </StackPanel>
             </Grid>
             <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">
-                <Button Content="Generate" x:Name="btnGeneratePO" Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="btnGeneratePO_Click_1">
+                <Button Content="Generate" x:Name="positiveBtn" Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="positiveBtn_Click_1">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </Button.Background>
                 </Button>
-                <Button Content="Discard" x:Name="btnDiscard" Width="100" Height="30" Margin="5" Foreground="White"  ToolTip="Discard Invoice" HorizontalAlignment="Left" Click="btnDiscard_Click">
+                <Button Content="Discard" x:Name="negativeBtn" Width="100" Height="30" Margin="5" Foreground="White"  ToolTip="Discard Invoice" HorizontalAlignment="Left" Click="negativeBtn_Click_1">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource ValidationColor5}" />
                     </Button.Background>

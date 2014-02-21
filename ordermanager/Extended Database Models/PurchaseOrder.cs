@@ -27,11 +27,16 @@ namespace ordermanager.DatabaseModel
         [TermsAndConditionsAttribute()]
         public string PriceTerms
         {
-            get { return m_PriceTerms; }
+            get 
+            {
+                if (m_PriceTerms == null)
+                    SeperateTermsAndConditions();
+                return m_PriceTerms; 
+            }
             set 
             { 
                 m_PriceTerms = value;
-                CollateTermsAndCondtions();
+                CollateTermsAndConditions();
                 ValidateTermsAndConditions();
                 OnPropertyChanged("PriceTerms");
             }
@@ -42,11 +47,17 @@ namespace ordermanager.DatabaseModel
         [TermsAndConditionsAttribute()]
         public string Freigt
         {
-            get { return m_Freigt; }
+            get
+            {
+                if(m_Freigt == null)
+                    SeperateTermsAndConditions();
+
+                return m_Freigt; 
+            }
             set 
             {
                 m_Freigt = value;
-                CollateTermsAndCondtions();
+                CollateTermsAndConditions();
                 ValidateTermsAndConditions();
                 OnPropertyChanged("Freigt");
             }
@@ -57,11 +68,17 @@ namespace ordermanager.DatabaseModel
         [TermsAndConditionsAttribute()]
         public string PaymentTerms
         {
-            get { return m_PaymentTerms; }
+            get 
+            {
+                if(m_PaymentTerms == null)
+                    SeperateTermsAndConditions();
+
+                return m_PaymentTerms; 
+            }
             set 
             {
                 m_PaymentTerms = value;
-                CollateTermsAndCondtions();
+                CollateTermsAndConditions();
                 ValidateTermsAndConditions();
                 OnPropertyChanged("PaymentTerms");
             }
@@ -72,11 +89,17 @@ namespace ordermanager.DatabaseModel
         [TermsAndConditionsAttribute()]
         public string DeliveryDate
         {
-            get { return m_DeliveryDate; }
+            get 
+            {
+                if(m_DeliveryDate == null)
+                    SeperateTermsAndConditions();
+
+                return m_DeliveryDate; 
+            }
             set 
             {
                 m_DeliveryDate = value;
-                CollateTermsAndCondtions();
+                CollateTermsAndConditions();
                 ValidateTermsAndConditions();
                 OnPropertyChanged("DeliveryDate");
             }
@@ -87,11 +110,17 @@ namespace ordermanager.DatabaseModel
         [TermsAndConditionsAttribute()]
         public string QualitySpecifications
         {
-            get { return m_QualitySpecifications; }
+            get 
+            {
+                if(m_QualitySpecifications == null)
+                    SeperateTermsAndConditions();
+
+                return m_QualitySpecifications; 
+            }
             set 
             {
                 m_QualitySpecifications = value;
-                CollateTermsAndCondtions();
+                CollateTermsAndConditions();
                 ValidateTermsAndConditions();
                 OnPropertyChanged("QualitySpecifications");
             }
@@ -102,39 +131,80 @@ namespace ordermanager.DatabaseModel
         [TermsAndConditionsAttribute()]
         public string QuantityAllowance
         {
-            get { return m_QuantityAllowance; }
+            get 
+            {
+                if(m_QuantityAllowance == null)
+                    SeperateTermsAndConditions();
+
+                return m_QuantityAllowance; 
+            }
             set 
             {
                 m_QuantityAllowance = value;
-                CollateTermsAndCondtions();
+                CollateTermsAndConditions();
                 ValidateTermsAndConditions();
                 OnPropertyChanged("QuantityAllowance");
             }
         }
 
 
-        private void CollateTermsAndCondtions()
+        private void CollateTermsAndConditions()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(priceTermsIdentificationKey);
             sb.AppendLine(PriceTerms);
+            sb.AppendLine();
 
             sb.AppendLine(freigtIdentificationKey);
             sb.AppendLine(Freigt);
+            sb.AppendLine();
 
             sb.AppendLine(paymentIdenficationKey);
             sb.AppendLine(PaymentTerms);
+            sb.AppendLine();
 
             sb.AppendLine(deliveryDateIdentificationKey);
             sb.AppendLine(DeliveryDate);
+            sb.AppendLine();
 
             sb.AppendLine(qualitySpecIdentificationKey);
             sb.AppendLine(QualitySpecifications);
+            sb.AppendLine();
 
             sb.AppendLine(quantityAllowanceIdentificationKey);
             sb.AppendLine(QuantityAllowance);
+            sb.AppendLine();
 
             TermsAndConditions = sb.ToString();
+        }
+
+        private void SeperateTermsAndConditions()
+        {
+            string termsAndConditions = TermsAndConditions;
+
+            m_QuantityAllowance = termsAndConditions.Substring(termsAndConditions.IndexOf(quantityAllowanceIdentificationKey));
+            termsAndConditions = termsAndConditions.Replace(QuantityAllowance, "");
+            m_QuantityAllowance = QuantityAllowance.Replace(quantityAllowanceIdentificationKey, "").Trim();
+
+            m_QualitySpecifications = termsAndConditions.Substring(termsAndConditions.IndexOf(qualitySpecIdentificationKey));
+            termsAndConditions = termsAndConditions.Replace(QualitySpecifications, "");
+            m_QualitySpecifications = QualitySpecifications.Replace(qualitySpecIdentificationKey, "").Trim();
+
+            m_DeliveryDate = termsAndConditions.Substring(termsAndConditions.IndexOf(deliveryDateIdentificationKey));
+            termsAndConditions = termsAndConditions.Replace(DeliveryDate, "");
+            m_DeliveryDate = DeliveryDate.Replace(deliveryDateIdentificationKey, "").Trim();
+
+            m_PaymentTerms = termsAndConditions.Substring(termsAndConditions.IndexOf(paymentIdenficationKey));
+            termsAndConditions = termsAndConditions.Replace(PaymentTerms, "");
+            m_PaymentTerms = PaymentTerms.Replace(paymentIdenficationKey, "").Trim();
+
+            m_Freigt = termsAndConditions.Substring(termsAndConditions.IndexOf(freigtIdentificationKey));
+            termsAndConditions = termsAndConditions.Replace(Freigt, "");
+            m_Freigt = Freigt.Replace(freigtIdentificationKey, "").Trim();
+
+            m_PriceTerms = termsAndConditions.Substring(termsAndConditions.IndexOf(priceTermsIdentificationKey));
+            termsAndConditions = termsAndConditions.Replace(PriceTerms, "");
+            m_PriceTerms = PriceTerms.Replace(priceTermsIdentificationKey, "").Trim();
         }
 
         private void ValidateTermsAndConditions()
@@ -174,7 +244,7 @@ namespace ordermanager.DatabaseModel
                 return false;
 
             string lowerCaseString = termsAndConditions.ToLower().Trim();
-            if(lowerCaseString == "na" || lowerCaseString == "N/A" || lowerCaseString == "not applicable"
+            if(lowerCaseString == "na" || lowerCaseString == @"n/a" || lowerCaseString == @"n\a" || lowerCaseString == "not applicable"
                 || lowerCaseString == "notapplicable")
             {
                 return false;

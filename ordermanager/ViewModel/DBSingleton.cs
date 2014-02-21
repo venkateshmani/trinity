@@ -817,7 +817,7 @@ namespace ordermanager.ViewModel
 
                 AttachTheMissingNavigationProperties();
                 LastUpdated = GetServerTime(true);
-                dbUpdateTask = Task.Factory.StartNew(() => dbContext.SaveChanges());
+                dbContext.SaveChanges();
                 return true;
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException e)
