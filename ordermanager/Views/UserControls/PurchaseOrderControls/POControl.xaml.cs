@@ -117,8 +117,14 @@ namespace ordermanager.Views.UserControls
                 string purchaseOrderNumber = GetPurchaseOrderNumber(po.Company);
                 string quoteNumber = GetQuoteNumber();
                 string quoteDate = GetQuoteDate(po.PurchaseOrderDate);
-                
-                purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, quoteNumber, quoteDate, po.TermsAndConditions);
+
+                purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, quoteNumber, quoteDate,
+                                                        po.PriceTerms,
+                                                        po.Freigt,
+                                                        po.PaymentTerms,
+                                                        po.DeliveryDate,
+                                                        po.QualitySpecifications,
+                                                        po.QuantityAllowance);
                 purchaseOrderReportControl.CreateReportAsPDF(po.PurchaseOrderID, filePath);
             }
             catch (Exception e)

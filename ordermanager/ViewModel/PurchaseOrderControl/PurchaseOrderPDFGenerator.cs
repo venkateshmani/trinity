@@ -48,12 +48,14 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                                              System.IO.Path.GetTempPath(), "OM_PurchaseOrder-" + PurchaseOrder.PurchaseOrderNumber.Replace("/", "_") + ".pdf");
 
 
-                if (!System.IO.File.Exists(fileName))
+                if (System.IO.File.Exists(fileName))
                 {
-                    if (!GeneratePurchaseOrder(fileName))
-                    {
-                        fileName = string.Empty;
-                    }
+                    System.IO.File.Delete(fileName);
+                }
+
+                if (!GeneratePurchaseOrder(fileName))
+                {
+                    fileName = string.Empty;
                 }
             }
             catch
@@ -73,7 +75,13 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                 string quoteNumber = GetQuoteNumber();
                 string quoteDate = GetQuoteDate(PurchaseOrder.PurchaseOrderDate);
 
-                purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, quoteNumber, quoteDate, PurchaseOrder.TermsAndConditions);
+                purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, quoteNumber, quoteDate,
+                                                         PurchaseOrder.PriceTerms, 
+                                                         PurchaseOrder.Freigt,
+                                                         PurchaseOrder.PaymentTerms,
+                                                         PurchaseOrder.DeliveryDate,
+                                                         PurchaseOrder.QualitySpecifications,
+                                                         PurchaseOrder.QuantityAllowance);
                 purchaseOrderReportControl.CreateReportAsPDF(PurchaseOrder.PurchaseOrderID, filePath);
             }
             catch (Exception e)
