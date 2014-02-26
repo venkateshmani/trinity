@@ -83,6 +83,7 @@ namespace ordermanager.Views.UserControls
 
         private void SupplierList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            poEditControl.Visibility = System.Windows.Visibility.Visible;
             PurchaseOrder poDetails = supplierList.SelectedItem as PurchaseOrder;
             if (poDetails != null && Order != null)
             {

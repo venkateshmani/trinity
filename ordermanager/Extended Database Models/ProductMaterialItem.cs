@@ -147,15 +147,24 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                if (Company == null)
-                    return "Not Generated";
-
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine(Company.Name);
 
-                if (LastPOGeneratedOn != null)
+                if (this.PurchaseOrder == null)
+                    sb.AppendLine("Not Generated");
+                else if (this.PurchaseOrder.Approval.IsApproved == null)
                 {
-                    sb.Append(LastPOGeneratedOn.Value.ToShortDateString());
+                    sb.AppendLine("Waiting for Approval");
+                    sb.Append(this.PurchaseOrder.Supplier.Name);
+                }
+                else if (this.PurchaseOrder.Approval.IsApproved == true)
+                {
+                    sb.AppendLine("Generated");
+                    sb.Append(this.PurchaseOrder.Supplier.Name);
+                }
+                else if (this.PurchaseOrder.Approval.IsApproved == false)
+                {
+                    sb.AppendLine("Rejected");
+                    sb.Append(this.PurchaseOrder.Supplier.Name);
                 }
 
                 return sb.ToString();
@@ -207,6 +216,9 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
+                if (this.PurchaseOrder != null)
+                    return false;
+
                 if( this.ProductMaterial != null && this.ProductMaterial.OrderProduct != null &&
                     this.ProductMaterial.OrderProduct.Order != null &&
                     this.ProductMaterial.OrderProduct.Order.OrderStatusID != (short)OrderStatusEnum.OrderConfirmed)

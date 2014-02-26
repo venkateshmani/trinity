@@ -115,7 +115,7 @@
                               HorizontalAlignment="Stretch">
                 <Reports:PurchaseOrderReportControl x:Name="purchaseOrderReportControl" Dock="Fill" />
             </WindowsFormsHost>-->
-            <PurchaseOrderControls:CreateNewPurchaseOrderControl x:Name="poEditControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+            <PurchaseOrderControls:CreateNewPurchaseOrderControl Visibility="Hidden" x:Name="poEditControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         </Grid>
         <Grid Grid.Row="2" Grid.ColumnSpan="3">
             <Rectangle Height="1" Fill="Gray" />

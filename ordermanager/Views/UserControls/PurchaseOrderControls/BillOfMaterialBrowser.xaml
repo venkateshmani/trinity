@@ -135,13 +135,6 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn x:Name="poStatus" Header=" PO Status " Width="0.3*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding POStatus, Mode=OneWay}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" IsReadOnly="True" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Border>
