@@ -49,6 +49,18 @@ namespace ordermanager.Views.PopUps
             maskableParent = parentWindow as IMaskable;
         }
 
+        public string Title
+        {
+            get
+            {
+                return titleText.Text;
+            }
+            set
+            {
+                titleText.Text = value;
+            }
+        }
+
         public string UpdateBtnText
         {
             get
@@ -58,6 +70,18 @@ namespace ordermanager.Views.PopUps
             set
             {
                 updateToDatabaseBtn.Content = value;
+            }
+        }
+
+        public bool IsReadOnly
+        {
+            get
+            {
+                return commentTextBox.IsReadOnly;
+            }
+            set
+            {
+                commentTextBox.IsReadOnly = value;
             }
         }
 
