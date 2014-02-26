@@ -316,6 +316,26 @@ namespace ordermanager.DatabaseModel
         }
 
 
+        public string POStatus
+        {
+            get
+            {
+                string status = string.Empty;
+                if (Approval != null)
+                {
+                    if (Approval.IsApproved == null)
+                        status = "Waiting for Approval";
+                    else if (Approval.IsApproved == true)
+                        status = "Approved";
+                    else if (Approval.IsApproved == false)
+                        status = "Rejected";
+                }
+
+                return status;
+            }
+        }
+
+
         public void Validate()
         {
             ValidateSupplier();
