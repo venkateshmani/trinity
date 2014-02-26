@@ -236,7 +236,10 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                     if (positiveBtn.Content.ToString() == "Generate")
                     {
                         SetUIAccesibility(PurchaseOrderState.Generated);
-                        InformUser("Purchase Order Successfully Created");
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("Purchase Order Successfully Created");
+                        sb.AppendLine("Submitted For Approval !.");
+                        InformUser(sb.ToString());
                         Reset();
                     }
                     else
@@ -300,6 +303,7 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                     btnChooseItems.Visibility = System.Windows.Visibility.Visible;
                     commentsBtn.Visibility = System.Windows.Visibility.Hidden;
                     editExistingSupplier.IsEnabled = true;
+                    poCurrencySelection.IsEnabled = true;
                     ViewModel.IsReadOnly = false;
                     break;
                 case PurchaseOrderState.Generated:
@@ -307,7 +311,7 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                     ViewModel.IsReadOnly = true;
                     positiveBtn.Content = "Approve";
                     negativeBtn.Content = "Reject";
-
+                    poCurrencySelection.IsEnabled = false;
                     btnChooseItems.Visibility = System.Windows.Visibility.Collapsed;
                     commentsBtn.Visibility = System.Windows.Visibility.Visible;
                     if (DBResources.Instance.CurrentUser.UserRole.CanApprovePurchaseOrder)
@@ -324,6 +328,7 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                 case PurchaseOrderState.Rejeted:
                     positiveBtn.Content = "Submit";
                     negativeBtn.Content = "Delete";
+                    poCurrencySelection.IsEnabled = true;
                     commentsBtn.Visibility = System.Windows.Visibility.Visible;
                     if (DBResources.Instance.CurrentUser.UserRole.CanGeneratePurchaseOrder)
                     {
@@ -343,6 +348,7 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                 case PurchaseOrderState.Approved:
                     positiveBtn.Content = "PDF";
                     negativeBtn.Content = "";
+                    poCurrencySelection.IsEnabled = false;
                     positiveBtn.Visibility = System.Windows.Visibility.Visible;
                     negativeBtn.Visibility = System.Windows.Visibility.Collapsed;
                     btnChooseItems.Visibility = System.Windows.Visibility.Collapsed;
@@ -359,6 +365,11 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
             cBox.IsReadOnly = true;
             cBox.Comment = ViewModel.PurchaseOrder.Approval.Comments;
             cBox.ShowDialog();
+        }
+
+        private void poCurrencySelection_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 

@@ -47,6 +47,27 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
             }
         }
 
+
+        private Currency m_POCurrency = null;
+        public Currency POCurrency
+        {
+            get
+            {
+                return m_POCurrency;
+            }
+            set
+            {
+                m_POCurrency = value;
+                PurchasableMaterials = null;
+                foreach (var item in SelectedItems)
+                {
+                    item.IsSelectedToGeneratePO = false;
+                }
+                OnPropertyChanged("POCurrency");
+            }
+        }
+
+
         private PurchaseOrder m_PurchaseOrder = null;
         public PurchaseOrder PurchaseOrder
         {
@@ -56,6 +77,7 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                 {
                     m_PurchaseOrder = new PurchaseOrder();
                     m_PurchaseOrder.PurchaseOrderStatusID = 1;
+                    POCurrency = DBResources.Instance.Context.Currencies.Find(1);
                     m_PurchaseOrder.PurchaseOrderDateWrapper = DBResources.Instance.GetServerTime();
                     m_PurchaseOrder.PropertyChanged += m_PurchaseOrder_PropertyChanged;
                 }
@@ -65,7 +87,13 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
             {
                 m_PurchaseOrder = value;
                 if(m_PurchaseOrder != null)
-                    m_PurchaseOrder.PropertyChanged += m_PurchaseOrder_PropertyChanged; 
+                    m_PurchaseOrder.PropertyChanged += m_PurchaseOrder_PropertyChanged;
+
+                var firstItem = value.ProductMaterialItems.FirstOrDefault();
+                if (firstItem != null)
+                {
+                    POCurrency = firstItem.Currency;
+                }
             }
         }
 
@@ -91,15 +119,22 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                         {
                             foreach (ProductMaterialItem purchasableMaterial in budgetMaterial.ProductMaterialItems)
                             {
-                                materialList.Add(purchasableMaterial);
-                                purchasableMaterial.PropertyChanged += purchasableMaterial_PropertyChanged;
-                                purchasableMaterial.CalculateItemCost();
+                                if (purchasableMaterial.CurrencyID == POCurrency.CurrencyID && (purchasableMaterial.PurchaseOrder == null || purchasableMaterial.PurchaseOrder.PurchaseOrderID == this.PurchaseOrder.PurchaseOrderID))
+                                {
+                                    materialList.Add(purchasableMaterial);
+                                    purchasableMaterial.PropertyChanged += purchasableMaterial_PropertyChanged;
+                                    purchasableMaterial.CalculateItemCost();
+                                }
                             }
                         }
                     }
                 }
 
                 return materialList;
+            }
+            private set
+            {
+                materialList = null;
             }
         }
 
@@ -132,15 +167,40 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                 ProductMaterialItem item = sender as ProductMaterialItem;
                 if (item.IsSelectedToGeneratePO)
                 {
+                    TotalPOValue += item.Cost;
                     SelectedItems.Add(item);
                 }
                 else
                 {
+                    TotalPOValue -= item.Cost;
                     item.PurchaseOrder = null;
                     SelectedItems.Remove(item);
                 }
             }
         }
+
+        private decimal m_TotalPOValue = -1;
+        public decimal TotalPOValue
+        {
+            get
+            {
+                if (m_TotalPOValue == -1)
+                {
+                    m_TotalPOValue = 0;
+                    foreach (var item in SelectedItems)
+                    {
+                        m_TotalPOValue += item.ItemCostWrapper;
+                    }
+                }
+                return m_TotalPOValue;
+            }
+            set
+            {
+                m_TotalPOValue = value;
+                OnPropertyChanged("TotalPOValue");
+            }
+        }
+
 
         public void ResetUserSelection()
         {
