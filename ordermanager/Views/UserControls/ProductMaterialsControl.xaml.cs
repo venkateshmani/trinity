@@ -148,37 +148,23 @@ namespace ordermanager.Views.UserControls
             }
         }
 
-        private bool Persist(bool isSubmit)
+        public bool Persist(bool isSubmit)
         {
-            if (m_ViewModel != null)
+            CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
+            if ((commentBox.ShowDialog() == true))
             {
-               
-                m_ViewModel.HasUserClickedSaveOrSubmit = true;
-                if (m_ViewModel.HasError)
+              
+                if (m_ViewModel.Save(isSubmit, commentBox.Comment))
                 {
-                    InformUser("Errors highlighted in red color !. Fix it and retry");
+                    btnAddNewItem.Visibility = System.Windows.Visibility.Hidden;
+                    materialsGrid.IsReadOnly = true;
+                    return true;
                 }
-                else
-                {
-                    if (isSubmit)
-                    {
-                        CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
-                        if ((commentBox.ShowDialog() == true))
-                        {
-                            if (m_ViewModel.Save(isSubmit, commentBox.Comment))
-                            {
-                                btnAddNewItem.Visibility = System.Windows.Visibility.Hidden;
-                                materialsGrid.IsReadOnly = true;
-                                return true;
-                            }
-                            return false;
-                        }
-                    }
-                    else
-                        return m_ViewModel.Save(isSubmit, "");
-                }
+                return false;
             }
-            return false;
+
+            return true;
+                  
         }
 
         private void AddNewExtraCostItem(object sender, RoutedEventArgs e)

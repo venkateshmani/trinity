@@ -210,6 +210,10 @@
             <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
             <End Role="OrderedItem" EntitySet="OrderedItem" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Approval" Association="OrderManagerDBModel.Store.FK_OrderProduct_Approval">
+            <End Role="Approval" EntitySet="Approval" />
+            <End Role="OrderProduct" EntitySet="OrderProduct" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderProduct_Currency" Association="OrderManagerDBModel.Store.FK_OrderProduct_Currency">
             <End Role="Currency" EntitySet="Currency" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
@@ -325,6 +329,10 @@
           <AssociationSet Name="FK_ProductMaterialItem_UnitsOfMeasurement" Association="OrderManagerDBModel.Store.FK_ProductMaterialItem_UnitsOfMeasurement">
             <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurement" />
             <End Role="ProductMaterialItem" EntitySet="ProductMaterialItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductMaterials_Approval" Association="OrderManagerDBModel.Store.FK_ProductMaterials_Approval">
+            <End Role="Approval" EntitySet="Approval" />
+            <End Role="ProductMaterials" EntitySet="ProductMaterials" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductMaterials_Currency" Association="OrderManagerDBModel.Store.FK_ProductMaterials_Currency">
             <End Role="Currency" EntitySet="Currency" />
@@ -692,6 +700,7 @@
           <Property Name="OrderValue" Type="decimal" Nullable="false" Scale="4" />
           <Property Name="ProductBreakUpID" Type="bigint" />
           <Property Name="TotalConsumptionCost" Type="decimal" Scale="4" />
+          <Property Name="ApprovalID" Type="bigint" />
         </EntityType>
         <EntityType Name="OrderReportCard">
           <Key>
@@ -840,6 +849,7 @@
           <Property Name="ConsumptionCost" Type="decimal" Scale="4" />
           <Property Name="OtherCostInINR" Type="decimal" Scale="4" />
           <Property Name="OtherCostName" Type="varchar" MaxLength="50" />
+          <Property Name="ApprovalID" Type="bigint" />
         </EntityType>
         <EntityType Name="ProductName">
           <Key>
@@ -1414,6 +1424,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderProduct_Approval">
+          <End Role="Approval" Type="OrderManagerDBModel.Store.Approval" Multiplicity="0..1" />
+          <End Role="OrderProduct" Type="OrderManagerDBModel.Store.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Approval">
+              <PropertyRef Name="ApprovalID" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="ApprovalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderProduct_Currency">
           <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="1" />
           <End Role="OrderProduct" Type="OrderManagerDBModel.Store.OrderProduct" Multiplicity="*" />
@@ -1762,6 +1784,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductMaterials_Approval">
+          <End Role="Approval" Type="OrderManagerDBModel.Store.Approval" Multiplicity="0..1" />
+          <End Role="ProductMaterials" Type="OrderManagerDBModel.Store.ProductMaterials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Approval">
+              <PropertyRef Name="ApprovalID" />
+            </Principal>
+            <Dependent Role="ProductMaterials">
+              <PropertyRef Name="ApprovalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProductMaterials_Currency">
           <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="0..1" />
           <End Role="ProductMaterials" Type="OrderManagerDBModel.Store.ProductMaterials" Multiplicity="*" />
@@ -2023,6 +2057,14 @@
           <AssociationSet Name="FK_Approval_Order" Association="OrderManagerDBModel.FK_Approval_Order">
             <End Role="Order" EntitySet="Orders" />
             <End Role="Approval" EntitySet="Approvals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderProduct_Approval" Association="OrderManagerDBModel.FK_OrderProduct_Approval">
+            <End Role="Approval" EntitySet="Approvals" />
+            <End Role="OrderProduct" EntitySet="OrderProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductMaterials_Approval" Association="OrderManagerDBModel.FK_ProductMaterials_Approval">
+            <End Role="Approval" EntitySet="Approvals" />
+            <End Role="ProductMaterials" EntitySet="ProductMaterials" />
           </AssociationSet>
           <AssociationSet Name="FK_PurchaseOrders_Approval" Association="OrderManagerDBModel.FK_PurchaseOrders_Approval">
             <End Role="Approval" EntitySet="Approvals" />
@@ -2349,6 +2391,8 @@
           <Property Name="Comments" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="ApprovalEntityType" Relationship="OrderManagerDBModel.FK_Approval_ApprovalEntityType" FromRole="Approval" ToRole="ApprovalEntityType" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_Approval_Order" FromRole="Approval" ToRole="Order" />
+          <NavigationProperty Name="OrderProducts" Relationship="OrderManagerDBModel.FK_OrderProduct_Approval" FromRole="Approval" ToRole="OrderProduct" />
+          <NavigationProperty Name="ProductMaterials" Relationship="OrderManagerDBModel.FK_ProductMaterials_Approval" FromRole="Approval" ToRole="ProductMaterials" />
           <NavigationProperty Name="PurchaseOrders" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Approval" FromRole="Approval" ToRole="PurchaseOrders" />
         </EntityType>
         <EntityType Name="ApprovalEntityType">
@@ -2718,6 +2762,8 @@
           <Property Name="OrderValue" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <Property Name="ProductBreakUpID" Type="Int64" />
           <Property Name="TotalConsumptionCost" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="ApprovalID" Type="Int64" />
+          <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_OrderProduct_Approval" FromRole="OrderProduct" ToRole="Approval" />
           <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_OrderProduct_Currency" FromRole="OrderProduct" ToRole="Currency" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_OrderProduct_Order" FromRole="OrderProduct" ToRole="Order" />
           <NavigationProperty Name="ProductBreakUp" Relationship="OrderManagerDBModel.FK_OrderProduct_ProductBreakUp" FromRole="OrderProduct" ToRole="ProductBreakUp" />
@@ -2910,6 +2956,8 @@
           <Property Name="ConsumptionCost" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="OtherCostInINR" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="OtherCostName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ApprovalID" Type="Int64" />
+          <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_ProductMaterials_Approval" FromRole="ProductMaterials" ToRole="Approval" />
           <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_ProductMaterials_Currency" FromRole="ProductMaterials" ToRole="Currency" />
           <NavigationProperty Name="MaterialName" Relationship="OrderManagerDBModel.FK_ProductMaterials_MaterialName" FromRole="ProductMaterials" ToRole="MaterialName" />
           <NavigationProperty Name="OrderProduct" Relationship="OrderManagerDBModel.FK_ProductMaterials_OrderProduct" FromRole="ProductMaterials" ToRole="OrderProduct" />
@@ -3119,6 +3167,30 @@
             </Principal>
             <Dependent Role="Approval">
               <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderProduct_Approval">
+          <End Role="Approval" Type="OrderManagerDBModel.Approval" Multiplicity="0..1" />
+          <End Role="OrderProduct" Type="OrderManagerDBModel.OrderProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Approval">
+              <PropertyRef Name="ApprovalID" />
+            </Principal>
+            <Dependent Role="OrderProduct">
+              <PropertyRef Name="ApprovalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductMaterials_Approval">
+          <End Role="Approval" Type="OrderManagerDBModel.Approval" Multiplicity="0..1" />
+          <End Role="ProductMaterials" Type="OrderManagerDBModel.ProductMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Approval">
+              <PropertyRef Name="ApprovalID" />
+            </Principal>
+            <Dependent Role="ProductMaterials">
+              <PropertyRef Name="ApprovalID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4390,6 +4462,7 @@
                 <ScalarProperty Name="OrderValue" ColumnName="OrderValue" />
                 <ScalarProperty Name="ProductBreakUpID" ColumnName="ProductBreakUpID" />
                 <ScalarProperty Name="TotalConsumptionCost" ColumnName="TotalConsumptionCost" />
+                <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4552,6 +4625,7 @@
                 <ScalarProperty Name="ConsumptionCost" ColumnName="ConsumptionCost" />
                 <ScalarProperty Name="OtherCostInINR" ColumnName="OtherCostInINR" />
                 <ScalarProperty Name="OtherCostName" ColumnName="OtherCostName" />
+                <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

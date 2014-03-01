@@ -31,7 +31,9 @@ namespace ordermanager.DatabaseModel
         public decimal OrderValue { get; set; }
         public Nullable<long> ProductBreakUpID { get; set; }
         public Nullable<decimal> TotalConsumptionCost { get; set; }
+        public Nullable<long> ApprovalID { get; set; }
     
+        public virtual Approval Approval { get; set; }
         public virtual Currency Currency { get; set; }
         public virtual Order Order { get; set; }
         public virtual ProductBreakUp ProductBreakUp { get; set; }

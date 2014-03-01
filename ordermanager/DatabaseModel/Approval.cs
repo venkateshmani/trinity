@@ -16,6 +16,8 @@ namespace ordermanager.DatabaseModel
     {
         public Approval()
         {
+            this.OrderProducts = new HashSet<OrderProduct>();
+            this.ProductMaterials = new HashSet<ProductMaterial>();
             this.PurchaseOrders = new HashSet<PurchaseOrder>();
         }
     
@@ -27,6 +29,8 @@ namespace ordermanager.DatabaseModel
     
         public virtual ApprovalEntityType ApprovalEntityType { get; set; }
         public virtual Order Order { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+        public virtual ICollection<ProductMaterial> ProductMaterials { get; set; }
         public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
     }
 }

@@ -420,6 +420,7 @@ namespace ordermanager.DatabaseModel
 
         public bool ValidateProductMaterials()
         {
+
             bool hasError = false;
             if (HasUserClickedSaveOrSubmit)
             {
@@ -431,7 +432,6 @@ namespace ordermanager.DatabaseModel
 
             foreach (var material in ProductMaterialsWrapper)
             {
-                material.IsValidating = true;
                 material.ValidateMaterialName();
                 material.ValidateUOM();
                 material.ValidateConsumtpion();

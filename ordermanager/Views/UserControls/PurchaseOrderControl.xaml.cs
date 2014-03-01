@@ -198,17 +198,31 @@ namespace ordermanager.Views.UserControls
             {
                 if (m_ViewModel.Validate())
                 {
-                    if (isSubmit)
+                    CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
+                    if ((commentBox.ShowDialog() == true))
                     {
-                        CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
-                        if ((commentBox.ShowDialog() == true))
+                        foreach (OrderProduct product in m_ViewModel.Order.OrderProducts)
                         {
-                            return m_ViewModel.Save(isSubmit, commentBox.Comment);
+                            foreach (ProductMaterial material in product.ProductMaterials)
+                            {
+                                if (material.Approval == null && material.IsBOMCostExceedsBudget())
+                                {
+                                    Approval approval = new Approval();
+                                    approval.ApprovalEntityTypeID = 1;
+                                    approval.Comments = "Submitted for Approval by " + DBResources.Instance.CurrentUser.UserName + " at " + DateTime.Now.ToString();
+                                    approval.Order = m_ViewModel.Order;
+                                    material.Approval = approval;
+                                }
+                            }
                         }
-                        return false;
+
+                        bool result = m_ViewModel.Save(isSubmit, commentBox.Comment);
+                        if (result)
+                            poMaterialsDetails.SetUIAccesibility();
+
+                        return result;
                     }
-                    else
-                        return m_ViewModel.Save(isSubmit, "");
+                    return false;
                 }
                 return false;
             }

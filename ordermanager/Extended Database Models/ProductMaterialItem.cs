@@ -219,6 +219,11 @@ namespace ordermanager.DatabaseModel
                 if (this.PurchaseOrder != null)
                     return false;
 
+                if (this.ProductMaterial.Approval != null && (this.ProductMaterial.Approval.IsApproved == null || 
+                                                              this.ProductMaterial.Approval.IsApproved.Value == true))
+                    return false;
+
+
                 if( this.ProductMaterial != null && this.ProductMaterial.OrderProduct != null &&
                     this.ProductMaterial.OrderProduct.Order != null &&
                     this.ProductMaterial.OrderProduct.Order.OrderStatusID != (short)OrderStatusEnum.OrderConfirmed)

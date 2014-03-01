@@ -38,9 +38,57 @@ namespace ordermanager.Views.UserControls
             }
             set
             {
+                if(m_ViewModel != null)
+                    m_ViewModel.PropertyChanged -= m_ViewModel_PropertyChanged;
+
                 m_ViewModel = value;
+                m_ViewModel.PropertyChanged += m_ViewModel_PropertyChanged;
+                SetUIAccesibility();
                 this.DataContext = value;
             }
+        }
+
+        void m_ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "SelectedMaterial")
+                SetUIAccesibility();
+        }
+
+        public void SetUIAccesibility()
+        {
+            if (m_ViewModel.SelectedMaterial != null)
+            {
+                Approval approval = m_ViewModel.SelectedMaterial.Approval;
+
+                if (approval == null)
+                {
+                    btnAddNewItem.Visibility = System.Windows.Visibility.Visible;
+                    approvalControl.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else if (approval.IsApproved == null)
+                {
+                    DetermineApprovalCommands();
+                    btnAddNewItem.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else if (approval.IsApproved.Value == true)
+                {
+                    btnAddNewItem.Visibility = System.Windows.Visibility.Collapsed;
+                    approvalControl.Visibility = System.Windows.Visibility.Collapsed;
+                }
+                else if (approval.IsApproved.Value == false)
+                {
+                    btnAddNewItem.Visibility = System.Windows.Visibility.Visible;
+                    approvalControl.Visibility = System.Windows.Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void DetermineApprovalCommands()
+        {
+            if (DBResources.Instance.CurrentUser.UserRole.CanApprovePurchaseOrder)
+                approvalControl.Visibility = System.Windows.Visibility.Visible;
+            else
+                approvalControl.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private Company AddNewSupplier(string type, string companyName)
@@ -230,6 +278,25 @@ namespace ordermanager.Views.UserControls
         private void ComboBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void positiveBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            m_ViewModel.SelectedMaterial.Approval.IsApproved = true;
+            DBResources.Instance.Save();
+            SetUIAccesibility();
+        }
+
+        private void negativeBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            m_ViewModel.SelectedMaterial.Approval.IsApproved = false;
+            DBResources.Instance.Save();
+            SetUIAccesibility();
+        }
+
+        private void commentsBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

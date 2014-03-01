@@ -29,7 +29,9 @@ namespace ordermanager.DatabaseModel
         public Nullable<decimal> ConsumptionCost { get; set; }
         public Nullable<decimal> OtherCostInINR { get; set; }
         public string OtherCostName { get; set; }
+        public Nullable<long> ApprovalID { get; set; }
     
+        public virtual Approval Approval { get; set; }
         public virtual Currency Currency { get; set; }
         public virtual MaterialName MaterialName { get; set; }
         public virtual OrderProduct OrderProduct { get; set; }

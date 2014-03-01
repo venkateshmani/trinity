@@ -1,6 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="OrderManagerDBModelStoreContainer" CdmEntityContainer="OrderManagerDBEntities">
+    <EntitySetMapping Name="Approvals">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.Approval">
+        <MappingFragment StoreEntitySet="Approval">
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+          <ScalarProperty Name="ApprovalEntityTypeID" ColumnName="ApprovalEntityTypeID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApprovalEntityTypes">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.ApprovalEntityType">
+        <MappingFragment StoreEntitySet="ApprovalEntityType">
+          <ScalarProperty Name="ApprovalEntityTypeID" ColumnName="ApprovalEntityTypeID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Assets">
       <EntityTypeMapping TypeName="OrderManagerDBModel.Asset">
         <MappingFragment StoreEntitySet="Asset">
@@ -308,6 +327,7 @@
           <ScalarProperty Name="OrderValue" ColumnName="OrderValue" />
           <ScalarProperty Name="ProductBreakUpID" ColumnName="ProductBreakUpID" />
           <ScalarProperty Name="TotalConsumptionCost" ColumnName="TotalConsumptionCost" />
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -453,6 +473,7 @@
           <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
           <ScalarProperty Name="LastPOGeneratedOn" ColumnName="LastPOGeneratedOn" />
           <ScalarProperty Name="TaxInINR" ColumnName="TaxInINR" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -469,6 +490,7 @@
           <ScalarProperty Name="ConsumptionCost" ColumnName="ConsumptionCost" />
           <ScalarProperty Name="OtherCostInINR" ColumnName="OtherCostInINR" />
           <ScalarProperty Name="OtherCostName" ColumnName="OtherCostName" />
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -511,6 +533,7 @@
           <ScalarProperty Name="PurchaseOrderStatusID" ColumnName="PurchaseOrderStatusID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -627,6 +650,7 @@
           <ScalarProperty Name="CanModifyGRN" ColumnName="CanModifyGRN" />
           <ScalarProperty Name="CanModifyJobOrder" ColumnName="CanModifyJobOrder" />
           <ScalarProperty Name="CanAddSubMaterialsCost" ColumnName="CanAddSubMaterialsCost" />
+          <ScalarProperty Name="CanApprovePurchaseOrder" ColumnName="CanApprovePurchaseOrder" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

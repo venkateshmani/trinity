@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace ordermanager.DatabaseModel
 {
@@ -172,17 +173,46 @@ namespace ordermanager.DatabaseModel
                 {
                     m_TotalSubMaterialsPurchaseCostWrapper = value;
                     OnPropertyChanged("TotalSubMaterialsPurchaseCostWrapper");
-                    RemoveError("TotalSubMaterialsPurchaseCostWrapper");
-                    OrderProduct.RemoveError(MaterialName.Name);
-                    if (TotalSubMaterialsPurchaseCostWrapper > (ConsumptionCostWrapper * ProductQuantity))
-                    {
-                        AddError("Tot.alSubMaterialsPurchaseCostWrapper", "Total purchase cost can't be more than consumption cost", false);
-                        OrderProduct.AddError(MaterialName.Name, MaterialName.Name + " has some errors", false);
-                    }
                 }
             }
         }
+
+        public bool IsBOMCostExceedsBudget()
+        {
+            bool result = false;
+
+            if (TotalSubMaterialsPurchaseCostWrapper > (ConsumptionCostWrapper * ProductQuantity))
+                result = true;
+            else
+                result = false;
+
+            return result;
+        }
+   
         #endregion
+
+        #region UI Enablers
+
+        public Brush StatusBrush
+        {
+            get
+            {
+                Brush brush = null;
+
+                if (this.Approval == null)
+                    brush = new SolidColorBrush(Colors.LimeGreen);
+                else if (this.Approval.IsApproved == null)
+                    brush = new SolidColorBrush(Colors.Gray);
+                else if (this.Approval.IsApproved.Value == true)
+                    brush = new SolidColorBrush(Colors.LimeGreen);
+                else if (this.Approval.IsApproved.Value == false)
+                    brush = new SolidColorBrush(Colors.Red);
+
+                return brush;
+            }
+        }
+
+        #endregion 
 
         #region Data Validation
 
@@ -307,6 +337,7 @@ namespace ordermanager.DatabaseModel
                 return 0;
             }
         }
+
 
         #region Currency Management
 

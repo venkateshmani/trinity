@@ -214,7 +214,6 @@ namespace ordermanager.ViewModel
                     {
                         summaryDict[breakupItem.ProductSize.ProductSizeID][breakupItem.Color.ColorID] += breakupItem.NumberOfPiecesWrapper;
                     }
-                    
                 }
 
                 for (int i = 0; i < dbProduct.ProductBreakUpSummaries.Count; )

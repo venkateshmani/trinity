@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="OrderManagerDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="OrderManagerDBEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Approvals" EntityType="OrderManagerDBModel.Approval" />
+    <EntitySet Name="ApprovalEntityTypes" EntityType="OrderManagerDBModel.ApprovalEntityType" />
     <EntitySet Name="Assets" EntityType="OrderManagerDBModel.Asset" />
     <EntitySet Name="AssetCategories" EntityType="OrderManagerDBModel.AssetCategory" />
     <EntitySet Name="AssetNames" EntityType="OrderManagerDBModel.AssetName" />
@@ -54,6 +56,26 @@
     <EntitySet Name="UnitsOfMeasurements" EntityType="OrderManagerDBModel.UnitsOfMeasurement" />
     <EntitySet Name="Users" EntityType="OrderManagerDBModel.User" />
     <EntitySet Name="UserRoles" EntityType="OrderManagerDBModel.UserRole" />
+    <AssociationSet Name="FK_Approval_ApprovalEntityType" Association="OrderManagerDBModel.FK_Approval_ApprovalEntityType">
+      <End Role="ApprovalEntityType" EntitySet="ApprovalEntityTypes" />
+      <End Role="Approval" EntitySet="Approvals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Approval_Order" Association="OrderManagerDBModel.FK_Approval_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Approval" EntitySet="Approvals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderProduct_Approval" Association="OrderManagerDBModel.FK_OrderProduct_Approval">
+      <End Role="Approval" EntitySet="Approvals" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterials_Approval" Association="OrderManagerDBModel.FK_ProductMaterials_Approval">
+      <End Role="Approval" EntitySet="Approvals" />
+      <End Role="ProductMaterials" EntitySet="ProductMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseOrders_Approval" Association="OrderManagerDBModel.FK_PurchaseOrders_Approval">
+      <End Role="Approval" EntitySet="Approvals" />
+      <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+    </AssociationSet>
     <AssociationSet Name="FK_Asset_AssetName" Association="OrderManagerDBModel.FK_Asset_AssetName">
       <End Role="AssetName" EntitySet="AssetNames" />
       <End Role="Asset" EntitySet="Assets" />
@@ -326,6 +348,10 @@
       <End Role="ProductMaterials" EntitySet="ProductMaterials" />
       <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
     </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterialItem_PurchaseOrders" Association="OrderManagerDBModel.FK_ProductMaterialItem_PurchaseOrders">
+      <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+      <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProductMaterialItem_SubMaterial" Association="OrderManagerDBModel.FK_ProductMaterialItem_SubMaterial">
       <End Role="SubMaterial" EntitySet="SubMaterials" />
       <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
@@ -354,16 +380,35 @@
       <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurements" />
       <End Role="SubMaterial" EntitySet="SubMaterials" />
     </AssociationSet>
-    <AssociationSet Name="FK_UnitsOfMeasurement_UnitsOfMeasurement" Association="OrderManagerDBModel.FK_UnitsOfMeasurement_UnitsOfMeasurement">
-      <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurements" />
-      <End Role="UnitsOfMeasurement1" EntitySet="UnitsOfMeasurements" />
-    </AssociationSet>
     <AssociationSet Name="FK_User_UserRole" Association="OrderManagerDBModel.FK_User_UserRole">
       <End Role="UserRole" EntitySet="UserRoles" />
       <End Role="User" EntitySet="Users" />
     </AssociationSet>
     <FunctionImport Name="SP_GetServerTime" ReturnType="Collection(DateTime)" />
   </EntityContainer>
+  <EntityType Name="Approval">
+    <Key>
+      <PropertyRef Name="ApprovalID" />
+    </Key>
+    <Property Name="ApprovalID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ApprovalEntityTypeID" Type="Byte" Nullable="false" />
+    <Property Name="OrderID" Type="Int64" Nullable="false" />
+    <Property Name="IsApproved" Type="Boolean" />
+    <Property Name="Comments" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="ApprovalEntityType" Relationship="OrderManagerDBModel.FK_Approval_ApprovalEntityType" FromRole="Approval" ToRole="ApprovalEntityType" />
+    <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_Approval_Order" FromRole="Approval" ToRole="Order" />
+    <NavigationProperty Name="OrderProducts" Relationship="OrderManagerDBModel.FK_OrderProduct_Approval" FromRole="Approval" ToRole="OrderProduct" />
+    <NavigationProperty Name="ProductMaterials" Relationship="OrderManagerDBModel.FK_ProductMaterials_Approval" FromRole="Approval" ToRole="ProductMaterials" />
+    <NavigationProperty Name="PurchaseOrders" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Approval" FromRole="Approval" ToRole="PurchaseOrders" />
+  </EntityType>
+  <EntityType Name="ApprovalEntityType">
+    <Key>
+      <PropertyRef Name="ApprovalEntityTypeID" />
+    </Key>
+    <Property Name="ApprovalEntityTypeID" Type="Byte" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="Approvals" Relationship="OrderManagerDBModel.FK_Approval_ApprovalEntityType" FromRole="ApprovalEntityType" ToRole="Approval" />
+  </EntityType>
   <EntityType Name="Asset">
     <Key>
       <PropertyRef Name="AssetID" />
@@ -666,6 +711,7 @@
     <Property Name="OrderApprovedDate" Type="DateTime" Precision="3" />
     <Property Name="OrderConfirmedDate" Type="DateTime" Precision="3" />
     <Property Name="CustomerOrderNumber" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Approvals" Relationship="OrderManagerDBModel.FK_Approval_Order" FromRole="Order" ToRole="Approval" />
     <NavigationProperty Name="CartonBoxes" Relationship="OrderManagerDBModel.FK_CartonBox_Order" FromRole="Order" ToRole="CartonBox" />
     <NavigationProperty Name="CommissionValueType" Relationship="OrderManagerDBModel.FK_Order_CommissionValueType" FromRole="Order" ToRole="CommissionValueType" />
     <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Order" ToRole="Company" />
@@ -722,6 +768,8 @@
     <Property Name="OrderValue" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
     <Property Name="ProductBreakUpID" Type="Int64" />
     <Property Name="TotalConsumptionCost" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="ApprovalID" Type="Int64" />
+    <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_OrderProduct_Approval" FromRole="OrderProduct" ToRole="Approval" />
     <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_OrderProduct_Currency" FromRole="OrderProduct" ToRole="Currency" />
     <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_OrderProduct_Order" FromRole="OrderProduct" ToRole="Order" />
     <NavigationProperty Name="ProductBreakUp" Relationship="OrderManagerDBModel.FK_OrderProduct_ProductBreakUp" FromRole="OrderProduct" ToRole="ProductBreakUp" />
@@ -891,10 +939,12 @@
     <Property Name="SupplierID" Type="Int32" />
     <Property Name="LastPOGeneratedOn" Type="DateTime" Precision="3" />
     <Property Name="TaxInINR" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="PurchaseOrderID" Type="Int64" />
     <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_Company" FromRole="ProductMaterialItem" ToRole="Company" />
     <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_Currency" FromRole="ProductMaterialItem" ToRole="Currency" />
     <NavigationProperty Name="OrderedItems" Relationship="OrderManagerDBModel.FK_OrderedItem_ProductMaterialItem" FromRole="ProductMaterialItem" ToRole="OrderedItem" />
     <NavigationProperty Name="ProductMaterial" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_ProductMaterials" FromRole="ProductMaterialItem" ToRole="ProductMaterials" />
+    <NavigationProperty Name="PurchaseOrder" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_PurchaseOrders" FromRole="ProductMaterialItem" ToRole="PurchaseOrders" />
     <NavigationProperty Name="SubMaterial" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_SubMaterial" FromRole="ProductMaterialItem" ToRole="SubMaterial" />
     <NavigationProperty Name="UnitsOfMeasurement" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_UnitsOfMeasurement" FromRole="ProductMaterialItem" ToRole="UnitsOfMeasurement" />
   </EntityType>
@@ -912,6 +962,8 @@
     <Property Name="ConsumptionCost" Type="Decimal" Precision="18" Scale="4" />
     <Property Name="OtherCostInINR" Type="Decimal" Precision="18" Scale="4" />
     <Property Name="OtherCostName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="ApprovalID" Type="Int64" />
+    <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_ProductMaterials_Approval" FromRole="ProductMaterials" ToRole="Approval" />
     <NavigationProperty Name="Currency" Relationship="OrderManagerDBModel.FK_ProductMaterials_Currency" FromRole="ProductMaterials" ToRole="Currency" />
     <NavigationProperty Name="MaterialName" Relationship="OrderManagerDBModel.FK_ProductMaterials_MaterialName" FromRole="ProductMaterials" ToRole="MaterialName" />
     <NavigationProperty Name="OrderProduct" Relationship="OrderManagerDBModel.FK_ProductMaterials_OrderProduct" FromRole="ProductMaterials" ToRole="OrderProduct" />
@@ -963,10 +1015,13 @@
     <Property Name="PurchaseOrderStatusID" Type="Byte" Nullable="false" />
     <Property Name="OrderID" Type="Int64" Nullable="false" />
     <Property Name="TermsAndConditions" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+    <Property Name="ApprovalID" Type="Int64" />
+    <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Approval" FromRole="PurchaseOrders" ToRole="Approval" />
     <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Company" FromRole="PurchaseOrders" ToRole="Company" />
     <NavigationProperty Name="GRNReciepts" Relationship="OrderManagerDBModel.FK_GRNReciept_PurchaseOrders" FromRole="PurchaseOrders" ToRole="GRNReciept" />
     <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Order" FromRole="PurchaseOrders" ToRole="Order" />
     <NavigationProperty Name="OrderedItems" Relationship="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders" FromRole="PurchaseOrders" ToRole="OrderedItem" />
+    <NavigationProperty Name="ProductMaterialItems" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_PurchaseOrders" FromRole="PurchaseOrders" ToRole="ProductMaterialItem" />
     <NavigationProperty Name="PurchaseOrderStatu" Relationship="OrderManagerDBModel.FK_PurchaseOrders_PurchaseOrderStatus" FromRole="PurchaseOrders" ToRole="PurchaseOrderStatus" />
   </EntityType>
   <EntityType Name="PurchaseOrderStatu">
@@ -1056,8 +1111,6 @@
     <NavigationProperty Name="ProductMaterialItems" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_UnitsOfMeasurement" FromRole="UnitsOfMeasurement" ToRole="ProductMaterialItem" />
     <NavigationProperty Name="ProductMaterials" Relationship="OrderManagerDBModel.FK_ProductMaterials_UnitsOfMeasurement" FromRole="UnitsOfMeasurement" ToRole="ProductMaterials" />
     <NavigationProperty Name="SubMaterials" Relationship="OrderManagerDBModel.FK_SubMaterial_UnitsOfMeasurement" FromRole="UnitsOfMeasurement" ToRole="SubMaterial" />
-    <NavigationProperty Name="UnitsOfMeasurement1" Relationship="OrderManagerDBModel.FK_UnitsOfMeasurement_UnitsOfMeasurement" FromRole="UnitsOfMeasurement" ToRole="UnitsOfMeasurement1" />
-    <NavigationProperty Name="UnitsOfMeasurement2" Relationship="OrderManagerDBModel.FK_UnitsOfMeasurement_UnitsOfMeasurement" FromRole="UnitsOfMeasurement1" ToRole="UnitsOfMeasurement" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -1095,9 +1148,70 @@
     <Property Name="CanModifyGRN" Type="Boolean" Nullable="false" />
     <Property Name="CanModifyJobOrder" Type="Boolean" Nullable="false" />
     <Property Name="CanAddSubMaterialsCost" Type="Boolean" Nullable="false" />
+    <Property Name="CanApprovePurchaseOrder" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="OrderStatus" Relationship="OrderManagerDBModel.FK_OrderStatus_UserRole" FromRole="UserRole" ToRole="OrderStatus" />
     <NavigationProperty Name="Users" Relationship="OrderManagerDBModel.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
   </EntityType>
+  <Association Name="FK_Approval_ApprovalEntityType">
+    <End Role="ApprovalEntityType" Type="OrderManagerDBModel.ApprovalEntityType" Multiplicity="1" />
+    <End Role="Approval" Type="OrderManagerDBModel.Approval" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApprovalEntityType">
+        <PropertyRef Name="ApprovalEntityTypeID" />
+      </Principal>
+      <Dependent Role="Approval">
+        <PropertyRef Name="ApprovalEntityTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Approval_Order">
+    <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="1" />
+    <End Role="Approval" Type="OrderManagerDBModel.Approval" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="Approval">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderProduct_Approval">
+    <End Role="Approval" Type="OrderManagerDBModel.Approval" Multiplicity="0..1" />
+    <End Role="OrderProduct" Type="OrderManagerDBModel.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Approval">
+        <PropertyRef Name="ApprovalID" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="ApprovalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterials_Approval">
+    <End Role="Approval" Type="OrderManagerDBModel.Approval" Multiplicity="0..1" />
+    <End Role="ProductMaterials" Type="OrderManagerDBModel.ProductMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Approval">
+        <PropertyRef Name="ApprovalID" />
+      </Principal>
+      <Dependent Role="ProductMaterials">
+        <PropertyRef Name="ApprovalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseOrders_Approval">
+    <End Role="Approval" Type="OrderManagerDBModel.Approval" Multiplicity="0..1" />
+    <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Approval">
+        <PropertyRef Name="ApprovalID" />
+      </Principal>
+      <Dependent Role="PurchaseOrders">
+        <PropertyRef Name="ApprovalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Asset_AssetName">
     <End Role="AssetName" Type="OrderManagerDBModel.AssetName" Multiplicity="1" />
     <End Role="Asset" Type="OrderManagerDBModel.Asset" Multiplicity="*" />
@@ -1914,6 +2028,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ProductMaterialItem_PurchaseOrders">
+    <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="0..1" />
+    <End Role="ProductMaterialItem" Type="OrderManagerDBModel.ProductMaterialItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrders">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Principal>
+      <Dependent Role="ProductMaterialItem">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProductMaterialItem_SubMaterial">
     <End Role="SubMaterial" Type="OrderManagerDBModel.SubMaterial" Multiplicity="1" />
     <End Role="ProductMaterialItem" Type="OrderManagerDBModel.ProductMaterialItem" Multiplicity="*" />
@@ -1994,18 +2120,6 @@
         <PropertyRef Name="UOMID" />
       </Principal>
       <Dependent Role="SubMaterial">
-        <PropertyRef Name="UOMID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UnitsOfMeasurement_UnitsOfMeasurement">
-    <End Role="UnitsOfMeasurement" Type="OrderManagerDBModel.UnitsOfMeasurement" Multiplicity="1" />
-    <End Role="UnitsOfMeasurement1" Type="OrderManagerDBModel.UnitsOfMeasurement" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="UnitsOfMeasurement">
-        <PropertyRef Name="UOMID" />
-      </Principal>
-      <Dependent Role="UnitsOfMeasurement1">
         <PropertyRef Name="UOMID" />
       </Dependent>
     </ReferentialConstraint>

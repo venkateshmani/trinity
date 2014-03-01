@@ -261,7 +261,7 @@ namespace ordermanager.ViewModel
             private set
             {
                 m_CompanyTypes = value;
-            }
+            } 
         }
         #endregion
 
