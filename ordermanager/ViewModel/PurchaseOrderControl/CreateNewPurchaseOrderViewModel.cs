@@ -117,13 +117,19 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                     {
                         foreach (ProductMaterial budgetMaterial in product.ProductMaterials)
                         {
-                            foreach (ProductMaterialItem purchasableMaterial in budgetMaterial.ProductMaterialItems)
+                            if (budgetMaterial.Approval == null || (budgetMaterial.Approval.IsApproved != null && budgetMaterial.Approval.IsApproved.Value))
                             {
-                                if (purchasableMaterial.CurrencyID == POCurrency.CurrencyID && (purchasableMaterial.PurchaseOrder == null || purchasableMaterial.PurchaseOrder.PurchaseOrderID == this.PurchaseOrder.PurchaseOrderID))
+                                foreach (ProductMaterialItem purchasableMaterial in budgetMaterial.ProductMaterialItems)
                                 {
-                                    materialList.Add(purchasableMaterial);
-                                    purchasableMaterial.PropertyChanged += purchasableMaterial_PropertyChanged;
-                                    purchasableMaterial.CalculateItemCost();
+                                    if (purchasableMaterial.PurchaseOrderID != null && purchasableMaterial.PurchaseOrderID.Value == this.PurchaseOrder.PurchaseOrderID)
+                                        purchasableMaterial.IsSelectedToGeneratePO = true;
+
+                                    if (purchasableMaterial.CurrencyID == POCurrency.CurrencyID && (purchasableMaterial.PurchaseOrder == null || purchasableMaterial.PurchaseOrder.PurchaseOrderID == this.PurchaseOrder.PurchaseOrderID))
+                                    {
+                                        materialList.Add(purchasableMaterial);
+                                        purchasableMaterial.PropertyChanged += purchasableMaterial_PropertyChanged;
+                                        purchasableMaterial.CalculateItemCost();
+                                    }
                                 }
                             }
                         }
