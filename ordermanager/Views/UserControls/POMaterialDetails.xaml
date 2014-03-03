@@ -227,13 +227,8 @@
                                 </DataGridTemplateColumn.HeaderTemplate>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Border BorderBrush="Silver" BorderThickness="1">
-                                            <DockPanel LastChildFill="True" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding CurrencyWrapper.Symbol}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2,0,1,0" Foreground="Black"></TextBlock>                                                
-                                                <TextBox Text="{Binding CostWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                 IsHitTestVisible="{Binding CanAddCosts}"  VerticalAlignment="Center" HorizontalAlignment="Left" BorderBrush="Transparent" Margin="0,0,1,0"/>
-                                            </DockPanel>
-                                        </Border>
+                                        <TextBox Text="{Binding CostWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                 IsHitTestVisible="{Binding CanAddCosts}"  Margin="0,0,1,0"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

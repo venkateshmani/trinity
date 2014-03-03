@@ -198,9 +198,6 @@ namespace ordermanager.Views.UserControls
             {
                 if (m_ViewModel.Validate())
                 {
-                    CommentBox commentBox = new CommentBox(Util.GetParentWindow(this));
-                    if ((commentBox.ShowDialog() == true))
-                    {
                         foreach (OrderProduct product in m_ViewModel.Order.OrderProducts)
                         {
                             foreach (ProductMaterial material in product.ProductMaterials)
@@ -214,15 +211,14 @@ namespace ordermanager.Views.UserControls
                                     material.Approval = approval;
                                 }
                             }
-                        }
 
-                        bool result = m_ViewModel.Save(isSubmit, commentBox.Comment);
-                        if (result)
-                            poMaterialsDetails.SetUIAccesibility();
+                            bool result = m_ViewModel.Save(isSubmit, "Save");
+                            if (result)
+                                poMaterialsDetails.SetUIAccesibility();
 
-                        return result;
-                    }
-                    return false;
+                            return result;
+                       }
+                   return false;
                 }
                 return false;
             }
