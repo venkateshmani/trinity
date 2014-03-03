@@ -180,31 +180,34 @@ namespace ordermanager.DatabaseModel
 
         private void SeperateTermsAndConditions()
         {
-            string termsAndConditions = TermsAndConditions;
+            if (TermsAndConditions != null)
+            {
+                string termsAndConditions = TermsAndConditions;
 
-            m_QuantityAllowance = termsAndConditions.Substring(termsAndConditions.IndexOf(quantityAllowanceIdentificationKey));
-            termsAndConditions = termsAndConditions.Replace(QuantityAllowance, "");
-            m_QuantityAllowance = QuantityAllowance.Replace(quantityAllowanceIdentificationKey, "").Trim();
+                m_QuantityAllowance = termsAndConditions.Substring(termsAndConditions.IndexOf(quantityAllowanceIdentificationKey));
+                termsAndConditions = termsAndConditions.Replace(QuantityAllowance, "");
+                m_QuantityAllowance = QuantityAllowance.Replace(quantityAllowanceIdentificationKey, "").Trim();
 
-            m_QualitySpecifications = termsAndConditions.Substring(termsAndConditions.IndexOf(qualitySpecIdentificationKey));
-            termsAndConditions = termsAndConditions.Replace(QualitySpecifications, "");
-            m_QualitySpecifications = QualitySpecifications.Replace(qualitySpecIdentificationKey, "").Trim();
+                m_QualitySpecifications = termsAndConditions.Substring(termsAndConditions.IndexOf(qualitySpecIdentificationKey));
+                termsAndConditions = termsAndConditions.Replace(QualitySpecifications, "");
+                m_QualitySpecifications = QualitySpecifications.Replace(qualitySpecIdentificationKey, "").Trim();
 
-            m_DeliveryDate = termsAndConditions.Substring(termsAndConditions.IndexOf(deliveryDateIdentificationKey));
-            termsAndConditions = termsAndConditions.Replace(DeliveryDate, "");
-            m_DeliveryDate = DeliveryDate.Replace(deliveryDateIdentificationKey, "").Trim();
+                m_DeliveryDate = termsAndConditions.Substring(termsAndConditions.IndexOf(deliveryDateIdentificationKey));
+                termsAndConditions = termsAndConditions.Replace(DeliveryDate, "");
+                m_DeliveryDate = DeliveryDate.Replace(deliveryDateIdentificationKey, "").Trim();
 
-            m_PaymentTerms = termsAndConditions.Substring(termsAndConditions.IndexOf(paymentIdenficationKey));
-            termsAndConditions = termsAndConditions.Replace(PaymentTerms, "");
-            m_PaymentTerms = PaymentTerms.Replace(paymentIdenficationKey, "").Trim();
+                m_PaymentTerms = termsAndConditions.Substring(termsAndConditions.IndexOf(paymentIdenficationKey));
+                termsAndConditions = termsAndConditions.Replace(PaymentTerms, "");
+                m_PaymentTerms = PaymentTerms.Replace(paymentIdenficationKey, "").Trim();
 
-            m_Freigt = termsAndConditions.Substring(termsAndConditions.IndexOf(freigtIdentificationKey));
-            termsAndConditions = termsAndConditions.Replace(Freigt, "");
-            m_Freigt = Freigt.Replace(freigtIdentificationKey, "").Trim();
+                m_Freigt = termsAndConditions.Substring(termsAndConditions.IndexOf(freigtIdentificationKey));
+                termsAndConditions = termsAndConditions.Replace(Freigt, "");
+                m_Freigt = Freigt.Replace(freigtIdentificationKey, "").Trim();
 
-            m_PriceTerms = termsAndConditions.Substring(termsAndConditions.IndexOf(priceTermsIdentificationKey));
-            termsAndConditions = termsAndConditions.Replace(PriceTerms, "");
-            m_PriceTerms = PriceTerms.Replace(priceTermsIdentificationKey, "").Trim();
+                m_PriceTerms = termsAndConditions.Substring(termsAndConditions.IndexOf(priceTermsIdentificationKey));
+                termsAndConditions = termsAndConditions.Replace(PriceTerms, "");
+                m_PriceTerms = PriceTerms.Replace(priceTermsIdentificationKey, "").Trim();
+            }
         }
 
         private void ValidateTermsAndConditions()
@@ -215,7 +218,8 @@ namespace ordermanager.DatabaseModel
                 bool hasAttribute = Attribute.IsDefined(pInfo, typeof(TermsAndConditionsAttribute));
                 if (hasAttribute)
                 {
-                    if (!IsValidTermsAndConditions(pInfo.GetValue(this) as String))
+                    object tAndC = pInfo.GetValue(this);
+                    if (tAndC == null || !IsValidTermsAndConditions(tAndC as string))
                     {
                         AddTCError(pInfo.Name);
                     }

@@ -92,12 +92,12 @@
             </TabItem>
             <TabItem x:Name="myTasksTab" Header="  My Tasks  ">
                 <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <my1:ViewOrdersControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" OnOrderClick="ViewOrdersControl_OnOrderClick" ShowAllOrders="False" />
+                    <my1:ViewOrdersControl x:Name="myTasks"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" OnOrderClick="ViewOrdersControl_OnOrderClick" ShowAllOrders="False" />
                 </Grid>
             </TabItem>
             <TabItem x:Name="allOrdersTab" Header="   All Orders  ">
                 <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <my1:ViewOrdersControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" OnOrderClick="ViewOrdersControl_OnOrderClick" ShowAllOrders="True" />
+                    <my1:ViewOrdersControl x:Name="allOrdersControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" OnOrderClick="ViewOrdersControl_OnOrderClick" ShowAllOrders="True" />
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabGRN" Header="  GRN  " Cursor="Hand">

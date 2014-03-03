@@ -44,6 +44,11 @@ namespace ordermanager.Views.UserControls
                 ViewModel = new ViewOrdersControlViewModel(ShowAllOrders);
         }
 
+        public void Reload()
+        {
+            ViewModel = new ViewOrdersControlViewModel(ShowAllOrders);
+        }
+
         CollectionViewSource ordersCollectionViewSource = null;
         public ViewOrdersControlViewModel ViewModel
         {

@@ -139,9 +139,11 @@ namespace ordermanager
             switch (tab)
             {
                 case Interfaces_And_Enums.OrderManagerTab.MyTasks:
+                    myTasks.Reload();
                     viewOrdersTabControl.SelectedIndex = 1;
                     break;
                 case Interfaces_And_Enums.OrderManagerTab.AllOrders:
+                    allOrdersControl.Reload();
                     viewOrdersTabControl.SelectedIndex = 2;
                     break;
             }
