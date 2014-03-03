@@ -339,6 +339,11 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public void RefreshUIProperties()
+        {
+            OnPropertyChanged("POStatus");
+        }
+
 
         public void Validate()
         {

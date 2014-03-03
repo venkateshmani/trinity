@@ -212,6 +212,12 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public void RefreshUIProperties()
+        {
+            OnPropertyChanged("StatusBrush");
+        }
+
+
         #endregion 
 
         #region Data Validation

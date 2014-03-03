@@ -283,15 +283,22 @@ namespace ordermanager.Views.UserControls
         private void positiveBtn_Click_1(object sender, RoutedEventArgs e)
         {
             m_ViewModel.SelectedMaterial.Approval.IsApproved = true;
-            DBResources.Instance.Save();
-            SetUIAccesibility();
+            if (DBResources.Instance.Save())
+            {
+                SetUIAccesibility();
+                m_ViewModel.SelectedMaterial.RefreshAllProperties();
+            }
         }
 
         private void negativeBtn_Click_1(object sender, RoutedEventArgs e)
         {
             m_ViewModel.SelectedMaterial.Approval.IsApproved = false;
-            DBResources.Instance.Save();
-            SetUIAccesibility();
+
+            if (DBResources.Instance.Save())
+            {
+                SetUIAccesibility();
+                m_ViewModel.SelectedMaterial.RefreshAllProperties();
+            }
         }
 
         private void commentsBtn_Click_1(object sender, RoutedEventArgs e)

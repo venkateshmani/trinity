@@ -193,6 +193,8 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
 
                 SetUIAccesibility(PurchaseOrderState.Rejeted);
             }
+
+            ViewModel.PurchaseOrder.RefreshUIProperties();
         }
 
         private void positiveBtn_Click_1(object sender, RoutedEventArgs e)
@@ -289,6 +291,8 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                     System.Diagnostics.Process.Start(generatedFile);
                 }
             }
+
+            ViewModel.PurchaseOrder.RefreshUIProperties();
         }
 
         private void SetUIAccesibility(PurchaseOrderState state)

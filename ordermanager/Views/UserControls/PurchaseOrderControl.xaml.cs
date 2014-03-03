@@ -214,10 +214,19 @@ namespace ordermanager.Views.UserControls
 
                             bool result = m_ViewModel.Save(isSubmit, "Save");
                             if (result)
+                            {
                                 poMaterialsDetails.SetUIAccesibility();
+                                foreach (OrderProduct op in m_ViewModel.Order.OrderProducts)
+                                {
+                                    foreach (ProductMaterial pm in op.ProductMaterials)
+                                    {
+                                        pm.RefreshUIProperties();
+                                    }
+                                }
+                            }
 
                             return result;
-                       }
+                        }
                    return false;
                 }
                 return false;
