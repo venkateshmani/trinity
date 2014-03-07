@@ -36,7 +36,6 @@ namespace ordermanager.Views.UserControls
             jobOrderSearcher.WorkerSupportsCancellation = true;
             jobOrderSearcher.DoWork += jobOrderSearcher_DoWork;
             jobOrderSearcher.RunWorkerCompleted += jobOrderSearcher_RunWorkerCompleted;
-            this.Loaded += JobOrderJOView_Loaded;
         }
 
         void jobOrderSearcher_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -81,9 +80,9 @@ namespace ordermanager.Views.UserControls
             }
         }
 
-        void JobOrderJOView_Loaded(object sender, RoutedEventArgs e)
+        public void SetOrder(Order order)
         {
-            ViewModel = new JobbOrderJOViewModel();
+            ViewModel = new JobbOrderJOViewModel(order);
         }
 
         private JobbOrderJOViewModel m_ViewModel = null;

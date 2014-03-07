@@ -12,18 +12,32 @@ namespace ordermanager.Views.UserControls
     /// </summary>
     public partial class JobWorkControl : UserControl
     {
-        JobWorkViewModel ViewModel;
         public JobWorkControl()
         {
             InitializeComponent();
             tabControlJobWorks.Visibility = System.Windows.Visibility.Collapsed;
-            ViewModel = new JobWorkViewModel();
-            this.DataContext = ViewModel;
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.Save();
+        }
+
+        public void SetOrder(Order order)
+        {
+            ViewModel = new JobWorkViewModel(order);
+        }
+
+        public JobWorkViewModel ViewModel
+        {
+            get
+            {
+                return this.DataContext as JobWorkViewModel;
+            }
+            set
+            {
+                this.DataContext = value;
+            }
         }
 
         private void IssueNextJob(JobOrder jOrder, ObservableCollection<JobOrderType> jobTypes)

@@ -55,7 +55,7 @@
                     <UserControls:GRNControl x:Name="grnControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 </TabItem>
                 <TabItem Header="  JO  ">
-
+                  <UserControls:JobOrderJOView x:Name="joCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 </TabItem>
             </TabControl>
         </Border>

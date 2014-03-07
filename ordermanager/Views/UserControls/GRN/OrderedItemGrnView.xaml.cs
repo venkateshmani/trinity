@@ -262,7 +262,6 @@ namespace ordermanager.Views.UserControls.GRN
                 if (poWindow.ShowDialog() == true)
                 {
                     ViewModel.SelectedGRNReceipt.RefreshUIEnablers();
-                    InformUser("New Purchase Order Generated Successfully");    
                 }
             }
             else

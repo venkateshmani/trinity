@@ -45,6 +45,7 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
             poViewer.SetOrder(Order);
             newPoCreator.SetOrder(Order);
             grnControl.Order = order;
+            joCtrl.SetOrder(Order);
         }
     }
 }

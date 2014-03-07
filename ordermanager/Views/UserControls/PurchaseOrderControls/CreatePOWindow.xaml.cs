@@ -23,6 +23,23 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
         public CreatePOWindow()
         {
             InitializeComponent();
+            poEditControl.PurchaseOrderStatusChanged += CreateNewPurchaseOrderControl_PurchaseOrderStatusChanged;
+        }
+
+       
+        void CreateNewPurchaseOrderControl_PurchaseOrderStatusChanged(PurchaseOrderState state)
+        {
+            if (state == PurchaseOrderState.Generated)
+            {
+                this.DialogResult = true;
+                this.Close();
+            }
+
+            if (state == PurchaseOrderState.Discarded)
+            {
+                this.DialogResult = false;
+                this.Close();
+            }
         }
 
         public void SetOrder(Order order, PurchaseOrder po)

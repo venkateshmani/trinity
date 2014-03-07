@@ -20,11 +20,13 @@ using System.Windows.Shapes;
 
 namespace ordermanager.Views.UserControls.PurchaseOrderControls
 {
+    public delegate void POStatusChanged(PurchaseOrderState state);
     /// <summary>
     /// Interaction logic for CreateNewPurchaseOrderControl.xaml
     /// </summary>
     public partial class CreateNewPurchaseOrderControl : UserControl
     {
+        public event POStatusChanged PurchaseOrderStatusChanged = null;
         public CreateNewPurchaseOrderControl()
         {
             InitializeComponent();
@@ -179,8 +181,14 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
 
         private void negativeBtn_Click_1(object sender, RoutedEventArgs e)
         {
-            if(negativeBtn.Content.ToString() == "Discard")
+            if (negativeBtn.Content.ToString() == "Discard")
+            {
                 Reset();
+                if (PurchaseOrderStatusChanged != null)
+                {
+                    PurchaseOrderStatusChanged(PurchaseOrderState.Discarded);
+                }
+            }
             else if (negativeBtn.Content.ToString() == "Reject")
             {
                 CommentBox cBox = new CommentBox();
@@ -189,7 +197,7 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                 ViewModel.PurchaseOrder.Approval.IsApproved = false;
 
                 StringBuilder sb = new StringBuilder();
-                
+
                 sb.AppendLine("Rejected By " + DBResources.Instance.CurrentUser.UserName + " at " + DBResources.Instance.GetServerTime().ToString());
                 sb.AppendLine(cBox.Comment);
                 sb.AppendLine();
@@ -252,6 +260,10 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                         sb.AppendLine("Submitted For Approval !.");
                         InformUser(sb.ToString());
                         Reset();
+                        if (PurchaseOrderStatusChanged != null)
+                        {
+                            PurchaseOrderStatusChanged(PurchaseOrderState.Generated);
+                        }
                     }
                     else
                     {
@@ -409,5 +421,6 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
         Submitted,
         Rejeted,
         Approved,
+        Discarded,
     }
 }

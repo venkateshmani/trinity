@@ -11,9 +11,52 @@ namespace ordermanager.ViewModel
 {
     public class JobWorkViewModel : INotifyPropertyChanged
     {
+        public JobWorkViewModel(Order order)
+        {
+            this.Order = order;
+        }
+
+        private Order m_Order = null;
+        public Order Order
+        {
+            get
+            {
+                return m_Order;
+            }
+            set
+            {
+                m_Order = value;
+            }
+        }
+
+        private ObservableCollection<Company> m_Suppliers = null;
         public ObservableCollection<Company> Suppliers
         {
-            get { return DBResources.Instance.Suppliers; }
+            get 
+            {
+                if (m_Suppliers == null)
+                {
+                    m_Suppliers = new ObservableCollection<Company>();
+                    foreach (PurchaseOrder po in Order.PurchaseOrders)
+                    {
+                        foreach (OrderedItem item in po.OrderedItems)
+                        {
+                            foreach (GRNReciept receipt in item.GRNReciepts)
+                            {
+                                foreach (JobOrder jo in receipt.JobOrders)
+                                {
+                                    if (!m_Suppliers.Contains(jo.Company))
+                                    {
+                                        m_Suppliers.Add(jo.Company);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return m_Suppliers;
+            }
         }
 
         OrderedItem m_SelectedOrderedItem;
