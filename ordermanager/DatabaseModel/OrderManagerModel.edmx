@@ -539,6 +539,7 @@
           <Property Name="ReceiptStatusID" Type="tinyint" />
           <Property Name="OrderedItemID" Type="bigint" Nullable="false" />
           <Property Name="VechileNo" Type="varchar" MaxLength="15" />
+          <Property Name="OtherChargersName" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="History">
           <Key>
@@ -2557,6 +2558,7 @@
           <Property Name="ReceiptStatusID" Type="Byte" />
           <Property Name="OrderedItemID" Type="Int64" Nullable="false" />
           <Property Name="VechileNo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="OtherChargersName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="OrderedItem" Relationship="OrderManagerDBModel.FK_GRNReciept_OrderedItem" FromRole="GRNReciept" ToRole="OrderedItem" />
           <NavigationProperty Name="PurchaseOrder" Relationship="OrderManagerDBModel.FK_GRNReciept_PurchaseOrders" FromRole="GRNReciept" ToRole="PurchaseOrders" />
           <NavigationProperty Name="ReceiptStatu" Relationship="OrderManagerDBModel.FK_GRNReciept_ReceiptStatus" FromRole="GRNReciept" ToRole="ReceiptStatus" />
@@ -4288,6 +4290,7 @@
                 <ScalarProperty Name="ReceiptStatusID" ColumnName="ReceiptStatusID" />
                 <ScalarProperty Name="OrderedItemID" ColumnName="OrderedItemID" />
                 <ScalarProperty Name="VechileNo" ColumnName="VechileNo" />
+                <ScalarProperty Name="OtherChargersName" ColumnName="OtherChargersName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -72,7 +72,11 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
             this.Order = order;
             ViewModel = new CreateNewPurchaseOrderViewModel(order, po);
 
-            if (po.Approval.IsApproved == null)
+            if (po.Approval == null)
+            {
+
+            }
+            else if (po.Approval.IsApproved == null)
             {
                 SetUIAccesibility(PurchaseOrderState.Generated);                
             }
@@ -204,6 +208,11 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                 ViewModel.PurchaseOrder.Validate();
                 if (!ViewModel.PurchaseOrder.HasErrors)
                 {
+                    if (positiveBtn.Content.ToString() == "Generate")
+                    {
+                        ViewModel.PurchaseOrder = DBResources.Instance.Context.PurchaseOrders.Add(ViewModel.PurchaseOrder);
+                    }
+
                     foreach (ProductMaterialItem item in ViewModel.SelectedItems)
                     {
                         item.PurchaseOrder = ViewModel.PurchaseOrder;
@@ -231,7 +240,6 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                         ViewModel.PurchaseOrder.Approval.IsApproved = null;
                     }
 
-                    
                     DBResources.Instance.Save();
                     
 

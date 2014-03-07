@@ -13,18 +13,6 @@ namespace ordermanager.ViewModel
         public POControlViewModel(Order order)
         {
             this.Order = order;
-            foreach (PurchaseOrder po in order.PurchaseOrders)
-            {
-                po.PropertyChanged += po_PropertyChanged;
-            }
-        }
-
-        void po_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "PurchaseOrderDateWrapper")
-            {
-                DBResources.Instance.Save();
-            }
         }
 
         public Order Order

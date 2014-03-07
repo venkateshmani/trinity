@@ -27,7 +27,18 @@ namespace ordermanager.Views.UserControls
         public GRNControl()
         {
             InitializeComponent();
-          
+        }
+
+        public Order Order
+        {
+            get
+            {
+                return poListControl.Order;
+            }
+            set
+            {
+                poListControl.Order = value;
+            }
         }
 
         private void PurchaseOrderSearchControl_OnTreeViewSelectionChanged_1(object selectedObject)

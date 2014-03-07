@@ -67,7 +67,7 @@
                 <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="GRN Details" Margin="4" Style="{StaticResource DescriptionHeaderStyle}" />
             </Border>
         </Grid>
-        <CommonControls:PurchaseOrderSearchControl Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+        <CommonControls:PurchaseOrderSearchControl x:Name="poListControl" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                                    OnTreeViewSelectionChanged="PurchaseOrderSearchControl_OnTreeViewSelectionChanged_1"/>
         <GridSplitter Grid.Row="0" Grid.Column="1"
                       HorizontalAlignment="Center"

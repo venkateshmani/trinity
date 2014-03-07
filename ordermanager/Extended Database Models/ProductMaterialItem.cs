@@ -1,4 +1,5 @@
 ﻿using ordermanager.DatabaseModel;
+using ordermanager.Interfaces_And_Enums;
 using ordermanager.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager.DatabaseModel
 {
-    public partial class ProductMaterialItem : EntityBase
+    public partial class ProductMaterialItem : EntityBase, IUIRefresher
     {
         #region [Wrappers]
         public virtual UnitsOfMeasurement UnitsOfMeasurementWrapper
@@ -233,6 +234,11 @@ namespace ordermanager.DatabaseModel
 
                 return true;
             }
+        }
+
+        public void RefreshUIProperties()
+        {
+            OnPropertyChanged("IsEditable");
         }
 
         private string m_PurchaseOrderNumber = string.Empty;

@@ -173,12 +173,13 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                 ProductMaterialItem item = sender as ProductMaterialItem;
                 if (item.IsSelectedToGeneratePO)
                 {
-                    TotalPOValue += item.Cost;
+                    TotalPOValue += item.ItemCostWrapper;
                     SelectedItems.Add(item);
                 }
                 else
                 {
-                    TotalPOValue -= item.Cost;
+                    TotalPOValue -= item.ItemCostWrapper;
+                    this.PurchaseOrder.ProductMaterialItems.Remove(item);
                     item.PurchaseOrder = null;
                     SelectedItems.Remove(item);
                 }

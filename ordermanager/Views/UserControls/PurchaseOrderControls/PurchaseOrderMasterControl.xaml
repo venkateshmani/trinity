@@ -51,6 +51,12 @@
                 <TabItem Header="  Generated Purchase Orders  ">
                     <UserControls:POControl x:Name="poViewer" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 </TabItem>
+                <TabItem Header="  GRN  ">
+                    <UserControls:GRNControl x:Name="grnControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                </TabItem>
+                <TabItem Header="  JO  ">
+
+                </TabItem>
             </TabControl>
         </Border>
     </Grid>

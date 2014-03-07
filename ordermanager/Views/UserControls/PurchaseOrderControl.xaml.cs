@@ -202,6 +202,11 @@ namespace ordermanager.Views.UserControls
                         {
                             foreach (ProductMaterial material in product.ProductMaterials)
                             {
+                                if (material.Approval != null && material.Approval.IsApproved != null && material.Approval.IsApproved.Value == false)
+                                {
+                                    material.Approval.IsApproved = null; 
+                                }
+
                                 if (material.Approval == null && material.IsBOMCostExceedsBudget())
                                 {
                                     Approval approval = new Approval();
@@ -221,6 +226,10 @@ namespace ordermanager.Views.UserControls
                                     foreach (ProductMaterial pm in op.ProductMaterials)
                                     {
                                         pm.RefreshUIProperties();
+                                        foreach (ProductMaterialItem item in pm.ProductMaterialItems)
+                                        {
+                                            item.RefreshUIProperties();
+                                        }
                                     }
                                 }
                             }

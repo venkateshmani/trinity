@@ -1,0 +1,29 @@
+﻿<Controls:MetroWindow xmlns:PurchaseOrderControls="clr-namespace:ordermanager.Views.UserControls.PurchaseOrderControls"  x:Class="ordermanager.Views.UserControls.PurchaseOrderControls.CreatePOWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CreatePOWindow" Height="641.729" Width="1198.873"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Metro.Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Controls:MetroWindow.GlowBrush>
+        <SolidColorBrush Color="{DynamicResource AccentColor}" />
+    </Controls:MetroWindow.GlowBrush>
+    <Grid>
+        <PurchaseOrderControls:CreateNewPurchaseOrderControl x:Name="poEditControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+    </Grid>
+</Controls:MetroWindow>

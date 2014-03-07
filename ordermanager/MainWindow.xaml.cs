@@ -34,9 +34,7 @@ namespace ordermanager
 
             if (!DBResources.Instance.CurrentUser.UserRole.CanCreateNewEnquiry)
                 newEnquiryTab.Visibility = System.Windows.Visibility.Collapsed;
-
-            if (!DBResources.Instance.CurrentUser.UserRole.CanModifyGRN)
-                tabGRN.Visibility = System.Windows.Visibility.Collapsed;
+            
             //if(!DBResources.Instance.CurrentUser.UserRole.CanModifyAssets)
             // assetsControl.Visibility = System.Windows.Visibility.Collapsed;
         }

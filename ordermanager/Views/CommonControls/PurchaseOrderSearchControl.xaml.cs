@@ -54,13 +54,27 @@ namespace ordermanager.Views.CommonControls
         public PurchaseOrderSearchControl()
         {
             InitializeComponent();
-            this.Loaded += PurchaseOrderSearchControl_Loaded;
         }
-
-        void PurchaseOrderSearchControl_Loaded(object sender, RoutedEventArgs e)
+      
+        private Order m_Order = null;
+        public Order Order
         {
-            ViewModel = new PurchaseOrderSearchControlViewModel();
-            tvSuppliers.ItemsSource = ViewModel.Suppliers;
+            get
+            {
+                return m_Order;
+            }
+            set
+            {
+                m_Order = value;
+                if (value != null)
+                {
+                    ViewModel = new PurchaseOrderSearchControlViewModel(value);
+                }
+                else
+                {
+                    ViewModel = null;
+                }
+            }
         }
 
         private void searchText_TextChanged_1(object sender, TextChangedEventArgs e)
@@ -69,69 +83,69 @@ namespace ordermanager.Views.CommonControls
         }
 
 
-        public void ApplyFilter()
-        {
-            string findText = searchText.Text;
-            foreach (object supplier in tvSuppliers.Items)
-            {
-                TreeViewItem supplierTreeItem = tvSuppliers.ItemContainerGenerator.ContainerFromItem(supplier) as TreeViewItem;
+        //public void ApplyFilter()
+        //{
+        //    string findText = searchText.Text;
+        //    foreach (object supplier in tvSuppliers.Items)
+        //    {
+        //        TreeViewItem supplierTreeItem = tvSuppliers.ItemContainerGenerator.ContainerFromItem(supplier) as TreeViewItem;
 
-                foreach (object purchaseOrder in supplierTreeItem.Items)
-                {
-                    TreeViewItem purchaseOrderTreeItem = supplierTreeItem.ItemContainerGenerator.ContainerFromItem(purchaseOrder) as TreeViewItem;
+        //        foreach (object purchaseOrder in supplierTreeItem.Items)
+        //        {
+        //            TreeViewItem purchaseOrderTreeItem = supplierTreeItem.ItemContainerGenerator.ContainerFromItem(purchaseOrder) as TreeViewItem;
 
-                    foreach (object material in purchaseOrderTreeItem.Items)
-                    {
-                        TreeViewItem materialTreeItem = tvSuppliers.ItemContainerGenerator.ContainerFromItem(material) as TreeViewItem;
+        //            foreach (object material in purchaseOrderTreeItem.Items)
+        //            {
+        //                TreeViewItem materialTreeItem = tvSuppliers.ItemContainerGenerator.ContainerFromItem(material) as TreeViewItem;
                         
-                    }
-                }
-            }
+        //            }
+        //        }
+        //    }
 
-            foreach (Company supplier in ViewModel.Suppliers)
-            {
-                bool supplierNameMatchesSearchCriteria = false;
-                if(supplier.Name.Contains(searchText.Text, StringComparison.OrdinalIgnoreCase))
-                  supplierNameMatchesSearchCriteria = true;
+        //    foreach (Company supplier in ViewModel.Suppliers)
+        //    {
+        //        bool supplierNameMatchesSearchCriteria = false;
+        //        if(supplier.Name.Contains(searchText.Text, StringComparison.OrdinalIgnoreCase))
+        //          supplierNameMatchesSearchCriteria = true;
 
-                foreach (PurchaseOrder purchaseOrder in supplier.PurchaseOrders)
-                {
-                    bool purchaseOrderNoMatchesSearchCriteria = false;
-                    if (supplierNameMatchesSearchCriteria || purchaseOrder.PurchaseOrderNumber.Contains(searchText.Text, StringComparison.OrdinalIgnoreCase))
-                        purchaseOrderNoMatchesSearchCriteria = true;
+        //        foreach (PurchaseOrder purchaseOrder in supplier.PurchaseOrders)
+        //        {
+        //            bool purchaseOrderNoMatchesSearchCriteria = false;
+        //            if (supplierNameMatchesSearchCriteria || purchaseOrder.PurchaseOrderNumber.Contains(searchText.Text, StringComparison.OrdinalIgnoreCase))
+        //                purchaseOrderNoMatchesSearchCriteria = true;
 
-                    int numberOfMaterialNameMatchesCriteria = 0;
-                    foreach (OrderedItem orderedItem in purchaseOrder.OrderedItems)
-                    {
-                        if (orderedItem.ProductMaterialItem.SubMaterial.Name.Contains(searchText.Text, StringComparison.OrdinalIgnoreCase) || purchaseOrderNoMatchesSearchCriteria)
-                        {
-                            orderedItem.Show();
-                            numberOfMaterialNameMatchesCriteria += 1;
-                        }
-                        else
-                        {
-                            orderedItem.Hide();
-                        }
-                    }
+        //            int numberOfMaterialNameMatchesCriteria = 0;
+        //            foreach (OrderedItem orderedItem in purchaseOrder.OrderedItems)
+        //            {
+        //                if (orderedItem.ProductMaterialItem.SubMaterial.Name.Contains(searchText.Text, StringComparison.OrdinalIgnoreCase) || purchaseOrderNoMatchesSearchCriteria)
+        //                {
+        //                    orderedItem.Show();
+        //                    numberOfMaterialNameMatchesCriteria += 1;
+        //                }
+        //                else
+        //                {
+        //                    orderedItem.Hide();
+        //                }
+        //            }
 
-                    if (numberOfMaterialNameMatchesCriteria != 0)
-                    {
-                        purchaseOrder.Show();
-                    }
-                    else
-                    {
-                        purchaseOrder.Hide();
-                    }
-                }
-            }
-        }
+        //            if (numberOfMaterialNameMatchesCriteria != 0)
+        //            {
+        //                purchaseOrder.Show();
+        //            }
+        //            else
+        //            {
+        //                purchaseOrder.Hide();
+        //            }
+        //        }
+        //    }
+        //}
 
-        private void tvSuppliers_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void tvPurchaseOrders_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             if (OnTreeViewSelectionChanged != null)
             {
                 DBResources.Instance.DiscardChanges();
-                OnTreeViewSelectionChanged(tvSuppliers.SelectedItem);
+                OnTreeViewSelectionChanged(tvPurchaseOrders.SelectedItem);
             }
         }
  

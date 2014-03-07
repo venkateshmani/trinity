@@ -34,6 +34,7 @@ namespace ordermanager.DatabaseModel
         public Nullable<byte> ReceiptStatusID { get; set; }
         public long OrderedItemID { get; set; }
         public string VechileNo { get; set; }
+        public string OtherChargersName { get; set; }
     
         public virtual OrderedItem OrderedItem { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }

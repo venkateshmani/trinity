@@ -212,7 +212,10 @@ namespace ordermanager.Views.UserControls
 
         void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateView();
+            if (e.OriginalSource != null && e.OriginalSource.GetType() == typeof(TabControl))
+            {
+                UpdateView();
+            }
             e.Handled = true;
         }
 

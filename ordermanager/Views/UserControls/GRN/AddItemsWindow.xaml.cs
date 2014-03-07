@@ -40,7 +40,17 @@ namespace ordermanager.Views.UserControls.GRN
                 checkedListBoxItems = new List<CheckedListItem<OrderedItem>>();
                 foreach (OrderedItem item in m_AvailableItems)
                 {
-                    checkedListBoxItems.Add(new CheckedListItem<OrderedItem>(item));
+                    decimal orderedQuantity = item.OrderedQuantity;
+                    decimal recievedQuantitySoFar = 0;
+                    foreach (var receipts in item.GRNReciepts)
+                    {
+                        recievedQuantitySoFar += receipts.RecievedInHandWrapper;
+                    }
+
+                    if (recievedQuantitySoFar < orderedQuantity)
+                    {
+                        checkedListBoxItems.Add(new CheckedListItem<OrderedItem>(item));
+                    }
                 }
 
                 itemsListBox.ItemsSource = checkedListBoxItems;

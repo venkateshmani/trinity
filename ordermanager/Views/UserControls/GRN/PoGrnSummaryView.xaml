@@ -153,7 +153,23 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                            </DataGrid.Columns>
+
+                                    <DataGridTemplateColumn Header="Other Charges(INR)" Width="0.1*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Text="{Binding OtherChargesInINR, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Other Charges Name" Width="0.1*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Text="{Binding OtherChargersName, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
                         </DataGrid>
                     </Border>
                    </StackPanel>

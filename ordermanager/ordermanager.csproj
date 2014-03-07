@@ -297,6 +297,7 @@
     <Compile Include="Extended Database Models\PurchaseOrder.cs" />
     <Compile Include="Extended Database Models\PurchaseOrderItems.cs" />
     <Compile Include="Extended Database Models\Quality.cs" />
+    <Compile Include="Interfaces And Enums\IUIRefresher.cs" />
     <Compile Include="Interfaces And Enums\ReceiptStatus.cs" />
     <Compile Include="Extended Database Models\Shipment.cs" />
     <Compile Include="Extended Database Models\User.cs" />
@@ -469,6 +470,9 @@
     </Compile>
     <Compile Include="Views\UserControls\PurchaseOrderControls\CreateNewPurchaseOrderControl.xaml.cs">
       <DependentUpon>CreateNewPurchaseOrderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\PurchaseOrderControls\CreatePOWindow.xaml.cs">
+      <DependentUpon>CreatePOWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\PurchaseOrderControls\POControl.xaml.cs">
       <DependentUpon>POControl.xaml</DependentUpon>
@@ -646,6 +650,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\PurchaseOrderControls\CreateNewPurchaseOrderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\PurchaseOrderControls\CreatePOWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

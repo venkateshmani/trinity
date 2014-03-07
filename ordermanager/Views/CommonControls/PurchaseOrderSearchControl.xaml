@@ -52,22 +52,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="searchText" FontSize="14" FontFamily="{StaticResource ContentFontFamily}" Height="30" Controls:TextboxHelper.Watermark="Search Here" 
-                 VerticalContentAlignment="Center" Controls:TextboxHelper.ClearTextButton="True" TextChanged="searchText_TextChanged_1"/>
-
-        <TreeView x:Name="tvSuppliers" Grid.Row="3" Grid.Column="0" Background="White" ItemsSource="{Binding Suppliers}" Margin="2" SelectedItemChanged="tvSuppliers_SelectedItemChanged">
+        <TreeView x:Name="tvPurchaseOrders" Grid.Row="3" Grid.Column="0" Background="White" ItemsSource="{Binding PurchaseOrders}" Margin="2" SelectedItemChanged="tvPurchaseOrders_SelectedItemChanged">
                 <TreeView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding PurchaseOrders}">
-                            <TextBlock HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" Visibility="{Binding Visibility}" Margin="3" />
-                                <HierarchicalDataTemplate.ItemTemplate>
-                                        <HierarchicalDataTemplate ItemsSource="{Binding OrderedItems}">
+                    <HierarchicalDataTemplate ItemsSource="{Binding OrderedItems}">
                             <TextBlock HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding PurchaseOrderNumber}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" Visibility="{Binding Visibility}" Margin="3"/>
-                                                    <HierarchicalDataTemplate.ItemTemplate>
-                                                        <HierarchicalDataTemplate >
-                                    <TextBlock HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding ProductMaterialItem.SubMaterial.Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"  Margin="3" Visibility="{Binding Visibility}"/>
-                                                        </HierarchicalDataTemplate>
-                                                    </HierarchicalDataTemplate.ItemTemplate>
-                                          </HierarchicalDataTemplate>
+                                <HierarchicalDataTemplate.ItemTemplate>
+                                    <HierarchicalDataTemplate >
+                                        <TextBlock HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding ProductMaterialItem.SubMaterial.Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"  Margin="3" Visibility="{Binding Visibility}"/>
+                                    </HierarchicalDataTemplate>
                                 </HierarchicalDataTemplate.ItemTemplate>
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>

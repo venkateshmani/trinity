@@ -3,6 +3,7 @@ using ordermanager.DatabaseModel;
 using ordermanager.Interfaces_And_Enums;
 using ordermanager.ViewModel;
 using ordermanager.Views.PopUps;
+using ordermanager.Views.UserControls.PurchaseOrderControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -241,6 +242,7 @@ namespace ordermanager.Views.UserControls.GRN
                 newPurchaseOrder.PurchaseOrderNumber = Constants.GetPurchaseOrderNumber(ViewModel.SelectedGRNReceipt.OrderedItem.PurchaseOrder.Company, ViewModel.SelectedGRNReceipt.OrderedItem.PurchaseOrder.Order);
                 newPurchaseOrder.PurchaseOrderStatusID = 1;
                 newPurchaseOrder.Company = Supplier;
+                newPurchaseOrder.TermsAndConditions = ViewModel.SelectedGRNReceipt.OrderedItem.PurchaseOrder.TermsAndConditions;
 
                 OrderedItem newOrderedItem = ViewModel.OrderedItem.Clone() as OrderedItem;
                 newOrderedItem.OrderedQuantity = ViewModel.SelectedGRNReceipt.QualityFailedQuantityWrapper;
@@ -252,9 +254,15 @@ namespace ordermanager.Views.UserControls.GRN
                 ViewModel.SelectedGRNReceipt.PurchaseOrder = newPurchaseOrder;
 
                 ViewModel.Order.PurchaseOrders.Add(newPurchaseOrder);
-                DBResources.Instance.Save();
-                ViewModel.SelectedGRNReceipt.RefreshUIEnablers();
-                InformUser("New Purchase Order Generated Successfully");
+
+                CreatePOWindow poWindow = new CreatePOWindow();
+                poWindow.PurchaseOrder = newPurchaseOrder;
+
+                if (poWindow.ShowDialog() == true)
+                {
+                    ViewModel.SelectedGRNReceipt.RefreshUIEnablers();
+                    InformUser("New Purchase Order Generated Successfully");    
+                }
             }
             else
             {

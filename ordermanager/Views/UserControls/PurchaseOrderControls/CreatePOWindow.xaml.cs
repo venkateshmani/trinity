@@ -11,40 +11,32 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ordermanager.Views.UserControls.PurchaseOrderControls
 {
     /// <summary>
-    /// Interaction logic for PurchaseOrderMasterControl.xaml
+    /// Interaction logic for CreatePOWindow.xaml
     /// </summary>
-    public partial class PurchaseOrderMasterControl : UserControl
+    public partial class CreatePOWindow 
     {
-        public PurchaseOrderMasterControl()
+        public CreatePOWindow()
         {
             InitializeComponent();
         }
 
-        private Order m_Order = null;
-        public Order Order
+        private PurchaseOrder m_PurchaseOrder = null;
+        public PurchaseOrder PurchaseOrder
         {
             get
             {
-                return m_Order;
+                return m_PurchaseOrder;
             }
             set
             {
-                m_Order = value;
+                m_PurchaseOrder = value;
+                poEditControl.SetOrder(value.Order, value);
             }
-        }
-
-        public void SetOrder(Order order)
-        {
-            Order = order;
-            poViewer.SetOrder(Order);
-            newPoCreator.SetOrder(Order);
-            grnControl.Order = order;
         }
     }
 }

@@ -756,13 +756,14 @@ namespace ordermanager.ViewModel
             }
         }
 
-        Task reloaderTask = null;
+        //Task reloaderTask = null;
         public void ReloadChangedEntities()
         {
-            if (reloaderTask != null)
-                reloaderTask.Wait();
+            //if (reloaderTask != null)
+            //    reloaderTask.Wait();
 
-            reloaderTask = Task.Factory.StartNew(() => Reload());
+            //reloaderTask = Task.Factory.StartNew(() => );
+            Reload();
         }
 
         private void Reload()
@@ -807,14 +808,10 @@ namespace ordermanager.ViewModel
         }
 
 
-        Task dbUpdateTask = null;
         public bool Save()
         {
             try
             {
-                if (dbUpdateTask != null)
-                    dbUpdateTask.Wait();
-
                 AttachTheMissingNavigationProperties();
                 LastUpdated = GetServerTime(true);
                 dbContext.SaveChanges();
