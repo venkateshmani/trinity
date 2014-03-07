@@ -240,12 +240,15 @@ namespace ordermanager.Views.UserControls.GRN
             {
                 PurchaseOrder newPurchaseOrder = new PurchaseOrder();
                 newPurchaseOrder.PurchaseOrderNumber = Constants.GetPurchaseOrderNumber(ViewModel.SelectedGRNReceipt.OrderedItem.PurchaseOrder.Company, ViewModel.SelectedGRNReceipt.OrderedItem.PurchaseOrder.Order);
+                newPurchaseOrder.PurchaseOrderDate = DBResources.Instance.GetServerTime();
                 newPurchaseOrder.PurchaseOrderStatusID = 1;
                 newPurchaseOrder.Company = Supplier;
                 newPurchaseOrder.TermsAndConditions = ViewModel.SelectedGRNReceipt.OrderedItem.PurchaseOrder.TermsAndConditions;
 
                 OrderedItem newOrderedItem = ViewModel.OrderedItem.Clone() as OrderedItem;
                 newOrderedItem.OrderedQuantity = ViewModel.SelectedGRNReceipt.QualityFailedQuantityWrapper;
+                newOrderedItem.CostWrapper = ViewModel.SelectedGRNReceipt.OrderedItem.CostWrapper;
+                newOrderedItem.TaxPerUnitWrapper = ViewModel.SelectedGRNReceipt.OrderedItem.TaxPerUnitWrapper;
                 newOrderedItem.PurchaseOrder = newPurchaseOrder;
                 
                 newPurchaseOrder.OrderedItems.Add(newOrderedItem);
@@ -253,10 +256,8 @@ namespace ordermanager.Views.UserControls.GRN
                 ViewModel.SelectedGRNReceipt.SpawnedNewPurchaseOrder = true;
                 ViewModel.SelectedGRNReceipt.PurchaseOrder = newPurchaseOrder;
 
-                ViewModel.Order.PurchaseOrders.Add(newPurchaseOrder);
-
                 CreatePOWindow poWindow = new CreatePOWindow();
-                poWindow.PurchaseOrder = newPurchaseOrder;
+                poWindow.SetOrder(ViewModel.Order, newPurchaseOrder);
 
                 if (poWindow.ShowDialog() == true)
                 {

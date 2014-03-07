@@ -25,18 +25,9 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
             InitializeComponent();
         }
 
-        private PurchaseOrder m_PurchaseOrder = null;
-        public PurchaseOrder PurchaseOrder
+        public void SetOrder(Order order, PurchaseOrder po)
         {
-            get
-            {
-                return m_PurchaseOrder;
-            }
-            set
-            {
-                m_PurchaseOrder = value;
-                poEditControl.SetOrder(value.Order, value);
-            }
+            poEditControl.SetOrder(order, po);
         }
     }
 }

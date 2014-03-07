@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager.DatabaseModel
 {
-    public partial class OrderedItem : EntityBase, ICloneable
+    public partial class OrderedItem : EntityBase, ICloneable, IPurchaseOrderItem
     {
 
         public string MaterialName
@@ -220,6 +220,118 @@ namespace ordermanager.DatabaseModel
             if (m_AllJobOrders == null)
                 LoadAllJobOrders();           
             return new ObservableCollection<JobOrder>(m_AllJobOrders.Where(jo => jo.JobOrderType.Type == type).Select(jo => jo).ToList());
+        }
+
+        public string Alias
+        {
+            get
+            {
+                return this.ProductMaterialItem.Alias;
+            }
+            set
+            {
+                this.ProductMaterialItem.Alias = value;
+            }
+        }
+
+        public decimal CostWrapper
+        {
+            get
+            {
+                if (this.CostPerUnit == null)
+                     CostPerUnit = 0;
+
+                return CostPerUnit.Value;
+            }
+            set
+            {
+                this.CostPerUnit = value;
+                CalcluateCost();
+            }
+        }
+
+        public Currency Currency
+        {
+            get
+            {
+                return this.ProductMaterialItem.Currency;
+            }
+            set
+            {
+                this.ProductMaterialItem.Currency = value; 
+            }
+        }
+
+        public decimal ItemCostWrapper
+        {
+            get
+            {
+                if (this.TotalCost == null)
+                    this.TotalCost = 0;
+
+                return this.TotalCost.Value;
+            }
+            set
+            {
+                this.TotalCost = value;
+           }
+        }
+
+        public decimal QuantityWrapper
+        {
+            get
+            {
+                return this.OrderedQuantity;
+            }
+            set
+            {
+                this.OrderedQuantity = value;
+                CalcluateCost();
+            }
+        }
+
+        public SubMaterial SubMaterial
+        {
+            get
+            {
+                return this.ProductMaterialItem.SubMaterial;
+            }
+            set
+            {
+                this.ProductMaterialItem.SubMaterial = value;
+            }
+        }
+
+        public decimal TaxPerUnitWrapper
+        {
+            get
+            {
+                if (TaxInINRPerUnit == null)
+                    TaxInINRPerUnit = 0;
+                return TaxInINRPerUnit.Value;
+            }
+            set
+            {
+                TaxInINRPerUnit = value;
+                CalcluateCost();
+            }
+        }
+
+        public UnitsOfMeasurement UnitsOfMeasurementWrapper
+        {
+            get
+            {
+                return this.ProductMaterialItem.UnitsOfMeasurement;
+            }
+            set
+            {
+                this.ProductMaterialItem.UnitsOfMeasurement = value;
+            }
+        }
+
+        private void CalcluateCost()
+        {
+            ItemCostWrapper = (CostWrapper + TaxPerUnitWrapper) * QuantityWrapper;
         }
     }
 }

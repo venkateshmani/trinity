@@ -61,7 +61,11 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                 PurchasableMaterials = null;
                 foreach (var item in SelectedItems)
                 {
-                    item.IsSelectedToGeneratePO = false;
+                    var pmItem = item as ProductMaterialItem;
+                    if (pmItem  != null)
+                    {
+                        pmItem.IsSelectedToGeneratePO = false;
+                    }
                 }
                 OnPropertyChanged("POCurrency");
             }
@@ -93,6 +97,14 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                 if (firstItem != null)
                 {
                     POCurrency = firstItem.Currency;
+                }
+                else
+                {
+                    var firstOrderedItem = value.OrderedItems.FirstOrDefault();
+                    if (firstOrderedItem != null)
+                    {
+                        POCurrency = firstOrderedItem.Currency;
+                    }
                 }
             }
         }
@@ -144,18 +156,26 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
             }
         }
 
-        private ObservableCollection<ProductMaterialItem> m_SelectedItems = null;
-        public ObservableCollection<ProductMaterialItem> SelectedItems
+        private ObservableCollection<IPurchaseOrderItem> m_SelectedItems = null;
+        public ObservableCollection<IPurchaseOrderItem> SelectedItems
         {
             get
             {
                 if (m_SelectedItems == null)
                 {
-                    foreach (var item in PurchaseOrder.ProductMaterialItems)
+
+                    if (PurchaseOrder.ProductMaterialItems.Count == 0 && PurchaseOrder.OrderedItems.Count != 0)
                     {
-                        item.IsSelectedToGeneratePO = true;
+                        m_SelectedItems = new ObservableCollection<IPurchaseOrderItem>(PurchaseOrder.OrderedItems);
                     }
-                    m_SelectedItems = new ObservableCollection<ProductMaterialItem>(PurchaseOrder.ProductMaterialItems);
+                    else
+                    {
+                        foreach (var item in PurchaseOrder.ProductMaterialItems)
+                        {
+                            item.IsSelectedToGeneratePO = true;
+                        }
+                        m_SelectedItems = new ObservableCollection<IPurchaseOrderItem>(PurchaseOrder.ProductMaterialItems);
+                    }
                 }
 
                 return m_SelectedItems;

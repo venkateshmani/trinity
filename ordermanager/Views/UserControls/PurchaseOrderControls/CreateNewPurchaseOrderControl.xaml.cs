@@ -74,7 +74,8 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
 
             if (po.Approval == null)
             {
-
+                btnChooseItems.Visibility = System.Windows.Visibility.Collapsed;
+                poCurrencySelection.IsEnabled = false;
             }
             else if (po.Approval.IsApproved == null)
             {
@@ -213,7 +214,7 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                         ViewModel.PurchaseOrder = DBResources.Instance.Context.PurchaseOrders.Add(ViewModel.PurchaseOrder);
                     }
 
-                    foreach (ProductMaterialItem item in ViewModel.SelectedItems)
+                    foreach (IPurchaseOrderItem item in ViewModel.SelectedItems)
                     {
                         item.PurchaseOrder = ViewModel.PurchaseOrder;
                     }
@@ -266,13 +267,19 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
             else if(positiveBtn.Content.ToString() == "Approve")
             {
                 
-                foreach (ProductMaterialItem item in ViewModel.SelectedItems)
+                foreach (IPurchaseOrderItem item in ViewModel.SelectedItems)
                 {
-                    OrderedItem itemToOrder = new OrderedItem { ProductMaterialItem = item, OrderedQuantity = item.Quantity };
-                    item.SupplierWrapper = ViewModel.PurchaseOrder.Company;
-                    item.LastPOGeneratedOn = DBResources.Instance.GetServerTime();
-                    ViewModel.PurchaseOrder.OrderedItems.Add(itemToOrder);
-                    item.PurchaseOrder = ViewModel.PurchaseOrder;
+                    if (item is ProductMaterialItem)
+                    {
+                        ProductMaterialItem pmItem = item as ProductMaterialItem;
+                        OrderedItem itemToOrder = new OrderedItem { ProductMaterialItem = pmItem, OrderedQuantity = pmItem.Quantity };
+                        itemToOrder.CostWrapper = item.CostWrapper;
+                        itemToOrder.TaxPerUnitWrapper = item.TaxPerUnitWrapper;
+                        pmItem.SupplierWrapper = ViewModel.PurchaseOrder.Company;
+                        pmItem.LastPOGeneratedOn = DBResources.Instance.GetServerTime();
+                        ViewModel.PurchaseOrder.OrderedItems.Add(itemToOrder);
+                        item.PurchaseOrder = ViewModel.PurchaseOrder;
+                    }
                 }
 
 
@@ -346,7 +353,16 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                     {
                         positiveBtn.Visibility = System.Windows.Visibility.Visible;
                         negativeBtn.Visibility = System.Windows.Visibility.Visible;
-                        btnChooseItems.Visibility = System.Windows.Visibility.Visible;
+
+                        if (ViewModel.PurchaseOrder.OrderedItems.Count == 0)
+                        {
+                            btnChooseItems.Visibility = System.Windows.Visibility.Visible;
+                        }
+                        else
+                        {
+                            btnChooseItems.Visibility = System.Windows.Visibility.Collapsed;
+                            poCurrencySelection.IsEnabled = false;
+                        }
                         ViewModel.IsReadOnly = false;
                     }
                     else

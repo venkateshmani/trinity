@@ -25,6 +25,9 @@ namespace ordermanager.DatabaseModel
         public decimal OrderedQuantity { get; set; }
         public Nullable<decimal> ExcessiveQuantity { get; set; }
         public Nullable<decimal> PendingQuantity { get; set; }
+        public Nullable<decimal> TaxInINRPerUnit { get; set; }
+        public Nullable<decimal> CostPerUnit { get; set; }
+        public Nullable<decimal> TotalCost { get; set; }
     
         public virtual ICollection<GRNReciept> GRNReciepts { get; set; }
         public virtual ProductMaterialItem ProductMaterialItem { get; set; }

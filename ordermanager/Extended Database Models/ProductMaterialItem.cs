@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager.DatabaseModel
 {
-    public partial class ProductMaterialItem : EntityBase, IUIRefresher
+    public partial class ProductMaterialItem : EntityBase, IUIRefresher, IPurchaseOrderItem
     {
         #region [Wrappers]
         public virtual UnitsOfMeasurement UnitsOfMeasurementWrapper

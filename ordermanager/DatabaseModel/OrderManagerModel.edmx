@@ -686,6 +686,9 @@
           <Property Name="OrderedQuantity" Type="decimal" Nullable="false" Scale="4" />
           <Property Name="ExcessiveQuantity" Type="decimal" Scale="4" />
           <Property Name="PendingQuantity" Type="decimal" Scale="4" />
+          <Property Name="TaxInINRPerUnit" Type="decimal" Scale="4" />
+          <Property Name="CostPerUnit" Type="decimal" Scale="4" />
+          <Property Name="TotalCost" Type="decimal" Scale="4" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
@@ -2746,6 +2749,9 @@
           <Property Name="OrderedQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <Property Name="ExcessiveQuantity" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="PendingQuantity" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="TaxInINRPerUnit" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="CostPerUnit" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="TotalCost" Type="Decimal" Precision="18" Scale="4" />
           <NavigationProperty Name="GRNReciepts" Relationship="OrderManagerDBModel.FK_GRNReciept_OrderedItem" FromRole="OrderedItem" ToRole="GRNReciept" />
           <NavigationProperty Name="ProductMaterialItem" Relationship="OrderManagerDBModel.FK_OrderedItem_ProductMaterialItem" FromRole="OrderedItem" ToRole="ProductMaterialItem" />
           <NavigationProperty Name="PurchaseOrder" Relationship="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders" FromRole="OrderedItem" ToRole="PurchaseOrders" />
@@ -4449,6 +4455,9 @@
                 <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
                 <ScalarProperty Name="ExcessiveQuantity" ColumnName="ExcessiveQuantity" />
                 <ScalarProperty Name="PendingQuantity" ColumnName="PendingQuantity" />
+                <ScalarProperty Name="TaxInINRPerUnit" ColumnName="TaxInINRPerUnit" />
+                <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
