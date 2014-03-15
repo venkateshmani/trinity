@@ -128,6 +128,25 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        decimal m_ItemCostInItemCurrency = -1;
+        public decimal ItemCostInItemCurrency
+        {
+            get
+            {
+                if (m_ItemCostInItemCurrency == -1)
+                    CalculateItemCost();
+                return m_ItemCostInItemCurrency;
+            }
+            set
+            {
+                if (m_ItemCostInItemCurrency != value)
+                {
+                    m_ItemCostInItemCurrency = value;
+                    OnPropertyChanged("ItemCostInItemCurrency");
+                }
+            }
+        }
+
         public virtual SubMaterial SubMaterialWrapper
         {
             get
@@ -343,6 +362,7 @@ namespace ordermanager.DatabaseModel
                 uomMultipler = UnitsOfMeasurement.Multiplier;
 
             ItemCostWrapper = (Cost + TaxPerUnitWrapper) * Quantity * CurrencyValueInINR * uomMultipler;
+            ItemCostInItemCurrency = (Cost + TaxPerUnitWrapper) * Quantity * uomMultipler;
         }
         #endregion [Helpers]
 

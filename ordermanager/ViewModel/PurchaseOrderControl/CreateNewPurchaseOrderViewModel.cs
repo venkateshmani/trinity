@@ -193,12 +193,12 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                 ProductMaterialItem item = sender as ProductMaterialItem;
                 if (item.IsSelectedToGeneratePO)
                 {
-                    TotalPOValue += item.ItemCostWrapper;
+                    TotalPOValue += item.ItemCostInItemCurrency;
                     SelectedItems.Add(item);
                 }
                 else
                 {
-                    TotalPOValue -= item.ItemCostWrapper;
+                    TotalPOValue -= item.ItemCostInItemCurrency;
                     this.PurchaseOrder.ProductMaterialItems.Remove(item);
                     item.PurchaseOrder = null;
                     SelectedItems.Remove(item);
@@ -216,7 +216,7 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                     m_TotalPOValue = 0;
                     foreach (var item in SelectedItems)
                     {
-                        m_TotalPOValue += item.ItemCostWrapper;
+                        m_TotalPOValue += item.ItemCostInItemCurrency;
                     }
                 }
                 return m_TotalPOValue;

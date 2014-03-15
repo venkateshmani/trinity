@@ -16,6 +16,7 @@ namespace ordermanager.Views.UserControls
         {
             InitializeComponent();
             tabControlJobWorks.Visibility = System.Windows.Visibility.Collapsed;
+            ViewModel = new JobWorkViewModel();
         }
 
         private void Save_Click(object sender, RoutedEventArgs e)
@@ -23,10 +24,6 @@ namespace ordermanager.Views.UserControls
             ViewModel.Save();
         }
 
-        public void SetOrder(Order order)
-        {
-            ViewModel = new JobWorkViewModel(order);
-        }
 
         public JobWorkViewModel ViewModel
         {

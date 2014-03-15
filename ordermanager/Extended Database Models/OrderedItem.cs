@@ -277,6 +277,21 @@ namespace ordermanager.DatabaseModel
            }
         }
 
+        public decimal ItemCostInItemCurrency
+        {
+            get
+            {
+                if (this.TotalCost == null)
+                    this.TotalCost = 0;
+
+                return this.TotalCost.Value;
+            }
+            set
+            {
+                this.TotalCost = value;
+            }
+        }
+
         public decimal QuantityWrapper
         {
             get
@@ -331,7 +346,7 @@ namespace ordermanager.DatabaseModel
 
         private void CalcluateCost()
         {
-            ItemCostWrapper = (CostWrapper + TaxPerUnitWrapper) * QuantityWrapper;
+            ItemCostWrapper = (CostWrapper + TaxPerUnitWrapper) * QuantityWrapper * UnitsOfMeasurementWrapper.Multiplier;
         }
     }
 }
