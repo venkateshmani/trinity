@@ -71,7 +71,7 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
             try
             {
                 string supplierInformation = GetSupplierInformation(PurchaseOrder.Company);
-                string purchaseOrderNumber = GetPurchaseOrderNumber(PurchaseOrder.Company);
+                string purchaseOrderNumber = PurchaseOrder.PurchaseOrderNumber;
                 string quoteNumber = GetQuoteNumber();
                 string quoteDate = GetQuoteDate(PurchaseOrder.PurchaseOrderDate);
 
@@ -96,15 +96,30 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
 
         private string GetQuoteDate(DateTime? date)
         {
-            if (date == null)
-                return string.Empty;
 
-            return date.Value.ToString("MM/dd/yyyy");
+            if (PurchaseOrder.QuotationDate == null)
+            {
+                if (date == null)
+                    return string.Empty;
+
+                return date.Value.ToString("dd/MM/yyyy");
+            }
+            else
+            {
+                return PurchaseOrder.QuotationDate.Value.ToString("dd/MM/yyyy");
+            }
         }
 
         private string GetQuoteNumber()
         {
-            return string.Format("HMI-{0}R", Order.OrderID.ToString());
+            if (string.IsNullOrEmpty(PurchaseOrder.QuotationNumber))
+            {
+                return string.Format("HMI-{0}R", Order.OrderID.ToString());
+            }
+            else
+            {
+                return PurchaseOrder.QuotationNumber;
+            }
         }
 
         private string GetPurchaseOrderNumber(Company supplier)

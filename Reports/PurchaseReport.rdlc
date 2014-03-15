@@ -234,7 +234,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Your Quote No.</Value>
+                    <Value>Quote No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -270,7 +270,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>QuotationDate</Value>
+                    <Value>Quotation Date </Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontWeight>Bold</FontWeight>

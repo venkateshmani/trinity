@@ -278,6 +278,63 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+
+        public Nullable<System.DateTime> QuotationDateWrapper
+        {
+            get
+            {
+                return QuotationDate;
+            }
+            set
+            {
+                QuotationDate = value;
+                ValidateQuotationDate();
+                OnPropertyChanged("QuotationDateWrapper");
+            }
+        
+        }
+
+        private void ValidateQuotationDate()
+        {
+            if (QuotationDateWrapper == null)
+            {
+                AddError("QuotationDateWrapper", "Please choose a date", false);
+            }
+            else
+            {
+                RemoveError("QuotationDateWrapper", "Please choose a date");
+            }
+                
+        }
+
+        public string QuotationNumberWrapper
+        {
+            get
+            {
+                return QuotationNumber;
+            }
+            set
+            {
+                QuotationNumber = value;
+                ValidateQuotationNumber();
+                OnPropertyChanged("QuotationNumberWrapper");
+            }
+        }
+
+        private void ValidateQuotationNumber()
+        {
+            if(string.IsNullOrEmpty(QuotationNumber.Trim()))
+            {
+                AddError("QuotationNumberWrapper", "Please enter quotation number", false);
+            }
+            else
+            {
+                RemoveError("QuotationNumberWrapper", "Please enter quotation number");
+            }
+        }
+
+        
+
         public string PurchaseOrderNumberWrapper
         {
             get
@@ -350,6 +407,8 @@ namespace ordermanager.DatabaseModel
             ValidateSupplier();
             ValidatePurchaseOrderDateWrapper();
             ValidateTermsAndConditions();
+            ValidateQuotationNumber();
+            ValidateQuotationDate();
         }
 
 

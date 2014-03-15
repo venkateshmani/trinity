@@ -893,6 +893,8 @@
           <Property Name="OrderID" Type="bigint" Nullable="false" />
           <Property Name="TermsAndConditions" Type="varchar" MaxLength="500" />
           <Property Name="ApprovalID" Type="bigint" />
+          <Property Name="QuotationDate" Type="datetime" />
+          <Property Name="QuotationNumber" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PurchaseOrderStatus">
           <Key>
@@ -3018,6 +3020,8 @@
           <Property Name="OrderID" Type="Int64" Nullable="false" />
           <Property Name="TermsAndConditions" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
           <Property Name="ApprovalID" Type="Int64" />
+          <Property Name="QuotationDate" Type="DateTime" Precision="3" />
+          <Property Name="QuotationNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Approval" FromRole="PurchaseOrders" ToRole="Approval" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Company" FromRole="PurchaseOrders" ToRole="Company" />
           <NavigationProperty Name="GRNReciepts" Relationship="OrderManagerDBModel.FK_GRNReciept_PurchaseOrders" FromRole="PurchaseOrders" ToRole="GRNReciept" />
@@ -4681,6 +4685,8 @@
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
                 <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+                <ScalarProperty Name="QuotationDate" ColumnName="QuotationDate" />
+                <ScalarProperty Name="QuotationNumber" ColumnName="QuotationNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

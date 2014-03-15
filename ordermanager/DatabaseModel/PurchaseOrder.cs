@@ -29,6 +29,8 @@ namespace ordermanager.DatabaseModel
         public long OrderID { get; set; }
         public string TermsAndConditions { get; set; }
         public Nullable<long> ApprovalID { get; set; }
+        public Nullable<System.DateTime> QuotationDate { get; set; }
+        public string QuotationNumber { get; set; }
     
         public virtual Approval Approval { get; set; }
         public virtual Company Company { get; set; }

@@ -79,6 +79,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -138,42 +139,50 @@
                 <TextBlock Text="Purchase Order No. :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" />
                 <TextBlock Text="{Binding PurchaseOrder.PurchaseOrderNumberWrapper}" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" />
                 
-                <TextBlock Text="Price Terms :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="3" />
-                <TextBox Text="{Binding PurchaseOrder.PriceTerms}" Width="200" Margin="5,5,0,5"
-                         Height="60" TextWrapping="Wrap"
-                         AcceptsReturn="True"
-                         Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
+                <TextBlock Text="Quotation Date :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="3" />
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="5">
+                        <DatePicker x:Name="quoteDate" VerticalAlignment="Center" Width="100" IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" SelectedDate="{Binding PurchaseOrder.QuotationDateWrapper}" />
+                        <TextBlock  Text="no." Margin="5,0,0,0" VerticalAlignment="Center" />
+                        <TextBox Text="{Binding PurchaseOrder.QuotationNumberWrapper}" Width="50" Margin="5,0,0,0"
+                    		HorizontalAlignment="Left"  IsReadOnly="{Binding IsReadOnly}"/>
+                    </StackPanel>
 
-                <TextBlock Text="Freigt :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="4" />
+                    <TextBlock Text="Price Terms :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="4" />
+                    <TextBox Text="{Binding PurchaseOrder.PriceTerms}" Width="200" Margin="5,5,0,5"
+                         Height="55" TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
+
+                <TextBlock Text="Freigt :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="5" />
                 <TextBox Text="{Binding PurchaseOrder.Freigt}" Width="200" Margin="5,5,0,5"
-                         Height="60" TextWrapping="Wrap"
-                         AcceptsReturn="True"
-                         Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
-
-                <TextBlock Text="Payment Terms :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="5" />
-                <TextBox Text="{Binding PurchaseOrder.PaymentTerms}" Width="200" Margin="5,5,0,5"
-                         Height="60" TextWrapping="Wrap"
+                         Height="55" TextWrapping="Wrap"
                          AcceptsReturn="True"
                          Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
 
-                <TextBlock Text="Delivery Date :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="6" />
-                <TextBox Text="{Binding PurchaseOrder.DeliveryDate}" Width="200" Margin="5,5,0,5"
-                         Height="60" TextWrapping="Wrap"
+                <TextBlock Text="Payment Terms :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="6" />
+                <TextBox Text="{Binding PurchaseOrder.PaymentTerms}" Width="200" Margin="5,5,0,5"
+                         Height="5" TextWrapping="Wrap"
                          AcceptsReturn="True"
                          Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
 
-
-                <TextBlock Text="Quality Specifications :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="7" />
-                <TextBox Text="{Binding PurchaseOrder.QualitySpecifications}" Width="200" Margin="5,5,0,5"
-                         Height="60" TextWrapping="Wrap"
+                <TextBlock Text="Delivery Date :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="7" />
+                <TextBox Text="{Binding PurchaseOrder.DeliveryDate}" Width="200" Margin="5,5,0,5"
+                         Height="55" TextWrapping="Wrap"
                          AcceptsReturn="True"
                          Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
 
-                <TextBlock Text="Quantity Allowance :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="8" />
-                <TextBox Text="{Binding PurchaseOrder.QuantityAllowance}" Width="200" Margin="5,5,0,5"
-                         Height="60" TextWrapping="Wrap"
+
+                <TextBlock Text="Quality Specifications :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="8" />
+                <TextBox Text="{Binding PurchaseOrder.QualitySpecifications}" Width="200" Margin="5,5,0,5"
+                         Height="55" TextWrapping="Wrap"
                          AcceptsReturn="True"
                          Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
+
+                <TextBlock Text="Quantity Allowance :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="9" />
+                <TextBox Text="{Binding PurchaseOrder.QuantityAllowance}" Width="200" Margin="5,5,0,5"
+                         Height="55" TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         Grid.Row="9" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
 
 
             </Grid>
