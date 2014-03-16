@@ -305,6 +305,18 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+
+        public decimal GetRecievedQuantity()
+        {
+            decimal goodsRecieved = 0;
+            foreach (var reciept in GRNReciepts)
+            {
+                goodsRecieved += reciept.InvoicedQuantityWrapper;
+            }
+            return goodsRecieved;
+        }
+    
+
         public SubMaterial SubMaterial
         {
             get

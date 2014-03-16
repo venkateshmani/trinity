@@ -131,6 +131,20 @@ namespace ordermanager.DatabaseModel
             OnPropertyChanged("PassedQuantityStatus");
         }
 
+        private decimal m_AlreadyRecievedQuantity = 0;
+        public decimal AlreadyRecievedQuantity
+        {
+            get
+            {
+                return m_AlreadyRecievedQuantity;
+            }
+            set
+            {
+                m_AlreadyRecievedQuantity = value;
+                OnPropertyChanged("AlreadyRecievedQuantity");
+            }
+        }
+
         //private ObservableCollection<JobOrder> m_KnittingItemsWrapper = null;
         //private ObservableCollection<JobOrder> m_DyeingItemsWrapper = null;
         //private ObservableCollection<JobOrder> m_PrintingItemsWrapper = null;
@@ -319,6 +333,18 @@ namespace ordermanager.DatabaseModel
             else
             {
                 RemoveError("InvoicedQuantityWrapper", "Enter the quantity mentioned in the Invoice");
+
+                decimal totalInvoicedQuantity = AlreadyRecievedQuantity + InvoicedQuantityWrapper;
+                decimal maxAllowedQuantity = totalInvoicedQuantity + 0.05M * totalInvoicedQuantity;
+
+                if (OrderedItem.OrderedQuantity < totalInvoicedQuantity)
+                {
+                    AddError("InvoicedQuantityWrapper", "Exceeds 5% allowance", false);
+                }
+                else
+                {
+                    RemoveError("InvoicedQuantityWrapper", "Exceeds 5% allowance");
+                }
             }
         }
 

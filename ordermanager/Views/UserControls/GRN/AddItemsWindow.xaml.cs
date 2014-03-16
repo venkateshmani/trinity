@@ -44,7 +44,7 @@ namespace ordermanager.Views.UserControls.GRN
                     decimal recievedQuantitySoFar = 0;
                     foreach (var receipts in item.GRNReciepts)
                     {
-                        recievedQuantitySoFar += receipts.RecievedInHandWrapper;
+                        recievedQuantitySoFar += receipts.InvoicedQuantityWrapper;
                     }
 
                     if (recievedQuantitySoFar < orderedQuantity)

@@ -131,6 +131,7 @@ namespace ordermanager.ViewModel
             foreach (OrderedItem item in items)
             {
                 GRNReciept newReceipt = new GRNReciept();
+                newReceipt.AlreadyRecievedQuantity = item.GetRecievedQuantity();
                 newReceipt.OrderedItem = item;
                 newReceipt.InvoiceNumber = this.InvoiceNumber;
                 newReceipt.InvoiceDate = this.InvoiceDate;
