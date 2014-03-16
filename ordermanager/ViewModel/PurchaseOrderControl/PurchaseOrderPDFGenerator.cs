@@ -75,7 +75,7 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
                 string quoteNumber = GetQuoteNumber();
                 string quoteDate = GetQuoteDate(PurchaseOrder.PurchaseOrderDate);
 
-                purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, quoteNumber, quoteDate,
+                purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, PurchaseOrder.PurchaseOrderDate.Value.ToString("dd/MM/yyyy"), quoteNumber, quoteDate,
                                                          PurchaseOrder.PriceTerms, 
                                                          PurchaseOrder.Freigt,
                                                          PurchaseOrder.PaymentTerms,

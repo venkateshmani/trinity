@@ -119,7 +119,7 @@ namespace ordermanager.Views.UserControls
                 string quoteNumber = GetQuoteNumber();
                 string quoteDate = GetQuoteDate(po.PurchaseOrderDate);
 
-                purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, quoteNumber, quoteDate,
+                purchaseOrderReportControl.SetParameters(supplierInformation, purchaseOrderNumber, po.PurchaseOrderDate.Value.ToShortDateString(), quoteNumber, quoteDate,
                                                         po.PriceTerms,
                                                         po.Freigt,
                                                         po.PaymentTerms,
