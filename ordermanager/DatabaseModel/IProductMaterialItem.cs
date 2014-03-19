@@ -13,5 +13,7 @@ namespace ordermanager.DatabaseModel
         decimal TaxPerUnitWrapper { get; set; }
         UnitsOfMeasurement UnitsOfMeasurementWrapper { get; set; }
         PurchaseOrder PurchaseOrder { get; set; }
+        decimal ActualInINR { get; }
+        decimal BudgetInINR { get; }
     }
 }

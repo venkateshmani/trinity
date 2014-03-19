@@ -234,7 +234,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.15*">
+                            <DataGridTemplateColumn x:Name="quantityColumn" Header="QTY" Width="0.15*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding QuantityWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
@@ -275,10 +275,50 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn x:Name="totalValue" Header="Total Value" Width="0.2*">
+                            <DataGridTemplateColumn x:Name="totalValue" Header="Total" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding ItemCostInItemCurrency, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                         IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn x:Name="actualInINR" Width="0.15*">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="Actual" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="(INR)" Grid.Row="2" HorizontalAlignment="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding ActualInINR, StringFormat={}{0:#0.####}, Mode=OneWay}"
+                                                         IsReadOnly="True"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn x:Name="BudgetValueInINR" Header="Bugdet Value In INR" Width="0.15*">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Grid  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="BUDGET" Grid.Row="0"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <TextBlock Text="(INR)" Grid.Row="2" HorizontalAlignment="Center" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding BudgetInINR, StringFormat={}{0:#0.####}, Mode=OneWay}"
                                                          IsReadOnly="True"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

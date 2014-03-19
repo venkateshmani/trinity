@@ -442,5 +442,22 @@ namespace ordermanager.DatabaseModel
         }
 
         #endregion Data Validation
+
+
+        public decimal ActualInINR
+        {
+            get
+            {
+                return this.CostWrapper; 
+            }
+        }
+
+        public decimal BudgetInINR
+        {
+            get
+            {
+                return this.ProductMaterial.CostPerUnitWrapper;
+            }
+        }
     }
 }

@@ -66,7 +66,11 @@
         <TreeView x:Name="tvProducts" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding Path=Products}" Background="White" Margin="2" SelectedItemChanged="tvProducts_SelectedItemChanged">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding ProductMaterials}">
-                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=tvProducts, Path=ActualWidth, Converter={StaticResource subractor}, ConverterParameter=20}" Height="30">
+                    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="{Binding ElementName=tvProducts, Path=ActualWidth, Converter={StaticResource subractor}, ConverterParameter=20}" Height="40">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -86,10 +90,10 @@
                             </Canvas>
                         </Viewbox>
                         <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path=ProductName.Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
-                        <Border Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
+                        <Border Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity, StringFormat=n4}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
-                                <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=UnitsOfMeasurement.Units}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" Margin="5,0,10,0"/>
+                                <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity, StringFormat=n4}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" FontSize="8"/>
+                                <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=UnitsOfMeasurement.Units}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" Margin="5,0,10,0" FontSize="8"/>
                             </StackPanel>
                         </Border>
                     </Grid>

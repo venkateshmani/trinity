@@ -360,5 +360,16 @@ namespace ordermanager.DatabaseModel
         {
             ItemCostWrapper = (CostWrapper + TaxPerUnitWrapper) * QuantityWrapper * UnitsOfMeasurementWrapper.Multiplier;
         }
+
+
+        public decimal ActualInINR
+        {
+            get { return this.ProductMaterialItem.ActualInINR; }
+        }
+
+        public decimal BudgetInINR
+        {
+            get { return this.ProductMaterialItem.BudgetInINR; }
+        }
     }
 }

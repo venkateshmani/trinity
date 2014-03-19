@@ -93,8 +93,8 @@
                                     <TextBlock Grid.Column="3" HorizontalAlignment="Left" TextAlignment="Left" DataContext="{Binding Path=ProductName}" Text="{Binding Path=Name}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
                                     <Border Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Visibility="Collapsed">
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity, StringFormat={}{0:#0.####}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
-                                            <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=UnitsOfMeasurement.Units}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" Margin="6,0,0,0"/>
+                                            <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=ExpectedQuantity, StringFormat={}{0:#0.####}}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" FontSize="10"/>
+                                            <TextBlock HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding Path=UnitsOfMeasurement.Units}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" Margin="6,0,0,0" FontSize="10"/>
                                         </StackPanel>
                                     </Border>
                                 </Grid>
