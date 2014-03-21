@@ -274,6 +274,7 @@ namespace ordermanager.DatabaseModel
             set
             {
                 this.TotalCost = value;
+                OnPropertyChanged("ItemCostWrapper");
            }
         }
 
@@ -289,6 +290,8 @@ namespace ordermanager.DatabaseModel
             set
             {
                 this.TotalCost = value;
+                CalcluateCost();
+                OnPropertyChanged("ItemCostInItemCurrency");
             }
         }
 
@@ -359,6 +362,7 @@ namespace ordermanager.DatabaseModel
         private void CalcluateCost()
         {
             ItemCostWrapper = (CostWrapper + TaxPerUnitWrapper) * QuantityWrapper * UnitsOfMeasurementWrapper.Multiplier;
+            ItemCostInItemCurrency = ItemCostWrapper;
         }
 
 

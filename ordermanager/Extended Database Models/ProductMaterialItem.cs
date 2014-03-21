@@ -448,7 +448,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                return this.CostWrapper; 
+                return (Cost + TaxPerUnitWrapper) * CurrencyValueInINR;
             }
         }
 
@@ -456,7 +456,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                return this.ProductMaterial.CostPerUnitWrapper;
+                return this.ProductMaterial.ConsumptionCostWrapper;
             }
         }
     }

@@ -271,7 +271,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding TaxPerUnitWrapper, StringFormat={}{0:#0.####}}"
-                                                 IsReadOnly="True" />
+                                                 IsHitTestVisible="{Binding IsEditable}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
