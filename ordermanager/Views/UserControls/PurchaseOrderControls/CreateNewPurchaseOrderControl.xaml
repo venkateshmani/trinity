@@ -255,7 +255,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBox Text="{Binding CostWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                         IsHitTestVisible="{Binding IsEditable}" />
+                                                         IsHitTestVisible="{Binding CanEditCostAndTax}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -270,8 +270,8 @@
                             <DataGridTemplateColumn x:Name="taxPerUnitINR" Header="Tax" Width="0.13*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding TaxPerUnitWrapper, StringFormat={}{0:#0.####}}"
-                                                 IsHitTestVisible="{Binding IsEditable}" />
+                                        <TextBox Text="{Binding TaxPerUnitWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                                                 IsHitTestVisible="{Binding CanEditCostAndTax}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

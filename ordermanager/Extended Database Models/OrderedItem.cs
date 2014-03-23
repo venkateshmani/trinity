@@ -290,7 +290,6 @@ namespace ordermanager.DatabaseModel
             set
             {
                 this.TotalCost = value;
-                CalcluateCost();
                 OnPropertyChanged("ItemCostInItemCurrency");
             }
         }
@@ -363,12 +362,17 @@ namespace ordermanager.DatabaseModel
         {
             ItemCostWrapper = (CostWrapper + TaxPerUnitWrapper) * QuantityWrapper * UnitsOfMeasurementWrapper.Multiplier;
             ItemCostInItemCurrency = ItemCostWrapper;
+
+            OnPropertyChanged("ActualInINR");
         }
 
 
         public decimal ActualInINR
         {
-            get { return this.ProductMaterialItem.ActualInINR; }
+            get 
+            {
+                return this.ProductMaterialItem.ActualInINR;
+            }
         }
 
         public decimal BudgetInINR

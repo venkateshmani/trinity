@@ -232,6 +232,29 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        /// <summary>
+        /// Used to determine the edit when the purchase order is rejected
+        /// </summary>
+        public bool CanEditCostAndTax
+        {
+            get
+            {
+                if (this.PurchaseOrder == null)
+                    return false;
+
+                if (this.PurchaseOrder.Approval == null)
+                    return false;
+
+                if (this.PurchaseOrder.Approval.IsApproved == null)
+                    return false;
+
+                if (this.PurchaseOrder.Approval.IsApproved.Value == false)
+                    return true;
+
+                return false;
+            }
+        }
+
         public bool IsEditable
         {
             get
@@ -363,6 +386,8 @@ namespace ordermanager.DatabaseModel
 
             ItemCostWrapper = (Cost + TaxPerUnitWrapper) * Quantity * CurrencyValueInINR * uomMultipler;
             ItemCostInItemCurrency = (Cost + TaxPerUnitWrapper) * Quantity * uomMultipler;
+
+            OnPropertyChanged("ActualInINR");
         }
         #endregion [Helpers]
 
@@ -448,7 +473,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                return (Cost + TaxPerUnitWrapper) * CurrencyValueInINR;
+                 return this.ProductMaterial.TotalSubMaterialsPurchaseCostWrapper; 
             }
         }
 
@@ -456,7 +481,7 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                return this.ProductMaterial.ConsumptionCostWrapper;
+                return this.ProductMaterial.ConsumptionCostWrapper * this.ProductMaterial.OrderProduct.ExpectedQuantity * this.ProductMaterial.OrderProduct.UnitsOfMeasurement.Multiplier;
             }
         }
     }

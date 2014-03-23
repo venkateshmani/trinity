@@ -494,7 +494,7 @@ namespace ordermanager.DatabaseModel
 
         private void ProductMaterialItem_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "ItemCostWrapper")
+            if (e.PropertyName == "ItemCostWrapper" || e.PropertyName == "TaxPerUnitWrapper")
             {
                 CalculateTotalSubMaterialsPurchaseCost();
             }
