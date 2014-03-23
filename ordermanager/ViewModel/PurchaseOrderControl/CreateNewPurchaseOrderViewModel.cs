@@ -18,6 +18,30 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
         public CreateNewPurchaseOrderViewModel(Order order, PurchaseOrder po) : this(order)
         {
             PurchaseOrder = po;
+
+            //Only for PO generated from GRN failed quantity
+            if (PurchaseOrder.ProductMaterialItems.Count == 0)
+            {
+                if (PurchaseOrder.OrderedItems.Count != 0)
+                {
+                    foreach (OrderedItem item in PurchaseOrder.OrderedItems)
+                    {
+                        item.PropertyChanged -= item_PropertyChanged;
+                        item.PropertyChanged += item_PropertyChanged;
+
+                        TotalPOValue += item.ItemCostInItemCurrency;
+                    }
+                }
+            }
+        }
+
+        void item_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            TotalPOValue = 0;
+            foreach (OrderedItem item in PurchaseOrder.OrderedItems)
+            {
+                TotalPOValue += item.ItemCostInItemCurrency;
+            }
         }
 
         private bool m_IsReadOnly = false;
