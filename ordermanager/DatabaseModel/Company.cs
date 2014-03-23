@@ -17,8 +17,10 @@ namespace ordermanager.DatabaseModel
         public Company()
         {
             this.Assets = new HashSet<Asset>();
+            this.DyeingJOes = new HashSet<DyeingJO>();
             this.Invoices = new HashSet<Invoice>();
             this.JobOrders = new HashSet<JobOrder>();
+            this.KnittingJOes = new HashSet<KnittingJO>();
             this.Orders = new HashSet<Order>();
             this.Orders1 = new HashSet<Order>();
             this.ProductMaterialItems = new HashSet<ProductMaterialItem>();
@@ -44,8 +46,10 @@ namespace ordermanager.DatabaseModel
     
         public virtual ICollection<Asset> Assets { get; set; }
         public virtual CompanyType CompanyType { get; set; }
+        public virtual ICollection<DyeingJO> DyeingJOes { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<JobOrder> JobOrders { get; set; }
+        public virtual ICollection<KnittingJO> KnittingJOes { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Order> Orders1 { get; set; }
         public virtual ICollection<ProductMaterialItem> ProductMaterialItems { get; set; }

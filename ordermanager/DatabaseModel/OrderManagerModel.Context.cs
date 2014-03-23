@@ -41,6 +41,8 @@ namespace ordermanager.DatabaseModel
         public DbSet<CompanyType> CompanyTypes { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Currency> Currencies { get; set; }
+        public DbSet<DyeingJO> DyeingJOes { get; set; }
+        public DbSet<DyeingJoItem> DyeingJoItems { get; set; }
         public DbSet<GRNReciept> GRNReciepts { get; set; }
         public DbSet<History> Histories { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
@@ -49,6 +51,8 @@ namespace ordermanager.DatabaseModel
         public DbSet<JobOrderTolerance> JobOrderTolerances { get; set; }
         public DbSet<JobOrderToleranceType> JobOrderToleranceTypes { get; set; }
         public DbSet<JobOrderType> JobOrderTypes { get; set; }
+        public DbSet<KnittingJO> KnittingJOes { get; set; }
+        public DbSet<KnittingJoItem> KnittingJoItems { get; set; }
         public DbSet<MaterialName> MaterialNames { get; set; }
         public DbSet<MaterialsFromStock> MaterialsFromStocks { get; set; }
         public DbSet<Order> Orders { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OrderManagerDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="OrderManagerDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="OrderManagerDBModelStoreContainer">
           <EntitySet Name="Approval" EntityType="OrderManagerDBModel.Store.Approval" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ApprovalEntityType" EntityType="OrderManagerDBModel.Store.ApprovalEntityType" store:Type="Tables" Schema="dbo" />
@@ -19,6 +19,8 @@
           <EntitySet Name="CompanyType" EntityType="OrderManagerDBModel.Store.CompanyType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Country" EntityType="OrderManagerDBModel.Store.Country" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Currency" EntityType="OrderManagerDBModel.Store.Currency" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DyeingJO" EntityType="OrderManagerDBModel.Store.DyeingJO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DyeingJoItem" EntityType="OrderManagerDBModel.Store.DyeingJoItem" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="GRNReciept" EntityType="OrderManagerDBModel.Store.GRNReciept" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="History" EntityType="OrderManagerDBModel.Store.History" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Invoice" EntityType="OrderManagerDBModel.Store.Invoice" store:Type="Tables" Schema="dbo" />
@@ -27,6 +29,8 @@
           <EntitySet Name="JobOrderTolerance" EntityType="OrderManagerDBModel.Store.JobOrderTolerance" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="JobOrderToleranceType" EntityType="OrderManagerDBModel.Store.JobOrderToleranceType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="JobOrderType" EntityType="OrderManagerDBModel.Store.JobOrderType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="KnittingJO" EntityType="OrderManagerDBModel.Store.KnittingJO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="KnittingJoItem" EntityType="OrderManagerDBModel.Store.KnittingJoItem" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MaterialName" EntityType="OrderManagerDBModel.Store.MaterialName" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MaterialsFromStock" EntityType="OrderManagerDBModel.Store.MaterialsFromStock" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Order" EntityType="OrderManagerDBModel.Store.Order" store:Type="Tables" Schema="dbo" />
@@ -106,6 +110,26 @@
             <End Role="CompanyType" EntitySet="CompanyType" />
             <End Role="Company" EntitySet="Company" />
           </AssociationSet>
+          <AssociationSet Name="FK_DyeingJO_Approval" Association="OrderManagerDBModel.Store.FK_DyeingJO_Approval">
+            <End Role="Approval" EntitySet="Approval" />
+            <End Role="DyeingJO" EntitySet="DyeingJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DyeingJO_Company" Association="OrderManagerDBModel.Store.FK_DyeingJO_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="DyeingJO" EntitySet="DyeingJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DyeingJO_Order" Association="OrderManagerDBModel.Store.FK_DyeingJO_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="DyeingJO" EntitySet="DyeingJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DyeingJO_PurchaseOrders" Association="OrderManagerDBModel.Store.FK_DyeingJO_PurchaseOrders">
+            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+            <End Role="DyeingJO" EntitySet="DyeingJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DyeingJoItem_DyeingJO" Association="OrderManagerDBModel.Store.FK_DyeingJoItem_DyeingJO">
+            <End Role="DyeingJO" EntitySet="DyeingJO" />
+            <End Role="DyeingJoItem" EntitySet="DyeingJoItem" />
+          </AssociationSet>
           <AssociationSet Name="FK_GRNReciept_OrderedItem" Association="OrderManagerDBModel.Store.FK_GRNReciept_OrderedItem">
             <End Role="OrderedItem" EntitySet="OrderedItem" />
             <End Role="GRNReciept" EntitySet="GRNReciept" />
@@ -165,6 +189,18 @@
           <AssociationSet Name="FK_JobOrderTolerance_Order" Association="OrderManagerDBModel.Store.FK_JobOrderTolerance_Order">
             <End Role="Order" EntitySet="Order" />
             <End Role="JobOrderTolerance" EntitySet="JobOrderTolerance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KnittingJO_Approval" Association="OrderManagerDBModel.Store.FK_KnittingJO_Approval">
+            <End Role="Approval" EntitySet="Approval" />
+            <End Role="KnittingJO" EntitySet="KnittingJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KnittingJO_Company" Association="OrderManagerDBModel.Store.FK_KnittingJO_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="KnittingJO" EntitySet="KnittingJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KnittingJoItem_KnittingJO" Association="OrderManagerDBModel.Store.FK_KnittingJoItem_KnittingJO">
+            <End Role="KnittingJO" EntitySet="KnittingJO" />
+            <End Role="KnittingJoItem" EntitySet="KnittingJoItem" />
           </AssociationSet>
           <AssociationSet Name="FK_MaterialsFromStock_Order" Association="OrderManagerDBModel.Store.FK_MaterialsFromStock_Order">
             <End Role="Order" EntitySet="Order" />
@@ -520,6 +556,38 @@
           <Property Name="Symbol" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="DefaultValueInINR" Type="decimal" Scale="4" />
         </EntityType>
+        <EntityType Name="DyeingJO">
+          <Key>
+            <PropertyRef Name="DyeingJOId" />
+          </Key>
+          <Property Name="DyeingJOId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierID" Type="int" Nullable="false" />
+          <Property Name="OrderID" Type="bigint" Nullable="false" />
+          <Property Name="PurchaseOrderID" Type="bigint" Nullable="false" />
+          <Property Name="JODate" Type="datetime" Nullable="false" />
+          <Property Name="QuoteNo" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="QuoteDate" Type="datetime" Nullable="false" />
+          <Property Name="GRNRefNo" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="OrderRef" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Process" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="TermsAndConditions" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="TotalValue" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="ApprovalID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DyeingJoItem">
+          <Key>
+            <PropertyRef Name="DyeingJoItemsID" />
+          </Key>
+          <Property Name="DyeingJoItemsID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DyeingJOId" Type="bigint" Nullable="false" />
+          <Property Name="Color" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="QualityDescription" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="ReqGSM" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ReqWidth" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="NetQty" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="RatePerKg" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="TotalAmount" Type="decimal" Nullable="false" Scale="4" />
+        </EntityType>
         <EntityType Name="GRNReciept">
           <Key>
             <PropertyRef Name="GRNReciptID" />
@@ -627,6 +695,32 @@
           </Key>
           <Property Name="JobOrderTypeID" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="KnittingJO">
+          <Key>
+            <PropertyRef Name="KnittingJOId" />
+          </Key>
+          <Property Name="KnittingJOId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierID" Type="int" Nullable="false" />
+          <Property Name="JoNo" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="JoDate" Type="datetime" Nullable="false" />
+          <Property Name="QuoteNo" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="QuoteDate" Type="datetime" Nullable="false" />
+          <Property Name="TermsAndConditions" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="QualitySpecifications" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="ApprovalID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KnittingJoItem">
+          <Key>
+            <PropertyRef Name="KnittingJoItemsId" />
+          </Key>
+          <Property Name="KnittingJoItemsId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NameOfProduct" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Quantity" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="Rate" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="TotalAmount" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="Remarks" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="KnittingJoId" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="MaterialName">
           <Key>
@@ -1118,6 +1212,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DyeingJO_Approval">
+          <End Role="Approval" Type="OrderManagerDBModel.Store.Approval" Multiplicity="1" />
+          <End Role="DyeingJO" Type="OrderManagerDBModel.Store.DyeingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Approval">
+              <PropertyRef Name="ApprovalID" />
+            </Principal>
+            <Dependent Role="DyeingJO">
+              <PropertyRef Name="ApprovalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DyeingJO_Company">
+          <End Role="Company" Type="OrderManagerDBModel.Store.Company" Multiplicity="1" />
+          <End Role="DyeingJO" Type="OrderManagerDBModel.Store.DyeingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="DyeingJO">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DyeingJO_Order">
+          <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
+          <End Role="DyeingJO" Type="OrderManagerDBModel.Store.DyeingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="DyeingJO">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DyeingJO_PurchaseOrders">
+          <End Role="PurchaseOrders" Type="OrderManagerDBModel.Store.PurchaseOrders" Multiplicity="1" />
+          <End Role="DyeingJO" Type="OrderManagerDBModel.Store.DyeingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrders">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Principal>
+            <Dependent Role="DyeingJO">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DyeingJoItem_DyeingJO">
+          <End Role="DyeingJO" Type="OrderManagerDBModel.Store.DyeingJO" Multiplicity="1" />
+          <End Role="DyeingJoItem" Type="OrderManagerDBModel.Store.DyeingJoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DyeingJO">
+              <PropertyRef Name="DyeingJOId" />
+            </Principal>
+            <Dependent Role="DyeingJoItem">
+              <PropertyRef Name="DyeingJOId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GRNReciept_OrderedItem">
           <End Role="OrderedItem" Type="OrderManagerDBModel.Store.OrderedItem" Multiplicity="1" />
           <End Role="GRNReciept" Type="OrderManagerDBModel.Store.GRNReciept" Multiplicity="*" />
@@ -1295,6 +1449,42 @@
             </Principal>
             <Dependent Role="JobOrderTolerance">
               <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KnittingJO_Approval">
+          <End Role="Approval" Type="OrderManagerDBModel.Store.Approval" Multiplicity="1" />
+          <End Role="KnittingJO" Type="OrderManagerDBModel.Store.KnittingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Approval">
+              <PropertyRef Name="ApprovalID" />
+            </Principal>
+            <Dependent Role="KnittingJO">
+              <PropertyRef Name="ApprovalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KnittingJO_Company">
+          <End Role="Company" Type="OrderManagerDBModel.Store.Company" Multiplicity="1" />
+          <End Role="KnittingJO" Type="OrderManagerDBModel.Store.KnittingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="KnittingJO">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KnittingJoItem_KnittingJO">
+          <End Role="KnittingJO" Type="OrderManagerDBModel.Store.KnittingJO" Multiplicity="1" />
+          <End Role="KnittingJoItem" Type="OrderManagerDBModel.Store.KnittingJoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KnittingJO">
+              <PropertyRef Name="KnittingJOId" />
+            </Principal>
+            <Dependent Role="KnittingJoItem">
+              <PropertyRef Name="KnittingJoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2014,6 +2204,8 @@
           <EntitySet Name="CompanyTypes" EntityType="OrderManagerDBModel.CompanyType" />
           <EntitySet Name="Countries" EntityType="OrderManagerDBModel.Country" />
           <EntitySet Name="Currencies" EntityType="OrderManagerDBModel.Currency" />
+          <EntitySet Name="DyeingJOes" EntityType="OrderManagerDBModel.DyeingJO" />
+          <EntitySet Name="DyeingJoItems" EntityType="OrderManagerDBModel.DyeingJoItem" />
           <EntitySet Name="GRNReciepts" EntityType="OrderManagerDBModel.GRNReciept" />
           <EntitySet Name="Histories" EntityType="OrderManagerDBModel.History" />
           <EntitySet Name="Invoices" EntityType="OrderManagerDBModel.Invoice" />
@@ -2022,6 +2214,8 @@
           <EntitySet Name="JobOrderTolerances" EntityType="OrderManagerDBModel.JobOrderTolerance" />
           <EntitySet Name="JobOrderToleranceTypes" EntityType="OrderManagerDBModel.JobOrderToleranceType" />
           <EntitySet Name="JobOrderTypes" EntityType="OrderManagerDBModel.JobOrderType" />
+          <EntitySet Name="KnittingJOes" EntityType="OrderManagerDBModel.KnittingJO" />
+          <EntitySet Name="KnittingJoItems" EntityType="OrderManagerDBModel.KnittingJoItem" />
           <EntitySet Name="MaterialNames" EntityType="OrderManagerDBModel.MaterialName" />
           <EntitySet Name="MaterialsFromStocks" EntityType="OrderManagerDBModel.MaterialsFromStock" />
           <EntitySet Name="Orders" EntityType="OrderManagerDBModel.Order" />
@@ -2063,6 +2257,14 @@
           <AssociationSet Name="FK_Approval_Order" Association="OrderManagerDBModel.FK_Approval_Order">
             <End Role="Order" EntitySet="Orders" />
             <End Role="Approval" EntitySet="Approvals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DyeingJO_Approval" Association="OrderManagerDBModel.FK_DyeingJO_Approval">
+            <End Role="Approval" EntitySet="Approvals" />
+            <End Role="DyeingJO" EntitySet="DyeingJOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KnittingJO_Approval" Association="OrderManagerDBModel.FK_KnittingJO_Approval">
+            <End Role="Approval" EntitySet="Approvals" />
+            <End Role="KnittingJO" EntitySet="KnittingJOes" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderProduct_Approval" Association="OrderManagerDBModel.FK_OrderProduct_Approval">
             <End Role="Approval" EntitySet="Approvals" />
@@ -2124,6 +2326,10 @@
             <End Role="CompanyType" EntitySet="CompanyTypes" />
             <End Role="Company" EntitySet="Companies" />
           </AssociationSet>
+          <AssociationSet Name="FK_DyeingJO_Company" Association="OrderManagerDBModel.FK_DyeingJO_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="DyeingJO" EntitySet="DyeingJOes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Invoice_Company" Association="OrderManagerDBModel.FK_Invoice_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Invoice" EntitySet="Invoices" />
@@ -2131,6 +2337,10 @@
           <AssociationSet Name="FK_JobOrder_Company" Association="OrderManagerDBModel.FK_JobOrder_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="JobOrder" EntitySet="JobOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KnittingJO_Company" Association="OrderManagerDBModel.FK_KnittingJO_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="KnittingJO" EntitySet="KnittingJOes" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Company" Association="OrderManagerDBModel.FK_Order_Company">
             <End Role="Company" EntitySet="Companies" />
@@ -2180,6 +2390,18 @@
             <End Role="Currency" EntitySet="Currencies" />
             <End Role="ProductMaterials" EntitySet="ProductMaterials" />
           </AssociationSet>
+          <AssociationSet Name="FK_DyeingJO_Order" Association="OrderManagerDBModel.FK_DyeingJO_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="DyeingJO" EntitySet="DyeingJOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DyeingJO_PurchaseOrders" Association="OrderManagerDBModel.FK_DyeingJO_PurchaseOrders">
+            <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+            <End Role="DyeingJO" EntitySet="DyeingJOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DyeingJoItem_DyeingJO" Association="OrderManagerDBModel.FK_DyeingJoItem_DyeingJO">
+            <End Role="DyeingJO" EntitySet="DyeingJOes" />
+            <End Role="DyeingJoItem" EntitySet="DyeingJoItems" />
+          </AssociationSet>
           <AssociationSet Name="FK_GRNReciept_OrderedItem" Association="OrderManagerDBModel.FK_GRNReciept_OrderedItem">
             <End Role="OrderedItem" EntitySet="OrderedItems" />
             <End Role="GRNReciept" EntitySet="GRNReciepts" />
@@ -2223,6 +2445,10 @@
           <AssociationSet Name="FK_JobOrderTolerance_Order" Association="OrderManagerDBModel.FK_JobOrderTolerance_Order">
             <End Role="Order" EntitySet="Orders" />
             <End Role="JobOrderTolerance" EntitySet="JobOrderTolerances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KnittingJoItem_KnittingJO" Association="OrderManagerDBModel.FK_KnittingJoItem_KnittingJO">
+            <End Role="KnittingJO" EntitySet="KnittingJOes" />
+            <End Role="KnittingJoItem" EntitySet="KnittingJoItems" />
           </AssociationSet>
           <AssociationSet Name="FK_ProductMaterials_MaterialName" Association="OrderManagerDBModel.FK_ProductMaterials_MaterialName">
             <End Role="MaterialName" EntitySet="MaterialNames" />
@@ -2397,6 +2623,8 @@
           <Property Name="Comments" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="ApprovalEntityType" Relationship="OrderManagerDBModel.FK_Approval_ApprovalEntityType" FromRole="Approval" ToRole="ApprovalEntityType" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_Approval_Order" FromRole="Approval" ToRole="Order" />
+          <NavigationProperty Name="DyeingJOes" Relationship="OrderManagerDBModel.FK_DyeingJO_Approval" FromRole="Approval" ToRole="DyeingJO" />
+          <NavigationProperty Name="KnittingJOes" Relationship="OrderManagerDBModel.FK_KnittingJO_Approval" FromRole="Approval" ToRole="KnittingJO" />
           <NavigationProperty Name="OrderProducts" Relationship="OrderManagerDBModel.FK_OrderProduct_Approval" FromRole="Approval" ToRole="OrderProduct" />
           <NavigationProperty Name="ProductMaterials" Relationship="OrderManagerDBModel.FK_ProductMaterials_Approval" FromRole="Approval" ToRole="ProductMaterials" />
           <NavigationProperty Name="PurchaseOrders" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Approval" FromRole="Approval" ToRole="PurchaseOrders" />
@@ -2505,8 +2733,10 @@
           <Property Name="CST" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
           <NavigationProperty Name="Assets" Relationship="OrderManagerDBModel.FK_Asset_Company" FromRole="Company" ToRole="Asset" />
           <NavigationProperty Name="CompanyType" Relationship="OrderManagerDBModel.FK_Company_CompanyType" FromRole="Company" ToRole="CompanyType" />
+          <NavigationProperty Name="DyeingJOes" Relationship="OrderManagerDBModel.FK_DyeingJO_Company" FromRole="Company" ToRole="DyeingJO" />
           <NavigationProperty Name="Invoices" Relationship="OrderManagerDBModel.FK_Invoice_Company" FromRole="Company" ToRole="Invoice" />
           <NavigationProperty Name="JobOrders" Relationship="OrderManagerDBModel.FK_JobOrder_Company" FromRole="Company" ToRole="JobOrder" />
+          <NavigationProperty Name="KnittingJOes" Relationship="OrderManagerDBModel.FK_KnittingJO_Company" FromRole="Company" ToRole="KnittingJO" />
           <NavigationProperty Name="Orders" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Company" ToRole="Order" />
           <NavigationProperty Name="Orders1" Relationship="OrderManagerDBModel.FK_Order_OrderBy" FromRole="Company" ToRole="Order" />
           <NavigationProperty Name="ProductMaterialItems" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_Company" FromRole="Company" ToRole="ProductMaterialItem" />
@@ -2543,6 +2773,44 @@
           <NavigationProperty Name="ProductExtraCosts" Relationship="OrderManagerDBModel.FK_ProductExtraCost_Currency" FromRole="Currency" ToRole="ProductExtraCost" />
           <NavigationProperty Name="ProductMaterialItems" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_Currency" FromRole="Currency" ToRole="ProductMaterialItem" />
           <NavigationProperty Name="ProductMaterials" Relationship="OrderManagerDBModel.FK_ProductMaterials_Currency" FromRole="Currency" ToRole="ProductMaterials" />
+        </EntityType>
+        <EntityType Name="DyeingJO">
+          <Key>
+            <PropertyRef Name="DyeingJOId" />
+          </Key>
+          <Property Name="DyeingJOId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierID" Type="Int32" Nullable="false" />
+          <Property Name="OrderID" Type="Int64" Nullable="false" />
+          <Property Name="PurchaseOrderID" Type="Int64" Nullable="false" />
+          <Property Name="JODate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QuoteNo" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="QuoteDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="GRNRefNo" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="OrderRef" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Process" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="TermsAndConditions" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="TotalValue" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ApprovalID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_DyeingJO_Approval" FromRole="DyeingJO" ToRole="Approval" />
+          <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_DyeingJO_Company" FromRole="DyeingJO" ToRole="Company" />
+          <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_DyeingJO_Order" FromRole="DyeingJO" ToRole="Order" />
+          <NavigationProperty Name="PurchaseOrder" Relationship="OrderManagerDBModel.FK_DyeingJO_PurchaseOrders" FromRole="DyeingJO" ToRole="PurchaseOrders" />
+          <NavigationProperty Name="DyeingJoItems" Relationship="OrderManagerDBModel.FK_DyeingJoItem_DyeingJO" FromRole="DyeingJO" ToRole="DyeingJoItem" />
+        </EntityType>
+        <EntityType Name="DyeingJoItem">
+          <Key>
+            <PropertyRef Name="DyeingJoItemsID" />
+          </Key>
+          <Property Name="DyeingJoItemsID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DyeingJOId" Type="Int64" Nullable="false" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="QualityDescription" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="ReqGSM" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ReqWidth" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="NetQty" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="RatePerKg" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <NavigationProperty Name="DyeingJO" Relationship="OrderManagerDBModel.FK_DyeingJoItem_DyeingJO" FromRole="DyeingJoItem" ToRole="DyeingJO" />
         </EntityType>
         <EntityType Name="GRNReciept">
           <Key>
@@ -2672,6 +2940,36 @@
           <Property Name="Type" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="JobOrders" Relationship="OrderManagerDBModel.FK_JobOrder_JobOrderType" FromRole="JobOrderType" ToRole="JobOrder" />
         </EntityType>
+        <EntityType Name="KnittingJO">
+          <Key>
+            <PropertyRef Name="KnittingJOId" />
+          </Key>
+          <Property Name="KnittingJOId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="SupplierID" Type="Int32" Nullable="false" />
+          <Property Name="JoNo" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="JoDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="QuoteNo" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="QuoteDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TermsAndConditions" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="QualitySpecifications" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="ApprovalID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_KnittingJO_Approval" FromRole="KnittingJO" ToRole="Approval" />
+          <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_KnittingJO_Company" FromRole="KnittingJO" ToRole="Company" />
+          <NavigationProperty Name="KnittingJoItems" Relationship="OrderManagerDBModel.FK_KnittingJoItem_KnittingJO" FromRole="KnittingJO" ToRole="KnittingJoItem" />
+        </EntityType>
+        <EntityType Name="KnittingJoItem">
+          <Key>
+            <PropertyRef Name="KnittingJoItemsId" />
+          </Key>
+          <Property Name="KnittingJoItemsId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="NameOfProduct" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="KnittingJoId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="KnittingJO" Relationship="OrderManagerDBModel.FK_KnittingJoItem_KnittingJO" FromRole="KnittingJoItem" ToRole="KnittingJO" />
+        </EntityType>
         <EntityType Name="MaterialName">
           <Key>
             <PropertyRef Name="MaterialNameID" />
@@ -2717,6 +3015,7 @@
           <NavigationProperty Name="CommissionValueType" Relationship="OrderManagerDBModel.FK_Order_CommissionValueType" FromRole="Order" ToRole="CommissionValueType" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_Order_Company" FromRole="Order" ToRole="Company" />
           <NavigationProperty Name="Company1" Relationship="OrderManagerDBModel.FK_Order_OrderBy" FromRole="Order" ToRole="Company" />
+          <NavigationProperty Name="DyeingJOes" Relationship="OrderManagerDBModel.FK_DyeingJO_Order" FromRole="Order" ToRole="DyeingJO" />
           <NavigationProperty Name="Histories" Relationship="OrderManagerDBModel.FK_History_Order" FromRole="Order" ToRole="History" />
           <NavigationProperty Name="Invoices" Relationship="OrderManagerDBModel.FK_Invoice_Order" FromRole="Order" ToRole="Invoice" />
           <NavigationProperty Name="JobOrderTolerances" Relationship="OrderManagerDBModel.FK_JobOrderTolerance_Order" FromRole="Order" ToRole="JobOrderTolerance" />
@@ -3024,6 +3323,7 @@
           <Property Name="QuotationNumber" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Approval" FromRole="PurchaseOrders" ToRole="Approval" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Company" FromRole="PurchaseOrders" ToRole="Company" />
+          <NavigationProperty Name="DyeingJOes" Relationship="OrderManagerDBModel.FK_DyeingJO_PurchaseOrders" FromRole="PurchaseOrders" ToRole="DyeingJO" />
           <NavigationProperty Name="GRNReciepts" Relationship="OrderManagerDBModel.FK_GRNReciept_PurchaseOrders" FromRole="PurchaseOrders" ToRole="GRNReciept" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_PurchaseOrders_Order" FromRole="PurchaseOrders" ToRole="Order" />
           <NavigationProperty Name="OrderedItems" Relationship="OrderManagerDBModel.FK_OrderedItem_PurchaseOrders" FromRole="PurchaseOrders" ToRole="OrderedItem" />
@@ -3179,6 +3479,30 @@
             </Principal>
             <Dependent Role="Approval">
               <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DyeingJO_Approval">
+          <End Role="Approval" Type="OrderManagerDBModel.Approval" Multiplicity="1" />
+          <End Role="DyeingJO" Type="OrderManagerDBModel.DyeingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Approval">
+              <PropertyRef Name="ApprovalID" />
+            </Principal>
+            <Dependent Role="DyeingJO">
+              <PropertyRef Name="ApprovalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KnittingJO_Approval">
+          <End Role="Approval" Type="OrderManagerDBModel.Approval" Multiplicity="1" />
+          <End Role="KnittingJO" Type="OrderManagerDBModel.KnittingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Approval">
+              <PropertyRef Name="ApprovalID" />
+            </Principal>
+            <Dependent Role="KnittingJO">
+              <PropertyRef Name="ApprovalID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3362,6 +3686,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DyeingJO_Company">
+          <End Role="Company" Type="OrderManagerDBModel.Company" Multiplicity="1" />
+          <End Role="DyeingJO" Type="OrderManagerDBModel.DyeingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="DyeingJO">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Invoice_Company">
           <End Role="Company" Type="OrderManagerDBModel.Company" Multiplicity="1" />
           <End Role="Invoice" Type="OrderManagerDBModel.Invoice" Multiplicity="*" />
@@ -3382,6 +3718,18 @@
               <PropertyRef Name="CompanyID" />
             </Principal>
             <Dependent Role="JobOrder">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KnittingJO_Company">
+          <End Role="Company" Type="OrderManagerDBModel.Company" Multiplicity="1" />
+          <End Role="KnittingJO" Type="OrderManagerDBModel.KnittingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="KnittingJO">
               <PropertyRef Name="SupplierID" />
             </Dependent>
           </ReferentialConstraint>
@@ -3530,6 +3878,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DyeingJO_Order">
+          <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="1" />
+          <End Role="DyeingJO" Type="OrderManagerDBModel.DyeingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="DyeingJO">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DyeingJO_PurchaseOrders">
+          <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="1" />
+          <End Role="DyeingJO" Type="OrderManagerDBModel.DyeingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseOrders">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Principal>
+            <Dependent Role="DyeingJO">
+              <PropertyRef Name="PurchaseOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DyeingJoItem_DyeingJO">
+          <End Role="DyeingJO" Type="OrderManagerDBModel.DyeingJO" Multiplicity="1" />
+          <End Role="DyeingJoItem" Type="OrderManagerDBModel.DyeingJoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DyeingJO">
+              <PropertyRef Name="DyeingJOId" />
+            </Principal>
+            <Dependent Role="DyeingJoItem">
+              <PropertyRef Name="DyeingJOId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GRNReciept_OrderedItem">
           <End Role="OrderedItem" Type="OrderManagerDBModel.OrderedItem" Multiplicity="1" />
           <End Role="GRNReciept" Type="OrderManagerDBModel.GRNReciept" Multiplicity="*" />
@@ -3659,6 +4043,18 @@
             </Principal>
             <Dependent Role="JobOrderTolerance">
               <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KnittingJoItem_KnittingJO">
+          <End Role="KnittingJO" Type="OrderManagerDBModel.KnittingJO" Multiplicity="1" />
+          <End Role="KnittingJoItem" Type="OrderManagerDBModel.KnittingJoItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KnittingJO">
+              <PropertyRef Name="KnittingJOId" />
+            </Principal>
+            <Dependent Role="KnittingJoItem">
+              <PropertyRef Name="KnittingJoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4282,6 +4678,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DyeingJOes">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.DyeingJO">
+              <MappingFragment StoreEntitySet="DyeingJO">
+                <ScalarProperty Name="DyeingJOId" ColumnName="DyeingJOId" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+                <ScalarProperty Name="JODate" ColumnName="JODate" />
+                <ScalarProperty Name="QuoteNo" ColumnName="QuoteNo" />
+                <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+                <ScalarProperty Name="GRNRefNo" ColumnName="GRNRefNo" />
+                <ScalarProperty Name="OrderRef" ColumnName="OrderRef" />
+                <ScalarProperty Name="Process" ColumnName="Process" />
+                <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
+                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+                <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DyeingJoItems">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.DyeingJoItem">
+              <MappingFragment StoreEntitySet="DyeingJoItem">
+                <ScalarProperty Name="DyeingJoItemsID" ColumnName="DyeingJoItemsID" />
+                <ScalarProperty Name="DyeingJOId" ColumnName="DyeingJOId" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="QualityDescription" ColumnName="QualityDescription" />
+                <ScalarProperty Name="ReqGSM" ColumnName="ReqGSM" />
+                <ScalarProperty Name="ReqWidth" ColumnName="ReqWidth" />
+                <ScalarProperty Name="NetQty" ColumnName="NetQty" />
+                <ScalarProperty Name="RatePerKg" ColumnName="RatePerKg" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="GRNReciepts">
             <EntityTypeMapping TypeName="OrderManagerDBModel.GRNReciept">
               <MappingFragment StoreEntitySet="GRNReciept">
@@ -4395,6 +4825,34 @@
               <MappingFragment StoreEntitySet="JobOrderType">
                 <ScalarProperty Name="JobOrderTypeID" ColumnName="JobOrderTypeID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KnittingJOes">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.KnittingJO">
+              <MappingFragment StoreEntitySet="KnittingJO">
+                <ScalarProperty Name="KnittingJOId" ColumnName="KnittingJOId" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="JoNo" ColumnName="JoNo" />
+                <ScalarProperty Name="JoDate" ColumnName="JoDate" />
+                <ScalarProperty Name="QuoteNo" ColumnName="QuoteNo" />
+                <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+                <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
+                <ScalarProperty Name="QualitySpecifications" ColumnName="QualitySpecifications" />
+                <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KnittingJoItems">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.KnittingJoItem">
+              <MappingFragment StoreEntitySet="KnittingJoItem">
+                <ScalarProperty Name="KnittingJoItemsId" ColumnName="KnittingJoItemsId" />
+                <ScalarProperty Name="NameOfProduct" ColumnName="NameOfProduct" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="KnittingJoId" ColumnName="KnittingJoId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

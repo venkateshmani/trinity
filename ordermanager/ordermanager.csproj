@@ -127,6 +127,12 @@
     <Compile Include="DatabaseModel\Currency.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\DyeingJO.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\DyeingJoItem.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\GRNReciept.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
@@ -150,6 +156,12 @@
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\JobOrderType.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\KnittingJO.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\KnittingJoItem.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\MaterialName.cs">
@@ -765,9 +777,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OrderManagerModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="App.Config" />
     <None Include="DatabaseModel\OrderManagerModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OrderManagerModel.edmx</DependentUpon>
