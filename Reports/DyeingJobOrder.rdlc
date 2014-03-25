@@ -860,7 +860,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!QuoteNumber.Value</Value>
+                    <Value>=Parameters!GRNRef.Value</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
@@ -933,7 +933,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!QuoteNumber.Value</Value>
+                    <Value>=Parameters!OrderRef.Value</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
@@ -1731,7 +1731,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Value</Value>
+                <Value>=Parameters!Process.Value</Value>
                 <Style>
                   <FontWeight>Normal</FontWeight>
                 </Style>
@@ -1801,7 +1801,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Value</Value>
+                <Value>=Parameters!TermsAndConditions.Value</Value>
                 <Style>
                   <FontWeight>Normal</FontWeight>
                 </Style>
@@ -1816,7 +1816,7 @@
         <Top>5.94556in</Top>
         <Left>0.0534in</Left>
         <Height>0.25in</Height>
-        <Width>1.11418in</Width>
+        <Width>1.60967in</Width>
         <ZIndex>12</ZIndex>
         <Style>
           <Border>
@@ -2041,6 +2041,44 @@
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="SupplierInformation">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PurchaseOrderNumber">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PODate">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="GRNRef">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="OrderRef">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="QuoteNo">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="QuoteDate">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Process">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="TermsAndConditions">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>846bd5f6-8b6e-453c-bfd4-6898ef0caebc</rd:ReportID>
 </Report>

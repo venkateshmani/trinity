@@ -442,7 +442,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>P.O. No.</Value>
+                    <Value>Job Order No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -458,7 +458,7 @@
             <Top>0.35005in</Top>
             <Left>3.62709in</Left>
             <Height>0.25in</Height>
-            <Width>0.73081in</Width>
+            <Width>1.07641in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -514,7 +514,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!PurchaseOrderNumber.Value</Value>
+                    <Value>=Parameters!JoOrderNo.Value</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
@@ -529,7 +529,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox48</rd:DefaultName>
             <Top>0.35004in</Top>
-            <Left>4.39929in</Left>
+            <Left>4.75905in</Left>
             <Height>0.25in</Height>
             <Width>2.14043in</Width>
             <ZIndex>4</ZIndex>
@@ -551,7 +551,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Parameters!PODate.Value</Value>
+                    <Value>=Parameters!JoDate.Value</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
@@ -763,7 +763,7 @@
               <Width>2.03624in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.6935in</Width>
+              <Width>0.78077in</Width>
             </TablixColumn>
             <TablixColumn>
               <Width>1.0703in</Width>
@@ -1026,21 +1026,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox25">
+                    <Textbox Name="NameOfProduct">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!NameOfProduct.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox25</rd:DefaultName>
+                      <rd:DefaultName>NameOfProduct</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1056,21 +1056,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox27">
+                    <Textbox Name="Quantity">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!Quantity.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox27</rd:DefaultName>
+                      <rd:DefaultName>Quantity</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1086,21 +1086,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox31">
+                    <Textbox Name="Rate">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!Rate.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox31</rd:DefaultName>
+                      <rd:DefaultName>Rate</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1116,21 +1116,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox33">
+                    <Textbox Name="TotalAmount">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!TotalAmount.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox33</rd:DefaultName>
+                      <rd:DefaultName>TotalAmount</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1146,21 +1146,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox35">
+                    <Textbox Name="Remarks">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=Fields!Remarks.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
                           <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox35</rd:DefaultName>
+                      <rd:DefaultName>Remarks</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -1198,10 +1198,11 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
+        <DataSetName>KnittingJoItems</DataSetName>
         <Top>4.04308in</Top>
         <Left>0.02674in</Left>
         <Height>0.66667in</Height>
-        <Width>6.88244in</Width>
+        <Width>6.96971in</Width>
         <ZIndex>5</ZIndex>
         <Style>
           <Border>
@@ -1229,7 +1230,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox47</rd:DefaultName>
         <Top>4.76161in</Top>
-        <Left>3.45587in</Left>
+        <Left>3.54314in</Left>
         <Height>0.25in</Height>
         <Width>1.1871in</Width>
         <ZIndex>6</ZIndex>
@@ -1264,7 +1265,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox47</rd:DefaultName>
         <Top>4.76161in</Top>
-        <Left>4.69852in</Left>
+        <Left>4.78579in</Left>
         <Height>0.25in</Height>
         <Width>1.03291in</Width>
         <ZIndex>7</ZIndex>
@@ -1321,7 +1322,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Value</Value>
+                <Value>=Parameters!TermsAndConditions.Value</Value>
                 <Style>
                   <FontWeight>Normal</FontWeight>
                 </Style>
@@ -1336,7 +1337,7 @@
         <Top>5.32682in</Top>
         <Left>0.02674in</Left>
         <Height>0.25in</Height>
-        <Width>1.11418in</Width>
+        <Width>1.60967in</Width>
         <ZIndex>9</ZIndex>
         <Style>
           <Border>
@@ -1391,7 +1392,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Value</Value>
+                <Value>=Parameters!QualitySpecification.Value</Value>
                 <Style>
                   <FontWeight>Normal</FontWeight>
                 </Style>
@@ -1406,7 +1407,7 @@
         <Top>5.98306in</Top>
         <Left>0.02674in</Left>
         <Height>0.25in</Height>
-        <Width>1.11418in</Width>
+        <Width>1.51001in</Width>
         <ZIndex>11</ZIndex>
         <Style>
           <Border>
@@ -1651,6 +1652,87 @@
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="OrderManagerDBKnittingJoDataSet">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>ebf7b093-e41c-4763-931c-82666801f188</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="KnittingJoItems">
+      <Query>
+        <DataSourceName>OrderManagerDBKnittingJoDataSet</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="KnittingJoItemsId">
+          <DataField>KnittingJoItemsId</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="NameOfProduct">
+          <DataField>NameOfProduct</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Quantity">
+          <DataField>Quantity</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Rate">
+          <DataField>Rate</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TotalAmount">
+          <DataField>TotalAmount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Remarks">
+          <DataField>Remarks</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>OrderManagerDBKnittingJoDataSet</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\Venkatesh\Documents\GitHub\trinity\Reports\OrderManagerDBKnittingJoDataSet.xsd</rd:SchemaPath>
+        <rd:TableName>SP_KnittingJODetails</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>SP_KnittingJODetailsTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="SupplierInformation">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="JoOrderNo">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="JoDate">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="QuoteNumber">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="QuoteDate">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="TermsAndConditions">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="QualitySpecification">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>9db9e046-4cb0-40d5-b3e1-06c5f965694e</rd:ReportID>
 </Report>

@@ -59,6 +59,13 @@
       <DependentUpon>BudgetReportControl.cs</DependentUpon>
     </Compile>
     <Compile Include="BudgetReportParameters.cs" />
+    <Compile Include="DyeingJoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DyeingJoControl.Designer.cs">
+      <DependentUpon>DyeingJoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DyeingJoParameters.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +79,13 @@
     <Compile Include="InvoiceUserControl.Designer.cs">
       <DependentUpon>InvoiceUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="KnittingJoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KnittingJoControl.Designer.cs">
+      <DependentUpon>KnittingJoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KnittingJoParameters.cs" />
     <Compile Include="OrderManagerDBDataSet.cs">
       <DependentUpon>OrderManagerDBDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -101,6 +115,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OrderManagerDBDyeingJoDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="OrderManagerDBKnittingJoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderManagerDBKnittingJoDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="OrderManagerDBOtherCostDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -119,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BudgetReportSheet.rdlc" />
     <EmbeddedResource Include="DyeingJobOrder.rdlc" />
+    <EmbeddedResource Include="DyeingJoControl.resx">
+      <DependentUpon>DyeingJoControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -127,6 +149,9 @@
       <DependentUpon>InvoiceUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KnittingJobOrder.rdlc" />
+    <EmbeddedResource Include="KnittingJoControl.resx">
+      <DependentUpon>KnittingJoControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PurchaseOrderReportControl.resx">
       <DependentUpon>PurchaseOrderReportControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -197,6 +222,17 @@
     </None>
     <None Include="OrderManagerDBDyeingJoDataSet.xss">
       <DependentUpon>OrderManagerDBDyeingJoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="OrderManagerDBKnittingJoDataSet.xsc">
+      <DependentUpon>OrderManagerDBKnittingJoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="OrderManagerDBKnittingJoDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrderManagerDBKnittingJoDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OrderManagerDBKnittingJoDataSet.xss">
+      <DependentUpon>OrderManagerDBKnittingJoDataSet.xsd</DependentUpon>
     </None>
     <None Include="OrderManagerDBOtherCostDataSet.xsc">
       <DependentUpon>OrderManagerDBOtherCostDataSet.xsd</DependentUpon>
