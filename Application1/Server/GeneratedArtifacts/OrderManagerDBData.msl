@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping CdmEntityContainer="OrderManagerDBDataObjectContext" StorageEntityContainer="OrderManagerDBDataStore">
+    <EntitySetMapping Name="DyeingJOes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.DyeingJO)">
+        <MappingFragment StoreEntitySet="DyeingJOes">
+          <ScalarProperty Name="DyeingJOId" ColumnName="DyeingJOId" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="JODate" ColumnName="JODate" />
+          <ScalarProperty Name="QuoteNo" ColumnName="QuoteNo" />
+          <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+          <ScalarProperty Name="GRNRefNo" ColumnName="GRNRefNo" />
+          <ScalarProperty Name="OrderRef" ColumnName="OrderRef" />
+          <ScalarProperty Name="Process" ColumnName="Process" />
+          <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
+          <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

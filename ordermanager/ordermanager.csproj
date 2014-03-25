@@ -360,6 +360,9 @@
     <Compile Include="ViewModel\Invoice\CreateNewInvoiceViewModel.cs" />
     <Compile Include="ViewModel\Invoice\GeneratedPurchaseOrderViewModel.cs" />
     <Compile Include="ViewModel\JobbOrderJOViewModel.cs" />
+    <Compile Include="ViewModel\JobOrder\CreateJOViewModel.cs" />
+    <Compile Include="ViewModel\JobOrder\DyeningJoViewModel.cs" />
+    <Compile Include="ViewModel\JobOrder\KnittingJoViewModel.cs" />
     <Compile Include="ViewModel\JobWorkViewModel.cs" />
     <Compile Include="ViewModel\ManageControlViewModel.cs" />
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />
@@ -471,6 +474,19 @@
     </Compile>
     <Compile Include="Views\UserControls\JobOrderJOView.xaml.cs">
       <DependentUpon>JobOrderJOView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\JobOrder\CreateJOControl.xaml.cs">
+      <DependentUpon>CreateJOControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\JobOrder\DyeingJOControl.xaml.cs">
+      <DependentUpon>DyeingJOControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\JobOrder\IJobOrderControl.cs" />
+    <Compile Include="Views\UserControls\JobOrder\JobOrderManager.xaml.cs">
+      <DependentUpon>JobOrderManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\JobOrder\KnittingJoControl.xaml.cs">
+      <DependentUpon>KnittingJoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\JobWorkControl.xaml.cs">
       <DependentUpon>JobWorkControl.xaml</DependentUpon>
@@ -647,6 +663,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\JobOrderJOView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\JobOrder\CreateJOControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\JobOrder\DyeingJOControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\JobOrder\JobOrderManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\JobOrder\KnittingJoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

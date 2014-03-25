@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="OrderManagerDBDataStore" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="OrderManagerDBDataStore">
+    <EntitySet Name="DyeingJOes" EntityType="OrderManagerDBDataStore.DyeingJO" store:Type="Tables" Schema="dbo" Table="DyeingJO" />
+  </EntityContainer>
+  <EntityType Name="DyeingJO">
+    <Key>
+      <PropertyRef Name="DyeingJOId" />
+    </Key>
+    <Property Name="DyeingJOId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SupplierID" Type="int" Nullable="false" />
+    <Property Name="OrderID" Type="bigint" Nullable="false" />
+    <Property Name="PurchaseOrderID" Type="bigint" Nullable="false" />
+    <Property Name="JODate" Type="datetime" Nullable="false" />
+    <Property Name="QuoteNo" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="QuoteDate" Type="datetime" Nullable="false" />
+    <Property Name="GRNRefNo" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="OrderRef" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="Process" Type="varchar" Nullable="false" MaxLength="150" />
+    <Property Name="TermsAndConditions" Type="varchar" Nullable="false" MaxLength="300" />
+    <Property Name="TotalValue" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="ApprovalID" Type="bigint" Nullable="false" />
+  </EntityType>
+</Schema>

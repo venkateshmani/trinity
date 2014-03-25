@@ -96,6 +96,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OrderManagerDBDataSetForPO.xsd</DependentUpon>
     </Compile>
+    <Compile Include="OrderManagerDBDyeingJoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrderManagerDBDyeingJoDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="OrderManagerDBOtherCostDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -113,6 +118,7 @@
       <DependentUpon>BudgetReportControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BudgetReportSheet.rdlc" />
+    <EmbeddedResource Include="DyeingJobOrder.rdlc" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +126,7 @@
     <EmbeddedResource Include="InvoiceUserControl.resx">
       <DependentUpon>InvoiceUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="KnittingJobOrder.rdlc" />
     <EmbeddedResource Include="PurchaseOrderReportControl.resx">
       <DependentUpon>PurchaseOrderReportControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -179,6 +186,17 @@
     </None>
     <None Include="OrderManagerDBDataSetForPO.xss">
       <DependentUpon>OrderManagerDBDataSetForPO.xsd</DependentUpon>
+    </None>
+    <None Include="OrderManagerDBDyeingJoDataSet.xsc">
+      <DependentUpon>OrderManagerDBDyeingJoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="OrderManagerDBDyeingJoDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>OrderManagerDBDyeingJoDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="OrderManagerDBDyeingJoDataSet.xss">
+      <DependentUpon>OrderManagerDBDyeingJoDataSet.xsd</DependentUpon>
     </None>
     <None Include="OrderManagerDBOtherCostDataSet.xsc">
       <DependentUpon>OrderManagerDBOtherCostDataSet.xsd</DependentUpon>

@@ -1,0 +1,106 @@
+﻿<UserControl xmlns:JobOrderControls="clr-namespace:ordermanager.Views.UserControls.JobOrderControls"  x:Class="ordermanager.Views.UserControls.JobOrderControls.JobOrderManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:Converters="clr-namespace:ordermanager.ValueConverters">
+             
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Metro.Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="HideHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Style>
+            <Style x:Key="ProductsListContentStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontSize" Value="18" />
+            </Style>
+            <Style x:Key="ProductInfoStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="FontSize" Value="16" />
+
+                <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
+            </Style>
+            <Converters:IndexToNumberConverter x:Key="IndexToNumber"/>
+            <Converters:CountToVisibilityConverter x:Key="CountToVisibilityConverter"/>
+            <Converters:Subractor x:Key="subractor"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.15*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+
+        <ListView x:Name="supplierList" Grid.Row="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Order.PurchaseOrders}" SelectedIndex="-1" SelectionChanged="SupplierList_SelectionChanged">
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
+                    <GridViewColumn x:Name="supplierColumn" Width="{Binding ActualWidth, ElementName=supplierList, Converter={StaticResource subractor}, ConverterParameter=5}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="3">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,0,0,0" HorizontalAlignment="Stretch" TextAlignment="Left" Text="{Binding Path=PurchaseOrderNumber}" Width="{Binding ElementName=supplierList, Path=ActualWidth, Converter={StaticResource subractor}, ConverterParameter=20}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="0"  Margin="4,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path= Company.Name }"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" FontSize="12"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="0"  Margin="4,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding POStatus}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" FontSize="12"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+         <JobOrderControls:CreateJOCtrl x:Name="joControl" Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">
+            <Button Content="Comments" x:Name="commentsBtn" Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="commentsBtn_Click_1">
+                <Button.Background>
+                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                </Button.Background>
+            </Button>
+            <Button Content="Generate" x:Name="positiveBtn" Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="positiveBtn_Click_1">
+                <Button.Background>
+                    <SolidColorBrush Color="{StaticResource AccentColor}" />
+                </Button.Background>
+            </Button>
+            <Button Content="Discard" x:Name="negativeBtn" Width="100" Height="30" Margin="5" Foreground="White"  ToolTip="Discard Invoice" HorizontalAlignment="Left" Click="negativeBtn_Click_1">
+                <Button.Background>
+                    <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        
+    </Grid>
+    
+    
+</UserControl>

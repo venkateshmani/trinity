@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModelFragment xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication
+    Name="LightSwitchServiceApplication"
+    Version="1.0.0.0">
+    <ServiceApplication.Attributes>
+      <ModuleNamespace
+        Namespace="LightSwitchApplication" />
+    </ServiceApplication.Attributes>
+  </ServiceApplication>
+  <DataService
+    DataProvider="EntityFrameworkDataProvider"
+    EntityContainer="LightSwitchCommonModule:OrderManagerDBData"
+    Name="OrderManagerDBDataDataService">
+    <DataService.ConnectionProperties>
+      <ConnectionProperty
+        Name="DataProviderName"
+        Value="91510608-8809-4020-8897-fba057e22d54" />
+      <ConnectionProperty
+        Name="DataSourceName"
+        Value="067ea0d9-ba62-43f7-9106-34930c60c528" />
+      <ConnectionProperty
+        Name="ProviderInvariantName"
+        Value="System.Data.SqlClient" />
+      <ConnectionProperty
+        Name="SafeConnectionString"
+        Value="Data Source=VENKATESH-PC\SQLEXPRESS;Initial Catalog=OrderManagerDB;Integrated Security=True" />
+      <ConnectionProperty
+        Name="ConnectionStringGuid"
+        Value="7f2b7696-e567-4612-bb95-533d8bf312f6" />
+      <ConnectionProperty
+        Name="ProviderManifestToken"
+        Value="2008" />
+    </DataService.ConnectionProperties>
+    <EntitySetMapping
+      EntitySet="DyeingJOes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="DyeingJO" />
+        <SsdlProperty
+          Name="DyeingJOId"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[DyeingJOId]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="SupplierID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[SupplierID]"
+          Type="int" />
+        <SsdlProperty
+          Name="OrderID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[OrderID]"
+          Type="bigint" />
+        <SsdlProperty
+          Name="PurchaseOrderID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[PurchaseOrderID]"
+          Type="bigint" />
+        <SsdlProperty
+          Name="JODate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[JODate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="QuoteNo"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[QuoteNo]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="QuoteDate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[QuoteDate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="GRNRefNo"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[GRNRefNo]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="OrderRef"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[OrderRef]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="150"
+          Name="Process"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[Process]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="300"
+          Name="TermsAndConditions"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[TermsAndConditions]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="TotalValue"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[TotalValue]"
+          Scale="2"
+          Type="decimal" />
+        <SsdlProperty
+          Name="ApprovalID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[ApprovalID]"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+  </DataService>
+  <DataService
+    DataProvider="EntityFrameworkDataProvider"
+    EntityContainer="LightSwitchCommonModule:OrderManagerDBData1"
+    Name="OrderManagerDBData1DataService">
+    <DataService.ConnectionProperties>
+      <ConnectionProperty
+        Name="DataProviderName"
+        Value="91510608-8809-4020-8897-fba057e22d54" />
+      <ConnectionProperty
+        Name="DataSourceName"
+        Value="067ea0d9-ba62-43f7-9106-34930c60c528" />
+      <ConnectionProperty
+        Name="ProviderInvariantName"
+        Value="System.Data.SqlClient" />
+      <ConnectionProperty
+        Name="SafeConnectionString"
+        Value="Data Source=VENKATESH-PC\SQLEXPRESS;Initial Catalog=OrderManagerDB;Integrated Security=True" />
+      <ConnectionProperty
+        Name="ConnectionStringGuid"
+        Value="816a9ab0-eba2-43f7-98eb-5f84d8e3ef75" />
+      <ConnectionProperty
+        Name="ProviderManifestToken"
+        Value="2008" />
+    </DataService.ConnectionProperties>
+    <EntitySetMapping
+      EntitySet="DyeingJOes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="DyeingJO" />
+        <SsdlProperty
+          Name="DyeingJOId"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[DyeingJOId]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="SupplierID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[SupplierID]"
+          Type="int" />
+        <SsdlProperty
+          Name="OrderID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[OrderID]"
+          Type="bigint" />
+        <SsdlProperty
+          Name="PurchaseOrderID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[PurchaseOrderID]"
+          Type="bigint" />
+        <SsdlProperty
+          Name="JODate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[JODate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="QuoteNo"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[QuoteNo]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="QuoteDate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[QuoteDate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="GRNRefNo"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[GRNRefNo]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="OrderRef"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[OrderRef]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="150"
+          Name="Process"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[Process]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="300"
+          Name="TermsAndConditions"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[TermsAndConditions]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="TotalValue"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[TotalValue]"
+          Scale="2"
+          Type="decimal" />
+        <SsdlProperty
+          Name="ApprovalID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO1/Properties[ApprovalID]"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="DyeingJoItems">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="DyeingJoItem" />
+        <SsdlProperty
+          Name="DyeingJoItemsID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[DyeingJoItemsID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Color"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[Color]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="QualityDescription"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[QualityDescription]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="ReqGSM"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[ReqGSM]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="ReqWidth"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[ReqWidth]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="NetQty"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[NetQty]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="RatePerKg"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[RatePerKg]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="TotalAmount"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[TotalAmount]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="DyeingJOId"
+          Nullable="False"
+          PropertyName="DyeingJOId"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_DyeingJoItem_DyeingJO">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_DyeingJoItem_DyeingJO" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData1/Members[FK_DyeingJoItem_DyeingJO]/Members[DyeingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="DyeingJOId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData1/Members[FK_DyeingJoItem_DyeingJO]/Members[DyeingJoItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="DyeingJOId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ModelFragment>

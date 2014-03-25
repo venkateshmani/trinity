@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ModelDocumentManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Documents>
+    <Document FullPath="C:\Users\Venkatesh\Documents\GitHub\trinity\Application1\Client\Properties\Client.lsml" Checksum="035C6AF722DAFADAFFCBCCB84A79265343BD2188573A7CA03B167A2DF3532012" />
+    <Document FullPath="C:\Users\Venkatesh\Documents\GitHub\trinity\Application1\Common\Properties\Common.lsml" Checksum="35B3459CEFAFB1C91A017A34169388C945169C12CC6B1D50B72D1A1B2E29E53C" />
+  </Documents>
+</ModelDocumentManifest>
