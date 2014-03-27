@@ -47,6 +47,17 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             throw new NotImplementedException();
         }
 
+        public bool ShowPDF()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public bool Discard()
+        {
+            throw new NotImplementedException();
+        }
+
         #region Supplier Management
 
         private void addNewSupplierBtn_Click_1(object sender, RoutedEventArgs e)
@@ -102,5 +113,8 @@ namespace ordermanager.Views.UserControls.JobOrderControls
         }
 
         #endregion 
+    
+
+      
     }
 }

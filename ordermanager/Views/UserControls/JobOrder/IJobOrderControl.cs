@@ -12,5 +12,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
         bool Submit();
         bool Approve();
         bool Reject();
+        bool ShowPDF();
+        bool Discard();
     }
 }

@@ -1,4 +1,8 @@
-﻿<UserControl xmlns:Information="clr-namespace:ordermanager.Views.UserControls.Information"  xmlns:PurchaseOrderControls="clr-namespace:ordermanager.Views.UserControls.PurchaseOrderControls"  xmlns:Execution="clr-namespace:ordermanager.Views.UserControls.Execution" 
+﻿<UserControl xmlns:Information="clr-namespace:ordermanager.Views.UserControls.Information"  
+             xmlns:PurchaseOrderControls="clr-namespace:ordermanager.Views.UserControls.PurchaseOrderControls" 
+             xmlns:Execution="clr-namespace:ordermanager.Views.UserControls.Execution" 
+             xmlns:UserControls="clr-namespace:ordermanager.Views.UserControls"  
+             xmlns:JobOrderControls="clr-namespace:ordermanager.Views.UserControls.JobOrderControls" 
              xmlns:PopUps="clr-namespace:ordermanager.Views.PopUps" 
              xmlns:my="clr-namespace:ordermanager.Views.UserControls"
              x:Class="ordermanager.Views.UserControls.OrderWorkBench"
@@ -107,7 +111,21 @@
                     <PurchaseOrderControls:PurchaseOrderMasterControl x:Name="poControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 </Border>
             </TabItem>
-           
+            <TabItem Header=" JO ">
+                <TabControl>
+                    <TabItem Header="  Create New  ">
+                        <JobOrderControls:CreateJOCtrl x:Name="joCreateCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    </TabItem>
+                    <TabItem Header="  JO  ">
+                        <JobOrderControls:JobOrderManager x:Name="joManagerCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    </TabItem>
+                    <TabItem Header=" Track ">
+                        <UserControls:JobOrderJOView x:Name="joCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            
+
             <TabItem x:Name="tabExecution" Header="  Execution" Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <TabControl x:Name="tabExecutionDetailsControl" Grid.Row="1">

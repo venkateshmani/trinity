@@ -288,6 +288,8 @@
     <Compile Include="Extended Database Models for UI\PurchaseOrder.cs" />
     <Compile Include="Extended Database Models\CartonBox.cs" />
     <Compile Include="Extended Database Models\Company.cs" />
+    <Compile Include="Extended Database Models\DyeingJO.cs" />
+    <Compile Include="Extended Database Models\DyeingJoItem.cs" />
     <Compile Include="Extended Database Models\GRNReciept.cs" />
     <Compile Include="Extended Database Models\Helper.cs" />
     <Compile Include="Extended Database Models\Invoice.cs" />
@@ -481,6 +483,7 @@
     <Compile Include="Views\UserControls\JobOrder\DyeingJOControl.xaml.cs">
       <DependentUpon>DyeingJOControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\JobOrder\IActionButtons.cs" />
     <Compile Include="Views\UserControls\JobOrder\IJobOrderControl.cs" />
     <Compile Include="Views\UserControls\JobOrder\JobOrderManager.xaml.cs">
       <DependentUpon>JobOrderManager.xaml</DependentUpon>

@@ -82,23 +82,7 @@
 
          <JobOrderControls:CreateJOCtrl x:Name="joControl" Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">
-            <Button Content="Comments" x:Name="commentsBtn" Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="commentsBtn_Click_1">
-                <Button.Background>
-                    <SolidColorBrush Color="{StaticResource AccentColor}" />
-                </Button.Background>
-            </Button>
-            <Button Content="Generate" x:Name="positiveBtn" Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="positiveBtn_Click_1">
-                <Button.Background>
-                    <SolidColorBrush Color="{StaticResource AccentColor}" />
-                </Button.Background>
-            </Button>
-            <Button Content="Discard" x:Name="negativeBtn" Width="100" Height="30" Margin="5" Foreground="White"  ToolTip="Discard Invoice" HorizontalAlignment="Left" Click="negativeBtn_Click_1">
-                <Button.Background>
-                    <SolidColorBrush Color="{StaticResource ValidationColor5}" />
-                </Button.Background>
-            </Button>
-        </StackPanel>
+       
         
     </Grid>
     

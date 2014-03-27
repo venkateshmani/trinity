@@ -1,4 +1,7 @@
-﻿<UserControl xmlns:JobOrderControls="clr-namespace:ordermanager.Views.UserControls.JobOrderControls"  xmlns:PurchaseOrderControls="clr-namespace:ordermanager.Views.UserControls.PurchaseOrderControls"  xmlns:UserControls="clr-namespace:ordermanager.Views.UserControls"  x:Class="ordermanager.Views.UserControls.PurchaseOrderControls.PurchaseOrderMasterControl"
+﻿<UserControl xmlns:JobOrderControls="clr-namespace:ordermanager.Views.UserControls.JobOrderControls"  
+             xmlns:PurchaseOrderControls="clr-namespace:ordermanager.Views.UserControls.PurchaseOrderControls"
+             xmlns:UserControls="clr-namespace:ordermanager.Views.UserControls"  
+             x:Class="ordermanager.Views.UserControls.PurchaseOrderControls.PurchaseOrderMasterControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -53,12 +56,6 @@
                 </TabItem>
                 <TabItem Header="  GRN  ">
                     <UserControls:GRNControl x:Name="grnControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-                </TabItem>
-                <TabItem Header="  Track JO   ">
-                  <UserControls:JobOrderJOView x:Name="joCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-                </TabItem>
-                <TabItem Header="  JO  ">
-                    <JobOrderControls:JobOrderManager x:Name="joManagerCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 </TabItem>
             </TabControl>
         </Border>

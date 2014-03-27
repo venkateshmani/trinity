@@ -573,6 +573,7 @@
           <Property Name="TermsAndConditions" Type="varchar" Nullable="false" MaxLength="300" />
           <Property Name="TotalValue" Type="decimal" Nullable="false" Scale="2" />
           <Property Name="ApprovalID" Type="bigint" Nullable="false" />
+          <Property Name="JoNo" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="DyeingJoItem">
           <Key>
@@ -2791,6 +2792,7 @@
           <Property Name="TermsAndConditions" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
           <Property Name="TotalValue" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="ApprovalID" Type="Int64" Nullable="false" />
+          <Property Name="JoNo" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_DyeingJO_Approval" FromRole="DyeingJO" ToRole="Approval" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_DyeingJO_Company" FromRole="DyeingJO" ToRole="Company" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_DyeingJO_Order" FromRole="DyeingJO" ToRole="Order" />
@@ -4694,6 +4696,7 @@
                 <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
                 <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
                 <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+                <ScalarProperty Name="JoNo" ColumnName="JoNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

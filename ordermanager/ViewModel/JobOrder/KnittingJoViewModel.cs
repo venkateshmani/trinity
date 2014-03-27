@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager.ViewModel.JobOrderControls
 {
-    class KnittingJoViewModel
+    public class KnittingJoViewModel
     {
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.Views.PopUps;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +30,46 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             InitializeComponent();
         }
 
-        
+        private Order m_Order = null;
+        public Order Order
+        {
+            get
+            {
+                return m_Order;
+            }
+            set
+            {
+                m_Order = value;
+            }
+        }
+
+        public void SetOrder(Order order)
+        {
+            Order = order;
+            CreateNewDyeingJo();
+        }
+
+        public void CreateNewDyeingJo()
+        {
+            dyeingJOControl.CreateNewJo(Order);
+        }
+
+        public void CreateNewKnittingJo()
+        {
+
+        }
+
+        public void OpenExistingJo(object jo)
+        {
+            if (jo is DyeingJO)
+            {
+                dyeingJOControl.OpenExistingJo(jo as DyeingJO);
+            }
+            else if (jo is KnittingJO)
+            {
+
+            }
+        }
 
         private void jobOrderType_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
@@ -41,14 +82,14 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                     {
                         dyeingJOControl.Visibility = System.Windows.Visibility.Visible;
                         knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
-
+                        CreateNewDyeingJo();
                         selectedJobOrderControl = dyeingJOControl;
                     }
                     else if (selectedItem.Content.ToString() == "Knitting")
                     {
                         dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
                         knittingJOControl.Visibility = System.Windows.Visibility.Visible;
-
+                        CreateNewKnittingJo();
                         selectedJobOrderControl = knittingJOControl;
                     }
                     else
@@ -61,5 +102,54 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 }
             }
         }
+
+        #region Action Events
+
+        private void commentsBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            CommentBox cBox = new CommentBox();
+            cBox.UpdateBtnText = "Close";
+            cBox.Title = "Comments";
+            cBox.IsReadOnly = true;
+            //cBox.Comment = ViewModel.PurchaseOrder.Approval.Comments;
+            cBox.ShowDialog();
+        }
+
+        private void negativeBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            string buttonContent = positiveBtn.Content.ToString();
+            switch (buttonContent)
+            {
+                case "Reject":
+                    selectedJobOrderControl.Reject();
+                    break;
+                case "Discard":
+                    selectedJobOrderControl.Discard();
+                    break;
+            }
+        }
+
+        private void positiveBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            string buttonContent = positiveBtn.Content.ToString();
+
+            switch (buttonContent)
+            {
+                case "Generate":
+                    selectedJobOrderControl.Generate();
+                    break;
+                case "Submit":
+                    selectedJobOrderControl.Submit();
+                    break;
+                case "Approve":
+                    selectedJobOrderControl.Approve();
+                    break;
+                case "PDF":
+                    selectedJobOrderControl.ShowPDF();
+                    break;
+            }
+        }
+
+        #endregion 
     }
 }

@@ -32,6 +32,7 @@ namespace ordermanager.DatabaseModel
         public string TermsAndConditions { get; set; }
         public decimal TotalValue { get; set; }
         public long ApprovalID { get; set; }
+        public string JoNo { get; set; }
     
         public virtual Approval Approval { get; set; }
         public virtual Company Company { get; set; }
