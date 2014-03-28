@@ -69,7 +69,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Background="White" Margin="5" CornerRadius="10">
-                <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -91,7 +91,7 @@
                         <ComboBox x:Name="supplierComboBox" Width="200" Margin="5" 
                               ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
                               DisplayMemberPath="Name"
-                              SelectedItem="{Binding JO.Company, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                              SelectedItem="{Binding JO.Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                               SelectionChanged="supplierComboBox_SelectionChanged_1"
                               IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
                               IsReadOnly="{Binding IsReadOnly}" />
@@ -132,7 +132,7 @@
                     </StackPanel>
 
                     <TextBlock Text="Po. No. :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="1" />
-                    <TextBox Text="{Binding JO.PurchaseOrderNumber}" Width="200" Margin="5,5,0,5"
+                    <TextBox Text="{Binding JO.PurchaseOrderNumber, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" Width="200" Margin="5,5,0,5"
                          Height="5" AcceptsReturn="True"
                          Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
 
@@ -142,37 +142,37 @@
                                     Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"/>
 
                     <TextBlock Text="JO No :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="3" />
-                    <TextBlock Text="{Binding  JO.JoNo, StringFormat=dd/MM/yy}" Margin="5" 
+                    <TextBlock Text="{Binding  JO.JoNo, StringFormat=dd/MM/yy,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" Margin="5" 
                                     Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left"/>
 
                     <TextBlock Text="Quotation Date :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="4" />
                     <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="5">
-                        <DatePicker x:Name="quoteDate" VerticalAlignment="Center" Width="100" IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" SelectedDate="{Binding JO.QuoteDate}" />
+                        <DatePicker x:Name="quoteDate" VerticalAlignment="Center" Width="100" IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" SelectedDate="{Binding JO.QuoteDateWrapper, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" />
                         <TextBlock  Text="no." Margin="5,0,0,0" VerticalAlignment="Center" />
-                        <TextBox Text="{Binding JO.QuoteNo}" Width="50" Margin="5,0,0,0"
+                        <TextBox Text="{Binding JO.QuoteNoWrapper,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" Width="50" Margin="5,0,0,0"
                     		HorizontalAlignment="Left"  IsReadOnly="{Binding IsReadOnly}"/>
                     </StackPanel>
 
                     <TextBlock Text="GRN Ref. no. :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="5" />
-                    <TextBox Text="{Binding JO.GRNRefNo}" Width="200" Margin="5,5,0,5"
+                    <TextBox Text="{Binding JO.GRNRefNoWrapper,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" Width="200" Margin="5,5,0,5"
                          Height="5" TextWrapping="Wrap"
                          AcceptsReturn="True"
                          Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
 
                     <TextBlock Text="Order Ref. no. :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="6" />
-                    <TextBox Text="{Binding JO.OrderRef}" Width="200" Margin="5,5,0,5"
+                    <TextBox Text="{Binding JO.OrderRefWrapper,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" Width="200" Margin="5,5,0,5"
                          Height="5" TextWrapping="Wrap"
                          AcceptsReturn="True"
                          Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
 
                     <TextBlock Text="Process :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="7" />
-                    <TextBox Text="{Binding JO.Process}" Width="200" Margin="5,5,0,5"
+                    <TextBox Text="{Binding JO.ProcessWrapper, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" Width="200" Margin="5,5,0,5"
                          Height="50" TextWrapping="Wrap"
                          AcceptsReturn="True"
                          Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
 
                     <TextBlock Text="T &amp; C :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="8" />
-                    <TextBox Text="{Binding JO.TermsAndConditions}" Width="200" Margin="5,5,0,5"
+                    <TextBox Text="{Binding JO.TermsAndConditionsWrapper,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" Width="200" Margin="5,5,0,5"
                          Height="100" TextWrapping="Wrap"
                          AcceptsReturn="True"
                          Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
@@ -212,42 +212,42 @@
                             <DataGridTemplateColumn x:Name="colorColumn" Header="Color" Width="0.14*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Color, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsReadOnly}"/>
+                                        <TextBox Text="{Binding ColorWrapper,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding IsReadOnly}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="qltyDesc" Header="QLTY DESC" Width="0.14*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding QualityDescription, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsReadOnly}" />
+                                        <TextBox Text="{Binding QualityDescriptionWrapper, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding IsReadOnly}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="reqGsm" Header="Req-Gsm" Width="0.14*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding ReqGSM, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsReadOnly}"/>
+                                        <TextBox Text="{Binding ReqGSMWrapper,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding IsReadOnly}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="reqWidth" Header="Req-Width" Width="0.14*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding ReqWidth, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsReadOnly}" />
+                                        <TextBox Text="{Binding ReqWidthWrapper,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding IsReadOnly}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="netQty" Header="Net-qty" Width="0.14*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding NetQtyWrapper, StringFormat=n, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsReadOnly}"/>
+                                        <TextBox Text="{Binding NetQtyWrapper, StringFormat=n,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding IsReadOnly}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="ratePerKG" Header="Rate / KG" Width="0.14*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding RatePerKgWrapper,  StringFormat=n, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="{Binding IsReadOnly}" />
+                                        <TextBox Text="{Binding RatePerKgWrapper,  StringFormat=n,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding IsReadOnly}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

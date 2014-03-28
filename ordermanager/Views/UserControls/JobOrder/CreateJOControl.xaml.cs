@@ -28,6 +28,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
         public CreateJOCtrl()
         {
             InitializeComponent();
+            jobOrderType.SelectedIndex = -1;
         }
 
         private Order m_Order = null;
@@ -46,7 +47,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
         public void SetOrder(Order order)
         {
             Order = order;
-            CreateNewDyeingJo();
+            joTypeSelection.Visibility = System.Windows.Visibility.Visible;
         }
 
         public void CreateNewDyeingJo()
@@ -64,11 +65,18 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             if (jo is DyeingJO)
             {
                 dyeingJOControl.OpenExistingJo(jo as DyeingJO);
+                dyeingJOControl.Visibility = System.Windows.Visibility.Visible;
+                knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                selectedJobOrderControl = dyeingJOControl;
             }
             else if (jo is KnittingJO)
             {
-
+                dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                knittingJOControl.Visibility = System.Windows.Visibility.Visible;
+                selectedJobOrderControl = knittingJOControl;
             }
+
+            joTypeSelection.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         private void jobOrderType_SelectionChanged_1(object sender, SelectionChangedEventArgs e)

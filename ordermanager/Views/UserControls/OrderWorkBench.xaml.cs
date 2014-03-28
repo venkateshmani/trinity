@@ -193,6 +193,7 @@ namespace ordermanager.Views.UserControls
             {
                 m_Order = order;
                 viewEnquiry.SetOrder(order);
+                joManagerCtrl.SetOrder(order);
                 joCtrl.SetOrder(order);
                 joCreateCtrl.SetOrder(order);
                 UpdateView();

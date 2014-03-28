@@ -1,4 +1,5 @@
-﻿using ordermanager.DatabaseModel;
+﻿using MahApps.Metro.Controls;
+using ordermanager.DatabaseModel;
 using ordermanager.ViewModel;
 using ordermanager.ViewModel.JobOrderControls;
 using ordermanager.Views.PopUps;
@@ -52,21 +53,44 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             ViewModel = new DyeingJoViewModel(jo);
         }
 
+        private void InformUser(string message)
+        {
+            PopupBox informer = new PopupBox();
+            informer.Message = message;
+            informer.PopupButton = PopupButton.OK;
+            informer.ShowDialog();
+        }
+
         public bool Generate()
         {
             try
             {
-                Approval approval = new Approval();
-                approval.Order = ViewModel.JO.Order;
-                approval.IsApproved = null;
+                if (ViewModel.JO.Validate() == false)
+                {
+                    Approval approval = new Approval();
+                    approval.Order = ViewModel.JO.Order;
+                    approval.IsApproved = null;
+                    approval.ApprovalEntityTypeID = 3;
 
-                StringBuilder comments = new StringBuilder();
-                comments.Append("Generated on " + DBResources.Instance.GetServerTime() + " by " + DBResources.Instance.CurrentUser.UserName);
+                    StringBuilder comments = new StringBuilder();
+                    comments.Append("Generated on " + DBResources.Instance.GetServerTime() + " by " + DBResources.Instance.CurrentUser.UserName);
 
-                approval.Comments = comments.ToString();
-                ViewModel.JO.Approval = approval;
+                    approval.Comments = comments.ToString();
+                    ViewModel.JO.Approval = approval;
+                    
+                    ViewModel.Order.DyeingJOes.Add(ViewModel.JO);
 
-                DBResources.Instance.Save();
+                    DBResources.Instance.Save();
+                    
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine("Job Order Successfully Created");
+                    sb.AppendLine("Submitted For Approval !.");
+                    InformUser(sb.ToString());
+                }
+                else
+                {
+                    InformUser("Fix the Highlighted Errors and try again");
+                }
             }
             catch (Exception ex)
             {

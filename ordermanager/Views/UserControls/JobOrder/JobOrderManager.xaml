@@ -54,7 +54,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <ListView x:Name="supplierList" Grid.Row="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Order.PurchaseOrders}" SelectedIndex="-1" SelectionChanged="SupplierList_SelectionChanged">
+        <ListView x:Name="supplierList" Grid.Row="0" BorderBrush="Transparent" Margin="2" PresentationTraceSources.TraceLevel="High" ItemsSource="{Binding JobOrderInfos}" SelectedIndex="-1" SelectionChanged="SupplierList_SelectionChanged">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
                     <GridViewColumn x:Name="supplierColumn" Width="{Binding ActualWidth, ElementName=supplierList, Converter={StaticResource subractor}, ConverterParameter=5}">
@@ -69,9 +69,9 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,0,0,0" HorizontalAlignment="Stretch" TextAlignment="Left" Text="{Binding Path=PurchaseOrderNumber}" Width="{Binding ElementName=supplierList, Path=ActualWidth, Converter={StaticResource subractor}, ConverterParameter=20}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
-                                    <TextBlock Grid.Row="1" Grid.Column="0"  Margin="4,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path= Company.Name }"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" FontSize="12"/>
-                                    <TextBlock Grid.Row="2" Grid.Column="0"  Margin="4,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding POStatus}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" FontSize="12"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="4,0,0,0" HorizontalAlignment="Stretch" TextAlignment="Left" Text="{Binding Path=JobOrderNumber}" Width="{Binding ElementName=supplierList, Path=ActualWidth, Converter={StaticResource subractor}, ConverterParameter=20}"  FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="0"  Margin="4,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Path= SupplierName}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" FontSize="12"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="0"  Margin="4,0,0,0" HorizontalAlignment="Left" TextAlignment="Left" Text="{Binding Status}"   FontFamily="{StaticResource ContentFontFamily}" VerticalAlignment="Center" Style="{StaticResource ProductsListContentStyle}" FontSize="12"/>
                                 </Grid>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

@@ -292,6 +292,7 @@
     <Compile Include="Extended Database Models\DyeingJoItem.cs" />
     <Compile Include="Extended Database Models\GRNReciept.cs" />
     <Compile Include="Extended Database Models\Helper.cs" />
+    <Compile Include="Extended Database Models\IJobOrderInfo.cs" />
     <Compile Include="Extended Database Models\Invoice.cs" />
     <Compile Include="Extended Database Models\JobOrder.cs" />
     <Compile Include="Extended Database Models\OrderCurrencyConversion.cs" />
@@ -364,6 +365,7 @@
     <Compile Include="ViewModel\JobbOrderJOViewModel.cs" />
     <Compile Include="ViewModel\JobOrder\CreateJOViewModel.cs" />
     <Compile Include="ViewModel\JobOrder\DyeningJoViewModel.cs" />
+    <Compile Include="ViewModel\JobOrder\JobOrderMangerViewModel.cs" />
     <Compile Include="ViewModel\JobOrder\KnittingJoViewModel.cs" />
     <Compile Include="ViewModel\JobWorkViewModel.cs" />
     <Compile Include="ViewModel\ManageControlViewModel.cs" />

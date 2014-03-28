@@ -1,5 +1,5 @@
 ﻿using ordermanager.DatabaseModel;
-using ordermanager.Views.UserControls.JobOrder;
+using ordermanager.Views.UserControls.JobOrderControls;
 using Reports;
 using System;
 using System.Collections.Generic;
@@ -15,8 +15,9 @@ namespace ordermanager.ViewModel.JobOrderControls
         {
             this.Order = order;
             JO = new DyeingJO();
-
             JO.JoNo =  "Dye-" + (Order.DyeingJOes.Count + 1).ToString();
+            JO.Order = order;
+            JO.QuoteDate = order.OrderDate;
             JO.JODate = DBResources.Instance.GetServerTime();
         }
 

@@ -1,4 +1,7 @@
-﻿using ordermanager.Views.PopUps;
+﻿using ordermanager.DatabaseModel;
+using ordermanager.Extended_Database_Models;
+using ordermanager.ViewModel.JobOrderControls;
+using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,8 +27,48 @@ namespace ordermanager.Views.UserControls.JobOrderControls
         public JobOrderManager()
         {
             InitializeComponent();
+            this.Loaded += JobOrderManager_Loaded;
         }
 
+        void JobOrderManager_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (ViewModel != null)
+            {
+                ViewModel.ReLoad();
+            }
+        }
+
+        public JobOrderManagerViewModel ViewModel
+        {
+            get
+            {
+                return this.DataContext as JobOrderManagerViewModel;
+            }
+            set
+            {
+                this.DataContext = value;
+            }
+        }
+
+        private Order m_Order = null;
+        public Order Order
+        {
+            get
+            {
+                return m_Order;
+            }
+            set
+            {
+                m_Order = value;
+            }
+        }
+
+        public void SetOrder(Order order)
+        {
+            this.Order = order;
+            ViewModel = new JobOrderManagerViewModel(order);
+        }
+            
 
         #region Action Events
 
@@ -53,7 +96,16 @@ namespace ordermanager.Views.UserControls.JobOrderControls
 
         private void SupplierList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            IJobOrderInfo jobOrderInfo = supplierList.SelectedItem as IJobOrderInfo;
+            if (jobOrderInfo != null)
+            {
+                ViewModel.SelectedJobOrderInfo = jobOrderInfo;
 
+                if (jobOrderInfo.Type == "Dyeing")
+                {
+                    joControl.OpenExistingJo(jobOrderInfo as DyeingJO);   
+                }
+            }
         }
 
     }

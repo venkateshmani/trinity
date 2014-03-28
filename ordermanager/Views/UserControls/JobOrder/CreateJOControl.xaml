@@ -62,14 +62,14 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" x:Name="joTypeSelection" Orientation="Horizontal">
             <Label Content="Job Order Type:"  VerticalAlignment="Center"/>
-            <ComboBox x:Name="jobOrderType" VerticalAlignment="Center" Margin="5" SelectedIndex="0" SelectionChanged="jobOrderType_SelectionChanged_1">
+            <ComboBox x:Name="jobOrderType" VerticalAlignment="Center" Margin="5" SelectedIndex="0" SelectionChanged="jobOrderType_SelectionChanged_1" Width="75">
                 <ComboBoxItem Content="Dyeing" />
                 <ComboBoxItem Content="Knitting" />
             </ComboBox>
         </StackPanel>
-        <JobOrderControls:DyeingJOControl x:Name="dyeingJOControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" Visibility="Visible" />
+        <JobOrderControls:DyeingJOControl x:Name="dyeingJOControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" Visibility="Hidden" />
         <JobOrderControls:KnittingJoControl x:Name="knittingJOControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden" Grid.Row="1" />
         <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">
             <Button Content="Comments" x:Name="commentsBtn" Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="commentsBtn_Click_1">

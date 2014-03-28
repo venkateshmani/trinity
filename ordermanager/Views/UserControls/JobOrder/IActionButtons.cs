@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ordermanager.Views.UserControls.JobOrder
+namespace ordermanager.Views.UserControls.JobOrderControls
 {
     interface IActionButtons
     {
