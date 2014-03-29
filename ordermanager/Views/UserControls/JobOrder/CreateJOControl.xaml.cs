@@ -1,4 +1,5 @@
 ﻿using ordermanager.DatabaseModel;
+using ordermanager.ViewModel.JobOrderControls;
 using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,19 @@ namespace ordermanager.Views.UserControls.JobOrderControls
         {
             InitializeComponent();
             jobOrderType.SelectedIndex = -1;
+        }
+
+
+        public CreateJOViewModel ViewModel
+        {
+            get
+            {
+                return this.DataContext as CreateJOViewModel;
+            }
+            set
+            {
+                this.DataContext = value;
+            }
         }
 
         private Order m_Order = null;
@@ -67,12 +81,14 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 dyeingJOControl.OpenExistingJo(jo as DyeingJO);
                 dyeingJOControl.Visibility = System.Windows.Visibility.Visible;
                 knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
                 selectedJobOrderControl = dyeingJOControl;
             }
             else if (jo is KnittingJO)
             {
                 dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
                 knittingJOControl.Visibility = System.Windows.Visibility.Visible;
+                actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
                 selectedJobOrderControl = knittingJOControl;
             }
 
@@ -88,16 +104,18 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 {
                     if (selectedItem.Content.ToString() == "Dyeing")
                     {
+                        CreateNewDyeingJo();
                         dyeingJOControl.Visibility = System.Windows.Visibility.Visible;
                         knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
-                        CreateNewDyeingJo();
+                        actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
                         selectedJobOrderControl = dyeingJOControl;
                     }
                     else if (selectedItem.Content.ToString() == "Knitting")
                     {
+                        CreateNewKnittingJo();
                         dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
                         knittingJOControl.Visibility = System.Windows.Visibility.Visible;
-                        CreateNewKnittingJo();
+                        actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
                         selectedJobOrderControl = knittingJOControl;
                     }
                     else
@@ -125,7 +143,8 @@ namespace ordermanager.Views.UserControls.JobOrderControls
 
         private void negativeBtn_Click_1(object sender, RoutedEventArgs e)
         {
-            string buttonContent = positiveBtn.Content.ToString();
+
+            string buttonContent = negativeBtn.Content.ToString();
             switch (buttonContent)
             {
                 case "Reject":
@@ -135,6 +154,8 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                     selectedJobOrderControl.Discard();
                     break;
             }
+
+            ViewModel.RefreshUIButtons();
         }
 
         private void positiveBtn_Click_1(object sender, RoutedEventArgs e)
@@ -156,8 +177,32 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                     selectedJobOrderControl.ShowPDF();
                     break;
             }
+
+            ViewModel.RefreshUIButtons();
         }
 
         #endregion 
+
+        private void dyeingJOControl_IsVisibleChanged_1(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (dyeingJOControl.Visibility == System.Windows.Visibility.Visible)
+            {
+                CreateJOViewModel viewModel = new CreateJOViewModel();
+                viewModel.CurrentViewActionButtons = dyeingJOControl.ViewModel as IActionButtons;
+
+                this.ViewModel = viewModel;
+            }
+        }
+
+        private void knittingJOControl_IsVisibleChanged_1(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (knittingJOControl.Visibility == System.Windows.Visibility.Visible)
+            {
+                CreateJOViewModel viewModel = new CreateJOViewModel();
+                //viewModel.CurrentViewActionButtons = //ToDo
+
+                this.ViewModel = viewModel;
+            }
+        }
     }
 }

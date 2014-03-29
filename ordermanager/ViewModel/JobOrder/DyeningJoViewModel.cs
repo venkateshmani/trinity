@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ordermanager.ViewModel.JobOrderControls
 {
     public class DyeingJoViewModel : ViewModelBase, IActionButtons
@@ -27,22 +28,14 @@ namespace ordermanager.ViewModel.JobOrderControls
             this.Order = jo.Order;
         }
 
-        public bool? m_IsReadOny = null;
-        private bool IsReadOnly
+        public bool IsReadOnly
         {
             get
             {
-                if (m_IsReadOny == null)
-                {
-                    m_IsReadOny = false;
-                }
+                if(JO.Approval != null && (JO.Approval.IsApproved == null || JO.Approval.IsApproved == true))
+                    return true;
 
-                return m_IsReadOny.Value;
-            }
-            set
-            {
-                m_IsReadOny = value;
-                OnPropertyChanged("IsReadOnly");
+                return false;
             }
         }
 
@@ -79,7 +72,17 @@ namespace ordermanager.ViewModel.JobOrderControls
 
         public DyeingJoParameters GetReportParameters()
         {
-            DyeingJoParameters parameters = null;
+            DyeingJoParameters parameters = new DyeingJoParameters();
+
+            parameters.GRNRef = JO.GRNRefNo;
+            parameters.OrderRef = JO.OrderRef;
+            parameters.Date = JO.JODate.ToString("dd/MM/yyyy");
+            parameters.Process = JO.Process;
+            parameters.PurchaseOrderNumber = JO.PurchaseOrderNumber;
+            parameters.QuoteDate = JO.QuoteDate.ToString("dd/MM/yyyy");
+            parameters.QuoteNo = JO.QuoteNo;
+            parameters.SupplierInformation = Constants.GetSupplierInformation(JO.Supplier);
+            parameters.TermsAndConditions = JO.TermsAndConditions;
 
             return parameters;
         }
@@ -94,7 +97,7 @@ namespace ordermanager.ViewModel.JobOrderControls
             JO.Remove(item);
         }
 
-        public string PositiveBttonContent
+        public string PositiveButtonContent
         {
             get
             {
@@ -193,6 +196,25 @@ namespace ordermanager.ViewModel.JobOrderControls
             foreach (var pInfo in typeof(IActionButtons).GetProperties())
             {
                 OnPropertyChanged(pInfo.Name);
+            }
+
+            //Dirty Code
+            OnPropertyChanged("IsReadOnly");
+        }
+
+
+        public System.Windows.Visibility AddRemoveButtonVisiblity
+        {
+            get
+            {
+                System.Windows.Visibility visiblity = System.Windows.Visibility.Visible;
+
+                if ((JO.Approval != null) && (DBResources.Instance.CurrentUser.UserRole.CanApprovePurchaseOrder == false || JO.Approval.IsApproved == null || JO.Approval.IsApproved == true))
+                {
+                    visiblity = System.Windows.Visibility.Collapsed;
+                }
+
+                return visiblity;
             }
         }
     }

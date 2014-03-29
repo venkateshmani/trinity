@@ -364,6 +364,7 @@
     <Compile Include="ViewModel\Invoice\GeneratedPurchaseOrderViewModel.cs" />
     <Compile Include="ViewModel\JobbOrderJOViewModel.cs" />
     <Compile Include="ViewModel\JobOrder\CreateJOViewModel.cs" />
+    <Compile Include="ViewModel\JobOrder\DyeingJOGenerator.cs" />
     <Compile Include="ViewModel\JobOrder\DyeningJoViewModel.cs" />
     <Compile Include="ViewModel\JobOrder\JobOrderMangerViewModel.cs" />
     <Compile Include="ViewModel\JobOrder\KnittingJoViewModel.cs" />

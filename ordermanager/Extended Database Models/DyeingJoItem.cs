@@ -119,6 +119,7 @@ namespace ordermanager.DatabaseModel
             return this.HasErrors;
         }
 
+
         private void ValidateColor()
         {
             if (string.IsNullOrEmpty(Color))

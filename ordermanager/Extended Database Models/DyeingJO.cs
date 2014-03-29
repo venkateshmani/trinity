@@ -67,6 +67,7 @@ namespace ordermanager.DatabaseModel
         {
             item.PropertyChanged -= item_PropertyChanged;
             Items.Remove(item);
+            item.DyeingJO = null;
             if(DyeingJoItems.Contains(item))
             {
                 DyeingJoItems.Remove(item);
@@ -315,7 +316,6 @@ namespace ordermanager.DatabaseModel
 
         #region IJobOrder Info
 
-
         public string SupplierName
         {
             get
@@ -333,7 +333,7 @@ namespace ordermanager.DatabaseModel
                 if (Approval == null)
                     status = string.Empty;
                 else if (Approval.IsApproved == null)
-                    status = "WaitingForApproval";
+                    status = "Waiting For Approval";
                 else if (Approval.IsApproved.Value == false)
                     status = "Rejected";
                 else if (Approval.IsApproved.Value == true)

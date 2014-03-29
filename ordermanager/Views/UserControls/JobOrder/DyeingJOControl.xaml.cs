@@ -86,6 +86,8 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                     sb.AppendLine("Job Order Successfully Created");
                     sb.AppendLine("Submitted For Approval !.");
                     InformUser(sb.ToString());
+
+                    ViewModel.JO.RefreshInfoJobOrderInfo();
                 }
                 else
                 {
@@ -113,6 +115,8 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 ViewModel.JO.Approval.IsApproved = null;
 
                 DBResources.Instance.Save();
+
+                ViewModel.JO.RefreshInfoJobOrderInfo();
             }
             catch (Exception ex)
             {
@@ -135,6 +139,8 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 ViewModel.JO.Approval.IsApproved = true;
 
                 DBResources.Instance.Save();
+
+                ViewModel.JO.RefreshInfoJobOrderInfo();
             }
             catch (Exception ex)
             {
@@ -162,6 +168,8 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                     ViewModel.JO.Approval.IsApproved = false;
 
                     DBResources.Instance.Save();
+
+                    ViewModel.JO.RefreshInfoJobOrderInfo();
                 }
             }
             catch (Exception ex)
@@ -175,8 +183,28 @@ namespace ordermanager.Views.UserControls.JobOrderControls
 
         public bool ShowPDF()
         {
-            throw new NotImplementedException();
+            try
+            {
+                DyeingJOGenerator pdfGenerator = new DyeingJOGenerator(ViewModel.JO, ViewModel.GetReportParameters());
+                string generatedFile = pdfGenerator.GenerateJobOrder();
+                if (string.IsNullOrEmpty(generatedFile))
+                {
+                    InformUser("Failed to Generate !");
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(generatedFile);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+            return true;
         }
+
 
 
         public bool Discard()

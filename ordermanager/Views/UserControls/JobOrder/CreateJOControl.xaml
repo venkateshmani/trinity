@@ -69,20 +69,23 @@
                 <ComboBoxItem Content="Knitting" />
             </ComboBox>
         </StackPanel>
-        <JobOrderControls:DyeingJOControl x:Name="dyeingJOControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" Visibility="Hidden" />
-        <JobOrderControls:KnittingJoControl x:Name="knittingJOControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden" Grid.Row="1" />
-        <StackPanel Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3">
-            <Button Content="Comments" x:Name="commentsBtn" Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="commentsBtn_Click_1">
+        <JobOrderControls:DyeingJOControl x:Name="dyeingJOControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" Visibility="Hidden" IsVisibleChanged="dyeingJOControl_IsVisibleChanged_1" />
+        <JobOrderControls:KnittingJoControl x:Name="knittingJOControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Visibility="Hidden" Grid.Row="1" IsVisibleChanged="knittingJOControl_IsVisibleChanged_1" />
+        <StackPanel x:Name="actionButtonsContainer" Orientation="Horizontal" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3" Visibility="Collapsed">
+            <Button Content="Comments" x:Name="commentsBtn" Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="commentsBtn_Click_1"
+                    Visibility="{Binding CommentsButtonVisibility}">
                 <Button.Background>
                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                 </Button.Background>
             </Button>
-            <Button Content="Generate" x:Name="positiveBtn" Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="positiveBtn_Click_1">
+            <Button Content="{Binding PositiveButtonContent}" x:Name="positiveBtn" Width="100" Height="30" Foreground="White" Margin="5" ToolTip="Generate Purchase Order" HorizontalAlignment="Left" Click="positiveBtn_Click_1"
+                    Visibility="{Binding PositiveButtonVisibility}">
                 <Button.Background>
                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                 </Button.Background>
             </Button>
-            <Button Content="Discard" x:Name="negativeBtn" Width="100" Height="30" Margin="5" Foreground="White"  ToolTip="Discard Invoice" HorizontalAlignment="Left" Click="negativeBtn_Click_1">
+            <Button Content="{Binding NegativeButtonContent}" x:Name="negativeBtn" Width="100" Height="30" Margin="5" Foreground="White"  ToolTip="Discard Invoice" HorizontalAlignment="Left" Click="negativeBtn_Click_1"
+                    Visibility="{Binding NegativeButtonVisibility}">
                 <Button.Background>
                     <SolidColorBrush Color="{StaticResource ValidationColor5}" />
                 </Button.Background>

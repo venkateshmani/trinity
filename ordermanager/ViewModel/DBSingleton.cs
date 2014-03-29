@@ -12,6 +12,7 @@ using System.Data.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.Entity;
 
 namespace ordermanager.ViewModel
 {

@@ -7,14 +7,15 @@ using System.Windows;
 
 namespace ordermanager.Views.UserControls.JobOrderControls
 {
-    interface IActionButtons
+    public interface IActionButtons
     {
-        string PositiveBttonContent { get;  }
+        string PositiveButtonContent { get;  }
         string NegativeButtonContent { get; }
 
         Visibility PositiveButtonVisibility { get;  }
         Visibility NegativeButtonVisibility {get;}
         Visibility CommentsButtonVisibility { get;  }
+        Visibility AddRemoveButtonVisiblity { get; }
 
         void RefreshUIButtons();
     }

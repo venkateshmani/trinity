@@ -27,7 +27,7 @@ namespace Reports.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=VENKATESH-PC\\SQLEXPRESS;Initial Catalog=OrderManagerDB;Persist Securi" +
-            "ty Info=True;User ID=sa;Password=password;Pooling=False")]
+            "ty Info=True;User ID=sa;Password=password00s;Pooling=False")]
         public string OrderManagerDBConnectionString {
             get {
                 return ((string)(this["OrderManagerDBConnectionString"]));

@@ -52,5 +52,22 @@ namespace ordermanager.ViewModel
 
             return string.Format("INV/{0}-{1}/{2}/{3}", startYear, endYear, timeStamp, invoiceUniqueNumber);
         }
+
+        public static string GetSupplierInformation(Company supplier)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(supplier.Name + ",");
+            if (!string.IsNullOrEmpty(supplier.Address1))
+                sb.AppendLine(supplier.Address1 + ",");
+
+            if (!string.IsNullOrEmpty(supplier.Address2))
+                sb.AppendLine(supplier.Address2 + ",");
+
+            sb.AppendLine(supplier.City + "," + supplier.State + ",");
+            sb.AppendLine(supplier.Country + ".");
+
+            return sb.ToString();
+
+        }
     }
 }
