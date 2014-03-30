@@ -78,18 +78,31 @@ namespace ordermanager.DatabaseModel
 
         void item_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "TotalamountWrapper")
+            if (e.PropertyName == "TotalAmountWrapper")
             {
                 CalcualteTotalAmount();
             }
         }
 
+        public decimal TotalValueWrapper
+        {
+            get
+            {
+                return TotalValue;
+            }
+            set
+            {
+                TotalValue = value;
+                OnPropertyChanged("TotalValueWrapper");
+            }
+        }
+
         private void CalcualteTotalAmount()
         {
-            TotalValue = 0;
+            TotalValueWrapper = 0;
             foreach (var item in Items)
             {
-                TotalValue += item.TotalAmountWrapper;
+                TotalValueWrapper += item.TotalAmountWrapper;
             }
         }
 

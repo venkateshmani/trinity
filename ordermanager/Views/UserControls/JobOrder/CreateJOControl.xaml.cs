@@ -25,7 +25,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
     {
 
         IJobOrderControl selectedJobOrderControl = null;
-
+        public event MoveToJOListDelegate OnMoveToJOList = null;
         public CreateJOCtrl()
         {
             InitializeComponent();
@@ -83,6 +83,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
                 actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
                 selectedJobOrderControl = dyeingJOControl;
+                ViewModel.CurrentViewActionButtons = dyeingJOControl.ViewModel as IActionButtons;
             }
             else if (jo is KnittingJO)
             {
@@ -90,9 +91,11 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 knittingJOControl.Visibility = System.Windows.Visibility.Visible;
                 actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
                 selectedJobOrderControl = knittingJOControl;
+                //ViewModel.CurrentViewActionButtons = dyeingJOControl.ViewModel as IActionButtons;
             }
 
             joTypeSelection.Visibility = System.Windows.Visibility.Collapsed;
+            ViewModel.RefreshUIButtons();
         }
 
         private void jobOrderType_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
@@ -126,6 +129,11 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                         selectedJobOrderControl = null;
                     }
                 }
+            }
+
+            if (ViewModel != null)
+            {
+                ViewModel.RefreshUIButtons();
             }
         }
 
@@ -165,7 +173,30 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             switch (buttonContent)
             {
                 case "Generate":
-                    selectedJobOrderControl.Generate();
+                    if (selectedJobOrderControl.Generate())
+                    {
+                        if (selectedJobOrderControl is DyeingJOControl)
+                        {
+                            ((DyeingJOControl)selectedJobOrderControl).ViewModel = null;
+                            dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                        }
+                        else if(selectedJobOrderControl is KnittingJoControl)
+                        {
+                            //TODO
+                            knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                        }
+
+                        actionButtonsContainer.Visibility = System.Windows.Visibility.Collapsed;
+
+                        jobOrderType.SelectedItem = null;
+                        jobOrderType.SelectedIndex = -1;
+                        selectedJobOrderControl = null;
+
+                        if (OnMoveToJOList != null)
+                        {
+                            OnMoveToJOList();
+                        }
+                    }
                     break;
                 case "Submit":
                     selectedJobOrderControl.Submit();

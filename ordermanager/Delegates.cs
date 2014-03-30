@@ -18,4 +18,6 @@ namespace ordermanager
 
     public delegate void TreeViewSelectionChangedDelegate(object selectedObject);
 
+    public delegate void MoveToJOListDelegate();
+
 }

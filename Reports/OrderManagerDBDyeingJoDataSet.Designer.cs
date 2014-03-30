@@ -283,6 +283,8 @@ namespace Reports {
             
             private global::System.Data.DataColumn columnColor;
             
+            private global::System.Data.DataColumn columnQualityDescription;
+            
             private global::System.Data.DataColumn columnReqGSM;
             
             private global::System.Data.DataColumn columnReqWidth;
@@ -339,6 +341,14 @@ namespace Reports {
             public global::System.Data.DataColumn ColorColumn {
                 get {
                     return this.columnColor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn QualityDescriptionColumn {
+                get {
+                    return this.columnQualityDescription;
                 }
             }
             
@@ -419,11 +429,12 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SP_DyeingJODetailsRow AddSP_DyeingJODetailsRow(long DyeingJOId, string Color, string ReqGSM, string ReqWidth, decimal NetQty, decimal RatePerKg, decimal TotalAmount) {
+            public SP_DyeingJODetailsRow AddSP_DyeingJODetailsRow(long DyeingJOId, string Color, string QualityDescription, string ReqGSM, string ReqWidth, decimal NetQty, decimal RatePerKg, decimal TotalAmount) {
                 SP_DyeingJODetailsRow rowSP_DyeingJODetailsRow = ((SP_DyeingJODetailsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         DyeingJOId,
                         Color,
+                        QualityDescription,
                         ReqGSM,
                         ReqWidth,
                         NetQty,
@@ -453,6 +464,7 @@ namespace Reports {
             internal void InitVars() {
                 this.columnDyeingJOId = base.Columns["DyeingJOId"];
                 this.columnColor = base.Columns["Color"];
+                this.columnQualityDescription = base.Columns["QualityDescription"];
                 this.columnReqGSM = base.Columns["ReqGSM"];
                 this.columnReqWidth = base.Columns["ReqWidth"];
                 this.columnNetQty = base.Columns["NetQty"];
@@ -467,6 +479,8 @@ namespace Reports {
                 base.Columns.Add(this.columnDyeingJOId);
                 this.columnColor = new global::System.Data.DataColumn("Color", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnColor);
+                this.columnQualityDescription = new global::System.Data.DataColumn("QualityDescription", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnQualityDescription);
                 this.columnReqGSM = new global::System.Data.DataColumn("ReqGSM", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnReqGSM);
                 this.columnReqWidth = new global::System.Data.DataColumn("ReqWidth", typeof(string), null, global::System.Data.MappingType.Element);
@@ -480,6 +494,8 @@ namespace Reports {
                 this.columnDyeingJOId.AllowDBNull = false;
                 this.columnColor.AllowDBNull = false;
                 this.columnColor.MaxLength = 50;
+                this.columnQualityDescription.AllowDBNull = false;
+                this.columnQualityDescription.MaxLength = 100;
                 this.columnReqGSM.AllowDBNull = false;
                 this.columnReqGSM.MaxLength = 50;
                 this.columnReqWidth.AllowDBNull = false;
@@ -646,6 +662,17 @@ namespace Reports {
                 }
                 set {
                     this[this.tableSP_DyeingJODetails.ColorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string QualityDescription {
+                get {
+                    return ((string)(this[this.tableSP_DyeingJODetails.QualityDescriptionColumn]));
+                }
+                set {
+                    this[this.tableSP_DyeingJODetails.QualityDescriptionColumn] = value;
                 }
             }
             
@@ -866,6 +893,7 @@ namespace Reports.OrderManagerDBDyeingJoDataSetTableAdapters {
             tableMapping.DataSetTable = "SP_DyeingJODetails";
             tableMapping.ColumnMappings.Add("DyeingJOId", "DyeingJOId");
             tableMapping.ColumnMappings.Add("Color", "Color");
+            tableMapping.ColumnMappings.Add("QualityDescription", "QualityDescription");
             tableMapping.ColumnMappings.Add("ReqGSM", "ReqGSM");
             tableMapping.ColumnMappings.Add("ReqWidth", "ReqWidth");
             tableMapping.ColumnMappings.Add("NetQty", "NetQty");

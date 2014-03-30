@@ -60,7 +60,10 @@ namespace ordermanager.ViewModel.JobOrderControls
 
         public void RefreshUIButtons()
         {
-            CurrentViewActionButtons.RefreshUIButtons();
+            if (CurrentViewActionButtons != null)
+            {
+                CurrentViewActionButtons.RefreshUIButtons();
+            }
             foreach (var pInfo in typeof(IActionButtons).GetProperties())
             {
                 OnPropertyChanged(pInfo.Name);

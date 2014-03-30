@@ -28,14 +28,23 @@ namespace ordermanager.Views.UserControls.JobOrderControls
         {
             InitializeComponent();
             this.Loaded += JobOrderManager_Loaded;
+            this.IsVisibleChanged += JobOrderManager_IsVisibleChanged;
+        }
+
+        void JobOrderManager_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.Visibility == System.Windows.Visibility.Visible)
+            {
+                if (ViewModel != null)
+                {
+                    ViewModel = new JobOrderManagerViewModel(Order);
+                }
+            }
         }
 
         void JobOrderManager_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ViewModel != null)
-            {
-                ViewModel.ReLoad();
-            }
+            
         }
 
         public JobOrderManagerViewModel ViewModel

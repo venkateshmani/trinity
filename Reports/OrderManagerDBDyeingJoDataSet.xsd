@@ -24,6 +24,7 @@
             <Mappings>
               <Mapping SourceColumn="DyeingJOId" DataSetColumn="DyeingJOId" />
               <Mapping SourceColumn="Color" DataSetColumn="Color" />
+              <Mapping SourceColumn="QualityDescription" DataSetColumn="QualityDescription" />
               <Mapping SourceColumn="ReqGSM" DataSetColumn="ReqGSM" />
               <Mapping SourceColumn="ReqWidth" DataSetColumn="ReqWidth" />
               <Mapping SourceColumn="NetQty" DataSetColumn="NetQty" />
@@ -48,6 +49,13 @@
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="QualityDescription" msprop:Generator_ColumnVarNameInTable="columnQualityDescription" msprop:Generator_ColumnPropNameInRow="QualityDescription" msprop:Generator_ColumnPropNameInTable="QualityDescriptionColumn" msprop:Generator_UserColumnName="QualityDescription">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

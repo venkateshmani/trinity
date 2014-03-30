@@ -247,6 +247,11 @@ namespace ordermanager.Views.UserControls
             public string ProductName { get; set; }
             public string Quantity { get; set; }
             public int ItemIndexNumber { get; set; }
+        }
+
+        private void joCreateCtrl_OnMoveToJOList_1()
+        {
+            joTabControl.SelectedIndex = 1;
         }       
     }   
 }

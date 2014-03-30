@@ -112,9 +112,9 @@
                 </Border>
             </TabItem>
             <TabItem Header=" JO ">
-                <TabControl>
+                <TabControl x:Name="joTabControl">
                     <TabItem Header="  Create New  ">
-                        <JobOrderControls:CreateJOCtrl x:Name="joCreateCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                        <JobOrderControls:CreateJOCtrl x:Name="joCreateCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" OnMoveToJOList="joCreateCtrl_OnMoveToJOList_1"  />
                     </TabItem>
                     <TabItem Header="  JO  ">
                         <JobOrderControls:JobOrderManager x:Name="joManagerCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
