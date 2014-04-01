@@ -4,66 +4,66 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3e90f701678f438ca899002d4031f8c2" Name="Diagram1">
-        <EntityTypeShape EntityType="OrderManagerDBModel.Approval" Width="1.5" PointX="7.5" PointY="34" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ApprovalEntityType" Width="1.5" PointX="5.25" PointY="40.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Asset" Width="1.5" PointX="8.25" PointY="24" IsExpanded="true" />
+      <Diagram DiagramId="a87e175319f446e3b895ad432cd1753f" Name="Diagram1">
+        <EntityTypeShape EntityType="OrderManagerDBModel.Approval" Width="1.5" PointX="7.5" PointY="34.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ApprovalEntityType" Width="1.5" PointX="5.25" PointY="41.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Asset" Width="1.5" PointX="8.25" PointY="24.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.AssetCategory" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.AssetName" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.BrandName" Width="1.5" PointX="6" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.CartonBox" Width="1.5" PointX="10.5" PointY="34.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Color" Width="1.5" PointX="15.75" PointY="43.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.CommissionValueType" Width="1.5" PointX="3" PointY="30.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Company" Width="1.5" PointX="3" PointY="41.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.CompanyType" Width="1.5" PointX="0.75" PointY="43.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Country" Width="1.5" PointX="5.25" PointY="28.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Currency" Width="1.5" PointX="13.5" PointY="43.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.DyeingJO" Width="1.5" PointX="12.75" PointY="28.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.DyeingJoItem" Width="1.5" PointX="15" PointY="23.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.GRNReciept" Width="1.5" PointX="24.75" PointY="26.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.History" Width="1.5" PointX="7.5" PointY="41.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Invoice" Width="1.5" PointX="7.5" PointY="28.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.JobOrder" Width="1.5" PointX="27" PointY="26.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.JobOrderReceipt" Width="1.5" PointX="29.25" PointY="28.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.JobOrderTolerance" Width="1.5" PointX="7.5" PointY="38.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.JobOrderToleranceType" Width="1.5" PointX="5.25" PointY="43.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.JobOrderType" Width="1.5" PointX="24.75" PointY="24.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.KnittingJO" Width="1.5" PointX="12.75" PointY="38" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.KnittingJoItem" Width="1.5" PointX="15" PointY="39.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.MaterialName" Width="1.5" PointX="6" PointY="19.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.MaterialsFromStock" Width="1.5" PointX="10.5" PointY="30.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Order" Width="1.5" PointX="5.25" PointY="32.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.OrderCurrencyConversion" Width="1.5" PointX="10.5" PointY="38.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.OrderedItem" Width="1.5" PointX="22.5" PointY="26.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.OrderProduct" Width="1.5" PointX="15.75" PointY="33.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.OrderReportCard" Width="1.5" PointX="13.5" PointY="34.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.OrderReportCardType" Width="1.5" PointX="11.25" PointY="42.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.OrderStatu" Width="1.5" PointX="3" PointY="34.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.OrderThrough" Width="1.5" PointX="3" PointY="48.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Package" Width="1.5" PointX="23.25" PointY="34.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ProductBreakUp" Width="1.5" PointX="13.5" PointY="46.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ProductBreakUpSummary" Width="1.5" PointX="18" PointY="34" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ProductCountryWiseBreakUp" Width="1.5" PointX="18" PointY="38.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ProductCutting" Width="1.5" PointX="20.25" PointY="30.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ProductExtraCost" Width="1.5" PointX="21" PointY="34.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ProductExtraCostType" Width="1.5" PointX="18.75" PointY="21.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Production" Width="1.5" PointX="20.25" PointY="38.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ProductMaterialItem" Width="1.5" PointX="20.25" PointY="24.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ProductMaterial" Width="1.5" PointX="18" PointY="28.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ProductName" Width="1.5" PointX="13.5" PointY="50.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ProductSize" Width="1.5" PointX="15.75" PointY="46.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ProductStock" Width="1.5" PointX="18" PointY="46.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.PurchaseOrder" Width="1.5" PointX="15.75" PointY="27.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.PurchaseOrderStatu" Width="1.5" PointX="13.5" PointY="19.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Quality" Width="1.5" PointX="20.25" PointY="41.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ReceiptStatu" Width="1.5" PointX="22.5" PointY="31.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.Shipment" Width="1.5" PointX="20.25" PointY="44.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.ShipmentMode" Width="1.5" PointX="5.25" PointY="25.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.SubMaterial" Width="1.5" PointX="8.25" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.BrandName" Width="1.5" PointX="6" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.CartonBox" Width="1.5" PointX="10.5" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Color" Width="1.5" PointX="15.75" PointY="43.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.CommissionValueType" Width="1.5" PointX="3" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Company" Width="1.5" PointX="3" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.CompanyType" Width="1.5" PointX="0.75" PointY="44.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Country" Width="1.5" PointX="5.25" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Currency" Width="1.5" PointX="13.5" PointY="43.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.DyeingJO" Width="1.5" PointX="12.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.DyeingJoItem" Width="1.5" PointX="15" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.GRNReciept" Width="1.5" PointX="24.75" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.History" Width="1.5" PointX="7.5" PointY="42.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Invoice" Width="1.5" PointX="7.5" PointY="28.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.JobOrder" Width="1.5" PointX="27" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.JobOrderReceipt" Width="1.5" PointX="29.25" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.JobOrderTolerance" Width="1.5" PointX="7.5" PointY="39" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.JobOrderToleranceType" Width="1.5" PointX="5.25" PointY="44.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.JobOrderType" Width="1.5" PointX="24.75" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.KnittingJO" Width="1.5" PointX="12.75" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.KnittingJoItem" Width="1.5" PointX="15" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.MaterialName" Width="1.5" PointX="6" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.MaterialsFromStock" Width="1.5" PointX="10.5" PointY="30.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Order" Width="1.5" PointX="5.25" PointY="32.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.OrderCurrencyConversion" Width="1.5" PointX="10.5" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.OrderedItem" Width="1.5" PointX="22.5" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.OrderProduct" Width="1.5" PointX="15.75" PointY="33.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.OrderReportCard" Width="1.5" PointX="13.5" PointY="34.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.OrderReportCardType" Width="1.5" PointX="11.25" PointY="43.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.OrderStatu" Width="1.5" PointX="3" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.OrderThrough" Width="1.5" PointX="3" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Package" Width="1.5" PointX="23.25" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ProductBreakUp" Width="1.5" PointX="13.5" PointY="47" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ProductBreakUpSummary" Width="1.5" PointX="18" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ProductCountryWiseBreakUp" Width="1.5" PointX="18" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ProductCutting" Width="1.5" PointX="20.25" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ProductExtraCost" Width="1.5" PointX="21" PointY="34.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ProductExtraCostType" Width="1.5" PointX="18.75" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Production" Width="1.5" PointX="20.25" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ProductMaterialItem" Width="1.5" PointX="20.25" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ProductMaterial" Width="1.5" PointX="18" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ProductName" Width="1.5" PointX="13.5" PointY="50.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ProductSize" Width="1.5" PointX="15.75" PointY="46.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ProductStock" Width="1.5" PointX="18" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.PurchaseOrder" Width="1.5" PointX="15.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.PurchaseOrderStatu" Width="1.5" PointX="13.5" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Quality" Width="1.5" PointX="20.25" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ReceiptStatu" Width="1.5" PointX="22.5" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.Shipment" Width="1.5" PointX="20.25" PointY="44.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.ShipmentMode" Width="1.5" PointX="5.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.SubMaterial" Width="1.5" PointX="8.25" PointY="20.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.Temp" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.UnitsOfMeasurement" Width="1.5" PointX="6" PointY="21.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.User" Width="1.5" PointX="3" PointY="37.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.UserRole" Width="1.5" PointX="0.75" PointY="34.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.UnitsOfMeasurement" Width="1.5" PointX="6" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.User" Width="1.5" PointX="3" PointY="37.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.UserRole" Width="1.5" PointX="0.75" PointY="34.625" IsExpanded="true" />
         <AssociationConnector Association="OrderManagerDBModel.FK_Approval_ApprovalEntityType" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_Approval_Order" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_DyeingJO_Approval" ManuallyRouted="false" />
@@ -113,6 +113,7 @@
         <AssociationConnector Association="OrderManagerDBModel.FK_JobOrderReceipt_JobOrder" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_JobOrderTolerance_JobOrderToleranceType" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_JobOrderTolerance_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderManagerDBModel.FK_KnittingJO_Order" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_KnittingJoItem_KnittingJO" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_ProductMaterials_MaterialName" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_SubMaterial_MaterialName" ManuallyRouted="false" />

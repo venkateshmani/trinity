@@ -1679,7 +1679,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Total Amount</Value>
+                <Value>Total Amount :</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
@@ -1692,7 +1692,7 @@
         </Paragraphs>
         <rd:DefaultName>Textbox47</rd:DefaultName>
         <Top>4.62688in</Top>
-        <Left>4.68499in</Left>
+        <Left>4.42334in</Left>
         <Height>0.25in</Height>
         <Width>1.1871in</Width>
         <ZIndex>7</ZIndex>
@@ -1714,7 +1714,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=FormatNumber(Sum(Fields!TotalAmount.Value, "DyeingJoItems"),2)</Value>
+                <Value>="Rs. " &amp; FormatNumber(Sum(Fields!TotalAmount.Value, "DyeingJoItems"),2)</Value>
                 <Style>
                   <FontFamily>Segoe UI</FontFamily>
                   <FontWeight>Bold</FontWeight>
@@ -1722,15 +1722,15 @@
               </TextRun>
             </TextRuns>
             <Style>
-              <TextAlign>Center</TextAlign>
+              <TextAlign>Left</TextAlign>
             </Style>
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox47</rd:DefaultName>
         <Top>4.62688in</Top>
-        <Left>5.92764in</Left>
+        <Left>5.67988in</Left>
         <Height>0.25in</Height>
-        <Width>1.03291in</Width>
+        <Width>1.25596in</Width>
         <ZIndex>8</ZIndex>
         <Style>
           <Border>
@@ -1752,6 +1752,8 @@
               <TextRun>
                 <Value>Process :</Value>
                 <Style>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -1787,6 +1789,8 @@
               <TextRun>
                 <Value>=Parameters!Process.Value</Value>
                 <Style>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                 </Style>
               </TextRun>
@@ -1822,6 +1826,8 @@
               <TextRun>
                 <Value>Terms and Conditions :</Value>
                 <Style>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -1857,6 +1863,8 @@
               <TextRun>
                 <Value>=Parameters!TermsAndConditions.Value</Value>
                 <Style>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Normal</FontWeight>
                 </Style>
               </TextRun>
@@ -1892,6 +1900,8 @@
               <TextRun>
                 <Value>For Triniity Colour India Pvt. Ltd.,</Value>
                 <Style>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -1924,6 +1934,8 @@
               <TextRun>
                 <Value>Authorised Signatory</Value>
                 <Style>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -1956,6 +1968,8 @@
               <TextRun>
                 <Value>Name &amp; Designation:</Value>
                 <Style>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>

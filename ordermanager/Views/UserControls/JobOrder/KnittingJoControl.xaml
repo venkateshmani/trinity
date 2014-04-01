@@ -88,7 +88,7 @@
                         <ComboBox x:Name="supplierComboBox" Width="200" Margin="5" 
                               ItemsSource="{Binding Suppliers, Source={StaticResource DataProvider}}"
                               DisplayMemberPath="Name"
-                              SelectedItem="{Binding PurchaseOrder.Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
+                              SelectedItem="{Binding JO.Supplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                               SelectionChanged="supplierComboBox_SelectionChanged_1"
                               IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}"
                               IsReadOnly="{Binding IsReadOnly}" />
@@ -129,28 +129,28 @@
                     </StackPanel>
 
                     <TextBlock Text="Jo. No. :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="1" />
-                    <TextBlock Text="{Binding  PurchaseOrder.PurchaseOrderDateWrapper, StringFormat=dd/MM/yy}" Margin="5" 
+                    <TextBlock Text="{Binding  JO.JoNo, StringFormat=dd/MM/yy}" Margin="5" 
                                     Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
 
                     <TextBlock Text="Date :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" />
-                    <TextBlock Text="{Binding PurchaseOrder.PurchaseOrderNumberWrapper}" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" />
+                    <TextBlock Text="{Binding JO.JoDate}" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" />
 
                     <TextBlock Text="Quotation Date :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="3" />
                     <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" VerticalAlignment="Stretch" HorizontalAlignment="Left" Margin="5">
-                        <DatePicker x:Name="quoteDate" VerticalAlignment="Center" Width="100" IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" SelectedDate="{Binding PurchaseOrder.QuotationDateWrapper}" />
+                        <DatePicker x:Name="quoteDate" VerticalAlignment="Center" Width="100" IsHitTestVisible="{Binding IsReadOnly, Converter={StaticResource FlipBoolValueConverter}}" SelectedDate="{Binding JO.QuoteDateWrapper}" />
                         <TextBlock  Text="no." Margin="5,0,0,0" VerticalAlignment="Center" />
-                        <TextBox Text="{Binding PurchaseOrder.QuotationNumberWrapper}" Width="50" Margin="5,0,0,0"
+                        <TextBox Text="{Binding JO.QuoteNoWrapper}" Width="50" Margin="5,0,0,0"
                     		HorizontalAlignment="Left"  IsReadOnly="{Binding IsReadOnly}"/>
                     </StackPanel>
 
                     <TextBlock Text="T &amp; C :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="4" />
-                    <TextBox Text="{Binding PurchaseOrder.PriceTerms}" Width="200" Margin="5,5,0,5"
+                    <TextBox Text="{Binding JO.TermsAndConditionsWrapper}" Width="200" Margin="5,5,0,5"
                          Height="100" TextWrapping="Wrap"
                          AcceptsReturn="True"
                          Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}"/>
 
                     <TextBlock Text="Quality Spec. :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="5" />
-                    <TextBox Text="{Binding PurchaseOrder.Freigt}" Width="200" Margin="5,5,0,5"
+                    <TextBox Text="{Binding JO.QualitySpecificationsWrapper}" Width="200" Margin="5,5,0,5"
                          Height="100" TextWrapping="Wrap"
                          AcceptsReturn="True"
                          Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" IsReadOnly="{Binding IsReadOnly}" />
@@ -163,45 +163,60 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Margin="5" Visibility="{Binding AddRemoveButtonVisiblity}">
+                    <Button Content="Add" x:Name="btnAdd" Width="125" Height="30" Foreground="White" Margin="10,5,5,5" ToolTip="Choose Items" HorizontalAlignment="Left"
+                            Click="btnAdd_Click_1">
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </Button.Background>
+                    </Button>
+
+                    <Button Content="Remove" x:Name="btnRemove" Width="125" Height="30" Foreground="White" Margin="10,5,5,5" ToolTip="Choose Items" HorizontalAlignment="Left"
+                            Click="btnRemove_Click_1">
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
                 <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gray">
                     <DataGrid x:Name="gridDetails" Grid.Row="1" FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                                 HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
                                 GridLinesVisibility="All" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="True" 
                                 HeadersVisibility="All"
-                                ItemsSource="{Binding SelectedItems}" Background="WhiteSmoke">
+                                ItemsSource="{Binding JO.Items}" Background="WhiteSmoke" IsReadOnly="{Binding IsReadOnly}">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn x:Name="productName" Header="Name of the Product &amp; Spec" Width="0.35*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox />
+                                        <TextBox  Text="{Binding NameOfProductWrapper,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding ElementName=gridDetails, Path=IsReadOnly}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="qty" Header="QTY" Width="0.14*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox />
+                                        <TextBox Text="{Binding QuantityWrapper, StringFormat=n,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding ElementName=gridDetails, Path=IsReadOnly}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="rate" Header="RATE" Width="0.14*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox />
+                                        <TextBox Text="{Binding RateWrapper, StringFormat=n,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding ElementName=gridDetails, Path=IsReadOnly}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="totalAmount" Header="Total Amount" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox />
+                                        <TextBox Text="{Binding TotalAmountWrapper, StringFormat=n,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding ElementName=gridDetails, Path=IsReadOnly}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn x:Name="remarks" Header="Remarks" Width="0.3*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox />
+                                        <TextBox  Text="{Binding RemarksWrapper,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding ElementName=gridDetails, Path=IsReadOnly}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -210,7 +225,7 @@
                 </Border>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Margin="10">
                     <TextBlock Text="TOTAL JO VALUE: "  VerticalAlignment="Center" FontSize="18"/>
-                    <TextBlock Text="{Binding TotalPOValue, StringFormat=n2}" VerticalAlignment="Center" FontSize="18">
+                    <TextBlock Text="{Binding JO.TotalValueWrapper, StringFormat=n2}" VerticalAlignment="Center" FontSize="18">
                         <TextBlock.Foreground>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </TextBlock.Foreground>

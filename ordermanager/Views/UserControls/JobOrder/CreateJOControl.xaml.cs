@@ -71,7 +71,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
 
         public void CreateNewKnittingJo()
         {
-
+            knittingJOControl.CreateNewJo(Order);
         }
 
         public void OpenExistingJo(object jo)
@@ -87,11 +87,12 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             }
             else if (jo is KnittingJO)
             {
+                knittingJOControl.OpenExistingJo(jo as KnittingJO);
                 dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
                 knittingJOControl.Visibility = System.Windows.Visibility.Visible;
                 actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
                 selectedJobOrderControl = knittingJOControl;
-                //ViewModel.CurrentViewActionButtons = dyeingJOControl.ViewModel as IActionButtons;
+                ViewModel.CurrentViewActionButtons = knittingJOControl.ViewModel as IActionButtons;
             }
 
             joTypeSelection.Visibility = System.Windows.Visibility.Collapsed;
@@ -230,7 +231,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             if (knittingJOControl.Visibility == System.Windows.Visibility.Visible)
             {
                 CreateJOViewModel viewModel = new CreateJOViewModel();
-                //viewModel.CurrentViewActionButtons = //ToDo
+                viewModel.CurrentViewActionButtons = knittingJOControl.ViewModel as IActionButtons;
 
                 this.ViewModel = viewModel;
             }

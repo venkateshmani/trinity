@@ -29,6 +29,10 @@ namespace ordermanager.ViewModel.JobOrderControls
                 if (m_JobOrderInfos == null)
                 {
                     m_JobOrderInfos = new ObservableCollection<IJobOrderInfo>(Order.DyeingJOes);
+                    foreach (var item in Order.KnittingJOes)
+                    {
+                        m_JobOrderInfos.Add(item);
+                    }
                 }
 
                 return m_JobOrderInfos;

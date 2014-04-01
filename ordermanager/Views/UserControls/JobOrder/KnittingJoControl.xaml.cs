@@ -1,5 +1,8 @@
-﻿using ordermanager.DatabaseModel;
+﻿using MahApps.Metro.Controls;
+using ordermanager.DatabaseModel;
 using ordermanager.ViewModel;
+using ordermanager.ViewModel.JobOrderControls;
+using ordermanager.Views.PopUps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,29 +30,178 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             InitializeComponent();
         }
 
+        public KnittingJoViewModel ViewModel
+        {
+            get
+            {
+                return this.DataContext as KnittingJoViewModel;
+            }
+            set
+            {
+                this.DataContext = value;
+            }
+        }
+
+        public void CreateNewJo(Order order)
+        {
+            ViewModel = new KnittingJoViewModel(order);
+        }
+
+        public void OpenExistingJo(KnittingJO jo)
+        {
+            ViewModel = new KnittingJoViewModel(jo);
+        }
+
+        private void InformUser(string message)
+        {
+            PopupBox informer = new PopupBox();
+            informer.Message = message;
+            informer.PopupButton = PopupButton.OK;
+            informer.ShowDialog();
+        }
+
         public bool Generate()
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (ViewModel.JO.Validate() == false)
+                {
+                    Approval approval = new Approval();
+                    approval.Order = ViewModel.JO.Order;
+                    approval.IsApproved = null;
+                    approval.ApprovalEntityTypeID = 3;
+
+                    StringBuilder comments = new StringBuilder();
+                    comments.Append("Generated on " + DBResources.Instance.GetServerTime() + " by " + DBResources.Instance.CurrentUser.UserName);
+
+                    approval.Comments = comments.ToString();
+                    ViewModel.JO.Approval = approval;
+
+                    ViewModel.Order.KnittingJOes.Add(ViewModel.JO);
+
+                    DBResources.Instance.Save();
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine("Job Order Successfully Created");
+                    sb.AppendLine("Submitted For Approval !.");
+                    InformUser(sb.ToString());
+
+                    ViewModel.JO.RefreshInfoJobOrderInfo();
+                }
+                else
+                {
+                    InformUser("Fix the Highlighted Errors and try again");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+            return true;
         }
 
         public bool Submit()
         {
-            throw new NotImplementedException();
+            try
+            {
+                StringBuilder comment = new StringBuilder();
+                comment.AppendLine("Submitted on " + DBResources.Instance.GetServerTime() + " by " + DBResources.Instance.CurrentUser.UserName);
+                comment.Append(ViewModel.JO.Approval.Comments);
+
+                ViewModel.JO.Approval.Comments = comment.ToString();
+                ViewModel.JO.Approval.IsApproved = null;
+
+                DBResources.Instance.Save();
+
+                ViewModel.JO.RefreshInfoJobOrderInfo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+            return true;
         }
 
         public bool Approve()
         {
-            throw new NotImplementedException();
+            try
+            {
+                StringBuilder comment = new StringBuilder();
+                comment.AppendLine("Approved on " + DBResources.Instance.GetServerTime() + " by " + DBResources.Instance.CurrentUser.UserName);
+                comment.Append(ViewModel.JO.Approval.Comments);
+
+                ViewModel.JO.Approval.Comments = comment.ToString();
+                ViewModel.JO.Approval.IsApproved = true;
+
+                DBResources.Instance.Save();
+
+                ViewModel.JO.RefreshInfoJobOrderInfo();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+            return true;
         }
 
         public bool Reject()
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                CommentBox cBox = new CommentBox();
+                if (cBox.ShowDialog() == true)
+                {
+                    StringBuilder comment = new StringBuilder();
+                    comment.AppendLine("Rejected on " + DBResources.Instance.GetServerTime() + " by " + DBResources.Instance.CurrentUser.UserName);
+                    comment.AppendLine(cBox.Comment);
+                    comment.Append(ViewModel.JO.Approval.Comments);
+
+                    ViewModel.JO.Approval.Comments = comment.ToString();
+                    ViewModel.JO.Approval.IsApproved = false;
+
+                    DBResources.Instance.Save();
+
+                    ViewModel.JO.RefreshInfoJobOrderInfo();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+            return true;
         }
 
         public bool ShowPDF()
         {
-            throw new NotImplementedException();
+            try
+            {
+                KnittingJoGenerator pdfGenerator = new KnittingJoGenerator(ViewModel.JO, ViewModel.GetReportParameters());
+                string generatedFile = pdfGenerator.GenerateJobOrder();
+                if (string.IsNullOrEmpty(generatedFile))
+                {
+                    InformUser("Failed to Generate !");
+                }
+                else
+                {
+                    System.Diagnostics.Process.Start(generatedFile);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+
+            return true;
         }
 
 
@@ -114,7 +266,22 @@ namespace ordermanager.Views.UserControls.JobOrderControls
 
         #endregion 
     
+        #region Items Management
 
+        private void btnAdd_Click_1(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Add();
+        }
+
+        private void btnRemove_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (gridDetails.SelectedItem != null && gridDetails.SelectedItem is DyeingJoItem)
+            {
+                ViewModel.Delete(gridDetails.SelectedItem as KnittingJoItem);
+            }
+        }
+
+        #endregion 
       
     }
 }

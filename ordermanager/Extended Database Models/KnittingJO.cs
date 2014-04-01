@@ -1,80 +1,58 @@
-﻿
+﻿using ordermanager.Extended_Database_Models;
+using ordermanager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ordermanager.Extended_Database_Models;
-using ordermanager.ViewModel;
-using System.Data;
 
 namespace ordermanager.DatabaseModel
 {
-    public partial class DyeingJO  : EntityBase, IJobOrderInfo
+    public partial class KnittingJO : EntityBase, IJobOrderInfo
     {
-        private ObservableCollection<DyeingJoItem> m_Items = null;
-        public ObservableCollection<DyeingJoItem> Items
+        private ObservableCollection<KnittingJoItem> m_Items = null;
+        public ObservableCollection<KnittingJoItem> Items
         {
             get
             {
                 if (m_Items == null)
                 {
-                     m_Items = new ObservableCollection<DyeingJoItem>(this.DyeingJoItems);
-                     foreach (var item in m_Items)
-                     {
-                         item.PropertyChanged += item_PropertyChanged; 
-                     }
+                    m_Items = new ObservableCollection<KnittingJoItem>(this.KnittingJoItems);
+                    foreach (var item in m_Items)
+                    {
+                        item.PropertyChanged += item_PropertyChanged;
+                    }
                 }
 
                 return m_Items;
             }
         }
 
-        public string PurchaseOrderNumber
-        {
-            get
-            {
-                if (PurchaseOrder != null)
-                    return PurchaseOrder.PurchaseOrderNumber;
-
-                return string.Empty;
-            }
-            set
-            {
-                if (this.Order != null)
-                {
-                    foreach (var po in this.Order.PurchaseOrders)
-                    {
-                        if (po.PurchaseOrderNumber == value)
-                            PurchaseOrder = po;
-                    }
-                }
-            }
-        }
-
         public void Add()
         {
-            DyeingJoItem item = new DyeingJoItem();
-            item.DyeingJO = this;
-            item.PropertyChanged +=item_PropertyChanged;
+            KnittingJoItem item = new KnittingJoItem();
+            item.KnittingJO = this;
+            item.PropertyChanged += item_PropertyChanged;
             Items.Add(item);
 
-            this.DyeingJoItems.Add(item);
-            
+            this.KnittingJoItems.Add(item);
+
             CalcualteTotalAmount();
         }
 
-        public void Remove(DyeingJoItem item)
+        public void Remove(KnittingJoItem item)
         {
             item.PropertyChanged -= item_PropertyChanged;
             Items.Remove(item);
-            //item.DyeingJO = null;
-            if(DyeingJoItems.Contains(item))
+            //item.KnittingJO = null;
+
+            if (KnittingJoItems.Contains(item))
             {
-                DyeingJoItems.Remove(item);
+                KnittingJoItems.Remove(item);
             }
-           // item.DyeingJO = null;
+            //item.KnittingJO = null;
             DBResources.Instance.MarkObjectForDelete(item);
             CalcualteTotalAmount();
         }
@@ -109,7 +87,6 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-
         #region Wrappers
 
         public Company Supplier
@@ -122,6 +99,7 @@ namespace ordermanager.DatabaseModel
             {
                 Company = value;
                 ValidateSupplier();
+                OnPropertyChanged("Supplier");
             }
         }
 
@@ -135,6 +113,7 @@ namespace ordermanager.DatabaseModel
             {
                 QuoteDate = value;
                 ValidateQuoteDate();
+                OnPropertyChanged("QuoteDateWrapper");
             }
         }
 
@@ -148,47 +127,8 @@ namespace ordermanager.DatabaseModel
             {
                 QuoteNo = value;
                 ValidateQuoteNo();
+                OnPropertyChanged("QuoteNoWrapper");
             }
-        }
-
-        public string GRNRefNoWrapper
-        {
-            get
-            {
-                return GRNRefNo;
-            }
-            set
-            {
-                GRNRefNo = value;
-                ValidateGRNRefNo();
-            }
-        }
-
-        public string OrderRefWrapper
-        {
-            get
-            {
-                return OrderRef;
-            }
-            set
-            {
-                OrderRef = value;
-                ValidateOrderRefNo();
-            }
-        }
-
-        public string ProcessWrapper
-        {
-            get
-            {
-                return Process;
-            }
-            set
-            {
-                Process = value;
-                ValidateProcess();
-            }
-
         }
 
         public string TermsAndConditionsWrapper
@@ -201,22 +141,36 @@ namespace ordermanager.DatabaseModel
             {
                 TermsAndConditions = value;
                 ValidateTermsAndConditions();
+                OnPropertyChanged("TermsAndConditionsWrapper");
             }
         }
 
-        #endregion 
+        public string QualitySpecificationsWrapper
+        {
+            get
+            {
+                return QualitySpecifications;
+            }
+            set
+            {
+                QualitySpecifications = value;
+                ValidateQualitySpecifications();
+                OnPropertyChanged("QualitySpecificationsWrapper");
+            }
+        }
+
+
+        #endregion
+
+        #region Validation
 
         public bool Validate()
         {
             ValidateSupplier();
-            ValidatePurchaseOrder();
             ValidateQuoteDate();
             ValidateQuoteNo();
-            ValidateGRNRefNo();
-            ValidateOrderRefNo();
-            ValidateProcess();
             ValidateTermsAndConditions();
-
+            ValidateQualitySpecifications();
 
             bool hasError = this.HasErrors;
 
@@ -232,10 +186,9 @@ namespace ordermanager.DatabaseModel
 
         }
 
-        
         private void ValidateSupplier()
         {
-            if (Company == null)
+            if (Supplier == null)
             {
                 AddError("Supplier", "Required", false);
             }
@@ -245,21 +198,10 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        private void ValidatePurchaseOrder()
-        {
-            if (PurchaseOrder == null)
-            {
-                AddError("PurchaseORderNumber", "Required", false);
-            }
-            else
-            {
-                RemoveError("PurchaseOrderNumber", "Required");
-            }
-        }
 
         private void ValidateQuoteDate()
         {
-            if (QuoteDate == null)
+            if (QuoteDateWrapper == null)
             {
                 AddError("QuoteDateWrapper", "Required", false);
             }
@@ -271,9 +213,9 @@ namespace ordermanager.DatabaseModel
 
         private void ValidateQuoteNo()
         {
-            if(string.IsNullOrEmpty(QuoteNo))
+            if (string.IsNullOrEmpty(QuoteNo))
             {
-                AddError("QuoteNoWrapper", "Required",false);
+                AddError("QuoteNoWrapper", "Required", false);
             }
             else
             {
@@ -281,45 +223,9 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        private void ValidateGRNRefNo()
-        {
-            if (string.IsNullOrEmpty(GRNRefNo))
-            {
-                AddError("GRNRefNoWrapper", "Required", false);
-            }
-            else
-            {
-                RemoveError("GRNRefNoWrapper", "Required");
-            }
-        }
-
-        private void ValidateOrderRefNo()
-        {
-            if (string.IsNullOrEmpty(OrderRef))
-            {
-                AddError("OrderRefWrapper", "Required", false);
-            }
-            else
-            {
-                RemoveError("OrderRefWrapper", "Required");
-            }
-        }
-
-        private void ValidateProcess()
-        {
-            if (string.IsNullOrEmpty(Process))
-            {
-                AddError("ProcessWrapper", "Required", false);
-            }
-            else
-            {
-                RemoveError("ProcessWrapper", "Required");
-            }
-        }
-
         private void ValidateTermsAndConditions()
         {
-            if (string.IsNullOrEmpty(TermsAndConditions))
+            if (string.IsNullOrEmpty(TermsAndConditionsWrapper))
             {
                 AddError("TermsAndConditionsWrapper", "Required", false);
             }
@@ -328,6 +234,21 @@ namespace ordermanager.DatabaseModel
                 RemoveError("TermsAndConditionsWrapper", "Required");
             }
         }
+
+        private void ValidateQualitySpecifications()
+        {
+            if (string.IsNullOrEmpty(QualitySpecificationsWrapper))
+            {
+                AddError("QuailitySpecificationsWrapper", "Required", false);
+            }
+            else
+            {
+                RemoveError("QualitySpecificationsWrapper", "Required");
+            }
+        }
+
+        #endregion
+
 
 
         #region IJobOrder Info
@@ -357,16 +278,16 @@ namespace ordermanager.DatabaseModel
 
                 return status;
             }
-            
+
         }
 
         public string Type
         {
             get
             {
-                return "Dyeing";
+                return "Knitting";
             }
-           
+
         }
 
         public string JobOrderNumber
@@ -383,6 +304,5 @@ namespace ordermanager.DatabaseModel
         }
 
         #endregion
-
     }
 }

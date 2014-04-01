@@ -114,6 +114,10 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 {
                     joControl.OpenExistingJo(jobOrderInfo as DyeingJO);   
                 }
+                else if (jobOrderInfo.Type == "Knitting")
+                {
+                    joControl.OpenExistingJo(jobOrderInfo as KnittingJO);
+                }
             }
         }
 

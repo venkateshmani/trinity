@@ -198,6 +198,10 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="KnittingJO" EntitySet="KnittingJO" />
           </AssociationSet>
+          <AssociationSet Name="FK_KnittingJO_Order" Association="OrderManagerDBModel.Store.FK_KnittingJO_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="KnittingJO" EntitySet="KnittingJO" />
+          </AssociationSet>
           <AssociationSet Name="FK_KnittingJoItem_KnittingJO" Association="OrderManagerDBModel.Store.FK_KnittingJoItem_KnittingJO">
             <End Role="KnittingJO" EntitySet="KnittingJO" />
             <End Role="KnittingJoItem" EntitySet="KnittingJoItem" />
@@ -710,6 +714,8 @@
           <Property Name="TermsAndConditions" Type="varchar" Nullable="false" MaxLength="300" />
           <Property Name="QualitySpecifications" Type="varchar" Nullable="false" MaxLength="300" />
           <Property Name="ApprovalID" Type="bigint" Nullable="false" />
+          <Property Name="OrderID" Type="bigint" />
+          <Property Name="TotalValue" Type="decimal" Nullable="false" Scale="4" />
         </EntityType>
         <EntityType Name="KnittingJoItem">
           <Key>
@@ -1474,6 +1480,18 @@
             </Principal>
             <Dependent Role="KnittingJO">
               <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KnittingJO_Order">
+          <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="0..1" />
+          <End Role="KnittingJO" Type="OrderManagerDBModel.Store.KnittingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="KnittingJO">
+              <PropertyRef Name="OrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2447,6 +2465,10 @@
             <End Role="Order" EntitySet="Orders" />
             <End Role="JobOrderTolerance" EntitySet="JobOrderTolerances" />
           </AssociationSet>
+          <AssociationSet Name="FK_KnittingJO_Order" Association="OrderManagerDBModel.FK_KnittingJO_Order">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="KnittingJO" EntitySet="KnittingJOes" />
+          </AssociationSet>
           <AssociationSet Name="FK_KnittingJoItem_KnittingJO" Association="OrderManagerDBModel.FK_KnittingJoItem_KnittingJO">
             <End Role="KnittingJO" EntitySet="KnittingJOes" />
             <End Role="KnittingJoItem" EntitySet="KnittingJoItems" />
@@ -2955,8 +2977,11 @@
           <Property Name="TermsAndConditions" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
           <Property Name="QualitySpecifications" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
           <Property Name="ApprovalID" Type="Int64" Nullable="false" />
+          <Property Name="OrderID" Type="Int64" />
+          <Property Name="TotalValue" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_KnittingJO_Approval" FromRole="KnittingJO" ToRole="Approval" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_KnittingJO_Company" FromRole="KnittingJO" ToRole="Company" />
+          <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_KnittingJO_Order" FromRole="KnittingJO" ToRole="Order" />
           <NavigationProperty Name="KnittingJoItems" Relationship="OrderManagerDBModel.FK_KnittingJoItem_KnittingJO" FromRole="KnittingJO" ToRole="KnittingJoItem" />
         </EntityType>
         <EntityType Name="KnittingJoItem">
@@ -3021,6 +3046,7 @@
           <NavigationProperty Name="Histories" Relationship="OrderManagerDBModel.FK_History_Order" FromRole="Order" ToRole="History" />
           <NavigationProperty Name="Invoices" Relationship="OrderManagerDBModel.FK_Invoice_Order" FromRole="Order" ToRole="Invoice" />
           <NavigationProperty Name="JobOrderTolerances" Relationship="OrderManagerDBModel.FK_JobOrderTolerance_Order" FromRole="Order" ToRole="JobOrderTolerance" />
+          <NavigationProperty Name="KnittingJOes" Relationship="OrderManagerDBModel.FK_KnittingJO_Order" FromRole="Order" ToRole="KnittingJO" />
           <NavigationProperty Name="MaterialsFromStocks" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_Order" FromRole="Order" ToRole="MaterialsFromStock" />
           <NavigationProperty Name="OrderStatu" Relationship="OrderManagerDBModel.FK_Order_OrderStatus" FromRole="Order" ToRole="OrderStatus" />
           <NavigationProperty Name="OrderThrough" Relationship="OrderManagerDBModel.FK_Order_OrderThrough" FromRole="Order" ToRole="OrderThrough" />
@@ -4048,6 +4074,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_KnittingJO_Order">
+          <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="0..1" />
+          <End Role="KnittingJO" Type="OrderManagerDBModel.KnittingJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="KnittingJO">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_KnittingJoItem_KnittingJO">
           <End Role="KnittingJO" Type="OrderManagerDBModel.KnittingJO" Multiplicity="1" />
           <End Role="KnittingJoItem" Type="OrderManagerDBModel.KnittingJoItem" Multiplicity="*" />
@@ -4843,6 +4881,8 @@
                 <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
                 <ScalarProperty Name="QualitySpecifications" ColumnName="QualitySpecifications" />
                 <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

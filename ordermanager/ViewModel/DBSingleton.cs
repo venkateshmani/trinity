@@ -838,7 +838,10 @@ namespace ordermanager.ViewModel
             }
         }
 
-        
+        public void MarkObjectForDelete(object item)
+        {
+            Context.Entry(item).State = EntityState.Deleted;
+        }
 
         public void Dispose()
         {

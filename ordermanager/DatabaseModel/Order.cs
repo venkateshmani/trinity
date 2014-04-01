@@ -22,6 +22,7 @@ namespace ordermanager.DatabaseModel
             this.Histories = new HashSet<History>();
             this.Invoices = new HashSet<Invoice>();
             this.JobOrderTolerances = new HashSet<JobOrderTolerance>();
+            this.KnittingJOes = new HashSet<KnittingJO>();
             this.MaterialsFromStocks = new HashSet<MaterialsFromStock>();
             this.OrderCurrencyConversions = new HashSet<OrderCurrencyConversion>();
             this.OrderProducts = new HashSet<OrderProduct>();
@@ -54,6 +55,7 @@ namespace ordermanager.DatabaseModel
         public virtual ICollection<History> Histories { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }
         public virtual ICollection<JobOrderTolerance> JobOrderTolerances { get; set; }
+        public virtual ICollection<KnittingJO> KnittingJOes { get; set; }
         public virtual ICollection<MaterialsFromStock> MaterialsFromStocks { get; set; }
         public virtual OrderStatu OrderStatu { get; set; }
         public virtual OrderThrough OrderThrough { get; set; }
