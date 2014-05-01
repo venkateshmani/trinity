@@ -42,9 +42,9 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             }
         }
 
-        public void CreateNewJo(Order order)
+        public void CreateNewJo(Order order,decimal quantity,GRNReciept reciept, bool jobOrderIssued)
         {
-            ViewModel = new KnittingJoViewModel(order);
+            ViewModel = new KnittingJoViewModel(order, quantity, reciept, jobOrderIssued);
         }
 
         public void OpenExistingJo(KnittingJO jo)
@@ -91,6 +91,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 else
                 {
                     InformUser("Fix the Highlighted Errors and try again");
+                    return false;
                 }
             }
             catch (Exception ex)
@@ -275,7 +276,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
 
         private void btnRemove_Click_1(object sender, RoutedEventArgs e)
         {
-            if (gridDetails.SelectedItem != null && gridDetails.SelectedItem is DyeingJoItem)
+            if (gridDetails.SelectedItem != null && gridDetails.SelectedItem is KnittingJoItem)
             {
                 ViewModel.Delete(gridDetails.SelectedItem as KnittingJoItem);
             }

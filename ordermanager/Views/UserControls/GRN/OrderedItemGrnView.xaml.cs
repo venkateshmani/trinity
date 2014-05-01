@@ -3,6 +3,7 @@ using ordermanager.DatabaseModel;
 using ordermanager.Interfaces_And_Enums;
 using ordermanager.ViewModel;
 using ordermanager.Views.PopUps;
+using ordermanager.Views.UserControls.JobOrderControls;
 using ordermanager.Views.UserControls.PurchaseOrderControls;
 using System;
 using System.Collections.Generic;
@@ -172,37 +173,13 @@ namespace ordermanager.Views.UserControls.GRN
             }
         }
 
+
+        GRNReciept selectedGRNReciept = null;
         private void issueBtn_Click_1(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            if (btn != null && btn.Tag != null && btn.Tag is GRNReciept)
-            {
-                GRNReciept receipt = btn.Tag as GRNReciept;
-                IssueToPopupBox issuePopupBox = new IssueToPopupBox();
-                issuePopupBox.Receipt = receipt;
-                issuePopupBox.JobQuantity = issuePopupBox.Receipt.QualityPassedQuantityWrapper;
-               
-                if (issuePopupBox.ShowDialog() == true)
-                {
-                    if (issuePopupBox.JobOrder.JobOrderType.Type.ToLower() == "stock")
-                    {
-                        if (ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.InStock == null)
-                        {
-                            ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.InStock = 0;
-                        }
-
-                        ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.InStock += receipt.QualityPassedQuantityWrapper;
-                        receipt.ReceiptStatusID = (byte)RecieptStatus.IssuedToStock;
-                    }
-                    else
-                    {
-                        receipt.JobOrders.Add(issuePopupBox.JobOrder);
-                    }
-
-                    DBResources.Instance.Save();
-                    ViewModel.SelectedGRNReceipt.RefreshUIEnablers();
-                }
-            }
+            selectedGRNReciept = btn.Tag as GRNReciept;
+            btn.ContextMenu.IsOpen = true;
         }
 
 
@@ -291,6 +268,71 @@ namespace ordermanager.Views.UserControls.GRN
             {
                 ViewModel.SelectedGRNReceipt = materialGRNGrid.SelectedItem as GRNReciept;
             }
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            MenuItem item = sender as MenuItem;
+            DependencyObject obj = item.GetParentObject();
+            switch (item.Header.ToString())
+            {
+                case "Knitting":
+                    CreateJoWindow knittWindow = new CreateJoWindow();
+                    knittWindow.Order = this.selectedGRNReciept.OrderedItem.PurchaseOrder.Order;
+                    knittWindow.PurchaseOrder = this.selectedGRNReciept.OrderedItem.PurchaseOrder;
+                    knittWindow.Quantity = this.selectedGRNReciept.QualityPassedQuantity.Value;
+                    knittWindow.GRNRefNo = this.selectedGRNReciept.GRNReciptID.ToString();
+                    knittWindow.GRNReciept = this.selectedGRNReciept;
+                    knittWindow.InitializeForKnitting();
+                    knittWindow.ShowDialog();
+                    break;
+                case "Dyeing":
+                    CreateJoWindow dyeWindow = new CreateJoWindow();
+                    dyeWindow.Order = this.selectedGRNReciept.OrderedItem.PurchaseOrder.Order;
+                    dyeWindow.PurchaseOrder = this.selectedGRNReciept.OrderedItem.PurchaseOrder;
+                    dyeWindow.Quantity = this.selectedGRNReciept.QualityPassedQuantity.Value;
+                    dyeWindow.GRNRefNo = this.selectedGRNReciept.GRNReciptID.ToString();
+                    dyeWindow.GRNReciept = this.selectedGRNReciept;
+                    dyeWindow.InitializeForDyeing();
+                    dyeWindow.ShowDialog();
+                    break;
+                case "Printing":
+                case "Compacting":
+                case "Washing":
+                case "Other":
+                case "Stock":
+                    if (selectedGRNReciept != null)
+                    {
+                        GRNReciept receipt = selectedGRNReciept;
+                        IssueToPopupBox issuePopupBox = new IssueToPopupBox();
+                        issuePopupBox.Receipt = receipt;
+                        issuePopupBox.JobQuantity = issuePopupBox.Receipt.QualityPassedQuantityWrapper;
+
+                        if (issuePopupBox.ShowDialog() == true)
+                        {
+                            if (issuePopupBox.JobOrder.JobOrderType.Type.ToLower() == "stock")
+                            {
+                                if (ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.InStock == null)
+                                {
+                                    ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.InStock = 0;
+                                }
+
+                                ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.InStock += receipt.QualityPassedQuantityWrapper;
+                                receipt.ReceiptStatusID = (byte)RecieptStatus.IssuedToStock;
+                            }
+                            else
+                            {
+                                receipt.JobOrders.Add(issuePopupBox.JobOrder);
+                            }
+
+                            DBResources.Instance.Save();
+                            ViewModel.SelectedGRNReceipt.RefreshUIEnablers();
+                        }
+                    }
+                    break;
+            }
+
+            ViewModel.SelectedGRNReceipt.RefreshUIEnablers();
         }
       
     }

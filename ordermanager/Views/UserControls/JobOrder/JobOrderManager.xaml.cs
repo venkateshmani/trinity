@@ -87,7 +87,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             cBox.UpdateBtnText = "Close";
             cBox.Title = "Comments";
             cBox.IsReadOnly = true;
-            //cBox.Comment = ViewModel.PurchaseOrder.Approval.Comments;
+            cBox.Comment = ViewModel.SelectedJobOrderInfo.Approval.Comments;
             cBox.ShowDialog();
         }
 

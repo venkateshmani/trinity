@@ -25,6 +25,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
     /// </summary>
     public partial class DyeingJOControl : UserControl, IJobOrderControl
     {
+        
         public DyeingJOControl()
         {
             InitializeComponent();
@@ -43,9 +44,9 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             }
         }
 
-        public void CreateNewJo(Order order)
+        public void CreateNewJo(Order order, decimal quantity, PurchaseOrder po, string grnRefNo, GRNReciept receipt, bool jobOrderIssued)
         {
-            ViewModel = new DyeingJoViewModel(order);
+            ViewModel = new DyeingJoViewModel(order, quantity, po, grnRefNo, receipt, jobOrderIssued);
         }
 
         public void OpenExistingJo(DyeingJO jo)
@@ -92,6 +93,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 else
                 {
                     InformUser("Fix the Highlighted Errors and try again");
+                    return false;
                 }
             }
             catch (Exception ex)

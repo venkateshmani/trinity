@@ -12,7 +12,7 @@ namespace ordermanager.ViewModel.JobOrderControls
 {
     public class DyeingJoViewModel : ViewModelBase, IActionButtons
     {
-        public DyeingJoViewModel(Order order)
+        public DyeingJoViewModel(Order order, decimal quantity, PurchaseOrder po, string grnRefNo, GRNReciept reciept, bool jobOrderIssued)
         {
             this.Order = order;
             JO = new DyeingJO();
@@ -20,6 +20,9 @@ namespace ordermanager.ViewModel.JobOrderControls
             JO.Order = order;
             JO.QuoteDate = order.OrderDate;
             JO.JODate = DBResources.Instance.GetServerTime();
+            JO.PurchaseOrder = po;
+            JO.GRNRefNo = grnRefNo;
+            JO.Add(quantity, reciept, jobOrderIssued);
         }
 
         public DyeingJoViewModel(DyeingJO jo)
@@ -89,7 +92,7 @@ namespace ordermanager.ViewModel.JobOrderControls
 
         public void Add()
         {
-            JO.Add();
+            JO.Add(0, null, false);
         }
 
         public void Delete(DyeingJoItem item)

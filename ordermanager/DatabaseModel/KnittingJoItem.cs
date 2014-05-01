@@ -21,7 +21,9 @@ namespace ordermanager.DatabaseModel
         public decimal TotalAmount { get; set; }
         public string Remarks { get; set; }
         public long KnittingJoId { get; set; }
+        public Nullable<long> JobOrderID { get; set; }
     
+        public virtual JobOrder JobOrder { get; set; }
         public virtual KnittingJO KnittingJO { get; set; }
     }
 }

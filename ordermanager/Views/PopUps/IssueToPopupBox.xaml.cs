@@ -28,16 +28,26 @@ namespace ordermanager.Views.PopUps
             InitializeComponent();
             JobOrder = new JobOrder();
             this.JobOrder.RequiredDateWrapper = DateTime.Now;
-            
-
         }
-        public IssueToPopupBox(JobOrder jOrder, ObservableCollection<JobOrderType> nextJobTypes):this()
+
+
+        public IssueToPopupBox(JobOrder jOrder, ObservableCollection<JobOrderType> nextJobTypes, string selectedJobType):this()
         {          
             JobOrder = jOrder;
             JobOrder.RequiredDateWrapper = DateTime.Now;
             materialName.Text = jOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.Name;
             quantity.Text = jOrder.JobQuantity.ToString();
-            issueToComboBox.ItemsSource = nextJobTypes;           
+            issueToComboBox.ItemsSource = nextJobTypes;
+
+            foreach (var item in nextJobTypes)
+            {
+                if (item.Type == selectedJobType)
+                {
+                    issueToComboBox.SelectedItem = item;
+                    jOrder.JobOrderType = item;
+                    break;
+                }
+            }
         }
 
         public IssueToPopupBox(JobOrder jOrder)

@@ -42,7 +42,7 @@ namespace ordermanager.Views.UserControls
             JobOrder newJob = new JobOrder();
             newJob.JobQuantity = jOrder.QualityPassed.GetValueOrDefault(0);
             newJob.GRNReciept = jOrder.GRNReciept;
-            IssueToPopupBox issuePopup = new IssueToPopupBox(newJob, jobTypes);
+            IssueToPopupBox issuePopup = new IssueToPopupBox(newJob, jobTypes, string.Empty);
             if (issuePopup.ShowDialog() == true)
             {
                 jOrder.IsIssued = true;

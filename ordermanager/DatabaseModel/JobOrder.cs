@@ -16,7 +16,11 @@ namespace ordermanager.DatabaseModel
     {
         public JobOrder()
         {
+            this.DyeingJOes = new HashSet<DyeingJO>();
+            this.DyeingJoItems = new HashSet<DyeingJoItem>();
             this.JobOrderReceipts = new HashSet<JobOrderReceipt>();
+            this.KnittingJOes = new HashSet<KnittingJO>();
+            this.KnittingJoItems = new HashSet<KnittingJoItem>();
         }
     
         public long JobOrderID { get; set; }
@@ -38,8 +42,12 @@ namespace ordermanager.DatabaseModel
         public bool FailedQuantityIssued { get; set; }
     
         public virtual Company Company { get; set; }
+        public virtual ICollection<DyeingJO> DyeingJOes { get; set; }
+        public virtual ICollection<DyeingJoItem> DyeingJoItems { get; set; }
         public virtual GRNReciept GRNReciept { get; set; }
         public virtual JobOrderType JobOrderType { get; set; }
         public virtual ICollection<JobOrderReceipt> JobOrderReceipts { get; set; }
+        public virtual ICollection<KnittingJO> KnittingJOes { get; set; }
+        public virtual ICollection<KnittingJoItem> KnittingJoItems { get; set; }
     }
 }

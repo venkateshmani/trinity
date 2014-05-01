@@ -71,7 +71,7 @@
 
                     <TextBlock Text="Material Name :" HorizontalAlignment="Right" Margin="3" Grid.Row="0" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
                     <TextBlock Text="Quantity :" HorizontalAlignment="Right" Margin="3" Grid.Row="1" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
-                    <TextBlock Text="Issue to :" HorizontalAlignment="Right" Margin="3" Grid.Row="2" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
+                    <TextBlock Text="Issue to :" HorizontalAlignment="Right" Margin="0,4,3,2" Grid.Row="2" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
                     <TextBlock Text="Charges in INR :" HorizontalAlignment="Right" Margin="3" Grid.Row="3" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
                     <TextBlock Text="Supplier :" HorizontalAlignment="Right" Margin="3" Grid.Row="4" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
                     <TextBlock Text="Instructions :" HorizontalAlignment="Right" Margin="3" Grid.Row="5" Foreground="White" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
@@ -85,8 +85,8 @@
                     <ComboBox x:Name="issueToComboBox" ItemsSource="{Binding AllJobsTypes, Source={StaticResource DataProvider}}" Grid.Row="2" Grid.Column="1"
                                                                 HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center"
                                                                 Width="125"   Height="20" 
-                                                                DisplayMemberPath="Type" SelectedItem="{Binding JobOrderTypeWrapper, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                                SelectionChanged="issueToComboBox_SelectionChanged"/>
+                                                                DisplayMemberPath="Type"
+                                                                SelectionChanged="issueToComboBox_SelectionChanged" IsHitTestVisible="False" IsEditable="False"/>
                     <TextBox x:Name="chargesInINR" Text="{Binding ChargesInINRWrapper, StringFormat={}{0:#0.####}}"  Width="125" FontSize="14" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" Margin="3" HorizontalAlignment="Left" IsEnabled="False"/>
                     <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4" Margin="3">
                         <ComboBox x:Name="supplierComboBox"  VerticalAlignment="Center" 

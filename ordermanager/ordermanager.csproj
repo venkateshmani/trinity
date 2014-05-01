@@ -489,6 +489,9 @@
     <Compile Include="Views\UserControls\JobOrder\DyeingJOControl.xaml.cs">
       <DependentUpon>DyeingJOControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\JobOrder\CreateJoWindow.xaml.cs">
+      <DependentUpon>CreateJoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\UserControls\JobOrder\IActionButtons.cs" />
     <Compile Include="Views\UserControls\JobOrder\IJobOrderControl.cs" />
     <Compile Include="Views\UserControls\JobOrder\JobOrderManager.xaml.cs">
@@ -680,6 +683,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\JobOrder\DyeingJOControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\JobOrder\CreateJoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

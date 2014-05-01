@@ -53,13 +53,19 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        public void Add()
+        public void Add(decimal quantity, GRNReciept reciept, bool jobOrderIssued)
         {
             DyeingJoItem item = new DyeingJoItem();
+            item.JobOrder = new DatabaseModel.JobOrder();
+            item.JobOrder.RequiredDateWrapper = DateTime.Now;
+            item.JobOrder.JobOrderTypeID = 2;
+            item.JobOrder.Instructions = "N/A";
+            item.JobOrder.GRNReciept = reciept;
+            item.JobOrder.IsIssued = jobOrderIssued;
             item.DyeingJO = this;
             item.PropertyChanged +=item_PropertyChanged;
+            item.NetQtyWrapper = quantity;
             Items.Add(item);
-
             this.DyeingJoItems.Add(item);
             
             CalcualteTotalAmount();
@@ -75,7 +81,11 @@ namespace ordermanager.DatabaseModel
                 DyeingJoItems.Remove(item);
             }
            // item.DyeingJO = null;
-            DBResources.Instance.MarkObjectForDelete(item);
+
+            if (item.DyeingJoItemsID != 0)
+            {
+                DBResources.Instance.MarkObjectForDelete(item);
+            }
             CalcualteTotalAmount();
         }
 
@@ -121,6 +131,10 @@ namespace ordermanager.DatabaseModel
             set
             {
                 Company = value;
+                foreach (DyeingJoItem item in DyeingJoItems)
+                {
+                    item.JobOrder.Supplier = value;
+                }
                 ValidateSupplier();
             }
         }

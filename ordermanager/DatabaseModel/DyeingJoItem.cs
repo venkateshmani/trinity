@@ -23,7 +23,9 @@ namespace ordermanager.DatabaseModel
         public decimal NetQty { get; set; }
         public decimal RatePerKg { get; set; }
         public decimal TotalAmount { get; set; }
+        public Nullable<long> JobOrderID { get; set; }
     
         public virtual DyeingJO DyeingJO { get; set; }
+        public virtual JobOrder JobOrder { get; set; }
     }
 }

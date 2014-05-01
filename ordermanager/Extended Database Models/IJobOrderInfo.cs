@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.DatabaseModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace ordermanager.Extended_Database_Models
         string SupplierName { get;  }
         string Status { get;  }
         string Type { get; }
-
+        Approval Approval { get; }
         void RefreshInfoJobOrderInfo();
     }
 }

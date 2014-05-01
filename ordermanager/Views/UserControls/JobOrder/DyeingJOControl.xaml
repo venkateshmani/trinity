@@ -132,11 +132,8 @@
                     </StackPanel>
 
                     <TextBlock Text="Po. No. :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="1" />
-                    <TextBox Text="{Binding JO.PurchaseOrderNumber, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" Width="200" Margin="5,5,0,5"
-                         Height="5" AcceptsReturn="True"
-                         Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"
-                             IsReadOnly="{Binding IsReadOnly}"/>
-
+                    <TextBlock Text="{Binding JO.PurchaseOrderNumber}" Margin="5,5,0,5"
+                          Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" />
 
                     <TextBlock Text="Date :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" />
                     <TextBlock Text="{Binding  JO.JODate, StringFormat=dd/MM/yy}" Margin="5" 
@@ -185,7 +182,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Margin="5" Visibility="{Binding AddRemoveButtonVisiblity}">
+                <StackPanel Orientation="Horizontal" Margin="5" Visibility="Collapsed">
                     <Button Content="Add" x:Name="btnAdd" Width="125" Height="30" Foreground="White" Margin="10,5,5,5" ToolTip="Choose Items" HorizontalAlignment="Left"
                             Click="btnAdd_Click_1">
                         <Button.Background>
@@ -239,7 +236,7 @@
                             <DataGridTemplateColumn x:Name="netQty" Header="Net-qty" Width="0.14*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding NetQtyWrapper, StringFormat=n,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="{Binding ElementName=gridDetails, Path=IsReadOnly}"/>
+                                        <TextBox Text="{Binding NetQtyWrapper, StringFormat=n,  UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}" IsReadOnly="True"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

@@ -20,4 +20,6 @@ namespace ordermanager
 
     public delegate void MoveToJOListDelegate();
 
+    public delegate void OnCloseDialogDelegate(bool dialogResult);
+
 }

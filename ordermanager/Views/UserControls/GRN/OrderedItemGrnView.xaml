@@ -44,6 +44,17 @@
             <Converters:QuantityToVisiblityConverter x:Key="qualityToVisibilityConverter" />
             <Converters:HasErrorToVisibilityConverter x:Key="hasErrorToVisibilityConverter" />
             <DataProviders:DataProvider x:Key="DataProvider" />
+
+            <ContextMenu x:Key="issueToMenuItems">
+                <MenuItem Header="Knitting" Click="MenuItem_Click_1"/>
+                <MenuItem Header="Dyeing"  Click="MenuItem_Click_1" />
+                <MenuItem Header="Printing" Click="MenuItem_Click_1" />
+                <MenuItem Header="Compacting"  Click="MenuItem_Click_1" />
+                <MenuItem Header="Washing"  Click="MenuItem_Click_1" />
+                <MenuItem Header="Other"  Click="MenuItem_Click_1" />
+                <MenuItem Header="Stock"  Click="MenuItem_Click_1" />
+            </ContextMenu>
+            
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -84,7 +95,7 @@
                                 <TextBlock Text="{Binding PassedQuantityStatus}" Margin="15,0,0,0" VerticalAlignment="Center" FontWeight="Bold"/>
                                 <Button x:Name="issueBtn" Content="Issue"  Margin="5" Width="100" Height="30" Foreground="White"
                                             ToolTip="Issue to Stock or Job Work" HorizontalAlignment="Right" Click="issueBtn_Click_1" Tag="{Binding}"
-                                             Visibility="{Binding IssueButtonVisibility}" >
+                                             Visibility="{Binding IssueButtonVisibility}" ContextMenu="{StaticResource issueToMenuItems}" >
                                     <Button.Background>
                                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                                     </Button.Background>

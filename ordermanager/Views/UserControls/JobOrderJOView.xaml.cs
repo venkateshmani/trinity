@@ -2,6 +2,7 @@
 using ordermanager.DatabaseModel;
 using ordermanager.ViewModel;
 using ordermanager.Views.PopUps;
+using ordermanager.Views.UserControls.JobOrderControls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -106,14 +107,25 @@ namespace ordermanager.Views.UserControls
 
         private void btnIsue_Click(object sender, RoutedEventArgs e)
         {
+            Button btnIssue = sender as Button;
             JobOrder jOrder = jobOrderDetails.SelectedItem as JobOrder;
-            if (jOrder != null)
+
+            var nextTypes = GetNextJobOrderTypes(jOrder);
+
+            ContextMenu cMenu = new ContextMenu();
+            foreach (var type in nextTypes)
             {
-                IssueNextJob(jOrder);
+                MenuItem mItem = new MenuItem();
+                mItem.Header = type.Type;
+                mItem.Click += mItem_Click;
+                cMenu.Items.Add(mItem);
             }
+
+            btnIssue.ContextMenu = cMenu;
+            btnIssue.ContextMenu.IsOpen = true;
         }
 
-        private void IssueNextJob(JobOrder jOrder)
+        private ObservableCollection<JobOrderType> GetNextJobOrderTypes(JobOrder jOrder)
         {
             ObservableCollection<JobOrderType> nextTypes;
             switch (jOrder.JobOrderTypeID)
@@ -137,21 +149,13 @@ namespace ordermanager.Views.UserControls
                     nextTypes = DBResources.Instance.AfterOtherJobs;
                     break;
                 default:
-                    return;
+                    return null;
             }
 
-
-            JobOrder newJob = new JobOrder();
-            newJob.JobQuantity = jOrder.QualityPassed.GetValueOrDefault(0);
-            newJob.GRNReciept = jOrder.GRNReciept;
-            IssueToPopupBox issuePopup = new IssueToPopupBox(newJob, nextTypes);
-            if (issuePopup.ShowDialog() == true)
-            {
-                jOrder.IsIssued = true;
-                if (ViewModel.IssueNewJob(issuePopup.JobOrder))
-                    jOrder.Refresh();
-            }
+            return nextTypes;
         }
+
+       
 
         private void btnSendForApproval_Click(object sender, RoutedEventArgs e)
         {
@@ -242,6 +246,58 @@ namespace ordermanager.Views.UserControls
             {
                 PerformSearch();
             }
+        }
+
+
+        void mItem_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem item = sender as MenuItem;
+            JobOrder jOrder = jobOrderDetails.SelectedItem as JobOrder;
+
+            switch (item.Header.ToString())
+            {
+                case "Knitting":
+                    CreateJoWindow knittWindow = new CreateJoWindow();
+                    knittWindow.Order = jOrder.GRNReciept.OrderedItem.PurchaseOrder.Order;
+                    knittWindow.PurchaseOrder = jOrder.GRNReciept.OrderedItem.PurchaseOrder;
+                    knittWindow.Quantity = jOrder.QualityPassed.Value;
+                    knittWindow.GRNRefNo = jOrder.GRNReciept.GRNReciptID.ToString();
+                    knittWindow.GRNReciept = jOrder.GRNReciept;
+                    jOrder.IsIssued = true;
+                    knittWindow.InitializeForKnitting();
+                    knittWindow.ShowDialog();
+                    break;
+                case "Dyeing":
+                    CreateJoWindow dyeWindow = new CreateJoWindow();
+                    dyeWindow.Order = jOrder.GRNReciept.OrderedItem.PurchaseOrder.Order;
+                    dyeWindow.PurchaseOrder = jOrder.GRNReciept.OrderedItem.PurchaseOrder;
+                    dyeWindow.Quantity = jOrder.QualityPassed.Value;
+                    dyeWindow.GRNRefNo = jOrder.GRNReciept.GRNReciptID.ToString();
+                    dyeWindow.GRNReciept = jOrder.GRNReciept;
+                    jOrder.IsIssued = true;
+                    dyeWindow.InitializeForDyeing();
+                    dyeWindow.ShowDialog();
+                    break;
+                case "Printing":
+                case "Compacting":
+                case "Washing":
+                case "Other":
+                case "Stock":
+                    JobOrder newJob = new JobOrder();
+                    newJob.JobQuantity = jOrder.QualityPassed.GetValueOrDefault(0);
+                    newJob.GRNReciept = jOrder.GRNReciept;
+                    IssueToPopupBox issuePopup = new IssueToPopupBox(newJob, GetNextJobOrderTypes(jOrder), item.Header.ToString());
+                    if (issuePopup.ShowDialog() == true)
+                    {
+                        jOrder.IsIssued = true;
+                        if (ViewModel.IssueNewJob(issuePopup.JobOrder))
+                            jOrder.Refresh();
+                    }
+                    break;
+            }
+
+            jOrder.Refresh();
+            jOrder.RefreshAllProperties();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ordermanager.ViewModel.JobOrderControls
 {
     public class KnittingJoViewModel: ViewModelBase, IActionButtons
     {
-        public KnittingJoViewModel(Order order)
+        public KnittingJoViewModel(Order order, decimal quantity, GRNReciept reciept, bool jobOrderIssued)
         {
             this.Order = order;
             JO = new KnittingJO();
@@ -19,6 +19,8 @@ namespace ordermanager.ViewModel.JobOrderControls
             JO.Order = order;
             JO.QuoteDate = order.OrderDate;
             JO.JoDate = DBResources.Instance.GetServerTime();
+
+            JO.Add(quantity, reciept, jobOrderIssued);
         }
 
         public KnittingJoViewModel(KnittingJO jo)
@@ -85,7 +87,7 @@ namespace ordermanager.ViewModel.JobOrderControls
 
         public void Add()
         {
-            JO.Add();
+            JO.Add(0,null, false);
         }
 
         public void Delete(KnittingJoItem item)

@@ -30,9 +30,17 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        public void Add()
+        public void Add(decimal quantity, GRNReciept reciept, bool jobOrderIssued)
         {
             KnittingJoItem item = new KnittingJoItem();
+            item.JobOrder = new DatabaseModel.JobOrder();
+            item.JobOrder.RequiredDateWrapper = DateTime.Now;
+            item.JobOrder.JobOrderTypeID = 1;
+            item.JobOrder.Instructions = "N/A";
+            item.JobOrder.GRNReciept = reciept;
+            item.JobOrder.IsIssued = jobOrderIssued;
+            item.QuantityWrapper = quantity;
+            
             item.KnittingJO = this;
             item.PropertyChanged += item_PropertyChanged;
             Items.Add(item);
@@ -53,7 +61,11 @@ namespace ordermanager.DatabaseModel
                 KnittingJoItems.Remove(item);
             }
             //item.KnittingJO = null;
-            DBResources.Instance.MarkObjectForDelete(item);
+
+            if (item.KnittingJoItemsId != 0)
+            {
+                DBResources.Instance.MarkObjectForDelete(item);
+            }
             CalcualteTotalAmount();
         }
 
@@ -98,6 +110,10 @@ namespace ordermanager.DatabaseModel
             set
             {
                 Company = value;
+                foreach (KnittingJoItem item in KnittingJoItems)
+                {
+                    item.JobOrder.Supplier = value;
+                }
                 ValidateSupplier();
                 OnPropertyChanged("Supplier");
             }

@@ -33,9 +33,11 @@ namespace ordermanager.DatabaseModel
         public decimal TotalValue { get; set; }
         public long ApprovalID { get; set; }
         public string JoNo { get; set; }
+        public Nullable<long> JobOrderID { get; set; }
     
         public virtual Approval Approval { get; set; }
         public virtual Company Company { get; set; }
+        public virtual JobOrder JobOrder { get; set; }
         public virtual Order Order { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }
         public virtual ICollection<DyeingJoItem> DyeingJoItems { get; set; }

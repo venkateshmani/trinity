@@ -400,7 +400,7 @@ namespace ordermanager.DatabaseModel
             {
                 get
                 {
-                    return OrderReportCardsHelperDict["Shipement"];
+                    return OrderReportCardsHelperDict["Shipment"];
                 }
             }
 

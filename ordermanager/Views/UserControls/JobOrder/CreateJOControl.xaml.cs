@@ -1,4 +1,6 @@
 ﻿using ordermanager.DatabaseModel;
+using ordermanager.Interfaces_And_Enums;
+using ordermanager.ViewModel;
 using ordermanager.ViewModel.JobOrderControls;
 using ordermanager.Views.PopUps;
 using System;
@@ -23,7 +25,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
     /// </summary>
     public partial class CreateJOCtrl : UserControl
     {
-
+        public event OnCloseDialogDelegate OnCloseDialog = null;
         IJobOrderControl selectedJobOrderControl = null;
         public event MoveToJOListDelegate OnMoveToJOList = null;
         public CreateJOCtrl()
@@ -32,6 +34,47 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             jobOrderType.SelectedIndex = -1;
         }
 
+
+        
+
+        public void InitializeForDyeing()
+        {
+            jobOrderType.SelectedIndex = 0;
+            InitializeControls();
+        }
+
+        public void InitializeForKnitting()
+        {
+            jobOrderType.SelectedIndex = 1;
+            InitializeControls();
+        }
+
+
+        private bool m_JobOrderIssued = false;
+        public bool JobOrderIssued
+        {
+            get
+            {
+                return m_JobOrderIssued;
+            }
+            set
+            {
+                m_JobOrderIssued = value;
+            }
+        }
+
+        private decimal m_Quantity = 0;
+        public decimal Quantity
+        {
+            get
+            {
+                return m_Quantity;
+            }
+            set
+            {
+                m_Quantity = value;
+            }
+        }
 
         public CreateJOViewModel ViewModel
         {
@@ -42,6 +85,58 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             set
             {
                 this.DataContext = value;
+            }
+        }
+
+        private PurchaseOrder m_PurchaseOrder = null;
+        public PurchaseOrder PurchaseOrder
+        {
+            get
+            {
+                return m_PurchaseOrder;
+            }
+            set
+            {
+                m_PurchaseOrder = value;
+            }
+        }
+
+        private string m_GRNRefNo = string.Empty;
+        public string GRNRefNo
+        {
+            get
+            {
+                return m_GRNRefNo;
+            }
+            set
+            {
+                m_GRNRefNo = value;
+            }
+        }
+
+        private GRNReciept m_GRNReciept = null;
+        public GRNReciept GRNReciept
+        {
+            get
+            {
+                return m_GRNReciept;
+            }
+            set
+            {
+                m_GRNReciept = value;
+            }
+        }
+
+        private JobOrder m_JobOrder = null;
+        public JobOrder JobOrder
+        {
+            get
+            {
+                return m_JobOrder;
+            }
+            set
+            {
+                m_JobOrder = value;
             }
         }
 
@@ -66,12 +161,12 @@ namespace ordermanager.Views.UserControls.JobOrderControls
 
         public void CreateNewDyeingJo()
         {
-            dyeingJOControl.CreateNewJo(Order);
+            dyeingJOControl.CreateNewJo(Order, Quantity, PurchaseOrder, GRNRefNo, GRNReciept, JobOrderIssued);
         }
 
         public void CreateNewKnittingJo()
         {
-            knittingJOControl.CreateNewJo(Order);
+            knittingJOControl.CreateNewJo(Order, Quantity, GRNReciept, JobOrderIssued);
         }
 
         public void OpenExistingJo(object jo)
@@ -103,32 +198,37 @@ namespace ordermanager.Views.UserControls.JobOrderControls
         {
             if (this.IsLoaded)
             {
-                ComboBoxItem selectedItem = jobOrderType.SelectedItem as ComboBoxItem;
-                if (selectedItem != null && selectedItem.Content != null)
-                {
-                    if (selectedItem.Content.ToString() == "Dyeing")
-                    {
-                        CreateNewDyeingJo();
-                        dyeingJOControl.Visibility = System.Windows.Visibility.Visible;
-                        knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
-                        actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
-                        selectedJobOrderControl = dyeingJOControl;
-                    }
-                    else if (selectedItem.Content.ToString() == "Knitting")
-                    {
-                        CreateNewKnittingJo();
-                        dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
-                        knittingJOControl.Visibility = System.Windows.Visibility.Visible;
-                        actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
-                        selectedJobOrderControl = knittingJOControl;
-                    }
-                    else
-                    {
-                        dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
-                        knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                InitializeControls();
+            }
+        }
 
-                        selectedJobOrderControl = null;
-                    }
+        private void InitializeControls()
+        {
+            ComboBoxItem selectedItem = jobOrderType.SelectedItem as ComboBoxItem;
+            if (selectedItem != null && selectedItem.Content != null)
+            {
+                if (selectedItem.Content.ToString() == "Dyeing")
+                {
+                    CreateNewDyeingJo();
+                    dyeingJOControl.Visibility = System.Windows.Visibility.Visible;
+                    knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                    actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
+                    selectedJobOrderControl = dyeingJOControl;
+                }
+                else if (selectedItem.Content.ToString() == "Knitting")
+                {
+                    CreateNewKnittingJo();
+                    dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                    knittingJOControl.Visibility = System.Windows.Visibility.Visible;
+                    actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
+                    selectedJobOrderControl = knittingJOControl;
+                }
+                else
+                {
+                    dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                    knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
+
+                    selectedJobOrderControl = null;
                 }
             }
 
@@ -179,24 +279,16 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                         if (selectedJobOrderControl is DyeingJOControl)
                         {
                             ((DyeingJOControl)selectedJobOrderControl).ViewModel = null;
-                            dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
                         }
-                        else if(selectedJobOrderControl is KnittingJoControl)
+                        else if (selectedJobOrderControl is KnittingJoControl)
                         {
-                            //TODO
-                            knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                            ((KnittingJoControl)selectedJobOrderControl).ViewModel = null;
                         }
 
                         actionButtonsContainer.Visibility = System.Windows.Visibility.Collapsed;
-
-                        jobOrderType.SelectedItem = null;
-                        jobOrderType.SelectedIndex = -1;
                         selectedJobOrderControl = null;
-
-                        if (OnMoveToJOList != null)
-                        {
-                            OnMoveToJOList();
-                        }
+                      
+                        OnCloseDialog(true);
                     }
                     break;
                 case "Submit":
