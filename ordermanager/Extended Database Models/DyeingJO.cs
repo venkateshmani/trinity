@@ -53,21 +53,30 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        public void Add(decimal quantity, GRNReciept reciept, bool jobOrderIssued)
+        public string JoNoWrapper
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(JoNo))
+                {
+                    return JobOrder.JobOrderNumber;
+                }
+
+                return JoNo;
+            }
+            set
+            {
+                JoNo = value;
+            }
+        }
+
+        public void Add()
         {
             DyeingJoItem item = new DyeingJoItem();
-            item.JobOrder = new DatabaseModel.JobOrder();
-            item.JobOrder.RequiredDateWrapper = DateTime.Now;
-            item.JobOrder.JobOrderTypeID = 2;
-            item.JobOrder.Instructions = "N/A";
-            item.JobOrder.GRNReciept = reciept;
-            item.JobOrder.IsIssued = jobOrderIssued;
             item.DyeingJO = this;
             item.PropertyChanged +=item_PropertyChanged;
-            item.NetQtyWrapper = quantity;
             Items.Add(item);
             this.DyeingJoItems.Add(item);
-            
             CalcualteTotalAmount();
         }
 
@@ -106,6 +115,7 @@ namespace ordermanager.DatabaseModel
             set
             {
                 TotalValue = value;
+                JobOrder.ChargesInINR = value;
                 OnPropertyChanged("TotalValueWrapper");
             }
         }
@@ -131,10 +141,7 @@ namespace ordermanager.DatabaseModel
             set
             {
                 Company = value;
-                foreach (DyeingJoItem item in DyeingJoItems)
-                {
-                    item.JobOrder.Supplier = value;
-                }
+                JobOrder.Supplier = value;
                 ValidateSupplier();
             }
         }
@@ -385,7 +392,7 @@ namespace ordermanager.DatabaseModel
 
         public string JobOrderNumber
         {
-            get { return JoNo; }
+            get { return JoNoWrapper; }
         }
 
         public void RefreshInfoJobOrderInfo()

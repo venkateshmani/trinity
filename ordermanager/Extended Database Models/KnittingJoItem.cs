@@ -21,7 +21,6 @@ namespace ordermanager.DatabaseModel
             set
             {
                 TotalAmount = value;
-                JobOrder.ChargesInINRWrapper = value;
                 OnPropertyChanged("TotalAmountWrapper");
             }
         }
@@ -48,7 +47,6 @@ namespace ordermanager.DatabaseModel
             set
             {
                 Quantity = value;
-                JobOrder.JobQuantity = value;
                 CalculateTotalValueWrapper();
                 OnPropertyChanged("QuantityWrapper");
             }

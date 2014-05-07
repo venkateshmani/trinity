@@ -83,5 +83,6 @@
         private System.Windows.Forms.BindingSource SP_KnittingJODetailsBindingSource;
         private OrderManagerDBKnittingJoDataSet OrderManagerDBKnittingJoDataSet;
         private OrderManagerDBKnittingJoDataSetTableAdapters.SP_KnittingJODetailsTableAdapter SP_KnittingJODetailsTableAdapter;
+
     }
 }

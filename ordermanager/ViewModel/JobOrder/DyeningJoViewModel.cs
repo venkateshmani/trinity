@@ -16,13 +16,23 @@ namespace ordermanager.ViewModel.JobOrderControls
         {
             this.Order = order;
             JO = new DyeingJO();
-            JO.JoNo =  "Dye-" + (Order.DyeingJOes.Count + 1).ToString();
             JO.Order = order;
             JO.QuoteDate = order.OrderDate;
             JO.JODate = DBResources.Instance.GetServerTime();
             JO.PurchaseOrder = po;
             JO.GRNRefNo = grnRefNo;
-            JO.Add(quantity, reciept, jobOrderIssued);
+
+            //Job Order
+            JO.JobOrder = new DatabaseModel.JobOrder();
+            JO.JobOrder.RequiredDateWrapper = DateTime.Now;
+            JO.JobOrder.JobOrderTypeID = 2;
+            JO.JobOrder.Instructions = "N/A";
+            JO.JobOrder.GRNReciept = reciept;
+            JO.JobOrder.IsIssued = jobOrderIssued;
+            JO.JobOrder.JobQuantity = quantity;
+            JO.JoNo = JO.JobOrder.JobOrderNumber;
+            
+            JO.Add();
         }
 
         public DyeingJoViewModel(DyeingJO jo)
@@ -92,7 +102,7 @@ namespace ordermanager.ViewModel.JobOrderControls
 
         public void Add()
         {
-            JO.Add(0, null, false);
+            JO.Add();
         }
 
         public void Delete(DyeingJoItem item)

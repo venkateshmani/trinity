@@ -15,12 +15,21 @@ namespace ordermanager.ViewModel.JobOrderControls
         {
             this.Order = order;
             JO = new KnittingJO();
-            JO.JoNo =  "Kni-" + (this.Order.KnittingJOes.Count + 1).ToString();
             JO.Order = order;
             JO.QuoteDate = order.OrderDate;
             JO.JoDate = DBResources.Instance.GetServerTime();
 
-            JO.Add(quantity, reciept, jobOrderIssued);
+
+            JO.JobOrder = new DatabaseModel.JobOrder();
+            JO.JobOrder.RequiredDateWrapper = DateTime.Now;
+            JO.JobOrder.JobOrderTypeID = 1;
+            JO.JobOrder.Instructions = "N/A";
+            JO.JobOrder.GRNReciept = reciept;
+            JO.JobOrder.IsIssued = jobOrderIssued;
+            JO.JobOrder.JobQuantity = quantity;
+
+            JO.JoNo = string.Empty;
+            JO.Add();
         }
 
         public KnittingJoViewModel(KnittingJO jo)
@@ -74,7 +83,7 @@ namespace ordermanager.ViewModel.JobOrderControls
         {
             KnittingJoParameters parameters = new KnittingJoParameters();
 
-            parameters.JoOrderNo = JO.JoNo;
+            parameters.JoOrderNo = JO.JoNoWrapper;
             parameters.QualitySpecification = JO.QualitySpecifications;
             parameters.JoDate = JO.JoDate.ToString("dd/MM/yyyy");
             parameters.QuoteDate = JO.QuoteDate.ToString("dd/MM/yyyy");
@@ -87,7 +96,7 @@ namespace ordermanager.ViewModel.JobOrderControls
 
         public void Add()
         {
-            JO.Add(0,null, false);
+            JO.Add();
         }
 
         public void Delete(KnittingJoItem item)

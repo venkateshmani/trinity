@@ -129,7 +129,7 @@
                     </StackPanel>
 
                     <TextBlock Text="Jo. No. :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="1" />
-                    <TextBlock Text="{Binding  JO.JoNo, StringFormat=dd/MM/yy}" Margin="5" 
+                    <TextBlock Text="{Binding  JO.JoNoWrapper, StringFormat=dd/MM/yy}" Margin="5" 
                                     Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
 
                     <TextBlock Text="Date :" Style="{StaticResource inLineTextBlockStyle}" Grid.Row="2" />
@@ -163,7 +163,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Margin="5" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" Margin="5" Visibility="{Binding AddRemoveButtonVisiblity}">
                     <Button Content="Add" x:Name="btnAdd" Width="125" Height="30" Foreground="White" Margin="10,5,5,5" ToolTip="Choose Items" HorizontalAlignment="Left"
                             Click="btnAdd_Click_1">
                         <Button.Background>

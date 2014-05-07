@@ -70,7 +70,6 @@ namespace ordermanager.DatabaseModel
             set
             {
                 NetQty = value;
-                JobOrder.JobQuantity = value;
                 ValidateNetQuantity();
                 CalculateTotalAmount();
             }
@@ -99,7 +98,6 @@ namespace ordermanager.DatabaseModel
             set
             {
                 TotalAmount = value;
-                JobOrder.ChargesInINRWrapper = value;
                 OnPropertyChanged("TotalAmountWrapper");
             }
         }

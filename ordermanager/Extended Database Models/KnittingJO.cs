@@ -30,20 +30,30 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        public void Add(decimal quantity, GRNReciept reciept, bool jobOrderIssued)
+        public string JoNoWrapper
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(JoNo))
+                {
+                    return JobOrder.JobOrderNumber;
+                }
+
+                return JoNo;
+            }
+            set
+            {
+                JoNo = value;
+            }
+        }
+
+        public void Add()
         {
             KnittingJoItem item = new KnittingJoItem();
-            item.JobOrder = new DatabaseModel.JobOrder();
-            item.JobOrder.RequiredDateWrapper = DateTime.Now;
-            item.JobOrder.JobOrderTypeID = 1;
-            item.JobOrder.Instructions = "N/A";
-            item.JobOrder.GRNReciept = reciept;
-            item.JobOrder.IsIssued = jobOrderIssued;
-            item.QuantityWrapper = quantity;
-            
             item.KnittingJO = this;
             item.PropertyChanged += item_PropertyChanged;
             Items.Add(item);
+            item.RemarksWrapper = string.Empty;
 
             this.KnittingJoItems.Add(item);
 
@@ -86,6 +96,7 @@ namespace ordermanager.DatabaseModel
             set
             {
                 TotalValue = value;
+                JobOrder.ChargesInINR = value;
                 OnPropertyChanged("TotalValueWrapper");
             }
         }
@@ -110,10 +121,7 @@ namespace ordermanager.DatabaseModel
             set
             {
                 Company = value;
-                foreach (KnittingJoItem item in KnittingJoItems)
-                {
-                    item.JobOrder.Supplier = value;
-                }
+                JobOrder.Supplier = value;
                 ValidateSupplier();
                 OnPropertyChanged("Supplier");
             }
@@ -308,7 +316,7 @@ namespace ordermanager.DatabaseModel
 
         public string JobOrderNumber
         {
-            get { return JoNo; }
+            get { return JoNoWrapper; }
         }
 
         public void RefreshInfoJobOrderInfo()
