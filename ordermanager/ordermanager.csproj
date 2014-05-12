@@ -389,6 +389,9 @@
     <Compile Include="Views\CommonControls\BackForwardButton.xaml.cs">
       <DependentUpon>BackForwardButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CommonControls\BudgetVsActual.xaml.cs">
+      <DependentUpon>BudgetVsActual.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CommonControls\OMbutton.xaml.cs">
       <DependentUpon>OMbutton.xaml</DependentUpon>
     </Compile>
@@ -566,6 +569,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CommonControls\BudgetVsActual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CommonControls\OrderReportCardItemControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

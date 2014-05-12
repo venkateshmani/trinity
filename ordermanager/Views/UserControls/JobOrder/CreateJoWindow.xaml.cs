@@ -68,6 +68,18 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             }
         }
 
+        public JobOrder ParentJobOrder
+        {
+            get
+            {
+                return createJoCtrl.ParentJobOrder;
+            }
+            set
+            {
+                createJoCtrl.ParentJobOrder = value;
+            }
+        }
+
         public string GRNRefNo
         {
             get

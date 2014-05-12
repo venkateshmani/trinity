@@ -18,6 +18,7 @@ namespace ordermanager.DatabaseModel
         {
             this.DyeingJOes = new HashSet<DyeingJO>();
             this.DyeingJoItems = new HashSet<DyeingJoItem>();
+            this.JobOrder1 = new HashSet<JobOrder>();
             this.JobOrderReceipts = new HashSet<JobOrderReceipt>();
             this.KnittingJOes = new HashSet<KnittingJO>();
             this.KnittingJoItems = new HashSet<KnittingJoItem>();
@@ -40,11 +41,15 @@ namespace ordermanager.DatabaseModel
         public bool IsWaitingForApproval { get; set; }
         public bool HasApproved { get; set; }
         public bool FailedQuantityIssued { get; set; }
+        public Nullable<long> ParentJOID { get; set; }
+        public byte[] ItemName { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual ICollection<DyeingJO> DyeingJOes { get; set; }
         public virtual ICollection<DyeingJoItem> DyeingJoItems { get; set; }
         public virtual GRNReciept GRNReciept { get; set; }
+        public virtual ICollection<JobOrder> JobOrder1 { get; set; }
+        public virtual JobOrder JobOrder2 { get; set; }
         public virtual JobOrderType JobOrderType { get; set; }
         public virtual ICollection<JobOrderReceipt> JobOrderReceipts { get; set; }
         public virtual ICollection<KnittingJO> KnittingJOes { get; set; }

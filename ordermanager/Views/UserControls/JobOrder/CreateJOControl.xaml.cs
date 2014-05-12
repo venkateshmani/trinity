@@ -127,16 +127,16 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             }
         }
 
-        private JobOrder m_JobOrder = null;
-        public JobOrder JobOrder
+        private JobOrder m_ParentJobOrder = null;
+        public JobOrder ParentJobOrder
         {
             get
             {
-                return m_JobOrder;
+                return m_ParentJobOrder;
             }
             set
             {
-                m_JobOrder = value;
+                m_ParentJobOrder = value;
             }
         }
 
@@ -161,12 +161,12 @@ namespace ordermanager.Views.UserControls.JobOrderControls
 
         public void CreateNewDyeingJo()
         {
-            dyeingJOControl.CreateNewJo(Order, Quantity, PurchaseOrder, GRNRefNo, GRNReciept, JobOrderIssued);
+            dyeingJOControl.CreateNewJo(Order, Quantity, PurchaseOrder, GRNRefNo, GRNReciept, JobOrderIssued, ParentJobOrder);
         }
 
         public void CreateNewKnittingJo()
         {
-            knittingJOControl.CreateNewJo(Order, Quantity, GRNReciept, JobOrderIssued);
+            knittingJOControl.CreateNewJo(Order, Quantity, GRNReciept, JobOrderIssued, ParentJobOrder);
         }
 
         public void OpenExistingJo(object jo)

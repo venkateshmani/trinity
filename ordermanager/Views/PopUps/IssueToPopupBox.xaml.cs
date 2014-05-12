@@ -48,6 +48,8 @@ namespace ordermanager.Views.PopUps
                     break;
                 }
             }
+
+            budgetVsActual.Initialize(JobOrder.GRNReciept.OrderedItem, JobOrder);
         }
 
         public IssueToPopupBox(JobOrder jOrder)
@@ -147,6 +149,7 @@ namespace ordermanager.Views.PopUps
             set
             {
                 JobOrder.GRNReciept = value;
+                budgetVsActual.Initialize(JobOrder.GRNReciept.OrderedItem, JobOrder);
             }
         }
 

@@ -12,7 +12,7 @@ namespace ordermanager.ViewModel.JobOrderControls
 {
     public class DyeingJoViewModel : ViewModelBase, IActionButtons
     {
-        public DyeingJoViewModel(Order order, decimal quantity, PurchaseOrder po, string grnRefNo, GRNReciept reciept, bool jobOrderIssued)
+        public DyeingJoViewModel(Order order, decimal quantity, PurchaseOrder po, string grnRefNo, GRNReciept reciept, bool jobOrderIssued, JobOrder parentJo)
         {
             this.Order = order;
             JO = new DyeingJO();
@@ -30,8 +30,10 @@ namespace ordermanager.ViewModel.JobOrderControls
             JO.JobOrder.GRNReciept = reciept;
             JO.JobOrder.IsIssued = jobOrderIssued;
             JO.JobOrder.JobQuantity = quantity;
+            JO.JobOrder.JobOrder2 = parentJo;
             JO.JoNo = JO.JobOrder.JobOrderNumber;
             
+
             JO.Add();
         }
 

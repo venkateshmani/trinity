@@ -476,5 +476,21 @@ namespace ordermanager.DatabaseModel
         }
 
         #endregion
+
+        #region Methods
+
+        public decimal GetCumulativeJOCharges()
+        {
+            decimal chargesPerUnitInINR = 0;
+
+            if (this.JobOrder2 != null)
+                chargesPerUnitInINR += this.JobOrder2.GetCumulativeJOCharges();
+
+            chargesPerUnitInINR += ChargesInINRWrapper * JobQuantity;
+            return chargesPerUnitInINR;
+        }
+
+        #endregion 
+
     }
 }

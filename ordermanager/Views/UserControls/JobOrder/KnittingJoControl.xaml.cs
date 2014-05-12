@@ -42,14 +42,16 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             }
         }
 
-        public void CreateNewJo(Order order,decimal quantity,GRNReciept reciept, bool jobOrderIssued)
+        public void CreateNewJo(Order order,decimal quantity,GRNReciept reciept, bool jobOrderIssued, JobOrder parentJo)
         {
-            ViewModel = new KnittingJoViewModel(order, quantity, reciept, jobOrderIssued);
+            ViewModel = new KnittingJoViewModel(order, quantity, reciept, jobOrderIssued, parentJo);
+            budgetVsActualControl.Initialize(reciept.OrderedItem, parentJo);
         }
 
         public void OpenExistingJo(KnittingJO jo)
         {
             ViewModel = new KnittingJoViewModel(jo);
+            budgetVsActualControl.Initialize(jo.JobOrder.GRNReciept.OrderedItem, jo.JobOrder);
         }
 
         private void InformUser(string message)

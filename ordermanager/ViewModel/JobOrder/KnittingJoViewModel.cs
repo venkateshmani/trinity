@@ -11,14 +11,14 @@ namespace ordermanager.ViewModel.JobOrderControls
 {
     public class KnittingJoViewModel: ViewModelBase, IActionButtons
     {
-        public KnittingJoViewModel(Order order, decimal quantity, GRNReciept reciept, bool jobOrderIssued)
+        public KnittingJoViewModel(Order order, decimal quantity, GRNReciept reciept, bool jobOrderIssued, JobOrder parentJO)
         {
             this.Order = order;
             JO = new KnittingJO();
             JO.Order = order;
             JO.QuoteDate = order.OrderDate;
             JO.JoDate = DBResources.Instance.GetServerTime();
-
+            
 
             JO.JobOrder = new DatabaseModel.JobOrder();
             JO.JobOrder.RequiredDateWrapper = DateTime.Now;
@@ -27,6 +27,7 @@ namespace ordermanager.ViewModel.JobOrderControls
             JO.JobOrder.GRNReciept = reciept;
             JO.JobOrder.IsIssued = jobOrderIssued;
             JO.JobOrder.JobQuantity = quantity;
+            JO.JobOrder.JobOrder2 = parentJO;
 
             JO.JoNo = string.Empty;
             JO.Add();

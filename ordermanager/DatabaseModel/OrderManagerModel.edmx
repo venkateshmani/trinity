@@ -182,6 +182,10 @@
             <End Role="GRNReciept" EntitySet="GRNReciept" />
             <End Role="JobOrder" EntitySet="JobOrder" />
           </AssociationSet>
+          <AssociationSet Name="FK_JobOrder_JobOrder" Association="OrderManagerDBModel.Store.FK_JobOrder_JobOrder">
+            <End Role="JobOrder" EntitySet="JobOrder" />
+            <End Role="JobOrder1" EntitySet="JobOrder" />
+          </AssociationSet>
           <AssociationSet Name="FK_JobOrder_JobOrderType" Association="OrderManagerDBModel.Store.FK_JobOrder_JobOrderType">
             <End Role="JobOrderType" EntitySet="JobOrderType" />
             <End Role="JobOrder" EntitySet="JobOrder" />
@@ -683,6 +687,8 @@
           <Property Name="IsWaitingForApproval" Type="bit" Nullable="false" />
           <Property Name="HasApproved" Type="bit" Nullable="false" />
           <Property Name="FailedQuantityIssued" Type="bit" Nullable="false" />
+          <Property Name="ParentJOID" Type="bigint" />
+          <Property Name="ItemName" Type="varbinary" MaxLength="50" />
         </EntityType>
         <EntityType Name="JobOrderReceipt">
           <Key>
@@ -1452,6 +1458,18 @@
             </Principal>
             <Dependent Role="JobOrder">
               <PropertyRef Name="GRNReciptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOrder_JobOrder">
+          <End Role="JobOrder" Type="OrderManagerDBModel.Store.JobOrder" Multiplicity="0..1" />
+          <End Role="JobOrder1" Type="OrderManagerDBModel.Store.JobOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobOrder">
+              <PropertyRef Name="JobOrderID" />
+            </Principal>
+            <Dependent Role="JobOrder1">
+              <PropertyRef Name="ParentJOID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2525,6 +2543,10 @@
             <End Role="ShipmentMode" EntitySet="ShipmentModes" />
             <End Role="Invoice" EntitySet="Invoices" />
           </AssociationSet>
+          <AssociationSet Name="FK_JobOrder_JobOrder" Association="OrderManagerDBModel.FK_JobOrder_JobOrder">
+            <End Role="JobOrder" EntitySet="JobOrders" />
+            <End Role="JobOrder1" EntitySet="JobOrders" />
+          </AssociationSet>
           <AssociationSet Name="FK_JobOrder_JobOrderType" Association="OrderManagerDBModel.FK_JobOrder_JobOrderType">
             <End Role="JobOrderType" EntitySet="JobOrderTypes" />
             <End Role="JobOrder" EntitySet="JobOrders" />
@@ -3007,10 +3029,14 @@
           <Property Name="IsWaitingForApproval" Type="Boolean" Nullable="false" />
           <Property Name="HasApproved" Type="Boolean" Nullable="false" />
           <Property Name="FailedQuantityIssued" Type="Boolean" Nullable="false" />
+          <Property Name="ParentJOID" Type="Int64" />
+          <Property Name="ItemName" Type="Binary" MaxLength="50" FixedLength="false" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_JobOrder_Company" FromRole="JobOrder" ToRole="Company" />
           <NavigationProperty Name="DyeingJOes" Relationship="OrderManagerDBModel.FK_DyeingJO_JobOrder" FromRole="JobOrder" ToRole="DyeingJO" />
           <NavigationProperty Name="DyeingJoItems" Relationship="OrderManagerDBModel.FK_DyeingJoItem_JobOrder" FromRole="JobOrder" ToRole="DyeingJoItem" />
           <NavigationProperty Name="GRNReciept" Relationship="OrderManagerDBModel.FK_JobOrder_GRNReciept" FromRole="JobOrder" ToRole="GRNReciept" />
+          <NavigationProperty Name="JobOrder1" Relationship="OrderManagerDBModel.FK_JobOrder_JobOrder" FromRole="JobOrder" ToRole="JobOrder1" />
+          <NavigationProperty Name="JobOrder2" Relationship="OrderManagerDBModel.FK_JobOrder_JobOrder" FromRole="JobOrder1" ToRole="JobOrder" />
           <NavigationProperty Name="JobOrderType" Relationship="OrderManagerDBModel.FK_JobOrder_JobOrderType" FromRole="JobOrder" ToRole="JobOrderType" />
           <NavigationProperty Name="JobOrderReceipts" Relationship="OrderManagerDBModel.FK_JobOrderReceipt_JobOrder" FromRole="JobOrder" ToRole="JobOrderReceipt" />
           <NavigationProperty Name="KnittingJOes" Relationship="OrderManagerDBModel.FK_KnittingJO_JobOrder" FromRole="JobOrder" ToRole="KnittingJO" />
@@ -4146,6 +4172,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_JobOrder_JobOrder">
+          <End Role="JobOrder" Type="OrderManagerDBModel.JobOrder" Multiplicity="0..1" />
+          <End Role="JobOrder1" Type="OrderManagerDBModel.JobOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobOrder">
+              <PropertyRef Name="JobOrderID" />
+            </Principal>
+            <Dependent Role="JobOrder1">
+              <PropertyRef Name="ParentJOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_JobOrder_JobOrderType">
           <End Role="JobOrderType" Type="OrderManagerDBModel.JobOrderType" Multiplicity="1" />
           <End Role="JobOrder" Type="OrderManagerDBModel.JobOrder" Multiplicity="*" />
@@ -4973,6 +5011,8 @@
                 <ScalarProperty Name="IsWaitingForApproval" ColumnName="IsWaitingForApproval" />
                 <ScalarProperty Name="HasApproved" ColumnName="HasApproved" />
                 <ScalarProperty Name="FailedQuantityIssued" ColumnName="FailedQuantityIssued" />
+                <ScalarProperty Name="ParentJOID" ColumnName="ParentJOID" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
