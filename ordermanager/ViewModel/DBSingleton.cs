@@ -13,6 +13,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.Entity;
+using System.Windows;
 
 namespace ordermanager.ViewModel
 {
@@ -560,7 +561,7 @@ namespace ordermanager.ViewModel
             historyItem.OrderChanges = "Created New Enquiry";
             historyItem.Date = DateTime.Now;
             newSavedOrder.Histories.Add(historyItem);
-
+            MessageBox.Show("Create New Order Method Called");
             Save();
             return newSavedOrder;
         }

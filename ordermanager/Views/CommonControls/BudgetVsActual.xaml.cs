@@ -81,18 +81,21 @@ namespace ordermanager.Views.CommonControls
 
         private void CalculateActual(OrderedItem orderedItem, JobOrder Jo)
         {
-            //Job Order Charges
-            PreviousActualInINR += Jo.GetCumulativeJOCharges();
-
-            //GRN Reciept Value
-            if (Jo.GRNReciept.OtherChargesInINR != null && Jo.GRNReciept.OtherChargesInINR.Value != 0 && Jo.GRNReciept.RecievedInHandWrapper != 0)
+            if (Jo != null)
             {
-                decimal perUnitGRNRecieptValue = Jo.GRNReciept.OtherChargesInINR.Value / Jo.GRNReciept.RecievedInHandWrapper;
-                PreviousActualInINR += perUnitGRNRecieptValue;
-            }
+                //Job Order Charges
+                PreviousActualInINR += Jo.GetCumulativeJOCharges();
 
-            //Purchase Order Value
-            PreviousActualInINR += orderedItem.ActualInINR / orderedItem.OrderedQuantity;
+                //GRN Reciept Value
+                if (Jo.GRNReciept.OtherChargesInINR != null && Jo.GRNReciept.OtherChargesInINR.Value != 0 && Jo.GRNReciept.RecievedInHandWrapper != 0)
+                {
+                    decimal perUnitGRNRecieptValue = Jo.GRNReciept.OtherChargesInINR.Value / Jo.GRNReciept.RecievedInHandWrapper;
+                    PreviousActualInINR += perUnitGRNRecieptValue;
+                }
+
+                //Purchase Order Value
+                PreviousActualInINR += orderedItem.ActualInINR / orderedItem.OrderedQuantity;
+            }
         }
              
     }

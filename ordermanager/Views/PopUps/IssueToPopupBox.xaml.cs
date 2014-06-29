@@ -28,6 +28,7 @@ namespace ordermanager.Views.PopUps
             InitializeComponent();
             JobOrder = new JobOrder();
             this.JobOrder.RequiredDateWrapper = DateTime.Now;
+            
         }
 
 
@@ -198,7 +199,7 @@ namespace ordermanager.Views.PopUps
             expectedDeliveryDate.IsEnabled = isEnabled;
         }
 
-        private void supplierComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+    gf    private void supplierComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             if (supplierComboBox.SelectedItem == null)
             {
