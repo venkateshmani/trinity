@@ -199,7 +199,7 @@
                     </Button>
 
                 </StackPanel>
-                <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gray">
+                <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gray">    
                     <DataGrid x:Name="gridDetails" Grid.Row="1" FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                                 HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
                                 GridLinesVisibility="All" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="True" 

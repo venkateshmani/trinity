@@ -114,10 +114,10 @@ namespace ordermanager.ViewModel.InStock
         {
             try
             {
-                FromStock.SubMaterialsNameID = StockDBItem.SubMaterialsNameID;
+               // FromStock.SubMaterialsNameID = StockDBItem.SubMaterialsNameID;
                 FromStock.Quantity = QuantityToIssue.Value;
                 FromStock.IssuedDate = DBResources.Instance.GetServerTime();
-                FromStock.OrderID = OrderNumber.Value;
+                //FromStock.OrderID = OrderNumber.Value;
                 StockDBItem.InStock = Stock - FromStock.Quantity;
                 DBResources.Instance.Context.MaterialsFromStocks.Add(FromStock);
                 DBResources.Instance.Context.SaveChanges();

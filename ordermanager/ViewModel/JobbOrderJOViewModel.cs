@@ -106,6 +106,15 @@ namespace ordermanager.ViewModel
                     {
                         if (jobOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.InStock == null)
                             jobOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.InStock = 0;
+
+                        MaterialStock stock = new MaterialStock();
+                        stock.Order = this.Order;
+                        stock.SubMaterial = jobOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial;
+                        stock.InStockDateTime = DBResources.Instance.GetServerTime();
+                        stock.StockQuantity = jobOrder.JobQuantity;
+                        stock.UnitsOfMeasurement = jobOrder.GRNReciept.OrderedItem.ProductMaterialItem.UnitsOfMeasurementWrapper;
+                        jobOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.MaterialStocks.Add(stock);
+
                         jobOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.InStock += jobOrder.JobQuantity;
                     }
                     else

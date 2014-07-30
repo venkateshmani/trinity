@@ -185,7 +185,7 @@
                             <DataGridTemplateColumn x:Name="quantityColumn" Header="Quantity" Width="0.2*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding QuantityWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
+                                        <TextBox Text="{Binding QuantityWrapper, StringFormat={}{0:#0.##}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" 
                                                  IsHitTestVisible="{Binding CanAddMaterials}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

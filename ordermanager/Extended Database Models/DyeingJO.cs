@@ -57,11 +57,6 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                if (string.IsNullOrEmpty(JoNo))
-                {
-                    return JobOrder.JobOrderNumber;
-                }
-
                 return JoNo;
             }
             set
@@ -115,7 +110,6 @@ namespace ordermanager.DatabaseModel
             set
             {
                 TotalValue = value;
-                JobOrder.ChargesInINR = value;
                 OnPropertyChanged("TotalValueWrapper");
             }
         }
@@ -141,7 +135,6 @@ namespace ordermanager.DatabaseModel
             set
             {
                 Company = value;
-                JobOrder.Supplier = value;
                 ValidateSupplier();
             }
         }

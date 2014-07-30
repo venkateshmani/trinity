@@ -55,6 +55,7 @@ namespace ordermanager.DatabaseModel
         public DbSet<KnittingJoItem> KnittingJoItems { get; set; }
         public DbSet<MaterialName> MaterialNames { get; set; }
         public DbSet<MaterialsFromStock> MaterialsFromStocks { get; set; }
+        public DbSet<MaterialStock> MaterialStocks { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderCurrencyConversion> OrderCurrencyConversions { get; set; }
         public DbSet<OrderedItem> OrderedItems { get; set; }

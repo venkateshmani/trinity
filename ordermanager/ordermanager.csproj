@@ -170,6 +170,9 @@
     <Compile Include="DatabaseModel\MaterialsFromStock.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\MaterialStock.cs">
+      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\Order.cs">
       <DependentUpon>OrderManagerModel.tt</DependentUpon>
     </Compile>
@@ -297,6 +300,7 @@
     <Compile Include="Extended Database Models\JobOrder.cs" />
     <Compile Include="Extended Database Models\KnittingJO.cs" />
     <Compile Include="Extended Database Models\KnittingJoItem.cs" />
+    <Compile Include="Extended Database Models\MaterialStock.cs" />
     <Compile Include="Extended Database Models\OrderCurrencyConversion.cs" />
     <Compile Include="Extended Database Models\EntityBase.cs" />
     <Compile Include="Extended Database Models\Order.cs" />
@@ -550,6 +554,10 @@
       <DependentUpon>PurchaseOrderMasterControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\PurchaseOrderControl\PurchaseOrderPDFGenerator.cs" />
+    <Compile Include="Views\UserControls\Stock\MaterialStockPerOrderControl.xaml.cs">
+      <DependentUpon>MaterialStockPerOrderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\Stock\MaterialStockPerOrderViewModel.cs" />
     <Compile Include="Views\UserControls\ViewOrdersControl.xaml.cs">
       <DependentUpon>ViewOrdersControl.xaml</DependentUpon>
     </Compile>
@@ -761,6 +769,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\Stock\MaterialStockPerOrderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\ViewOrdersControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -832,9 +844,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OrderManagerModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="App.Config" />
     <None Include="DatabaseModel\OrderManagerModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>OrderManagerModel.edmx</DependentUpon>

@@ -135,5 +135,11 @@ namespace ordermanager.DatabaseModel
         }
 
         #endregion
+
+
+        public override string ToString()
+        {
+            return "D" + this.KnittingJoId.ToString() + " Name:" + NameOfProduct;
+        }
     }
 }

@@ -31,6 +31,20 @@ namespace ordermanager.Views.PopUps
             
         }
 
+        public IssueToPopupBox(ObservableCollection<JobOrderType> nextJobTypes, string selectedJobType)
+            : this()
+        {
+            issueToComboBox.ItemsSource = nextJobTypes;
+            foreach (var item in nextJobTypes)
+            {
+                if (item.Type == selectedJobType)
+                {
+                    issueToComboBox.SelectedItem = item;
+                    JobOrder.JobOrderType = item;
+                    break;
+                }
+            }
+        }
 
         public IssueToPopupBox(JobOrder jOrder, ObservableCollection<JobOrderType> nextJobTypes, string selectedJobType):this()
         {          
@@ -49,8 +63,6 @@ namespace ordermanager.Views.PopUps
                     break;
                 }
             }
-
-            budgetVsActual.Initialize(JobOrder.GRNReciept.OrderedItem, JobOrder);
         }
 
         public IssueToPopupBox(JobOrder jOrder)
@@ -150,7 +162,6 @@ namespace ordermanager.Views.PopUps
             set
             {
                 JobOrder.GRNReciept = value;
-                budgetVsActual.Initialize(JobOrder.GRNReciept.OrderedItem, JobOrder);
             }
         }
 
@@ -199,7 +210,7 @@ namespace ordermanager.Views.PopUps
             expectedDeliveryDate.IsEnabled = isEnabled;
         }
 
-    gf    private void supplierComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        private void supplierComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             if (supplierComboBox.SelectedItem == null)
             {

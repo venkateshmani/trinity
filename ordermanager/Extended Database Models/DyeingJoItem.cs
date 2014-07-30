@@ -192,5 +192,10 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+
+        public override string ToString()
+        {
+            return "D" + this.DyeingJOId.ToString() + "  Color:" + Color + "  Quality:" + QualityDescription + "  Req-GSM:" + ReqGSM + "  ReqWidth:" + ReqWidth;  
+        }
     }
 }

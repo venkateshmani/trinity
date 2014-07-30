@@ -36,25 +36,25 @@ namespace ordermanager.ViewModel.Information
         {
             get
             {
-                if (materialSummaryDict == null)
-                {
-                    materialSummaryDict = new Dictionary<string, MaterialsFromStockSummary>();
-                    foreach (MaterialsFromStock mfs in MaterialsFromStock)
-                    {
-                        MaterialsFromStockSummary summary = null;
-                        if (materialSummaryDict.ContainsKey(mfs.SubMaterial.Name))
-                        {
-                            summary = materialSummaryDict[mfs.SubMaterial.Name];
-                        }
-                        else
-                        {
-                            summary = new MaterialsFromStockSummary(mfs.SubMaterial);
-                            materialSummaryDict.Add(mfs.SubMaterial.Name, summary);
-                        }
+                //if (materialSummaryDict == null)
+                //{
+                //    materialSummaryDict = new Dictionary<string, MaterialsFromStockSummary>();
+                //    foreach (MaterialsFromStock mfs in MaterialsFromStock)
+                //    {
+                //        MaterialsFromStockSummary summary = null;
+                //        if (materialSummaryDict.ContainsKey(mfs.SubMaterial.Name))
+                //        {
+                //            summary = materialSummaryDict[mfs.SubMaterial.Name];
+                //        }
+                //        else
+                //        {
+                //            summary = new MaterialsFromStockSummary(mfs.SubMaterial);
+                //            materialSummaryDict.Add(mfs.SubMaterial.Name, summary);
+                //        }
 
-                        summary.Quantity += mfs.Quantity;
-                    }
-                }
+                //        summary.Quantity += mfs.Quantity;
+                //    }
+                //}
 
                 return new ObservableCollection<MaterialsFromStockSummary>(materialSummaryDict.Values);
             }

@@ -144,7 +144,7 @@ namespace ordermanager.DatabaseModel
                     }
 
                 }
-                return m_jobOrderNumber;
+                return m_jobOrderNumber + "  " + this.ToString();
             }
         }
 
@@ -492,5 +492,14 @@ namespace ordermanager.DatabaseModel
 
         #endregion 
 
+        public override string ToString()
+        {
+            if(this.DyeingJoItems != null && this.DyeingJoItems.Count() != 0)
+                return this.DyeingJoItems.ElementAt(0).ToString();
+            if(this.KnittingJoItems != null && this.KnittingJoItems.Count() != 0)
+                return this.KnittingJoItems.ElementAt(0).ToString();
+
+            return string.Empty;
+        }
     }
 }

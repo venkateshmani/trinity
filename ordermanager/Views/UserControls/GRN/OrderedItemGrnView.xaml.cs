@@ -304,7 +304,7 @@ namespace ordermanager.Views.UserControls.GRN
                     if (selectedGRNReciept != null)
                     {
                         GRNReciept receipt = selectedGRNReciept;
-                        IssueToPopupBox issuePopupBox = new IssueToPopupBox();
+                        IssueToPopupBox issuePopupBox = new IssueToPopupBox(DBResources.Instance.AllJobsTypes, item.Header.ToString());
                         issuePopupBox.Receipt = receipt;
                         issuePopupBox.JobQuantity = issuePopupBox.Receipt.QualityPassedQuantityWrapper;
 
@@ -312,12 +312,13 @@ namespace ordermanager.Views.UserControls.GRN
                         {
                             if (issuePopupBox.JobOrder.JobOrderType.Type.ToLower() == "stock")
                             {
-                                if (ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.InStock == null)
-                                {
-                                    ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.InStock = 0;
-                                }
-
-                                ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.InStock += receipt.QualityPassedQuantityWrapper;
+                                MaterialStock stock = new MaterialStock();
+                                stock.Order = ViewModel.Order;
+                                stock.SubMaterial = ViewModel.OrderedItem.ProductMaterialItem.SubMaterial;
+                                stock.InStockDateTime = DBResources.Instance.GetServerTime();
+                                stock.StockQuantity = receipt.QualityPassedQuantityWrapper;
+                                stock.UnitsOfMeasurement = ViewModel.OrderedItem.ProductMaterialItem.UnitsOfMeasurementWrapper;
+                                ViewModel.OrderedItem.ProductMaterialItem.SubMaterial.MaterialStocks.Add(stock);
                                 receipt.ReceiptStatusID = (byte)RecieptStatus.IssuedToStock;
                             }
                             else

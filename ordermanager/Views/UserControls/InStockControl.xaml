@@ -62,7 +62,7 @@
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <DataGrid x:Name="gridMaterialStock" FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" 
-                         ItemsSource="{Binding MaterialStockItems}" Background="WhiteSmoke">
+                         ItemsSource="{Binding MaterialStockItems}" Background="WhiteSmoke">h
                         <DataGrid.RowDetailsTemplate>
                             <DataTemplate>
                                 <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5">

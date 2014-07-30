@@ -42,7 +42,7 @@ namespace ordermanager.DatabaseModel
         public bool HasApproved { get; set; }
         public bool FailedQuantityIssued { get; set; }
         public Nullable<long> ParentJOID { get; set; }
-        public byte[] ItemName { get; set; }
+        public string ItemName { get; set; }
     
         public virtual Company Company { get; set; }
         public virtual ICollection<DyeingJO> DyeingJOes { get; set; }

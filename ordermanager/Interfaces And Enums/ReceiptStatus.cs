@@ -15,6 +15,6 @@ namespace ordermanager.Interfaces_And_Enums
 	    IssuedToPrinting = 5, 
 	    IssuedToCompacting = 6,
 	    IssuedToWashing = 7,
-	    IssuesToOther = 8
+	    IssuedToOther = 8
     }
 }

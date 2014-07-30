@@ -22,17 +22,9 @@ namespace ordermanager.ViewModel.JobOrderControls
             JO.PurchaseOrder = po;
             JO.GRNRefNo = grnRefNo;
 
-            //Job Order
-            JO.JobOrder = new DatabaseModel.JobOrder();
-            JO.JobOrder.RequiredDateWrapper = DateTime.Now;
-            JO.JobOrder.JobOrderTypeID = 2;
-            JO.JobOrder.Instructions = "N/A";
-            JO.JobOrder.GRNReciept = reciept;
-            JO.JobOrder.IsIssued = jobOrderIssued;
-            JO.JobOrder.JobQuantity = quantity;
-            JO.JobOrder.JobOrder2 = parentJo;
-            JO.JoNo = JO.JobOrder.JobOrderNumber;
-            
+            JO.GRNReciept = reciept;
+            JO.JobOrder = parentJo;
+            JO.JoNo = "D" + JO.DyeingJOId.ToString();
 
             JO.Add();
         }

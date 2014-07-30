@@ -18,18 +18,10 @@ namespace ordermanager.ViewModel.JobOrderControls
             JO.Order = order;
             JO.QuoteDate = order.OrderDate;
             JO.JoDate = DBResources.Instance.GetServerTime();
-            
+            JO.JobOrder = parentJO;
+            JO.GRNReciept = reciept;
 
-            JO.JobOrder = new DatabaseModel.JobOrder();
-            JO.JobOrder.RequiredDateWrapper = DateTime.Now;
-            JO.JobOrder.JobOrderTypeID = 1;
-            JO.JobOrder.Instructions = "N/A";
-            JO.JobOrder.GRNReciept = reciept;
-            JO.JobOrder.IsIssued = jobOrderIssued;
-            JO.JobOrder.JobQuantity = quantity;
-            JO.JobOrder.JobOrder2 = parentJO;
-
-            JO.JoNo = string.Empty;
+            JO.JoNoWrapper = "K" + JO.KnittingJOId.ToString();
             JO.Add();
         }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ordermanager.ViewModel
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public class ViewModelBase : EntityBase, INotifyPropertyChanged
     {
 
         private Order m_Order = null;

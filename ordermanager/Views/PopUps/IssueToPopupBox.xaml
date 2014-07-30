@@ -75,7 +75,6 @@
                     <TextBlock Text="Supplier :" HorizontalAlignment="Right" Margin="3" Grid.Row="4" Foreground="Black" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
                     <TextBlock Text="Instructions :" HorizontalAlignment="Right" Margin="3" Grid.Row="5" Foreground="Black" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
                     <TextBlock Text="Required Date :" HorizontalAlignment="Right" Margin="3" Grid.Row="6" Foreground="Black" FontSize="16" FontFamily="{StaticResource ContentFontFamily}"/>
-                    <CommonControls:BudgetVsActual x:Name="budgetVsActual" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="7" Grid.ColumnSpan="2" />
 
                     <TextBlock x:Name="materialName" Text="{Binding GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.Name}" FontSize="16" FontWeight="Bold" Foreground="Black" Grid.Row="0" Grid.Column="1" Margin="3" HorizontalAlignment="Left"
                                VerticalAlignment="Center"/>

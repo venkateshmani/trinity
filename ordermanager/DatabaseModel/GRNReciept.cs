@@ -16,7 +16,9 @@ namespace ordermanager.DatabaseModel
     {
         public GRNReciept()
         {
+            this.DyeingJOes = new HashSet<DyeingJO>();
             this.JobOrders = new HashSet<JobOrder>();
+            this.KnittingJOes = new HashSet<KnittingJO>();
         }
     
         public long GRNReciptID { get; set; }
@@ -36,9 +38,11 @@ namespace ordermanager.DatabaseModel
         public string VechileNo { get; set; }
         public string OtherChargersName { get; set; }
     
+        public virtual ICollection<DyeingJO> DyeingJOes { get; set; }
         public virtual OrderedItem OrderedItem { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }
         public virtual ReceiptStatu ReceiptStatu { get; set; }
         public virtual ICollection<JobOrder> JobOrders { get; set; }
+        public virtual ICollection<KnittingJO> KnittingJOes { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace ordermanager.DatabaseModel
     {
         public UnitsOfMeasurement()
         {
+            this.MaterialStocks = new HashSet<MaterialStock>();
             this.OrderProducts = new HashSet<OrderProduct>();
             this.ProductMaterialItems = new HashSet<ProductMaterialItem>();
             this.ProductMaterials = new HashSet<ProductMaterial>();
@@ -26,6 +27,7 @@ namespace ordermanager.DatabaseModel
         public string Units { get; set; }
         public decimal Multiplier { get; set; }
     
+        public virtual ICollection<MaterialStock> MaterialStocks { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
         public virtual ICollection<ProductMaterialItem> ProductMaterialItems { get; set; }
         public virtual ICollection<ProductMaterial> ProductMaterials { get; set; }

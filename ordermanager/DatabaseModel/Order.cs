@@ -24,6 +24,8 @@ namespace ordermanager.DatabaseModel
             this.JobOrderTolerances = new HashSet<JobOrderTolerance>();
             this.KnittingJOes = new HashSet<KnittingJO>();
             this.MaterialsFromStocks = new HashSet<MaterialsFromStock>();
+            this.MaterialsFromStocks1 = new HashSet<MaterialsFromStock>();
+            this.MaterialStocks = new HashSet<MaterialStock>();
             this.OrderCurrencyConversions = new HashSet<OrderCurrencyConversion>();
             this.OrderProducts = new HashSet<OrderProduct>();
             this.OrderReportCards = new HashSet<OrderReportCard>();
@@ -57,6 +59,8 @@ namespace ordermanager.DatabaseModel
         public virtual ICollection<JobOrderTolerance> JobOrderTolerances { get; set; }
         public virtual ICollection<KnittingJO> KnittingJOes { get; set; }
         public virtual ICollection<MaterialsFromStock> MaterialsFromStocks { get; set; }
+        public virtual ICollection<MaterialsFromStock> MaterialsFromStocks1 { get; set; }
+        public virtual ICollection<MaterialStock> MaterialStocks { get; set; }
         public virtual OrderStatu OrderStatu { get; set; }
         public virtual OrderThrough OrderThrough { get; set; }
         public virtual ICollection<OrderCurrencyConversion> OrderCurrencyConversions { get; set; }

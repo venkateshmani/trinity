@@ -53,7 +53,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
         public void OpenExistingJo(DyeingJO jo)
         {
             ViewModel = new DyeingJoViewModel(jo);
-            budgetVsActualControl.Initialize(jo.JobOrder.GRNReciept.OrderedItem, jo.JobOrder);
+            //budgetVsActualControl.Initialize(jo.JobOrder.GRNReciept.OrderedItem, jo.JobOrder);
         }
 
         private void InformUser(string message)
@@ -141,6 +141,24 @@ namespace ordermanager.Views.UserControls.JobOrderControls
 
                 ViewModel.JO.Approval.Comments = comment.ToString();
                 ViewModel.JO.Approval.IsApproved = true;
+
+                int itemNumber = 1;
+                foreach (var item in ViewModel.JO.DyeingJoItems)
+                {
+                    JobOrder jo = new JobOrder();
+                    jo.Company = ViewModel.JO.Company;
+                    jo.GRNReciept = ViewModel.JO.GRNReciept;
+                    jo.ChargesInINR = item.NetQtyWrapper * item.RatePerKgWrapper;
+                    jo.RequiredDateWrapper = DateTime.Now;
+                    jo.JobOrderTypeID  = 2;
+                    jo.JobOrder2 = ViewModel.JO.JobOrder;
+                    jo.Instructions = ViewModel.JO.TermsAndConditionsWrapper;
+                    jo.JobQuantity = item.NetQtyWrapper;
+                    jo.DyeingJoItems.Add(item);
+                    item.JobOrder = jo;
+
+                    itemNumber += 1;
+                }
 
                 DBResources.Instance.Save();
 
