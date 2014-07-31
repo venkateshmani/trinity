@@ -1,6 +1,7 @@
-﻿
+﻿C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
 
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MainWindow.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\CommonControls\BudgetVsActual.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\CommonControls\OrderReportCardItemControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\CommonControls\PurchaseOrderSearchControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\PopUps\IssueToPopupBox.xaml;;
@@ -21,9 +22,15 @@ FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\GRN
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\InStockControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\Invoice\CreateNewInvoiceControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\JobOrderJOView.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\JobOrder\CreateJOControl.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\JobOrder\DyeingJOControl.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\JobOrder\CreateJoWindow.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\JobOrder\JobOrderManager.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\JobOrder\KnittingJoControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\JobWorkControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\PurchaseOrderControls\BillOfMaterialBrowser.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\PurchaseOrderControls\CreateNewPurchaseOrderControl.xaml;;
+FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\PurchaseOrderControls\CreatePOWindow.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\PurchaseOrderControls\POControl.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\POMaterialDetails.xaml;;
 FC:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\Views\UserControls\PurchaseOrderControl.xaml;;

@@ -24,7 +24,7 @@ namespace ordermanager.ViewModel.JobOrderControls
 
             JO.GRNReciept = reciept;
             JO.JobOrder = parentJo;
-            JO.JoNo = "D" + JO.DyeingJOId.ToString();
+            JO.JoNo = "D" + (DBResources.Instance.Context.DyeingJOes.Count() + 1).ToString();
 
             JO.Add();
         }

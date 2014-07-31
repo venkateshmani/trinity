@@ -27,7 +27,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ListBox x:Name="materialsList" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5" BorderBrush="Gray" ItemsSource="{Binding Materials}"
-                 SelectionChanged="materialsList_SelectionChanged_1">
+                 SelectionChanged="materialsList_SelectionChanged_1" SelectedItem="{Binding SelectedMaterialStock}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5">

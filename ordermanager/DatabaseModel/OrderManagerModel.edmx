@@ -715,6 +715,7 @@
           <Property Name="FailedQuantityIssued" Type="bit" Nullable="false" />
           <Property Name="ParentJOID" Type="bigint" />
           <Property Name="ItemName" Type="varchar" MaxLength="50" />
+          <Property Name="RecievedAs" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="JobOrderReceipt">
           <Key>
@@ -3172,6 +3173,7 @@
           <Property Name="FailedQuantityIssued" Type="Boolean" Nullable="false" />
           <Property Name="ParentJOID" Type="Int64" />
           <Property Name="ItemName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="RecievedAs" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_JobOrder_Company" FromRole="JobOrder" ToRole="Company" />
           <NavigationProperty Name="DyeingJOes" Relationship="OrderManagerDBModel.FK_DyeingJO_JobOrder1" FromRole="JobOrder" ToRole="DyeingJO" />
           <NavigationProperty Name="DyeingJoItems" Relationship="OrderManagerDBModel.FK_DyeingJoItem_JobOrder" FromRole="JobOrder" ToRole="DyeingJoItem" />
@@ -5250,6 +5252,7 @@
                 <ScalarProperty Name="FailedQuantityIssued" ColumnName="FailedQuantityIssued" />
                 <ScalarProperty Name="ParentJOID" ColumnName="ParentJOID" />
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="RecievedAs" ColumnName="RecievedAs" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

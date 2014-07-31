@@ -65,6 +65,20 @@ namespace ordermanager.Views.PopUps
             }
         }
 
+
+        public string MaterialName
+        {
+            get
+            {
+                return materialName.Text;
+            }
+            set
+            {
+                materialName.Text = value;
+                JobOrder.ItemName = value;
+            }
+        }
+
         public IssueToPopupBox(JobOrder jOrder)
             : this()
         {

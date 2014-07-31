@@ -21,7 +21,7 @@ namespace ordermanager.ViewModel.JobOrderControls
             JO.JobOrder = parentJO;
             JO.GRNReciept = reciept;
 
-            JO.JoNoWrapper = "K" + JO.KnittingJOId.ToString();
+            JO.JoNoWrapper = "K" + (DBResources.Instance.Context.KnittingJOes.Count() + 1).ToString();
             JO.Add();
         }
 

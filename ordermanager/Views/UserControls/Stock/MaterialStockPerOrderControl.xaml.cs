@@ -57,7 +57,6 @@ namespace ordermanager.Views.UserControls.Stock
         {
             if (materialsList.SelectedItem != null)
             {
-                ViewModel.SelectedMaterialStock = materialsList.SelectedItem as MaterialStock;
                 materialRecievedHistory.ItemsSource = ViewModel.StockIssuedFrom;
                 materialIssuedHistory.ItemsSource = ViewModel.StockIssuedTo;
             }

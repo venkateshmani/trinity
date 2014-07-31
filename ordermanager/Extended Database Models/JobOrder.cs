@@ -61,6 +61,20 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public string RecievedAsWrapper
+        {
+            get
+            {
+                return RecievedAs;
+            }
+            set
+            {
+                RecievedAs = value;
+                ValidateRecievedAs();
+                OnPropertyChanged("RecievedAsWrapper");
+            }
+        }
+
         public DateTime RequiredDateWrapper
         {
             get
@@ -396,6 +410,17 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        private void ValidateRecievedAs()
+        {
+            if (string.IsNullOrEmpty(RecievedAsWrapper))
+            {
+                AddError("RecievedAsWrapper", "Enter the name of the material recieved after the Job Order", false);
+            }
+            else
+            {
+                RemoveError("RecievedAsWrapper", "Enter the name of the material recieved after the Job Order");
+            }
+        }
 
         private void ValidateSupplier()
         {

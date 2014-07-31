@@ -163,7 +163,10 @@ namespace ordermanager.DatabaseModel
             get
             {
                 if (ProductBreakUp == null)
+                {
                     ProductBreakUp = new ProductBreakUp();
+                    ProductBreakUp.ShipmentModeID = 1;
+                }
                 return ProductBreakUp;
             }
             set

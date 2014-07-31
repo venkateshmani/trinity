@@ -135,6 +135,44 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DyeingJOes">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.DyeingJO">
+        <MappingFragment StoreEntitySet="DyeingJO">
+          <ScalarProperty Name="DyeingJOId" ColumnName="DyeingJOId" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="JODate" ColumnName="JODate" />
+          <ScalarProperty Name="QuoteNo" ColumnName="QuoteNo" />
+          <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+          <ScalarProperty Name="GRNRefNo" ColumnName="GRNRefNo" />
+          <ScalarProperty Name="OrderRef" ColumnName="OrderRef" />
+          <ScalarProperty Name="Process" ColumnName="Process" />
+          <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
+          <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+          <ScalarProperty Name="JoNo" ColumnName="JoNo" />
+          <ScalarProperty Name="ParentJOID" ColumnName="ParentJOID" />
+          <ScalarProperty Name="GRNReciptID" ColumnName="GRNReciptID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DyeingJoItems">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.DyeingJoItem">
+        <MappingFragment StoreEntitySet="DyeingJoItem">
+          <ScalarProperty Name="DyeingJoItemsID" ColumnName="DyeingJoItemsID" />
+          <ScalarProperty Name="DyeingJOId" ColumnName="DyeingJOId" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="QualityDescription" ColumnName="QualityDescription" />
+          <ScalarProperty Name="ReqGSM" ColumnName="ReqGSM" />
+          <ScalarProperty Name="ReqWidth" ColumnName="ReqWidth" />
+          <ScalarProperty Name="NetQty" ColumnName="NetQty" />
+          <ScalarProperty Name="RatePerKg" ColumnName="RatePerKg" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="GRNReciepts">
       <EntityTypeMapping TypeName="OrderManagerDBModel.GRNReciept">
         <MappingFragment StoreEntitySet="GRNReciept">
@@ -153,6 +191,7 @@
           <ScalarProperty Name="ReceiptStatusID" ColumnName="ReceiptStatusID" />
           <ScalarProperty Name="OrderedItemID" ColumnName="OrderedItemID" />
           <ScalarProperty Name="VechileNo" ColumnName="VechileNo" />
+          <ScalarProperty Name="OtherChargersName" ColumnName="OtherChargersName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -208,6 +247,9 @@
           <ScalarProperty Name="IsWaitingForApproval" ColumnName="IsWaitingForApproval" />
           <ScalarProperty Name="HasApproved" ColumnName="HasApproved" />
           <ScalarProperty Name="FailedQuantityIssued" ColumnName="FailedQuantityIssued" />
+          <ScalarProperty Name="ParentJOID" ColumnName="ParentJOID" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="RecievedAs" ColumnName="RecievedAs" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -250,6 +292,39 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="KnittingJOes">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.KnittingJO">
+        <MappingFragment StoreEntitySet="KnittingJO">
+          <ScalarProperty Name="KnittingJOId" ColumnName="KnittingJOId" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="JoNo" ColumnName="JoNo" />
+          <ScalarProperty Name="JoDate" ColumnName="JoDate" />
+          <ScalarProperty Name="QuoteNo" ColumnName="QuoteNo" />
+          <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+          <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
+          <ScalarProperty Name="QualitySpecifications" ColumnName="QualitySpecifications" />
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+          <ScalarProperty Name="ParentJobOrderID" ColumnName="ParentJobOrderID" />
+          <ScalarProperty Name="GRNRecieptID" ColumnName="GRNRecieptID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KnittingJoItems">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.KnittingJoItem">
+        <MappingFragment StoreEntitySet="KnittingJoItem">
+          <ScalarProperty Name="KnittingJoItemsId" ColumnName="KnittingJoItemsId" />
+          <ScalarProperty Name="NameOfProduct" ColumnName="NameOfProduct" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="KnittingJoId" ColumnName="KnittingJoId" />
+          <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="MaterialNames">
       <EntityTypeMapping TypeName="OrderManagerDBModel.MaterialName">
         <MappingFragment StoreEntitySet="MaterialName">
@@ -262,10 +337,24 @@
       <EntityTypeMapping TypeName="OrderManagerDBModel.MaterialsFromStock">
         <MappingFragment StoreEntitySet="MaterialsFromStock">
           <ScalarProperty Name="MaterialsFromStockID" ColumnName="MaterialsFromStockID" />
-          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
-          <ScalarProperty Name="SubMaterialsNameID" ColumnName="SubMaterialsNameID" />
+          <ScalarProperty Name="FromOrderID" ColumnName="FromOrderID" />
+          <ScalarProperty Name="MaterialStockID" ColumnName="MaterialStockID" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+          <ScalarProperty Name="ToOrderID" ColumnName="ToOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaterialStocks">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.MaterialStock">
+        <MappingFragment StoreEntitySet="MaterialStock">
+          <ScalarProperty Name="MaterialStockID" ColumnName="MaterialStockID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="SubMaterialsNameID" ColumnName="SubMaterialsNameID" />
+          <ScalarProperty Name="StockQuantity" ColumnName="StockQuantity" />
+          <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+          <ScalarProperty Name="IssuedQuantity" ColumnName="IssuedQuantity" />
+          <ScalarProperty Name="InStockDateTime" ColumnName="InStockDateTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -311,6 +400,9 @@
           <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
           <ScalarProperty Name="ExcessiveQuantity" ColumnName="ExcessiveQuantity" />
           <ScalarProperty Name="PendingQuantity" ColumnName="PendingQuantity" />
+          <ScalarProperty Name="TaxInINRPerUnit" ColumnName="TaxInINRPerUnit" />
+          <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -534,6 +626,8 @@
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
           <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+          <ScalarProperty Name="QuotationDate" ColumnName="QuotationDate" />
+          <ScalarProperty Name="QuotationNumber" ColumnName="QuotationNumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

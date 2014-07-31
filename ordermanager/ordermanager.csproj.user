@@ -2,5 +2,13 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
+    <PublishUrlHistory>C:\Users\Venkatesh\Dropbox\OrderManagerClickOnce\|https://ordermanager.blob.core.windows.net/clickonce/|C:\inetpub\wwwroot\|https://drive.google.com/folderview%3fid=0B4zlpan5I7smdG1JcU4zMmJlVzA&amp;usp=sharing/|publish\</PublishUrlHistory>
+    <InstallUrlHistory>https://ordermanager.blob.core.windows.net/clickonce/|https://www.dropbox.com/sh/4wa3dslwwnphb2a/AAB0ps5QpcXnUmK1csx2fAY_a/|https://drive.google.com/folderview%3fid=0B4zlpan5I7smdG1JcU4zMmJlVzA&amp;usp=sharing/</InstallUrlHistory>
+    <SupportUrlHistory />
+    <UpdateUrlHistory />
+    <BootstrapperUrlHistory />
+    <ErrorReportUrlHistory />
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
   </PropertyGroup>
 </Project>

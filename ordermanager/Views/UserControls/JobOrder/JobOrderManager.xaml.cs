@@ -120,6 +120,5 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 }
             }
         }
-
     }
 }

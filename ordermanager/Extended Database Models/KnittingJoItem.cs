@@ -139,7 +139,7 @@ namespace ordermanager.DatabaseModel
 
         public override string ToString()
         {
-            return "D" + this.KnittingJoId.ToString() + " Name:" + NameOfProduct;
+            return "-" + this.KnittingJO.JoNoWrapper + " Name:" + NameOfProduct;
         }
     }
 }

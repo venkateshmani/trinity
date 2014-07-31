@@ -561,7 +561,6 @@ namespace ordermanager.ViewModel
             historyItem.OrderChanges = "Created New Enquiry";
             historyItem.Date = DateTime.Now;
             newSavedOrder.Histories.Add(historyItem);
-            MessageBox.Show("Create New Order Method Called");
             Save();
             return newSavedOrder;
         }
