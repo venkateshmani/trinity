@@ -154,8 +154,8 @@
                      <DataGrid x:Name="gridDetails"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
                         GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" CanUserResizeColumns="True" 
                         HeadersVisibility="All"
-                        DataContext="{Binding SelectedMaterial}" ItemsSource="{Binding ProductMaterialItemsWrapper}" Background="WhiteSmoke"
-                              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        DataContext="{Binding SelectedMaterial}" ItemsSource="{Binding ProductMaterialItemsWrapper, IsAsync=True}" Background="WhiteSmoke"
+                              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" EnableColumnVirtualization="True" EnableRowVirtualization="True" MaxWidth="1600" MaxHeight="2500" VirtualizingPanel.IsVirtualizing="True">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn x:Name="subMaterialColumn" Header="Item Name" Width="0.3*">
                                 <DataGridTemplateColumn.CellTemplate>

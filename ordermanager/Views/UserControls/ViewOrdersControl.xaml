@@ -116,7 +116,7 @@
                     <GridView VirtualizingPanel.IsContainerVirtualizable="True"
                       VirtualizingPanel.IsVirtualizing="True"
                       VirtualizingPanel.IsVirtualizingWhenGrouping="True">
-                        <GridViewColumn Header="Order ID">
+                        <GridViewColumn Header="Order ID" Width="100">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical">
@@ -125,17 +125,17 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Customer">
+                        <GridViewColumn Header="Customer" Width="400">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
                                         <TextBlock TextAlignment="Center" Text="{Binding Path=Company.Name}"  FontFamily="{StaticResource ContentFontFamily}" HorizontalAlignment="Center" Style="{StaticResource DescriptionHeaderStyle}"/>
                                         <TextBlock TextAlignment="Center" Text="{Binding Path=Company.City}"  FontSize="10" Foreground="Gray" FontStyle="Italic" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Status">
+                        <GridViewColumn Header="Status" Width="250">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="10,2,10,2" VerticalAlignment="Center">
@@ -145,13 +145,13 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Progress" Width="Auto">
+                        <!--<GridViewColumn Header="Progress" Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <CommonControls:OrderReportCardListControl Order="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Center" Width="450"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+                        </GridViewColumn>-->
                     </GridView>
                 </ListView.View>
             </ListView>

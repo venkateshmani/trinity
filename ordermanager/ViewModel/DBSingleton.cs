@@ -769,13 +769,7 @@ namespace ordermanager.ViewModel
 
         private void Reload()
         {
-            foreach (DbEntityEntry entry in Context.ChangeTracker.Entries())
-            {
-                if (entry.State == EntityState.Added)
-                    entry.State = EntityState.Detached;
-                else
-                    entry.Reload();
-            }
+            DiscardChanges();
         }
              
 
@@ -793,13 +787,11 @@ namespace ordermanager.ViewModel
                     // entity as Unchanged. This will also reject changes to  
                     // FK relationships since the original value of the FK  
                     // will be restored. 
-                    case EntityState.Modified:
-                        entry.State = EntityState.Unchanged;
-                        break;
                     case EntityState.Added:
                         entry.State = EntityState.Detached;
                         break;
                     // If the EntityState is the Deleted, reload the date from the database.   
+                    case EntityState.Modified:
                     case EntityState.Deleted:
                         entry.Reload();
                         break;

@@ -34,7 +34,7 @@ namespace ordermanager
 
             if (!DBResources.Instance.CurrentUser.UserRole.CanCreateNewEnquiry)
                 newEnquiryTab.Visibility = System.Windows.Visibility.Collapsed;
-            
+
             //if(!DBResources.Instance.CurrentUser.UserRole.CanModifyAssets)
             // assetsControl.Visibility = System.Windows.Visibility.Collapsed;
         }
@@ -88,7 +88,7 @@ namespace ordermanager
         private void orderWorkBench_OnGoBack_1()
         {
             viewOrdersTabControl.Visibility = System.Windows.Visibility.Visible;
-            orderWorkBench.Visibility = System.Windows.Visibility.Collapsed;
+            orderWorkBench.Visibility = System.Windows.Visibility.Hidden;
         }
 
         private void LaunchSettings(object sender, RoutedEventArgs e)

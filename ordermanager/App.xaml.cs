@@ -15,6 +15,8 @@ namespace ordermanager
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+
+
             EventManager.RegisterClassHandler(typeof(TextBox),
                                              TextBox.GotMouseCaptureEvent,
                                              new RoutedEventHandler(TextBox_GotMouseCaptureEvent));

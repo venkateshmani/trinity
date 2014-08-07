@@ -59,7 +59,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
             <Border Grid.Row="0">
-                <TextBlock x:Name="tbCompanyName" Margin="0" FontFamily="{DynamicResource ContentFontFamily}" FontSize="30" Text="Log in" Foreground="White" VerticalAlignment="Bottom"></TextBlock>
+                <TextBlock x:Name="tbCompanyName" Margin="0" FontFamily="{DynamicResource ContentFontFamily}" FontSize="30" Text="Log in..." Foreground="White" VerticalAlignment="Bottom"></TextBlock>
             </Border>
             <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,10,0,0" HorizontalAlignment="Right">
                 <TextBox x:Name="tbUserName" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" Height="40" Width="320"   Foreground="Gray" FontSize="{StaticResource NormalFontSize}"

@@ -60,13 +60,13 @@
         <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Order ID:" FontSize="22" FontFamily="{StaticResource ContentFontFamily}" Margin="5"  VerticalAlignment="Center" Foreground="Gray"/>
-                <TextBlock Text="{Binding OrderID}" FontSize="22" FontFamily="{StaticResource ContentFontFamily}" Margin="5"  VerticalAlignment="Center">
+                <TextBlock x:Name="orderIDTxtBlk"  FontSize="22" FontFamily="{StaticResource ContentFontFamily}" Margin="5"  VerticalAlignment="Center">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </TextBlock.Foreground>
                 </TextBlock>
                 <TextBlock Text="Customer:" FontSize="22" FontFamily="{StaticResource ContentFontFamily}" Margin="40,5,5,5" VerticalAlignment="Center" Foreground="Gray" />
-                <TextBlock Text="{Binding Customer.Name}" FontSize="22" FontFamily="{StaticResource ContentFontFamily}" Margin="5" VerticalAlignment="Center">
+                <TextBlock x:Name="customerNameTxtBlk" FontSize="22" FontFamily="{StaticResource ContentFontFamily}" Margin="5" VerticalAlignment="Center">
                     <TextBlock.Foreground>
                         <SolidColorBrush Color="{StaticResource AccentColor}" />
                     </TextBlock.Foreground>
@@ -93,32 +93,32 @@
                 </TabItem.Header>
             </TabItem>
             <TabItem x:Name="tabViewEnquiry" Header="  View Enquiry" Cursor="Hand">
-                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                    <PopUps:NewEnquiryFormUserControl x:Name="viewEnquiry" Margin="20,10,10,0" IsNewEnquiry="False" />
+                <Border x:Name="viewEnquiryHolder" BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    
                 </Border>
             </TabItem>
             <TabItem x:Name="tabMaterials" Header="  Budget" Cursor="Hand">
-                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                    <local:ProductMaterialsControl x:Name="materialsControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:ProductMaterialsControl>
+                <Border x:Name="materialsControlHolder" BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    
                 </Border>
             </TabItem>
             <TabItem x:Name="tabMaterialDetails" Header="  BOM" Cursor="Hand">
-                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                    <local:PurchaseOrderControl x:Name="purchaseOrderControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
+                <Border x:Name="bomHolder" BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    
                 </Border>
             </TabItem>
             <TabItem x:Name="tabPurchaseOrder" Header="  Purchase Order" Cursor="Hand">
-                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                    <PurchaseOrderControls:PurchaseOrderMasterControl x:Name="poControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                <Border x:Name="purchaseOrderControlHolder" BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    
                 </Border>
             </TabItem>
             <TabItem Header=" JO ">
                 <TabControl x:Name="joTabControl">
-                    <TabItem Header="  JO  ">
-                        <JobOrderControls:JobOrderManager x:Name="joManagerCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    <TabItem x:Name="joManagerCtrlHolder" Header="  JO  ">
+                        
                     </TabItem>
-                    <TabItem Header=" Track ">
-                        <UserControls:JobOrderJOView x:Name="joCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    <TabItem x:Name="joCtrlHolder" Header=" Track ">
+                        
                     </TabItem>
                 </TabControl>
             </TabItem>
@@ -128,22 +128,22 @@
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <TabControl x:Name="tabExecutionDetailsControl" Grid.Row="1">
                         <TabItem x:Name="tabOverAllCompletion" Header="  ● OC Report  " Tag="Cutting">
-                            <Execution:OverAllCompleteReportControl x:Name="ocReportControl" />
+                            
                         </TabItem>
                         <TabItem x:Name="tabCutting" Header="  ● Cutting  " Tag="Cutting">
-                            <Execution:CuttingControl x:Name="cuttingControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                            
                         </TabItem>
                         <TabItem x:Name="tabProduction" Header=" ● Production  " Tag="Production">
-                            <Execution:ProductionControl x:Name="productionControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                            
                         </TabItem>
                         <TabItem x:Name="tabQuality" Header="  ● Quality  " Tag="Quality">
-                            <Execution:QualityControl x:Name="qualityControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                            
                         </TabItem>
                         <TabItem x:Name="tabPackaging" Header="  ● Packaging  " Tag="Packaging">
-                            <Execution:PackagingControl x:Name="packagingControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                            
                         </TabItem>
                         <TabItem x:Name="tabShipment" Header="  ● Shipment  " Tag="Shipment">
-                            <Execution:ShippingControl x:Name="shippingControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                            
                         </TabItem>
                     </TabControl>
                 </Border>
@@ -152,22 +152,22 @@
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <TabControl Grid.Row="1">
                         <TabItem x:Name="tabNewInvoice" Header=" Create New Invoice  " Tag="NewInvoice">
-                            <my:CreateNewInvoiceControl x:Name="createNewInvoiceControl" />
+                         
                         </TabItem>
                         <TabItem x:Name="tabGeneratedInvoice" Header="  Generated Invoices  " Tag="GeneratedInvoice">
-                            <my:GeneratedInvoiceViewerControl x:Name="generatedInvoiceControl" />
+                         
                         </TabItem>
                     </TabControl>
                 </Border>
             </TabItem>
             <TabItem x:Name="tabChangeHistory" Header="  History" Cursor="Hand">
-                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                    <local:ChangeHistoryControl x:Name="changeHistoryControl" VerticalAlignment="Stretch" HorizontalAlignment='Stretch' />
+                <Border x:Name="changeHistoryHolder" BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    
                 </Border>
             </TabItem>
             <TabItem x:Name="tabStock" Header="  Stock" Cursor="Hand">
-                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                    <Stock:MaterialStockPerOrderControl x:Name="stockPerOrderControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Border x:Name="stockerOrderHolder" BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    
                 </Border>
             </TabItem>
         </TabControl>

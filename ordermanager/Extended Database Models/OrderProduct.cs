@@ -235,6 +235,17 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public decimal TotalExpectedQuantity
+        {
+            get
+            {
+                if(UnitsOfMeasurement != null)
+                    return ExpectedQuantity * UnitsOfMeasurement.Multiplier;
+
+                return 0;
+            }
+        }
+
 
         /// <summary>
         /// Total Our Cost
@@ -701,6 +712,8 @@ namespace ordermanager.DatabaseModel
         }
 
         #region Data Validation
+
+
 
         public void Validate()
         {

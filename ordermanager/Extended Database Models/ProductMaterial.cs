@@ -344,6 +344,16 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        public decimal TotalProductQuantity
+        {
+            get
+            {
+                if(UnitsOfMeasurement != null)
+                    return ProductQuantity * UnitsOfMeasurement.Multiplier;
+
+                return 0;
+            }
+        }
 
         #region Currency Management
 

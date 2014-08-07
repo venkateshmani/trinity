@@ -208,7 +208,7 @@
                             <Border BorderBrush="Gray" BorderThickness="1" Margin="10,5,10,10" Grid.Row="1">
                                 <DataGrid x:Name="materialsGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
-                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductMaterialsWrapper, UpdateSourceTrigger=PropertyChanged}"
+                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductMaterialsWrapper, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" EnableColumnVirtualization="True" EnableRowVirtualization="True"
                                               RowHeaderWidth="25"
                                               HeadersVisibility="All">
                                     <DataGrid.Columns>
@@ -421,8 +421,8 @@
                             <Border BorderBrush="Gray" BorderThickness="1" Margin="10,5,10,10" Grid.Row="1" Width="400">
                                 <DataGrid x:Name="extraCostGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
-                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductExtraCostWrapper, UpdateSourceTrigger=PropertyChanged}"
-                                              RowHeaderWidth="25" HeadersVisibility="All" >
+                                              HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro" ItemsSource="{Binding ProductExtraCostWrapper, UpdateSourceTrigger=PropertyChanged, IsAsync=True}" EnableColumnVirtualization="True" EnableRowVirtualization="True"
+                                              RowHeaderWidth="25" HeadersVisibility="All" VirtualizingPanel.IsVirtualizing="True">
 
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn x:Name="extraTypeColumn" Header="Extra Cost Name" Width="0.25*" >

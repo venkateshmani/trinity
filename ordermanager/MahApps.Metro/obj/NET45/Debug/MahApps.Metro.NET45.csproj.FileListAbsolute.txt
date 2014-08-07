@@ -512,6 +512,7 @@ C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Themes\MetroAnimatedTabControl.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Themes\MetroContentControl.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Themes\MetroImage.baml
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Themes\MetroPopup.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Themes\MetroProgressBar.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Themes\MetroTabControl.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Themes\MetroTabItem.baml
@@ -530,5 +531,3 @@ C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.g.resources
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.dll
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.pdb
-C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\MahApps.Metro.NET45.csprojResolveAssemblyReference.cache
-C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\MahApps.Metro\obj\NET45\Debug\Themes\MetroPopup.baml

@@ -83,7 +83,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <my1:OrderWorkBench  x:Name="orderWorkBench" Grid.Row="1" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" OnGoBack="orderWorkBench_OnGoBack_1" />
+        <my1:OrderWorkBench  x:Name="orderWorkBench" Grid.Row="1" Visibility="Hidden" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" OnGoBack="orderWorkBench_OnGoBack_1" />
         <TabControl x:Name="viewOrdersTabControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" SelectedIndex="1">
             <TabItem x:Name="newEnquiryTab" Header="  New Enquiry  ">
                 <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -99,25 +99,6 @@
                 <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <my1:ViewOrdersControl x:Name="allOrdersControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" OnOrderClick="ViewOrdersControl_OnOrderClick" ShowAllOrders="True" />
                 </Grid>
-            </TabItem>
-            <TabItem x:Name="tabJobOrder" Header="  Job Order  " Cursor="Hand">
-                <TabControl VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="1" SelectedIndex="1">
-                        <TabItem x:Name="tabPoView" Header="  PO View  " FontSize="16">
-                            <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                                <my1:JobWorkControl x:Name="jobOrderControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></my1:JobWorkControl>
-                            </Border>
-                        </TabItem>
-                        <TabItem x:Name="tabJoView" Header="  JO View  ">
-                            <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                                <my1:JobOrderJOView x:Name="joView" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-                            </Border>
-                        </TabItem>
-                </TabControl>
-            </TabItem>
-            <TabItem x:Name="tabStock" Header="  In Stock  " Cursor="Hand">
-                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
-                    <my1:InStockControl x:Name="inStockControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-                </Border>
             </TabItem>
             <TabItem x:Name="tabAssets" Header="  Assets  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">

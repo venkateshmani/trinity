@@ -167,11 +167,14 @@ namespace ordermanager.Views.UserControls
 
         private void lvOrders_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            DateTime time = DateTime.Now;
             if (OnOrderClick != null && lvOrders.SelectedItem != null)
             {
                 OnOrderClick(lvOrders.SelectedItem);
                 DBResources.Instance.LastUpdated = null; //Reset
             }
+            System.Diagnostics.Debug.WriteLine(DateTime.Now.Subtract(time).TotalSeconds);
+
         }
 
        
