@@ -85,7 +85,8 @@ namespace ordermanager.Views.UserControls
 
         private void DetermineApprovalCommands()
         {
-            if (DBResources.Instance.CurrentUser.UserRole.CanApprovePurchaseOrder)
+            if (DBResources.Instance.CurrentUser.UserRole.AliasName == "Owner" ||
+                DBResources.Instance.CurrentUser.UserRole.AliasName == "Root")
                 approvalControl.Visibility = System.Windows.Visibility.Visible;
             else
                 approvalControl.Visibility = System.Windows.Visibility.Collapsed;

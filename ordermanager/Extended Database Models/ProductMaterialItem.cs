@@ -395,11 +395,19 @@ namespace ordermanager.DatabaseModel
 
         public bool Validate()
         {
-            ValidateQuantity();
-            ValidateCurrency();
-            ValidateCost();
-            ValidateCurrencyValueInINR();
-            ValidateUOM();
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterials)
+            {
+                ValidateQuantity();
+                ValidateUOM();
+            }
+
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterialsCost)
+            {
+                ValidateCurrency();
+                ValidateCost();
+                ValidateCurrencyValueInINR();
+            }
+            
             return !HasErrors;
         }
 

@@ -223,7 +223,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>
-                <CommonControls:BudgetVsActual x:Name="budgetVsActualControl" Grid.Row="2"  Grid.Column="0"  HorizontalAlignment="Left" Width="344"/>
+                <CommonControls:BudgetVsActual x:Name="budgetVsActualControl" Grid.Row="2"  Grid.Column="0"  HorizontalAlignment="Left" Width="344" Visibility="Collapsed"/>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="2" Margin="10">
                     <TextBlock Text="TOTAL JO VALUE: "  VerticalAlignment="Center" FontSize="18"/>
                     <TextBlock Text="{Binding JO.TotalValueWrapper, StringFormat=n2}" VerticalAlignment="Center" FontSize="18">

@@ -30,7 +30,7 @@ namespace ordermanager.DatabaseModel
         public long ApprovalID { get; set; }
         public Nullable<long> OrderID { get; set; }
         public decimal TotalValue { get; set; }
-        public Nullable<long> ParentJobOrderID { get; set; }
+        public Nullable<long> JobOrderID { get; set; }
         public Nullable<long> GRNRecieptID { get; set; }
     
         public virtual Approval Approval { get; set; }

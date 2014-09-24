@@ -118,7 +118,7 @@
       <End Role="GRNReciept" EntitySet="GRNReciept" />
       <End Role="DyeingJO" EntitySet="DyeingJO" />
     </AssociationSet>
-    <AssociationSet Name="FK_DyeingJO_JobOrder1" Association="OrderManagerDBModel.Store.FK_DyeingJO_JobOrder1">
+    <AssociationSet Name="FK_DyeingJO_JobOrder" Association="OrderManagerDBModel.Store.FK_DyeingJO_JobOrder">
       <End Role="JobOrder" EntitySet="JobOrder" />
       <End Role="DyeingJO" EntitySet="DyeingJO" />
     </AssociationSet>
@@ -230,15 +230,15 @@
       <End Role="KnittingJO" EntitySet="KnittingJO" />
       <End Role="KnittingJoItem" EntitySet="KnittingJoItem" />
     </AssociationSet>
-    <AssociationSet Name="FK_MaterialsFromStock_FromOrder" Association="OrderManagerDBModel.Store.FK_MaterialsFromStock_FromOrder">
-      <End Role="Order" EntitySet="Order" />
-      <End Role="MaterialsFromStock" EntitySet="MaterialsFromStock" />
-    </AssociationSet>
     <AssociationSet Name="FK_MaterialsFromStock_MaterialStock" Association="OrderManagerDBModel.Store.FK_MaterialsFromStock_MaterialStock">
       <End Role="MaterialStock" EntitySet="MaterialStock" />
       <End Role="MaterialsFromStock" EntitySet="MaterialsFromStock" />
     </AssociationSet>
-    <AssociationSet Name="FK_MaterialsFromStock_ToOrder" Association="OrderManagerDBModel.Store.FK_MaterialsFromStock_ToOrder">
+    <AssociationSet Name="FK_MaterialsFromStock_Order1" Association="OrderManagerDBModel.Store.FK_MaterialsFromStock_Order1">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="MaterialsFromStock" EntitySet="MaterialsFromStock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaterialsFromStock_Order2" Association="OrderManagerDBModel.Store.FK_MaterialsFromStock_Order2">
       <End Role="Order" EntitySet="Order" />
       <End Role="MaterialsFromStock" EntitySet="MaterialsFromStock" />
     </AssociationSet>
@@ -618,8 +618,8 @@
     <Property Name="TotalValue" Type="decimal" Nullable="false" Scale="2" />
     <Property Name="ApprovalID" Type="bigint" Nullable="false" />
     <Property Name="JoNo" Type="varchar" MaxLength="20" />
-    <Property Name="ParentJOID" Type="bigint" />
-    <Property Name="GRNReciptID" Type="bigint" />
+    <Property Name="JobOrderID" Type="bigint" />
+    <Property Name="GRNRecieptID" Type="bigint" />
   </EntityType>
   <EntityType Name="DyeingJoItem">
     <Key>
@@ -762,7 +762,7 @@
     <Property Name="ApprovalID" Type="bigint" Nullable="false" />
     <Property Name="OrderID" Type="bigint" />
     <Property Name="TotalValue" Type="decimal" Nullable="false" Scale="4" />
-    <Property Name="ParentJobOrderID" Type="bigint" />
+    <Property Name="JobOrderID" Type="bigint" />
     <Property Name="GRNRecieptID" Type="bigint" />
   </EntityType>
   <EntityType Name="KnittingJoItem">
@@ -790,11 +790,11 @@
       <PropertyRef Name="MaterialsFromStockID" />
     </Key>
     <Property Name="MaterialsFromStockID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="FromOrderID" Type="bigint" Nullable="false" />
-    <Property Name="MaterialStockID" Type="bigint" Nullable="false" />
     <Property Name="Quantity" Type="decimal" Nullable="false" Scale="4" />
     <Property Name="IssuedDate" Type="datetime" Nullable="false" />
+    <Property Name="FromOrderID" Type="bigint" Nullable="false" />
     <Property Name="ToOrderID" Type="bigint" Nullable="false" />
+    <Property Name="MaterialStockID" Type="bigint" Nullable="false" />
   </EntityType>
   <EntityType Name="MaterialStock">
     <Key>
@@ -803,9 +803,9 @@
     <Property Name="MaterialStockID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="OrderID" Type="bigint" Nullable="false" />
     <Property Name="SubMaterialsNameID" Type="bigint" Nullable="false" />
-    <Property Name="StockQuantity" Type="decimal" Nullable="false" />
+    <Property Name="StockQuantity" Type="decimal" Nullable="false" Scale="4" />
     <Property Name="UOMID" Type="smallint" Nullable="false" />
-    <Property Name="IssuedQuantity" Type="decimal" Nullable="false" />
+    <Property Name="IssuedQuantity" Type="decimal" Nullable="false" Scale="4" />
     <Property Name="InStockDateTime" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Order">
@@ -1111,7 +1111,7 @@
     <Property Name="UOMID" Type="smallint" />
   </EntityType>
   <!--Errors Found During Generation:
-      warning 6002: The table/view 'OrderManagerDB1.dbo.Temp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'OrderManagerDB.dbo.Temp' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
   <EntityType Name="Temp">
     <Key>
@@ -1135,6 +1135,7 @@
     <Property Name="UOMID" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Units" Type="varchar" Nullable="false" MaxLength="10" />
     <Property Name="Multiplier" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="QuantityMultiplier" Type="decimal" Scale="2" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -1313,11 +1314,11 @@
         <PropertyRef Name="GRNReciptID" />
       </Principal>
       <Dependent Role="DyeingJO">
-        <PropertyRef Name="GRNReciptID" />
+        <PropertyRef Name="GRNRecieptID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DyeingJO_JobOrder1">
+  <Association Name="FK_DyeingJO_JobOrder">
     <End Role="JobOrder" Type="OrderManagerDBModel.Store.JobOrder" Multiplicity="0..1" />
     <End Role="DyeingJO" Type="OrderManagerDBModel.Store.DyeingJO" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1325,7 +1326,7 @@
         <PropertyRef Name="JobOrderID" />
       </Principal>
       <Dependent Role="DyeingJO">
-        <PropertyRef Name="ParentJOID" />
+        <PropertyRef Name="JobOrderID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1613,7 +1614,7 @@
         <PropertyRef Name="JobOrderID" />
       </Principal>
       <Dependent Role="KnittingJO">
-        <PropertyRef Name="ParentJobOrderID" />
+        <PropertyRef Name="JobOrderID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1653,18 +1654,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MaterialsFromStock_FromOrder">
-    <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
-    <End Role="MaterialsFromStock" Type="OrderManagerDBModel.Store.MaterialsFromStock" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Order">
-        <PropertyRef Name="OrderID" />
-      </Principal>
-      <Dependent Role="MaterialsFromStock">
-        <PropertyRef Name="FromOrderID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_MaterialsFromStock_MaterialStock">
     <End Role="MaterialStock" Type="OrderManagerDBModel.Store.MaterialStock" Multiplicity="1" />
     <End Role="MaterialsFromStock" Type="OrderManagerDBModel.Store.MaterialsFromStock" Multiplicity="*" />
@@ -1677,7 +1666,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MaterialsFromStock_ToOrder">
+  <Association Name="FK_MaterialsFromStock_Order1">
+    <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
+    <End Role="MaterialsFromStock" Type="OrderManagerDBModel.Store.MaterialsFromStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="MaterialsFromStock">
+        <PropertyRef Name="FromOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaterialsFromStock_Order2">
     <End Role="Order" Type="OrderManagerDBModel.Store.Order" Multiplicity="1" />
     <End Role="MaterialsFromStock" Type="OrderManagerDBModel.Store.MaterialsFromStock" Multiplicity="*" />
     <ReferentialConstraint>

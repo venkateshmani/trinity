@@ -315,11 +315,34 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
                 }
                 else
                 {
+                    //Initiate PDF Viewer
                     System.Diagnostics.Process.Start(generatedFile);
+
+                    //Initiate New Outlook Message
+                    try
+                    {
+                        InitiateNewOutlookMessage(generatedFile);
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }
 
             ViewModel.PurchaseOrder.RefreshUIProperties();
+        }
+
+        private void InitiateNewOutlookMessage(string generatedFile)
+        {
+            Microsoft.Win32.RegistryKey key =
+            Microsoft.Win32.Registry.LocalMachine.OpenSubKey("Software\\microsoft\\windows\\currentversion\\app paths\\OUTLOOK.EXE");
+            string path = (string)key.GetValue("Path");
+            if (path != null)
+            {
+                string processStartInfo = string.Format(@"outlook.exe /c ipm.note /a {0}", generatedFile);
+                System.Diagnostics.Process.Start(processStartInfo);
+            }
         }
 
         private void SetUIAccesibility(PurchaseOrderState state)

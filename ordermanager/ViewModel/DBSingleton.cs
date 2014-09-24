@@ -921,7 +921,7 @@ namespace ordermanager.ViewModel
 
         public bool ChangePassword(string newPassword)
         {
-            string encryptedPassword = newPassword.Encrypt();
+            string encryptedPassword = newPassword;
             CurrentUser.Password = encryptedPassword;
             Save();
             return true;

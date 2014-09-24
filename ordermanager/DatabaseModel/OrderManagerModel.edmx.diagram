@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="86af0956c2fc48b39c9903ab204ee82f" Name="Diagram1">
+      <Diagram DiagramId="6038d7e69a3945818c3f54d50eb5b10f" Name="Diagram1">
         <EntityTypeShape EntityType="OrderManagerDBModel.Approval" Width="1.5" PointX="7.5" PointY="34.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.ApprovalEntityType" Width="1.5" PointX="5.25" PointY="30.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.Asset" Width="1.5" PointX="5.25" PointY="22.625" IsExpanded="true" />
@@ -30,7 +30,7 @@
         <EntityTypeShape EntityType="OrderManagerDBModel.JobOrderType" Width="1.5" PointX="27.75" PointY="35.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.KnittingJO" Width="1.5" PointX="15.75" PointY="34.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.KnittingJoItem" Width="1.5" PointX="21" PointY="34.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrderManagerDBModel.MaterialName" Width="1.5" PointX="9" PointY="44.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrderManagerDBModel.MaterialName" Width="1.5" PointX="9" PointY="44.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.MaterialsFromStock" Width="1.5" PointX="7.5" PointY="30.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.MaterialStock" Width="1.5" PointX="13.5" PointY="34.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OrderManagerDBModel.Order" Width="1.5" PointX="5.25" PointY="32.875" IsExpanded="true" />
@@ -101,7 +101,7 @@
         <AssociationConnector Association="OrderManagerDBModel.FK_ProductMaterialItem_Currency" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_ProductMaterials_Currency" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_DyeingJO_GRNReciept" ManuallyRouted="false" />
-        <AssociationConnector Association="OrderManagerDBModel.FK_DyeingJO_JobOrder1" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderManagerDBModel.FK_DyeingJO_JobOrder" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_DyeingJO_Order" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_DyeingJO_PurchaseOrders" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_DyeingJoItem_DyeingJO" ManuallyRouted="false" />
@@ -125,9 +125,9 @@
         <AssociationConnector Association="OrderManagerDBModel.FK_KnittingJoItem_KnittingJO" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_ProductMaterials_MaterialName" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_SubMaterial_MaterialName" ManuallyRouted="false" />
-        <AssociationConnector Association="OrderManagerDBModel.FK_MaterialsFromStock_FromOrder" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_MaterialsFromStock_MaterialStock" ManuallyRouted="false" />
-        <AssociationConnector Association="OrderManagerDBModel.FK_MaterialsFromStock_ToOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderManagerDBModel.FK_MaterialsFromStock_Order1" ManuallyRouted="false" />
+        <AssociationConnector Association="OrderManagerDBModel.FK_MaterialsFromStock_Order2" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_MaterialStock_Order" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_MaterialStock_SubMaterial" ManuallyRouted="false" />
         <AssociationConnector Association="OrderManagerDBModel.FK_MaterialStock_UnitsOfMeasurement" ManuallyRouted="false" />

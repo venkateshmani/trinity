@@ -320,7 +320,8 @@ namespace ordermanager.ViewModel
                 decimal per = Convert.ToDecimal(dbProduct.ProductBreakUpWrapper.Tolerance) / 100;
                 dbProduct.RemoveError("ExpectedQuantity");
                 dbProduct.ProductBreakUpWrapper.RemoveError("ToleranceWrapper");
-                if (totalQuantity > (1.0M + per) * dbProduct.ExpectedQuantity || totalQuantity < (1.0M - per) * dbProduct.ExpectedQuantity)
+                decimal quantityMultipler = dbProduct.UnitsOfMeasurement.QuantityMultiplier.Value;
+                if (totalQuantity > (1.0M + per) * (dbProduct.ExpectedQuantity * quantityMultipler) || totalQuantity < (1.0M - per) * dbProduct.ExpectedQuantity * quantityMultipler)
                 {
                     dbProduct.AddError("ExpectedQuantity", "ExpectedQuantity", false);
                     dbProduct.ProductBreakUpWrapper.AddError("ToleranceWrapper", string.Format("The total quantity {0} is not in the allowed tolerance limits of {1} and {2}.", totalQuantity, (1.0M - per) * dbProduct.ExpectedQuantity,(1.0M + per) * dbProduct.ExpectedQuantity), false);

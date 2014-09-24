@@ -205,7 +205,7 @@
       <End Role="GRNReciept" EntitySet="GRNReciepts" />
       <End Role="DyeingJO" EntitySet="DyeingJOes" />
     </AssociationSet>
-    <AssociationSet Name="FK_DyeingJO_JobOrder1" Association="OrderManagerDBModel.FK_DyeingJO_JobOrder1">
+    <AssociationSet Name="FK_DyeingJO_JobOrder" Association="OrderManagerDBModel.FK_DyeingJO_JobOrder">
       <End Role="JobOrder" EntitySet="JobOrders" />
       <End Role="DyeingJO" EntitySet="DyeingJOes" />
     </AssociationSet>
@@ -301,15 +301,15 @@
       <End Role="MaterialName" EntitySet="MaterialNames" />
       <End Role="SubMaterial" EntitySet="SubMaterials" />
     </AssociationSet>
-    <AssociationSet Name="FK_MaterialsFromStock_FromOrder" Association="OrderManagerDBModel.FK_MaterialsFromStock_FromOrder">
-      <End Role="Order" EntitySet="Orders" />
-      <End Role="MaterialsFromStock" EntitySet="MaterialsFromStocks" />
-    </AssociationSet>
     <AssociationSet Name="FK_MaterialsFromStock_MaterialStock" Association="OrderManagerDBModel.FK_MaterialsFromStock_MaterialStock">
       <End Role="MaterialStock" EntitySet="MaterialStocks" />
       <End Role="MaterialsFromStock" EntitySet="MaterialsFromStocks" />
     </AssociationSet>
-    <AssociationSet Name="FK_MaterialsFromStock_ToOrder" Association="OrderManagerDBModel.FK_MaterialsFromStock_ToOrder">
+    <AssociationSet Name="FK_MaterialsFromStock_Order1" Association="OrderManagerDBModel.FK_MaterialsFromStock_Order1">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="MaterialsFromStock" EntitySet="MaterialsFromStocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaterialsFromStock_Order2" Association="OrderManagerDBModel.FK_MaterialsFromStock_Order2">
       <End Role="Order" EntitySet="Orders" />
       <End Role="MaterialsFromStock" EntitySet="MaterialsFromStocks" />
     </AssociationSet>
@@ -651,12 +651,12 @@
     <Property Name="TotalValue" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
     <Property Name="ApprovalID" Type="Int64" Nullable="false" />
     <Property Name="JoNo" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-    <Property Name="ParentJOID" Type="Int64" />
-    <Property Name="GRNReciptID" Type="Int64" />
+    <Property Name="JobOrderID" Type="Int64" />
+    <Property Name="GRNRecieptID" Type="Int64" />
     <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_DyeingJO_Approval" FromRole="DyeingJO" ToRole="Approval" />
     <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_DyeingJO_Company" FromRole="DyeingJO" ToRole="Company" />
     <NavigationProperty Name="GRNReciept" Relationship="OrderManagerDBModel.FK_DyeingJO_GRNReciept" FromRole="DyeingJO" ToRole="GRNReciept" />
-    <NavigationProperty Name="JobOrder" Relationship="OrderManagerDBModel.FK_DyeingJO_JobOrder1" FromRole="DyeingJO" ToRole="JobOrder" />
+    <NavigationProperty Name="JobOrder" Relationship="OrderManagerDBModel.FK_DyeingJO_JobOrder" FromRole="DyeingJO" ToRole="JobOrder" />
     <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_DyeingJO_Order" FromRole="DyeingJO" ToRole="Order" />
     <NavigationProperty Name="PurchaseOrder" Relationship="OrderManagerDBModel.FK_DyeingJO_PurchaseOrders" FromRole="DyeingJO" ToRole="PurchaseOrders" />
     <NavigationProperty Name="DyeingJoItems" Relationship="OrderManagerDBModel.FK_DyeingJoItem_DyeingJO" FromRole="DyeingJO" ToRole="DyeingJoItem" />
@@ -767,7 +767,7 @@
     <Property Name="ItemName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <Property Name="RecievedAs" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
     <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_JobOrder_Company" FromRole="JobOrder" ToRole="Company" />
-    <NavigationProperty Name="DyeingJOes" Relationship="OrderManagerDBModel.FK_DyeingJO_JobOrder1" FromRole="JobOrder" ToRole="DyeingJO" />
+    <NavigationProperty Name="DyeingJOes" Relationship="OrderManagerDBModel.FK_DyeingJO_JobOrder" FromRole="JobOrder" ToRole="DyeingJO" />
     <NavigationProperty Name="DyeingJoItems" Relationship="OrderManagerDBModel.FK_DyeingJoItem_JobOrder" FromRole="JobOrder" ToRole="DyeingJoItem" />
     <NavigationProperty Name="GRNReciept" Relationship="OrderManagerDBModel.FK_JobOrder_GRNReciept" FromRole="JobOrder" ToRole="GRNReciept" />
     <NavigationProperty Name="JobOrder1" Relationship="OrderManagerDBModel.FK_JobOrder_JobOrder" FromRole="JobOrder" ToRole="JobOrder1" />
@@ -832,7 +832,7 @@
     <Property Name="ApprovalID" Type="Int64" Nullable="false" />
     <Property Name="OrderID" Type="Int64" />
     <Property Name="TotalValue" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-    <Property Name="ParentJobOrderID" Type="Int64" />
+    <Property Name="JobOrderID" Type="Int64" />
     <Property Name="GRNRecieptID" Type="Int64" />
     <NavigationProperty Name="Approval" Relationship="OrderManagerDBModel.FK_KnittingJO_Approval" FromRole="KnittingJO" ToRole="Approval" />
     <NavigationProperty Name="Company" Relationship="OrderManagerDBModel.FK_KnittingJO_Company" FromRole="KnittingJO" ToRole="Company" />
@@ -870,14 +870,14 @@
       <PropertyRef Name="MaterialsFromStockID" />
     </Key>
     <Property Name="MaterialsFromStockID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-    <Property Name="FromOrderID" Type="Int64" Nullable="false" />
-    <Property Name="MaterialStockID" Type="Int64" Nullable="false" />
     <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
     <Property Name="IssuedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FromOrderID" Type="Int64" Nullable="false" />
     <Property Name="ToOrderID" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_FromOrder" FromRole="MaterialsFromStock" ToRole="Order" />
+    <Property Name="MaterialStockID" Type="Int64" Nullable="false" />
     <NavigationProperty Name="MaterialStock" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_MaterialStock" FromRole="MaterialsFromStock" ToRole="MaterialStock" />
-    <NavigationProperty Name="Order1" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_ToOrder" FromRole="MaterialsFromStock" ToRole="Order" />
+    <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_Order1" FromRole="MaterialsFromStock" ToRole="Order" />
+    <NavigationProperty Name="Order1" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_Order2" FromRole="MaterialsFromStock" ToRole="Order" />
   </EntityType>
   <EntityType Name="MaterialStock">
     <Key>
@@ -886,9 +886,9 @@
     <Property Name="MaterialStockID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="OrderID" Type="Int64" Nullable="false" />
     <Property Name="SubMaterialsNameID" Type="Int64" Nullable="false" />
-    <Property Name="StockQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="StockQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
     <Property Name="UOMID" Type="Int16" Nullable="false" />
-    <Property Name="IssuedQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="IssuedQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
     <Property Name="InStockDateTime" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="MaterialsFromStocks" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_MaterialStock" FromRole="MaterialStock" ToRole="MaterialsFromStock" />
     <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_MaterialStock_Order" FromRole="MaterialStock" ToRole="Order" />
@@ -924,8 +924,8 @@
     <NavigationProperty Name="Invoices" Relationship="OrderManagerDBModel.FK_Invoice_Order" FromRole="Order" ToRole="Invoice" />
     <NavigationProperty Name="JobOrderTolerances" Relationship="OrderManagerDBModel.FK_JobOrderTolerance_Order" FromRole="Order" ToRole="JobOrderTolerance" />
     <NavigationProperty Name="KnittingJOes" Relationship="OrderManagerDBModel.FK_KnittingJO_Order" FromRole="Order" ToRole="KnittingJO" />
-    <NavigationProperty Name="MaterialsFromStocks" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_FromOrder" FromRole="Order" ToRole="MaterialsFromStock" />
-    <NavigationProperty Name="MaterialsFromStocks1" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_ToOrder" FromRole="Order" ToRole="MaterialsFromStock" />
+    <NavigationProperty Name="MaterialsFromStocks" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_Order1" FromRole="Order" ToRole="MaterialsFromStock" />
+    <NavigationProperty Name="MaterialsFromStocks1" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_Order2" FromRole="Order" ToRole="MaterialsFromStock" />
     <NavigationProperty Name="MaterialStocks" Relationship="OrderManagerDBModel.FK_MaterialStock_Order" FromRole="Order" ToRole="MaterialStock" />
     <NavigationProperty Name="OrderStatu" Relationship="OrderManagerDBModel.FK_Order_OrderStatus" FromRole="Order" ToRole="OrderStatus" />
     <NavigationProperty Name="OrderThrough" Relationship="OrderManagerDBModel.FK_Order_OrderThrough" FromRole="Order" ToRole="OrderThrough" />
@@ -1320,6 +1320,7 @@
     <Property Name="UOMID" Type="Int16" Nullable="false" p1:StoreGeneratedPattern="Identity" />
     <Property Name="Units" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
     <Property Name="Multiplier" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="QuantityMultiplier" Type="Decimal" Precision="18" Scale="2" />
     <NavigationProperty Name="MaterialStocks" Relationship="OrderManagerDBModel.FK_MaterialStock_UnitsOfMeasurement" FromRole="UnitsOfMeasurement" ToRole="MaterialStock" />
     <NavigationProperty Name="OrderProducts" Relationship="OrderManagerDBModel.FK_OrderProduct_UnitsOfMeasurement" FromRole="UnitsOfMeasurement" ToRole="OrderProduct" />
     <NavigationProperty Name="ProductMaterialItems" Relationship="OrderManagerDBModel.FK_ProductMaterialItem_UnitsOfMeasurement" FromRole="UnitsOfMeasurement" ToRole="ProductMaterialItem" />
@@ -1794,11 +1795,11 @@
         <PropertyRef Name="GRNReciptID" />
       </Principal>
       <Dependent Role="DyeingJO">
-        <PropertyRef Name="GRNReciptID" />
+        <PropertyRef Name="GRNRecieptID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_DyeingJO_JobOrder1">
+  <Association Name="FK_DyeingJO_JobOrder">
     <End Role="JobOrder" Type="OrderManagerDBModel.JobOrder" Multiplicity="0..1" />
     <End Role="DyeingJO" Type="OrderManagerDBModel.DyeingJO" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1806,7 +1807,7 @@
         <PropertyRef Name="JobOrderID" />
       </Principal>
       <Dependent Role="DyeingJO">
-        <PropertyRef Name="ParentJOID" />
+        <PropertyRef Name="JobOrderID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1998,7 +1999,7 @@
         <PropertyRef Name="JobOrderID" />
       </Principal>
       <Dependent Role="KnittingJO">
-        <PropertyRef Name="ParentJobOrderID" />
+        <PropertyRef Name="JobOrderID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2086,18 +2087,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MaterialsFromStock_FromOrder">
-    <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="1" />
-    <End Role="MaterialsFromStock" Type="OrderManagerDBModel.MaterialsFromStock" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Order">
-        <PropertyRef Name="OrderID" />
-      </Principal>
-      <Dependent Role="MaterialsFromStock">
-        <PropertyRef Name="FromOrderID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_MaterialsFromStock_MaterialStock">
     <End Role="MaterialStock" Type="OrderManagerDBModel.MaterialStock" Multiplicity="1" />
     <End Role="MaterialsFromStock" Type="OrderManagerDBModel.MaterialsFromStock" Multiplicity="*" />
@@ -2110,7 +2099,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_MaterialsFromStock_ToOrder">
+  <Association Name="FK_MaterialsFromStock_Order1">
+    <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="1" />
+    <End Role="MaterialsFromStock" Type="OrderManagerDBModel.MaterialsFromStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="MaterialsFromStock">
+        <PropertyRef Name="FromOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaterialsFromStock_Order2">
     <End Role="Order" Type="OrderManagerDBModel.Order" Multiplicity="1" />
     <End Role="MaterialsFromStock" Type="OrderManagerDBModel.MaterialsFromStock" Multiplicity="*" />
     <ReferentialConstraint>

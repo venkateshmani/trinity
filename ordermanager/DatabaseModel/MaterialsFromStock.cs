@@ -15,14 +15,14 @@ namespace ordermanager.DatabaseModel
     public partial class MaterialsFromStock
     {
         public long MaterialsFromStockID { get; set; }
-        public long FromOrderID { get; set; }
-        public long MaterialStockID { get; set; }
         public decimal Quantity { get; set; }
         public System.DateTime IssuedDate { get; set; }
+        public long FromOrderID { get; set; }
         public long ToOrderID { get; set; }
+        public long MaterialStockID { get; set; }
     
-        public virtual Order Order { get; set; }
         public virtual MaterialStock MaterialStock { get; set; }
+        public virtual Order Order { get; set; }
         public virtual Order Order1 { get; set; }
     }
 }

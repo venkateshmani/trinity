@@ -152,8 +152,8 @@
           <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
           <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
           <ScalarProperty Name="JoNo" ColumnName="JoNo" />
-          <ScalarProperty Name="ParentJOID" ColumnName="ParentJOID" />
-          <ScalarProperty Name="GRNReciptID" ColumnName="GRNReciptID" />
+          <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+          <ScalarProperty Name="GRNRecieptID" ColumnName="GRNRecieptID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -306,7 +306,7 @@
           <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
           <ScalarProperty Name="OrderID" ColumnName="OrderID" />
           <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
-          <ScalarProperty Name="ParentJobOrderID" ColumnName="ParentJobOrderID" />
+          <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
           <ScalarProperty Name="GRNRecieptID" ColumnName="GRNRecieptID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -337,11 +337,11 @@
       <EntityTypeMapping TypeName="OrderManagerDBModel.MaterialsFromStock">
         <MappingFragment StoreEntitySet="MaterialsFromStock">
           <ScalarProperty Name="MaterialsFromStockID" ColumnName="MaterialsFromStockID" />
-          <ScalarProperty Name="FromOrderID" ColumnName="FromOrderID" />
-          <ScalarProperty Name="MaterialStockID" ColumnName="MaterialStockID" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+          <ScalarProperty Name="FromOrderID" ColumnName="FromOrderID" />
           <ScalarProperty Name="ToOrderID" ColumnName="ToOrderID" />
+          <ScalarProperty Name="MaterialStockID" ColumnName="MaterialStockID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -706,6 +706,7 @@
           <ScalarProperty Name="UOMID" ColumnName="UOMID" />
           <ScalarProperty Name="Units" ColumnName="Units" />
           <ScalarProperty Name="Multiplier" ColumnName="Multiplier" />
+          <ScalarProperty Name="QuantityMultiplier" ColumnName="QuantityMultiplier" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

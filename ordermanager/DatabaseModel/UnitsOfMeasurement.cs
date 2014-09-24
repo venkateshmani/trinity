@@ -26,6 +26,7 @@ namespace ordermanager.DatabaseModel
         public short UOMID { get; set; }
         public string Units { get; set; }
         public decimal Multiplier { get; set; }
+        public Nullable<decimal> QuantityMultiplier { get; set; }
     
         public virtual ICollection<MaterialStock> MaterialStocks { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
