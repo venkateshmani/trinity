@@ -125,7 +125,7 @@
                     </Button.Background>
                 </Button>
                 <Button x:Name="btnDeleteItem"  Content="Delete"  Width="100" Height="25" Margin="10,0,0,0" Foreground="White" ToolTip="Delete Selected Item" HorizontalAlignment="Left" Click="DeleteItem_Click"
-                        Visibility="Collapsed">
+                        Visibility="{Binding AddDeleteButtonVisibility}">
                     <Button.Background>
                         <SolidColorBrush Color="{StaticResource ValidationColor5}" />
                     </Button.Background>
@@ -152,10 +152,10 @@
         <Grid Grid.Row="3" Margin="0,10,0,0">
                  <Border BorderBrush="Gray" BorderThickness="1">
                      <DataGrid x:Name="gridDetails"  FontSize="{StaticResource NormalFontSize}" FontWeight="Normal" SelectionMode="Single" SelectionUnit="FullRow" 
-                        GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="True" CanUserAddRows="False" CanUserResizeColumns="True" 
+                        GridLinesVisibility="None" AutoGenerateColumns="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeColumns="True" 
                         HeadersVisibility="All"
                         DataContext="{Binding SelectedMaterial}" ItemsSource="{Binding ProductMaterialItemsWrapper, IsAsync=True}" Background="WhiteSmoke"
-                              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" EnableColumnVirtualization="True" EnableRowVirtualization="True" MaxWidth="1600" MaxHeight="2500" VirtualizingPanel.IsVirtualizing="True">
+                              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" EnableColumnVirtualization="True" EnableRowVirtualization="True" MaxWidth="1600" MaxHeight="2500" VirtualizingPanel.IsVirtualizing="True" SelectionChanged="gridDetails_SelectionChanged">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn x:Name="subMaterialColumn" Header="Item Name" Width="0.3*">
                                 <DataGridTemplateColumn.CellTemplate>

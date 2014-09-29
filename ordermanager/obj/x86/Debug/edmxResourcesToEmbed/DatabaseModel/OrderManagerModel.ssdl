@@ -995,7 +995,7 @@
     <Property Name="Alias" Type="text" />
     <Property Name="Quantity" Type="decimal" Nullable="false" Scale="4" />
     <Property Name="UOMID" Type="smallint" Nullable="false" />
-    <Property Name="CurrencyID" Type="smallint" Nullable="false" />
+    <Property Name="CurrencyID" Type="smallint" />
     <Property Name="Cost" Type="decimal" Nullable="false" Scale="4" />
     <Property Name="SupplierID" Type="int" />
     <Property Name="LastPOGeneratedOn" Type="datetime" />
@@ -2135,7 +2135,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterialItem_Currency">
-    <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="1" />
+    <End Role="Currency" Type="OrderManagerDBModel.Store.Currency" Multiplicity="0..1" />
     <End Role="ProductMaterialItem" Type="OrderManagerDBModel.Store.ProductMaterialItem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Currency">

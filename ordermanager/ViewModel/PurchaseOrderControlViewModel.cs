@@ -132,6 +132,17 @@ namespace ordermanager.ViewModel
                 return false;
         }
 
+        public bool DeleteProductMateialItem(ProductMaterialItem item)
+        {
+            if (m_SelectedMaterial != null)
+            {
+                m_SelectedMaterial.ProductMaterialItemsWrapper.Remove(item);
+                return true;
+            }
+
+            return false;
+        }
+
         public void AddNewBreakUp()
         {
             if (SelectedProduct != null)

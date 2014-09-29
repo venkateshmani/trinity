@@ -807,7 +807,7 @@ namespace ordermanager.ViewModel
             {
                 AttachTheMissingNavigationProperties();
                 LastUpdated = GetServerTime(true);
-                dbContext.SaveChanges();
+                  dbContext.SaveChanges();
                 return true;
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException e)
@@ -833,6 +833,7 @@ namespace ordermanager.ViewModel
         public void MarkObjectForDelete(object item)
         {
             Context.Entry(item).State = EntityState.Deleted;
+            
         }
 
         public void Dispose()

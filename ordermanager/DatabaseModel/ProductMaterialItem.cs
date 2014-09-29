@@ -25,7 +25,7 @@ namespace ordermanager.DatabaseModel
         public string Alias { get; set; }
         public decimal Quantity { get; set; }
         public short UOMID { get; set; }
-        public short CurrencyID { get; set; }
+        public Nullable<short> CurrencyID { get; set; }
         public decimal Cost { get; set; }
         public Nullable<int> SupplierID { get; set; }
         public Nullable<System.DateTime> LastPOGeneratedOn { get; set; }

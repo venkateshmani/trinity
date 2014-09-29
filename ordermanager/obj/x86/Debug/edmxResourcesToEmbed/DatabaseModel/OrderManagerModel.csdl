@@ -1144,7 +1144,7 @@
     <Property Name="Alias" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
     <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
     <Property Name="UOMID" Type="Int16" Nullable="false" />
-    <Property Name="CurrencyID" Type="Int16" Nullable="false" />
+    <Property Name="CurrencyID" Type="Int16" />
     <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
     <Property Name="SupplierID" Type="Int32" />
     <Property Name="LastPOGeneratedOn" Type="DateTime" Precision="3" />
@@ -1764,7 +1764,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductMaterialItem_Currency">
-    <End Role="Currency" Type="OrderManagerDBModel.Currency" Multiplicity="1" />
+    <End Role="Currency" Type="OrderManagerDBModel.Currency" Multiplicity="0..1" />
     <End Role="ProductMaterialItem" Type="OrderManagerDBModel.ProductMaterialItem" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Currency">

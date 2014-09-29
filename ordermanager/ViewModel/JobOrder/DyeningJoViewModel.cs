@@ -158,7 +158,7 @@ namespace ordermanager.ViewModel.JobOrderControls
             {
                 System.Windows.Visibility visiblity = System.Windows.Visibility.Visible;
 
-                if (DBResources.Instance.CurrentUser.UserRole.CanApprovePurchaseOrder == false)
+                if (DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder == false)
                 {
                     visiblity = System.Windows.Visibility.Collapsed;
                 }
@@ -173,7 +173,7 @@ namespace ordermanager.ViewModel.JobOrderControls
             {
                 System.Windows.Visibility visiblity = System.Windows.Visibility.Visible;
 
-                if (DBResources.Instance.CurrentUser.UserRole.CanApprovePurchaseOrder == false || JO.Approval.IsApproved == true)
+                if (DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder == false || JO.Approval.IsApproved == true)
                 {
                     visiblity = System.Windows.Visibility.Collapsed;
                 }
