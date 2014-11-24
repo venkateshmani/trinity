@@ -36,7 +36,7 @@ namespace ordermanager.DatabaseModel
                 decimal quantity = 0;
                 foreach (GRNReciept receipt in this.GRNReciepts)
                 {
-                    quantity += receipt.RecievedInHandWrapper;
+                    quantity += receipt.InvoicedQuantityWrapper;
                 }
 
                 return quantity;

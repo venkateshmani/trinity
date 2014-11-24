@@ -62,26 +62,22 @@ namespace ordermanager.Views.UserControls
 
                 if (approval == null)
                 {
-                    btnAddNewItem.Visibility = System.Windows.Visibility.Visible;
-                    btnDeleteItem.Visibility = System.Windows.Visibility.Visible;
+                    m_ViewModel.AddDeleteButtonVisibility = System.Windows.Visibility.Visible;
                     approvalControl.Visibility = System.Windows.Visibility.Collapsed;
                 }
                 else if (approval.IsApproved == null)
                 {
                     DetermineApprovalCommands();
-                    btnAddNewItem.Visibility = System.Windows.Visibility.Collapsed;
-                    btnDeleteItem.Visibility = System.Windows.Visibility.Collapsed;
+                    m_ViewModel.AddDeleteButtonVisibility = System.Windows.Visibility.Collapsed;
                 }
                 else if (approval.IsApproved.Value == true)
                 {
-                    btnAddNewItem.Visibility = System.Windows.Visibility.Collapsed;
-                    btnDeleteItem.Visibility = System.Windows.Visibility.Collapsed;
+                    m_ViewModel.AddDeleteButtonVisibility = System.Windows.Visibility.Collapsed;
                     approvalControl.Visibility = System.Windows.Visibility.Collapsed;
                 }
                 else if (approval.IsApproved.Value == false)
                 {
-                    btnAddNewItem.Visibility = System.Windows.Visibility.Visible;
-                    btnDeleteItem.Visibility = System.Windows.Visibility.Visible;
+                    m_ViewModel.AddDeleteButtonVisibility = System.Windows.Visibility.Visible;
                     approvalControl.Visibility = System.Windows.Visibility.Collapsed;
                 }
             }
@@ -141,7 +137,13 @@ namespace ordermanager.Views.UserControls
         private void DeleteItem_Click(object sender, RoutedEventArgs e)
         {
             ProductMaterialItem item = gridDetails.SelectedItem as ProductMaterialItem;
-            DBResources.Instance.Context.ProductMaterialItems.Remove(item);
+
+            //Check whether the deleted item has been added to the database
+            if (item.ProductMaterialItemID != 0)
+            {
+                DBResources.Instance.Context.ProductMaterialItems.Remove(item);
+            }
+
             ViewModel.DeleteProductMateialItem(item);
         }
 

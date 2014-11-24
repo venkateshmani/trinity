@@ -158,10 +158,10 @@ namespace ordermanager.ViewModel.JobOrderControls
             {
                 System.Windows.Visibility visiblity = System.Windows.Visibility.Visible;
 
-                if (DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder == false)
-                {
+                if ( (JO.Approval != null && JO.Approval.IsApproved == null && DBResources.Instance.CurrentUser.UserRole.RoleName != "Owner") ||
+                      DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder == false)
                     visiblity = System.Windows.Visibility.Collapsed;
-                }
+
                 return visiblity;
                
             }
@@ -173,10 +173,10 @@ namespace ordermanager.ViewModel.JobOrderControls
             {
                 System.Windows.Visibility visiblity = System.Windows.Visibility.Visible;
 
-                if (DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder == false || JO.Approval.IsApproved == true)
-                {
+                if ((JO.Approval != null && JO.Approval.IsApproved == null && DBResources.Instance.CurrentUser.UserRole.RoleName != "Owner") ||
+                    DBResources.Instance.CurrentUser.UserRole.CanModifyJobOrder == false || JO.Approval.IsApproved == true)
                     visiblity = System.Windows.Visibility.Collapsed;
-                }
+
                 return visiblity;
                
             }

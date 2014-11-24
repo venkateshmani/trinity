@@ -1,0 +1,4750 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModelFragment xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication
+    Name="LightSwitchServiceApplication"
+    Version="1.0.0.0">
+    <ServiceApplication.Attributes>
+      <ModuleNamespace
+        Namespace="LightSwitchApplication" />
+    </ServiceApplication.Attributes>
+  </ServiceApplication>
+  <DataService
+    DataProvider="EntityFrameworkDataProvider"
+    EntityContainer="LightSwitchCommonModule:OrderManagerDBData"
+    Name="OrderManagerDBDataDataService">
+    <DataService.ConnectionProperties>
+      <ConnectionProperty
+        Name="DataProviderName"
+        Value="91510608-8809-4020-8897-fba057e22d54" />
+      <ConnectionProperty
+        Name="DataSourceName"
+        Value="067ea0d9-ba62-43f7-9106-34930c60c528" />
+      <ConnectionProperty
+        Name="ProviderInvariantName"
+        Value="System.Data.SqlClient" />
+      <ConnectionProperty
+        Name="SafeConnectionString"
+        Value="Data Source=VENKATESH-PC\SQLEXPRESS;Initial Catalog=OrderManagerDB;Integrated Security=True" />
+      <ConnectionProperty
+        Name="ConnectionStringGuid"
+        Value="df54351c-5ff2-4c96-963f-da17c228225f" />
+      <ConnectionProperty
+        Name="ProviderManifestToken"
+        Value="2008" />
+    </DataService.ConnectionProperties>
+    <EntitySetMapping
+      EntitySet="Approvals">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Approval" />
+        <SsdlProperty
+          Name="ApprovalID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Approval/Properties[ApprovalID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="IsApproved"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Approval/Properties[IsApproved]"
+          Type="bit" />
+        <SsdlProperty
+          Name="Comments"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Approval/Properties[Comments]"
+          Type="text" />
+        <SsdlForeignKeyProperty
+          Name="ApprovalEntityTypeID"
+          Nullable="False"
+          PropertyName="ApprovalEntityTypeID"
+          Type="tinyint" />
+        <SsdlForeignKeyProperty
+          Name="OrderID"
+          Nullable="False"
+          PropertyName="OrderID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ApprovalEntityTypes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ApprovalEntityType" />
+        <SsdlProperty
+          Name="ApprovalEntityTypeID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ApprovalEntityType/Properties[ApprovalEntityTypeID]"
+          StoreGeneratedPattern="Identity"
+          Type="tinyint" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="TypeName"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ApprovalEntityType/Properties[TypeName]"
+          Type="nchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Assets">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Asset" />
+        <SsdlProperty
+          Name="AssetID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Asset/Properties[AssetID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="InvoiceDate"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Asset/Properties[InvoiceDate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="InvoiceNumber"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Asset/Properties[InvoiceNumber]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="ValueInINR"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Asset/Properties[ValueInINR]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Quantity"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Asset/Properties[Quantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="AssetNameID"
+          Nullable="False"
+          PropertyName="AssetNameID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="BrandNameID"
+          Nullable="True"
+          PropertyName="BrandNameID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="SupplierID"
+          Nullable="True"
+          PropertyName="SupplierID"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="AssetCategories">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="AssetCategory" />
+        <SsdlProperty
+          Name="CategoryID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:AssetCategory/Properties[CategoryID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Name"
+          Nullable="False"
+          Property="LightSwitchCommonModule:AssetCategory/Properties[Name]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="AssetNames">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="AssetName" />
+        <SsdlProperty
+          Name="AssetNameID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:AssetName/Properties[AssetNameID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Name"
+          Nullable="False"
+          Property="LightSwitchCommonModule:AssetName/Properties[Name]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Descritpion"
+          Nullable="True"
+          Property="LightSwitchCommonModule:AssetName/Properties[Descritpion]"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="CategoryID"
+          Nullable="True"
+          PropertyName="CategoryID"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="BrandNames">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="BrandName" />
+        <SsdlProperty
+          Name="BrandNameID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:BrandName/Properties[BrandNameID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Name"
+          Nullable="False"
+          Property="LightSwitchCommonModule:BrandName/Properties[Name]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="CartonBoxes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="CartonBox" />
+        <SsdlProperty
+          Name="CartonBoxID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:CartonBox/Properties[CartonBoxID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Number"
+          Nullable="False"
+          Property="LightSwitchCommonModule:CartonBox/Properties[Number]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="InvoiceGenerated"
+          Nullable="False"
+          Property="LightSwitchCommonModule:CartonBox/Properties[InvoiceGenerated]"
+          Type="bit" />
+        <SsdlForeignKeyProperty
+          Name="InvoiceID"
+          Nullable="True"
+          PropertyName="InvoiceID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="OrderID"
+          Nullable="False"
+          PropertyName="OrderID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Colors">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Color" />
+        <SsdlProperty
+          Name="ColorID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Color/Properties[ColorID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Name"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Color/Properties[Name]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="CommissionValueTypes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="CommissionValueType" />
+        <SsdlProperty
+          Name="CommissionValueTypeID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:CommissionValueType/Properties[CommissionValueTypeID]"
+          StoreGeneratedPattern="Identity"
+          Type="tinyint" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="Type"
+          Nullable="False"
+          Property="LightSwitchCommonModule:CommissionValueType/Properties[Type]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Companies">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Company" />
+        <SsdlProperty
+          Name="CompanyID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Company/Properties[CompanyID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          Name="Name"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Company/Properties[Name]"
+          Type="text" />
+        <SsdlProperty
+          Name="Alias"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[c_Alias]"
+          Type="text" />
+        <SsdlProperty
+          Name="Address1"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[Address1]"
+          Type="text" />
+        <SsdlProperty
+          Name="Address2"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[Address2]"
+          Type="text" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="City"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[City]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="State"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[State]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Country"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[Country]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="ZipCode"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[ZipCode]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="Telephone"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[Telephone]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="Fax"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[Fax]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="Mobile"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[Mobile]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="EmaiID"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[EmaiID]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="TIN"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[TIN]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="CST"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Company/Properties[CST]"
+          Type="nchar" />
+        <SsdlForeignKeyProperty
+          Name="CompanyTypeID"
+          Nullable="False"
+          PropertyName="CompanyTypeID"
+          Type="smallint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="CompanyTypes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="CompanyType" />
+        <SsdlProperty
+          Name="CompanyTypeID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:CompanyType/Properties[CompanyTypeID]"
+          StoreGeneratedPattern="Identity"
+          Type="smallint" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="Type"
+          Nullable="False"
+          Property="LightSwitchCommonModule:CompanyType/Properties[Type]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Countries">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Country" />
+        <SsdlProperty
+          Name="CountryID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Country/Properties[CountryID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Name"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Country/Properties[Name]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Currencies">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Currency" />
+        <SsdlProperty
+          Name="CurrencyID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Currency/Properties[CurrencyID]"
+          StoreGeneratedPattern="Identity"
+          Type="smallint" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="CountryName"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Currency/Properties[CountryName]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Symbol"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Currency/Properties[Symbol]"
+          Type="nvarchar" />
+        <SsdlProperty
+          Name="DefaultValueInINR"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Currency/Properties[DefaultValueInINR]"
+          Scale="4"
+          Type="decimal" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="DyeingJOes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="DyeingJO" />
+        <SsdlProperty
+          Name="DyeingJOId"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[DyeingJOId]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="JODate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[JODate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="QuoteNo"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[QuoteNo]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="QuoteDate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[QuoteDate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="GRNRefNo"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[GRNRefNo]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="OrderRef"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[OrderRef]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="150"
+          Name="Process"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[Process]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="300"
+          Name="TermsAndConditions"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[TermsAndConditions]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="TotalValue"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[TotalValue]"
+          Scale="2"
+          Type="decimal" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="JoNo"
+          Nullable="True"
+          Property="LightSwitchCommonModule:DyeingJO/Properties[JoNo]"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="ApprovalID"
+          Nullable="False"
+          PropertyName="ApprovalID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="SupplierID"
+          Nullable="False"
+          PropertyName="SupplierID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="GRNRecieptID"
+          Nullable="True"
+          PropertyName="GRNRecieptID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="JobOrderID"
+          Nullable="True"
+          PropertyName="JobOrderID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="OrderID"
+          Nullable="False"
+          PropertyName="OrderID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="PurchaseOrderID"
+          Nullable="False"
+          PropertyName="PurchaseOrderID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="DyeingJoItems">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="DyeingJoItem" />
+        <SsdlProperty
+          Name="DyeingJoItemsID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[DyeingJoItemsID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Color"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[Color]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="QualityDescription"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[QualityDescription]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="ReqGSM"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[ReqGSM]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="ReqWidth"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[ReqWidth]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="NetQty"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[NetQty]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="RatePerKg"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[RatePerKg]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="TotalAmount"
+          Nullable="False"
+          Property="LightSwitchCommonModule:DyeingJoItem/Properties[TotalAmount]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="DyeingJOId"
+          Nullable="False"
+          PropertyName="DyeingJOId"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="JobOrderID"
+          Nullable="True"
+          PropertyName="JobOrderID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="GRNReciepts">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="GRNReciept" />
+        <SsdlProperty
+          Name="GRNReciptID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[GRNReciptID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="InvoiceDate"
+          Nullable="True"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[InvoiceDate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="150"
+          Name="InvoiceNumber"
+          Nullable="True"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[InvoiceNumber]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="RecievedDate"
+          Nullable="True"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[RecievedDate]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="InvoicedQuantity"
+          Nullable="True"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[InvoicedQuantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="RecievedInHand"
+          Nullable="True"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[RecievedInHand]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="OtherChargesInINR"
+          Nullable="True"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[OtherChargesInINR]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="QualityPassedQuantity"
+          Nullable="True"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[QualityPassedQuantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="QualityFailedQuantity"
+          Nullable="True"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[QualityFailedQuantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="InvoiceValue"
+          Nullable="True"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[InvoiceValue]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="SpawnedNewPurchaseOrder"
+          Nullable="True"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[SpawnedNewPurchaseOrder]"
+          Type="bit" />
+        <SsdlProperty
+          MaxLength="15"
+          Name="VechileNo"
+          Nullable="True"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[VechileNo]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="OtherChargersName"
+          Nullable="True"
+          Property="LightSwitchCommonModule:GRNReciept/Properties[OtherChargersName]"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="OrderedItemID"
+          Nullable="False"
+          PropertyName="OrderedItemID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="SpawnedPurchaseOrderID"
+          Nullable="True"
+          PropertyName="SpawnedPurchaseOrderID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="ReceiptStatusID"
+          Nullable="True"
+          PropertyName="ReceiptStatusID"
+          Type="tinyint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Histories">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="History" />
+        <SsdlProperty
+          Name="HistoryID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:History/Properties[HistoryID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="Date"
+          Nullable="False"
+          Property="LightSwitchCommonModule:History/Properties[c_Date]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="UserName"
+          Nullable="False"
+          Property="LightSwitchCommonModule:History/Properties[UserName]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="OrderChanges"
+          Nullable="False"
+          Property="LightSwitchCommonModule:History/Properties[OrderChanges]"
+          Type="text" />
+        <SsdlProperty
+          Name="Comment"
+          Nullable="False"
+          Property="LightSwitchCommonModule:History/Properties[Comment]"
+          Type="text" />
+        <SsdlForeignKeyProperty
+          Name="OrderID"
+          Nullable="False"
+          PropertyName="OrderID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Invoices">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Invoice" />
+        <SsdlProperty
+          Name="InvoiceID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Invoice/Properties[InvoiceID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="InvoiceNumber"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Invoice/Properties[InvoiceNumber]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="InvoiceDate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Invoice/Properties[InvoiceDate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="ExporterRefNumber"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Invoice/Properties[ExporterRefNumber]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="BuyerRefNumber"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Invoice/Properties[BuyerRefNumber]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="PlaceOfReceiptByPrecarrier"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Invoice/Properties[PlaceOfReceiptByPrecarrier]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="LoadingPlace"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Invoice/Properties[LoadingPlace]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="DischargePlace"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Invoice/Properties[DischargePlace]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="IsProforma"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Invoice/Properties[IsProforma]"
+          Type="bit" />
+        <SsdlForeignKeyProperty
+          Name="ConsigneeID"
+          Nullable="False"
+          PropertyName="ConsigneeID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="DestinationCountryID"
+          Nullable="False"
+          PropertyName="DestinationCountryID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="OrderID"
+          Nullable="False"
+          PropertyName="OrderID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="OriginCountryID"
+          Nullable="False"
+          PropertyName="OriginCountryID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="CarriageByID"
+          Nullable="False"
+          PropertyName="CarriageByID"
+          Type="tinyint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="JobOrders">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="JobOrder" />
+        <SsdlProperty
+          Name="JobOrderID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrder/Properties[JobOrderID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="JobQuantity"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrder/Properties[JobQuantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="ChargesInINR"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrder/Properties[ChargesInINR]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="RequiredDate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrder/Properties[RequiredDate]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="Instructions"
+          Nullable="True"
+          Property="LightSwitchCommonModule:JobOrder/Properties[Instructions]"
+          Type="text" />
+        <SsdlProperty
+          Name="PendingQuantity"
+          Nullable="True"
+          Property="LightSwitchCommonModule:JobOrder/Properties[PendingQuantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="QualityPassed"
+          Nullable="True"
+          Property="LightSwitchCommonModule:JobOrder/Properties[QualityPassed]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="QualityFailed"
+          Nullable="True"
+          Property="LightSwitchCommonModule:JobOrder/Properties[QualityFailed]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="DCNumber"
+          Nullable="True"
+          Property="LightSwitchCommonModule:JobOrder/Properties[DCNumber]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Comments"
+          Nullable="True"
+          Property="LightSwitchCommonModule:JobOrder/Properties[Comments]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="IsIssued"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrder/Properties[IsIssued]"
+          Type="bit" />
+        <SsdlProperty
+          Name="IsWaitingForApproval"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrder/Properties[IsWaitingForApproval]"
+          Type="bit" />
+        <SsdlProperty
+          Name="HasApproved"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrder/Properties[HasApproved]"
+          Type="bit" />
+        <SsdlProperty
+          Name="FailedQuantityIssued"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrder/Properties[FailedQuantityIssued]"
+          Type="bit" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="ItemName"
+          Nullable="True"
+          Property="LightSwitchCommonModule:JobOrder/Properties[ItemName]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="RecievedAs"
+          Nullable="True"
+          Property="LightSwitchCommonModule:JobOrder/Properties[RecievedAs]"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="SupplierID"
+          Nullable="False"
+          PropertyName="SupplierID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="GRNReciptID"
+          Nullable="False"
+          PropertyName="GRNReciptID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="ParentJOID"
+          Nullable="True"
+          PropertyName="ParentJOID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="JobOrderTypeID"
+          Nullable="False"
+          PropertyName="JobOrderTypeID"
+          Type="tinyint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="JobOrderReceipts">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="JobOrderReceipt" />
+        <SsdlProperty
+          Name="JobOrderReceiptID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrderReceipt/Properties[JobOrderReceiptID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="ReceiptDate"
+          Nullable="True"
+          Property="LightSwitchCommonModule:JobOrderReceipt/Properties[ReceiptDate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Comments"
+          Nullable="True"
+          Property="LightSwitchCommonModule:JobOrderReceipt/Properties[Comments]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="ReceivedQuantity"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrderReceipt/Properties[ReceivedQuantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Issued"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrderReceipt/Properties[Issued]"
+          Type="bit" />
+        <SsdlForeignKeyProperty
+          Name="JobOrderID"
+          Nullable="False"
+          PropertyName="JobOrderID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="JobOrderTolerances">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="JobOrderTolerance" />
+        <SsdlProperty
+          Name="JobOrderToleranceID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrderTolerance/Properties[JobOrderToleranceID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="ToleranceValueInPercentage"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrderTolerance/Properties[ToleranceValueInPercentage]"
+          Scale="2"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="JobOrderToleraceTypeID"
+          Nullable="False"
+          PropertyName="JobOrderToleraceTypeID"
+          Type="tinyint" />
+        <SsdlForeignKeyProperty
+          Name="OrderID"
+          Nullable="False"
+          PropertyName="OrderID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="JobOrderToleranceTypes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="JobOrderToleranceType" />
+        <SsdlProperty
+          Name="JobOrderToleranceTypeID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrderToleranceType/Properties[JobOrderToleranceTypeID]"
+          StoreGeneratedPattern="Identity"
+          Type="tinyint" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="Type"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrderToleranceType/Properties[Type]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="DefaultToleranceInPercentage"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrderToleranceType/Properties[DefaultToleranceInPercentage]"
+          Scale="2"
+          Type="decimal" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="JobOrderTypes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="JobOrderType" />
+        <SsdlProperty
+          Name="JobOrderTypeID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrderType/Properties[JobOrderTypeID]"
+          StoreGeneratedPattern="Identity"
+          Type="tinyint" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="Type"
+          Nullable="False"
+          Property="LightSwitchCommonModule:JobOrderType/Properties[Type]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="KnittingJOes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="KnittingJO" />
+        <SsdlProperty
+          Name="KnittingJOId"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJO/Properties[KnittingJOId]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="JoNo"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJO/Properties[JoNo]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="JoDate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJO/Properties[JoDate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="QuoteNo"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJO/Properties[QuoteNo]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="QuoteDate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJO/Properties[QuoteDate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="300"
+          Name="TermsAndConditions"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJO/Properties[TermsAndConditions]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="300"
+          Name="QualitySpecifications"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJO/Properties[QualitySpecifications]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="TotalValue"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJO/Properties[TotalValue]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="ApprovalID"
+          Nullable="False"
+          PropertyName="ApprovalID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="SupplierID"
+          Nullable="False"
+          PropertyName="SupplierID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="GRNRecieptID"
+          Nullable="True"
+          PropertyName="GRNRecieptID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="JobOrderID"
+          Nullable="True"
+          PropertyName="JobOrderID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="OrderID"
+          Nullable="True"
+          PropertyName="OrderID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="KnittingJoItems">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="KnittingJoItem" />
+        <SsdlProperty
+          Name="KnittingJoItemsId"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJoItem/Properties[KnittingJoItemsId]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="NameOfProduct"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJoItem/Properties[NameOfProduct]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="Quantity"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJoItem/Properties[Quantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Rate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJoItem/Properties[Rate]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="TotalAmount"
+          Nullable="False"
+          Property="LightSwitchCommonModule:KnittingJoItem/Properties[TotalAmount]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Remarks"
+          Nullable="True"
+          Property="LightSwitchCommonModule:KnittingJoItem/Properties[Remarks]"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="JobOrderID"
+          Nullable="True"
+          PropertyName="JobOrderID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="KnittingJoId"
+          Nullable="False"
+          PropertyName="KnittingJoId"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="MaterialNames">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="MaterialName" />
+        <SsdlProperty
+          Name="MaterialNameID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:MaterialName/Properties[MaterialNameID]"
+          StoreGeneratedPattern="Identity"
+          Type="int" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Name"
+          Nullable="False"
+          Property="LightSwitchCommonModule:MaterialName/Properties[Name]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="MaterialsFromStocks">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="MaterialsFromStock" />
+        <SsdlProperty
+          Name="MaterialsFromStockID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:MaterialsFromStock/Properties[MaterialsFromStockID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="Quantity"
+          Nullable="False"
+          Property="LightSwitchCommonModule:MaterialsFromStock/Properties[Quantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="IssuedDate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:MaterialsFromStock/Properties[IssuedDate]"
+          Type="datetime" />
+        <SsdlForeignKeyProperty
+          Name="MaterialStockID"
+          Nullable="False"
+          PropertyName="MaterialStockID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="FromOrderID"
+          Nullable="False"
+          PropertyName="FromOrderID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="ToOrderID"
+          Nullable="False"
+          PropertyName="ToOrderID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="MaterialStocks">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="MaterialStock" />
+        <SsdlProperty
+          Name="MaterialStockID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:MaterialStock/Properties[MaterialStockID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="StockQuantity"
+          Nullable="False"
+          Property="LightSwitchCommonModule:MaterialStock/Properties[StockQuantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="IssuedQuantity"
+          Nullable="False"
+          Property="LightSwitchCommonModule:MaterialStock/Properties[IssuedQuantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="InStockDateTime"
+          Nullable="False"
+          Property="LightSwitchCommonModule:MaterialStock/Properties[InStockDateTime]"
+          Type="datetime" />
+        <SsdlForeignKeyProperty
+          Name="OrderID"
+          Nullable="False"
+          PropertyName="OrderID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="SubMaterialsNameID"
+          Nullable="False"
+          PropertyName="SubMaterialsNameID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="UOMID"
+          Nullable="False"
+          PropertyName="UOMID"
+          Type="smallint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Orders">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Order" />
+        <SsdlProperty
+          Name="OrderID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Order/Properties[OrderID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="OrderDate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Order/Properties[OrderDate]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="ExpectedDeliveryDate"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Order/Properties[ExpectedDeliveryDate]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="CommissionValue"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Order/Properties[CommissionValue]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="LastModifiedDate"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Order/Properties[LastModifiedDate]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="TotalOrderValue"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Order/Properties[TotalOrderValue]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="InternalDeliveryDate"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Order/Properties[InternalDeliveryDate]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="OrderApprovedDate"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Order/Properties[OrderApprovedDate]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="OrderConfirmedDate"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Order/Properties[OrderConfirmedDate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="CustomerOrderNumber"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Order/Properties[CustomerOrderNumber]"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="CommissionValueTypeID"
+          Nullable="True"
+          PropertyName="CommissionValueTypeID"
+          Type="tinyint" />
+        <SsdlForeignKeyProperty
+          Name="CustomerID"
+          Nullable="False"
+          PropertyName="CustomerID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="OrderByID"
+          Nullable="False"
+          PropertyName="OrderByID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="OrderStatusID"
+          Nullable="False"
+          PropertyName="OrderStatusID"
+          Type="smallint" />
+        <SsdlForeignKeyProperty
+          Name="OrderThoughID"
+          Nullable="False"
+          PropertyName="OrderThoughID"
+          Type="tinyint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="OrderCurrencyConversions">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="OrderCurrencyConversion" />
+        <SsdlProperty
+          Name="OrderCurrencyConversionID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderCurrencyConversion/Properties[OrderCurrencyConversionID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="ValueInINR"
+          Nullable="True"
+          Property="LightSwitchCommonModule:OrderCurrencyConversion/Properties[ValueInINR]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="ValueInINRForMaterials"
+          Nullable="True"
+          Property="LightSwitchCommonModule:OrderCurrencyConversion/Properties[ValueInINRForMaterials]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="ValueInINRForSubMaterials"
+          Nullable="True"
+          Property="LightSwitchCommonModule:OrderCurrencyConversion/Properties[ValueInINRForSubMaterials]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="CurrencyID"
+          Nullable="False"
+          PropertyName="CurrencyID"
+          Type="smallint" />
+        <SsdlForeignKeyProperty
+          Name="OrderID"
+          Nullable="False"
+          PropertyName="OrderID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="OrderedItems">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="OrderedItem" />
+        <SsdlProperty
+          Name="OrderedItemID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderedItem/Properties[OrderedItemID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="OrderedQuantity"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderedItem/Properties[OrderedQuantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="ExcessiveQuantity"
+          Nullable="True"
+          Property="LightSwitchCommonModule:OrderedItem/Properties[ExcessiveQuantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="PendingQuantity"
+          Nullable="True"
+          Property="LightSwitchCommonModule:OrderedItem/Properties[PendingQuantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="TaxInINRPerUnit"
+          Nullable="True"
+          Property="LightSwitchCommonModule:OrderedItem/Properties[TaxInINRPerUnit]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="CostPerUnit"
+          Nullable="True"
+          Property="LightSwitchCommonModule:OrderedItem/Properties[CostPerUnit]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="TotalCost"
+          Nullable="True"
+          Property="LightSwitchCommonModule:OrderedItem/Properties[TotalCost]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="ProductMaterialItemID"
+          Nullable="False"
+          PropertyName="ProductMaterialItemID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="PurchaseOrderID"
+          Nullable="False"
+          PropertyName="PurchaseOrderID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="OrderProducts">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="OrderProduct" />
+        <SsdlProperty
+          Name="ProductID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderProduct/Properties[ProductID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="ExpectedQuantity"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderProduct/Properties[ExpectedQuantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="CustomerTargetPrice"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderProduct/Properties[CustomerTargetPrice]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="OrderValue"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderProduct/Properties[OrderValue]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="TotalConsumptionCost"
+          Nullable="True"
+          Property="LightSwitchCommonModule:OrderProduct/Properties[TotalConsumptionCost]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="ApprovalID"
+          Nullable="True"
+          PropertyName="ApprovalID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="CurrencyID"
+          Nullable="False"
+          PropertyName="CurrencyID"
+          Type="smallint" />
+        <SsdlForeignKeyProperty
+          Name="OrderID"
+          Nullable="False"
+          PropertyName="OrderID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="ProductBreakUpID"
+          Nullable="True"
+          PropertyName="ProductBreakUpID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="ProductNameID"
+          Nullable="False"
+          PropertyName="ProductNameID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="UOMID"
+          Nullable="False"
+          PropertyName="UOMID"
+          Type="smallint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="OrderReportCards">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="OrderReportCard" />
+        <SsdlProperty
+          Name="OrderReportCardID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderReportCard/Properties[OrderReportCardID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="ProgressPercentage"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderReportCard/Properties[ProgressPercentage]"
+          Scale="2"
+          Type="decimal" />
+        <SsdlProperty
+          Name="RequiredFinishDate"
+          Nullable="True"
+          Property="LightSwitchCommonModule:OrderReportCard/Properties[RequiredFinishDate]"
+          Type="datetime" />
+        <SsdlForeignKeyProperty
+          Name="OrderID"
+          Nullable="False"
+          PropertyName="OrderID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="OrderReportCardTypeID"
+          Nullable="False"
+          PropertyName="OrderReportCardTypeID"
+          Type="tinyint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="OrderReportCardTypes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="OrderReportCardType" />
+        <SsdlProperty
+          Name="OrderReportCardTypeID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderReportCardType/Properties[OrderReportCardTypeID]"
+          StoreGeneratedPattern="Identity"
+          Type="tinyint" />
+        <SsdlProperty
+          MaxLength="20"
+          Name="Type"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderReportCardType/Properties[Type]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="OrderStatus">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="OrderStatus" />
+        <SsdlProperty
+          Name="OrderStatusID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderStatu/Properties[OrderStatusID]"
+          StoreGeneratedPattern="Identity"
+          Type="smallint" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="StatusLabel"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderStatu/Properties[StatusLabel]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="DisplayLabel"
+          Nullable="True"
+          Property="LightSwitchCommonModule:OrderStatu/Properties[DisplayLabel]"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="NextUserRoleID"
+          Nullable="True"
+          PropertyName="NextUserRoleID"
+          Type="smallint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="OrderThroughs">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="OrderThrough" />
+        <SsdlProperty
+          Name="OrderThroughID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderThrough/Properties[OrderThroughID]"
+          StoreGeneratedPattern="Identity"
+          Type="tinyint" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Mode"
+          Nullable="False"
+          Property="LightSwitchCommonModule:OrderThrough/Properties[Mode]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Packages">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Package" />
+        <SsdlProperty
+          Name="PackageID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Package/Properties[PackageID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="Packed"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Package/Properties[Packed]"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Pending"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Package/Properties[Pending]"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Date"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Package/Properties[c_Date]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="ExcessToStock"
+          Nullable="True"
+          Property="LightSwitchCommonModule:Package/Properties[ExcessToStock]"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="CartonBoxID"
+          Nullable="True"
+          PropertyName="CartonBoxID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="ProductBreakUpSummaryID"
+          Nullable="False"
+          PropertyName="ProductBreakUpSummaryID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ProductBreakUps">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ProductBreakUp" />
+        <SsdlProperty
+          Name="ProductBreakUpID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductBreakUp/Properties[ProductBreakUpID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="Tolerance"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductBreakUp/Properties[Tolerance]"
+          Type="float" />
+        <SsdlProperty
+          Name="PriceTerms"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductBreakUp/Properties[PriceTerms]"
+          Type="text" />
+        <SsdlProperty
+          Name="PaymentTerms"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductBreakUp/Properties[PaymentTerms]"
+          Type="text" />
+        <SsdlProperty
+          Name="DocumentsRequired"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductBreakUp/Properties[DocumentsRequired]"
+          Type="text" />
+        <SsdlForeignKeyProperty
+          Name="ShipmentModeID"
+          Nullable="False"
+          PropertyName="ShipmentModeID"
+          Type="tinyint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ProductBreakUpSummaries">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ProductBreakUpSummary" />
+        <SsdlProperty
+          Name="ProductBreakUpSummaryID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductBreakUpSummary/Properties[ProductBreakUpSummaryID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="NumberOfPieces"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductBreakUpSummary/Properties[NumberOfPieces]"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="ColorID"
+          Nullable="False"
+          PropertyName="ColorID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="ProductID"
+          Nullable="True"
+          PropertyName="ProductID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="ProductSizeID"
+          Nullable="False"
+          PropertyName="ProductSizeID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ProductCountryWiseBreakUps">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ProductCountryWiseBreakUp" />
+        <SsdlProperty
+          Name="ProductCountryWiseBreakUpID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductCountryWiseBreakUp/Properties[ProductCountryWiseBreakUpID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="NumberOfPieces"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductCountryWiseBreakUp/Properties[NumberOfPieces]"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="ColorID"
+          Nullable="False"
+          PropertyName="ColorID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="CountryID"
+          Nullable="False"
+          PropertyName="CountryID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="ProductBreakUpID"
+          Nullable="False"
+          PropertyName="ProductBreakUpID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="ProductSizeID"
+          Nullable="False"
+          PropertyName="ProductSizeID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ProductCuttings">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ProductCutting" />
+        <SsdlProperty
+          Name="CuttingID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductCutting/Properties[CuttingID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="Date"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductCutting/Properties[c_Date]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="CutQuantity"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductCutting/Properties[CutQuantity]"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Pending"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductCutting/Properties[Pending]"
+          Type="decimal" />
+        <SsdlProperty
+          Name="ExcessToStock"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductCutting/Properties[ExcessToStock]"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="ProductBreakUpSummaryID"
+          Nullable="False"
+          PropertyName="ProductBreakUpSummaryID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ProductExtraCosts">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ProductExtraCost" />
+        <SsdlProperty
+          Name="ExtraCostID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductExtraCost/Properties[ExtraCostID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="Description"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductExtraCost/Properties[Description]"
+          Type="text" />
+        <SsdlProperty
+          Name="Cost"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductExtraCost/Properties[Cost]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="CurrencyID"
+          Nullable="True"
+          PropertyName="CurrencyID"
+          Type="smallint" />
+        <SsdlForeignKeyProperty
+          Name="ProductID"
+          Nullable="False"
+          PropertyName="ProductID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="ExtraCostTypeID"
+          Nullable="False"
+          PropertyName="ExtraCostTypeID"
+          Type="smallint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ProductExtraCostTypes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ProductExtraCostType" />
+        <SsdlProperty
+          Name="ExtraCostTypeID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductExtraCostType/Properties[ExtraCostTypeID]"
+          StoreGeneratedPattern="Identity"
+          Type="smallint" />
+        <SsdlProperty
+          Name="TypeName"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductExtraCostType/Properties[TypeName]"
+          Type="text" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Productions">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Production" />
+        <SsdlProperty
+          Name="ProductionID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Production/Properties[ProductionID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="CompletedQuantity"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Production/Properties[CompletedQuantity]"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Pending"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Production/Properties[Pending]"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Date"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Production/Properties[c_Date]"
+          Type="datetime" />
+        <SsdlForeignKeyProperty
+          Name="ProductBreakUpSummaryID"
+          Nullable="False"
+          PropertyName="ProductBreakUpSummaryID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ProductMaterialItems">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ProductMaterialItem" />
+        <SsdlProperty
+          Name="ProductMaterialItemID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductMaterialItem/Properties[ProductMaterialItemID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="Alias"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductMaterialItem/Properties[c_Alias]"
+          Type="text" />
+        <SsdlProperty
+          Name="Quantity"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductMaterialItem/Properties[Quantity]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Cost"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductMaterialItem/Properties[Cost]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="LastPOGeneratedOn"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductMaterialItem/Properties[LastPOGeneratedOn]"
+          Type="datetime" />
+        <SsdlProperty
+          Name="TaxInINR"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductMaterialItem/Properties[TaxInINR]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="SupplierID"
+          Nullable="True"
+          PropertyName="SupplierID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="CurrencyID"
+          Nullable="True"
+          PropertyName="CurrencyID"
+          Type="smallint" />
+        <SsdlForeignKeyProperty
+          Name="MaterialID"
+          Nullable="False"
+          PropertyName="MaterialID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="PurchaseOrderID"
+          Nullable="True"
+          PropertyName="PurchaseOrderID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="SubMaterialNameID"
+          Nullable="False"
+          PropertyName="SubMaterialNameID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="UOMID"
+          Nullable="False"
+          PropertyName="UOMID"
+          Type="smallint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ProductMaterials">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ProductMaterials" />
+        <SsdlProperty
+          Name="MaterialID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductMaterial/Properties[MaterialID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="Consumption"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductMaterial/Properties[Consumption]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Cost"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductMaterial/Properties[Cost]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="ConsumptionCost"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductMaterial/Properties[ConsumptionCost]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          Name="OtherCostInINR"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductMaterial/Properties[OtherCostInINR]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="OtherCostName"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductMaterial/Properties[OtherCostName]"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="ApprovalID"
+          Nullable="True"
+          PropertyName="ApprovalID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="CurrencyID"
+          Nullable="True"
+          PropertyName="CurrencyID"
+          Type="smallint" />
+        <SsdlForeignKeyProperty
+          Name="MaterialNameID"
+          Nullable="False"
+          PropertyName="MaterialNameID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="ProductID"
+          Nullable="False"
+          PropertyName="ProductID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="UOMID"
+          Nullable="True"
+          PropertyName="UOMID"
+          Type="smallint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ProductNames">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ProductName" />
+        <SsdlProperty
+          Name="ProductNameID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductName/Properties[ProductNameID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="Name"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductName/Properties[Name]"
+          Type="text" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="StyleID"
+          Nullable="True"
+          Property="LightSwitchCommonModule:ProductName/Properties[StyleID]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ProductSizes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ProductSize" />
+        <SsdlProperty
+          Name="ProductSizeID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductSize/Properties[ProductSizeID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          MaxLength="25"
+          Name="Size"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductSize/Properties[Size]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ProductStocks">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ProductStock" />
+        <SsdlProperty
+          Name="ProductStockID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductStock/Properties[ProductStockID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="CutStock"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductStock/Properties[CutStock]"
+          Type="decimal" />
+        <SsdlProperty
+          Name="ProductStock"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ProductStock/Properties[ProductStock1]"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="ColorID"
+          Nullable="False"
+          PropertyName="ColorID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="ProductNameID"
+          Nullable="False"
+          PropertyName="ProductNameID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="ProductSizeID"
+          Nullable="False"
+          PropertyName="ProductSizeID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="PurchaseOrders">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="PurchaseOrders" />
+        <SsdlProperty
+          Name="PurchaseOrderID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:PurchaseOrder/Properties[PurchaseOrderID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="PurchaseOrderDate"
+          Nullable="True"
+          Property="LightSwitchCommonModule:PurchaseOrder/Properties[PurchaseOrderDate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="150"
+          Name="PurchaseOrderNumber"
+          Nullable="True"
+          Property="LightSwitchCommonModule:PurchaseOrder/Properties[PurchaseOrderNumber]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="500"
+          Name="TermsAndConditions"
+          Nullable="True"
+          Property="LightSwitchCommonModule:PurchaseOrder/Properties[TermsAndConditions]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="QuotationDate"
+          Nullable="True"
+          Property="LightSwitchCommonModule:PurchaseOrder/Properties[QuotationDate]"
+          Type="datetime" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="QuotationNumber"
+          Nullable="True"
+          Property="LightSwitchCommonModule:PurchaseOrder/Properties[QuotationNumber]"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="ApprovalID"
+          Nullable="True"
+          PropertyName="ApprovalID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="SupplierID"
+          Nullable="False"
+          PropertyName="SupplierID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="OrderID"
+          Nullable="False"
+          PropertyName="OrderID"
+          Type="bigint" />
+        <SsdlForeignKeyProperty
+          Name="PurchaseOrderStatusID"
+          Nullable="False"
+          PropertyName="PurchaseOrderStatusID"
+          Type="tinyint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="PurchaseOrderStatus">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="PurchaseOrderStatus" />
+        <SsdlProperty
+          Name="PurchaseOrderStatusID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:PurchaseOrderStatu/Properties[PurchaseOrderStatusID]"
+          StoreGeneratedPattern="Identity"
+          Type="tinyint" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="Status"
+          Nullable="False"
+          Property="LightSwitchCommonModule:PurchaseOrderStatu/Properties[Status]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Qualities">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Quality" />
+        <SsdlProperty
+          Name="QualityID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Quality/Properties[QualityID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="Passed"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Quality/Properties[Passed]"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Failed"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Quality/Properties[Failed]"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Date"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Quality/Properties[c_Date]"
+          Type="datetime" />
+        <SsdlForeignKeyProperty
+          Name="ProductBreakUpSummaryID"
+          Nullable="False"
+          PropertyName="ProductBreakUpSummaryID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ReceiptStatus">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ReceiptStatus" />
+        <SsdlProperty
+          Name="ReceiptStatusID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ReceiptStatu/Properties[ReceiptStatusID]"
+          StoreGeneratedPattern="Identity"
+          Type="tinyint" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Status"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ReceiptStatu/Properties[Status]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Shipments">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="Shipment" />
+        <SsdlProperty
+          Name="ShipmentID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Shipment/Properties[ShipmentID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="Shipped"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Shipment/Properties[Shipped]"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Rejected"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Shipment/Properties[Rejected]"
+          Type="decimal" />
+        <SsdlProperty
+          Name="Date"
+          Nullable="False"
+          Property="LightSwitchCommonModule:Shipment/Properties[c_Date]"
+          Type="datetime" />
+        <SsdlForeignKeyProperty
+          Name="ProductBreakUpSummaryID"
+          Nullable="False"
+          PropertyName="ProductBreakUpSummaryID"
+          Type="bigint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="ShipmentModes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="ShipmentMode" />
+        <SsdlProperty
+          Name="ShipmentModeID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ShipmentMode/Properties[ShipmentModeID]"
+          StoreGeneratedPattern="Identity"
+          Type="tinyint" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="Mode"
+          Nullable="False"
+          Property="LightSwitchCommonModule:ShipmentMode/Properties[Mode]"
+          Type="varchar" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="SubMaterials">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="SubMaterial" />
+        <SsdlProperty
+          Name="SubMaterialsNameID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:SubMaterial/Properties[SubMaterialsNameID]"
+          StoreGeneratedPattern="Identity"
+          Type="bigint" />
+        <SsdlProperty
+          Name="Name"
+          Nullable="False"
+          Property="LightSwitchCommonModule:SubMaterial/Properties[Name]"
+          Type="text" />
+        <SsdlProperty
+          Name="InStock"
+          Nullable="True"
+          Property="LightSwitchCommonModule:SubMaterial/Properties[InStock]"
+          Scale="4"
+          Type="decimal" />
+        <SsdlForeignKeyProperty
+          Name="MaterialNameID"
+          Nullable="False"
+          PropertyName="MaterialNameID"
+          Type="int" />
+        <SsdlForeignKeyProperty
+          Name="UOMID"
+          Nullable="True"
+          PropertyName="UOMID"
+          Type="smallint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="UnitsOfMeasurements">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="UnitsOfMeasurement" />
+        <SsdlProperty
+          Name="UOMID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UnitsOfMeasurement/Properties[UOMID]"
+          StoreGeneratedPattern="Identity"
+          Type="smallint" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="Units"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UnitsOfMeasurement/Properties[Units]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="Multiplier"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UnitsOfMeasurement/Properties[Multiplier]"
+          Scale="2"
+          Type="decimal" />
+        <SsdlProperty
+          Name="QuantityMultiplier"
+          Nullable="True"
+          Property="LightSwitchCommonModule:UnitsOfMeasurement/Properties[QuantityMultiplier]"
+          Scale="2"
+          Type="decimal" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="Users">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="User" />
+        <SsdlProperty
+          Name="UserID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:User/Properties[UserID]"
+          StoreGeneratedPattern="Identity"
+          Type="smallint" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="UserName"
+          Nullable="False"
+          Property="LightSwitchCommonModule:User/Properties[UserName]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="Password"
+          Nullable="False"
+          Property="LightSwitchCommonModule:User/Properties[Password]"
+          Type="text" />
+        <SsdlProperty
+          MaxLength="100"
+          Name="EmailID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:User/Properties[EmailID]"
+          Type="varchar" />
+        <SsdlForeignKeyProperty
+          Name="RoleID"
+          Nullable="False"
+          PropertyName="RoleID"
+          Type="smallint" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <EntitySetMapping
+      EntitySet="UserRoles">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="dbo"
+          Table="UserRole" />
+        <SsdlProperty
+          Name="UserRoleID"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[UserRoleID]"
+          StoreGeneratedPattern="Identity"
+          Type="smallint" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="RoleName"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[RoleName]"
+          Type="varchar" />
+        <SsdlProperty
+          MaxLength="50"
+          Name="AliasName"
+          Nullable="True"
+          Property="LightSwitchCommonModule:UserRole/Properties[AliasName]"
+          Type="varchar" />
+        <SsdlProperty
+          Name="CanCreateUser"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanCreateUser]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanCreateNewEnquiry"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanCreateNewEnquiry]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanAddMaterials"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanAddMaterials]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanAddMaterialsCost"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanAddMaterialsCost]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanAddConsumption"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanAddConsumption]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanAddExtraCost"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanAddExtraCost]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanApproveEnquiry"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanApproveEnquiry]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanConfirmOrder"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanConfirmOrder]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanAddSubMaterials"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanAddSubMaterials]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanGeneratePurchaseOrder"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanGeneratePurchaseOrder]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanModifyExecutionCutting"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanModifyExecutionCutting]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanModifyExecutionProduction"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanModifyExecutionProduction]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanModifyExecutionPackaging"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanModifyExecutionPackaging]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanModifyExectionQuality"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanModifyExectionQuality]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanModifyExecutionShipping"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanModifyExecutionShipping]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanModifyGRN"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanModifyGRN]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanModifyJobOrder"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanModifyJobOrder]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanAddSubMaterialsCost"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanAddSubMaterialsCost]"
+          Type="bit" />
+        <SsdlProperty
+          Name="CanApprovePurchaseOrder"
+          Nullable="False"
+          Property="LightSwitchCommonModule:UserRole/Properties[CanApprovePurchaseOrder]"
+          Type="bit" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Approval_ApprovalEntityType">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Approval_ApprovalEntityType" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Approval_ApprovalEntityType]/Members[ApprovalEntityType]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ApprovalEntityTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Approval_ApprovalEntityType]/Members[Approval]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ApprovalEntityTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Approval_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Approval_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Approval_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Approval_Order]/Members[Approval]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Asset_AssetName">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Asset_AssetName" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Asset_AssetName]/Members[AssetName]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="AssetNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Asset_AssetName]/Members[Asset]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="AssetNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Asset_BrandName">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Asset_BrandName" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Asset_BrandName]/Members[BrandName]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="BrandNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Asset_BrandName]/Members[Asset]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="BrandNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Asset_Company">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Asset_Company" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Asset_Company]/Members[Company]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CompanyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Asset_Company]/Members[Asset]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SupplierID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_AssetName_AssetCategory">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_AssetName_AssetCategory" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_AssetName_AssetCategory]/Members[AssetCategory]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CategoryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_AssetName_AssetCategory]/Members[AssetName]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CategoryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_CartonBox_Invoice">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_CartonBox_Invoice" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_CartonBox_Invoice]/Members[Invoice]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="InvoiceID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_CartonBox_Invoice]/Members[CartonBox]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="InvoiceID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_CartonBox_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_CartonBox_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_CartonBox_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_CartonBox_Order]/Members[CartonBox]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Company_CompanyType">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Company_CompanyType" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Company_CompanyType]/Members[CompanyType]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CompanyTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Company_CompanyType]/Members[Company]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CompanyTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_DyeingJO_Approval">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_DyeingJO_Approval" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJO_Approval]/Members[Approval]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ApprovalID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJO_Approval]/Members[DyeingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ApprovalID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_DyeingJO_Company">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_DyeingJO_Company" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJO_Company]/Members[Company]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CompanyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJO_Company]/Members[DyeingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SupplierID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_DyeingJO_GRNReciept">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_DyeingJO_GRNReciept" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJO_GRNReciept]/Members[GRNReciept]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="GRNReciptID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJO_GRNReciept]/Members[DyeingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="GRNRecieptID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_DyeingJO_JobOrder">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_DyeingJO_JobOrder" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJO_JobOrder]/Members[JobOrder]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJO_JobOrder]/Members[DyeingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_DyeingJO_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_DyeingJO_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJO_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJO_Order]/Members[DyeingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_DyeingJO_PurchaseOrders">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_DyeingJO_PurchaseOrders" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJO_PurchaseOrders]/Members[PurchaseOrders]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PurchaseOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJO_PurchaseOrders]/Members[DyeingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PurchaseOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_DyeingJoItem_DyeingJO">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_DyeingJoItem_DyeingJO" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJoItem_DyeingJO]/Members[DyeingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="DyeingJOId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJoItem_DyeingJO]/Members[DyeingJoItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="DyeingJOId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_DyeingJoItem_JobOrder">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_DyeingJoItem_JobOrder" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJoItem_JobOrder]/Members[JobOrder]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_DyeingJoItem_JobOrder]/Members[DyeingJoItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_GRNReciept_OrderedItem">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_GRNReciept_OrderedItem" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_GRNReciept_OrderedItem]/Members[OrderedItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderedItemID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_GRNReciept_OrderedItem]/Members[GRNReciept]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderedItemID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_GRNReciept_PurchaseOrders">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_GRNReciept_PurchaseOrders" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_GRNReciept_PurchaseOrders]/Members[PurchaseOrders]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PurchaseOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_GRNReciept_PurchaseOrders]/Members[GRNReciept]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SpawnedPurchaseOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_GRNReciept_ReceiptStatus">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_GRNReciept_ReceiptStatus" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_GRNReciept_ReceiptStatus]/Members[ReceiptStatus]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ReceiptStatusID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_GRNReciept_ReceiptStatus]/Members[GRNReciept]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ReceiptStatusID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_History_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_History_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_History_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_History_Order]/Members[History]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Invoice_Company">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Invoice_Company" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Invoice_Company]/Members[Company]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CompanyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Invoice_Company]/Members[Invoice]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ConsigneeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Invoice_Destination">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Invoice_Destination" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Invoice_Destination]/Members[Country]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CountryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Invoice_Destination]/Members[Invoice]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="DestinationCountryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Invoice_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Invoice_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Invoice_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Invoice_Order]/Members[Invoice]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Invoice_Origin">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Invoice_Origin" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Invoice_Origin]/Members[Country]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CountryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Invoice_Origin]/Members[Invoice]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OriginCountryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Invoice_ShipmentMode">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Invoice_ShipmentMode" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Invoice_ShipmentMode]/Members[ShipmentMode]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ShipmentModeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Invoice_ShipmentMode]/Members[Invoice]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CarriageByID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_JobOrder_Company">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_JobOrder_Company" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrder_Company]/Members[Company]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CompanyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrder_Company]/Members[JobOrder]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SupplierID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_JobOrder_GRNReciept">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_JobOrder_GRNReciept" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrder_GRNReciept]/Members[GRNReciept]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="GRNReciptID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrder_GRNReciept]/Members[JobOrder]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="GRNReciptID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_JobOrder_JobOrder">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_JobOrder_JobOrder" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrder_JobOrder]/Members[JobOrder]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrder_JobOrder]/Members[JobOrder1]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ParentJOID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_JobOrder_JobOrderType">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_JobOrder_JobOrderType" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrder_JobOrderType]/Members[JobOrderType]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrder_JobOrderType]/Members[JobOrder]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_JobOrderReceipt_JobOrder">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_JobOrderReceipt_JobOrder" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrderReceipt_JobOrder]/Members[JobOrder]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrderReceipt_JobOrder]/Members[JobOrderReceipt]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_JobOrderTolerance_JobOrderToleranceType">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_JobOrderTolerance_JobOrderToleranceType" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrderTolerance_JobOrderToleranceType]/Members[JobOrderToleranceType]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderToleranceTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrderTolerance_JobOrderToleranceType]/Members[JobOrderTolerance]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderToleraceTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_JobOrderTolerance_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_JobOrderTolerance_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrderTolerance_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_JobOrderTolerance_Order]/Members[JobOrderTolerance]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_KnittingJO_Approval">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_KnittingJO_Approval" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJO_Approval]/Members[Approval]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ApprovalID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJO_Approval]/Members[KnittingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ApprovalID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_KnittingJO_Company">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_KnittingJO_Company" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJO_Company]/Members[Company]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CompanyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJO_Company]/Members[KnittingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SupplierID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_KnittingJO_GRNReciept">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_KnittingJO_GRNReciept" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJO_GRNReciept]/Members[GRNReciept]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="GRNReciptID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJO_GRNReciept]/Members[KnittingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="GRNRecieptID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_KnittingJO_JobOrder">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_KnittingJO_JobOrder" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJO_JobOrder]/Members[JobOrder]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJO_JobOrder]/Members[KnittingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_KnittingJO_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_KnittingJO_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJO_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJO_Order]/Members[KnittingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_KnittingJoItem_JobOrder">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_KnittingJoItem_JobOrder" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJoItem_JobOrder]/Members[JobOrder]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJoItem_JobOrder]/Members[KnittingJoItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="JobOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_KnittingJoItem_KnittingJO">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_KnittingJoItem_KnittingJO" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJoItem_KnittingJO]/Members[KnittingJO]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="KnittingJOId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_KnittingJoItem_KnittingJO]/Members[KnittingJoItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="KnittingJoId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_MaterialsFromStock_MaterialStock">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_MaterialsFromStock_MaterialStock" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_MaterialsFromStock_MaterialStock]/Members[MaterialStock]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="MaterialStockID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_MaterialsFromStock_MaterialStock]/Members[MaterialsFromStock]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="MaterialStockID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_MaterialsFromStock_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_MaterialsFromStock_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_MaterialsFromStock_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_MaterialsFromStock_Order]/Members[MaterialsFromStock]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="FromOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_MaterialsFromStock_Order1">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_MaterialsFromStock_Order1" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_MaterialsFromStock_Order1]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_MaterialsFromStock_Order1]/Members[MaterialsFromStock]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ToOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_MaterialStock_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_MaterialStock_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_MaterialStock_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_MaterialStock_Order]/Members[MaterialStock]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_MaterialStock_SubMaterial">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_MaterialStock_SubMaterial" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_MaterialStock_SubMaterial]/Members[SubMaterial]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SubMaterialsNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_MaterialStock_SubMaterial]/Members[MaterialStock]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SubMaterialsNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_MaterialStock_UnitsOfMeasurement">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_MaterialStock_UnitsOfMeasurement" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_MaterialStock_UnitsOfMeasurement]/Members[UnitsOfMeasurement]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UOMID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_MaterialStock_UnitsOfMeasurement]/Members[MaterialStock]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UOMID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Order_CommissionValueType">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Order_CommissionValueType" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Order_CommissionValueType]/Members[CommissionValueType]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CommissionValueTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Order_CommissionValueType]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CommissionValueTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Order_Company">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Order_Company" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Order_Company]/Members[Company]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CompanyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Order_Company]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CustomerID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Order_OrderBy">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Order_OrderBy" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Order_OrderBy]/Members[Company]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CompanyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Order_OrderBy]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderByID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Order_OrderStatus">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Order_OrderStatus" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Order_OrderStatus]/Members[OrderStatus]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderStatusID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Order_OrderStatus]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderStatusID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Order_OrderThrough">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Order_OrderThrough" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Order_OrderThrough]/Members[OrderThrough]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderThroughID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Order_OrderThrough]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderThoughID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderCurrencyConversion_Currency">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderCurrencyConversion_Currency" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderCurrencyConversion_Currency]/Members[Currency]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CurrencyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderCurrencyConversion_Currency]/Members[OrderCurrencyConversion]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CurrencyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderCurrencyConversion_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderCurrencyConversion_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderCurrencyConversion_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderCurrencyConversion_Order]/Members[OrderCurrencyConversion]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderedItem_ProductMaterialItem">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderedItem_ProductMaterialItem" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderedItem_ProductMaterialItem]/Members[ProductMaterialItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductMaterialItemID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderedItem_ProductMaterialItem]/Members[OrderedItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductMaterialItemID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderedItem_PurchaseOrders">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderedItem_PurchaseOrders" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderedItem_PurchaseOrders]/Members[PurchaseOrders]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PurchaseOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderedItem_PurchaseOrders]/Members[OrderedItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PurchaseOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderProduct_Approval">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderProduct_Approval" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderProduct_Approval]/Members[Approval]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ApprovalID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderProduct_Approval]/Members[OrderProduct]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ApprovalID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderProduct_Currency">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderProduct_Currency" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderProduct_Currency]/Members[Currency]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CurrencyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderProduct_Currency]/Members[OrderProduct]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CurrencyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderProduct_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderProduct_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderProduct_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderProduct_Order]/Members[OrderProduct]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderProduct_ProductBreakUp">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderProduct_ProductBreakUp" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderProduct_ProductBreakUp]/Members[ProductBreakUp]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderProduct_ProductBreakUp]/Members[OrderProduct]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderProduct_ProductName">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderProduct_ProductName" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderProduct_ProductName]/Members[ProductName]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderProduct_ProductName]/Members[OrderProduct]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderProduct_UnitsOfMeasurement">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderProduct_UnitsOfMeasurement" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderProduct_UnitsOfMeasurement]/Members[UnitsOfMeasurement]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UOMID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderProduct_UnitsOfMeasurement]/Members[OrderProduct]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UOMID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderReportCard_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderReportCard_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderReportCard_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderReportCard_Order]/Members[OrderReportCard]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderReportCard_OrderReportCardType">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderReportCard_OrderReportCardType" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderReportCard_OrderReportCardType]/Members[OrderReportCardType]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderReportCardTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderReportCard_OrderReportCardType]/Members[OrderReportCard]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderReportCardTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_OrderStatus_UserRole">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_OrderStatus_UserRole" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderStatus_UserRole]/Members[UserRole]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UserRoleID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_OrderStatus_UserRole]/Members[OrderStatus]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="NextUserRoleID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Package_CartonBox">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Package_CartonBox" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Package_CartonBox]/Members[CartonBox]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CartonBoxID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Package_CartonBox]/Members[Package]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CartonBoxID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Package_ProductBreakUpSummary">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Package_ProductBreakUpSummary" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Package_ProductBreakUpSummary]/Members[ProductBreakUpSummary]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpSummaryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Package_ProductBreakUpSummary]/Members[Package]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpSummaryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductBreakUp_ShipmentMode">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductBreakUp_ShipmentMode" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductBreakUp_ShipmentMode]/Members[ShipmentMode]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ShipmentModeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductBreakUp_ShipmentMode]/Members[ProductBreakUp]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ShipmentModeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductBreakUpSummary_Color">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductBreakUpSummary_Color" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductBreakUpSummary_Color]/Members[Color]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ColorID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductBreakUpSummary_Color]/Members[ProductBreakUpSummary]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ColorID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductBreakUpSummary_OrderProduct">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductBreakUpSummary_OrderProduct" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductBreakUpSummary_OrderProduct]/Members[OrderProduct]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductBreakUpSummary_OrderProduct]/Members[ProductBreakUpSummary]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductBreakUpSummary_ProductSize">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductBreakUpSummary_ProductSize" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductBreakUpSummary_ProductSize]/Members[ProductSize]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductSizeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductBreakUpSummary_ProductSize]/Members[ProductBreakUpSummary]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductSizeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductCountryWiseBreakUp_Color">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductCountryWiseBreakUp_Color" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductCountryWiseBreakUp_Color]/Members[Color]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ColorID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductCountryWiseBreakUp_Color]/Members[ProductCountryWiseBreakUp]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ColorID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductCountryWiseBreakUp_Country">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductCountryWiseBreakUp_Country" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductCountryWiseBreakUp_Country]/Members[Country]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CountryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductCountryWiseBreakUp_Country]/Members[ProductCountryWiseBreakUp]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CountryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductCountryWiseBreakUp_ProductBreakUp">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductCountryWiseBreakUp_ProductBreakUp" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductCountryWiseBreakUp_ProductBreakUp]/Members[ProductBreakUp]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductCountryWiseBreakUp_ProductBreakUp]/Members[ProductCountryWiseBreakUp]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductCountryWiseBreakUp_ProductSize">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductCountryWiseBreakUp_ProductSize" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductCountryWiseBreakUp_ProductSize]/Members[ProductSize]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductSizeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductCountryWiseBreakUp_ProductSize]/Members[ProductCountryWiseBreakUp]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductSizeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductCutting_ProductBreakUpSummary">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductCutting_ProductBreakUpSummary" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductCutting_ProductBreakUpSummary]/Members[ProductBreakUpSummary]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpSummaryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductCutting_ProductBreakUpSummary]/Members[ProductCutting]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpSummaryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductExtraCost_Currency">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductExtraCost_Currency" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductExtraCost_Currency]/Members[Currency]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CurrencyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductExtraCost_Currency]/Members[ProductExtraCost]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CurrencyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductExtraCost_OrderProduct">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductExtraCost_OrderProduct" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductExtraCost_OrderProduct]/Members[OrderProduct]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductExtraCost_OrderProduct]/Members[ProductExtraCost]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductExtraCost_ProductExtraCostType">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductExtraCost_ProductExtraCostType" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductExtraCost_ProductExtraCostType]/Members[ProductExtraCostType]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ExtraCostTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductExtraCost_ProductExtraCostType]/Members[ProductExtraCost]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ExtraCostTypeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Production_ProductBreakUpSummary">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Production_ProductBreakUpSummary" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Production_ProductBreakUpSummary]/Members[ProductBreakUpSummary]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpSummaryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Production_ProductBreakUpSummary]/Members[Production]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpSummaryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductMaterialItem_Company">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductMaterialItem_Company" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterialItem_Company]/Members[Company]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CompanyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterialItem_Company]/Members[ProductMaterialItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SupplierID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductMaterialItem_Currency">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductMaterialItem_Currency" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterialItem_Currency]/Members[Currency]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CurrencyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterialItem_Currency]/Members[ProductMaterialItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CurrencyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductMaterialItem_ProductMaterials">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductMaterialItem_ProductMaterials" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterialItem_ProductMaterials]/Members[ProductMaterials]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="MaterialID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterialItem_ProductMaterials]/Members[ProductMaterialItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="MaterialID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductMaterialItem_PurchaseOrders">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductMaterialItem_PurchaseOrders" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterialItem_PurchaseOrders]/Members[PurchaseOrders]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PurchaseOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterialItem_PurchaseOrders]/Members[ProductMaterialItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PurchaseOrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductMaterialItem_SubMaterial">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductMaterialItem_SubMaterial" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterialItem_SubMaterial]/Members[SubMaterial]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SubMaterialsNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterialItem_SubMaterial]/Members[ProductMaterialItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SubMaterialNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductMaterialItem_UnitsOfMeasurement">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductMaterialItem_UnitsOfMeasurement" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterialItem_UnitsOfMeasurement]/Members[UnitsOfMeasurement]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UOMID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterialItem_UnitsOfMeasurement]/Members[ProductMaterialItem]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UOMID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductMaterials_Approval">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductMaterials_Approval" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterials_Approval]/Members[Approval]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ApprovalID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterials_Approval]/Members[ProductMaterials]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ApprovalID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductMaterials_Currency">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductMaterials_Currency" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterials_Currency]/Members[Currency]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CurrencyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterials_Currency]/Members[ProductMaterials]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CurrencyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductMaterials_MaterialName">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductMaterials_MaterialName" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterials_MaterialName]/Members[MaterialName]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="MaterialNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterials_MaterialName]/Members[ProductMaterials]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="MaterialNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductMaterials_OrderProduct">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductMaterials_OrderProduct" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterials_OrderProduct]/Members[OrderProduct]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterials_OrderProduct]/Members[ProductMaterials]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductMaterials_UnitsOfMeasurement">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductMaterials_UnitsOfMeasurement" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterials_UnitsOfMeasurement]/Members[UnitsOfMeasurement]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UOMID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductMaterials_UnitsOfMeasurement]/Members[ProductMaterials]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UOMID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductStock_Color">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductStock_Color" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductStock_Color]/Members[Color]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ColorID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductStock_Color]/Members[ProductStock]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ColorID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductStock_ProductName">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductStock_ProductName" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductStock_ProductName]/Members[ProductName]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductStock_ProductName]/Members[ProductStock]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_ProductStock_ProductSize">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_ProductStock_ProductSize" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductStock_ProductSize]/Members[ProductSize]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductSizeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_ProductStock_ProductSize]/Members[ProductStock]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductSizeID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_PurchaseOrders_Approval">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_PurchaseOrders_Approval" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_PurchaseOrders_Approval]/Members[Approval]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ApprovalID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_PurchaseOrders_Approval]/Members[PurchaseOrders]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ApprovalID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_PurchaseOrders_Company">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_PurchaseOrders_Company" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_PurchaseOrders_Company]/Members[Company]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="CompanyID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_PurchaseOrders_Company]/Members[PurchaseOrders]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="SupplierID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_PurchaseOrders_Order">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_PurchaseOrders_Order" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_PurchaseOrders_Order]/Members[Order]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_PurchaseOrders_Order]/Members[PurchaseOrders]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="OrderID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_PurchaseOrders_PurchaseOrderStatus">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_PurchaseOrders_PurchaseOrderStatus" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_PurchaseOrders_PurchaseOrderStatus]/Members[PurchaseOrderStatus]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PurchaseOrderStatusID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_PurchaseOrders_PurchaseOrderStatus]/Members[PurchaseOrders]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="PurchaseOrderStatusID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Quality_ProductBreakUpSummary">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Quality_ProductBreakUpSummary" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Quality_ProductBreakUpSummary]/Members[ProductBreakUpSummary]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpSummaryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Quality_ProductBreakUpSummary]/Members[Quality]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpSummaryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Shipment_ProductBreakUpSummary">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Shipment_ProductBreakUpSummary" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Shipment_ProductBreakUpSummary]/Members[ProductBreakUpSummary]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpSummaryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_Shipment_ProductBreakUpSummary]/Members[Shipment]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ProductBreakUpSummaryID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_SubMaterial_MaterialName">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_SubMaterial_MaterialName" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_SubMaterial_MaterialName]/Members[MaterialName]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="MaterialNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_SubMaterial_MaterialName]/Members[SubMaterial]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="MaterialNameID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_SubMaterial_UnitsOfMeasurement">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_SubMaterial_UnitsOfMeasurement" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_SubMaterial_UnitsOfMeasurement]/Members[UnitsOfMeasurement]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UOMID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_SubMaterial_UnitsOfMeasurement]/Members[SubMaterial]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UOMID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_User_UserRole">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_User_UserRole" />
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_User_UserRole]/Members[UserRole]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="UserRoleID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LightSwitchCommonModule:OrderManagerDBData/Members[FK_User_UserRole]/Members[User]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="RoleID" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ModelFragment>

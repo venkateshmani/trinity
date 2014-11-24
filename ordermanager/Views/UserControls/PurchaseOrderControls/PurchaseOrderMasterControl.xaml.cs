@@ -1,4 +1,5 @@
 ﻿using ordermanager.DatabaseModel;
+using ordermanager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,18 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
             poViewer.SetOrder(Order);
             newPoCreator.SetOrder(Order);
             grnControl.Order = order;
+
+            if (DBResources.Instance.CurrentUser.UserRole.CanGeneratePurchaseOrder)
+            {
+                tabCreateNewPurchaseOrder.Visibility = System.Windows.Visibility.Visible;
+                newPoCreator.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                tabCreateNewPurchaseOrder.Visibility = System.Windows.Visibility.Collapsed;
+                newPoCreator.Visibility = System.Windows.Visibility.Collapsed;
+            }
+
         }
     }
 }

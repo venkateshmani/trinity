@@ -72,6 +72,17 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
         }
 
 
+        public bool CanDeleteItems
+        {
+            get
+            {
+                if (DBResources.Instance.CurrentUser.UserRole.CanApprovePurchaseOrder)
+                    return true;
+
+                return false;
+            }
+        }
+
         private Currency m_POCurrency = null;
         public Currency POCurrency
         {

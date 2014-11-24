@@ -84,5 +84,10 @@ namespace ordermanager.Views.UserControls.GRN
             informer.PopupButton = PopupButton.OK;
             informer.ShowDialog();
         }
+
+        private void materialsReceiptGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

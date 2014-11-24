@@ -139,7 +139,7 @@
                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                 </TextBlock.Foreground>
                             </TextBlock>
-                            <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Text="Pieces">
+                            <TextBlock Style="{StaticResource ProductInfoStyle}" FontWeight="Bold" Text="{Binding SelectedProduct.UnitsOfMeasurementWrapper.Units}">
                                 <TextBlock.Foreground>
                                     <SolidColorBrush Color="{StaticResource AccentColor}" />
                                 </TextBlock.Foreground>

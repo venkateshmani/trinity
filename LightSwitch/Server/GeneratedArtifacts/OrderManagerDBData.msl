@@ -1,0 +1,741 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping CdmEntityContainer="OrderManagerDBDataObjectContext" StorageEntityContainer="OrderManagerDBDataStore">
+    <EntitySetMapping Name="Approvals">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Approval)">
+        <MappingFragment StoreEntitySet="Approvals">
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="ApprovalEntityTypeID" ColumnName="ApprovalEntityTypeID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApprovalEntityTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ApprovalEntityType)">
+        <MappingFragment StoreEntitySet="ApprovalEntityTypes">
+          <ScalarProperty Name="ApprovalEntityTypeID" ColumnName="ApprovalEntityTypeID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Assets">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Asset)">
+        <MappingFragment StoreEntitySet="Assets">
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="ValueInINR" ColumnName="ValueInINR" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="AssetNameID" ColumnName="AssetNameID" />
+          <ScalarProperty Name="BrandNameID" ColumnName="BrandNameID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.AssetCategory)">
+        <MappingFragment StoreEntitySet="AssetCategories">
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetNames">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.AssetName)">
+        <MappingFragment StoreEntitySet="AssetNames">
+          <ScalarProperty Name="AssetNameID" ColumnName="AssetNameID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Descritpion" ColumnName="Descritpion" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BrandNames">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.BrandName)">
+        <MappingFragment StoreEntitySet="BrandNames">
+          <ScalarProperty Name="BrandNameID" ColumnName="BrandNameID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CartonBoxes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.CartonBox)">
+        <MappingFragment StoreEntitySet="CartonBoxes">
+          <ScalarProperty Name="CartonBoxID" ColumnName="CartonBoxID" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="InvoiceGenerated" ColumnName="InvoiceGenerated" />
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Colors">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Color)">
+        <MappingFragment StoreEntitySet="Colors">
+          <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommissionValueTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.CommissionValueType)">
+        <MappingFragment StoreEntitySet="CommissionValueTypes">
+          <ScalarProperty Name="CommissionValueTypeID" ColumnName="CommissionValueTypeID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Company)">
+        <MappingFragment StoreEntitySet="Companies">
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="c_Alias" ColumnName="Alias" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="EmaiID" ColumnName="EmaiID" />
+          <ScalarProperty Name="TIN" ColumnName="TIN" />
+          <ScalarProperty Name="CST" ColumnName="CST" />
+          <ScalarProperty Name="CompanyTypeID" ColumnName="CompanyTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.CompanyType)">
+        <MappingFragment StoreEntitySet="CompanyTypes">
+          <ScalarProperty Name="CompanyTypeID" ColumnName="CompanyTypeID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Country)">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Currencies">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Currency)">
+        <MappingFragment StoreEntitySet="Currencies">
+          <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+          <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+          <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+          <ScalarProperty Name="DefaultValueInINR" ColumnName="DefaultValueInINR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DyeingJOes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.DyeingJO)">
+        <MappingFragment StoreEntitySet="DyeingJOes">
+          <ScalarProperty Name="DyeingJOId" ColumnName="DyeingJOId" />
+          <ScalarProperty Name="JODate" ColumnName="JODate" />
+          <ScalarProperty Name="QuoteNo" ColumnName="QuoteNo" />
+          <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+          <ScalarProperty Name="GRNRefNo" ColumnName="GRNRefNo" />
+          <ScalarProperty Name="OrderRef" ColumnName="OrderRef" />
+          <ScalarProperty Name="Process" ColumnName="Process" />
+          <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
+          <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+          <ScalarProperty Name="JoNo" ColumnName="JoNo" />
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="GRNRecieptID" ColumnName="GRNRecieptID" />
+          <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DyeingJoItems">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.DyeingJoItem)">
+        <MappingFragment StoreEntitySet="DyeingJoItems">
+          <ScalarProperty Name="DyeingJoItemsID" ColumnName="DyeingJoItemsID" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="QualityDescription" ColumnName="QualityDescription" />
+          <ScalarProperty Name="ReqGSM" ColumnName="ReqGSM" />
+          <ScalarProperty Name="ReqWidth" ColumnName="ReqWidth" />
+          <ScalarProperty Name="NetQty" ColumnName="NetQty" />
+          <ScalarProperty Name="RatePerKg" ColumnName="RatePerKg" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="DyeingJOId" ColumnName="DyeingJOId" />
+          <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GRNReciepts">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.GRNReciept)">
+        <MappingFragment StoreEntitySet="GRNReciepts">
+          <ScalarProperty Name="GRNReciptID" ColumnName="GRNReciptID" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="RecievedDate" ColumnName="RecievedDate" />
+          <ScalarProperty Name="InvoicedQuantity" ColumnName="InvoicedQuantity" />
+          <ScalarProperty Name="RecievedInHand" ColumnName="RecievedInHand" />
+          <ScalarProperty Name="OtherChargesInINR" ColumnName="OtherChargesInINR" />
+          <ScalarProperty Name="QualityPassedQuantity" ColumnName="QualityPassedQuantity" />
+          <ScalarProperty Name="QualityFailedQuantity" ColumnName="QualityFailedQuantity" />
+          <ScalarProperty Name="InvoiceValue" ColumnName="InvoiceValue" />
+          <ScalarProperty Name="SpawnedNewPurchaseOrder" ColumnName="SpawnedNewPurchaseOrder" />
+          <ScalarProperty Name="VechileNo" ColumnName="VechileNo" />
+          <ScalarProperty Name="OtherChargersName" ColumnName="OtherChargersName" />
+          <ScalarProperty Name="OrderedItemID" ColumnName="OrderedItemID" />
+          <ScalarProperty Name="SpawnedPurchaseOrderID" ColumnName="SpawnedPurchaseOrderID" />
+          <ScalarProperty Name="ReceiptStatusID" ColumnName="ReceiptStatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Histories">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.History)">
+        <MappingFragment StoreEntitySet="Histories">
+          <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+          <ScalarProperty Name="c_Date" ColumnName="Date" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="OrderChanges" ColumnName="OrderChanges" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Invoices">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Invoice)">
+        <MappingFragment StoreEntitySet="Invoices">
+          <ScalarProperty Name="InvoiceID" ColumnName="InvoiceID" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="ExporterRefNumber" ColumnName="ExporterRefNumber" />
+          <ScalarProperty Name="BuyerRefNumber" ColumnName="BuyerRefNumber" />
+          <ScalarProperty Name="PlaceOfReceiptByPrecarrier" ColumnName="PlaceOfReceiptByPrecarrier" />
+          <ScalarProperty Name="LoadingPlace" ColumnName="LoadingPlace" />
+          <ScalarProperty Name="DischargePlace" ColumnName="DischargePlace" />
+          <ScalarProperty Name="IsProforma" ColumnName="IsProforma" />
+          <ScalarProperty Name="ConsigneeID" ColumnName="ConsigneeID" />
+          <ScalarProperty Name="DestinationCountryID" ColumnName="DestinationCountryID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="OriginCountryID" ColumnName="OriginCountryID" />
+          <ScalarProperty Name="CarriageByID" ColumnName="CarriageByID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobOrders">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.JobOrder)">
+        <MappingFragment StoreEntitySet="JobOrders">
+          <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+          <ScalarProperty Name="JobQuantity" ColumnName="JobQuantity" />
+          <ScalarProperty Name="ChargesInINR" ColumnName="ChargesInINR" />
+          <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
+          <ScalarProperty Name="Instructions" ColumnName="Instructions" />
+          <ScalarProperty Name="PendingQuantity" ColumnName="PendingQuantity" />
+          <ScalarProperty Name="QualityPassed" ColumnName="QualityPassed" />
+          <ScalarProperty Name="QualityFailed" ColumnName="QualityFailed" />
+          <ScalarProperty Name="DCNumber" ColumnName="DCNumber" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="IsIssued" ColumnName="IsIssued" />
+          <ScalarProperty Name="IsWaitingForApproval" ColumnName="IsWaitingForApproval" />
+          <ScalarProperty Name="HasApproved" ColumnName="HasApproved" />
+          <ScalarProperty Name="FailedQuantityIssued" ColumnName="FailedQuantityIssued" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="RecievedAs" ColumnName="RecievedAs" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="GRNReciptID" ColumnName="GRNReciptID" />
+          <ScalarProperty Name="ParentJOID" ColumnName="ParentJOID" />
+          <ScalarProperty Name="JobOrderTypeID" ColumnName="JobOrderTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobOrderReceipts">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.JobOrderReceipt)">
+        <MappingFragment StoreEntitySet="JobOrderReceipts">
+          <ScalarProperty Name="JobOrderReceiptID" ColumnName="JobOrderReceiptID" />
+          <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="ReceivedQuantity" ColumnName="ReceivedQuantity" />
+          <ScalarProperty Name="Issued" ColumnName="Issued" />
+          <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobOrderTolerances">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.JobOrderTolerance)">
+        <MappingFragment StoreEntitySet="JobOrderTolerances">
+          <ScalarProperty Name="JobOrderToleranceID" ColumnName="JobOrderToleranceID" />
+          <ScalarProperty Name="ToleranceValueInPercentage" ColumnName="ToleranceValueInPercentage" />
+          <ScalarProperty Name="JobOrderToleraceTypeID" ColumnName="JobOrderToleraceTypeID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobOrderToleranceTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.JobOrderToleranceType)">
+        <MappingFragment StoreEntitySet="JobOrderToleranceTypes">
+          <ScalarProperty Name="JobOrderToleranceTypeID" ColumnName="JobOrderToleranceTypeID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="DefaultToleranceInPercentage" ColumnName="DefaultToleranceInPercentage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobOrderTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.JobOrderType)">
+        <MappingFragment StoreEntitySet="JobOrderTypes">
+          <ScalarProperty Name="JobOrderTypeID" ColumnName="JobOrderTypeID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KnittingJOes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.KnittingJO)">
+        <MappingFragment StoreEntitySet="KnittingJOes">
+          <ScalarProperty Name="KnittingJOId" ColumnName="KnittingJOId" />
+          <ScalarProperty Name="JoNo" ColumnName="JoNo" />
+          <ScalarProperty Name="JoDate" ColumnName="JoDate" />
+          <ScalarProperty Name="QuoteNo" ColumnName="QuoteNo" />
+          <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+          <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
+          <ScalarProperty Name="QualitySpecifications" ColumnName="QualitySpecifications" />
+          <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="GRNRecieptID" ColumnName="GRNRecieptID" />
+          <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KnittingJoItems">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.KnittingJoItem)">
+        <MappingFragment StoreEntitySet="KnittingJoItems">
+          <ScalarProperty Name="KnittingJoItemsId" ColumnName="KnittingJoItemsId" />
+          <ScalarProperty Name="NameOfProduct" ColumnName="NameOfProduct" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+          <ScalarProperty Name="KnittingJoId" ColumnName="KnittingJoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaterialNames">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.MaterialName)">
+        <MappingFragment StoreEntitySet="MaterialNames">
+          <ScalarProperty Name="MaterialNameID" ColumnName="MaterialNameID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaterialsFromStocks">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.MaterialsFromStock)">
+        <MappingFragment StoreEntitySet="MaterialsFromStocks">
+          <ScalarProperty Name="MaterialsFromStockID" ColumnName="MaterialsFromStockID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+          <ScalarProperty Name="MaterialStockID" ColumnName="MaterialStockID" />
+          <ScalarProperty Name="FromOrderID" ColumnName="FromOrderID" />
+          <ScalarProperty Name="ToOrderID" ColumnName="ToOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MaterialStocks">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.MaterialStock)">
+        <MappingFragment StoreEntitySet="MaterialStocks">
+          <ScalarProperty Name="MaterialStockID" ColumnName="MaterialStockID" />
+          <ScalarProperty Name="StockQuantity" ColumnName="StockQuantity" />
+          <ScalarProperty Name="IssuedQuantity" ColumnName="IssuedQuantity" />
+          <ScalarProperty Name="InStockDateTime" ColumnName="InStockDateTime" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="SubMaterialsNameID" ColumnName="SubMaterialsNameID" />
+          <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Order)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="ExpectedDeliveryDate" ColumnName="ExpectedDeliveryDate" />
+          <ScalarProperty Name="CommissionValue" ColumnName="CommissionValue" />
+          <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+          <ScalarProperty Name="TotalOrderValue" ColumnName="TotalOrderValue" />
+          <ScalarProperty Name="InternalDeliveryDate" ColumnName="InternalDeliveryDate" />
+          <ScalarProperty Name="OrderApprovedDate" ColumnName="OrderApprovedDate" />
+          <ScalarProperty Name="OrderConfirmedDate" ColumnName="OrderConfirmedDate" />
+          <ScalarProperty Name="CustomerOrderNumber" ColumnName="CustomerOrderNumber" />
+          <ScalarProperty Name="CommissionValueTypeID" ColumnName="CommissionValueTypeID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="OrderByID" ColumnName="OrderByID" />
+          <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
+          <ScalarProperty Name="OrderThoughID" ColumnName="OrderThoughID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderCurrencyConversions">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.OrderCurrencyConversion)">
+        <MappingFragment StoreEntitySet="OrderCurrencyConversions">
+          <ScalarProperty Name="OrderCurrencyConversionID" ColumnName="OrderCurrencyConversionID" />
+          <ScalarProperty Name="ValueInINR" ColumnName="ValueInINR" />
+          <ScalarProperty Name="ValueInINRForMaterials" ColumnName="ValueInINRForMaterials" />
+          <ScalarProperty Name="ValueInINRForSubMaterials" ColumnName="ValueInINRForSubMaterials" />
+          <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderedItems">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.OrderedItem)">
+        <MappingFragment StoreEntitySet="OrderedItems">
+          <ScalarProperty Name="OrderedItemID" ColumnName="OrderedItemID" />
+          <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
+          <ScalarProperty Name="ExcessiveQuantity" ColumnName="ExcessiveQuantity" />
+          <ScalarProperty Name="PendingQuantity" ColumnName="PendingQuantity" />
+          <ScalarProperty Name="TaxInINRPerUnit" ColumnName="TaxInINRPerUnit" />
+          <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+          <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+          <ScalarProperty Name="ProductMaterialItemID" ColumnName="ProductMaterialItemID" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderProducts">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.OrderProduct)">
+        <MappingFragment StoreEntitySet="OrderProducts">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ExpectedQuantity" ColumnName="ExpectedQuantity" />
+          <ScalarProperty Name="CustomerTargetPrice" ColumnName="CustomerTargetPrice" />
+          <ScalarProperty Name="OrderValue" ColumnName="OrderValue" />
+          <ScalarProperty Name="TotalConsumptionCost" ColumnName="TotalConsumptionCost" />
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+          <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="ProductBreakUpID" ColumnName="ProductBreakUpID" />
+          <ScalarProperty Name="ProductNameID" ColumnName="ProductNameID" />
+          <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderReportCards">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.OrderReportCard)">
+        <MappingFragment StoreEntitySet="OrderReportCards">
+          <ScalarProperty Name="OrderReportCardID" ColumnName="OrderReportCardID" />
+          <ScalarProperty Name="ProgressPercentage" ColumnName="ProgressPercentage" />
+          <ScalarProperty Name="RequiredFinishDate" ColumnName="RequiredFinishDate" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="OrderReportCardTypeID" ColumnName="OrderReportCardTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderReportCardTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.OrderReportCardType)">
+        <MappingFragment StoreEntitySet="OrderReportCardTypes">
+          <ScalarProperty Name="OrderReportCardTypeID" ColumnName="OrderReportCardTypeID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.OrderStatu)">
+        <MappingFragment StoreEntitySet="OrderStatus">
+          <ScalarProperty Name="OrderStatusID" ColumnName="OrderStatusID" />
+          <ScalarProperty Name="StatusLabel" ColumnName="StatusLabel" />
+          <ScalarProperty Name="DisplayLabel" ColumnName="DisplayLabel" />
+          <ScalarProperty Name="NextUserRoleID" ColumnName="NextUserRoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderThroughs">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.OrderThrough)">
+        <MappingFragment StoreEntitySet="OrderThroughs">
+          <ScalarProperty Name="OrderThroughID" ColumnName="OrderThroughID" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Packages">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Package)">
+        <MappingFragment StoreEntitySet="Packages">
+          <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+          <ScalarProperty Name="Packed" ColumnName="Packed" />
+          <ScalarProperty Name="Pending" ColumnName="Pending" />
+          <ScalarProperty Name="c_Date" ColumnName="Date" />
+          <ScalarProperty Name="ExcessToStock" ColumnName="ExcessToStock" />
+          <ScalarProperty Name="CartonBoxID" ColumnName="CartonBoxID" />
+          <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductBreakUps">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ProductBreakUp)">
+        <MappingFragment StoreEntitySet="ProductBreakUps">
+          <ScalarProperty Name="ProductBreakUpID" ColumnName="ProductBreakUpID" />
+          <ScalarProperty Name="Tolerance" ColumnName="Tolerance" />
+          <ScalarProperty Name="PriceTerms" ColumnName="PriceTerms" />
+          <ScalarProperty Name="PaymentTerms" ColumnName="PaymentTerms" />
+          <ScalarProperty Name="DocumentsRequired" ColumnName="DocumentsRequired" />
+          <ScalarProperty Name="ShipmentModeID" ColumnName="ShipmentModeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductBreakUpSummaries">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ProductBreakUpSummary)">
+        <MappingFragment StoreEntitySet="ProductBreakUpSummaries">
+          <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
+          <ScalarProperty Name="NumberOfPieces" ColumnName="NumberOfPieces" />
+          <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductSizeID" ColumnName="ProductSizeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductCountryWiseBreakUps">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ProductCountryWiseBreakUp)">
+        <MappingFragment StoreEntitySet="ProductCountryWiseBreakUps">
+          <ScalarProperty Name="ProductCountryWiseBreakUpID" ColumnName="ProductCountryWiseBreakUpID" />
+          <ScalarProperty Name="NumberOfPieces" ColumnName="NumberOfPieces" />
+          <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+          <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+          <ScalarProperty Name="ProductBreakUpID" ColumnName="ProductBreakUpID" />
+          <ScalarProperty Name="ProductSizeID" ColumnName="ProductSizeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductCuttings">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ProductCutting)">
+        <MappingFragment StoreEntitySet="ProductCuttings">
+          <ScalarProperty Name="CuttingID" ColumnName="CuttingID" />
+          <ScalarProperty Name="c_Date" ColumnName="Date" />
+          <ScalarProperty Name="CutQuantity" ColumnName="CutQuantity" />
+          <ScalarProperty Name="Pending" ColumnName="Pending" />
+          <ScalarProperty Name="ExcessToStock" ColumnName="ExcessToStock" />
+          <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductExtraCosts">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ProductExtraCost)">
+        <MappingFragment StoreEntitySet="ProductExtraCosts">
+          <ScalarProperty Name="ExtraCostID" ColumnName="ExtraCostID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ExtraCostTypeID" ColumnName="ExtraCostTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductExtraCostTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ProductExtraCostType)">
+        <MappingFragment StoreEntitySet="ProductExtraCostTypes">
+          <ScalarProperty Name="ExtraCostTypeID" ColumnName="ExtraCostTypeID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Productions">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Production)">
+        <MappingFragment StoreEntitySet="Productions">
+          <ScalarProperty Name="ProductionID" ColumnName="ProductionID" />
+          <ScalarProperty Name="CompletedQuantity" ColumnName="CompletedQuantity" />
+          <ScalarProperty Name="Pending" ColumnName="Pending" />
+          <ScalarProperty Name="c_Date" ColumnName="Date" />
+          <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductMaterialItems">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ProductMaterialItem)">
+        <MappingFragment StoreEntitySet="ProductMaterialItems">
+          <ScalarProperty Name="ProductMaterialItemID" ColumnName="ProductMaterialItemID" />
+          <ScalarProperty Name="c_Alias" ColumnName="Alias" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="LastPOGeneratedOn" ColumnName="LastPOGeneratedOn" />
+          <ScalarProperty Name="TaxInINR" ColumnName="TaxInINR" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="SubMaterialNameID" ColumnName="SubMaterialNameID" />
+          <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductMaterials">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ProductMaterial)">
+        <MappingFragment StoreEntitySet="ProductMaterials">
+          <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+          <ScalarProperty Name="Consumption" ColumnName="Consumption" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="ConsumptionCost" ColumnName="ConsumptionCost" />
+          <ScalarProperty Name="OtherCostInINR" ColumnName="OtherCostInINR" />
+          <ScalarProperty Name="OtherCostName" ColumnName="OtherCostName" />
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+          <ScalarProperty Name="CurrencyID" ColumnName="CurrencyID" />
+          <ScalarProperty Name="MaterialNameID" ColumnName="MaterialNameID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductNames">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ProductName)">
+        <MappingFragment StoreEntitySet="ProductNames">
+          <ScalarProperty Name="ProductNameID" ColumnName="ProductNameID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StyleID" ColumnName="StyleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductSizes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ProductSize)">
+        <MappingFragment StoreEntitySet="ProductSizes">
+          <ScalarProperty Name="ProductSizeID" ColumnName="ProductSizeID" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductStocks">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ProductStock)">
+        <MappingFragment StoreEntitySet="ProductStocks">
+          <ScalarProperty Name="ProductStockID" ColumnName="ProductStockID" />
+          <ScalarProperty Name="CutStock" ColumnName="CutStock" />
+          <ScalarProperty Name="ProductStock1" ColumnName="ProductStock" />
+          <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+          <ScalarProperty Name="ProductNameID" ColumnName="ProductNameID" />
+          <ScalarProperty Name="ProductSizeID" ColumnName="ProductSizeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseOrders">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.PurchaseOrder)">
+        <MappingFragment StoreEntitySet="PurchaseOrders">
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="PurchaseOrderDate" ColumnName="PurchaseOrderDate" />
+          <ScalarProperty Name="PurchaseOrderNumber" ColumnName="PurchaseOrderNumber" />
+          <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
+          <ScalarProperty Name="QuotationDate" ColumnName="QuotationDate" />
+          <ScalarProperty Name="QuotationNumber" ColumnName="QuotationNumber" />
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="PurchaseOrderStatusID" ColumnName="PurchaseOrderStatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseOrderStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.PurchaseOrderStatu)">
+        <MappingFragment StoreEntitySet="PurchaseOrderStatus">
+          <ScalarProperty Name="PurchaseOrderStatusID" ColumnName="PurchaseOrderStatusID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Qualities">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Quality)">
+        <MappingFragment StoreEntitySet="Qualities">
+          <ScalarProperty Name="QualityID" ColumnName="QualityID" />
+          <ScalarProperty Name="Passed" ColumnName="Passed" />
+          <ScalarProperty Name="Failed" ColumnName="Failed" />
+          <ScalarProperty Name="c_Date" ColumnName="Date" />
+          <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReceiptStatus">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ReceiptStatu)">
+        <MappingFragment StoreEntitySet="ReceiptStatus">
+          <ScalarProperty Name="ReceiptStatusID" ColumnName="ReceiptStatusID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Shipments">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.Shipment)">
+        <MappingFragment StoreEntitySet="Shipments">
+          <ScalarProperty Name="ShipmentID" ColumnName="ShipmentID" />
+          <ScalarProperty Name="Shipped" ColumnName="Shipped" />
+          <ScalarProperty Name="Rejected" ColumnName="Rejected" />
+          <ScalarProperty Name="c_Date" ColumnName="Date" />
+          <ScalarProperty Name="ProductBreakUpSummaryID" ColumnName="ProductBreakUpSummaryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShipmentModes">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.ShipmentMode)">
+        <MappingFragment StoreEntitySet="ShipmentModes">
+          <ScalarProperty Name="ShipmentModeID" ColumnName="ShipmentModeID" />
+          <ScalarProperty Name="Mode" ColumnName="Mode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SubMaterials">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.SubMaterial)">
+        <MappingFragment StoreEntitySet="SubMaterials">
+          <ScalarProperty Name="SubMaterialsNameID" ColumnName="SubMaterialsNameID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="InStock" ColumnName="InStock" />
+          <ScalarProperty Name="MaterialNameID" ColumnName="MaterialNameID" />
+          <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnitsOfMeasurements">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.UnitsOfMeasurement)">
+        <MappingFragment StoreEntitySet="UnitsOfMeasurements">
+          <ScalarProperty Name="UOMID" ColumnName="UOMID" />
+          <ScalarProperty Name="Units" ColumnName="Units" />
+          <ScalarProperty Name="Multiplier" ColumnName="Multiplier" />
+          <ScalarProperty Name="QuantityMultiplier" ColumnName="QuantityMultiplier" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(LightSwitchApplication.UserRole)">
+        <MappingFragment StoreEntitySet="UserRoles">
+          <ScalarProperty Name="UserRoleID" ColumnName="UserRoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="AliasName" ColumnName="AliasName" />
+          <ScalarProperty Name="CanCreateUser" ColumnName="CanCreateUser" />
+          <ScalarProperty Name="CanCreateNewEnquiry" ColumnName="CanCreateNewEnquiry" />
+          <ScalarProperty Name="CanAddMaterials" ColumnName="CanAddMaterials" />
+          <ScalarProperty Name="CanAddMaterialsCost" ColumnName="CanAddMaterialsCost" />
+          <ScalarProperty Name="CanAddConsumption" ColumnName="CanAddConsumption" />
+          <ScalarProperty Name="CanAddExtraCost" ColumnName="CanAddExtraCost" />
+          <ScalarProperty Name="CanApproveEnquiry" ColumnName="CanApproveEnquiry" />
+          <ScalarProperty Name="CanConfirmOrder" ColumnName="CanConfirmOrder" />
+          <ScalarProperty Name="CanAddSubMaterials" ColumnName="CanAddSubMaterials" />
+          <ScalarProperty Name="CanGeneratePurchaseOrder" ColumnName="CanGeneratePurchaseOrder" />
+          <ScalarProperty Name="CanModifyExecutionCutting" ColumnName="CanModifyExecutionCutting" />
+          <ScalarProperty Name="CanModifyExecutionProduction" ColumnName="CanModifyExecutionProduction" />
+          <ScalarProperty Name="CanModifyExecutionPackaging" ColumnName="CanModifyExecutionPackaging" />
+          <ScalarProperty Name="CanModifyExectionQuality" ColumnName="CanModifyExectionQuality" />
+          <ScalarProperty Name="CanModifyExecutionShipping" ColumnName="CanModifyExecutionShipping" />
+          <ScalarProperty Name="CanModifyGRN" ColumnName="CanModifyGRN" />
+          <ScalarProperty Name="CanModifyJobOrder" ColumnName="CanModifyJobOrder" />
+          <ScalarProperty Name="CanAddSubMaterialsCost" ColumnName="CanAddSubMaterialsCost" />
+          <ScalarProperty Name="CanApprovePurchaseOrder" ColumnName="CanApprovePurchaseOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

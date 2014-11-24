@@ -400,11 +400,6 @@ namespace ordermanager.Views.UserControls
         {
             if (m_Order != order)
             {
-                if (DBResources.Instance.CurrentUser.UserRole.CanGeneratePurchaseOrder)
-                    tabPurchaseOrder.Visibility = System.Windows.Visibility.Visible;
-                else
-                    tabPurchaseOrder.Visibility = System.Windows.Visibility.Collapsed;
-
                 m_Order = order;
                 UpdateView();
             }

@@ -92,7 +92,7 @@ namespace ordermanager.ViewModel
             CanEditMaterials = false;
             CanEditMaterialsCost = false;
             //CanEditConsumption = false;
-            //CanEditExtraCost = false;
+            CanEditExtraCost = false;
             if (m_Order != null)
             {
                 UserRole cuRole = DBResources.Instance.CurrentUser.UserRole;
@@ -103,15 +103,16 @@ namespace ordermanager.ViewModel
                     {
                         ActionButtonsVisibility = Visibility.Visible;
                         NewItemAddBtnVisibility = Visibility.Visible;
+                        AddNewExtraCostItemBtnVisibility = Visibility.Visible;
                         CanEditMaterials = true;
-                        //CanEditExtraCost = true;
+                        CanEditExtraCost = true;
                     }
                 }
                 if (cuRole.CanAddMaterialsCost && coStatus.OrderStatusID == (short)OrderStatusEnum.MaterialsAdded)
                 {
                     ActionButtonsVisibility = Visibility.Visible;
                     NewItemAddBtnVisibility = Visibility.Hidden;
-                    AddNewExtraCostItemBtnVisibility = Visibility.Visible;
+                    AddNewExtraCostItemBtnVisibility = Visibility.Hidden;
                     CanEditMaterialsCost = true;
                 }
             }
@@ -225,6 +226,21 @@ namespace ordermanager.ViewModel
                     m_CanEditMaterialsCost = value;
                     NotifyPropertyChanged("CanEditMaterialsCost");
                 }
+            }
+        }
+
+
+        private bool m_CanEditExtraCost = false;
+        public bool CanEditExtraCost
+        {
+            get
+            {
+                return m_CanEditExtraCost;
+            }
+            set
+            {
+                m_CanEditExtraCost = value;
+                NotifyPropertyChanged("CanEditExtraCost");
             }
         }
 

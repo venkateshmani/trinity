@@ -340,7 +340,8 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
             string path = (string)key.GetValue("Path");
             if (path != null)
             {
-                string processStartInfo = string.Format(@"outlook.exe /c ipm.note /a {0}", generatedFile);
+                path += @"\outlook.exe";
+                string processStartInfo = string.Format(@"{0} /c ipm.note /a {1}", path, generatedFile);
                 System.Diagnostics.Process.Start(processStartInfo);
             }
         }
@@ -431,6 +432,29 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
         }
 
         private void poCurrencySelection_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ProductMaterialItem selectedItem = gridDetails.SelectedItem as ProductMaterialItem;
+                ViewModel.SelectedItems.Remove(selectedItem);
+                selectedItem.PurchaseOrder = null;
+                DBResources.Instance.MarkObjectForDelete(selectedItem.OrderedItems.First());
+                selectedItem.OrderedItems.Clear();
+                DBResources.Instance.Save();
+                ViewModel.TotalPOValue -= selectedItem.ItemCostInItemCurrency;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void gridDetails_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

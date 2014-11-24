@@ -401,12 +401,12 @@ namespace ordermanager.DatabaseModel
                 ValidateUOM();
             }
 
-            if (DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterialsCost)
-            {
-                ValidateCurrency();
-                ValidateCost();
-                ValidateCurrencyValueInINR();
-            }
+            //if (DBResources.Instance.CurrentUser.UserRole.CanAddSubMaterialsCost)
+            //{
+            //    ValidateCurrency();
+            //    ValidateCost();
+            //    ValidateCurrencyValueInINR();
+            //}
             
             return !HasErrors;
         }

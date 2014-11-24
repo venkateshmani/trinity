@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ModelDocumentManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Documents>
+    <Document FullPath="C:\Users\Venkatesh\Documents\GitHub\trinity\LightSwitch\Common\Properties\Common.lsml" Checksum="CB1DE6C8C30A53959B5452AB6240909FDA4CF48822D68712B795920C87B44CAE" />
+    <Document FullPath="C:\Users\Venkatesh\Documents\GitHub\trinity\LightSwitch\Server\Properties\Service.lsml" Checksum="207E02239F4D90F40F9EB661D1829C19F1D6CDCF208A6B0D013B3E784B57963F" />
+  </Documents>
+</ModelDocumentManifest>

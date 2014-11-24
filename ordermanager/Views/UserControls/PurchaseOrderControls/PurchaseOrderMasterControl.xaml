@@ -48,7 +48,7 @@
     <Grid>
         <Border BorderThickness="1" BorderBrush="Gray">
             <TabControl x:Name="poMasterTabControl">
-                <TabItem Header="  Create New Purchase Order  ">
+                <TabItem x:Name="tabCreateNewPurchaseOrder" Header="  Create New Purchase Order  ">
                    <PurchaseOrderControls:CreateNewPurchaseOrderControl x:Name="newPoCreator"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                 </TabItem>
                 <TabItem Header="  Generated Purchase Orders  ">

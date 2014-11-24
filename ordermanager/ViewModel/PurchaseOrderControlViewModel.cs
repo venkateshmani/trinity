@@ -351,7 +351,10 @@ namespace ordermanager.ViewModel
             }
             set
             {
-                m_AddDeleteButtonVisibility = value;
+                if (DBResources.CurrentUser.UserRole.CanAddSubMaterials)
+                    m_AddDeleteButtonVisibility = value;
+                else
+                    m_AddDeleteButtonVisibility = Visibility.Collapsed; //Assume collapsed if the user doesnt have permissions to add sub materials
                 NotifyPropertyChanged("AddDeleteButtonVisibility");
             }
         }

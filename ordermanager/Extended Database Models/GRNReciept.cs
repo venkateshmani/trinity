@@ -337,7 +337,7 @@ namespace ordermanager.DatabaseModel
                 decimal totalInvoicedQuantity = AlreadyRecievedQuantity + InvoicedQuantityWrapper;
                 decimal maxAllowedQuantity = totalInvoicedQuantity + 0.05M * totalInvoicedQuantity;
 
-                if (OrderedItem.OrderedQuantity < totalInvoicedQuantity)
+                if ( (OrderedItem.OrderedQuantity + 0.05m * OrderedItem.OrderedQuantity ) < totalInvoicedQuantity)
                 {
                     AddError("InvoicedQuantityWrapper", "Exceeds 5% allowance", false);
                 }

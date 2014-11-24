@@ -194,6 +194,12 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Margin="5">
+                    <Button Content="Delete Item" x:Name="btnDelete" Width="125" Height="30" Foreground="White" Margin="10,5,5,5" ToolTip="Choose Items" HorizontalAlignment="Left"
+                           Click="btnDelete_Click_1" Visibility="{Binding CanDeleteItems, Converter={StaticResource BoolToVisibility}}">
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource ValidationColor5}" />
+                        </Button.Background>
+                    </Button>
                     <Button Content="Choose Items" x:Name="btnChooseItems" Width="125" Height="30" Foreground="White" Margin="10,5,5,5" ToolTip="Choose Items" HorizontalAlignment="Left"
                            Click="btnChooseItems_Click_1">
                         <Button.Background>
@@ -216,7 +222,7 @@
                                 HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
                                 GridLinesVisibility="All" AutoGenerateColumns="False" CanUserAddRows="False" CanUserResizeColumns="True" 
                                 HeadersVisibility="All"
-                                ItemsSource="{Binding SelectedItems}" Background="WhiteSmoke">
+                                ItemsSource="{Binding SelectedItems}" Background="WhiteSmoke" SelectionChanged="gridDetails_SelectionChanged" CanUserDeleteRows="False">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn x:Name="subMaterialColumn" Header="Item Name" Width="0.3*">
                                 <DataGridTemplateColumn.CellTemplate>

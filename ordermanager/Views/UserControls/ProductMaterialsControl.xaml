@@ -435,8 +435,8 @@
                                                         </Grid.ColumnDefinitions>
                                                         <ComboBox x:Name="extraTypeComboBox" Grid.Column="0" 
                                                                   PreviewMouseWheel="materialsComboBox_MouseWheel"
-                                                           IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                           IsEditable="{Binding Path=DataContext.CanEditMaterialsCost,ElementName=This}"
+                                                           IsReadOnly="{Binding Path=DataContext.CanEditExtraCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                           IsEditable="{Binding Path=DataContext.CanEditExtraCost,ElementName=This}"
                                                            IsHitTestVisible="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"
                                                            IsTabStop="{Binding RelativeSource={RelativeSource Mode=Self}, Path= IsEditable}"         
                                                            VerticalAlignment="Stretch" HorizontalAlignment="Stretch"                                                                
@@ -462,8 +462,8 @@
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <TextBox Text="{Binding CostWrapper, StringFormat={}{0:#0.####}, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
-                                                 IsReadOnly="{Binding Path=DataContext.CanEditMaterialsCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
-                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditMaterialsCost, ElementName=This}"/>
+                                                 IsReadOnly="{Binding Path=DataContext.CanEditExtraCost, Converter={StaticResource FlipBoolValueConverter},ElementName=This}"
+                                                 IsHitTestVisible="{Binding Path=DataContext.CanEditExtraCost, ElementName=This}"/>
                                                 </DataTemplate>
                                             </DataGridTemplateColumn.CellTemplate>
                                         </DataGridTemplateColumn>
