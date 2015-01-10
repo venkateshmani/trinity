@@ -345,7 +345,8 @@ namespace ordermanager.ViewModel
                 if (DBResources.Instance.CurrentUser.UserRole.CanApproveEnquiry)
                 {
                     if (DBResources.Instance.CurrentUser.UserRole.AliasName.ToUpper() == "SPECIAL" ||
-                        DBResources.Instance.CurrentUser.UserRole.AliasName.ToUpper() == "ROOT")
+                        DBResources.Instance.CurrentUser.UserRole.AliasName.ToUpper() == "ROOT" ||
+                        DBResources.Instance.CurrentUser.UserRole.AliasName.ToUpper() == "OWNER")
                         return true;
                     foreach (OrderProduct op in Order.OrderProducts)
                     {

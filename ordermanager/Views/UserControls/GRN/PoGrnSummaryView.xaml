@@ -138,7 +138,15 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Header="Invc. Qty" Width="0.1*">
+                                    <DataGridTemplateColumn Header="Already Recv. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox IsReadOnly="True"  Text="{Binding  AlreadyRecievedQuantity, StringFormat={}{0:#0.####}, Mode=OneWay}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+
+                                    <DataGridTemplateColumn Header="Invc. Qty" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                                 <TextBox Text="{Binding InvoicedQuantityWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, NotifyOnSourceUpdated=True, ValidatesOnNotifyDataErrors=True}" />
