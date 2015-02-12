@@ -18,6 +18,7 @@ namespace ordermanager.DatabaseModel
         {
             this.Approvals = new HashSet<Approval>();
             this.CartonBoxes = new HashSet<CartonBox>();
+            this.CompactingJoes = new HashSet<CompactingJo>();
             this.DyeingJOes = new HashSet<DyeingJO>();
             this.Histories = new HashSet<History>();
             this.Invoices = new HashSet<Invoice>();
@@ -51,6 +52,7 @@ namespace ordermanager.DatabaseModel
         public virtual ICollection<Approval> Approvals { get; set; }
         public virtual ICollection<CartonBox> CartonBoxes { get; set; }
         public virtual CommissionValueType CommissionValueType { get; set; }
+        public virtual ICollection<CompactingJo> CompactingJoes { get; set; }
         public virtual Company Company { get; set; }
         public virtual Company Company1 { get; set; }
         public virtual ICollection<DyeingJO> DyeingJOes { get; set; }

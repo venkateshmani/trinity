@@ -53,6 +53,21 @@ namespace ordermanager.ViewModel
             return string.Format("INV/{0}-{1}/{2}/{3}", startYear, endYear, timeStamp, invoiceUniqueNumber);
         }
 
+        public static string GetStyleInfo(Order order)
+        {
+            if (order != null)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (OrderProduct product in order.OrderProducts)
+                {
+                    sb.AppendLine(product.StyleID + " : " + product.ProductName.Name);
+                }
+                return sb.ToString();
+            }
+            else
+                return null;
+        }
+
         public static string GetSupplierInformation(Company supplier)
         {
             StringBuilder sb = new StringBuilder();
@@ -65,6 +80,12 @@ namespace ordermanager.ViewModel
 
             sb.AppendLine(supplier.City + "," + supplier.State + ",");
             sb.AppendLine(supplier.Country + ".");
+
+            sb.AppendLine("TIN No: ");
+            sb.Append(supplier.TIN);
+
+            sb.AppendLine("CST No: ");
+            sb.AppendLine(supplier.CST);
 
             return sb.ToString();
 

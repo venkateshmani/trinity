@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Reports
 {
-    public class DyeingJoParameters
+    public class JoGenericParameters
     {
         public string SupplierInformation { get; set; }
         public string PurchaseOrderNumber { get; set; }
@@ -17,6 +17,6 @@ namespace Reports
         public string QuoteDate { get; set; }
         public string Process { get; set; }
         public string TermsAndConditions { get; set; }
-        
+        public string JoOrderNo { get; set; }
     }
 }

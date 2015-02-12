@@ -33,7 +33,17 @@ namespace ordermanager.Views.UserControls
         public ProductMaterialsControl()
         {
             InitializeComponent();
+            this.Loaded += ProductMaterialsControl_Loaded;
             budgetReportControl = new BudgetReportControl();
+        }
+
+        void ProductMaterialsControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            Visibility v = System.Windows.Visibility.Collapsed;
+            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost)
+                v = System.Windows.Visibility.Visible;
+
+            btnGeneratePDF.Visibility = v;
         }
 
         public ProductMaterialsViewModel ViewModel

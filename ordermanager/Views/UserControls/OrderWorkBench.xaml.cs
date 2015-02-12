@@ -89,6 +89,14 @@ namespace ordermanager.Views.UserControls
             {
                 orderIDTxtBlk.Text = value.OrderID.ToString();
                 customerNameTxtBlk.Text = value.Customer.Name;
+                styleNames.Text = string.Empty;
+                foreach (var orderedProduct in value.OrderProducts)
+                {
+                    if (styleNames.Text != string.Empty)
+                        styleNames.Text += ", ";
+                    styleNames.Text += orderedProduct.ProductName.StyleID;
+                }
+
                 OrderStatusEnum status = (OrderStatusEnum)Enum.Parse(typeof(OrderStatusEnum), value.OrderStatu.StatusLabel);
 
                 if (status < OrderStatusEnum.OrderConfirmed)
@@ -134,17 +142,22 @@ namespace ordermanager.Views.UserControls
                 {
                     case "View Enquiry":
                         {
-                            if (viewEnquiry == null)
+                            
+
+                            if (tabViewEnquiry.Visibility == System.Windows.Visibility.Visible)
                             {
-                                viewEnquiry = new NewEnquiryFormUserControl
-                                { 
-                                   VerticalAlignment = System.Windows.VerticalAlignment.Stretch,
-                                   HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch, 
-                                   IsNewEnquiry = false  
-                                };
-                                viewEnquiryHolder.Child = viewEnquiry;
+                                if (viewEnquiry == null)
+                                {
+                                    viewEnquiry = new NewEnquiryFormUserControl
+                                    {
+                                        VerticalAlignment = System.Windows.VerticalAlignment.Stretch,
+                                        HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
+                                        IsNewEnquiry = false
+                                    };
+                                    viewEnquiryHolder.Child = viewEnquiry;
+                                }
+                                viewEnquiry.SetOrder(m_Order);
                             }
-                            viewEnquiry.SetOrder(m_Order);
                             break;
                         }
                     case "Budget":
@@ -186,7 +199,9 @@ namespace ordermanager.Views.UserControls
                                 poControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
                                 purchaseOrderControlHolder.Child = poControl;
                             }
-                            poControl.SetOrder(m_Order);
+                            if (poControl.Order != m_Order)
+                                poControl.SetOrder(m_Order);
+
                             break;
                         }
                     case "JO":
@@ -407,7 +422,14 @@ namespace ordermanager.Views.UserControls
 
         void OrderWorkBench_Loaded(object sender, RoutedEventArgs e)
         {
-
+            if (DBResources.Instance.CurrentUser.UserRole.CanCreateNewEnquiry)
+            {
+                tabViewEnquiry.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                tabViewEnquiry.Visibility = System.Windows.Visibility.Collapsed;
+            }
         }
 
         private void GoBack_MouseDown_1(object sender, MouseButtonEventArgs e)

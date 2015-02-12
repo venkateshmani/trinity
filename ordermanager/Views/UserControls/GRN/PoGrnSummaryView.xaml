@@ -20,6 +20,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatSlider.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <CollectionViewSource x:Key="grnReportViewSource" />
             <Style x:Key="DescriptionHeaderStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -64,26 +65,29 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Invoice #" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
-                        <TextBlock Text="Invoice Date" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
-                        <TextBlock Text="Recieved Date" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
-                        
-                        <TextBox x:Name="invoiceNumber" Text="{Binding InvoiceNumber}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Width="200" />
+                        <TextBlock Text="GRN #" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
+                        <TextBlock Text="Invoice #" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
+                        <TextBlock Text="Invoice Date" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
+                        <TextBlock Text="Recieved Date" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5" />
+
+                        <TextBlock Text="{Binding GRNIndex}"  Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
+                        <TextBox x:Name="invoiceNumber" Text="{Binding InvoiceNumber}" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Width="200" />
                         <DatePicker x:Name="invoiceDate" Width="150" 
-                                    Grid.Row="1" Grid.Column="1"
+                                    Grid.Row="2" Grid.Column="1"
                                     SelectedDate="{Binding InvoiceDate, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date"
                                     VerticalAlignment="Center" 
                                     Margin="5"/>
                         <DatePicker x:Name="recievedDate" Width="150" 
-                                    Grid.Row="2" Grid.Column="1"
+                                    Grid.Row="3" Grid.Column="1"
                                     SelectedDate="{Binding RecievedDate, NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}"
                                     HorizontalAlignment="Left"
                                     Controls:TextboxHelper.Watermark="Select a date"
@@ -252,6 +256,36 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                </Border>
+            </TabItem>
+            <TabItem Header="GRN Reports">
+                <Border Margin="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Margin="10">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <ComboBox x:Name="grnList" ItemsSource="{Binding GRNs}" Margin="10" SelectionChanged="ComboBox_SelectionChanged_1" />
+                                <Button Content="PDF"  Width="100" Click="Button_Click_1"/>
+                            </StackPanel>
+                        </Border>
+                        <DataGrid x:Name="grnReportGrid" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10" AutoGenerateColumns="False"
+                                  IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Po No." Binding="{Binding OrderedItem.PurchaseOrder.PurchaseOrderNumber}"/>
+                                <DataGridTextColumn Header="Item Name" Binding="{Binding OrderedItem.SubMaterial.Name}"/>
+                                <DataGridTextColumn Header="UOM" Binding="{Binding OrderedItem.UnitsOfMeasurement}"/>
+                                <DataGridTextColumn Header="Po Qty" Binding="{Binding OrderedItem.QuantityWrapper}"/>
+                                <DataGridTextColumn Header="Inv Qty" Binding="{Binding InvoicedQuantityWrapper}"/>
+                                <DataGridTextColumn Header="Recieved Qty" Binding="{Binding RecievedInHandWrapper}"/>
+                                <DataGridTextColumn Header="Cost/Unit" Binding="{Binding OrderedItem.CostPerUnit}"/>
+                                <DataGridTextColumn Header="Tax/Unit" Binding="{Binding OrderedItem.TaxPerUnitWrapper}"/>
+                                <DataGridTextColumn Header="Currency" Binding="{Binding OrderedItem.Currency.Symbol}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
                 </Border>
             </TabItem>
         </TabControl>

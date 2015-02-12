@@ -37,6 +37,8 @@ namespace ordermanager.DatabaseModel
         public DbSet<CartonBox> CartonBoxes { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<CommissionValueType> CommissionValueTypes { get; set; }
+        public DbSet<CompactingJo> CompactingJoes { get; set; }
+        public DbSet<CompactingJoItem> CompactingJoItems { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<CompanyType> CompanyTypes { get; set; }
         public DbSet<Country> Countries { get; set; }

@@ -28,7 +28,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\Server\OrderManager\Dropbox\</InstallUrl>
-    <ApplicationRevision>25</ApplicationRevision>
+    <ApplicationRevision>35</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -111,200 +111,206 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DatabaseModel\Approval.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ApprovalEntityType.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Asset.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\AssetCategory.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\AssetName.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\BrandName.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\CartonBox.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Color.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\CommissionValueType.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\CompactingJo.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\CompactingJoItem.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Company.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\CompanyType.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Country.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Currency.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\DyeingJO.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\DyeingJoItem.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\GRNReciept.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\History.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Invoice.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\IProductMaterialItem.cs" />
     <Compile Include="DatabaseModel\JobOrder.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\JobOrderReceipt.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\JobOrderTolerance.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\JobOrderToleranceType.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\JobOrderType.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\KnittingJO.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\KnittingJoItem.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\MaterialName.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\MaterialsFromStock.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\MaterialStock.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Order.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\OrderCurrencyConversion.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\OrderedItem.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseModel\OrderManagerModel.Context.cs">
+    <Compile Include="DatabaseModel\OrderManagerEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OrderManagerModel.Context.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseModel\OrderManagerModel.cs">
+    <Compile Include="DatabaseModel\OrderManagerEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseModel\OrderManagerModel.Designer.cs">
+    <Compile Include="DatabaseModel\OrderManagerEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OrderManagerModel.edmx</DependentUpon>
+      <DependentUpon>OrderManagerEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\OrderProduct.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\OrderReportCard.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\OrderReportCardType.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\OrderStatu.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\OrderThrough.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Package.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductBreakUp.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductBreakUpSummary.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductCountryWiseBreakUp.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductCutting.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductExtraCost.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductExtraCostType.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Production.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductMaterial.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductMaterialItem.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductName.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductSize.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ProductStock.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\PurchaseOrder.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\PurchaseOrderStatu.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Quality.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ReceiptStatu.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Shipment.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ShipmentMode.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\SubMaterial.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\Temp.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\UnitsOfMeasurement.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\User.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\UserRole.cs">
-      <DependentUpon>OrderManagerModel.tt</DependentUpon>
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Extended Database Models for UI\Company.cs" />
     <Compile Include="Extended Database Models for UI\GRNReciept.cs" />
@@ -312,6 +318,8 @@
     <Compile Include="Extended Database Models for UI\OrderReportCard.cs" />
     <Compile Include="Extended Database Models for UI\PurchaseOrder.cs" />
     <Compile Include="Extended Database Models\CartonBox.cs" />
+    <Compile Include="Extended Database Models\CompactingJo.cs" />
+    <Compile Include="Extended Database Models\CompactingJoItem.cs" />
     <Compile Include="Extended Database Models\Company.cs" />
     <Compile Include="Extended Database Models\DyeingJO.cs" />
     <Compile Include="Extended Database Models\DyeingJoItem.cs" />
@@ -391,12 +399,17 @@
     <Compile Include="ViewModel\Invoice\CreateNewInvoiceViewModel.cs" />
     <Compile Include="ViewModel\Invoice\GeneratedPurchaseOrderViewModel.cs" />
     <Compile Include="ViewModel\JobbOrderJOViewModel.cs" />
+    <Compile Include="ViewModel\JobOrder\CompactingJoGenerator.cs" />
+    <Compile Include="ViewModel\JobOrder\CompactingJoViewModel.cs" />
     <Compile Include="ViewModel\JobOrder\CreateJOViewModel.cs" />
     <Compile Include="ViewModel\JobOrder\DyeingJOGenerator.cs" />
     <Compile Include="ViewModel\JobOrder\DyeningJoViewModel.cs" />
+    <Compile Include="ViewModel\JobOrder\JobOrderBase.cs" />
     <Compile Include="ViewModel\JobOrder\JobOrderMangerViewModel.cs" />
     <Compile Include="ViewModel\JobOrder\KnittingJoGenerator.cs" />
     <Compile Include="ViewModel\JobOrder\KnittingJoViewModel.cs" />
+    <Compile Include="ViewModel\JobOrder\PrintingJoGenerator.cs" />
+    <Compile Include="ViewModel\JobOrder\PrintingJoViewModel.cs" />
     <Compile Include="ViewModel\JobWorkViewModel.cs" />
     <Compile Include="ViewModel\ManageControlViewModel.cs" />
     <Compile Include="ViewModel\NewEnquiryViewModel.cs" />
@@ -511,6 +524,9 @@
     </Compile>
     <Compile Include="Views\UserControls\JobOrderJOView.xaml.cs">
       <DependentUpon>JobOrderJOView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\JobOrder\CompactingJoControl.xaml.cs">
+      <DependentUpon>CompactingJoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\JobOrder\CreateJOControl.xaml.cs">
       <DependentUpon>CreateJOControl.xaml</DependentUpon>
@@ -715,6 +731,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\JobOrder\CompactingJoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\JobOrder\CreateJOControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -862,25 +882,23 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="DatabaseModel\OrderManagerModel.edmx">
+    <EntityDeploy Include="DatabaseModel\OrderManagerEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OrderManagerModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>OrderManagerEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DatabaseModel\OrderManagerModel.Context.tt">
+    <None Include="App.Config" />
+    <None Include="DatabaseModel\OrderManagerEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OrderManagerModel.edmx</DependentUpon>
-      <LastGenOutput>OrderManagerModel.Context.cs</LastGenOutput>
+      <DependentUpon>OrderManagerEntities.edmx</DependentUpon>
+      <LastGenOutput>OrderManagerEntities.Context.cs</LastGenOutput>
     </None>
-    <None Include="DatabaseModel\OrderManagerModel.edmx.diagram">
-      <DependentUpon>OrderManagerModel.edmx</DependentUpon>
+    <None Include="DatabaseModel\OrderManagerEntities.edmx.diagram">
+      <DependentUpon>OrderManagerEntities.edmx</DependentUpon>
     </None>
-    <None Include="DatabaseModel\OrderManagerModel.tt">
+    <None Include="DatabaseModel\OrderManagerEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OrderManagerModel.edmx</DependentUpon>
-      <LastGenOutput>OrderManagerModel.cs</LastGenOutput>
+      <DependentUpon>OrderManagerEntities.edmx</DependentUpon>
+      <LastGenOutput>OrderManagerEntities.cs</LastGenOutput>
     </None>
     <None Include="ordermanager_TemporaryKey.pfx" />
     <None Include="packages.config" />

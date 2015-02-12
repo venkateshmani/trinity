@@ -61,7 +61,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ListView x:Name="supplierList" Grid.Row="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=Order.PurchaseOrders}" SelectedIndex="-1" SelectionChanged="SupplierList_SelectionChanged">
+            <ListView x:Name="supplierList" Grid.Row="0" BorderBrush="Transparent" Margin="2" ItemsSource="{Binding Path=PurchaseOrders}" SelectedIndex="-1" SelectionChanged="SupplierList_SelectionChanged">
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource HideHeaderStyle}">
                         <GridViewColumn x:Name="supplierColumn" Width="{Binding ActualWidth, ElementName=supplierList, Converter={StaticResource subractor}, ConverterParameter=5}">

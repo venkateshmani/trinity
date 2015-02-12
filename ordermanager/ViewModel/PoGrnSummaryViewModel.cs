@@ -96,6 +96,30 @@ namespace ordermanager.ViewModel
             }
         }
 
+        private long m_GRNIndex = 0;
+        public long GRNIndex
+        {
+            get
+            {
+                if (m_GRNIndex == 0)
+                {
+                    var lastGRNRecord = DBResources.Instance.Context.GRNReciepts
+                     .OrderByDescending(m => m.GRNIndex) 
+                     .FirstOrDefault();
+
+                    if (lastGRNRecord == null)
+                        m_GRNIndex = 1;
+                    else
+                    {
+                        m_GRNIndex = lastGRNRecord.GRNIndex.Value + 1;
+                    }
+                }
+
+                return m_GRNIndex;
+            }
+        }
+
+
         public List<OrderedItem> AvailableItemsInPoToCreateGRNReceipt
         {
             get
@@ -125,6 +149,27 @@ namespace ordermanager.ViewModel
                 return items;
             }
         }
+
+        public List<long> GRNs
+        {
+            get
+            {
+                List<long> grns = new List<long>();
+
+                foreach (var orderedItem in PurchaseOrder.OrderedItems)
+                {
+                    foreach (var receipt in orderedItem.GRNReciepts)
+                    {
+                        if (!grns.Contains(receipt.GRNIndex.Value))
+                        {
+                            grns.Add(receipt.GRNIndex.Value);
+                        }
+                    }
+                }
+
+                return grns;
+            }
+        }
         
         public void AddItems(List<OrderedItem> items)
         {
@@ -136,6 +181,7 @@ namespace ordermanager.ViewModel
                 newReceipt.InvoiceNumber = this.InvoiceNumber;
                 newReceipt.InvoiceDate = this.InvoiceDate;
                 newReceipt.RecievedDate = this.ReceivedDate;
+                newReceipt.GRNIndex = this.GRNIndex;
                 this.Receipts.Add(newReceipt);
                 item.GRNReciepts.Add(newReceipt);
             }
@@ -214,5 +260,11 @@ namespace ordermanager.ViewModel
         }
                 
         #endregion 
+    }
+
+    public class GRNInfo
+    {
+        public long GRNNumber { get; set; }
+        public DateTime GRNDateTime { get; set; }
     }
 }

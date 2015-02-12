@@ -16,6 +16,8 @@ namespace ordermanager.DatabaseModel
     {
         public JobOrder()
         {
+            this.CompactingJoes = new HashSet<CompactingJo>();
+            this.CompactingJoItems = new HashSet<CompactingJoItem>();
             this.DyeingJOes = new HashSet<DyeingJO>();
             this.DyeingJoItems = new HashSet<DyeingJoItem>();
             this.JobOrder1 = new HashSet<JobOrder>();
@@ -45,6 +47,8 @@ namespace ordermanager.DatabaseModel
         public string ItemName { get; set; }
         public string RecievedAs { get; set; }
     
+        public virtual ICollection<CompactingJo> CompactingJoes { get; set; }
+        public virtual ICollection<CompactingJoItem> CompactingJoItems { get; set; }
         public virtual Company Company { get; set; }
         public virtual ICollection<DyeingJO> DyeingJOes { get; set; }
         public virtual ICollection<DyeingJoItem> DyeingJoItems { get; set; }

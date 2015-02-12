@@ -17,6 +17,7 @@ namespace ordermanager.DatabaseModel
         public Company()
         {
             this.Assets = new HashSet<Asset>();
+            this.CompactingJoes = new HashSet<CompactingJo>();
             this.DyeingJOes = new HashSet<DyeingJO>();
             this.Invoices = new HashSet<Invoice>();
             this.JobOrders = new HashSet<JobOrder>();
@@ -45,6 +46,7 @@ namespace ordermanager.DatabaseModel
         public string CST { get; set; }
     
         public virtual ICollection<Asset> Assets { get; set; }
+        public virtual ICollection<CompactingJo> CompactingJoes { get; set; }
         public virtual CompanyType CompanyType { get; set; }
         public virtual ICollection<DyeingJO> DyeingJOes { get; set; }
         public virtual ICollection<Invoice> Invoices { get; set; }

@@ -118,6 +118,10 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 {
                     joControl.OpenExistingJo(jobOrderInfo as KnittingJO);
                 }
+                else if (jobOrderInfo.Type == "Compacting")
+                {
+                    joControl.OpenExistingJo(jobOrderInfo as CompactingJo);
+                }
             }
         }
     }

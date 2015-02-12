@@ -35,7 +35,11 @@ namespace ordermanager.Views.UserControls.JobOrderControls
         }
 
 
-        
+        public void InitializeForCompacting()
+        {
+            jobOrderType.SelectedIndex = 3;
+            InitializeControls();
+        }
 
         public void InitializeForDyeing()
         {
@@ -169,6 +173,11 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             knittingJOControl.CreateNewJo(Order, Quantity, GRNReciept, JobOrderIssued, ParentJobOrder);
         }
 
+        public void CreateNewCompactingJo()
+        {
+            compactingJoControl.CreateNewJo(Order, Quantity, PurchaseOrder, GRNRefNo, GRNReciept, JobOrderIssued, ParentJobOrder); 
+        }
+
         public void OpenExistingJo(object jo)
         {
             if (jo is DyeingJO)
@@ -176,6 +185,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 dyeingJOControl.OpenExistingJo(jo as DyeingJO);
                 dyeingJOControl.Visibility = System.Windows.Visibility.Visible;
                 knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                compactingJoControl.Visibility = Visibility.Hidden;
                 actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
                 selectedJobOrderControl = dyeingJOControl;
                 ViewModel.CurrentViewActionButtons = dyeingJOControl.ViewModel as IActionButtons;
@@ -185,9 +195,20 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                 knittingJOControl.OpenExistingJo(jo as KnittingJO);
                 dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
                 knittingJOControl.Visibility = System.Windows.Visibility.Visible;
+                compactingJoControl.Visibility = Visibility.Hidden;
                 actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
                 selectedJobOrderControl = knittingJOControl;
                 ViewModel.CurrentViewActionButtons = knittingJOControl.ViewModel as IActionButtons;
+            }
+            else if (jo is CompactingJo)
+            {
+                compactingJoControl.OpenExistingJo(jo as CompactingJo);
+                dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                compactingJoControl.Visibility = Visibility.Visible;
+                actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
+                selectedJobOrderControl = compactingJoControl;
+                ViewModel.CurrentViewActionButtons = compactingJoControl.ViewModel as IActionButtons;
             }
 
             joTypeSelection.Visibility = System.Windows.Visibility.Collapsed;
@@ -212,6 +233,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                     CreateNewDyeingJo();
                     dyeingJOControl.Visibility = System.Windows.Visibility.Visible;
                     knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                    compactingJoControl.Visibility = Visibility.Hidden;
                     actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
                     selectedJobOrderControl = dyeingJOControl;
                 }
@@ -220,8 +242,18 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                     CreateNewKnittingJo();
                     dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
                     knittingJOControl.Visibility = System.Windows.Visibility.Visible;
+                    compactingJoControl.Visibility = Visibility.Hidden;
                     actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
                     selectedJobOrderControl = knittingJOControl;
+                }
+                else if (selectedItem.Content.ToString() == "Compacting")
+                {
+                    CreateNewCompactingJo();
+                    dyeingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                    knittingJOControl.Visibility = System.Windows.Visibility.Hidden;
+                    compactingJoControl.Visibility = Visibility.Visible;
+                    actionButtonsContainer.Visibility = System.Windows.Visibility.Visible;
+                    selectedJobOrderControl = compactingJoControl;
                 }
                 else
                 {
@@ -284,6 +316,10 @@ namespace ordermanager.Views.UserControls.JobOrderControls
                         {
                             ((KnittingJoControl)selectedJobOrderControl).ViewModel = null;
                         }
+                        else if (selectedJobOrderControl is CompactingJoControl)
+                        {
+                            ((CompactingJoControl) selectedJobOrderControl).ViewModel = null;
+                        }
 
                         actionButtonsContainer.Visibility = System.Windows.Visibility.Collapsed;
                         selectedJobOrderControl = null;
@@ -324,6 +360,19 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             {
                 CreateJOViewModel viewModel = new CreateJOViewModel();
                 viewModel.CurrentViewActionButtons = knittingJOControl.ViewModel as IActionButtons;
+
+                this.ViewModel = viewModel;
+            }
+        }
+
+        private void CompactingJoControl_OnIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (compactingJoControl.Visibility == System.Windows.Visibility.Visible)
+            {
+                var viewModel = new CreateJOViewModel
+                {
+                    CurrentViewActionButtons = compactingJoControl.ViewModel
+                };
 
                 this.ViewModel = viewModel;
             }

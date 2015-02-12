@@ -16,6 +16,7 @@ namespace ordermanager.DatabaseModel
     {
         public GRNReciept()
         {
+            this.CompactingJoes = new HashSet<CompactingJo>();
             this.DyeingJOes = new HashSet<DyeingJO>();
             this.JobOrders = new HashSet<JobOrder>();
             this.KnittingJOes = new HashSet<KnittingJO>();
@@ -37,7 +38,9 @@ namespace ordermanager.DatabaseModel
         public long OrderedItemID { get; set; }
         public string VechileNo { get; set; }
         public string OtherChargersName { get; set; }
+        public Nullable<long> GRNIndex { get; set; }
     
+        public virtual ICollection<CompactingJo> CompactingJoes { get; set; }
         public virtual ICollection<DyeingJO> DyeingJOes { get; set; }
         public virtual OrderedItem OrderedItem { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }

@@ -87,6 +87,44 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CompactingJoes">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.CompactingJo">
+        <MappingFragment StoreEntitySet="CompactingJo">
+          <ScalarProperty Name="CompactingJoId" ColumnName="CompactingJoId" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="PurchaseOrderID" ColumnName="PurchaseOrderID" />
+          <ScalarProperty Name="JODate" ColumnName="JODate" />
+          <ScalarProperty Name="QuoteNo" ColumnName="QuoteNo" />
+          <ScalarProperty Name="QuoteDate" ColumnName="QuoteDate" />
+          <ScalarProperty Name="GRNRefNo" ColumnName="GRNRefNo" />
+          <ScalarProperty Name="OrderRef" ColumnName="OrderRef" />
+          <ScalarProperty Name="Process" ColumnName="Process" />
+          <ScalarProperty Name="TermsAndConditions" ColumnName="TermsAndConditions" />
+          <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+          <ScalarProperty Name="JoNo" ColumnName="JoNo" />
+          <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+          <ScalarProperty Name="GRNRecieptID" ColumnName="GRNRecieptID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompactingJoItems">
+      <EntityTypeMapping TypeName="OrderManagerDBModel.CompactingJoItem">
+        <MappingFragment StoreEntitySet="CompactingJoItem">
+          <ScalarProperty Name="CompactingJoItemID" ColumnName="CompactingJoItemID" />
+          <ScalarProperty Name="CompactingJoId" ColumnName="CompactingJoId" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="QualityDescription" ColumnName="QualityDescription" />
+          <ScalarProperty Name="ReqGSM" ColumnName="ReqGSM" />
+          <ScalarProperty Name="ReqWidth" ColumnName="ReqWidth" />
+          <ScalarProperty Name="NetQty" ColumnName="NetQty" />
+          <ScalarProperty Name="RatePerKg" ColumnName="RatePerKg" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Companies">
       <EntityTypeMapping TypeName="OrderManagerDBModel.Company">
         <MappingFragment StoreEntitySet="Company">

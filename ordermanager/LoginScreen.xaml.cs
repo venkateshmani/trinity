@@ -17,6 +17,7 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Configuration;
 using ordermanager.Utilities;
+using Reports;
 
 namespace ordermanager
 {

@@ -167,7 +167,13 @@ namespace ordermanager.Views.UserControls
                 sb.AppendLine(supplier.Address2 + ",");
 
             sb.AppendLine(supplier.City + "," + supplier.State + ",");
-            sb.AppendLine(supplier.Country + "."); 
+            sb.AppendLine(supplier.Country + ".");
+
+            sb.AppendLine("TIN No: ");
+            sb.Append(supplier.TIN);
+
+            sb.AppendLine("CST No: ");
+            sb.AppendLine(supplier.CST);
 
             return sb.ToString();
 

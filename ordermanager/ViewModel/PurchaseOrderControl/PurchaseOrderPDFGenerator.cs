@@ -140,6 +140,12 @@ namespace ordermanager.ViewModel.PurchaseOrderControl
             sb.AppendLine(supplier.City + "," + supplier.State + ",");
             sb.AppendLine(supplier.Country + ".");
 
+            sb.Append("TIN No: ");
+            sb.AppendLine(supplier.TIN);
+
+            sb.Append("CST No: ");
+            sb.AppendLine(supplier.CST);
+
             return sb.ToString();
 
         }

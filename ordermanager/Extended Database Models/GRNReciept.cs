@@ -62,7 +62,11 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                if (this.JobOrders.Count > 0 || this.QualityPassedQuantity == 0 || this.ReceiptStatu != null)
+                if (this.JobOrders.Count > 0 || 
+                    this.DyeingJOes.Count > 0 ||
+                    this.KnittingJOes.Count > 0 ||
+                    this.CompactingJoes.Count > 0  ||
+                    this.QualityPassedQuantity == 0 || this.ReceiptStatu != null)
                 {
                     return System.Windows.Visibility.Collapsed;
                 }
@@ -100,7 +104,11 @@ namespace ordermanager.DatabaseModel
         {
             get
             {
-                if (this.JobOrders.Count > 0 || this.ReceiptStatu != null)
+                if (this.JobOrders.Count > 0 ||
+                    this.DyeingJOes.Count > 0 ||
+                    this.KnittingJOes.Count > 0 ||
+                    this.CompactingJoes.Count > 0 ||
+                    this.QualityPassedQuantity == 0 || this.ReceiptStatu != null)
                 {
                     return "Issued";
                 }
@@ -117,7 +125,7 @@ namespace ordermanager.DatabaseModel
                 {
                     return "New PO: " + this.PurchaseOrder.PurchaseOrderNumber;
                 }
-
+                
                 return string.Empty;
             }
         }
@@ -145,113 +153,12 @@ namespace ordermanager.DatabaseModel
             }
         }
 
-        //private ObservableCollection<JobOrder> m_KnittingItemsWrapper = null;
-        //private ObservableCollection<JobOrder> m_DyeingItemsWrapper = null;
-        //private ObservableCollection<JobOrder> m_PrintingItemsWrapper = null;
-        //private ObservableCollection<JobOrder> m_CompactingItemsWrapper = null;
-        //private ObservableCollection<JobOrder> m_WashingItemsWrapper = null;
-        //private ObservableCollection<JobOrder> m_OtherItemsWrapper = null;
 
-        //public ObservableCollection<JobOrder> KnittingItemsWrapper
-        //{
-        //    get
-        //    {
-        //        if (m_KnittingItemsWrapper == null)
-        //        {
-        //            m_KnittingItemsWrapper = GetJobOrdersByType("Knitting");
-        //        }
-        //        return m_KnittingItemsWrapper;
-        //    }
-        //    private set
-        //    {
-        //        m_KnittingItemsWrapper = value;
-        //    }
-        //}
-
-        //public ObservableCollection<JobOrder> DyeingItemsWrapper
-        //{
-        //    get
-        //    {
-        //        if (m_DyeingItemsWrapper == null)
-        //        {
-        //            m_DyeingItemsWrapper = GetJobOrdersByType("Dyeing");
-        //        }
-        //        return m_DyeingItemsWrapper;
-        //    }
-        //    private set
-        //    {
-        //        m_DyeingItemsWrapper = value;
-        //    }
-        //}
-
-        //public ObservableCollection<JobOrder> PrintingItemsWrapper
-        //{
-        //    get
-        //    {
-        //        if (m_PrintingItemsWrapper == null)
-        //        {
-        //            m_PrintingItemsWrapper = GetJobOrdersByType("Printing");
-        //        }
-        //        return m_PrintingItemsWrapper;
-        //    }
-        //    private set
-        //    {
-        //        m_PrintingItemsWrapper = value;
-        //    }
-        //}
-
-        //public ObservableCollection<JobOrder> CompactingItemsWrapper
-        //{
-        //    get
-        //    {
-        //        if (m_CompactingItemsWrapper == null)
-        //        {
-        //            m_CompactingItemsWrapper = GetJobOrdersByType("Compacting");
-        //        }
-        //        return m_CompactingItemsWrapper;
-        //    }
-        //    private set
-        //    {
-        //        m_CompactingItemsWrapper = value;
-        //    }
-        //}
-
-        //public ObservableCollection<JobOrder> WashingItemsWrapper
-        //{
-        //    get
-        //    {
-        //        if (m_WashingItemsWrapper == null)
-        //        {
-        //            m_WashingItemsWrapper = GetJobOrdersByType("Washing");
-        //        }
-        //        return m_WashingItemsWrapper;
-        //    }
-        //    private set
-        //    {
-        //        m_WashingItemsWrapper = value;
-        //    }
-        //}
-
-        //public ObservableCollection<JobOrder> OtherItemsWrapper
-        //{
-        //    get
-        //    {
-        //        if (m_OtherItemsWrapper == null)
-        //        {
-        //            m_OtherItemsWrapper = GetJobOrdersByType("Other");
-        //        }
-        //        return m_OtherItemsWrapper;
-        //    }
-        //    private set
-        //    {
-        //        m_OtherItemsWrapper = value;
-        //    }
-        //}
-
-        //private ObservableCollection<JobOrder> GetJobOrdersByType(string type)
-        //{
-        //    return new ObservableCollection<JobOrder>(JobOrders.Where(jo => jo.JobOrderType.Type == type).Select(jo => jo).ToList());
-        //}
+        public string GRNNumber
+        {
+            get { return "G" + this.OrderedItem.PurchaseOrder.OrderID + "-" + this.GRNReciptID; }
+            set {}
+        }
 
 
         public decimal InvoicedQuantityWrapper

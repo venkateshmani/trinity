@@ -16,6 +16,7 @@ namespace ordermanager.DatabaseModel
     {
         public PurchaseOrder()
         {
+            this.CompactingJoes = new HashSet<CompactingJo>();
             this.DyeingJOes = new HashSet<DyeingJO>();
             this.GRNReciepts = new HashSet<GRNReciept>();
             this.OrderedItems = new HashSet<OrderedItem>();
@@ -34,6 +35,7 @@ namespace ordermanager.DatabaseModel
         public string QuotationNumber { get; set; }
     
         public virtual Approval Approval { get; set; }
+        public virtual ICollection<CompactingJo> CompactingJoes { get; set; }
         public virtual Company Company { get; set; }
         public virtual ICollection<DyeingJO> DyeingJOes { get; set; }
         public virtual ICollection<GRNReciept> GRNReciepts { get; set; }

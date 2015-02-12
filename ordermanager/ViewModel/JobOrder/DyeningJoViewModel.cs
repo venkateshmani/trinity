@@ -77,9 +77,9 @@ namespace ordermanager.ViewModel.JobOrderControls
             return message;
         }
 
-        public DyeingJoParameters GetReportParameters()
+        public JoGenericParameters GetReportParameters()
         {
-            DyeingJoParameters parameters = new DyeingJoParameters();
+            JoGenericParameters parameters = new JoGenericParameters();
 
             parameters.GRNRef = JO.GRNRefNo;
             parameters.OrderRef = JO.OrderRef;
@@ -90,7 +90,7 @@ namespace ordermanager.ViewModel.JobOrderControls
             parameters.QuoteNo = JO.QuoteNo;
             parameters.SupplierInformation = Constants.GetSupplierInformation(JO.Supplier);
             parameters.TermsAndConditions = JO.TermsAndConditions;
-
+            parameters.JoOrderNo = JO.JoNoWrapper;
             return parameters;
         }
 

@@ -11,7 +11,7 @@ namespace ordermanager.ViewModel.JobOrderControls
     public class DyeingJOGenerator
     {
         private Reports.DyeingJoControl dyeingJoControl = null;
-        public DyeingJOGenerator(DyeingJO jo, DyeingJoParameters parameters)
+        public DyeingJOGenerator(DyeingJO jo, JoGenericParameters parameters)
         {
             dyeingJoControl = new Reports.DyeingJoControl();
             JO = jo;
@@ -19,8 +19,8 @@ namespace ordermanager.ViewModel.JobOrderControls
         }
 
 
-        private DyeingJoParameters m_parameters = null;
-        public DyeingJoParameters Parameters
+        private JoGenericParameters m_parameters = null;
+        public JoGenericParameters Parameters
         {
             get
             {

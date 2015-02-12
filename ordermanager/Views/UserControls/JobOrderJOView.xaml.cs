@@ -278,8 +278,19 @@ namespace ordermanager.Views.UserControls
                     dyeWindow.InitializeForDyeing();
                     dyeWindow.ShowDialog();
                     break;
-                case "Printing":
                 case "Compacting":
+                    CreateJoWindow compactingWindows = new CreateJoWindow();
+                    compactingWindows.Order = jOrder.GRNReciept.OrderedItem.PurchaseOrder.Order;
+                    compactingWindows.PurchaseOrder = jOrder.GRNReciept.OrderedItem.PurchaseOrder;
+                    compactingWindows.ParentJobOrder = jOrder;
+                    compactingWindows.Quantity = jOrder.QualityFailed.GetValueOrDefault(0);
+                    compactingWindows.GRNRefNo = jOrder.GRNReciept.GRNReciptID.ToString();
+                    compactingWindows.GRNReciept = jOrder.GRNReciept;
+                    jOrder.IsIssued = true;
+                    compactingWindows.InitializeForCompacting();
+                    compactingWindows.ShowDialog();
+                    break;
+                case "Printing":
                 case "Washing":
                 case "Other":
                 case "Stock":
@@ -342,8 +353,19 @@ namespace ordermanager.Views.UserControls
                     dyeWindow.InitializeForDyeing();
                     dyeWindow.ShowDialog();
                     break;
-                case "Printing":
                 case "Compacting":
+                    CreateJoWindow compactingWindow = new CreateJoWindow();
+                    compactingWindow.Order = jOrder.GRNReciept.OrderedItem.PurchaseOrder.Order;
+                    compactingWindow.PurchaseOrder = jOrder.GRNReciept.OrderedItem.PurchaseOrder;
+                    compactingWindow.ParentJobOrder = jOrder;
+                    compactingWindow.Quantity = jOrder.QualityPassed.Value;
+                    compactingWindow.GRNRefNo = jOrder.GRNReciept.GRNReciptID.ToString();
+                    compactingWindow.GRNReciept = jOrder.GRNReciept;
+                    jOrder.IsIssued = true;
+                    compactingWindow.InitializeForCompacting();
+                    compactingWindow.ShowDialog();
+                    break;
+                case "Printing":
                 case "Washing":
                 case "Other":
                 case "Stock":

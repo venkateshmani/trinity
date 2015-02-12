@@ -963,6 +963,39 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox44">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!JoOrderNo.Value</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox36</rd:DefaultName>
+            <Top>0.31945in</Top>
+            <Left>2.44654in</Left>
+            <Height>0.25in</Height>
+            <Width>1.2677in</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Top>1.61503in</Top>
@@ -1911,9 +1944,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox61</rd:DefaultName>
         <Top>6.53521in</Top>
-        <Left>4.42334in</Left>
+        <Left>5.11466in</Left>
         <Height>0.25in</Height>
-        <Width>2.2096in</Width>
+        <Width>1.86776in</Width>
         <ZIndex>13</ZIndex>
         <Style>
           <Border>
@@ -1925,17 +1958,15 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox62">
+      <Textbox Name="Textbox3">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Authorised Signatory</Value>
+                <Value>Prepared by</Value>
                 <Style>
-                  <FontFamily>Segoe UI</FontFamily>
-                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -1943,11 +1974,11 @@
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Textbox61</rd:DefaultName>
-        <Top>7.33792in</Top>
-        <Left>4.42334in</Left>
-        <Height>0.25in</Height>
-        <Width>2.2096in</Width>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>7.3414in</Top>
+        <Left>0.05931in</Left>
+        <Height>0.21875in</Height>
+        <Width>1in</Width>
         <ZIndex>14</ZIndex>
         <Style>
           <Border>
@@ -1959,17 +1990,15 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="Textbox63">
+      <Textbox Name="Textbox5">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Name &amp; Designation:</Value>
+                <Value>Checked by</Value>
                 <Style>
-                  <FontFamily>Segoe UI</FontFamily>
-                  <FontSize>8pt</FontSize>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
@@ -1977,12 +2006,46 @@
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Textbox61</rd:DefaultName>
-        <Top>7.60182in</Top>
-        <Left>4.42334in</Left>
-        <Height>0.25in</Height>
-        <Width>2.2096in</Width>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>7.3414in</Top>
+        <Left>2.96906in</Left>
+        <Height>0.21875in</Height>
+        <Width>1in</Width>
         <ZIndex>15</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox4">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Authorised by</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style>
+              <TextAlign>Right</TextAlign>
+            </Style>
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox3</rd:DefaultName>
+        <Top>7.3414in</Top>
+        <Left>5.82617in</Left>
+        <Height>0.21875in</Height>
+        <Width>1.15625in</Width>
+        <ZIndex>16</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2147,6 +2210,10 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="TermsAndConditions">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="JoOrderNo">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>

@@ -42,6 +42,11 @@ namespace ordermanager.Views.UserControls.JobOrderControls
             createJoCtrl.InitializeForKnitting();
         }
 
+        public void InitializeForCompacting()
+        {
+            createJoCtrl.InitializeForCompacting();
+        }
+
         public bool JobOrderIssued
         {
             get

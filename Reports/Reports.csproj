@@ -62,13 +62,56 @@
       <DependentUpon>BudgetReportControl.cs</DependentUpon>
     </Compile>
     <Compile Include="BudgetReportParameters.cs" />
+    <Compile Include="CompactingJoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CompactingJoControl.Designer.cs">
+      <DependentUpon>CompactingJoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CompactingJoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompactingJoDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dataset.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DyeingJoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DyeingJoControl.Designer.cs">
       <DependentUpon>DyeingJoControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="DyeingJoParameters.cs" />
+    <Compile Include="grnDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>grnDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GrnDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GrnDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GrnReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GrnReportControl.Designer.cs">
+      <DependentUpon>GrnReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GrnReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GrnReportDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="grnReportDS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>grnReportDS.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GrnReportParameters.cs" />
+    <Compile Include="JoGenericParameters.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,12 +183,20 @@
       <DependentUpon>BudgetReportControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BudgetReportSheet.rdlc" />
+    <EmbeddedResource Include="CompactingJoControl.resx">
+      <DependentUpon>CompactingJoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompactingJobOrder.rdlc" />
     <EmbeddedResource Include="DyeingJobOrder.rdlc" />
     <EmbeddedResource Include="DyeingJoControl.resx">
       <DependentUpon>DyeingJoControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GrnReport.rdlc" />
+    <EmbeddedResource Include="GrnReportControl.resx">
+      <DependentUpon>GrnReportControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Invoice.rdlc" />
     <EmbeddedResource Include="InvoiceUserControl.resx">
@@ -170,6 +221,72 @@
     </Compile>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="CompactingJoDataSet.xsc">
+      <DependentUpon>CompactingJoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CompactingJoDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CompactingJoDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CompactingJoDataSet.xss">
+      <DependentUpon>CompactingJoDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="dataset.xsc">
+      <DependentUpon>dataset.xsd</DependentUpon>
+    </None>
+    <None Include="dataset.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dataset.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="dataset.xss">
+      <DependentUpon>dataset.xsd</DependentUpon>
+    </None>
+    <None Include="grnDataSet.xsc">
+      <DependentUpon>grnDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="grnDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>grnDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="grnDataSet.xss">
+      <DependentUpon>grnDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GrnDS.xsc">
+      <DependentUpon>GrnDS.xsd</DependentUpon>
+    </None>
+    <None Include="GrnDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GrnDS.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GrnDS.xss">
+      <DependentUpon>GrnDS.xsd</DependentUpon>
+    </None>
+    <None Include="GrnReportDataSet.xsc">
+      <DependentUpon>GrnReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GrnReportDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GrnReportDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GrnReportDataSet.xss">
+      <DependentUpon>GrnReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="grnReportDS.xsc">
+      <DependentUpon>grnReportDS.xsd</DependentUpon>
+    </None>
+    <None Include="grnReportDS.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>grnReportDS.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="grnReportDS.xss">
+      <DependentUpon>grnReportDS.xsd</DependentUpon>
     </None>
     <None Include="OrderManagerDBDataSet.xsc">
       <DependentUpon>OrderManagerDBDataSet.xsd</DependentUpon>

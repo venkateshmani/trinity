@@ -220,6 +220,8 @@ namespace ordermanager.DatabaseModel
 
         #endregion 
 
+        #region Validation
+
         public bool Validate()
         {
             ValidateSupplier();
@@ -343,6 +345,7 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        #endregion 
 
         #region IJobOrder Info
 

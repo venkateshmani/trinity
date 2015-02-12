@@ -20,5 +20,10 @@ namespace ordermanager.ViewModel
             get;
             set;
         }
+
+        public ObservableCollection<PurchaseOrder> PurchaseOrders
+        {
+            get {return new ObservableCollection<PurchaseOrder>(Order.PurchaseOrders); }
+        }
     }
 }

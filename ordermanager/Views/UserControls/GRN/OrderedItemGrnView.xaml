@@ -85,6 +85,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             
+                            
                             <TextBlock Text="Quantity Passed : "  Grid.Row="0" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBlock Text="Quantity Failed : " Grid.Row="1" Margin="3" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             
@@ -144,6 +145,14 @@
                     </DataTemplate>
                 </DataGrid.RowDetailsTemplate>
                 <DataGrid.Columns>
+                    <DataGridTemplateColumn  Header="GRN #" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding GRNNumber}"
+                                                     IsReadOnly="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTemplateColumn Header="Invc. #" Width="0.1*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

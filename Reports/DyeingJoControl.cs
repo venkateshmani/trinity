@@ -19,12 +19,12 @@ namespace Reports
             InitializeComponent();
         }
 
-        public void SetParameters(DyeingJoParameters parameters)
+        public void SetParameters(JoGenericParameters parameters)
         {
             this.reportViewer1.LocalReport.SetParameters(CreateReportParameters(parameters));
         }
 
-        private ReportParameter[] CreateReportParameters(DyeingJoParameters parameters)
+        private ReportParameter[] CreateReportParameters(JoGenericParameters parameters)
         {
             List<ReportParameter> reportParameters = new List<ReportParameter>();
             PropertyInfo[] propertyInfos = parameters.GetType().GetProperties();

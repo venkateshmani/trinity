@@ -8,6 +8,7 @@ namespace ordermanager.DatabaseModel
 {
     public partial class DyeingJoItem : EntityBase
     {
+        #region Wrapper
 
         public string ColorWrapper
         {
@@ -102,10 +103,14 @@ namespace ordermanager.DatabaseModel
             }
         }
 
+        #endregion 
+
         private void CalculateTotalAmount()
         {
             TotalAmountWrapper = NetQty * RatePerKg;
         }
+
+        #region Validation
 
         public bool Validate()
         {
@@ -191,6 +196,8 @@ namespace ordermanager.DatabaseModel
                 RemoveError("RatePerKgWrapper", "Required");
             }
         }
+
+        #endregion
 
 
         public override string ToString()

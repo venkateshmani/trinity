@@ -296,8 +296,17 @@ namespace ordermanager.Views.UserControls.GRN
                     dyeWindow.InitializeForDyeing();
                     dyeWindow.ShowDialog();
                     break;
-                case "Printing":
                 case "Compacting":
+                    CreateJoWindow compactingWindow = new CreateJoWindow();
+                    compactingWindow.Order = this.selectedGRNReciept.OrderedItem.PurchaseOrder.Order;
+                    compactingWindow.PurchaseOrder = this.selectedGRNReciept.OrderedItem.PurchaseOrder;
+                    compactingWindow.Quantity = this.selectedGRNReciept.QualityPassedQuantity.Value;
+                    compactingWindow.GRNRefNo = this.selectedGRNReciept.GRNReciptID.ToString();
+                    compactingWindow.GRNReciept = this.selectedGRNReciept;
+                    compactingWindow.InitializeForCompacting();
+                    compactingWindow.ShowDialog();
+                    break;
+                case "Printing":
                 case "Washing":
                 case "Other":
                 case "Stock":

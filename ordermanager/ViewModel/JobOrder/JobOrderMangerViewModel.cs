@@ -33,6 +33,11 @@ namespace ordermanager.ViewModel.JobOrderControls
                     {
                         m_JobOrderInfos.Add(item);
                     }
+
+                    foreach (var item in Order.CompactingJoes)
+                    {
+                        m_JobOrderInfos.Add((item));
+                    }
                 }
 
                 return m_JobOrderInfos;

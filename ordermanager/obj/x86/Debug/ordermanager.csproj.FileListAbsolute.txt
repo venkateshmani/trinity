@@ -711,6 +711,7 @@ C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\Use
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\InStockControl.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Invoice\CreateNewInvoiceControl.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\JobOrderJOView.g.cs
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\JobOrder\CompactingJoControl.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\JobOrder\CreateJOControl.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\JobOrder\DyeingJOControl.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\JobOrder\CreateJoWindow.g.cs
@@ -764,6 +765,7 @@ C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\Use
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\InStockControl.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Invoice\CreateNewInvoiceControl.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\JobOrderJOView.baml
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\JobOrder\CompactingJoControl.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\JobOrder\CreateJOControl.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\JobOrder\DyeingJOControl.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\JobOrder\CreateJoWindow.baml

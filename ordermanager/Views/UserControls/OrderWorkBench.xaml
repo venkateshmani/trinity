@@ -58,7 +58,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
                 <TextBlock Text="Order ID:" FontSize="22" FontFamily="{StaticResource ContentFontFamily}" Margin="5"  VerticalAlignment="Center" Foreground="Gray"/>
                 <TextBlock x:Name="orderIDTxtBlk"  FontSize="22" FontFamily="{StaticResource ContentFontFamily}" Margin="5"  VerticalAlignment="Center">
                     <TextBlock.Foreground>
@@ -72,6 +77,15 @@
                     </TextBlock.Foreground>
                 </TextBlock>
             </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text = "Styles: " FontSize="22" ></TextBlock>
+                    <TextBlock x:Name="styleNames" VerticalAlignment="Center" FontSize="22" HorizontalAlignment="Center">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
         </Grid>
         <TabControl x:Name="tabControl" Grid.Row="1">
             <TabItem x:Name="GoBackTab">
