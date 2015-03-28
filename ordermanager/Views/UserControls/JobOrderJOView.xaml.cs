@@ -83,7 +83,8 @@ namespace ordermanager.Views.UserControls
 
         public void SetOrder(Order order)
         {
-            ViewModel = new JobbOrderJOViewModel(order);
+             ViewModel = new JobbOrderJOViewModel(order);
+             supplierList.SelectedIndex = -1;
         }
 
         private JobbOrderJOViewModel m_ViewModel = null;

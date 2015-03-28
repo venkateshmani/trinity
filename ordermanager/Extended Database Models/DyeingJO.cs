@@ -225,7 +225,7 @@ namespace ordermanager.DatabaseModel
         public bool Validate()
         {
             ValidateSupplier();
-            ValidatePurchaseOrder();
+            //ValidatePurchaseOrder();
             ValidateQuoteDate();
             ValidateQuoteNo();
             ValidateGRNRefNo();

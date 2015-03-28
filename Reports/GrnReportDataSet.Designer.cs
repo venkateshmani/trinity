@@ -20,9 +20,9 @@ namespace Reports {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("GrnReportDataSet")]
+    [global::System.Xml.Serialization.XmlRootAttribute("grnReportDataSet")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class GrnReportDataSet : global::System.Data.DataSet {
+    public partial class grnReportDataSet : global::System.Data.DataSet {
         
         private SP_GRNReportDataTable tableSP_GRNReport;
         
@@ -30,7 +30,7 @@ namespace Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public GrnReportDataSet() {
+        public grnReportDataSet() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace Reports {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected GrnReportDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected grnReportDataSet(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -127,7 +127,7 @@ namespace Reports {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            GrnReportDataSet cln = ((GrnReportDataSet)(base.Clone()));
+            grnReportDataSet cln = ((grnReportDataSet)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -199,9 +199,9 @@ namespace Reports {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "GrnReportDataSet";
+            this.DataSetName = "grnReportDataSet";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/GrnReportDataSet.xsd";
+            this.Namespace = "http://tempuri.org/grnReportDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableSP_GRNReport = new SP_GRNReportDataTable();
@@ -225,7 +225,7 @@ namespace Reports {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            GrnReportDataSet ds = new GrnReportDataSet();
+            grnReportDataSet ds = new grnReportDataSet();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -279,23 +279,37 @@ namespace Reports {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class SP_GRNReportDataTable : global::System.Data.TypedTableBase<SP_GRNReportRow> {
             
-            private global::System.Data.DataColumn columnPo_No;
+            private global::System.Data.DataColumn columnGRNReciptID;
             
-            private global::System.Data.DataColumn columnItem_Name;
+            private global::System.Data.DataColumn columnPurchaseOrderNumber;
             
-            private global::System.Data.DataColumn columnUOM;
+            private global::System.Data.DataColumn columnName;
             
-            private global::System.Data.DataColumn columnPo_Qty;
+            private global::System.Data.DataColumn columnUnits;
             
-            private global::System.Data.DataColumn _columnInv_Qty;
+            private global::System.Data.DataColumn columnOrderedQuantity;
             
-            private global::System.Data.DataColumn columnReceived_Qty;
+            private global::System.Data.DataColumn columnInvoicedQuantity;
             
-            private global::System.Data.DataColumn _columnCost_Unit;
+            private global::System.Data.DataColumn columnRecievedInHand;
             
-            private global::System.Data.DataColumn _columnTax_Unit;
+            private global::System.Data.DataColumn columnPendingQuantity;
             
-            private global::System.Data.DataColumn columnCurrency;
+            private global::System.Data.DataColumn columnTaxInINRPerUnit;
+            
+            private global::System.Data.DataColumn columnCostPerUnit;
+            
+            private global::System.Data.DataColumn columnSymbol;
+            
+            private global::System.Data.DataColumn columnTotalCost;
+            
+            private global::System.Data.DataColumn columnGRNIndex;
+            
+            private global::System.Data.DataColumn columnSupplier;
+            
+            private global::System.Data.DataColumn columnInvoiceNumber;
+            
+            private global::System.Data.DataColumn columnRecievedDate;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -332,73 +346,129 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Po_NoColumn {
+            public global::System.Data.DataColumn GRNReciptIDColumn {
                 get {
-                    return this.columnPo_No;
+                    return this.columnGRNReciptID;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Item_NameColumn {
+            public global::System.Data.DataColumn PurchaseOrderNumberColumn {
                 get {
-                    return this.columnItem_Name;
+                    return this.columnPurchaseOrderNumber;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn UOMColumn {
+            public global::System.Data.DataColumn NameColumn {
                 get {
-                    return this.columnUOM;
+                    return this.columnName;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Po_QtyColumn {
+            public global::System.Data.DataColumn UnitsColumn {
                 get {
-                    return this.columnPo_Qty;
+                    return this.columnUnits;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn _Inv_QtyColumn {
+            public global::System.Data.DataColumn OrderedQuantityColumn {
                 get {
-                    return this._columnInv_Qty;
+                    return this.columnOrderedQuantity;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Received_QtyColumn {
+            public global::System.Data.DataColumn InvoicedQuantityColumn {
                 get {
-                    return this.columnReceived_Qty;
+                    return this.columnInvoicedQuantity;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn _Cost_UnitColumn {
+            public global::System.Data.DataColumn RecievedInHandColumn {
                 get {
-                    return this._columnCost_Unit;
+                    return this.columnRecievedInHand;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn _Tax_UnitColumn {
+            public global::System.Data.DataColumn PendingQuantityColumn {
                 get {
-                    return this._columnTax_Unit;
+                    return this.columnPendingQuantity;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CurrencyColumn {
+            public global::System.Data.DataColumn TaxInINRPerUnitColumn {
                 get {
-                    return this.columnCurrency;
+                    return this.columnTaxInINRPerUnit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CostPerUnitColumn {
+                get {
+                    return this.columnCostPerUnit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SymbolColumn {
+                get {
+                    return this.columnSymbol;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn TotalCostColumn {
+                get {
+                    return this.columnTotalCost;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn GRNIndexColumn {
+                get {
+                    return this.columnGRNIndex;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn SupplierColumn {
+                get {
+                    return this.columnSupplier;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn InvoiceNumberColumn {
+                get {
+                    return this.columnInvoiceNumber;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn RecievedDateColumn {
+                get {
+                    return this.columnRecievedDate;
                 }
             }
             
@@ -439,21 +509,35 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public SP_GRNReportRow AddSP_GRNReportRow(string Po_No, string Item_Name, string UOM, decimal Po_Qty, decimal _Inv_Qty, decimal Received_Qty, decimal _Cost_Unit, decimal _Tax_Unit, string Currency) {
+            public SP_GRNReportRow AddSP_GRNReportRow(string PurchaseOrderNumber, string Name, string Units, decimal OrderedQuantity, decimal InvoicedQuantity, decimal RecievedInHand, decimal PendingQuantity, decimal TaxInINRPerUnit, decimal CostPerUnit, string Symbol, decimal TotalCost, long GRNIndex, string Supplier, string InvoiceNumber, System.DateTime RecievedDate) {
                 SP_GRNReportRow rowSP_GRNReportRow = ((SP_GRNReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        Po_No,
-                        Item_Name,
-                        UOM,
-                        Po_Qty,
-                        _Inv_Qty,
-                        Received_Qty,
-                        _Cost_Unit,
-                        _Tax_Unit,
-                        Currency};
+                        null,
+                        PurchaseOrderNumber,
+                        Name,
+                        Units,
+                        OrderedQuantity,
+                        InvoicedQuantity,
+                        RecievedInHand,
+                        PendingQuantity,
+                        TaxInINRPerUnit,
+                        CostPerUnit,
+                        Symbol,
+                        TotalCost,
+                        GRNIndex,
+                        Supplier,
+                        InvoiceNumber,
+                        RecievedDate};
                 rowSP_GRNReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSP_GRNReportRow);
                 return rowSP_GRNReportRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public SP_GRNReportRow FindByGRNReciptID(long GRNReciptID) {
+                return ((SP_GRNReportRow)(this.Rows.Find(new object[] {
+                            GRNReciptID})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -473,52 +557,76 @@ namespace Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
-                this.columnPo_No = base.Columns["Po No"];
-                this.columnItem_Name = base.Columns["Item Name"];
-                this.columnUOM = base.Columns["UOM"];
-                this.columnPo_Qty = base.Columns["Po Qty"];
-                this._columnInv_Qty = base.Columns["Inv.Qty"];
-                this.columnReceived_Qty = base.Columns["Received Qty"];
-                this._columnCost_Unit = base.Columns["Cost/Unit"];
-                this._columnTax_Unit = base.Columns["Tax/Unit"];
-                this.columnCurrency = base.Columns["Currency"];
+                this.columnGRNReciptID = base.Columns["GRNReciptID"];
+                this.columnPurchaseOrderNumber = base.Columns["PurchaseOrderNumber"];
+                this.columnName = base.Columns["Name"];
+                this.columnUnits = base.Columns["Units"];
+                this.columnOrderedQuantity = base.Columns["OrderedQuantity"];
+                this.columnInvoicedQuantity = base.Columns["InvoicedQuantity"];
+                this.columnRecievedInHand = base.Columns["RecievedInHand"];
+                this.columnPendingQuantity = base.Columns["PendingQuantity"];
+                this.columnTaxInINRPerUnit = base.Columns["TaxInINRPerUnit"];
+                this.columnCostPerUnit = base.Columns["CostPerUnit"];
+                this.columnSymbol = base.Columns["Symbol"];
+                this.columnTotalCost = base.Columns["TotalCost"];
+                this.columnGRNIndex = base.Columns["GRNIndex"];
+                this.columnSupplier = base.Columns["Supplier"];
+                this.columnInvoiceNumber = base.Columns["InvoiceNumber"];
+                this.columnRecievedDate = base.Columns["RecievedDate"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
-                this.columnPo_No = new global::System.Data.DataColumn("Po No", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPo_No);
-                this.columnItem_Name = new global::System.Data.DataColumn("Item Name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnItem_Name);
-                this.columnUOM = new global::System.Data.DataColumn("UOM", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUOM);
-                this.columnPo_Qty = new global::System.Data.DataColumn("Po Qty", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPo_Qty);
-                this._columnInv_Qty = new global::System.Data.DataColumn("Inv.Qty", typeof(decimal), null, global::System.Data.MappingType.Element);
-                this._columnInv_Qty.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnInv_Qty");
-                this._columnInv_Qty.ExtendedProperties.Add("Generator_UserColumnName", "Inv.Qty");
-                base.Columns.Add(this._columnInv_Qty);
-                this.columnReceived_Qty = new global::System.Data.DataColumn("Received Qty", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnReceived_Qty);
-                this._columnCost_Unit = new global::System.Data.DataColumn("Cost/Unit", typeof(decimal), null, global::System.Data.MappingType.Element);
-                this._columnCost_Unit.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnCost_Unit");
-                this._columnCost_Unit.ExtendedProperties.Add("Generator_UserColumnName", "Cost/Unit");
-                base.Columns.Add(this._columnCost_Unit);
-                this._columnTax_Unit = new global::System.Data.DataColumn("Tax/Unit", typeof(decimal), null, global::System.Data.MappingType.Element);
-                this._columnTax_Unit.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnTax_Unit");
-                this._columnTax_Unit.ExtendedProperties.Add("Generator_UserColumnName", "Tax/Unit");
-                base.Columns.Add(this._columnTax_Unit);
-                this.columnCurrency = new global::System.Data.DataColumn("Currency", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCurrency);
-                this.columnPo_No.MaxLength = 150;
-                this.columnItem_Name.AllowDBNull = false;
-                this.columnItem_Name.MaxLength = 2147483647;
-                this.columnUOM.AllowDBNull = false;
-                this.columnUOM.MaxLength = 10;
-                this.columnPo_Qty.AllowDBNull = false;
-                this.columnCurrency.AllowDBNull = false;
-                this.columnCurrency.MaxLength = 50;
+                this.columnGRNReciptID = new global::System.Data.DataColumn("GRNReciptID", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGRNReciptID);
+                this.columnPurchaseOrderNumber = new global::System.Data.DataColumn("PurchaseOrderNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPurchaseOrderNumber);
+                this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnName);
+                this.columnUnits = new global::System.Data.DataColumn("Units", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnits);
+                this.columnOrderedQuantity = new global::System.Data.DataColumn("OrderedQuantity", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOrderedQuantity);
+                this.columnInvoicedQuantity = new global::System.Data.DataColumn("InvoicedQuantity", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvoicedQuantity);
+                this.columnRecievedInHand = new global::System.Data.DataColumn("RecievedInHand", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRecievedInHand);
+                this.columnPendingQuantity = new global::System.Data.DataColumn("PendingQuantity", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPendingQuantity);
+                this.columnTaxInINRPerUnit = new global::System.Data.DataColumn("TaxInINRPerUnit", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTaxInINRPerUnit);
+                this.columnCostPerUnit = new global::System.Data.DataColumn("CostPerUnit", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCostPerUnit);
+                this.columnSymbol = new global::System.Data.DataColumn("Symbol", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSymbol);
+                this.columnTotalCost = new global::System.Data.DataColumn("TotalCost", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTotalCost);
+                this.columnGRNIndex = new global::System.Data.DataColumn("GRNIndex", typeof(long), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnGRNIndex);
+                this.columnSupplier = new global::System.Data.DataColumn("Supplier", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSupplier);
+                this.columnInvoiceNumber = new global::System.Data.DataColumn("InvoiceNumber", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInvoiceNumber);
+                this.columnRecievedDate = new global::System.Data.DataColumn("RecievedDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRecievedDate);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnGRNReciptID}, true));
+                this.columnGRNReciptID.AutoIncrement = true;
+                this.columnGRNReciptID.AllowDBNull = false;
+                this.columnGRNReciptID.ReadOnly = true;
+                this.columnGRNReciptID.Unique = true;
+                this.columnPurchaseOrderNumber.MaxLength = 150;
+                this.columnName.AllowDBNull = false;
+                this.columnName.MaxLength = 2147483647;
+                this.columnUnits.AllowDBNull = false;
+                this.columnUnits.MaxLength = 10;
+                this.columnOrderedQuantity.AllowDBNull = false;
+                this.columnSymbol.AllowDBNull = false;
+                this.columnSymbol.MaxLength = 50;
+                this.columnSupplier.AllowDBNull = false;
+                this.columnSupplier.MaxLength = 2147483647;
+                this.columnInvoiceNumber.MaxLength = 150;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -586,7 +694,7 @@ namespace Reports {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                GrnReportDataSet ds = new GrnReportDataSet();
+                grnReportDataSet ds = new grnReportDataSet();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -661,186 +769,348 @@ namespace Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Po_No {
+            public long GRNReciptID {
+                get {
+                    return ((long)(this[this.tableSP_GRNReport.GRNReciptIDColumn]));
+                }
+                set {
+                    this[this.tableSP_GRNReport.GRNReciptIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string PurchaseOrderNumber {
                 get {
                     try {
-                        return ((string)(this[this.tableSP_GRNReport.Po_NoColumn]));
+                        return ((string)(this[this.tableSP_GRNReport.PurchaseOrderNumberColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Po No\' in table \'SP_GRNReport\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'PurchaseOrderNumber\' in table \'SP_GRNReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSP_GRNReport.Po_NoColumn] = value;
+                    this[this.tableSP_GRNReport.PurchaseOrderNumberColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Item_Name {
+            public string Name {
                 get {
-                    return ((string)(this[this.tableSP_GRNReport.Item_NameColumn]));
+                    return ((string)(this[this.tableSP_GRNReport.NameColumn]));
                 }
                 set {
-                    this[this.tableSP_GRNReport.Item_NameColumn] = value;
+                    this[this.tableSP_GRNReport.NameColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string UOM {
+            public string Units {
                 get {
-                    return ((string)(this[this.tableSP_GRNReport.UOMColumn]));
+                    return ((string)(this[this.tableSP_GRNReport.UnitsColumn]));
                 }
                 set {
-                    this[this.tableSP_GRNReport.UOMColumn] = value;
+                    this[this.tableSP_GRNReport.UnitsColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal Po_Qty {
+            public decimal OrderedQuantity {
                 get {
-                    return ((decimal)(this[this.tableSP_GRNReport.Po_QtyColumn]));
+                    return ((decimal)(this[this.tableSP_GRNReport.OrderedQuantityColumn]));
                 }
                 set {
-                    this[this.tableSP_GRNReport.Po_QtyColumn] = value;
+                    this[this.tableSP_GRNReport.OrderedQuantityColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal _Inv_Qty {
+            public decimal InvoicedQuantity {
                 get {
                     try {
-                        return ((decimal)(this[this.tableSP_GRNReport._Inv_QtyColumn]));
+                        return ((decimal)(this[this.tableSP_GRNReport.InvoicedQuantityColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Inv.Qty\' in table \'SP_GRNReport\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'InvoicedQuantity\' in table \'SP_GRNReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSP_GRNReport._Inv_QtyColumn] = value;
+                    this[this.tableSP_GRNReport.InvoicedQuantityColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal Received_Qty {
+            public decimal RecievedInHand {
                 get {
                     try {
-                        return ((decimal)(this[this.tableSP_GRNReport.Received_QtyColumn]));
+                        return ((decimal)(this[this.tableSP_GRNReport.RecievedInHandColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Received Qty\' in table \'SP_GRNReport\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'RecievedInHand\' in table \'SP_GRNReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSP_GRNReport.Received_QtyColumn] = value;
+                    this[this.tableSP_GRNReport.RecievedInHandColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal _Cost_Unit {
+            public decimal PendingQuantity {
                 get {
                     try {
-                        return ((decimal)(this[this.tableSP_GRNReport._Cost_UnitColumn]));
+                        return ((decimal)(this[this.tableSP_GRNReport.PendingQuantityColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Cost/Unit\' in table \'SP_GRNReport\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'PendingQuantity\' in table \'SP_GRNReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSP_GRNReport._Cost_UnitColumn] = value;
+                    this[this.tableSP_GRNReport.PendingQuantityColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public decimal _Tax_Unit {
+            public decimal TaxInINRPerUnit {
                 get {
                     try {
-                        return ((decimal)(this[this.tableSP_GRNReport._Tax_UnitColumn]));
+                        return ((decimal)(this[this.tableSP_GRNReport.TaxInINRPerUnitColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Tax/Unit\' in table \'SP_GRNReport\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'TaxInINRPerUnit\' in table \'SP_GRNReport\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSP_GRNReport._Tax_UnitColumn] = value;
+                    this[this.tableSP_GRNReport.TaxInINRPerUnitColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Currency {
+            public decimal CostPerUnit {
                 get {
-                    return ((string)(this[this.tableSP_GRNReport.CurrencyColumn]));
+                    try {
+                        return ((decimal)(this[this.tableSP_GRNReport.CostPerUnitColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CostPerUnit\' in table \'SP_GRNReport\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this[this.tableSP_GRNReport.CurrencyColumn] = value;
+                    this[this.tableSP_GRNReport.CostPerUnitColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsPo_NoNull() {
-                return this.IsNull(this.tableSP_GRNReport.Po_NoColumn);
+            public string Symbol {
+                get {
+                    return ((string)(this[this.tableSP_GRNReport.SymbolColumn]));
+                }
+                set {
+                    this[this.tableSP_GRNReport.SymbolColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetPo_NoNull() {
-                this[this.tableSP_GRNReport.Po_NoColumn] = global::System.Convert.DBNull;
+            public decimal TotalCost {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSP_GRNReport.TotalCostColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'TotalCost\' in table \'SP_GRNReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_GRNReport.TotalCostColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Is_Inv_QtyNull() {
-                return this.IsNull(this.tableSP_GRNReport._Inv_QtyColumn);
+            public long GRNIndex {
+                get {
+                    try {
+                        return ((long)(this[this.tableSP_GRNReport.GRNIndexColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'GRNIndex\' in table \'SP_GRNReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_GRNReport.GRNIndexColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Set_Inv_QtyNull() {
-                this[this.tableSP_GRNReport._Inv_QtyColumn] = global::System.Convert.DBNull;
+            public string Supplier {
+                get {
+                    return ((string)(this[this.tableSP_GRNReport.SupplierColumn]));
+                }
+                set {
+                    this[this.tableSP_GRNReport.SupplierColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsReceived_QtyNull() {
-                return this.IsNull(this.tableSP_GRNReport.Received_QtyColumn);
+            public string InvoiceNumber {
+                get {
+                    try {
+                        return ((string)(this[this.tableSP_GRNReport.InvoiceNumberColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'InvoiceNumber\' in table \'SP_GRNReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_GRNReport.InvoiceNumberColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetReceived_QtyNull() {
-                this[this.tableSP_GRNReport.Received_QtyColumn] = global::System.Convert.DBNull;
+            public System.DateTime RecievedDate {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableSP_GRNReport.RecievedDateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RecievedDate\' in table \'SP_GRNReport\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_GRNReport.RecievedDateColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Is_Cost_UnitNull() {
-                return this.IsNull(this.tableSP_GRNReport._Cost_UnitColumn);
+            public bool IsPurchaseOrderNumberNull() {
+                return this.IsNull(this.tableSP_GRNReport.PurchaseOrderNumberColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Set_Cost_UnitNull() {
-                this[this.tableSP_GRNReport._Cost_UnitColumn] = global::System.Convert.DBNull;
+            public void SetPurchaseOrderNumberNull() {
+                this[this.tableSP_GRNReport.PurchaseOrderNumberColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Is_Tax_UnitNull() {
-                return this.IsNull(this.tableSP_GRNReport._Tax_UnitColumn);
+            public bool IsInvoicedQuantityNull() {
+                return this.IsNull(this.tableSP_GRNReport.InvoicedQuantityColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void Set_Tax_UnitNull() {
-                this[this.tableSP_GRNReport._Tax_UnitColumn] = global::System.Convert.DBNull;
+            public void SetInvoicedQuantityNull() {
+                this[this.tableSP_GRNReport.InvoicedQuantityColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRecievedInHandNull() {
+                return this.IsNull(this.tableSP_GRNReport.RecievedInHandColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRecievedInHandNull() {
+                this[this.tableSP_GRNReport.RecievedInHandColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsPendingQuantityNull() {
+                return this.IsNull(this.tableSP_GRNReport.PendingQuantityColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetPendingQuantityNull() {
+                this[this.tableSP_GRNReport.PendingQuantityColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTaxInINRPerUnitNull() {
+                return this.IsNull(this.tableSP_GRNReport.TaxInINRPerUnitColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTaxInINRPerUnitNull() {
+                this[this.tableSP_GRNReport.TaxInINRPerUnitColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsCostPerUnitNull() {
+                return this.IsNull(this.tableSP_GRNReport.CostPerUnitColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetCostPerUnitNull() {
+                this[this.tableSP_GRNReport.CostPerUnitColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsTotalCostNull() {
+                return this.IsNull(this.tableSP_GRNReport.TotalCostColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetTotalCostNull() {
+                this[this.tableSP_GRNReport.TotalCostColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsGRNIndexNull() {
+                return this.IsNull(this.tableSP_GRNReport.GRNIndexColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetGRNIndexNull() {
+                this[this.tableSP_GRNReport.GRNIndexColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsInvoiceNumberNull() {
+                return this.IsNull(this.tableSP_GRNReport.InvoiceNumberColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetInvoiceNumberNull() {
+                this[this.tableSP_GRNReport.InvoiceNumberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRecievedDateNull() {
+                return this.IsNull(this.tableSP_GRNReport.RecievedDateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRecievedDateNull() {
+                this[this.tableSP_GRNReport.RecievedDateColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -879,7 +1149,7 @@ namespace Reports {
         }
     }
 }
-namespace Reports.GrnReportDataSetTableAdapters {
+namespace Reports.grnReportDataSetTableAdapters {
     
     
     /// <summary>
@@ -1003,15 +1273,22 @@ namespace Reports.GrnReportDataSetTableAdapters {
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "SP_GRNReport";
-            tableMapping.ColumnMappings.Add("Po No", "Po No");
-            tableMapping.ColumnMappings.Add("Item Name", "Item Name");
-            tableMapping.ColumnMappings.Add("UOM", "UOM");
-            tableMapping.ColumnMappings.Add("Po Qty", "Po Qty");
-            tableMapping.ColumnMappings.Add("Inv.Qty", "Inv.Qty");
-            tableMapping.ColumnMappings.Add("Received Qty", "Received Qty");
-            tableMapping.ColumnMappings.Add("Cost/Unit", "Cost/Unit");
-            tableMapping.ColumnMappings.Add("Tax/Unit", "Tax/Unit");
-            tableMapping.ColumnMappings.Add("Currency", "Currency");
+            tableMapping.ColumnMappings.Add("GRNReciptID", "GRNReciptID");
+            tableMapping.ColumnMappings.Add("PurchaseOrderNumber", "PurchaseOrderNumber");
+            tableMapping.ColumnMappings.Add("Name", "Name");
+            tableMapping.ColumnMappings.Add("Units", "Units");
+            tableMapping.ColumnMappings.Add("OrderedQuantity", "OrderedQuantity");
+            tableMapping.ColumnMappings.Add("InvoicedQuantity", "InvoicedQuantity");
+            tableMapping.ColumnMappings.Add("RecievedInHand", "RecievedInHand");
+            tableMapping.ColumnMappings.Add("PendingQuantity", "PendingQuantity");
+            tableMapping.ColumnMappings.Add("TaxInINRPerUnit", "TaxInINRPerUnit");
+            tableMapping.ColumnMappings.Add("CostPerUnit", "CostPerUnit");
+            tableMapping.ColumnMappings.Add("Symbol", "Symbol");
+            tableMapping.ColumnMappings.Add("TotalCost", "TotalCost");
+            tableMapping.ColumnMappings.Add("GRNIndex", "GRNIndex");
+            tableMapping.ColumnMappings.Add("Supplier", "Supplier");
+            tableMapping.ColumnMappings.Add("InvoiceNumber", "InvoiceNumber");
+            tableMapping.ColumnMappings.Add("RecievedDate", "RecievedDate");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1031,20 +1308,20 @@ namespace Reports.GrnReportDataSetTableAdapters {
             this._commandCollection[0].CommandText = "dbo.SP_GRNReport";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GRNIndex", global::System.Data.SqlDbType.BigInt, 8, global::System.Data.ParameterDirection.Input, 19, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GrnIndexes", global::System.Data.SqlDbType.VarChar, 500, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(GrnReportDataSet.SP_GRNReportDataTable dataTable, global::System.Nullable<long> GRNIndex) {
+        public virtual int Fill(grnReportDataSet.SP_GRNReportDataTable dataTable, string GrnIndexes) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((GRNIndex.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((long)(GRNIndex.Value));
+            if ((GrnIndexes == null)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(GrnIndexes));
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1057,15 +1334,15 @@ namespace Reports.GrnReportDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual GrnReportDataSet.SP_GRNReportDataTable GetData(global::System.Nullable<long> GRNIndex) {
+        public virtual grnReportDataSet.SP_GRNReportDataTable GetData(string GrnIndexes) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((GRNIndex.HasValue == true)) {
-                this.Adapter.SelectCommand.Parameters[1].Value = ((long)(GRNIndex.Value));
-            }
-            else {
+            if ((GrnIndexes == null)) {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            GrnReportDataSet.SP_GRNReportDataTable dataTable = new GrnReportDataSet.SP_GRNReportDataTable();
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((string)(GrnIndexes));
+            }
+            grnReportDataSet.SP_GRNReportDataTable dataTable = new grnReportDataSet.SP_GRNReportDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1139,7 +1416,7 @@ namespace Reports.GrnReportDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateUpdatedRows(GrnReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(grnReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1149,7 +1426,7 @@ namespace Reports.GrnReportDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateInsertedRows(GrnReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(grnReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1159,7 +1436,7 @@ namespace Reports.GrnReportDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private int UpdateDeletedRows(GrnReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(grnReportDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             return result;
         }
@@ -1193,7 +1470,7 @@ namespace Reports.GrnReportDataSetTableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public virtual int UpdateAll(GrnReportDataSet dataSet) {
+        public virtual int UpdateAll(grnReportDataSet dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

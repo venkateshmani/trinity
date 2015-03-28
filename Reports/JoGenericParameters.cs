@@ -9,7 +9,6 @@ namespace Reports
     public class JoGenericParameters
     {
         public string SupplierInformation { get; set; }
-        public string PurchaseOrderNumber { get; set; }
         public string Date { get; set; }
         public string GRNRef { get; set; }
         public string OrderRef { get; set; }

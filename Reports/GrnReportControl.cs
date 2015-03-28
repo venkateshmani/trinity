@@ -14,7 +14,7 @@ namespace Reports
 {
     public partial class GrnReportControl : UserControl
     {
-        
+
         public GrnReportControl()
         {
             InitializeComponent();
@@ -23,7 +23,14 @@ namespace Reports
 
         public void SetParameters(GrnReportParameters parameters)
         {
-            this.reportViewer1.LocalReport.SetParameters(CreateReportParameters(parameters));
+            try
+            {
+                this.reportViewer1.LocalReport.SetParameters(CreateReportParameters(parameters));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private ReportParameter[] CreateReportParameters(GrnReportParameters parameters)
@@ -39,13 +46,13 @@ namespace Reports
             return reportParameters.ToArray();
         }
 
-        public void CreateReportAsPDF(long? GrnIndex, string fileName)
+        public void CreateReportAsPDF(string grnNumbers, string fileName)
         {
 
             try
             {
-                this.SP_GRNReportTableAdapter.Fill(this.dataset.SP_GRNReport, GrnIndex);
-                
+                this.SP_GRNReportTableAdapter.Fill(this.grnReportDataSet.SP_GRNReport, grnNumbers);
+
                 // Variables
                 Warning[] warnings;
                 string[] streamIds;
@@ -68,7 +75,13 @@ namespace Reports
 
             }
         }
+    }
 
-        
+    public class GrnReportParameters
+    {
+        public string Supplier {get;set;}
+        public string GrnNo {get;set;}
+        public string GrnDate {get;set;}
+        public string StyleInfo { get; set; }
     }
 }

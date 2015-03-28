@@ -276,6 +276,11 @@ namespace ordermanager.Views.UserControls.GRN
             DependencyObject obj = item.GetParentObject();
             switch (item.Header.ToString())
             {
+                case "Send To Store":
+                    ReceiptStatu recievedStatus = DBResources.Instance.Context.ReceiptStatus.Find(10);
+                    selectedGRNReciept.ReceiptStatu = recievedStatus;
+                    DBResources.Instance.Save();
+                    break;
                 case "Knitting":
                     CreateJoWindow knittWindow = new CreateJoWindow();
                     knittWindow.Order = this.selectedGRNReciept.OrderedItem.PurchaseOrder.Order;

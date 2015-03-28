@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.Configuration;
 using ordermanager.Utilities;
 using Reports;
+using ordermanager.DatabaseModel;
 
 namespace ordermanager
 {
@@ -48,6 +49,7 @@ namespace ordermanager
                 }
 
                 tbPassword.Password = "v1";
+                FixGrnPendingQuantity();
                 //LogIn();
         }
 
@@ -117,6 +119,35 @@ namespace ordermanager
                 
                 MainWindow mainWindow = new MainWindow(this);
                 mainWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void FixGrnPendingQuantity()
+        {
+            try
+            {
+                var orderedItems = DBResources.Instance.Context.OrderedItems;
+                foreach (var orderedItem in orderedItems)
+                {
+                    if (orderedItem.PendingQuantity != null)
+                        break;
+                    bool firstiteration = true; decimal PendingQuantityLastIteration = 0;
+                    foreach (var grnReceipt in orderedItem.GRNReciepts)
+                    {
+                        if(grnReceipt.RecievedInHand == null)
+                            continue;
+
+                        grnReceipt.PendingQuantity = firstiteration ? (orderedItem.OrderedQuantity - grnReceipt.RecievedInHand) : (PendingQuantityLastIteration - grnReceipt.RecievedInHand);
+                        PendingQuantityLastIteration = grnReceipt.PendingQuantity.Value;
+                        firstiteration = false;
+                    }
+                }
+
+                DBResources.Instance.Save();
             }
             catch (Exception ex)
             {

@@ -162,6 +162,7 @@ namespace ordermanager.Views.UserControls.Stock
                     stockInOtherOrder.StockQuantity = 0;
                     stockInOtherOrder.UnitsOfMeasurement = SelectedMaterialStock.UnitsOfMeasurement;
                     stockInOtherOrder.SubMaterial.MaterialStocks.Add(stockInOtherOrder);
+
                     this.SelectedOrder.MaterialStocks.Add(stockInOtherOrder);
                 }
 

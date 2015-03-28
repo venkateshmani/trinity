@@ -12,9 +12,11 @@ namespace ordermanager.Interfaces_And_Enums
 	    IssuedToStock = 2, 
 	    IssuedToKnittting = 3,
 	    IssuedToDyeing = 4,
-	    IssuedToPrinting = 5, 
-	    IssuedToCompacting = 6,
-	    IssuedToWashing = 7,
-	    IssuedToOther = 8
+        IssuesToPrinting = 5,
+	    IssuedToPrinting = 6, 
+	    IssuedToCompacting = 7,
+	    IssuedToWashing = 8,
+	    IssuedToOther = 9,
+        Recieved = 10,
     }
 }

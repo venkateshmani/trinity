@@ -55,6 +55,7 @@ namespace ordermanager.DatabaseModel
         public DbSet<JobOrderType> JobOrderTypes { get; set; }
         public DbSet<KnittingJO> KnittingJOes { get; set; }
         public DbSet<KnittingJoItem> KnittingJoItems { get; set; }
+        public DbSet<MaterialInStockHistory> MaterialInStockHistories { get; set; }
         public DbSet<MaterialName> MaterialNames { get; set; }
         public DbSet<MaterialsFromStock> MaterialsFromStocks { get; set; }
         public DbSet<MaterialStock> MaterialStocks { get; set; }
@@ -91,9 +92,135 @@ namespace ordermanager.DatabaseModel
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
     
+        public virtual ObjectResult<SP_Budget_Result> SP_Budget(Nullable<long> productID)
+        {
+            var productIDParameter = productID.HasValue ?
+                new ObjectParameter("productID", productID) :
+                new ObjectParameter("productID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Budget_Result>("SP_Budget", productIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_CompactingJoDetails_Result> SP_CompactingJoDetails(Nullable<long> compactingJoID)
+        {
+            var compactingJoIDParameter = compactingJoID.HasValue ?
+                new ObjectParameter("CompactingJoID", compactingJoID) :
+                new ObjectParameter("CompactingJoID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CompactingJoDetails_Result>("SP_CompactingJoDetails", compactingJoIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_Dummy_Result> SP_Dummy()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Dummy_Result>("SP_Dummy");
+        }
+    
+        public virtual ObjectResult<SP_DyeingJODetails_Result> SP_DyeingJODetails(Nullable<long> dyeingJobOrderID)
+        {
+            var dyeingJobOrderIDParameter = dyeingJobOrderID.HasValue ?
+                new ObjectParameter("dyeingJobOrderID", dyeingJobOrderID) :
+                new ObjectParameter("dyeingJobOrderID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_DyeingJODetails_Result>("SP_DyeingJODetails", dyeingJobOrderIDParameter);
+        }
+    
         public virtual ObjectResult<Nullable<System.DateTime>> SP_GetServerTime()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.DateTime>>("SP_GetServerTime");
+        }
+    
+        public virtual ObjectResult<SP_GRNReport_Result> SP_GRNReport(string grnIndexes)
+        {
+            var grnIndexesParameter = grnIndexes != null ?
+                new ObjectParameter("GrnIndexes", grnIndexes) :
+                new ObjectParameter("GrnIndexes", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GRNReport_Result>("SP_GRNReport", grnIndexesParameter);
+        }
+    
+        public virtual ObjectResult<SP_Invoice_Result> SP_Invoice(Nullable<long> orderID)
+        {
+            var orderIDParameter = orderID.HasValue ?
+                new ObjectParameter("orderID", orderID) :
+                new ObjectParameter("orderID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Invoice_Result>("SP_Invoice", orderIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_InvoiceDetails_Result> SP_InvoiceDetails(Nullable<long> invoiceID)
+        {
+            var invoiceIDParameter = invoiceID.HasValue ?
+                new ObjectParameter("invoiceID", invoiceID) :
+                new ObjectParameter("invoiceID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InvoiceDetails_Result>("SP_InvoiceDetails", invoiceIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_JoGRN_Result> SP_JoGRN(Nullable<int> supplierId, Nullable<long> jobOrderId)
+        {
+            var supplierIdParameter = supplierId.HasValue ?
+                new ObjectParameter("SupplierId", supplierId) :
+                new ObjectParameter("SupplierId", typeof(int));
+    
+            var jobOrderIdParameter = jobOrderId.HasValue ?
+                new ObjectParameter("JobOrderId", jobOrderId) :
+                new ObjectParameter("JobOrderId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_JoGRN_Result>("SP_JoGRN", supplierIdParameter, jobOrderIdParameter);
+        }
+    
+        public virtual ObjectResult<SP_KnittingJODetails_Result> SP_KnittingJODetails(Nullable<long> knittingJobOrderID)
+        {
+            var knittingJobOrderIDParameter = knittingJobOrderID.HasValue ?
+                new ObjectParameter("knittingJobOrderID", knittingJobOrderID) :
+                new ObjectParameter("knittingJobOrderID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_KnittingJODetails_Result>("SP_KnittingJODetails", knittingJobOrderIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_MaterialDetails_Result> SP_MaterialDetails(Nullable<long> orderProductID, Nullable<long> orderID)
+        {
+            var orderProductIDParameter = orderProductID.HasValue ?
+                new ObjectParameter("orderProductID", orderProductID) :
+                new ObjectParameter("orderProductID", typeof(long));
+    
+            var orderIDParameter = orderID.HasValue ?
+                new ObjectParameter("orderID", orderID) :
+                new ObjectParameter("orderID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_MaterialDetails_Result>("SP_MaterialDetails", orderProductIDParameter, orderIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_MaterialOtherCostDetails_Result> SP_MaterialOtherCostDetails(Nullable<long> orderProductID)
+        {
+            var orderProductIDParameter = orderProductID.HasValue ?
+                new ObjectParameter("orderProductID", orderProductID) :
+                new ObjectParameter("orderProductID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_MaterialOtherCostDetails_Result>("SP_MaterialOtherCostDetails", orderProductIDParameter);
+        }
+    
+        public virtual ObjectResult<SP_OrderedItemReport_Result> SP_OrderedItemReport()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_OrderedItemReport_Result>("SP_OrderedItemReport");
+        }
+    
+        public virtual ObjectResult<SP_PurchaseOrder_Result> SP_PurchaseOrder(Nullable<long> purchaseOrderID)
+        {
+            var purchaseOrderIDParameter = purchaseOrderID.HasValue ?
+                new ObjectParameter("purchaseOrderID", purchaseOrderID) :
+                new ObjectParameter("purchaseOrderID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_PurchaseOrder_Result>("SP_PurchaseOrder", purchaseOrderIDParameter);
+        }
+    
+        public virtual ObjectResult<string> TableNameSelect(string tableCatalog)
+        {
+            var tableCatalogParameter = tableCatalog != null ?
+                new ObjectParameter("TableCatalog", tableCatalog) :
+                new ObjectParameter("TableCatalog", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("TableNameSelect", tableCatalogParameter);
         }
     }
 }

@@ -47,7 +47,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
         public void CreateNewJo(Order order, decimal quantity, PurchaseOrder po, string grnRefNo, GRNReciept receipt, bool jobOrderIssued, JobOrder parentJo)
         {
             ViewModel = new DyeingJoViewModel(order, quantity, po, grnRefNo, receipt, jobOrderIssued,parentJo);
-            budgetVsActualControl.Initialize(receipt.OrderedItem, parentJo);
+            //budgetVsActualControl.Initialize(receipt.OrderedItem, parentJo);
         }
 
         public void OpenExistingJo(DyeingJO jo)

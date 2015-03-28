@@ -34,7 +34,7 @@ namespace ordermanager.DatabaseModel
         public string Instructions { get; set; }
         public byte JobOrderTypeID { get; set; }
         public Nullable<decimal> PendingQuantity { get; set; }
-        public long GRNReciptID { get; set; }
+        public Nullable<long> GRNReciptID { get; set; }
         public Nullable<decimal> QualityPassed { get; set; }
         public Nullable<decimal> QualityFailed { get; set; }
         public string DCNumber { get; set; }

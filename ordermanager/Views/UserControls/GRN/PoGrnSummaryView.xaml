@@ -47,14 +47,11 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TabControl x:Name="poGrnTabControl" SelectedIndex="1" Grid.Row="1">
+        <TabControl x:Name="poGrnTabControl" SelectedIndex="1" Grid.Row="0">
             <TabItem x:Name="tabNewReceipt" Header=" New Receipt ">
                 <Grid VerticalAlignment='Stretch' HorizontalAlignment="Stretch">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
@@ -95,33 +92,29 @@
                                     Margin="5"/>
                         
                     </Grid>
-                                <Button x:Name="addNewReceipt" Grid.Row="2" Content="Add New Receipt"  Margin="5" Width="150" Height="30" Foreground="White"
-                                        ToolTip="Add New Item" HorizontalAlignment="Right" Click="addNewReceipt_Click_1"
+                      
+                    <Button x:Name="addNewItemBtn" Grid.Row="1" Content="Add Item(s)"  Margin="10" Width="150" Height="30" Foreground="White"
+                                        ToolTip="Add New Item" HorizontalAlignment="Left" 
+                                        Click="addNewItemBtn_Click_1"
                                  >
                         <Button.Background>
                             <SolidColorBrush Color="{StaticResource AccentColor}" />
                         </Button.Background>
                     </Button>
-                    <StackPanel Grid.Row="1">
-                        <Button x:Name="addNewItemBtn" Grid.Row="2" Content="Add Item(s)"  Margin="10" Width="150" Height="30" Foreground="White"
-                                        ToolTip="Add New Item" HorizontalAlignment="Left" 
-                                        Click="addNewItemBtn_Click_1"
-                                 >
-                            <Button.Background>
-                                <SolidColorBrush Color="{StaticResource AccentColor}" />
-                            </Button.Background>
-                        </Button>
-                        <Border BorderBrush="Gray" BorderThickness="1" Margin="10">
-                        <DataGrid x:Name="materialsReceiptGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
+
+                        <DataGrid x:Name="materialsReceiptGrid" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" SelectionMode="Single" 
                                               GridLinesVisibility="None" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" CanUserResizeColumns="True"
                                               HorizontalGridLinesBrush="Gainsboro" VerticalGridLinesBrush="Gainsboro"
+                                              VerticalScrollBarVisibility="Visible"
+                                              HorizontalScrollBarVisibility="Visible"
                                               RowHeaderWidth="25"
                                               HeadersVisibility="All" ItemsSource="{Binding Receipts}">
+
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Material" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                                <TextBox IsReadOnly="True" Text="{Binding OrderedItem.ProductMaterialItem.SubMaterial.Name, Mode=OneWay}" />
+                                            <TextBox IsReadOnly="True" Text="{Binding OrderedItem.ProductMaterialItem.SubMaterial.Name, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -129,7 +122,7 @@
                                 <DataGridTemplateColumn Header="UOM" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                                <TextBox IsReadOnly="True" Text="{Binding  OrderedItem.ProductMaterialItem.UnitsOfMeasurement.Units, Mode=OneWay}" />
+                                            <TextBox IsReadOnly="True" Text="{Binding  OrderedItem.ProductMaterialItem.UnitsOfMeasurement.Units, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -137,54 +130,60 @@
                                 <DataGridTemplateColumn Header="ORD. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                                <TextBox IsReadOnly="True"  Text="{Binding  OrderedItem.OrderedQuantity, StringFormat={}{0:#0.####}, Mode=OneWay}" />
+                                            <TextBox IsReadOnly="True"  Text="{Binding  OrderedItem.OrderedQuantity, StringFormat={}{0:#0.####}, Mode=OneWay}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                    <DataGridTemplateColumn Header="Already Recv. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox IsReadOnly="True"  Text="{Binding  AlreadyRecievedQuantity, StringFormat={}{0:#0.####}, Mode=OneWay}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-
-                                    <DataGridTemplateColumn Header="Invc. Qty" Width="0.1*">
+                                <DataGridTemplateColumn Header="Already Recv. Qty" Width="0.1*" ToolTipService.ToolTip="Ordered Quantity">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                                <TextBox Text="{Binding InvoicedQuantityWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, NotifyOnSourceUpdated=True, ValidatesOnNotifyDataErrors=True}" />
-                                       </DataTemplate>
+                                            <TextBox IsReadOnly="True"  Text="{Binding  AlreadyRecievedQuantity, StringFormat={}{0:#0.####}, Mode=OneWay}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Invc. Qty" Width="0.1*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding InvoicedQuantityWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus, NotifyOnSourceUpdated=True, ValidatesOnNotifyDataErrors=True}" />
+                                        </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
                                 <DataGridTemplateColumn Header="Recv. Qty" Width="0.1*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                                <TextBox Text="{Binding RecievedInHandWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                            <TextBox Text="{Binding RecievedInHandWrapper, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                    <DataGridTemplateColumn Header="Other Charges(INR)" Width="0.1*">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Text="{Binding OtherChargesInINR, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Other Charges(INR)" Width="0.1*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding OtherChargesInINR, StringFormat={}{0:#0.####}, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
 
-                                    <DataGridTemplateColumn Header="Other Charges Name" Width="0.1*">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Text="{Binding OtherChargersName, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Other Charges Name" Width="0.1*">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding OtherChargersName, UpdateSourceTrigger=LostFocus,  NotifyOnValidationError=True, ValidatesOnNotifyDataErrors=True}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
                         </DataGrid>
-                    </Border>
-                   </StackPanel>
+                    <Button x:Name="addNewReceipt" Grid.Row="3" Content="Add New Receipt"  Margin="5" Width="150" Height="30" Foreground="White"
+                                ToolTip="Add New Item" HorizontalAlignment="Right" Click="addNewReceipt_Click_1"
+                            >
+                        <Button.Background>
+                            <SolidColorBrush Color="{StaticResource AccentColor}" />
+                        </Button.Background>
+                    </Button>
+                    
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabSummary" Header=" Summary ">

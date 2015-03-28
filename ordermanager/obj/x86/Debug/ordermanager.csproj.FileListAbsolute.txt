@@ -669,6 +669,9 @@ C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\Pop
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\PopUps\CommentBox.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\PopUps\PopupBox.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\PopUps\ProgressUpdateWindow.baml
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\ReportViewers\IndividualGrnReport.baml
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\ReportViewers\JoGRNReport.baml
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\ReportViewers\ReportsManager.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Execution\OverAllCompleteReportControl.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\GRN\AddItemsWindow.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\ManageControl.baml
@@ -693,6 +696,9 @@ C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\Pop
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\PopUps\PopupBox.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\PopUps\ProgressUpdateWindow.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\PopUps\UserManagementWindow.g.cs
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\ReportViewers\IndividualGrnReport.g.cs
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\ReportViewers\JoGRNReport.g.cs
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\ReportViewers\ReportsManager.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\AssetsControl.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\ChangeHistoryControl.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Execution\CuttingControl.g.cs
@@ -701,6 +707,7 @@ C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\Use
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Execution\ProductionControl.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Execution\QualityControl.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Execution\ShippingControl.g.cs
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\GRN\ExpressGRN\GRNExpressView.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Information\MaterialsFromStock.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Invoice\CatronBoxBrowser.g.cs
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Invoice\GeneratedInvoiceViewerControl.g.cs
@@ -756,6 +763,7 @@ C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\Use
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Execution\ProductionControl.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Execution\QualityControl.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Execution\ShippingControl.baml
+C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\GRN\ExpressGRN\GRNExpressView.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Information\MaterialsFromStock.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Invoice\CatronBoxBrowser.baml
 C:\Users\Venkatesh\Documents\GitHub\trinity\ordermanager\obj\x86\Debug\Views\UserControls\Invoice\GeneratedInvoiceViewerControl.baml

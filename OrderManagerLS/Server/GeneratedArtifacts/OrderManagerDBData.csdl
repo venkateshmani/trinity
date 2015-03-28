@@ -1,0 +1,2777 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" Namespace="LightSwitchApplication" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityType Name="Approval">
+    <Key>
+      <PropertyRef Name="ApprovalID" />
+    </Key>
+    <Property Name="ApprovalID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IsApproved" Type="Edm.Boolean" ConcurrencyMode="Fixed" />
+    <Property Name="Comments" Type="Edm.String" Nullable="false" MaxLength="Max" Unicode="false" />
+    <Property Name="ApprovalEntityTypeID" Type="Edm.Byte" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="ApprovalEntityType" Relationship="LightSwitchApplication.FK_Approval_ApprovalEntityType" ToRole="ApprovalEntityType" FromRole="Approval" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_Approval_Order" ToRole="Order" FromRole="Approval" />
+    <NavigationProperty Name="CompactingJoes" Relationship="LightSwitchApplication.FK_CompactingJo_Approval" ToRole="CompactingJo" FromRole="Approval" />
+    <NavigationProperty Name="DyeingJOes" Relationship="LightSwitchApplication.FK_DyeingJO_Approval" ToRole="DyeingJO" FromRole="Approval" />
+    <NavigationProperty Name="KnittingJOes" Relationship="LightSwitchApplication.FK_KnittingJO_Approval" ToRole="KnittingJO" FromRole="Approval" />
+    <NavigationProperty Name="OrderProducts" Relationship="LightSwitchApplication.FK_OrderProduct_Approval" ToRole="OrderProduct" FromRole="Approval" />
+    <NavigationProperty Name="ProductMaterials" Relationship="LightSwitchApplication.FK_ProductMaterials_Approval" ToRole="ProductMaterials" FromRole="Approval" />
+    <NavigationProperty Name="PurchaseOrders" Relationship="LightSwitchApplication.FK_PurchaseOrders_Approval" ToRole="PurchaseOrders" FromRole="Approval" />
+  </EntityType>
+  <EntityType Name="ApprovalEntityType">
+    <Key>
+      <PropertyRef Name="ApprovalEntityTypeID" />
+    </Key>
+    <Property Name="ApprovalEntityTypeID" Type="Edm.Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="Edm.String" MaxLength="10" FixedLength="true" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Approvals" Relationship="LightSwitchApplication.FK_Approval_ApprovalEntityType" ToRole="Approval" FromRole="ApprovalEntityType" />
+  </EntityType>
+  <EntityType Name="Asset">
+    <Key>
+      <PropertyRef Name="AssetID" />
+    </Key>
+    <Property Name="AssetID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceDate" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="InvoiceNumber" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="ValueInINR" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="Quantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="AssetNameID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="BrandNameID" Type="Edm.Int32" ConcurrencyMode="Fixed" />
+    <Property Name="SupplierID" Type="Edm.Int32" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="AssetName" Relationship="LightSwitchApplication.FK_Asset_AssetName" ToRole="AssetName" FromRole="Asset" />
+    <NavigationProperty Name="BrandName" Relationship="LightSwitchApplication.FK_Asset_BrandName" ToRole="BrandName" FromRole="Asset" />
+    <NavigationProperty Name="Company" Relationship="LightSwitchApplication.FK_Asset_Company" ToRole="Company" FromRole="Asset" />
+  </EntityType>
+  <EntityType Name="AssetCategory">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Edm.Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="AssetNames" Relationship="LightSwitchApplication.FK_AssetName_AssetCategory" ToRole="AssetName" FromRole="AssetCategory" />
+  </EntityType>
+  <EntityType Name="AssetName">
+    <Key>
+      <PropertyRef Name="AssetNameID" />
+    </Key>
+    <Property Name="AssetNameID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="100" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="Descritpion" Type="Edm.String" MaxLength="100" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="CategoryID" Type="Edm.Int32" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Assets" Relationship="LightSwitchApplication.FK_Asset_AssetName" ToRole="Asset" FromRole="AssetName" />
+    <NavigationProperty Name="AssetCategory" Relationship="LightSwitchApplication.FK_AssetName_AssetCategory" ToRole="AssetCategory" FromRole="AssetName" />
+  </EntityType>
+  <EntityType Name="BrandName">
+    <Key>
+      <PropertyRef Name="BrandNameID" />
+    </Key>
+    <Property Name="BrandNameID" Type="Edm.Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Assets" Relationship="LightSwitchApplication.FK_Asset_BrandName" ToRole="Asset" FromRole="BrandName" />
+  </EntityType>
+  <EntityType Name="CartonBox">
+    <Key>
+      <PropertyRef Name="CartonBoxID" />
+    </Key>
+    <Property Name="CartonBoxID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Number" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="InvoiceGenerated" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="InvoiceID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Invoice" Relationship="LightSwitchApplication.FK_CartonBox_Invoice" ToRole="Invoice" FromRole="CartonBox" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_CartonBox_Order" ToRole="Order" FromRole="CartonBox" />
+    <NavigationProperty Name="Packages" Relationship="LightSwitchApplication.FK_Package_CartonBox" ToRole="Package" FromRole="CartonBox" />
+  </EntityType>
+  <EntityType Name="Color">
+    <Key>
+      <PropertyRef Name="ColorID" />
+    </Key>
+    <Property Name="ColorID" Type="Edm.Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="ProductBreakUpSummaries" Relationship="LightSwitchApplication.FK_ProductBreakUpSummary_Color" ToRole="ProductBreakUpSummary" FromRole="Color" />
+    <NavigationProperty Name="ProductCountryWiseBreakUps" Relationship="LightSwitchApplication.FK_ProductCountryWiseBreakUp_Color" ToRole="ProductCountryWiseBreakUp" FromRole="Color" />
+    <NavigationProperty Name="ProductStocks" Relationship="LightSwitchApplication.FK_ProductStock_Color" ToRole="ProductStock" FromRole="Color" />
+  </EntityType>
+  <EntityType Name="CommissionValueType">
+    <Key>
+      <PropertyRef Name="CommissionValueTypeID" />
+    </Key>
+    <Property Name="CommissionValueTypeID" Type="Edm.Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="10" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Orders" Relationship="LightSwitchApplication.FK_Order_CommissionValueType" ToRole="Order" FromRole="CommissionValueType" />
+  </EntityType>
+  <EntityType Name="CompactingJo">
+    <Key>
+      <PropertyRef Name="CompactingJoId" />
+    </Key>
+    <Property Name="CompactingJoId" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JODate" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="QuoteNo" Type="Edm.String" Nullable="false" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="QuoteDate" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="GRNRefNo" Type="Edm.String" Nullable="false" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderRef" Type="Edm.String" Nullable="false" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="Process" Type="Edm.String" Nullable="false" MaxLength="150" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="TermsAndConditions" Type="Edm.String" Nullable="false" MaxLength="300" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="TotalValue" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="2" ConcurrencyMode="Fixed" />
+    <Property Name="JoNo" Type="Edm.String" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="ApprovalID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="SupplierID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="GRNRecieptID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="JobOrderID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="PurchaseOrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Approval" Relationship="LightSwitchApplication.FK_CompactingJo_Approval" ToRole="Approval" FromRole="CompactingJo" />
+    <NavigationProperty Name="Company" Relationship="LightSwitchApplication.FK_CompactingJo_Company" ToRole="Company" FromRole="CompactingJo" />
+    <NavigationProperty Name="GRNReciept" Relationship="LightSwitchApplication.FK_CompactingJo_GRNReciept" ToRole="GRNReciept" FromRole="CompactingJo" />
+    <NavigationProperty Name="JobOrder" Relationship="LightSwitchApplication.FK_CompactingJo_JobOrder" ToRole="JobOrder" FromRole="CompactingJo" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_CompactingJo_Order" ToRole="Order" FromRole="CompactingJo" />
+    <NavigationProperty Name="PurchaseOrder" Relationship="LightSwitchApplication.FK_CompactingJo_PurchaseOrders" ToRole="PurchaseOrders" FromRole="CompactingJo" />
+    <NavigationProperty Name="CompactingJoItems" Relationship="LightSwitchApplication.FK_CompactingJoItem_CompactingJo" ToRole="CompactingJoItem" FromRole="CompactingJo" />
+  </EntityType>
+  <EntityType Name="CompactingJoItem">
+    <Key>
+      <PropertyRef Name="CompactingJoItemID" />
+    </Key>
+    <Property Name="CompactingJoItemID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Color" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="QualityDescription" Type="Edm.String" Nullable="false" MaxLength="100" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="ReqGSM" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="ReqWidth" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="NetQty" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="RatePerKg" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="TotalAmount" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="CompactingJoId" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="JobOrderID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="CompactingJo" Relationship="LightSwitchApplication.FK_CompactingJoItem_CompactingJo" ToRole="CompactingJo" FromRole="CompactingJoItem" />
+    <NavigationProperty Name="JobOrder" Relationship="LightSwitchApplication.FK_CompactingJoItem_JobOrder" ToRole="JobOrder" FromRole="CompactingJoItem" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyID" Type="Edm.Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="Max" Unicode="false" />
+    <Property Name="c_Alias" Type="Edm.String" MaxLength="Max" Unicode="false" />
+    <Property Name="Address1" Type="Edm.String" MaxLength="Max" Unicode="false" />
+    <Property Name="Address2" Type="Edm.String" MaxLength="Max" Unicode="false" />
+    <Property Name="City" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="State" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="Country" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="ZipCode" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="Telephone" Type="Edm.String" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="Fax" Type="Edm.String" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="Mobile" Type="Edm.String" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="EmaiID" Type="Edm.String" MaxLength="100" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="TIN" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="CST" Type="Edm.String" MaxLength="50" FixedLength="true" ConcurrencyMode="Fixed" />
+    <Property Name="CompanyTypeID" Type="Edm.Int16" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Assets" Relationship="LightSwitchApplication.FK_Asset_Company" ToRole="Asset" FromRole="Company" />
+    <NavigationProperty Name="CompactingJoes" Relationship="LightSwitchApplication.FK_CompactingJo_Company" ToRole="CompactingJo" FromRole="Company" />
+    <NavigationProperty Name="CompanyType" Relationship="LightSwitchApplication.FK_Company_CompanyType" ToRole="CompanyType" FromRole="Company" />
+    <NavigationProperty Name="DyeingJOes" Relationship="LightSwitchApplication.FK_DyeingJO_Company" ToRole="DyeingJO" FromRole="Company" />
+    <NavigationProperty Name="Invoices" Relationship="LightSwitchApplication.FK_Invoice_Company" ToRole="Invoice" FromRole="Company" />
+    <NavigationProperty Name="JobOrders" Relationship="LightSwitchApplication.FK_JobOrder_Company" ToRole="JobOrder" FromRole="Company" />
+    <NavigationProperty Name="KnittingJOes" Relationship="LightSwitchApplication.FK_KnittingJO_Company" ToRole="KnittingJO" FromRole="Company" />
+    <NavigationProperty Name="Orders" Relationship="LightSwitchApplication.FK_Order_Company" ToRole="Order" FromRole="Company" />
+    <NavigationProperty Name="Orders1" Relationship="LightSwitchApplication.FK_Order_OrderBy" ToRole="Order" FromRole="Company" />
+    <NavigationProperty Name="ProductMaterialItems" Relationship="LightSwitchApplication.FK_ProductMaterialItem_Company" ToRole="ProductMaterialItem" FromRole="Company" />
+    <NavigationProperty Name="PurchaseOrders" Relationship="LightSwitchApplication.FK_PurchaseOrders_Company" ToRole="PurchaseOrders" FromRole="Company" />
+  </EntityType>
+  <EntityType Name="CompanyType">
+    <Key>
+      <PropertyRef Name="CompanyTypeID" />
+    </Key>
+    <Property Name="CompanyTypeID" Type="Edm.Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Companies" Relationship="LightSwitchApplication.FK_Company_CompanyType" ToRole="Company" FromRole="CompanyType" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryID" />
+    </Key>
+    <Property Name="CountryID" Type="Edm.Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Invoices" Relationship="LightSwitchApplication.FK_Invoice_Destination" ToRole="Invoice" FromRole="Country" />
+    <NavigationProperty Name="Invoices1" Relationship="LightSwitchApplication.FK_Invoice_Origin" ToRole="Invoice" FromRole="Country" />
+    <NavigationProperty Name="ProductCountryWiseBreakUps" Relationship="LightSwitchApplication.FK_ProductCountryWiseBreakUp_Country" ToRole="ProductCountryWiseBreakUp" FromRole="Country" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="CurrencyID" />
+    </Key>
+    <Property Name="CurrencyID" Type="Edm.Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="Symbol" Type="Edm.String" Nullable="false" MaxLength="50" ConcurrencyMode="Fixed" />
+    <Property Name="DefaultValueInINR" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="OrderCurrencyConversions" Relationship="LightSwitchApplication.FK_OrderCurrencyConversion_Currency" ToRole="OrderCurrencyConversion" FromRole="Currency" />
+    <NavigationProperty Name="OrderProducts" Relationship="LightSwitchApplication.FK_OrderProduct_Currency" ToRole="OrderProduct" FromRole="Currency" />
+    <NavigationProperty Name="ProductExtraCosts" Relationship="LightSwitchApplication.FK_ProductExtraCost_Currency" ToRole="ProductExtraCost" FromRole="Currency" />
+    <NavigationProperty Name="ProductMaterialItems" Relationship="LightSwitchApplication.FK_ProductMaterialItem_Currency" ToRole="ProductMaterialItem" FromRole="Currency" />
+    <NavigationProperty Name="ProductMaterials" Relationship="LightSwitchApplication.FK_ProductMaterials_Currency" ToRole="ProductMaterials" FromRole="Currency" />
+  </EntityType>
+  <EntityType Name="DyeingJO">
+    <Key>
+      <PropertyRef Name="DyeingJOId" />
+    </Key>
+    <Property Name="DyeingJOId" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JODate" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="QuoteNo" Type="Edm.String" Nullable="false" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="QuoteDate" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="GRNRefNo" Type="Edm.String" Nullable="false" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderRef" Type="Edm.String" Nullable="false" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="Process" Type="Edm.String" Nullable="false" MaxLength="150" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="TermsAndConditions" Type="Edm.String" Nullable="false" MaxLength="300" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="TotalValue" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="2" ConcurrencyMode="Fixed" />
+    <Property Name="JoNo" Type="Edm.String" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="ApprovalID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="SupplierID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="GRNRecieptID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="JobOrderID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="PurchaseOrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Approval" Relationship="LightSwitchApplication.FK_DyeingJO_Approval" ToRole="Approval" FromRole="DyeingJO" />
+    <NavigationProperty Name="Company" Relationship="LightSwitchApplication.FK_DyeingJO_Company" ToRole="Company" FromRole="DyeingJO" />
+    <NavigationProperty Name="GRNReciept" Relationship="LightSwitchApplication.FK_DyeingJO_GRNReciept" ToRole="GRNReciept" FromRole="DyeingJO" />
+    <NavigationProperty Name="JobOrder" Relationship="LightSwitchApplication.FK_DyeingJO_JobOrder" ToRole="JobOrder" FromRole="DyeingJO" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_DyeingJO_Order" ToRole="Order" FromRole="DyeingJO" />
+    <NavigationProperty Name="PurchaseOrder" Relationship="LightSwitchApplication.FK_DyeingJO_PurchaseOrders" ToRole="PurchaseOrders" FromRole="DyeingJO" />
+    <NavigationProperty Name="DyeingJoItems" Relationship="LightSwitchApplication.FK_DyeingJoItem_DyeingJO" ToRole="DyeingJoItem" FromRole="DyeingJO" />
+  </EntityType>
+  <EntityType Name="DyeingJoItem">
+    <Key>
+      <PropertyRef Name="DyeingJoItemsID" />
+    </Key>
+    <Property Name="DyeingJoItemsID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Color" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="QualityDescription" Type="Edm.String" Nullable="false" MaxLength="100" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="ReqGSM" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="ReqWidth" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="NetQty" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="RatePerKg" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="TotalAmount" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="DyeingJOId" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="JobOrderID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="DyeingJO" Relationship="LightSwitchApplication.FK_DyeingJoItem_DyeingJO" ToRole="DyeingJO" FromRole="DyeingJoItem" />
+    <NavigationProperty Name="JobOrder" Relationship="LightSwitchApplication.FK_DyeingJoItem_JobOrder" ToRole="JobOrder" FromRole="DyeingJoItem" />
+  </EntityType>
+  <EntityType Name="GRNReciept">
+    <Key>
+      <PropertyRef Name="GRNReciptID" />
+    </Key>
+    <Property Name="GRNReciptID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceDate" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="InvoiceNumber" Type="Edm.String" MaxLength="150" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="RecievedDate" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="InvoicedQuantity" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="RecievedInHand" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="OtherChargesInINR" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="QualityPassedQuantity" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="QualityFailedQuantity" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="InvoiceValue" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="SpawnedNewPurchaseOrder" Type="Edm.Boolean" ConcurrencyMode="Fixed" />
+    <Property Name="VechileNo" Type="Edm.String" MaxLength="15" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="OtherChargersName" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="GRNIndex" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="PendingQuantity" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="OrderedItemID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="SpawnedPurchaseOrderID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="ReceiptStatusID" Type="Edm.Byte" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="CompactingJoes" Relationship="LightSwitchApplication.FK_CompactingJo_GRNReciept" ToRole="CompactingJo" FromRole="GRNReciept" />
+    <NavigationProperty Name="DyeingJOes" Relationship="LightSwitchApplication.FK_DyeingJO_GRNReciept" ToRole="DyeingJO" FromRole="GRNReciept" />
+    <NavigationProperty Name="OrderedItem" Relationship="LightSwitchApplication.FK_GRNReciept_OrderedItem" ToRole="OrderedItem" FromRole="GRNReciept" />
+    <NavigationProperty Name="PurchaseOrder" Relationship="LightSwitchApplication.FK_GRNReciept_PurchaseOrders" ToRole="PurchaseOrders" FromRole="GRNReciept" />
+    <NavigationProperty Name="ReceiptStatu" Relationship="LightSwitchApplication.FK_GRNReciept_ReceiptStatus" ToRole="ReceiptStatus" FromRole="GRNReciept" />
+    <NavigationProperty Name="JobOrders" Relationship="LightSwitchApplication.FK_JobOrder_GRNReciept" ToRole="JobOrder" FromRole="GRNReciept" />
+    <NavigationProperty Name="KnittingJOes" Relationship="LightSwitchApplication.FK_KnittingJO_GRNReciept" ToRole="KnittingJO" FromRole="GRNReciept" />
+  </EntityType>
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="HistoryID" />
+    </Key>
+    <Property Name="HistoryID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="c_Date" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="UserName" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderChanges" Type="Edm.String" Nullable="false" MaxLength="Max" Unicode="false" />
+    <Property Name="Comment" Type="Edm.String" Nullable="false" MaxLength="Max" Unicode="false" />
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_History_Order" ToRole="Order" FromRole="History" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceNumber" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="InvoiceDate" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="ExporterRefNumber" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="BuyerRefNumber" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="PlaceOfReceiptByPrecarrier" Type="Edm.String" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="LoadingPlace" Type="Edm.String" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="DischargePlace" Type="Edm.String" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="IsProforma" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="ConsigneeID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="DestinationCountryID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="OriginCountryID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CarriageByID" Type="Edm.Byte" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="CartonBoxes" Relationship="LightSwitchApplication.FK_CartonBox_Invoice" ToRole="CartonBox" FromRole="Invoice" />
+    <NavigationProperty Name="Company" Relationship="LightSwitchApplication.FK_Invoice_Company" ToRole="Company" FromRole="Invoice" />
+    <NavigationProperty Name="Country" Relationship="LightSwitchApplication.FK_Invoice_Destination" ToRole="Country" FromRole="Invoice" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_Invoice_Order" ToRole="Order" FromRole="Invoice" />
+    <NavigationProperty Name="Country1" Relationship="LightSwitchApplication.FK_Invoice_Origin" ToRole="Country" FromRole="Invoice" />
+    <NavigationProperty Name="ShipmentMode" Relationship="LightSwitchApplication.FK_Invoice_ShipmentMode" ToRole="ShipmentMode" FromRole="Invoice" />
+  </EntityType>
+  <EntityType Name="JobOrder">
+    <Key>
+      <PropertyRef Name="JobOrderID" />
+    </Key>
+    <Property Name="JobOrderID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobQuantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="ChargesInINR" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="RequiredDate" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="Instructions" Type="Edm.String" MaxLength="Max" Unicode="false" />
+    <Property Name="PendingQuantity" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="QualityPassed" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="QualityFailed" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="DCNumber" Type="Edm.String" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="Comments" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="IsIssued" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="IsWaitingForApproval" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="HasApproved" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="FailedQuantityIssued" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="ItemName" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="RecievedAs" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="SupplierID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="GRNReciptID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="ParentJOID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="JobOrderTypeID" Type="Edm.Byte" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="CompactingJoes" Relationship="LightSwitchApplication.FK_CompactingJo_JobOrder" ToRole="CompactingJo" FromRole="JobOrder" />
+    <NavigationProperty Name="CompactingJoItems" Relationship="LightSwitchApplication.FK_CompactingJoItem_JobOrder" ToRole="CompactingJoItem" FromRole="JobOrder" />
+    <NavigationProperty Name="DyeingJOes" Relationship="LightSwitchApplication.FK_DyeingJO_JobOrder" ToRole="DyeingJO" FromRole="JobOrder" />
+    <NavigationProperty Name="DyeingJoItems" Relationship="LightSwitchApplication.FK_DyeingJoItem_JobOrder" ToRole="DyeingJoItem" FromRole="JobOrder" />
+    <NavigationProperty Name="Company" Relationship="LightSwitchApplication.FK_JobOrder_Company" ToRole="Company" FromRole="JobOrder" />
+    <NavigationProperty Name="GRNReciept" Relationship="LightSwitchApplication.FK_JobOrder_GRNReciept" ToRole="GRNReciept" FromRole="JobOrder" />
+    <NavigationProperty Name="JobOrders" Relationship="LightSwitchApplication.FK_JobOrder_JobOrder" ToRole="JobOrder1" FromRole="JobOrder" />
+    <NavigationProperty Name="JobOrder1" Relationship="LightSwitchApplication.FK_JobOrder_JobOrder" ToRole="JobOrder" FromRole="JobOrder1" />
+    <NavigationProperty Name="JobOrderType" Relationship="LightSwitchApplication.FK_JobOrder_JobOrderType" ToRole="JobOrderType" FromRole="JobOrder" />
+    <NavigationProperty Name="JobOrderReceipts" Relationship="LightSwitchApplication.FK_JobOrderReceipt_JobOrder" ToRole="JobOrderReceipt" FromRole="JobOrder" />
+    <NavigationProperty Name="KnittingJOes" Relationship="LightSwitchApplication.FK_KnittingJO_JobOrder" ToRole="KnittingJO" FromRole="JobOrder" />
+    <NavigationProperty Name="KnittingJoItems" Relationship="LightSwitchApplication.FK_KnittingJoItem_JobOrder" ToRole="KnittingJoItem" FromRole="JobOrder" />
+  </EntityType>
+  <EntityType Name="JobOrderReceipt">
+    <Key>
+      <PropertyRef Name="JobOrderReceiptID" />
+    </Key>
+    <Property Name="JobOrderReceiptID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReceiptDate" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="Comments" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="ReceivedQuantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="Issued" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="JobOrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="JobOrder" Relationship="LightSwitchApplication.FK_JobOrderReceipt_JobOrder" ToRole="JobOrder" FromRole="JobOrderReceipt" />
+  </EntityType>
+  <EntityType Name="JobOrderTolerance">
+    <Key>
+      <PropertyRef Name="JobOrderToleranceID" />
+    </Key>
+    <Property Name="JobOrderToleranceID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ToleranceValueInPercentage" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="2" ConcurrencyMode="Fixed" />
+    <Property Name="JobOrderToleraceTypeID" Type="Edm.Byte" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="JobOrderToleranceType" Relationship="LightSwitchApplication.FK_JobOrderTolerance_JobOrderToleranceType" ToRole="JobOrderToleranceType" FromRole="JobOrderTolerance" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_JobOrderTolerance_Order" ToRole="Order" FromRole="JobOrderTolerance" />
+  </EntityType>
+  <EntityType Name="JobOrderToleranceType">
+    <Key>
+      <PropertyRef Name="JobOrderToleranceTypeID" />
+    </Key>
+    <Property Name="JobOrderToleranceTypeID" Type="Edm.Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="DefaultToleranceInPercentage" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="2" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="JobOrderTolerances" Relationship="LightSwitchApplication.FK_JobOrderTolerance_JobOrderToleranceType" ToRole="JobOrderTolerance" FromRole="JobOrderToleranceType" />
+  </EntityType>
+  <EntityType Name="JobOrderType">
+    <Key>
+      <PropertyRef Name="JobOrderTypeID" />
+    </Key>
+    <Property Name="JobOrderTypeID" Type="Edm.Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="JobOrders" Relationship="LightSwitchApplication.FK_JobOrder_JobOrderType" ToRole="JobOrder" FromRole="JobOrderType" />
+  </EntityType>
+  <EntityType Name="KnittingJO">
+    <Key>
+      <PropertyRef Name="KnittingJOId" />
+    </Key>
+    <Property Name="KnittingJOId" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JoNo" Type="Edm.String" Nullable="false" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="JoDate" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="QuoteNo" Type="Edm.String" Nullable="false" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="QuoteDate" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="TermsAndConditions" Type="Edm.String" Nullable="false" MaxLength="300" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="QualitySpecifications" Type="Edm.String" Nullable="false" MaxLength="300" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="TotalValue" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="ApprovalID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="SupplierID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="GRNRecieptID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="JobOrderID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="OrderID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Approval" Relationship="LightSwitchApplication.FK_KnittingJO_Approval" ToRole="Approval" FromRole="KnittingJO" />
+    <NavigationProperty Name="Company" Relationship="LightSwitchApplication.FK_KnittingJO_Company" ToRole="Company" FromRole="KnittingJO" />
+    <NavigationProperty Name="GRNReciept" Relationship="LightSwitchApplication.FK_KnittingJO_GRNReciept" ToRole="GRNReciept" FromRole="KnittingJO" />
+    <NavigationProperty Name="JobOrder" Relationship="LightSwitchApplication.FK_KnittingJO_JobOrder" ToRole="JobOrder" FromRole="KnittingJO" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_KnittingJO_Order" ToRole="Order" FromRole="KnittingJO" />
+    <NavigationProperty Name="KnittingJoItems" Relationship="LightSwitchApplication.FK_KnittingJoItem_KnittingJO" ToRole="KnittingJoItem" FromRole="KnittingJO" />
+  </EntityType>
+  <EntityType Name="KnittingJoItem">
+    <Key>
+      <PropertyRef Name="KnittingJoItemsId" />
+    </Key>
+    <Property Name="KnittingJoItemsId" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameOfProduct" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="Quantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="Rate" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="TotalAmount" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="Remarks" Type="Edm.String" MaxLength="100" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="JobOrderID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="KnittingJoId" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="JobOrder" Relationship="LightSwitchApplication.FK_KnittingJoItem_JobOrder" ToRole="JobOrder" FromRole="KnittingJoItem" />
+    <NavigationProperty Name="KnittingJO" Relationship="LightSwitchApplication.FK_KnittingJoItem_KnittingJO" ToRole="KnittingJO" FromRole="KnittingJoItem" />
+  </EntityType>
+  <EntityType Name="MaterialName">
+    <Key>
+      <PropertyRef Name="MaterialNameID" />
+    </Key>
+    <Property Name="MaterialNameID" Type="Edm.Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="ProductMaterials" Relationship="LightSwitchApplication.FK_ProductMaterials_MaterialName" ToRole="ProductMaterials" FromRole="MaterialName" />
+    <NavigationProperty Name="SubMaterials" Relationship="LightSwitchApplication.FK_SubMaterial_MaterialName" ToRole="SubMaterial" FromRole="MaterialName" />
+  </EntityType>
+  <EntityType Name="MaterialsFromStock">
+    <Key>
+      <PropertyRef Name="MaterialsFromStockID" />
+    </Key>
+    <Property Name="MaterialsFromStockID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Quantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="IssuedDate" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="MaterialStockID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="FromOrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="ToOrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="MaterialStock" Relationship="LightSwitchApplication.FK_MaterialsFromStock_MaterialStock" ToRole="MaterialStock" FromRole="MaterialsFromStock" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_MaterialsFromStock_Order" ToRole="Order" FromRole="MaterialsFromStock" />
+    <NavigationProperty Name="Order1" Relationship="LightSwitchApplication.FK_MaterialsFromStock_Order1" ToRole="Order" FromRole="MaterialsFromStock" />
+  </EntityType>
+  <EntityType Name="MaterialStock">
+    <Key>
+      <PropertyRef Name="MaterialStockID" />
+    </Key>
+    <Property Name="MaterialStockID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StockQuantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="IssuedQuantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="InStockDateTime" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="SubMaterialsNameID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="UOMID" Type="Edm.Int16" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="MaterialsFromStocks" Relationship="LightSwitchApplication.FK_MaterialsFromStock_MaterialStock" ToRole="MaterialsFromStock" FromRole="MaterialStock" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_MaterialStock_Order" ToRole="Order" FromRole="MaterialStock" />
+    <NavigationProperty Name="SubMaterial" Relationship="LightSwitchApplication.FK_MaterialStock_SubMaterial" ToRole="SubMaterial" FromRole="MaterialStock" />
+    <NavigationProperty Name="UnitsOfMeasurement" Relationship="LightSwitchApplication.FK_MaterialStock_UnitsOfMeasurement" ToRole="UnitsOfMeasurement" FromRole="MaterialStock" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="ExpectedDeliveryDate" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="CommissionValue" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="LastModifiedDate" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="TotalOrderValue" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="InternalDeliveryDate" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="OrderApprovedDate" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="OrderConfirmedDate" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="CustomerOrderNumber" Type="Edm.String" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="CommissionValueTypeID" Type="Edm.Byte" ConcurrencyMode="Fixed" />
+    <Property Name="CustomerID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderByID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderStatusID" Type="Edm.Int16" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderThoughID" Type="Edm.Byte" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Approvals" Relationship="LightSwitchApplication.FK_Approval_Order" ToRole="Approval" FromRole="Order" />
+    <NavigationProperty Name="CartonBoxes" Relationship="LightSwitchApplication.FK_CartonBox_Order" ToRole="CartonBox" FromRole="Order" />
+    <NavigationProperty Name="CompactingJoes" Relationship="LightSwitchApplication.FK_CompactingJo_Order" ToRole="CompactingJo" FromRole="Order" />
+    <NavigationProperty Name="DyeingJOes" Relationship="LightSwitchApplication.FK_DyeingJO_Order" ToRole="DyeingJO" FromRole="Order" />
+    <NavigationProperty Name="Histories" Relationship="LightSwitchApplication.FK_History_Order" ToRole="History" FromRole="Order" />
+    <NavigationProperty Name="Invoices" Relationship="LightSwitchApplication.FK_Invoice_Order" ToRole="Invoice" FromRole="Order" />
+    <NavigationProperty Name="JobOrderTolerances" Relationship="LightSwitchApplication.FK_JobOrderTolerance_Order" ToRole="JobOrderTolerance" FromRole="Order" />
+    <NavigationProperty Name="KnittingJOes" Relationship="LightSwitchApplication.FK_KnittingJO_Order" ToRole="KnittingJO" FromRole="Order" />
+    <NavigationProperty Name="MaterialsFromStocks" Relationship="LightSwitchApplication.FK_MaterialsFromStock_Order" ToRole="MaterialsFromStock" FromRole="Order" />
+    <NavigationProperty Name="MaterialsFromStocks1" Relationship="LightSwitchApplication.FK_MaterialsFromStock_Order1" ToRole="MaterialsFromStock" FromRole="Order" />
+    <NavigationProperty Name="MaterialStocks" Relationship="LightSwitchApplication.FK_MaterialStock_Order" ToRole="MaterialStock" FromRole="Order" />
+    <NavigationProperty Name="CommissionValueType" Relationship="LightSwitchApplication.FK_Order_CommissionValueType" ToRole="CommissionValueType" FromRole="Order" />
+    <NavigationProperty Name="Company" Relationship="LightSwitchApplication.FK_Order_Company" ToRole="Company" FromRole="Order" />
+    <NavigationProperty Name="Company1" Relationship="LightSwitchApplication.FK_Order_OrderBy" ToRole="Company" FromRole="Order" />
+    <NavigationProperty Name="OrderStatu" Relationship="LightSwitchApplication.FK_Order_OrderStatus" ToRole="OrderStatus" FromRole="Order" />
+    <NavigationProperty Name="OrderThrough" Relationship="LightSwitchApplication.FK_Order_OrderThrough" ToRole="OrderThrough" FromRole="Order" />
+    <NavigationProperty Name="OrderCurrencyConversions" Relationship="LightSwitchApplication.FK_OrderCurrencyConversion_Order" ToRole="OrderCurrencyConversion" FromRole="Order" />
+    <NavigationProperty Name="OrderProducts" Relationship="LightSwitchApplication.FK_OrderProduct_Order" ToRole="OrderProduct" FromRole="Order" />
+    <NavigationProperty Name="OrderReportCards" Relationship="LightSwitchApplication.FK_OrderReportCard_Order" ToRole="OrderReportCard" FromRole="Order" />
+    <NavigationProperty Name="PurchaseOrders" Relationship="LightSwitchApplication.FK_PurchaseOrders_Order" ToRole="PurchaseOrders" FromRole="Order" />
+  </EntityType>
+  <EntityType Name="OrderCurrencyConversion">
+    <Key>
+      <PropertyRef Name="OrderCurrencyConversionID" />
+    </Key>
+    <Property Name="OrderCurrencyConversionID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ValueInINR" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="ValueInINRForMaterials" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="ValueInINRForSubMaterials" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="CurrencyID" Type="Edm.Int16" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Currency" Relationship="LightSwitchApplication.FK_OrderCurrencyConversion_Currency" ToRole="Currency" FromRole="OrderCurrencyConversion" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_OrderCurrencyConversion_Order" ToRole="Order" FromRole="OrderCurrencyConversion" />
+  </EntityType>
+  <EntityType Name="OrderedItem">
+    <Key>
+      <PropertyRef Name="OrderedItemID" />
+    </Key>
+    <Property Name="OrderedItemID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderedQuantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="ExcessiveQuantity" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="PendingQuantity" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="TaxInINRPerUnit" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="CostPerUnit" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="TotalCost" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="ProductMaterialItemID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="PurchaseOrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="GRNReciepts" Relationship="LightSwitchApplication.FK_GRNReciept_OrderedItem" ToRole="GRNReciept" FromRole="OrderedItem" />
+    <NavigationProperty Name="ProductMaterialItem" Relationship="LightSwitchApplication.FK_OrderedItem_ProductMaterialItem" ToRole="ProductMaterialItem" FromRole="OrderedItem" />
+    <NavigationProperty Name="PurchaseOrder" Relationship="LightSwitchApplication.FK_OrderedItem_PurchaseOrders" ToRole="PurchaseOrders" FromRole="OrderedItem" />
+  </EntityType>
+  <EntityType Name="OrderProduct">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExpectedQuantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="CustomerTargetPrice" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="OrderValue" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="TotalConsumptionCost" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="ApprovalID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="CurrencyID" Type="Edm.Int16" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="ProductBreakUpID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="ProductNameID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="UOMID" Type="Edm.Int16" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Approval" Relationship="LightSwitchApplication.FK_OrderProduct_Approval" ToRole="Approval" FromRole="OrderProduct" />
+    <NavigationProperty Name="Currency" Relationship="LightSwitchApplication.FK_OrderProduct_Currency" ToRole="Currency" FromRole="OrderProduct" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_OrderProduct_Order" ToRole="Order" FromRole="OrderProduct" />
+    <NavigationProperty Name="ProductBreakUp" Relationship="LightSwitchApplication.FK_OrderProduct_ProductBreakUp" ToRole="ProductBreakUp" FromRole="OrderProduct" />
+    <NavigationProperty Name="ProductName" Relationship="LightSwitchApplication.FK_OrderProduct_ProductName" ToRole="ProductName" FromRole="OrderProduct" />
+    <NavigationProperty Name="UnitsOfMeasurement" Relationship="LightSwitchApplication.FK_OrderProduct_UnitsOfMeasurement" ToRole="UnitsOfMeasurement" FromRole="OrderProduct" />
+    <NavigationProperty Name="ProductBreakUpSummaries" Relationship="LightSwitchApplication.FK_ProductBreakUpSummary_OrderProduct" ToRole="ProductBreakUpSummary" FromRole="OrderProduct" />
+    <NavigationProperty Name="ProductExtraCosts" Relationship="LightSwitchApplication.FK_ProductExtraCost_OrderProduct" ToRole="ProductExtraCost" FromRole="OrderProduct" />
+    <NavigationProperty Name="ProductMaterials" Relationship="LightSwitchApplication.FK_ProductMaterials_OrderProduct" ToRole="ProductMaterials" FromRole="OrderProduct" />
+  </EntityType>
+  <EntityType Name="OrderReportCard">
+    <Key>
+      <PropertyRef Name="OrderReportCardID" />
+    </Key>
+    <Property Name="OrderReportCardID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProgressPercentage" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="2" ConcurrencyMode="Fixed" />
+    <Property Name="RequiredFinishDate" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderReportCardTypeID" Type="Edm.Byte" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_OrderReportCard_Order" ToRole="Order" FromRole="OrderReportCard" />
+    <NavigationProperty Name="OrderReportCardType" Relationship="LightSwitchApplication.FK_OrderReportCard_OrderReportCardType" ToRole="OrderReportCardType" FromRole="OrderReportCard" />
+  </EntityType>
+  <EntityType Name="OrderReportCardType">
+    <Key>
+      <PropertyRef Name="OrderReportCardTypeID" />
+    </Key>
+    <Property Name="OrderReportCardTypeID" Type="Edm.Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="20" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="OrderReportCards" Relationship="LightSwitchApplication.FK_OrderReportCard_OrderReportCardType" ToRole="OrderReportCard" FromRole="OrderReportCardType" />
+  </EntityType>
+  <EntityType Name="OrderStatu">
+    <Key>
+      <PropertyRef Name="OrderStatusID" />
+    </Key>
+    <Property Name="OrderStatusID" Type="Edm.Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StatusLabel" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="DisplayLabel" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="NextUserRoleID" Type="Edm.Int16" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Orders" Relationship="LightSwitchApplication.FK_Order_OrderStatus" ToRole="Order" FromRole="OrderStatus" />
+    <NavigationProperty Name="UserRole" Relationship="LightSwitchApplication.FK_OrderStatus_UserRole" ToRole="UserRole" FromRole="OrderStatus" />
+  </EntityType>
+  <EntityType Name="OrderThrough">
+    <Key>
+      <PropertyRef Name="OrderThroughID" />
+    </Key>
+    <Property Name="OrderThroughID" Type="Edm.Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Mode" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Orders" Relationship="LightSwitchApplication.FK_Order_OrderThrough" ToRole="Order" FromRole="OrderThrough" />
+  </EntityType>
+  <EntityType Name="Package">
+    <Key>
+      <PropertyRef Name="PackageID" />
+    </Key>
+    <Property Name="PackageID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Packed" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="Pending" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="c_Date" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="ExcessToStock" Type="Edm.Decimal" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="CartonBoxID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="ProductBreakUpSummaryID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="CartonBox" Relationship="LightSwitchApplication.FK_Package_CartonBox" ToRole="CartonBox" FromRole="Package" />
+    <NavigationProperty Name="ProductBreakUpSummary" Relationship="LightSwitchApplication.FK_Package_ProductBreakUpSummary" ToRole="ProductBreakUpSummary" FromRole="Package" />
+  </EntityType>
+  <EntityType Name="ProductBreakUp">
+    <Key>
+      <PropertyRef Name="ProductBreakUpID" />
+    </Key>
+    <Property Name="ProductBreakUpID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tolerance" Type="Edm.Double" Nullable="false" />
+    <Property Name="PriceTerms" Type="Edm.String" MaxLength="Max" Unicode="false" />
+    <Property Name="PaymentTerms" Type="Edm.String" MaxLength="Max" Unicode="false" />
+    <Property Name="DocumentsRequired" Type="Edm.String" MaxLength="Max" Unicode="false" />
+    <Property Name="ShipmentModeID" Type="Edm.Byte" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="OrderProducts" Relationship="LightSwitchApplication.FK_OrderProduct_ProductBreakUp" ToRole="OrderProduct" FromRole="ProductBreakUp" />
+    <NavigationProperty Name="ShipmentMode" Relationship="LightSwitchApplication.FK_ProductBreakUp_ShipmentMode" ToRole="ShipmentMode" FromRole="ProductBreakUp" />
+    <NavigationProperty Name="ProductCountryWiseBreakUps" Relationship="LightSwitchApplication.FK_ProductCountryWiseBreakUp_ProductBreakUp" ToRole="ProductCountryWiseBreakUp" FromRole="ProductBreakUp" />
+  </EntityType>
+  <EntityType Name="ProductBreakUpSummary">
+    <Key>
+      <PropertyRef Name="ProductBreakUpSummaryID" />
+    </Key>
+    <Property Name="ProductBreakUpSummaryID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumberOfPieces" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="ColorID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="ProductID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="ProductSizeID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Packages" Relationship="LightSwitchApplication.FK_Package_ProductBreakUpSummary" ToRole="Package" FromRole="ProductBreakUpSummary" />
+    <NavigationProperty Name="Color" Relationship="LightSwitchApplication.FK_ProductBreakUpSummary_Color" ToRole="Color" FromRole="ProductBreakUpSummary" />
+    <NavigationProperty Name="OrderProduct" Relationship="LightSwitchApplication.FK_ProductBreakUpSummary_OrderProduct" ToRole="OrderProduct" FromRole="ProductBreakUpSummary" />
+    <NavigationProperty Name="ProductSize" Relationship="LightSwitchApplication.FK_ProductBreakUpSummary_ProductSize" ToRole="ProductSize" FromRole="ProductBreakUpSummary" />
+    <NavigationProperty Name="ProductCuttings" Relationship="LightSwitchApplication.FK_ProductCutting_ProductBreakUpSummary" ToRole="ProductCutting" FromRole="ProductBreakUpSummary" />
+    <NavigationProperty Name="Productions" Relationship="LightSwitchApplication.FK_Production_ProductBreakUpSummary" ToRole="Production" FromRole="ProductBreakUpSummary" />
+    <NavigationProperty Name="Qualities" Relationship="LightSwitchApplication.FK_Quality_ProductBreakUpSummary" ToRole="Quality" FromRole="ProductBreakUpSummary" />
+    <NavigationProperty Name="Shipments" Relationship="LightSwitchApplication.FK_Shipment_ProductBreakUpSummary" ToRole="Shipment" FromRole="ProductBreakUpSummary" />
+  </EntityType>
+  <EntityType Name="ProductCountryWiseBreakUp">
+    <Key>
+      <PropertyRef Name="ProductCountryWiseBreakUpID" />
+    </Key>
+    <Property Name="ProductCountryWiseBreakUpID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumberOfPieces" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="ColorID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CountryID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="ProductBreakUpID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="ProductSizeID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Color" Relationship="LightSwitchApplication.FK_ProductCountryWiseBreakUp_Color" ToRole="Color" FromRole="ProductCountryWiseBreakUp" />
+    <NavigationProperty Name="Country" Relationship="LightSwitchApplication.FK_ProductCountryWiseBreakUp_Country" ToRole="Country" FromRole="ProductCountryWiseBreakUp" />
+    <NavigationProperty Name="ProductBreakUp" Relationship="LightSwitchApplication.FK_ProductCountryWiseBreakUp_ProductBreakUp" ToRole="ProductBreakUp" FromRole="ProductCountryWiseBreakUp" />
+    <NavigationProperty Name="ProductSize" Relationship="LightSwitchApplication.FK_ProductCountryWiseBreakUp_ProductSize" ToRole="ProductSize" FromRole="ProductCountryWiseBreakUp" />
+  </EntityType>
+  <EntityType Name="ProductCutting">
+    <Key>
+      <PropertyRef Name="CuttingID" />
+    </Key>
+    <Property Name="CuttingID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="c_Date" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="CutQuantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="Pending" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="ExcessToStock" Type="Edm.Decimal" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="ProductBreakUpSummaryID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="ProductBreakUpSummary" Relationship="LightSwitchApplication.FK_ProductCutting_ProductBreakUpSummary" ToRole="ProductBreakUpSummary" FromRole="ProductCutting" />
+  </EntityType>
+  <EntityType Name="ProductExtraCost">
+    <Key>
+      <PropertyRef Name="ExtraCostID" />
+    </Key>
+    <Property Name="ExtraCostID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="Edm.String" MaxLength="Max" Unicode="false" />
+    <Property Name="Cost" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="CurrencyID" Type="Edm.Int16" ConcurrencyMode="Fixed" />
+    <Property Name="ProductID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="ExtraCostTypeID" Type="Edm.Int16" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Currency" Relationship="LightSwitchApplication.FK_ProductExtraCost_Currency" ToRole="Currency" FromRole="ProductExtraCost" />
+    <NavigationProperty Name="OrderProduct" Relationship="LightSwitchApplication.FK_ProductExtraCost_OrderProduct" ToRole="OrderProduct" FromRole="ProductExtraCost" />
+    <NavigationProperty Name="ProductExtraCostType" Relationship="LightSwitchApplication.FK_ProductExtraCost_ProductExtraCostType" ToRole="ProductExtraCostType" FromRole="ProductExtraCost" />
+  </EntityType>
+  <EntityType Name="ProductExtraCostType">
+    <Key>
+      <PropertyRef Name="ExtraCostTypeID" />
+    </Key>
+    <Property Name="ExtraCostTypeID" Type="Edm.Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeName" Type="Edm.String" Nullable="false" MaxLength="Max" Unicode="false" />
+    <NavigationProperty Name="ProductExtraCosts" Relationship="LightSwitchApplication.FK_ProductExtraCost_ProductExtraCostType" ToRole="ProductExtraCost" FromRole="ProductExtraCostType" />
+  </EntityType>
+  <EntityType Name="Production">
+    <Key>
+      <PropertyRef Name="ProductionID" />
+    </Key>
+    <Property Name="ProductionID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompletedQuantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="Pending" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="c_Date" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="ProductBreakUpSummaryID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="ProductBreakUpSummary" Relationship="LightSwitchApplication.FK_Production_ProductBreakUpSummary" ToRole="ProductBreakUpSummary" FromRole="Production" />
+  </EntityType>
+  <EntityType Name="ProductMaterialItem">
+    <Key>
+      <PropertyRef Name="ProductMaterialItemID" />
+    </Key>
+    <Property Name="ProductMaterialItemID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="c_Alias" Type="Edm.String" MaxLength="Max" Unicode="false" />
+    <Property Name="Quantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="Cost" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="LastPOGeneratedOn" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="TaxInINR" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="SupplierID" Type="Edm.Int32" ConcurrencyMode="Fixed" />
+    <Property Name="CurrencyID" Type="Edm.Int16" ConcurrencyMode="Fixed" />
+    <Property Name="MaterialID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="PurchaseOrderID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="SubMaterialNameID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="UOMID" Type="Edm.Int16" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="OrderedItems" Relationship="LightSwitchApplication.FK_OrderedItem_ProductMaterialItem" ToRole="OrderedItem" FromRole="ProductMaterialItem" />
+    <NavigationProperty Name="Company" Relationship="LightSwitchApplication.FK_ProductMaterialItem_Company" ToRole="Company" FromRole="ProductMaterialItem" />
+    <NavigationProperty Name="Currency" Relationship="LightSwitchApplication.FK_ProductMaterialItem_Currency" ToRole="Currency" FromRole="ProductMaterialItem" />
+    <NavigationProperty Name="ProductMaterial" Relationship="LightSwitchApplication.FK_ProductMaterialItem_ProductMaterials" ToRole="ProductMaterials" FromRole="ProductMaterialItem" />
+    <NavigationProperty Name="PurchaseOrder" Relationship="LightSwitchApplication.FK_ProductMaterialItem_PurchaseOrders" ToRole="PurchaseOrders" FromRole="ProductMaterialItem" />
+    <NavigationProperty Name="SubMaterial" Relationship="LightSwitchApplication.FK_ProductMaterialItem_SubMaterial" ToRole="SubMaterial" FromRole="ProductMaterialItem" />
+    <NavigationProperty Name="UnitsOfMeasurement" Relationship="LightSwitchApplication.FK_ProductMaterialItem_UnitsOfMeasurement" ToRole="UnitsOfMeasurement" FromRole="ProductMaterialItem" />
+  </EntityType>
+  <EntityType Name="ProductMaterial">
+    <Key>
+      <PropertyRef Name="MaterialID" />
+    </Key>
+    <Property Name="MaterialID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Consumption" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="Cost" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="ConsumptionCost" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="OtherCostInINR" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="OtherCostName" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="ApprovalID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="CurrencyID" Type="Edm.Int16" ConcurrencyMode="Fixed" />
+    <Property Name="MaterialNameID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="ProductID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="UOMID" Type="Edm.Int16" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="ProductMaterialItems" Relationship="LightSwitchApplication.FK_ProductMaterialItem_ProductMaterials" ToRole="ProductMaterialItem" FromRole="ProductMaterials" />
+    <NavigationProperty Name="Approval" Relationship="LightSwitchApplication.FK_ProductMaterials_Approval" ToRole="Approval" FromRole="ProductMaterials" />
+    <NavigationProperty Name="Currency" Relationship="LightSwitchApplication.FK_ProductMaterials_Currency" ToRole="Currency" FromRole="ProductMaterials" />
+    <NavigationProperty Name="MaterialName" Relationship="LightSwitchApplication.FK_ProductMaterials_MaterialName" ToRole="MaterialName" FromRole="ProductMaterials" />
+    <NavigationProperty Name="OrderProduct" Relationship="LightSwitchApplication.FK_ProductMaterials_OrderProduct" ToRole="OrderProduct" FromRole="ProductMaterials" />
+    <NavigationProperty Name="UnitsOfMeasurement" Relationship="LightSwitchApplication.FK_ProductMaterials_UnitsOfMeasurement" ToRole="UnitsOfMeasurement" FromRole="ProductMaterials" />
+  </EntityType>
+  <EntityType Name="ProductName">
+    <Key>
+      <PropertyRef Name="ProductNameID" />
+    </Key>
+    <Property Name="ProductNameID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="Max" Unicode="false" />
+    <Property Name="StyleID" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="OrderProducts" Relationship="LightSwitchApplication.FK_OrderProduct_ProductName" ToRole="OrderProduct" FromRole="ProductName" />
+    <NavigationProperty Name="ProductStocks" Relationship="LightSwitchApplication.FK_ProductStock_ProductName" ToRole="ProductStock" FromRole="ProductName" />
+  </EntityType>
+  <EntityType Name="ProductSize">
+    <Key>
+      <PropertyRef Name="ProductSizeID" />
+    </Key>
+    <Property Name="ProductSizeID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Size" Type="Edm.String" Nullable="false" MaxLength="25" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="ProductBreakUpSummaries" Relationship="LightSwitchApplication.FK_ProductBreakUpSummary_ProductSize" ToRole="ProductBreakUpSummary" FromRole="ProductSize" />
+    <NavigationProperty Name="ProductCountryWiseBreakUps" Relationship="LightSwitchApplication.FK_ProductCountryWiseBreakUp_ProductSize" ToRole="ProductCountryWiseBreakUp" FromRole="ProductSize" />
+    <NavigationProperty Name="ProductStocks" Relationship="LightSwitchApplication.FK_ProductStock_ProductSize" ToRole="ProductStock" FromRole="ProductSize" />
+  </EntityType>
+  <EntityType Name="ProductStock">
+    <Key>
+      <PropertyRef Name="ProductStockID" />
+    </Key>
+    <Property Name="ProductStockID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CutStock" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="ProductStock1" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="ColorID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="ProductNameID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="ProductSizeID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Color" Relationship="LightSwitchApplication.FK_ProductStock_Color" ToRole="Color" FromRole="ProductStock" />
+    <NavigationProperty Name="ProductName" Relationship="LightSwitchApplication.FK_ProductStock_ProductName" ToRole="ProductName" FromRole="ProductStock" />
+    <NavigationProperty Name="ProductSize" Relationship="LightSwitchApplication.FK_ProductStock_ProductSize" ToRole="ProductSize" FromRole="ProductStock" />
+  </EntityType>
+  <EntityType Name="PurchaseOrder">
+    <Key>
+      <PropertyRef Name="PurchaseOrderID" />
+    </Key>
+    <Property Name="PurchaseOrderID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PurchaseOrderDate" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="PurchaseOrderNumber" Type="Edm.String" MaxLength="150" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="TermsAndConditions" Type="Edm.String" MaxLength="1000" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="QuotationDate" Type="Edm.DateTime" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="QuotationNumber" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="ApprovalID" Type="Edm.Int64" ConcurrencyMode="Fixed" />
+    <Property Name="SupplierID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="OrderID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="PurchaseOrderStatusID" Type="Edm.Byte" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="CompactingJoes" Relationship="LightSwitchApplication.FK_CompactingJo_PurchaseOrders" ToRole="CompactingJo" FromRole="PurchaseOrders" />
+    <NavigationProperty Name="DyeingJOes" Relationship="LightSwitchApplication.FK_DyeingJO_PurchaseOrders" ToRole="DyeingJO" FromRole="PurchaseOrders" />
+    <NavigationProperty Name="GRNReciepts" Relationship="LightSwitchApplication.FK_GRNReciept_PurchaseOrders" ToRole="GRNReciept" FromRole="PurchaseOrders" />
+    <NavigationProperty Name="OrderedItems" Relationship="LightSwitchApplication.FK_OrderedItem_PurchaseOrders" ToRole="OrderedItem" FromRole="PurchaseOrders" />
+    <NavigationProperty Name="ProductMaterialItems" Relationship="LightSwitchApplication.FK_ProductMaterialItem_PurchaseOrders" ToRole="ProductMaterialItem" FromRole="PurchaseOrders" />
+    <NavigationProperty Name="Approval" Relationship="LightSwitchApplication.FK_PurchaseOrders_Approval" ToRole="Approval" FromRole="PurchaseOrders" />
+    <NavigationProperty Name="Company" Relationship="LightSwitchApplication.FK_PurchaseOrders_Company" ToRole="Company" FromRole="PurchaseOrders" />
+    <NavigationProperty Name="Order" Relationship="LightSwitchApplication.FK_PurchaseOrders_Order" ToRole="Order" FromRole="PurchaseOrders" />
+    <NavigationProperty Name="PurchaseOrderStatu" Relationship="LightSwitchApplication.FK_PurchaseOrders_PurchaseOrderStatus" ToRole="PurchaseOrderStatus" FromRole="PurchaseOrders" />
+  </EntityType>
+  <EntityType Name="PurchaseOrderStatu">
+    <Key>
+      <PropertyRef Name="PurchaseOrderStatusID" />
+    </Key>
+    <Property Name="PurchaseOrderStatusID" Type="Edm.Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="100" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="PurchaseOrders" Relationship="LightSwitchApplication.FK_PurchaseOrders_PurchaseOrderStatus" ToRole="PurchaseOrders" FromRole="PurchaseOrderStatus" />
+  </EntityType>
+  <EntityType Name="Quality">
+    <Key>
+      <PropertyRef Name="QualityID" />
+    </Key>
+    <Property Name="QualityID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Passed" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="Failed" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="c_Date" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="ProductBreakUpSummaryID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="ProductBreakUpSummary" Relationship="LightSwitchApplication.FK_Quality_ProductBreakUpSummary" ToRole="ProductBreakUpSummary" FromRole="Quality" />
+  </EntityType>
+  <EntityType Name="ReceiptStatu">
+    <Key>
+      <PropertyRef Name="ReceiptStatusID" />
+    </Key>
+    <Property Name="ReceiptStatusID" Type="Edm.Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="GRNReciepts" Relationship="LightSwitchApplication.FK_GRNReciept_ReceiptStatus" ToRole="GRNReciept" FromRole="ReceiptStatus" />
+  </EntityType>
+  <EntityType Name="Shipment">
+    <Key>
+      <PropertyRef Name="ShipmentID" />
+    </Key>
+    <Property Name="ShipmentID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Shipped" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="Rejected" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" ConcurrencyMode="Fixed" />
+    <Property Name="c_Date" Type="Edm.DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
+    <Property Name="ProductBreakUpSummaryID" Type="Edm.Int64" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="ProductBreakUpSummary" Relationship="LightSwitchApplication.FK_Shipment_ProductBreakUpSummary" ToRole="ProductBreakUpSummary" FromRole="Shipment" />
+  </EntityType>
+  <EntityType Name="ShipmentMode">
+    <Key>
+      <PropertyRef Name="ShipmentModeID" />
+    </Key>
+    <Property Name="ShipmentModeID" Type="Edm.Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Mode" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="Invoices" Relationship="LightSwitchApplication.FK_Invoice_ShipmentMode" ToRole="Invoice" FromRole="ShipmentMode" />
+    <NavigationProperty Name="ProductBreakUps" Relationship="LightSwitchApplication.FK_ProductBreakUp_ShipmentMode" ToRole="ProductBreakUp" FromRole="ShipmentMode" />
+  </EntityType>
+  <EntityType Name="SubMaterial">
+    <Key>
+      <PropertyRef Name="SubMaterialsNameID" />
+    </Key>
+    <Property Name="SubMaterialsNameID" Type="Edm.Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="Max" Unicode="false" />
+    <Property Name="InStock" Type="Edm.Decimal" Precision="18" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="MaterialNameID" Type="Edm.Int32" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="UOMID" Type="Edm.Int16" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="MaterialStocks" Relationship="LightSwitchApplication.FK_MaterialStock_SubMaterial" ToRole="MaterialStock" FromRole="SubMaterial" />
+    <NavigationProperty Name="ProductMaterialItems" Relationship="LightSwitchApplication.FK_ProductMaterialItem_SubMaterial" ToRole="ProductMaterialItem" FromRole="SubMaterial" />
+    <NavigationProperty Name="MaterialName" Relationship="LightSwitchApplication.FK_SubMaterial_MaterialName" ToRole="MaterialName" FromRole="SubMaterial" />
+    <NavigationProperty Name="UnitsOfMeasurement" Relationship="LightSwitchApplication.FK_SubMaterial_UnitsOfMeasurement" ToRole="UnitsOfMeasurement" FromRole="SubMaterial" />
+  </EntityType>
+  <EntityType Name="Temp">
+    <Key>
+      <PropertyRef Name="CartonBoxNumber" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="Color" />
+      <PropertyRef Name="Size" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="CartonBoxNumber" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" />
+    <Property Name="Quantity" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Color" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" />
+    <Property Name="CostPerUnit" Type="Edm.Decimal" Precision="36" Scale="4" ConcurrencyMode="Fixed" />
+    <Property Name="Size" Type="Edm.String" Nullable="false" MaxLength="25" Unicode="false" />
+    <Property Name="Name" Type="Edm.String" Nullable="false" MaxLength="Max" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UnitsOfMeasurement">
+    <Key>
+      <PropertyRef Name="UOMID" />
+    </Key>
+    <Property Name="UOMID" Type="Edm.Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Units" Type="Edm.String" Nullable="false" MaxLength="10" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="Multiplier" Type="Edm.Decimal" Nullable="false" Precision="18" Scale="2" ConcurrencyMode="Fixed" />
+    <Property Name="QuantityMultiplier" Type="Edm.Decimal" Precision="18" Scale="2" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="MaterialStocks" Relationship="LightSwitchApplication.FK_MaterialStock_UnitsOfMeasurement" ToRole="MaterialStock" FromRole="UnitsOfMeasurement" />
+    <NavigationProperty Name="OrderProducts" Relationship="LightSwitchApplication.FK_OrderProduct_UnitsOfMeasurement" ToRole="OrderProduct" FromRole="UnitsOfMeasurement" />
+    <NavigationProperty Name="ProductMaterialItems" Relationship="LightSwitchApplication.FK_ProductMaterialItem_UnitsOfMeasurement" ToRole="ProductMaterialItem" FromRole="UnitsOfMeasurement" />
+    <NavigationProperty Name="ProductMaterials" Relationship="LightSwitchApplication.FK_ProductMaterials_UnitsOfMeasurement" ToRole="ProductMaterials" FromRole="UnitsOfMeasurement" />
+    <NavigationProperty Name="SubMaterials" Relationship="LightSwitchApplication.FK_SubMaterial_UnitsOfMeasurement" ToRole="SubMaterial" FromRole="UnitsOfMeasurement" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Edm.Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="Password" Type="Edm.String" Nullable="false" MaxLength="Max" Unicode="false" />
+    <Property Name="EmailID" Type="Edm.String" Nullable="false" MaxLength="100" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="RoleID" Type="Edm.Int16" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="UserRole" Relationship="LightSwitchApplication.FK_User_UserRole" ToRole="UserRole" FromRole="User" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserRoleID" />
+    </Key>
+    <Property Name="UserRoleID" Type="Edm.Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="Edm.String" Nullable="false" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="AliasName" Type="Edm.String" MaxLength="50" Unicode="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanCreateUser" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanCreateNewEnquiry" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanAddMaterials" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanAddMaterialsCost" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanAddConsumption" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanAddExtraCost" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanApproveEnquiry" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanConfirmOrder" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanAddSubMaterials" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanGeneratePurchaseOrder" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanModifyExecutionCutting" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanModifyExecutionProduction" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanModifyExecutionPackaging" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanModifyExectionQuality" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanModifyExecutionShipping" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanModifyGRN" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanModifyJobOrder" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanAddSubMaterialsCost" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <Property Name="CanApprovePurchaseOrder" Type="Edm.Boolean" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="OrderStatus" Relationship="LightSwitchApplication.FK_OrderStatus_UserRole" ToRole="OrderStatus" FromRole="UserRole" />
+    <NavigationProperty Name="Users" Relationship="LightSwitchApplication.FK_User_UserRole" ToRole="User" FromRole="UserRole" />
+  </EntityType>
+  <Association Name="FK_Approval_ApprovalEntityType">
+    <End Role="ApprovalEntityType" Type="LightSwitchApplication.ApprovalEntityType" Multiplicity="1" />
+    <End Role="Approval" Type="LightSwitchApplication.Approval" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ApprovalEntityType">
+        <PropertyRef Name="ApprovalEntityTypeID" />
+      </Principal>
+      <Dependent Role="Approval">
+        <PropertyRef Name="ApprovalEntityTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Approval_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="Approval" Type="LightSwitchApplication.Approval" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="Approval">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Asset_AssetName">
+    <End Role="AssetName" Type="LightSwitchApplication.AssetName" Multiplicity="1" />
+    <End Role="Asset" Type="LightSwitchApplication.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetName">
+        <PropertyRef Name="AssetNameID" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="AssetNameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Asset_BrandName">
+    <End Role="BrandName" Type="LightSwitchApplication.BrandName" Multiplicity="0..1" />
+    <End Role="Asset" Type="LightSwitchApplication.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BrandName">
+        <PropertyRef Name="BrandNameID" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="BrandNameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Asset_Company">
+    <End Role="Company" Type="LightSwitchApplication.Company" Multiplicity="0..1" />
+    <End Role="Asset" Type="LightSwitchApplication.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetName_AssetCategory">
+    <End Role="AssetCategory" Type="LightSwitchApplication.AssetCategory" Multiplicity="0..1" />
+    <End Role="AssetName" Type="LightSwitchApplication.AssetName" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetCategory">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="AssetName">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartonBox_Invoice">
+    <End Role="Invoice" Type="LightSwitchApplication.Invoice" Multiplicity="0..1" />
+    <End Role="CartonBox" Type="LightSwitchApplication.CartonBox" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Invoice">
+        <PropertyRef Name="InvoiceID" />
+      </Principal>
+      <Dependent Role="CartonBox">
+        <PropertyRef Name="InvoiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CartonBox_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="CartonBox" Type="LightSwitchApplication.CartonBox" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="CartonBox">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompactingJo_Approval">
+    <End Role="Approval" Type="LightSwitchApplication.Approval" Multiplicity="1" />
+    <End Role="CompactingJo" Type="LightSwitchApplication.CompactingJo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Approval">
+        <PropertyRef Name="ApprovalID" />
+      </Principal>
+      <Dependent Role="CompactingJo">
+        <PropertyRef Name="ApprovalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompactingJo_Company">
+    <End Role="Company" Type="LightSwitchApplication.Company" Multiplicity="1" />
+    <End Role="CompactingJo" Type="LightSwitchApplication.CompactingJo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="CompactingJo">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompactingJo_GRNReciept">
+    <End Role="GRNReciept" Type="LightSwitchApplication.GRNReciept" Multiplicity="0..1" />
+    <End Role="CompactingJo" Type="LightSwitchApplication.CompactingJo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GRNReciept">
+        <PropertyRef Name="GRNReciptID" />
+      </Principal>
+      <Dependent Role="CompactingJo">
+        <PropertyRef Name="GRNRecieptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompactingJo_JobOrder">
+    <End Role="JobOrder" Type="LightSwitchApplication.JobOrder" Multiplicity="0..1" />
+    <End Role="CompactingJo" Type="LightSwitchApplication.CompactingJo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOrder">
+        <PropertyRef Name="JobOrderID" />
+      </Principal>
+      <Dependent Role="CompactingJo">
+        <PropertyRef Name="JobOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompactingJo_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="CompactingJo" Type="LightSwitchApplication.CompactingJo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="CompactingJo">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompactingJo_PurchaseOrders">
+    <End Role="PurchaseOrders" Type="LightSwitchApplication.PurchaseOrder" Multiplicity="1" />
+    <End Role="CompactingJo" Type="LightSwitchApplication.CompactingJo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrders">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Principal>
+      <Dependent Role="CompactingJo">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompactingJoItem_CompactingJo">
+    <End Role="CompactingJo" Type="LightSwitchApplication.CompactingJo" Multiplicity="1" />
+    <End Role="CompactingJoItem" Type="LightSwitchApplication.CompactingJoItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompactingJo">
+        <PropertyRef Name="CompactingJoId" />
+      </Principal>
+      <Dependent Role="CompactingJoItem">
+        <PropertyRef Name="CompactingJoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CompactingJoItem_JobOrder">
+    <End Role="JobOrder" Type="LightSwitchApplication.JobOrder" Multiplicity="0..1" />
+    <End Role="CompactingJoItem" Type="LightSwitchApplication.CompactingJoItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOrder">
+        <PropertyRef Name="JobOrderID" />
+      </Principal>
+      <Dependent Role="CompactingJoItem">
+        <PropertyRef Name="JobOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Company_CompanyType">
+    <End Role="CompanyType" Type="LightSwitchApplication.CompanyType" Multiplicity="1" />
+    <End Role="Company" Type="LightSwitchApplication.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyType">
+        <PropertyRef Name="CompanyTypeID" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="CompanyTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DyeingJO_Approval">
+    <End Role="Approval" Type="LightSwitchApplication.Approval" Multiplicity="1" />
+    <End Role="DyeingJO" Type="LightSwitchApplication.DyeingJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Approval">
+        <PropertyRef Name="ApprovalID" />
+      </Principal>
+      <Dependent Role="DyeingJO">
+        <PropertyRef Name="ApprovalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DyeingJO_Company">
+    <End Role="Company" Type="LightSwitchApplication.Company" Multiplicity="1" />
+    <End Role="DyeingJO" Type="LightSwitchApplication.DyeingJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="DyeingJO">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DyeingJO_GRNReciept">
+    <End Role="GRNReciept" Type="LightSwitchApplication.GRNReciept" Multiplicity="0..1" />
+    <End Role="DyeingJO" Type="LightSwitchApplication.DyeingJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GRNReciept">
+        <PropertyRef Name="GRNReciptID" />
+      </Principal>
+      <Dependent Role="DyeingJO">
+        <PropertyRef Name="GRNRecieptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DyeingJO_JobOrder">
+    <End Role="JobOrder" Type="LightSwitchApplication.JobOrder" Multiplicity="0..1" />
+    <End Role="DyeingJO" Type="LightSwitchApplication.DyeingJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOrder">
+        <PropertyRef Name="JobOrderID" />
+      </Principal>
+      <Dependent Role="DyeingJO">
+        <PropertyRef Name="JobOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DyeingJO_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="DyeingJO" Type="LightSwitchApplication.DyeingJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="DyeingJO">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DyeingJO_PurchaseOrders">
+    <End Role="PurchaseOrders" Type="LightSwitchApplication.PurchaseOrder" Multiplicity="1" />
+    <End Role="DyeingJO" Type="LightSwitchApplication.DyeingJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrders">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Principal>
+      <Dependent Role="DyeingJO">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DyeingJoItem_DyeingJO">
+    <End Role="DyeingJO" Type="LightSwitchApplication.DyeingJO" Multiplicity="1" />
+    <End Role="DyeingJoItem" Type="LightSwitchApplication.DyeingJoItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DyeingJO">
+        <PropertyRef Name="DyeingJOId" />
+      </Principal>
+      <Dependent Role="DyeingJoItem">
+        <PropertyRef Name="DyeingJOId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DyeingJoItem_JobOrder">
+    <End Role="JobOrder" Type="LightSwitchApplication.JobOrder" Multiplicity="0..1" />
+    <End Role="DyeingJoItem" Type="LightSwitchApplication.DyeingJoItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOrder">
+        <PropertyRef Name="JobOrderID" />
+      </Principal>
+      <Dependent Role="DyeingJoItem">
+        <PropertyRef Name="JobOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GRNReciept_OrderedItem">
+    <End Role="OrderedItem" Type="LightSwitchApplication.OrderedItem" Multiplicity="1" />
+    <End Role="GRNReciept" Type="LightSwitchApplication.GRNReciept" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderedItem">
+        <PropertyRef Name="OrderedItemID" />
+      </Principal>
+      <Dependent Role="GRNReciept">
+        <PropertyRef Name="OrderedItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GRNReciept_PurchaseOrders">
+    <End Role="PurchaseOrders" Type="LightSwitchApplication.PurchaseOrder" Multiplicity="0..1" />
+    <End Role="GRNReciept" Type="LightSwitchApplication.GRNReciept" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrders">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Principal>
+      <Dependent Role="GRNReciept">
+        <PropertyRef Name="SpawnedPurchaseOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GRNReciept_ReceiptStatus">
+    <End Role="ReceiptStatus" Type="LightSwitchApplication.ReceiptStatu" Multiplicity="0..1" />
+    <End Role="GRNReciept" Type="LightSwitchApplication.GRNReciept" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReceiptStatus">
+        <PropertyRef Name="ReceiptStatusID" />
+      </Principal>
+      <Dependent Role="GRNReciept">
+        <PropertyRef Name="ReceiptStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_History_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="History" Type="LightSwitchApplication.History" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="History">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Company">
+    <End Role="Company" Type="LightSwitchApplication.Company" Multiplicity="1" />
+    <End Role="Invoice" Type="LightSwitchApplication.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="ConsigneeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Destination">
+    <End Role="Country" Type="LightSwitchApplication.Country" Multiplicity="1" />
+    <End Role="Invoice" Type="LightSwitchApplication.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="DestinationCountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="Invoice" Type="LightSwitchApplication.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_Origin">
+    <End Role="Country" Type="LightSwitchApplication.Country" Multiplicity="1" />
+    <End Role="Invoice" Type="LightSwitchApplication.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="OriginCountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Invoice_ShipmentMode">
+    <End Role="ShipmentMode" Type="LightSwitchApplication.ShipmentMode" Multiplicity="1" />
+    <End Role="Invoice" Type="LightSwitchApplication.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipmentMode">
+        <PropertyRef Name="ShipmentModeID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="CarriageByID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobOrder_Company">
+    <End Role="Company" Type="LightSwitchApplication.Company" Multiplicity="1" />
+    <End Role="JobOrder" Type="LightSwitchApplication.JobOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="JobOrder">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobOrder_GRNReciept">
+    <End Role="GRNReciept" Type="LightSwitchApplication.GRNReciept" Multiplicity="1" />
+    <End Role="JobOrder" Type="LightSwitchApplication.JobOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GRNReciept">
+        <PropertyRef Name="GRNReciptID" />
+      </Principal>
+      <Dependent Role="JobOrder">
+        <PropertyRef Name="GRNReciptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobOrder_JobOrder">
+    <End Role="JobOrder" Type="LightSwitchApplication.JobOrder" Multiplicity="0..1" />
+    <End Role="JobOrder1" Type="LightSwitchApplication.JobOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOrder">
+        <PropertyRef Name="JobOrderID" />
+      </Principal>
+      <Dependent Role="JobOrder1">
+        <PropertyRef Name="ParentJOID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobOrder_JobOrderType">
+    <End Role="JobOrderType" Type="LightSwitchApplication.JobOrderType" Multiplicity="1" />
+    <End Role="JobOrder" Type="LightSwitchApplication.JobOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOrderType">
+        <PropertyRef Name="JobOrderTypeID" />
+      </Principal>
+      <Dependent Role="JobOrder">
+        <PropertyRef Name="JobOrderTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobOrderReceipt_JobOrder">
+    <End Role="JobOrder" Type="LightSwitchApplication.JobOrder" Multiplicity="1" />
+    <End Role="JobOrderReceipt" Type="LightSwitchApplication.JobOrderReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOrder">
+        <PropertyRef Name="JobOrderID" />
+      </Principal>
+      <Dependent Role="JobOrderReceipt">
+        <PropertyRef Name="JobOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobOrderTolerance_JobOrderToleranceType">
+    <End Role="JobOrderToleranceType" Type="LightSwitchApplication.JobOrderToleranceType" Multiplicity="1" />
+    <End Role="JobOrderTolerance" Type="LightSwitchApplication.JobOrderTolerance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOrderToleranceType">
+        <PropertyRef Name="JobOrderToleranceTypeID" />
+      </Principal>
+      <Dependent Role="JobOrderTolerance">
+        <PropertyRef Name="JobOrderToleraceTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobOrderTolerance_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="JobOrderTolerance" Type="LightSwitchApplication.JobOrderTolerance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="JobOrderTolerance">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KnittingJO_Approval">
+    <End Role="Approval" Type="LightSwitchApplication.Approval" Multiplicity="1" />
+    <End Role="KnittingJO" Type="LightSwitchApplication.KnittingJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Approval">
+        <PropertyRef Name="ApprovalID" />
+      </Principal>
+      <Dependent Role="KnittingJO">
+        <PropertyRef Name="ApprovalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KnittingJO_Company">
+    <End Role="Company" Type="LightSwitchApplication.Company" Multiplicity="1" />
+    <End Role="KnittingJO" Type="LightSwitchApplication.KnittingJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="KnittingJO">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KnittingJO_GRNReciept">
+    <End Role="GRNReciept" Type="LightSwitchApplication.GRNReciept" Multiplicity="0..1" />
+    <End Role="KnittingJO" Type="LightSwitchApplication.KnittingJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GRNReciept">
+        <PropertyRef Name="GRNReciptID" />
+      </Principal>
+      <Dependent Role="KnittingJO">
+        <PropertyRef Name="GRNRecieptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KnittingJO_JobOrder">
+    <End Role="JobOrder" Type="LightSwitchApplication.JobOrder" Multiplicity="0..1" />
+    <End Role="KnittingJO" Type="LightSwitchApplication.KnittingJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOrder">
+        <PropertyRef Name="JobOrderID" />
+      </Principal>
+      <Dependent Role="KnittingJO">
+        <PropertyRef Name="JobOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KnittingJO_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="0..1" />
+    <End Role="KnittingJO" Type="LightSwitchApplication.KnittingJO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="KnittingJO">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KnittingJoItem_JobOrder">
+    <End Role="JobOrder" Type="LightSwitchApplication.JobOrder" Multiplicity="0..1" />
+    <End Role="KnittingJoItem" Type="LightSwitchApplication.KnittingJoItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobOrder">
+        <PropertyRef Name="JobOrderID" />
+      </Principal>
+      <Dependent Role="KnittingJoItem">
+        <PropertyRef Name="JobOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KnittingJoItem_KnittingJO">
+    <End Role="KnittingJO" Type="LightSwitchApplication.KnittingJO" Multiplicity="1" />
+    <End Role="KnittingJoItem" Type="LightSwitchApplication.KnittingJoItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KnittingJO">
+        <PropertyRef Name="KnittingJOId" />
+      </Principal>
+      <Dependent Role="KnittingJoItem">
+        <PropertyRef Name="KnittingJoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaterialsFromStock_MaterialStock">
+    <End Role="MaterialStock" Type="LightSwitchApplication.MaterialStock" Multiplicity="1" />
+    <End Role="MaterialsFromStock" Type="LightSwitchApplication.MaterialsFromStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaterialStock">
+        <PropertyRef Name="MaterialStockID" />
+      </Principal>
+      <Dependent Role="MaterialsFromStock">
+        <PropertyRef Name="MaterialStockID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaterialsFromStock_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="MaterialsFromStock" Type="LightSwitchApplication.MaterialsFromStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="MaterialsFromStock">
+        <PropertyRef Name="FromOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaterialsFromStock_Order1">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="MaterialsFromStock" Type="LightSwitchApplication.MaterialsFromStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="MaterialsFromStock">
+        <PropertyRef Name="ToOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaterialStock_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="MaterialStock" Type="LightSwitchApplication.MaterialStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="MaterialStock">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaterialStock_SubMaterial">
+    <End Role="SubMaterial" Type="LightSwitchApplication.SubMaterial" Multiplicity="1" />
+    <End Role="MaterialStock" Type="LightSwitchApplication.MaterialStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubMaterial">
+        <PropertyRef Name="SubMaterialsNameID" />
+      </Principal>
+      <Dependent Role="MaterialStock">
+        <PropertyRef Name="SubMaterialsNameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaterialStock_UnitsOfMeasurement">
+    <End Role="UnitsOfMeasurement" Type="LightSwitchApplication.UnitsOfMeasurement" Multiplicity="1" />
+    <End Role="MaterialStock" Type="LightSwitchApplication.MaterialStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnitsOfMeasurement">
+        <PropertyRef Name="UOMID" />
+      </Principal>
+      <Dependent Role="MaterialStock">
+        <PropertyRef Name="UOMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_CommissionValueType">
+    <End Role="CommissionValueType" Type="LightSwitchApplication.CommissionValueType" Multiplicity="0..1" />
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CommissionValueType">
+        <PropertyRef Name="CommissionValueTypeID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CommissionValueTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_Company">
+    <End Role="Company" Type="LightSwitchApplication.Company" Multiplicity="1" />
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_OrderBy">
+    <End Role="Company" Type="LightSwitchApplication.Company" Multiplicity="1" />
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="OrderByID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_OrderStatus">
+    <End Role="OrderStatus" Type="LightSwitchApplication.OrderStatu" Multiplicity="1" />
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="OrderStatusID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="OrderStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Order_OrderThrough">
+    <End Role="OrderThrough" Type="LightSwitchApplication.OrderThrough" Multiplicity="1" />
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderThrough">
+        <PropertyRef Name="OrderThroughID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="OrderThoughID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderCurrencyConversion_Currency">
+    <End Role="Currency" Type="LightSwitchApplication.Currency" Multiplicity="1" />
+    <End Role="OrderCurrencyConversion" Type="LightSwitchApplication.OrderCurrencyConversion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyID" />
+      </Principal>
+      <Dependent Role="OrderCurrencyConversion">
+        <PropertyRef Name="CurrencyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderCurrencyConversion_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="OrderCurrencyConversion" Type="LightSwitchApplication.OrderCurrencyConversion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderCurrencyConversion">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderedItem_ProductMaterialItem">
+    <End Role="ProductMaterialItem" Type="LightSwitchApplication.ProductMaterialItem" Multiplicity="1" />
+    <End Role="OrderedItem" Type="LightSwitchApplication.OrderedItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductMaterialItem">
+        <PropertyRef Name="ProductMaterialItemID" />
+      </Principal>
+      <Dependent Role="OrderedItem">
+        <PropertyRef Name="ProductMaterialItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderedItem_PurchaseOrders">
+    <End Role="PurchaseOrders" Type="LightSwitchApplication.PurchaseOrder" Multiplicity="1" />
+    <End Role="OrderedItem" Type="LightSwitchApplication.OrderedItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrders">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Principal>
+      <Dependent Role="OrderedItem">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderProduct_Approval">
+    <End Role="Approval" Type="LightSwitchApplication.Approval" Multiplicity="0..1" />
+    <End Role="OrderProduct" Type="LightSwitchApplication.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Approval">
+        <PropertyRef Name="ApprovalID" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="ApprovalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderProduct_Currency">
+    <End Role="Currency" Type="LightSwitchApplication.Currency" Multiplicity="1" />
+    <End Role="OrderProduct" Type="LightSwitchApplication.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyID" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="CurrencyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderProduct_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="OrderProduct" Type="LightSwitchApplication.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderProduct_ProductBreakUp">
+    <End Role="ProductBreakUp" Type="LightSwitchApplication.ProductBreakUp" Multiplicity="0..1" />
+    <End Role="OrderProduct" Type="LightSwitchApplication.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBreakUp">
+        <PropertyRef Name="ProductBreakUpID" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="ProductBreakUpID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderProduct_ProductName">
+    <End Role="ProductName" Type="LightSwitchApplication.ProductName" Multiplicity="1" />
+    <End Role="OrderProduct" Type="LightSwitchApplication.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductName">
+        <PropertyRef Name="ProductNameID" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="ProductNameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderProduct_UnitsOfMeasurement">
+    <End Role="UnitsOfMeasurement" Type="LightSwitchApplication.UnitsOfMeasurement" Multiplicity="1" />
+    <End Role="OrderProduct" Type="LightSwitchApplication.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnitsOfMeasurement">
+        <PropertyRef Name="UOMID" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="UOMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderReportCard_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="OrderReportCard" Type="LightSwitchApplication.OrderReportCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderReportCard">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderReportCard_OrderReportCardType">
+    <End Role="OrderReportCardType" Type="LightSwitchApplication.OrderReportCardType" Multiplicity="1" />
+    <End Role="OrderReportCard" Type="LightSwitchApplication.OrderReportCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderReportCardType">
+        <PropertyRef Name="OrderReportCardTypeID" />
+      </Principal>
+      <Dependent Role="OrderReportCard">
+        <PropertyRef Name="OrderReportCardTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderStatus_UserRole">
+    <End Role="UserRole" Type="LightSwitchApplication.UserRole" Multiplicity="0..1" />
+    <End Role="OrderStatus" Type="LightSwitchApplication.OrderStatu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="UserRoleID" />
+      </Principal>
+      <Dependent Role="OrderStatus">
+        <PropertyRef Name="NextUserRoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_CartonBox">
+    <End Role="CartonBox" Type="LightSwitchApplication.CartonBox" Multiplicity="0..1" />
+    <End Role="Package" Type="LightSwitchApplication.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CartonBox">
+        <PropertyRef Name="CartonBoxID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="CartonBoxID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Package_ProductBreakUpSummary">
+    <End Role="ProductBreakUpSummary" Type="LightSwitchApplication.ProductBreakUpSummary" Multiplicity="1" />
+    <End Role="Package" Type="LightSwitchApplication.Package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBreakUpSummary">
+        <PropertyRef Name="ProductBreakUpSummaryID" />
+      </Principal>
+      <Dependent Role="Package">
+        <PropertyRef Name="ProductBreakUpSummaryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBreakUp_ShipmentMode">
+    <End Role="ShipmentMode" Type="LightSwitchApplication.ShipmentMode" Multiplicity="1" />
+    <End Role="ProductBreakUp" Type="LightSwitchApplication.ProductBreakUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipmentMode">
+        <PropertyRef Name="ShipmentModeID" />
+      </Principal>
+      <Dependent Role="ProductBreakUp">
+        <PropertyRef Name="ShipmentModeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBreakUpSummary_Color">
+    <End Role="Color" Type="LightSwitchApplication.Color" Multiplicity="1" />
+    <End Role="ProductBreakUpSummary" Type="LightSwitchApplication.ProductBreakUpSummary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Color">
+        <PropertyRef Name="ColorID" />
+      </Principal>
+      <Dependent Role="ProductBreakUpSummary">
+        <PropertyRef Name="ColorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBreakUpSummary_OrderProduct">
+    <End Role="OrderProduct" Type="LightSwitchApplication.OrderProduct" Multiplicity="0..1" />
+    <End Role="ProductBreakUpSummary" Type="LightSwitchApplication.ProductBreakUpSummary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderProduct">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductBreakUpSummary">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductBreakUpSummary_ProductSize">
+    <End Role="ProductSize" Type="LightSwitchApplication.ProductSize" Multiplicity="1" />
+    <End Role="ProductBreakUpSummary" Type="LightSwitchApplication.ProductBreakUpSummary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductSize">
+        <PropertyRef Name="ProductSizeID" />
+      </Principal>
+      <Dependent Role="ProductBreakUpSummary">
+        <PropertyRef Name="ProductSizeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCountryWiseBreakUp_Color">
+    <End Role="Color" Type="LightSwitchApplication.Color" Multiplicity="1" />
+    <End Role="ProductCountryWiseBreakUp" Type="LightSwitchApplication.ProductCountryWiseBreakUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Color">
+        <PropertyRef Name="ColorID" />
+      </Principal>
+      <Dependent Role="ProductCountryWiseBreakUp">
+        <PropertyRef Name="ColorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCountryWiseBreakUp_Country">
+    <End Role="Country" Type="LightSwitchApplication.Country" Multiplicity="1" />
+    <End Role="ProductCountryWiseBreakUp" Type="LightSwitchApplication.ProductCountryWiseBreakUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="CountryID" />
+      </Principal>
+      <Dependent Role="ProductCountryWiseBreakUp">
+        <PropertyRef Name="CountryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCountryWiseBreakUp_ProductBreakUp">
+    <End Role="ProductBreakUp" Type="LightSwitchApplication.ProductBreakUp" Multiplicity="1" />
+    <End Role="ProductCountryWiseBreakUp" Type="LightSwitchApplication.ProductCountryWiseBreakUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBreakUp">
+        <PropertyRef Name="ProductBreakUpID" />
+      </Principal>
+      <Dependent Role="ProductCountryWiseBreakUp">
+        <PropertyRef Name="ProductBreakUpID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCountryWiseBreakUp_ProductSize">
+    <End Role="ProductSize" Type="LightSwitchApplication.ProductSize" Multiplicity="1" />
+    <End Role="ProductCountryWiseBreakUp" Type="LightSwitchApplication.ProductCountryWiseBreakUp" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductSize">
+        <PropertyRef Name="ProductSizeID" />
+      </Principal>
+      <Dependent Role="ProductCountryWiseBreakUp">
+        <PropertyRef Name="ProductSizeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductCutting_ProductBreakUpSummary">
+    <End Role="ProductBreakUpSummary" Type="LightSwitchApplication.ProductBreakUpSummary" Multiplicity="1" />
+    <End Role="ProductCutting" Type="LightSwitchApplication.ProductCutting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBreakUpSummary">
+        <PropertyRef Name="ProductBreakUpSummaryID" />
+      </Principal>
+      <Dependent Role="ProductCutting">
+        <PropertyRef Name="ProductBreakUpSummaryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductExtraCost_Currency">
+    <End Role="Currency" Type="LightSwitchApplication.Currency" Multiplicity="0..1" />
+    <End Role="ProductExtraCost" Type="LightSwitchApplication.ProductExtraCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyID" />
+      </Principal>
+      <Dependent Role="ProductExtraCost">
+        <PropertyRef Name="CurrencyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductExtraCost_OrderProduct">
+    <End Role="OrderProduct" Type="LightSwitchApplication.OrderProduct" Multiplicity="1" />
+    <End Role="ProductExtraCost" Type="LightSwitchApplication.ProductExtraCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderProduct">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductExtraCost">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductExtraCost_ProductExtraCostType">
+    <End Role="ProductExtraCostType" Type="LightSwitchApplication.ProductExtraCostType" Multiplicity="1" />
+    <End Role="ProductExtraCost" Type="LightSwitchApplication.ProductExtraCost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductExtraCostType">
+        <PropertyRef Name="ExtraCostTypeID" />
+      </Principal>
+      <Dependent Role="ProductExtraCost">
+        <PropertyRef Name="ExtraCostTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Production_ProductBreakUpSummary">
+    <End Role="ProductBreakUpSummary" Type="LightSwitchApplication.ProductBreakUpSummary" Multiplicity="1" />
+    <End Role="Production" Type="LightSwitchApplication.Production" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBreakUpSummary">
+        <PropertyRef Name="ProductBreakUpSummaryID" />
+      </Principal>
+      <Dependent Role="Production">
+        <PropertyRef Name="ProductBreakUpSummaryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterialItem_Company">
+    <End Role="Company" Type="LightSwitchApplication.Company" Multiplicity="0..1" />
+    <End Role="ProductMaterialItem" Type="LightSwitchApplication.ProductMaterialItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="ProductMaterialItem">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterialItem_Currency">
+    <End Role="Currency" Type="LightSwitchApplication.Currency" Multiplicity="0..1" />
+    <End Role="ProductMaterialItem" Type="LightSwitchApplication.ProductMaterialItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyID" />
+      </Principal>
+      <Dependent Role="ProductMaterialItem">
+        <PropertyRef Name="CurrencyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterialItem_ProductMaterials">
+    <End Role="ProductMaterials" Type="LightSwitchApplication.ProductMaterial" Multiplicity="1" />
+    <End Role="ProductMaterialItem" Type="LightSwitchApplication.ProductMaterialItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductMaterials">
+        <PropertyRef Name="MaterialID" />
+      </Principal>
+      <Dependent Role="ProductMaterialItem">
+        <PropertyRef Name="MaterialID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterialItem_PurchaseOrders">
+    <End Role="PurchaseOrders" Type="LightSwitchApplication.PurchaseOrder" Multiplicity="0..1" />
+    <End Role="ProductMaterialItem" Type="LightSwitchApplication.ProductMaterialItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrders">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Principal>
+      <Dependent Role="ProductMaterialItem">
+        <PropertyRef Name="PurchaseOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterialItem_SubMaterial">
+    <End Role="SubMaterial" Type="LightSwitchApplication.SubMaterial" Multiplicity="1" />
+    <End Role="ProductMaterialItem" Type="LightSwitchApplication.ProductMaterialItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SubMaterial">
+        <PropertyRef Name="SubMaterialsNameID" />
+      </Principal>
+      <Dependent Role="ProductMaterialItem">
+        <PropertyRef Name="SubMaterialNameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterialItem_UnitsOfMeasurement">
+    <End Role="UnitsOfMeasurement" Type="LightSwitchApplication.UnitsOfMeasurement" Multiplicity="1" />
+    <End Role="ProductMaterialItem" Type="LightSwitchApplication.ProductMaterialItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnitsOfMeasurement">
+        <PropertyRef Name="UOMID" />
+      </Principal>
+      <Dependent Role="ProductMaterialItem">
+        <PropertyRef Name="UOMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterials_Approval">
+    <End Role="Approval" Type="LightSwitchApplication.Approval" Multiplicity="0..1" />
+    <End Role="ProductMaterials" Type="LightSwitchApplication.ProductMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Approval">
+        <PropertyRef Name="ApprovalID" />
+      </Principal>
+      <Dependent Role="ProductMaterials">
+        <PropertyRef Name="ApprovalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterials_Currency">
+    <End Role="Currency" Type="LightSwitchApplication.Currency" Multiplicity="0..1" />
+    <End Role="ProductMaterials" Type="LightSwitchApplication.ProductMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="CurrencyID" />
+      </Principal>
+      <Dependent Role="ProductMaterials">
+        <PropertyRef Name="CurrencyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterials_MaterialName">
+    <End Role="MaterialName" Type="LightSwitchApplication.MaterialName" Multiplicity="1" />
+    <End Role="ProductMaterials" Type="LightSwitchApplication.ProductMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaterialName">
+        <PropertyRef Name="MaterialNameID" />
+      </Principal>
+      <Dependent Role="ProductMaterials">
+        <PropertyRef Name="MaterialNameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterials_OrderProduct">
+    <End Role="OrderProduct" Type="LightSwitchApplication.OrderProduct" Multiplicity="1" />
+    <End Role="ProductMaterials" Type="LightSwitchApplication.ProductMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderProduct">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductMaterials">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterials_UnitsOfMeasurement">
+    <End Role="UnitsOfMeasurement" Type="LightSwitchApplication.UnitsOfMeasurement" Multiplicity="0..1" />
+    <End Role="ProductMaterials" Type="LightSwitchApplication.ProductMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnitsOfMeasurement">
+        <PropertyRef Name="UOMID" />
+      </Principal>
+      <Dependent Role="ProductMaterials">
+        <PropertyRef Name="UOMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductStock_Color">
+    <End Role="Color" Type="LightSwitchApplication.Color" Multiplicity="1" />
+    <End Role="ProductStock" Type="LightSwitchApplication.ProductStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Color">
+        <PropertyRef Name="ColorID" />
+      </Principal>
+      <Dependent Role="ProductStock">
+        <PropertyRef Name="ColorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductStock_ProductName">
+    <End Role="ProductName" Type="LightSwitchApplication.ProductName" Multiplicity="1" />
+    <End Role="ProductStock" Type="LightSwitchApplication.ProductStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductName">
+        <PropertyRef Name="ProductNameID" />
+      </Principal>
+      <Dependent Role="ProductStock">
+        <PropertyRef Name="ProductNameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductStock_ProductSize">
+    <End Role="ProductSize" Type="LightSwitchApplication.ProductSize" Multiplicity="1" />
+    <End Role="ProductStock" Type="LightSwitchApplication.ProductStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductSize">
+        <PropertyRef Name="ProductSizeID" />
+      </Principal>
+      <Dependent Role="ProductStock">
+        <PropertyRef Name="ProductSizeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseOrders_Approval">
+    <End Role="Approval" Type="LightSwitchApplication.Approval" Multiplicity="0..1" />
+    <End Role="PurchaseOrders" Type="LightSwitchApplication.PurchaseOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Approval">
+        <PropertyRef Name="ApprovalID" />
+      </Principal>
+      <Dependent Role="PurchaseOrders">
+        <PropertyRef Name="ApprovalID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseOrders_Company">
+    <End Role="Company" Type="LightSwitchApplication.Company" Multiplicity="1" />
+    <End Role="PurchaseOrders" Type="LightSwitchApplication.PurchaseOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="PurchaseOrders">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseOrders_Order">
+    <End Role="Order" Type="LightSwitchApplication.Order" Multiplicity="1" />
+    <End Role="PurchaseOrders" Type="LightSwitchApplication.PurchaseOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="PurchaseOrders">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseOrders_PurchaseOrderStatus">
+    <End Role="PurchaseOrderStatus" Type="LightSwitchApplication.PurchaseOrderStatu" Multiplicity="1" />
+    <End Role="PurchaseOrders" Type="LightSwitchApplication.PurchaseOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PurchaseOrderStatus">
+        <PropertyRef Name="PurchaseOrderStatusID" />
+      </Principal>
+      <Dependent Role="PurchaseOrders">
+        <PropertyRef Name="PurchaseOrderStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quality_ProductBreakUpSummary">
+    <End Role="ProductBreakUpSummary" Type="LightSwitchApplication.ProductBreakUpSummary" Multiplicity="1" />
+    <End Role="Quality" Type="LightSwitchApplication.Quality" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBreakUpSummary">
+        <PropertyRef Name="ProductBreakUpSummaryID" />
+      </Principal>
+      <Dependent Role="Quality">
+        <PropertyRef Name="ProductBreakUpSummaryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Shipment_ProductBreakUpSummary">
+    <End Role="ProductBreakUpSummary" Type="LightSwitchApplication.ProductBreakUpSummary" Multiplicity="1" />
+    <End Role="Shipment" Type="LightSwitchApplication.Shipment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductBreakUpSummary">
+        <PropertyRef Name="ProductBreakUpSummaryID" />
+      </Principal>
+      <Dependent Role="Shipment">
+        <PropertyRef Name="ProductBreakUpSummaryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubMaterial_MaterialName">
+    <End Role="MaterialName" Type="LightSwitchApplication.MaterialName" Multiplicity="1" />
+    <End Role="SubMaterial" Type="LightSwitchApplication.SubMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaterialName">
+        <PropertyRef Name="MaterialNameID" />
+      </Principal>
+      <Dependent Role="SubMaterial">
+        <PropertyRef Name="MaterialNameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SubMaterial_UnitsOfMeasurement">
+    <End Role="UnitsOfMeasurement" Type="LightSwitchApplication.UnitsOfMeasurement" Multiplicity="0..1" />
+    <End Role="SubMaterial" Type="LightSwitchApplication.SubMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UnitsOfMeasurement">
+        <PropertyRef Name="UOMID" />
+      </Principal>
+      <Dependent Role="SubMaterial">
+        <PropertyRef Name="UOMID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_UserRole">
+    <End Role="UserRole" Type="LightSwitchApplication.UserRole" Multiplicity="1" />
+    <End Role="User" Type="LightSwitchApplication.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRole">
+        <PropertyRef Name="UserRoleID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OrderManagerDBDataObjectContext" m:IsDefaultEntityContainer="true">
+    <EntitySet Name="Approvals" EntityType="LightSwitchApplication.Approval" />
+    <EntitySet Name="ApprovalEntityTypes" EntityType="LightSwitchApplication.ApprovalEntityType" />
+    <EntitySet Name="Assets" EntityType="LightSwitchApplication.Asset" />
+    <EntitySet Name="AssetCategories" EntityType="LightSwitchApplication.AssetCategory" />
+    <EntitySet Name="AssetNames" EntityType="LightSwitchApplication.AssetName" />
+    <EntitySet Name="BrandNames" EntityType="LightSwitchApplication.BrandName" />
+    <EntitySet Name="CartonBoxes" EntityType="LightSwitchApplication.CartonBox" />
+    <EntitySet Name="Colors" EntityType="LightSwitchApplication.Color" />
+    <EntitySet Name="CommissionValueTypes" EntityType="LightSwitchApplication.CommissionValueType" />
+    <EntitySet Name="CompactingJoes" EntityType="LightSwitchApplication.CompactingJo" />
+    <EntitySet Name="CompactingJoItems" EntityType="LightSwitchApplication.CompactingJoItem" />
+    <EntitySet Name="Companies" EntityType="LightSwitchApplication.Company" />
+    <EntitySet Name="CompanyTypes" EntityType="LightSwitchApplication.CompanyType" />
+    <EntitySet Name="Countries" EntityType="LightSwitchApplication.Country" />
+    <EntitySet Name="Currencies" EntityType="LightSwitchApplication.Currency" />
+    <EntitySet Name="DyeingJOes" EntityType="LightSwitchApplication.DyeingJO" />
+    <EntitySet Name="DyeingJoItems" EntityType="LightSwitchApplication.DyeingJoItem" />
+    <EntitySet Name="GRNReciepts" EntityType="LightSwitchApplication.GRNReciept" />
+    <EntitySet Name="Histories" EntityType="LightSwitchApplication.History" />
+    <EntitySet Name="Invoices" EntityType="LightSwitchApplication.Invoice" />
+    <EntitySet Name="JobOrders" EntityType="LightSwitchApplication.JobOrder" />
+    <EntitySet Name="JobOrderReceipts" EntityType="LightSwitchApplication.JobOrderReceipt" />
+    <EntitySet Name="JobOrderTolerances" EntityType="LightSwitchApplication.JobOrderTolerance" />
+    <EntitySet Name="JobOrderToleranceTypes" EntityType="LightSwitchApplication.JobOrderToleranceType" />
+    <EntitySet Name="JobOrderTypes" EntityType="LightSwitchApplication.JobOrderType" />
+    <EntitySet Name="KnittingJOes" EntityType="LightSwitchApplication.KnittingJO" />
+    <EntitySet Name="KnittingJoItems" EntityType="LightSwitchApplication.KnittingJoItem" />
+    <EntitySet Name="MaterialNames" EntityType="LightSwitchApplication.MaterialName" />
+    <EntitySet Name="MaterialsFromStocks" EntityType="LightSwitchApplication.MaterialsFromStock" />
+    <EntitySet Name="MaterialStocks" EntityType="LightSwitchApplication.MaterialStock" />
+    <EntitySet Name="Orders" EntityType="LightSwitchApplication.Order" />
+    <EntitySet Name="OrderCurrencyConversions" EntityType="LightSwitchApplication.OrderCurrencyConversion" />
+    <EntitySet Name="OrderedItems" EntityType="LightSwitchApplication.OrderedItem" />
+    <EntitySet Name="OrderProducts" EntityType="LightSwitchApplication.OrderProduct" />
+    <EntitySet Name="OrderReportCards" EntityType="LightSwitchApplication.OrderReportCard" />
+    <EntitySet Name="OrderReportCardTypes" EntityType="LightSwitchApplication.OrderReportCardType" />
+    <EntitySet Name="OrderStatus" EntityType="LightSwitchApplication.OrderStatu" />
+    <EntitySet Name="OrderThroughs" EntityType="LightSwitchApplication.OrderThrough" />
+    <EntitySet Name="Packages" EntityType="LightSwitchApplication.Package" />
+    <EntitySet Name="ProductBreakUps" EntityType="LightSwitchApplication.ProductBreakUp" />
+    <EntitySet Name="ProductBreakUpSummaries" EntityType="LightSwitchApplication.ProductBreakUpSummary" />
+    <EntitySet Name="ProductCountryWiseBreakUps" EntityType="LightSwitchApplication.ProductCountryWiseBreakUp" />
+    <EntitySet Name="ProductCuttings" EntityType="LightSwitchApplication.ProductCutting" />
+    <EntitySet Name="ProductExtraCosts" EntityType="LightSwitchApplication.ProductExtraCost" />
+    <EntitySet Name="ProductExtraCostTypes" EntityType="LightSwitchApplication.ProductExtraCostType" />
+    <EntitySet Name="Productions" EntityType="LightSwitchApplication.Production" />
+    <EntitySet Name="ProductMaterialItems" EntityType="LightSwitchApplication.ProductMaterialItem" />
+    <EntitySet Name="ProductMaterials" EntityType="LightSwitchApplication.ProductMaterial" />
+    <EntitySet Name="ProductNames" EntityType="LightSwitchApplication.ProductName" />
+    <EntitySet Name="ProductSizes" EntityType="LightSwitchApplication.ProductSize" />
+    <EntitySet Name="ProductStocks" EntityType="LightSwitchApplication.ProductStock" />
+    <EntitySet Name="PurchaseOrders" EntityType="LightSwitchApplication.PurchaseOrder" />
+    <EntitySet Name="PurchaseOrderStatus" EntityType="LightSwitchApplication.PurchaseOrderStatu" />
+    <EntitySet Name="Qualities" EntityType="LightSwitchApplication.Quality" />
+    <EntitySet Name="ReceiptStatus" EntityType="LightSwitchApplication.ReceiptStatu" />
+    <EntitySet Name="Shipments" EntityType="LightSwitchApplication.Shipment" />
+    <EntitySet Name="ShipmentModes" EntityType="LightSwitchApplication.ShipmentMode" />
+    <EntitySet Name="SubMaterials" EntityType="LightSwitchApplication.SubMaterial" />
+    <EntitySet Name="Temps" EntityType="LightSwitchApplication.Temp" />
+    <EntitySet Name="UnitsOfMeasurements" EntityType="LightSwitchApplication.UnitsOfMeasurement" />
+    <EntitySet Name="Users" EntityType="LightSwitchApplication.User" />
+    <EntitySet Name="UserRoles" EntityType="LightSwitchApplication.UserRole" />
+    <AssociationSet Name="FK_Approval_ApprovalEntityType" Association="LightSwitchApplication.FK_Approval_ApprovalEntityType">
+      <End Role="ApprovalEntityType" EntitySet="ApprovalEntityTypes" />
+      <End Role="Approval" EntitySet="Approvals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Approval_Order" Association="LightSwitchApplication.FK_Approval_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Approval" EntitySet="Approvals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Asset_AssetName" Association="LightSwitchApplication.FK_Asset_AssetName">
+      <End Role="AssetName" EntitySet="AssetNames" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Asset_BrandName" Association="LightSwitchApplication.FK_Asset_BrandName">
+      <End Role="BrandName" EntitySet="BrandNames" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Asset_Company" Association="LightSwitchApplication.FK_Asset_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetName_AssetCategory" Association="LightSwitchApplication.FK_AssetName_AssetCategory">
+      <End Role="AssetCategory" EntitySet="AssetCategories" />
+      <End Role="AssetName" EntitySet="AssetNames" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartonBox_Invoice" Association="LightSwitchApplication.FK_CartonBox_Invoice">
+      <End Role="Invoice" EntitySet="Invoices" />
+      <End Role="CartonBox" EntitySet="CartonBoxes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CartonBox_Order" Association="LightSwitchApplication.FK_CartonBox_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="CartonBox" EntitySet="CartonBoxes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompactingJo_Approval" Association="LightSwitchApplication.FK_CompactingJo_Approval">
+      <End Role="Approval" EntitySet="Approvals" />
+      <End Role="CompactingJo" EntitySet="CompactingJoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompactingJo_Company" Association="LightSwitchApplication.FK_CompactingJo_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="CompactingJo" EntitySet="CompactingJoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompactingJo_GRNReciept" Association="LightSwitchApplication.FK_CompactingJo_GRNReciept">
+      <End Role="GRNReciept" EntitySet="GRNReciepts" />
+      <End Role="CompactingJo" EntitySet="CompactingJoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompactingJo_JobOrder" Association="LightSwitchApplication.FK_CompactingJo_JobOrder">
+      <End Role="JobOrder" EntitySet="JobOrders" />
+      <End Role="CompactingJo" EntitySet="CompactingJoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompactingJo_Order" Association="LightSwitchApplication.FK_CompactingJo_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="CompactingJo" EntitySet="CompactingJoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompactingJo_PurchaseOrders" Association="LightSwitchApplication.FK_CompactingJo_PurchaseOrders">
+      <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+      <End Role="CompactingJo" EntitySet="CompactingJoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompactingJoItem_CompactingJo" Association="LightSwitchApplication.FK_CompactingJoItem_CompactingJo">
+      <End Role="CompactingJo" EntitySet="CompactingJoes" />
+      <End Role="CompactingJoItem" EntitySet="CompactingJoItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CompactingJoItem_JobOrder" Association="LightSwitchApplication.FK_CompactingJoItem_JobOrder">
+      <End Role="JobOrder" EntitySet="JobOrders" />
+      <End Role="CompactingJoItem" EntitySet="CompactingJoItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Company_CompanyType" Association="LightSwitchApplication.FK_Company_CompanyType">
+      <End Role="CompanyType" EntitySet="CompanyTypes" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DyeingJO_Approval" Association="LightSwitchApplication.FK_DyeingJO_Approval">
+      <End Role="Approval" EntitySet="Approvals" />
+      <End Role="DyeingJO" EntitySet="DyeingJOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DyeingJO_Company" Association="LightSwitchApplication.FK_DyeingJO_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="DyeingJO" EntitySet="DyeingJOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DyeingJO_GRNReciept" Association="LightSwitchApplication.FK_DyeingJO_GRNReciept">
+      <End Role="GRNReciept" EntitySet="GRNReciepts" />
+      <End Role="DyeingJO" EntitySet="DyeingJOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DyeingJO_JobOrder" Association="LightSwitchApplication.FK_DyeingJO_JobOrder">
+      <End Role="JobOrder" EntitySet="JobOrders" />
+      <End Role="DyeingJO" EntitySet="DyeingJOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DyeingJO_Order" Association="LightSwitchApplication.FK_DyeingJO_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="DyeingJO" EntitySet="DyeingJOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DyeingJO_PurchaseOrders" Association="LightSwitchApplication.FK_DyeingJO_PurchaseOrders">
+      <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+      <End Role="DyeingJO" EntitySet="DyeingJOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DyeingJoItem_DyeingJO" Association="LightSwitchApplication.FK_DyeingJoItem_DyeingJO">
+      <End Role="DyeingJO" EntitySet="DyeingJOes" />
+      <End Role="DyeingJoItem" EntitySet="DyeingJoItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DyeingJoItem_JobOrder" Association="LightSwitchApplication.FK_DyeingJoItem_JobOrder">
+      <End Role="JobOrder" EntitySet="JobOrders" />
+      <End Role="DyeingJoItem" EntitySet="DyeingJoItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GRNReciept_OrderedItem" Association="LightSwitchApplication.FK_GRNReciept_OrderedItem">
+      <End Role="OrderedItem" EntitySet="OrderedItems" />
+      <End Role="GRNReciept" EntitySet="GRNReciepts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GRNReciept_PurchaseOrders" Association="LightSwitchApplication.FK_GRNReciept_PurchaseOrders">
+      <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+      <End Role="GRNReciept" EntitySet="GRNReciepts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GRNReciept_ReceiptStatus" Association="LightSwitchApplication.FK_GRNReciept_ReceiptStatus">
+      <End Role="ReceiptStatus" EntitySet="ReceiptStatus" />
+      <End Role="GRNReciept" EntitySet="GRNReciepts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_History_Order" Association="LightSwitchApplication.FK_History_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="History" EntitySet="Histories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Company" Association="LightSwitchApplication.FK_Invoice_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Destination" Association="LightSwitchApplication.FK_Invoice_Destination">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Order" Association="LightSwitchApplication.FK_Invoice_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_Origin" Association="LightSwitchApplication.FK_Invoice_Origin">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Invoice_ShipmentMode" Association="LightSwitchApplication.FK_Invoice_ShipmentMode">
+      <End Role="ShipmentMode" EntitySet="ShipmentModes" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobOrder_Company" Association="LightSwitchApplication.FK_JobOrder_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="JobOrder" EntitySet="JobOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobOrder_GRNReciept" Association="LightSwitchApplication.FK_JobOrder_GRNReciept">
+      <End Role="GRNReciept" EntitySet="GRNReciepts" />
+      <End Role="JobOrder" EntitySet="JobOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobOrder_JobOrder" Association="LightSwitchApplication.FK_JobOrder_JobOrder">
+      <End Role="JobOrder" EntitySet="JobOrders" />
+      <End Role="JobOrder1" EntitySet="JobOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobOrder_JobOrderType" Association="LightSwitchApplication.FK_JobOrder_JobOrderType">
+      <End Role="JobOrderType" EntitySet="JobOrderTypes" />
+      <End Role="JobOrder" EntitySet="JobOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobOrderReceipt_JobOrder" Association="LightSwitchApplication.FK_JobOrderReceipt_JobOrder">
+      <End Role="JobOrder" EntitySet="JobOrders" />
+      <End Role="JobOrderReceipt" EntitySet="JobOrderReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobOrderTolerance_JobOrderToleranceType" Association="LightSwitchApplication.FK_JobOrderTolerance_JobOrderToleranceType">
+      <End Role="JobOrderToleranceType" EntitySet="JobOrderToleranceTypes" />
+      <End Role="JobOrderTolerance" EntitySet="JobOrderTolerances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobOrderTolerance_Order" Association="LightSwitchApplication.FK_JobOrderTolerance_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="JobOrderTolerance" EntitySet="JobOrderTolerances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KnittingJO_Approval" Association="LightSwitchApplication.FK_KnittingJO_Approval">
+      <End Role="Approval" EntitySet="Approvals" />
+      <End Role="KnittingJO" EntitySet="KnittingJOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KnittingJO_Company" Association="LightSwitchApplication.FK_KnittingJO_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="KnittingJO" EntitySet="KnittingJOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KnittingJO_GRNReciept" Association="LightSwitchApplication.FK_KnittingJO_GRNReciept">
+      <End Role="GRNReciept" EntitySet="GRNReciepts" />
+      <End Role="KnittingJO" EntitySet="KnittingJOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KnittingJO_JobOrder" Association="LightSwitchApplication.FK_KnittingJO_JobOrder">
+      <End Role="JobOrder" EntitySet="JobOrders" />
+      <End Role="KnittingJO" EntitySet="KnittingJOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KnittingJO_Order" Association="LightSwitchApplication.FK_KnittingJO_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="KnittingJO" EntitySet="KnittingJOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KnittingJoItem_JobOrder" Association="LightSwitchApplication.FK_KnittingJoItem_JobOrder">
+      <End Role="JobOrder" EntitySet="JobOrders" />
+      <End Role="KnittingJoItem" EntitySet="KnittingJoItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KnittingJoItem_KnittingJO" Association="LightSwitchApplication.FK_KnittingJoItem_KnittingJO">
+      <End Role="KnittingJO" EntitySet="KnittingJOes" />
+      <End Role="KnittingJoItem" EntitySet="KnittingJoItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaterialsFromStock_MaterialStock" Association="LightSwitchApplication.FK_MaterialsFromStock_MaterialStock">
+      <End Role="MaterialStock" EntitySet="MaterialStocks" />
+      <End Role="MaterialsFromStock" EntitySet="MaterialsFromStocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaterialsFromStock_Order" Association="LightSwitchApplication.FK_MaterialsFromStock_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="MaterialsFromStock" EntitySet="MaterialsFromStocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaterialsFromStock_Order1" Association="LightSwitchApplication.FK_MaterialsFromStock_Order1">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="MaterialsFromStock" EntitySet="MaterialsFromStocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaterialStock_Order" Association="LightSwitchApplication.FK_MaterialStock_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="MaterialStock" EntitySet="MaterialStocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaterialStock_SubMaterial" Association="LightSwitchApplication.FK_MaterialStock_SubMaterial">
+      <End Role="SubMaterial" EntitySet="SubMaterials" />
+      <End Role="MaterialStock" EntitySet="MaterialStocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaterialStock_UnitsOfMeasurement" Association="LightSwitchApplication.FK_MaterialStock_UnitsOfMeasurement">
+      <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurements" />
+      <End Role="MaterialStock" EntitySet="MaterialStocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_CommissionValueType" Association="LightSwitchApplication.FK_Order_CommissionValueType">
+      <End Role="CommissionValueType" EntitySet="CommissionValueTypes" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_Company" Association="LightSwitchApplication.FK_Order_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_OrderBy" Association="LightSwitchApplication.FK_Order_OrderBy">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_OrderStatus" Association="LightSwitchApplication.FK_Order_OrderStatus">
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Order_OrderThrough" Association="LightSwitchApplication.FK_Order_OrderThrough">
+      <End Role="OrderThrough" EntitySet="OrderThroughs" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderCurrencyConversion_Currency" Association="LightSwitchApplication.FK_OrderCurrencyConversion_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="OrderCurrencyConversion" EntitySet="OrderCurrencyConversions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderCurrencyConversion_Order" Association="LightSwitchApplication.FK_OrderCurrencyConversion_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderCurrencyConversion" EntitySet="OrderCurrencyConversions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderedItem_ProductMaterialItem" Association="LightSwitchApplication.FK_OrderedItem_ProductMaterialItem">
+      <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
+      <End Role="OrderedItem" EntitySet="OrderedItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderedItem_PurchaseOrders" Association="LightSwitchApplication.FK_OrderedItem_PurchaseOrders">
+      <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+      <End Role="OrderedItem" EntitySet="OrderedItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderProduct_Approval" Association="LightSwitchApplication.FK_OrderProduct_Approval">
+      <End Role="Approval" EntitySet="Approvals" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderProduct_Currency" Association="LightSwitchApplication.FK_OrderProduct_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderProduct_Order" Association="LightSwitchApplication.FK_OrderProduct_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderProduct_ProductBreakUp" Association="LightSwitchApplication.FK_OrderProduct_ProductBreakUp">
+      <End Role="ProductBreakUp" EntitySet="ProductBreakUps" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderProduct_ProductName" Association="LightSwitchApplication.FK_OrderProduct_ProductName">
+      <End Role="ProductName" EntitySet="ProductNames" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderProduct_UnitsOfMeasurement" Association="LightSwitchApplication.FK_OrderProduct_UnitsOfMeasurement">
+      <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurements" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderReportCard_Order" Association="LightSwitchApplication.FK_OrderReportCard_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderReportCard" EntitySet="OrderReportCards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderReportCard_OrderReportCardType" Association="LightSwitchApplication.FK_OrderReportCard_OrderReportCardType">
+      <End Role="OrderReportCardType" EntitySet="OrderReportCardTypes" />
+      <End Role="OrderReportCard" EntitySet="OrderReportCards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderStatus_UserRole" Association="LightSwitchApplication.FK_OrderStatus_UserRole">
+      <End Role="UserRole" EntitySet="UserRoles" />
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_CartonBox" Association="LightSwitchApplication.FK_Package_CartonBox">
+      <End Role="CartonBox" EntitySet="CartonBoxes" />
+      <End Role="Package" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Package_ProductBreakUpSummary" Association="LightSwitchApplication.FK_Package_ProductBreakUpSummary">
+      <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+      <End Role="Package" EntitySet="Packages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBreakUp_ShipmentMode" Association="LightSwitchApplication.FK_ProductBreakUp_ShipmentMode">
+      <End Role="ShipmentMode" EntitySet="ShipmentModes" />
+      <End Role="ProductBreakUp" EntitySet="ProductBreakUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBreakUpSummary_Color" Association="LightSwitchApplication.FK_ProductBreakUpSummary_Color">
+      <End Role="Color" EntitySet="Colors" />
+      <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBreakUpSummary_OrderProduct" Association="LightSwitchApplication.FK_ProductBreakUpSummary_OrderProduct">
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+      <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductBreakUpSummary_ProductSize" Association="LightSwitchApplication.FK_ProductBreakUpSummary_ProductSize">
+      <End Role="ProductSize" EntitySet="ProductSizes" />
+      <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCountryWiseBreakUp_Color" Association="LightSwitchApplication.FK_ProductCountryWiseBreakUp_Color">
+      <End Role="Color" EntitySet="Colors" />
+      <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCountryWiseBreakUp_Country" Association="LightSwitchApplication.FK_ProductCountryWiseBreakUp_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCountryWiseBreakUp_ProductBreakUp" Association="LightSwitchApplication.FK_ProductCountryWiseBreakUp_ProductBreakUp">
+      <End Role="ProductBreakUp" EntitySet="ProductBreakUps" />
+      <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCountryWiseBreakUp_ProductSize" Association="LightSwitchApplication.FK_ProductCountryWiseBreakUp_ProductSize">
+      <End Role="ProductSize" EntitySet="ProductSizes" />
+      <End Role="ProductCountryWiseBreakUp" EntitySet="ProductCountryWiseBreakUps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductCutting_ProductBreakUpSummary" Association="LightSwitchApplication.FK_ProductCutting_ProductBreakUpSummary">
+      <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+      <End Role="ProductCutting" EntitySet="ProductCuttings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductExtraCost_Currency" Association="LightSwitchApplication.FK_ProductExtraCost_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="ProductExtraCost" EntitySet="ProductExtraCosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductExtraCost_OrderProduct" Association="LightSwitchApplication.FK_ProductExtraCost_OrderProduct">
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+      <End Role="ProductExtraCost" EntitySet="ProductExtraCosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductExtraCost_ProductExtraCostType" Association="LightSwitchApplication.FK_ProductExtraCost_ProductExtraCostType">
+      <End Role="ProductExtraCostType" EntitySet="ProductExtraCostTypes" />
+      <End Role="ProductExtraCost" EntitySet="ProductExtraCosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Production_ProductBreakUpSummary" Association="LightSwitchApplication.FK_Production_ProductBreakUpSummary">
+      <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+      <End Role="Production" EntitySet="Productions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterialItem_Company" Association="LightSwitchApplication.FK_ProductMaterialItem_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterialItem_Currency" Association="LightSwitchApplication.FK_ProductMaterialItem_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterialItem_ProductMaterials" Association="LightSwitchApplication.FK_ProductMaterialItem_ProductMaterials">
+      <End Role="ProductMaterials" EntitySet="ProductMaterials" />
+      <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterialItem_PurchaseOrders" Association="LightSwitchApplication.FK_ProductMaterialItem_PurchaseOrders">
+      <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+      <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterialItem_SubMaterial" Association="LightSwitchApplication.FK_ProductMaterialItem_SubMaterial">
+      <End Role="SubMaterial" EntitySet="SubMaterials" />
+      <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterialItem_UnitsOfMeasurement" Association="LightSwitchApplication.FK_ProductMaterialItem_UnitsOfMeasurement">
+      <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurements" />
+      <End Role="ProductMaterialItem" EntitySet="ProductMaterialItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterials_Approval" Association="LightSwitchApplication.FK_ProductMaterials_Approval">
+      <End Role="Approval" EntitySet="Approvals" />
+      <End Role="ProductMaterials" EntitySet="ProductMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterials_Currency" Association="LightSwitchApplication.FK_ProductMaterials_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="ProductMaterials" EntitySet="ProductMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterials_MaterialName" Association="LightSwitchApplication.FK_ProductMaterials_MaterialName">
+      <End Role="MaterialName" EntitySet="MaterialNames" />
+      <End Role="ProductMaterials" EntitySet="ProductMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterials_OrderProduct" Association="LightSwitchApplication.FK_ProductMaterials_OrderProduct">
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+      <End Role="ProductMaterials" EntitySet="ProductMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterials_UnitsOfMeasurement" Association="LightSwitchApplication.FK_ProductMaterials_UnitsOfMeasurement">
+      <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurements" />
+      <End Role="ProductMaterials" EntitySet="ProductMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductStock_Color" Association="LightSwitchApplication.FK_ProductStock_Color">
+      <End Role="Color" EntitySet="Colors" />
+      <End Role="ProductStock" EntitySet="ProductStocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductStock_ProductName" Association="LightSwitchApplication.FK_ProductStock_ProductName">
+      <End Role="ProductName" EntitySet="ProductNames" />
+      <End Role="ProductStock" EntitySet="ProductStocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductStock_ProductSize" Association="LightSwitchApplication.FK_ProductStock_ProductSize">
+      <End Role="ProductSize" EntitySet="ProductSizes" />
+      <End Role="ProductStock" EntitySet="ProductStocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseOrders_Approval" Association="LightSwitchApplication.FK_PurchaseOrders_Approval">
+      <End Role="Approval" EntitySet="Approvals" />
+      <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseOrders_Company" Association="LightSwitchApplication.FK_PurchaseOrders_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseOrders_Order" Association="LightSwitchApplication.FK_PurchaseOrders_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseOrders_PurchaseOrderStatus" Association="LightSwitchApplication.FK_PurchaseOrders_PurchaseOrderStatus">
+      <End Role="PurchaseOrderStatus" EntitySet="PurchaseOrderStatus" />
+      <End Role="PurchaseOrders" EntitySet="PurchaseOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quality_ProductBreakUpSummary" Association="LightSwitchApplication.FK_Quality_ProductBreakUpSummary">
+      <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+      <End Role="Quality" EntitySet="Qualities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Shipment_ProductBreakUpSummary" Association="LightSwitchApplication.FK_Shipment_ProductBreakUpSummary">
+      <End Role="ProductBreakUpSummary" EntitySet="ProductBreakUpSummaries" />
+      <End Role="Shipment" EntitySet="Shipments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubMaterial_MaterialName" Association="LightSwitchApplication.FK_SubMaterial_MaterialName">
+      <End Role="MaterialName" EntitySet="MaterialNames" />
+      <End Role="SubMaterial" EntitySet="SubMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SubMaterial_UnitsOfMeasurement" Association="LightSwitchApplication.FK_SubMaterial_UnitsOfMeasurement">
+      <End Role="UnitsOfMeasurement" EntitySet="UnitsOfMeasurements" />
+      <End Role="SubMaterial" EntitySet="SubMaterials" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_UserRole" Association="LightSwitchApplication.FK_User_UserRole">
+      <End Role="UserRole" EntitySet="UserRoles" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

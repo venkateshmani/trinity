@@ -73,26 +73,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CompactingJoDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="dataset.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dataset.xsd</DependentUpon>
-    </Compile>
     <Compile Include="DyeingJoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DyeingJoControl.Designer.cs">
       <DependentUpon>DyeingJoControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="grnDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>grnDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="GrnDS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GrnDS.xsd</DependentUpon>
     </Compile>
     <Compile Include="GrnReportControl.cs">
       <SubType>UserControl</SubType>
@@ -100,17 +85,11 @@
     <Compile Include="GrnReportControl.Designer.cs">
       <DependentUpon>GrnReportControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="GrnReportDataSet.Designer.cs">
+    <Compile Include="grnReportDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GrnReportDataSet.xsd</DependentUpon>
+      <DependentUpon>grnReportDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="grnReportDS.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>grnReportDS.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="GrnReportParameters.cs" />
     <Compile Include="JoGenericParameters.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -124,6 +103,17 @@
     </Compile>
     <Compile Include="InvoiceUserControl.Designer.cs">
       <DependentUpon>InvoiceUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JoGRNReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="JoGRNReportControl.Designer.cs">
+      <DependentUpon>JoGRNReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="joGRNReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>joGRNReportDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="KnittingJoControl.cs">
       <SubType>UserControl</SubType>
@@ -194,13 +184,19 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GrnReport.rdlc" />
+    <EmbeddedResource Include="GrnReport.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="GrnReportControl.resx">
       <DependentUpon>GrnReportControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Invoice.rdlc" />
     <EmbeddedResource Include="InvoiceUserControl.resx">
       <DependentUpon>InvoiceUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="joGrnReport.rdlc" />
+    <EmbeddedResource Include="JoGRNReportControl.resx">
+      <DependentUpon>JoGRNReportControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KnittingJobOrder.rdlc" />
     <EmbeddedResource Include="KnittingJoControl.resx">
@@ -233,60 +229,27 @@
     <None Include="CompactingJoDataSet.xss">
       <DependentUpon>CompactingJoDataSet.xsd</DependentUpon>
     </None>
-    <None Include="dataset.xsc">
-      <DependentUpon>dataset.xsd</DependentUpon>
+    <None Include="grnReportDataSet.xsc">
+      <DependentUpon>grnReportDataSet.xsd</DependentUpon>
     </None>
-    <None Include="dataset.xsd">
+    <None Include="grnReportDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dataset.Designer.cs</LastGenOutput>
+      <LastGenOutput>grnReportDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="dataset.xss">
-      <DependentUpon>dataset.xsd</DependentUpon>
+    <None Include="grnReportDataSet.xss">
+      <DependentUpon>grnReportDataSet.xsd</DependentUpon>
     </None>
-    <None Include="grnDataSet.xsc">
-      <DependentUpon>grnDataSet.xsd</DependentUpon>
+    <None Include="joGRNReportDataSet.xsc">
+      <DependentUpon>joGRNReportDataSet.xsd</DependentUpon>
     </None>
-    <None Include="grnDataSet.xsd">
+    <None Include="joGRNReportDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>grnDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>joGRNReportDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="grnDataSet.xss">
-      <DependentUpon>grnDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="GrnDS.xsc">
-      <DependentUpon>GrnDS.xsd</DependentUpon>
-    </None>
-    <None Include="GrnDS.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>GrnDS.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="GrnDS.xss">
-      <DependentUpon>GrnDS.xsd</DependentUpon>
-    </None>
-    <None Include="GrnReportDataSet.xsc">
-      <DependentUpon>GrnReportDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="GrnReportDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>GrnReportDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="GrnReportDataSet.xss">
-      <DependentUpon>GrnReportDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="grnReportDS.xsc">
-      <DependentUpon>grnReportDS.xsd</DependentUpon>
-    </None>
-    <None Include="grnReportDS.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>grnReportDS.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="grnReportDS.xss">
-      <DependentUpon>grnReportDS.xsd</DependentUpon>
+    <None Include="joGRNReportDataSet.xss">
+      <DependentUpon>joGRNReportDataSet.xsd</DependentUpon>
     </None>
     <None Include="OrderManagerDBDataSet.xsc">
       <DependentUpon>OrderManagerDBDataSet.xsd</DependentUpon>

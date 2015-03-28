@@ -19,6 +19,21 @@ namespace ordermanager.DatabaseModel
             Visibility = System.Windows.Visibility.Collapsed;
         }
 
+        private bool m_IsChecked = false;
+        public bool IsChecked
+        {
+            get
+            {
+                return m_IsChecked;
+            }
+            set
+            {
+                m_IsChecked = value;
+                OnPropertyChanged("IsChecked");
+            }
+
+        }
+
         private System.Windows.Visibility m_Visibility = System.Windows.Visibility.Visible;
         public System.Windows.Visibility Visibility
         {

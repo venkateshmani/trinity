@@ -31,34 +31,34 @@
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.dataset = new Reports.dataset();
+            this.grnReportDataSet = new Reports.grnReportDataSet();
             this.SP_GRNReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.SP_GRNReportTableAdapter = new Reports.datasetTableAdapters.SP_GRNReportTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.dataset)).BeginInit();
+            this.SP_GRNReportTableAdapter = new Reports.grnReportDataSetTableAdapters.SP_GRNReportTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.grnReportDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SP_GRNReportBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            reportDataSource1.Name = "Datasource";
+            reportDataSource1.Name = "grnReportDataSource";
             reportDataSource1.Value = this.SP_GRNReportBindingSource;
             this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "Reports.GrnReport.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(437, 307);
+            this.reportViewer1.Size = new System.Drawing.Size(150, 150);
             this.reportViewer1.TabIndex = 0;
             // 
-            // dataset
+            // grnReportDataSet
             // 
-            this.dataset.DataSetName = "dataset";
-            this.dataset.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.grnReportDataSet.DataSetName = "grnReportDataSet";
+            this.grnReportDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // SP_GRNReportBindingSource
             // 
             this.SP_GRNReportBindingSource.DataMember = "SP_GRNReport";
-            this.SP_GRNReportBindingSource.DataSource = this.dataset;
+            this.SP_GRNReportBindingSource.DataSource = this.grnReportDataSet;
             // 
             // SP_GRNReportTableAdapter
             // 
@@ -70,8 +70,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.reportViewer1);
             this.Name = "GrnReportControl";
-            this.Size = new System.Drawing.Size(437, 307);
-            ((System.ComponentModel.ISupportInitialize)(this.dataset)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grnReportDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SP_GRNReportBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -81,8 +80,7 @@
 
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
         private System.Windows.Forms.BindingSource SP_GRNReportBindingSource;
-        private dataset dataset;
-        private datasetTableAdapters.SP_GRNReportTableAdapter SP_GRNReportTableAdapter;
-
+        private grnReportDataSet grnReportDataSet;
+        private grnReportDataSetTableAdapters.SP_GRNReportTableAdapter SP_GRNReportTableAdapter;
     }
 }

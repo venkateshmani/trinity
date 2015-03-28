@@ -22,7 +22,7 @@ namespace ordermanager.DatabaseModel
         public long CompactingJoId { get; set; }
         public int SupplierID { get; set; }
         public long OrderID { get; set; }
-        public long PurchaseOrderID { get; set; }
+        public Nullable<long> PurchaseOrderID { get; set; }
         public System.DateTime JODate { get; set; }
         public string QuoteNo { get; set; }
         public System.DateTime QuoteDate { get; set; }

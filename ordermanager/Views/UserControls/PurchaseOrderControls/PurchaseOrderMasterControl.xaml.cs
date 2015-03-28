@@ -46,7 +46,7 @@ namespace ordermanager.Views.UserControls.PurchaseOrderControls
             poViewer.SetOrder(Order);
             newPoCreator.SetOrder(Order);
             grnControl.Order = order;
-
+            grnExpressView.SetOrder(order);
             if (DBResources.Instance.CurrentUser.UserRole.CanGeneratePurchaseOrder)
             {
                 tabCreateNewPurchaseOrder.Visibility = System.Windows.Visibility.Visible;

@@ -422,13 +422,20 @@ namespace ordermanager.Views.UserControls
 
         void OrderWorkBench_Loaded(object sender, RoutedEventArgs e)
         {
-            if (DBResources.Instance.CurrentUser.UserRole.CanCreateNewEnquiry)
+            try
             {
-                tabViewEnquiry.Visibility = System.Windows.Visibility.Visible;
+                if (DBResources.Instance.CurrentUser.UserRole.CanCreateNewEnquiry)
+                {
+                    tabViewEnquiry.Visibility = System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    tabViewEnquiry.Visibility = System.Windows.Visibility.Collapsed;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                tabViewEnquiry.Visibility = System.Windows.Visibility.Collapsed;
+
             }
         }
 

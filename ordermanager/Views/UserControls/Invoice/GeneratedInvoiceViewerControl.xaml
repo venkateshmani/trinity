@@ -8,7 +8,7 @@
              xmlns:Reports="clr-namespace:Reports;assembly=Reports"
              xmlns:interop="clr-namespace:Microsoft.DwayneNeed.Interop;assembly=Microsoft.DwayneNeed"
              mc:Ignorable="d" d:DesignWidth="785.075" d:DesignHeight="404.478">
-    <UserControl.Resources>
+  <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />

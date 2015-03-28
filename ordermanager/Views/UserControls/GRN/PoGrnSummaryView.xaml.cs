@@ -180,7 +180,7 @@ namespace ordermanager.Views.UserControls.GRN
                 parameters.StyleInfo = Constants.GetStyleInfo(ViewModel.PurchaseOrder.Order);
 
                 grnReportControl.SetParameters(parameters);
-                grnReportControl.CreateReportAsPDF(grnIndex, filePath);
+                grnReportControl.CreateReportAsPDF(grnIndex.Value.ToString(), filePath);
             }
             catch (Exception e)
             {

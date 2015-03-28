@@ -40,7 +40,7 @@ namespace ordermanager.Views.UserControls
         void ProductMaterialsControl_Loaded(object sender, RoutedEventArgs e)
         {
             Visibility v = System.Windows.Visibility.Collapsed;
-            if (DBResources.Instance.CurrentUser.UserRole.CanAddMaterialsCost)
+            if (DBResources.Instance.CurrentUser.UserRole.CanCreateNewEnquiry)
                 v = System.Windows.Visibility.Visible;
 
             btnGeneratePDF.Visibility = v;

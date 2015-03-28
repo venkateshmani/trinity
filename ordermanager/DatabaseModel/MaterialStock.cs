@@ -16,6 +16,7 @@ namespace ordermanager.DatabaseModel
     {
         public MaterialStock()
         {
+            this.MaterialInStockHistories = new HashSet<MaterialInStockHistory>();
             this.MaterialsFromStocks = new HashSet<MaterialsFromStock>();
         }
     
@@ -27,6 +28,7 @@ namespace ordermanager.DatabaseModel
         public decimal IssuedQuantity { get; set; }
         public System.DateTime InStockDateTime { get; set; }
     
+        public virtual ICollection<MaterialInStockHistory> MaterialInStockHistories { get; set; }
         public virtual ICollection<MaterialsFromStock> MaterialsFromStocks { get; set; }
         public virtual Order Order { get; set; }
         public virtual SubMaterial SubMaterial { get; set; }

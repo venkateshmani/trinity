@@ -33,6 +33,7 @@
           <EntitySet Name="JobOrderType" EntityType="OrderManagerDBModel.Store.JobOrderType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="KnittingJO" EntityType="OrderManagerDBModel.Store.KnittingJO" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="KnittingJoItem" EntityType="OrderManagerDBModel.Store.KnittingJoItem" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MaterialInStockHistory" EntityType="OrderManagerDBModel.Store.MaterialInStockHistory" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MaterialName" EntityType="OrderManagerDBModel.Store.MaterialName" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MaterialsFromStock" EntityType="OrderManagerDBModel.Store.MaterialsFromStock" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MaterialStock" EntityType="OrderManagerDBModel.Store.MaterialStock" store:Type="Tables" Schema="dbo" />
@@ -268,6 +269,10 @@
           <AssociationSet Name="FK_KnittingJoItem_KnittingJO" Association="OrderManagerDBModel.Store.FK_KnittingJoItem_KnittingJO">
             <End Role="KnittingJO" EntitySet="KnittingJO" />
             <End Role="KnittingJoItem" EntitySet="KnittingJoItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialInStockHistory_MaterialStock" Association="OrderManagerDBModel.Store.FK_MaterialInStockHistory_MaterialStock">
+            <End Role="MaterialStock" EntitySet="MaterialStock" />
+            <End Role="MaterialInStockHistory" EntitySet="MaterialInStockHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_MaterialsFromStock_MaterialStock" Association="OrderManagerDBModel.Store.FK_MaterialsFromStock_MaterialStock">
             <End Role="MaterialStock" EntitySet="MaterialStock" />
@@ -602,7 +607,7 @@
           <Property Name="CompactingJoId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="SupplierID" Type="int" Nullable="false" />
           <Property Name="OrderID" Type="bigint" Nullable="false" />
-          <Property Name="PurchaseOrderID" Type="bigint" Nullable="false" />
+          <Property Name="PurchaseOrderID" Type="bigint" />
           <Property Name="JODate" Type="datetime" Nullable="false" />
           <Property Name="QuoteNo" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="QuoteDate" Type="datetime" Nullable="false" />
@@ -682,7 +687,7 @@
           <Property Name="DyeingJOId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="SupplierID" Type="int" Nullable="false" />
           <Property Name="OrderID" Type="bigint" Nullable="false" />
-          <Property Name="PurchaseOrderID" Type="bigint" Nullable="false" />
+          <Property Name="PurchaseOrderID" Type="bigint" />
           <Property Name="JODate" Type="datetime" Nullable="false" />
           <Property Name="QuoteNo" Type="varchar" Nullable="false" MaxLength="20" />
           <Property Name="QuoteDate" Type="datetime" Nullable="false" />
@@ -732,6 +737,7 @@
           <Property Name="VechileNo" Type="varchar" MaxLength="15" />
           <Property Name="OtherChargersName" Type="varchar" MaxLength="50" />
           <Property Name="GRNIndex" Type="bigint" />
+          <Property Name="PendingQuantity" Type="decimal" Scale="4" />
         </EntityType>
         <EntityType Name="History">
           <Key>
@@ -775,7 +781,7 @@
           <Property Name="Instructions" Type="text" />
           <Property Name="JobOrderTypeID" Type="tinyint" Nullable="false" />
           <Property Name="PendingQuantity" Type="decimal" Scale="4" />
-          <Property Name="GRNReciptID" Type="bigint" Nullable="false" />
+          <Property Name="GRNReciptID" Type="bigint" />
           <Property Name="QualityPassed" Type="decimal" Scale="4" />
           <Property Name="QualityFailed" Type="decimal" Scale="4" />
           <Property Name="DCNumber" Type="varchar" MaxLength="20" />
@@ -853,6 +859,16 @@
           <Property Name="Remarks" Type="varchar" MaxLength="100" />
           <Property Name="KnittingJoId" Type="bigint" Nullable="false" />
           <Property Name="JobOrderID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="MaterialInStockHistory">
+          <Key>
+            <PropertyRef Name="MaterialInStockHistoryID" />
+          </Key>
+          <Property Name="MaterialInStockHistoryID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Nullable="false" Scale="4" />
+          <Property Name="MaterialStockID" Type="bigint" Nullable="false" />
+          <Property Name="TotalMaterialStockQuantity" Type="decimal" Nullable="false" Scale="4" />
         </EntityType>
         <EntityType Name="MaterialName">
           <Key>
@@ -1407,7 +1423,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CompactingJo_PurchaseOrders">
-          <End Role="PurchaseOrders" Type="OrderManagerDBModel.Store.PurchaseOrders" Multiplicity="1" />
+          <End Role="PurchaseOrders" Type="OrderManagerDBModel.Store.PurchaseOrders" Multiplicity="0..1" />
           <End Role="CompactingJo" Type="OrderManagerDBModel.Store.CompactingJo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseOrders">
@@ -1515,7 +1531,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DyeingJO_PurchaseOrders">
-          <End Role="PurchaseOrders" Type="OrderManagerDBModel.Store.PurchaseOrders" Multiplicity="1" />
+          <End Role="PurchaseOrders" Type="OrderManagerDBModel.Store.PurchaseOrders" Multiplicity="0..1" />
           <End Role="DyeingJO" Type="OrderManagerDBModel.Store.DyeingJO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseOrders">
@@ -1671,7 +1687,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_JobOrder_GRNReciept">
-          <End Role="GRNReciept" Type="OrderManagerDBModel.Store.GRNReciept" Multiplicity="1" />
+          <End Role="GRNReciept" Type="OrderManagerDBModel.Store.GRNReciept" Multiplicity="0..1" />
           <End Role="JobOrder" Type="OrderManagerDBModel.Store.JobOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GRNReciept">
@@ -1823,6 +1839,18 @@
             </Principal>
             <Dependent Role="KnittingJoItem">
               <PropertyRef Name="KnittingJoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialInStockHistory_MaterialStock">
+          <End Role="MaterialStock" Type="OrderManagerDBModel.Store.MaterialStock" Multiplicity="1" />
+          <End Role="MaterialInStockHistory" Type="OrderManagerDBModel.Store.MaterialInStockHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialStock">
+              <PropertyRef Name="MaterialStockID" />
+            </Principal>
+            <Dependent Role="MaterialInStockHistory">
+              <PropertyRef Name="MaterialStockID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2570,7 +2598,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_Budget" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="productID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="SP_CompactingJoDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompactingJoID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="SP_Dummy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_DyeingJODetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dyeingJobOrderID" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="SP_GetServerTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_GRNReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GrnIndexes" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Invoice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="orderID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="SP_InvoiceDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="invoiceID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="SP_JoGRN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SupplierId" Type="int" Mode="In" />
+          <Parameter Name="JobOrderId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="SP_KnittingJODetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="knittingJobOrderID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="SP_MaterialDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="orderProductID" Type="bigint" Mode="In" />
+          <Parameter Name="orderID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="SP_MaterialOtherCostDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="orderProductID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="SP_OrderedItemReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_PurchaseOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="purchaseOrderID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="TableNameSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TableCatalog" Type="varchar" Mode="In" />
+        </Function>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -2604,6 +2672,7 @@
           <EntitySet Name="JobOrderTypes" EntityType="OrderManagerDBModel.JobOrderType" />
           <EntitySet Name="KnittingJOes" EntityType="OrderManagerDBModel.KnittingJO" />
           <EntitySet Name="KnittingJoItems" EntityType="OrderManagerDBModel.KnittingJoItem" />
+          <EntitySet Name="MaterialInStockHistories" EntityType="OrderManagerDBModel.MaterialInStockHistory" />
           <EntitySet Name="MaterialNames" EntityType="OrderManagerDBModel.MaterialName" />
           <EntitySet Name="MaterialsFromStocks" EntityType="OrderManagerDBModel.MaterialsFromStock" />
           <EntitySet Name="MaterialStocks" EntityType="OrderManagerDBModel.MaterialStock" />
@@ -2903,6 +2972,10 @@
             <End Role="KnittingJO" EntitySet="KnittingJOes" />
             <End Role="KnittingJoItem" EntitySet="KnittingJoItems" />
           </AssociationSet>
+          <AssociationSet Name="FK_MaterialInStockHistory_MaterialStock" Association="OrderManagerDBModel.FK_MaterialInStockHistory_MaterialStock">
+            <End Role="MaterialStock" EntitySet="MaterialStocks" />
+            <End Role="MaterialInStockHistory" EntitySet="MaterialInStockHistories" />
+          </AssociationSet>
           <AssociationSet Name="FK_ProductMaterials_MaterialName" Association="OrderManagerDBModel.FK_ProductMaterials_MaterialName">
             <End Role="MaterialName" EntitySet="MaterialNames" />
             <End Role="ProductMaterials" EntitySet="ProductMaterials" />
@@ -3079,7 +3152,47 @@
             <End Role="UserRole" EntitySet="UserRoles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
+          <FunctionImport Name="SP_Budget" ReturnType="Collection(OrderManagerDBModel.SP_Budget_Result)">
+            <Parameter Name="productID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CompactingJoDetails" ReturnType="Collection(OrderManagerDBModel.SP_CompactingJoDetails_Result)">
+            <Parameter Name="CompactingJoID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Dummy" ReturnType="Collection(OrderManagerDBModel.SP_Dummy_Result)" />
+          <FunctionImport Name="SP_DyeingJODetails" ReturnType="Collection(OrderManagerDBModel.SP_DyeingJODetails_Result)">
+            <Parameter Name="dyeingJobOrderID" Mode="In" Type="Int64" />
+          </FunctionImport>
           <FunctionImport Name="SP_GetServerTime" ReturnType="Collection(DateTime)" />
+          <FunctionImport Name="SP_GRNReport" ReturnType="Collection(OrderManagerDBModel.SP_GRNReport_Result)">
+            <Parameter Name="GrnIndexes" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Invoice" ReturnType="Collection(OrderManagerDBModel.SP_Invoice_Result)">
+            <Parameter Name="orderID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="SP_InvoiceDetails" ReturnType="Collection(OrderManagerDBModel.SP_InvoiceDetails_Result)">
+            <Parameter Name="invoiceID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="SP_JoGRN" ReturnType="Collection(OrderManagerDBModel.SP_JoGRN_Result)">
+            <Parameter Name="SupplierId" Mode="In" Type="Int32" />
+            <Parameter Name="JobOrderId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="SP_KnittingJODetails" ReturnType="Collection(OrderManagerDBModel.SP_KnittingJODetails_Result)">
+            <Parameter Name="knittingJobOrderID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="SP_MaterialDetails" ReturnType="Collection(OrderManagerDBModel.SP_MaterialDetails_Result)">
+            <Parameter Name="orderProductID" Mode="In" Type="Int64" />
+            <Parameter Name="orderID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="SP_MaterialOtherCostDetails" ReturnType="Collection(OrderManagerDBModel.SP_MaterialOtherCostDetails_Result)">
+            <Parameter Name="orderProductID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="SP_OrderedItemReport" ReturnType="Collection(OrderManagerDBModel.SP_OrderedItemReport_Result)" />
+          <FunctionImport Name="SP_PurchaseOrder" ReturnType="Collection(OrderManagerDBModel.SP_PurchaseOrder_Result)">
+            <Parameter Name="purchaseOrderID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="TableNameSelect" ReturnType="Collection(String)">
+            <Parameter Name="TableCatalog" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Approval">
           <Key>
@@ -3188,7 +3301,7 @@
           <Property Name="CompactingJoId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="SupplierID" Type="Int32" Nullable="false" />
           <Property Name="OrderID" Type="Int64" Nullable="false" />
-          <Property Name="PurchaseOrderID" Type="Int64" Nullable="false" />
+          <Property Name="PurchaseOrderID" Type="Int64" />
           <Property Name="JODate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="QuoteNo" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="QuoteDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -3297,7 +3410,7 @@
           <Property Name="DyeingJOId" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="SupplierID" Type="Int32" Nullable="false" />
           <Property Name="OrderID" Type="Int64" Nullable="false" />
-          <Property Name="PurchaseOrderID" Type="Int64" Nullable="false" />
+          <Property Name="PurchaseOrderID" Type="Int64" />
           <Property Name="JODate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="QuoteNo" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
           <Property Name="QuoteDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -3356,6 +3469,7 @@
           <Property Name="VechileNo" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
           <Property Name="OtherChargersName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="GRNIndex" Type="Int64" />
+          <Property Name="PendingQuantity" Type="Decimal" Precision="18" Scale="4" />
           <NavigationProperty Name="CompactingJoes" Relationship="OrderManagerDBModel.FK_CompactingJo_GRNReciept" FromRole="GRNReciept" ToRole="CompactingJo" />
           <NavigationProperty Name="DyeingJOes" Relationship="OrderManagerDBModel.FK_DyeingJO_GRNReciept" FromRole="GRNReciept" ToRole="DyeingJO" />
           <NavigationProperty Name="OrderedItem" Relationship="OrderManagerDBModel.FK_GRNReciept_OrderedItem" FromRole="GRNReciept" ToRole="OrderedItem" />
@@ -3413,7 +3527,7 @@
           <Property Name="Instructions" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="JobOrderTypeID" Type="Byte" Nullable="false" />
           <Property Name="PendingQuantity" Type="Decimal" Precision="18" Scale="4" />
-          <Property Name="GRNReciptID" Type="Int64" Nullable="false" />
+          <Property Name="GRNReciptID" Type="Int64" />
           <Property Name="QualityPassed" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="QualityFailed" Type="Decimal" Precision="18" Scale="4" />
           <Property Name="DCNumber" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
@@ -3517,6 +3631,17 @@
           <NavigationProperty Name="JobOrder" Relationship="OrderManagerDBModel.FK_KnittingJoItem_JobOrder" FromRole="KnittingJoItem" ToRole="JobOrder" />
           <NavigationProperty Name="KnittingJO" Relationship="OrderManagerDBModel.FK_KnittingJoItem_KnittingJO" FromRole="KnittingJoItem" ToRole="KnittingJO" />
         </EntityType>
+        <EntityType Name="MaterialInStockHistory">
+          <Key>
+            <PropertyRef Name="MaterialInStockHistoryID" />
+          </Key>
+          <Property Name="MaterialInStockHistoryID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="MaterialStockID" Type="Int64" Nullable="false" />
+          <Property Name="TotalMaterialStockQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <NavigationProperty Name="MaterialStock" Relationship="OrderManagerDBModel.FK_MaterialInStockHistory_MaterialStock" FromRole="MaterialInStockHistory" ToRole="MaterialStock" />
+        </EntityType>
         <EntityType Name="MaterialName">
           <Key>
             <PropertyRef Name="MaterialNameID" />
@@ -3551,6 +3676,7 @@
           <Property Name="UOMID" Type="Int16" Nullable="false" />
           <Property Name="IssuedQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
           <Property Name="InStockDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="MaterialInStockHistories" Relationship="OrderManagerDBModel.FK_MaterialInStockHistory_MaterialStock" FromRole="MaterialStock" ToRole="MaterialInStockHistory" />
           <NavigationProperty Name="MaterialsFromStocks" Relationship="OrderManagerDBModel.FK_MaterialsFromStock_MaterialStock" FromRole="MaterialStock" ToRole="MaterialsFromStock" />
           <NavigationProperty Name="Order" Relationship="OrderManagerDBModel.FK_MaterialStock_Order" FromRole="MaterialStock" ToRole="Order" />
           <NavigationProperty Name="SubMaterial" Relationship="OrderManagerDBModel.FK_MaterialStock_SubMaterial" FromRole="MaterialStock" ToRole="SubMaterial" />
@@ -4307,7 +4433,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CompactingJo_PurchaseOrders">
-          <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="1" />
+          <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="0..1" />
           <End Role="CompactingJo" Type="OrderManagerDBModel.CompactingJo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseOrders">
@@ -4583,7 +4709,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DyeingJO_PurchaseOrders">
-          <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="1" />
+          <End Role="PurchaseOrders" Type="OrderManagerDBModel.PurchaseOrder" Multiplicity="0..1" />
           <End Role="DyeingJO" Type="OrderManagerDBModel.DyeingJO" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PurchaseOrders">
@@ -4655,7 +4781,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_JobOrder_GRNReciept">
-          <End Role="GRNReciept" Type="OrderManagerDBModel.GRNReciept" Multiplicity="1" />
+          <End Role="GRNReciept" Type="OrderManagerDBModel.GRNReciept" Multiplicity="0..1" />
           <End Role="JobOrder" Type="OrderManagerDBModel.JobOrder" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GRNReciept">
@@ -4819,6 +4945,18 @@
             </Principal>
             <Dependent Role="KnittingJoItem">
               <PropertyRef Name="KnittingJoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialInStockHistory_MaterialStock">
+          <End Role="MaterialStock" Type="OrderManagerDBModel.MaterialStock" Multiplicity="1" />
+          <End Role="MaterialInStockHistory" Type="OrderManagerDBModel.MaterialInStockHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialStock">
+              <PropertyRef Name="MaterialStockID" />
+            </Principal>
+            <Dependent Role="MaterialInStockHistory">
+              <PropertyRef Name="MaterialStockID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5350,6 +5488,151 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SP_Budget_Result">
+          <Property Type="Int64" Name="OrderID" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="MaterialName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SubMaterialName" Nullable="false" MaxLength="Max" />
+          <Property Type="Decimal" Name="OrderedQuantity" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="String" Name="Units" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="Cost" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="String" Name="Currency" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Int32" Name="Tax" Nullable="false" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="String" Name="Supplier" Nullable="false" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="SP_CompactingJoDetails_Result">
+          <Property Type="Int64" Name="CompactingJoItemID" Nullable="false" />
+          <Property Type="String" Name="Color" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="QualityDescription" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ReqGSM" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ReqWidth" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="NetQty" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="RatePerKg" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="TotalAmount" Nullable="false" Precision="18" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="SP_Dummy_Result">
+          <Property Type="Int64" Name="OrderID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalOrderValue" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="DateTime" Name="OrderDate" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SP_DyeingJODetails_Result">
+          <Property Type="Int64" Name="DyeingJOId" Nullable="false" />
+          <Property Type="String" Name="Color" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="QualityDescription" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="ReqGSM" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ReqWidth" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="NetQty" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="RatePerKg" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="TotalAmount" Nullable="false" Precision="18" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="SP_GRNReport_Result">
+          <Property Type="Int64" Name="GRNReciptID" Nullable="false" />
+          <Property Type="Int64" Name="GRNIndex" Nullable="true" />
+          <Property Type="String" Name="Supplier" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="InvoiceNumber" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="PurchaseOrderNumber" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="RecievedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Units" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="OrderedQuantity" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="InvoicedQuantity" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="RecievedInHand" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="PendingQuantity" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="TaxInINRPerUnit" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="CostPerUnit" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="String" Name="Symbol" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="TotalCost" Nullable="true" Precision="38" Scale="8" />
+        </ComplexType>
+        <ComplexType Name="SP_Invoice_Result">
+          <Property Type="String" Name="InvoiceNumber" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="InvoiceDate" Nullable="false" Precision="23" />
+          <Property Type="Int64" Name="OrderID" Nullable="false" />
+          <Property Type="String" Name="PlaceOfReceiptByPrecarrier" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="PortOfLoading" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="PortOfDischarge" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Origin" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CarriageBy" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ConsigneeAddress" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_InvoiceDetails_Result">
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Size" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Color" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="38" Scale="4" />
+          <Property Type="Decimal" Name="CostPerUnit" Nullable="true" Precision="36" Scale="4" />
+          <Property Type="Decimal" Name="TotalCost" Nullable="true" Precision="38" Scale="6" />
+        </ComplexType>
+        <ComplexType Name="SP_JoGRN_Result">
+          <Property Type="Guid" Name="ID" Nullable="true" />
+          <Property Type="Int64" Name="OrderID" Nullable="true" />
+          <Property Type="String" Name="JoNo" Nullable="true" MaxLength="42" />
+          <Property Type="String" Name="Supplier" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Color" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ReqGSM" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ReqWidth" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="IssuedQty" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="RecievedQty" Nullable="true" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="BalanceQty" Nullable="true" Precision="20" Scale="4" />
+          <Property Type="Decimal" Name="RatePerUnit" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="TotalAmount" Nullable="false" Precision="18" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="SP_KnittingJODetails_Result">
+          <Property Type="Int64" Name="KnittingJoItemsId" Nullable="false" />
+          <Property Type="String" Name="NameOfProduct" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="Rate" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="TotalAmount" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SP_MaterialDetails_Result">
+          <Property Type="Int64" Name="MaterialID" Nullable="false" />
+          <Property Type="String" Name="MaterialName" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Consumption" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="String" Name="Units" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="Cost" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="String" Name="Currency" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="CurrencyValueInINR" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="OtherCostInINR" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="String" Name="OtherCostName" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="ConsumptionCost" Nullable="true" Precision="18" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="SP_MaterialOtherCostDetails_Result">
+          <Property Type="Int64" Name="ExtraCostID" Nullable="false" />
+          <Property Type="String" Name="ExtraCostName" Nullable="false" MaxLength="Max" />
+          <Property Type="Decimal" Name="Cost" Nullable="false" Precision="18" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="SP_OrderedItemReport_Result">
+          <Property Type="String" Name="Po_No" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="Po_Date" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Supplier" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Item_Name" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="Alias" Nullable="true" MaxLength="Max" />
+          <Property Type="Decimal" Name="Item_Quantity" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="Decimal" Name="Item_Value" Nullable="true" Precision="18" Scale="4" />
+          <Property Type="String" Name="Currency" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="Order_ID" Nullable="false" />
+          <Property Type="String" Name="Customer_Name" Nullable="false" MaxLength="Max" />
+          <Property Type="Decimal" Name="Currency_Value_in_INR" Nullable="true" Precision="18" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="SP_PurchaseOrder_Result">
+          <Property Type="Int64" Name="OrderID" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="MaterialName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SubMaterialName" Nullable="false" MaxLength="Max" />
+          <Property Type="Decimal" Name="OrderedQuantity" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="String" Name="Units" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="Cost" Nullable="false" Precision="18" Scale="4" />
+          <Property Type="String" Name="Alias" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Currency" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="Tax" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="Decimal" Name="Total" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="String" Name="Supplier" Nullable="false" MaxLength="Max" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5586,6 +5869,7 @@
                 <ScalarProperty Name="VechileNo" ColumnName="VechileNo" />
                 <ScalarProperty Name="OtherChargersName" ColumnName="OtherChargersName" />
                 <ScalarProperty Name="GRNIndex" ColumnName="GRNIndex" />
+                <ScalarProperty Name="PendingQuantity" ColumnName="PendingQuantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -5716,6 +6000,17 @@
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="KnittingJoId" ColumnName="KnittingJoId" />
                 <ScalarProperty Name="JobOrderID" ColumnName="JobOrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialInStockHistories">
+            <EntityTypeMapping TypeName="OrderManagerDBModel.MaterialInStockHistory">
+              <MappingFragment StoreEntitySet="MaterialInStockHistory">
+                <ScalarProperty Name="MaterialInStockHistoryID" ColumnName="MaterialInStockHistoryID" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="MaterialStockID" ColumnName="MaterialStockID" />
+                <ScalarProperty Name="TotalMaterialStockQuantity" ColumnName="TotalMaterialStockQuantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -6143,7 +6438,205 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Budget" FunctionName="OrderManagerDBModel.Store.SP_Budget">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_Budget_Result">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+                <ScalarProperty Name="SubMaterialName" ColumnName="SubMaterialName" />
+                <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_CompactingJoDetails" FunctionName="OrderManagerDBModel.Store.SP_CompactingJoDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_CompactingJoDetails_Result">
+                <ScalarProperty Name="CompactingJoItemID" ColumnName="CompactingJoItemID" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="QualityDescription" ColumnName="QualityDescription" />
+                <ScalarProperty Name="ReqGSM" ColumnName="ReqGSM" />
+                <ScalarProperty Name="ReqWidth" ColumnName="ReqWidth" />
+                <ScalarProperty Name="NetQty" ColumnName="NetQty" />
+                <ScalarProperty Name="RatePerKg" ColumnName="RatePerKg" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Dummy" FunctionName="OrderManagerDBModel.Store.SP_Dummy">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_Dummy_Result">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="TotalOrderValue" ColumnName="TotalOrderValue" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_DyeingJODetails" FunctionName="OrderManagerDBModel.Store.SP_DyeingJODetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_DyeingJODetails_Result">
+                <ScalarProperty Name="DyeingJOId" ColumnName="DyeingJOId" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="QualityDescription" ColumnName="QualityDescription" />
+                <ScalarProperty Name="ReqGSM" ColumnName="ReqGSM" />
+                <ScalarProperty Name="ReqWidth" ColumnName="ReqWidth" />
+                <ScalarProperty Name="NetQty" ColumnName="NetQty" />
+                <ScalarProperty Name="RatePerKg" ColumnName="RatePerKg" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_GetServerTime" FunctionName="OrderManagerDBModel.Store.SP_GetServerTime" />
+          <FunctionImportMapping FunctionImportName="SP_GRNReport" FunctionName="OrderManagerDBModel.Store.SP_GRNReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_GRNReport_Result">
+                <ScalarProperty Name="GRNReciptID" ColumnName="GRNReciptID" />
+                <ScalarProperty Name="GRNIndex" ColumnName="GRNIndex" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="PurchaseOrderNumber" ColumnName="PurchaseOrderNumber" />
+                <ScalarProperty Name="RecievedDate" ColumnName="RecievedDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
+                <ScalarProperty Name="InvoicedQuantity" ColumnName="InvoicedQuantity" />
+                <ScalarProperty Name="RecievedInHand" ColumnName="RecievedInHand" />
+                <ScalarProperty Name="PendingQuantity" ColumnName="PendingQuantity" />
+                <ScalarProperty Name="TaxInINRPerUnit" ColumnName="TaxInINRPerUnit" />
+                <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Invoice" FunctionName="OrderManagerDBModel.Store.SP_Invoice">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_Invoice_Result">
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="PlaceOfReceiptByPrecarrier" ColumnName="PlaceOfReceiptByPrecarrier" />
+                <ScalarProperty Name="PortOfLoading" ColumnName="PortOfLoading" />
+                <ScalarProperty Name="PortOfDischarge" ColumnName="PortOfDischarge" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="CarriageBy" ColumnName="CarriageBy" />
+                <ScalarProperty Name="ConsigneeAddress" ColumnName="ConsigneeAddress" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_InvoiceDetails" FunctionName="OrderManagerDBModel.Store.SP_InvoiceDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_InvoiceDetails_Result">
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_JoGRN" FunctionName="OrderManagerDBModel.Store.SP_JoGRN">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_JoGRN_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="JoNo" ColumnName="JoNo" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="ReqGSM" ColumnName="ReqGSM" />
+                <ScalarProperty Name="ReqWidth" ColumnName="ReqWidth" />
+                <ScalarProperty Name="IssuedQty" ColumnName="IssuedQty" />
+                <ScalarProperty Name="RecievedQty" ColumnName="RecievedQty" />
+                <ScalarProperty Name="BalanceQty" ColumnName="BalanceQty" />
+                <ScalarProperty Name="RatePerUnit" ColumnName="RatePerUnit" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_KnittingJODetails" FunctionName="OrderManagerDBModel.Store.SP_KnittingJODetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_KnittingJODetails_Result">
+                <ScalarProperty Name="KnittingJoItemsId" ColumnName="KnittingJoItemsId" />
+                <ScalarProperty Name="NameOfProduct" ColumnName="NameOfProduct" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_MaterialDetails" FunctionName="OrderManagerDBModel.Store.SP_MaterialDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_MaterialDetails_Result">
+                <ScalarProperty Name="MaterialID" ColumnName="MaterialID" />
+                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+                <ScalarProperty Name="Consumption" ColumnName="Consumption" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="CurrencyValueInINR" ColumnName="CurrencyValueInINR" />
+                <ScalarProperty Name="OtherCostInINR" ColumnName="OtherCostInINR" />
+                <ScalarProperty Name="OtherCostName" ColumnName="OtherCostName" />
+                <ScalarProperty Name="ConsumptionCost" ColumnName="ConsumptionCost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_MaterialOtherCostDetails" FunctionName="OrderManagerDBModel.Store.SP_MaterialOtherCostDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_MaterialOtherCostDetails_Result">
+                <ScalarProperty Name="ExtraCostID" ColumnName="ExtraCostID" />
+                <ScalarProperty Name="ExtraCostName" ColumnName="ExtraCostName" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_OrderedItemReport" FunctionName="OrderManagerDBModel.Store.SP_OrderedItemReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_OrderedItemReport_Result">
+                <ScalarProperty Name="Po_No" ColumnName="Po No" />
+                <ScalarProperty Name="Po_Date" ColumnName="Po Date" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="Item_Name" ColumnName="Item Name" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Item_Quantity" ColumnName="Item Quantity" />
+                <ScalarProperty Name="Item_Value" ColumnName="Item Value" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order ID" />
+                <ScalarProperty Name="Customer_Name" ColumnName="Customer Name" />
+                <ScalarProperty Name="Currency_Value_in_INR" ColumnName="Currency Value in INR" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_PurchaseOrder" FunctionName="OrderManagerDBModel.Store.SP_PurchaseOrder">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OrderManagerDBModel.SP_PurchaseOrder_Result">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+                <ScalarProperty Name="SubMaterialName" ColumnName="SubMaterialName" />
+                <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TableNameSelect" FunctionName="OrderManagerDBModel.Store.TableNameSelect" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="ordermanager.Views.ReportViewers.JoGRNReport"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d">
+    <Grid>
+        <StackPanel  HorizontalAlignment="Center" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="bySupplierRadio" IsChecked="False" Checked="bySupplierRadio_Checked_1" />
+                <TextBlock Text="Supplier: " VerticalAlignment="Center" FontSize="14" />
+                <ComboBox x:Name="supplierList" Width="200" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="15" SelectionChanged="supplier_SelectionChanged_1" DisplayMemberPath="Name" IsEnabled="{Binding ElementName=bySupplierRadio, Path=byJoNumber.IsChecked, Mode=OneWay}"/>
+                <Rectangle Width="2" VerticalAlignment="Stretch" Fill="Black" Margin="10" />
+                <RadioButton x:Name="byJoNumber" IsChecked="True" Checked="byJoNumber_Checked_1" />
+                <TextBlock Text="JoNo: " VerticalAlignment="Center" FontSize="14" />
+                <TextBox x:Name="joNumberBox" Width="200" FontSize="14" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="15" IsEnabled="{Binding ElementName=byJoNumber, Path=byJoNumber.IsChecked, Mode=OneWay}"/>
+                <Button x:Name="getBtn" Click="getBtn_Click_1"  Content=" Get "  Height="28" Width="50" IsEnabled="{Binding ElementName=byJoNumber, Path=byJoNumber.IsChecked, Mode=OneWay}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

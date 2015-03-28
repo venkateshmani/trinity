@@ -28,7 +28,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>\\Server\OrderManager\Dropbox\</InstallUrl>
-    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationRevision>60</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -192,6 +192,9 @@
     <Compile Include="DatabaseModel\KnittingJoItem.cs">
       <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseModel\MaterialInStockHistory.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseModel\MaterialName.cs">
       <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
@@ -295,6 +298,45 @@
       <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\ShipmentMode.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_Budget_Result.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_CompactingJoDetails_Result.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_Dummy_Result.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_DyeingJODetails_Result.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_GRNReport_Result.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_InvoiceDetails_Result.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_Invoice_Result.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_JoGRN_Result.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_KnittingJODetails_Result.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_MaterialDetails_Result.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_MaterialOtherCostDetails_Result.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_OrderedItemReport_Result.cs">
+      <DependentUpon>OrderManagerEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseModel\SP_PurchaseOrder_Result.cs">
       <DependentUpon>OrderManagerEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="DatabaseModel\SubMaterial.cs">
@@ -471,6 +513,18 @@
     <Compile Include="Views\PopUps\UserManagementWindow.xaml.cs">
       <DependentUpon>UserManagementWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ReportViewers\IndividualGrnReport.xaml.cs">
+      <DependentUpon>IndividualGrnReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportViewers\IReportViewer.cs" />
+    <Compile Include="Views\ReportViewers\JoGRNReport.xaml.cs">
+      <DependentUpon>JoGRNReport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportViewers\ReportItem.cs" />
+    <Compile Include="Views\ReportViewers\ReportsManager.xaml.cs">
+      <DependentUpon>ReportsManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportViewers\ReportsMangerViewModel.cs" />
     <Compile Include="Views\UserControls\AssetsControl.xaml.cs">
       <DependentUpon>AssetsControl.xaml</DependentUpon>
     </Compile>
@@ -495,6 +549,11 @@
     <Compile Include="Views\UserControls\Execution\ShippingControl.xaml.cs">
       <DependentUpon>ShippingControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControls\GRN\ExpressGRN\GRNExpressItem.cs" />
+    <Compile Include="Views\UserControls\GRN\ExpressGRN\GRNExpressView.xaml.cs">
+      <DependentUpon>GRNExpressView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\GRN\ExpressGRN\GRNExpressViewModel.cs" />
     <Compile Include="Views\UserControls\Information\MaterialsFromStock.xaml.cs">
       <DependentUpon>MaterialsFromStock.xaml</DependentUpon>
     </Compile>
@@ -659,6 +718,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\ReportViewers\IndividualGrnReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportViewers\JoGRNReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportViewers\ReportsManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControls\AssetsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -688,6 +759,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\Execution\ShippingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\GRN\ExpressGRN\GRNExpressView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

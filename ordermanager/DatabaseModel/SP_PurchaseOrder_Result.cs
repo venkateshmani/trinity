@@ -17,12 +17,13 @@ namespace ordermanager.DatabaseModel
         public string ProductName { get; set; }
         public string MaterialName { get; set; }
         public string SubMaterialName { get; set; }
-        public decimal Quantity { get; set; }
+        public decimal OrderedQuantity { get; set; }
         public string Units { get; set; }
         public decimal Cost { get; set; }
+        public string Alias { get; set; }
         public string Currency { get; set; }
         public Nullable<decimal> Amount { get; set; }
-        public int Tax { get; set; }
+        public Nullable<decimal> Tax { get; set; }
         public Nullable<decimal> Total { get; set; }
         public string Supplier { get; set; }
     }

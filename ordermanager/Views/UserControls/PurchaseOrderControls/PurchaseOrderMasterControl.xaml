@@ -8,7 +8,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Converters="clr-namespace:ordermanager.ValueConverters"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="1600">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -56,6 +56,9 @@
                 </TabItem>
                 <TabItem Header="  GRN  ">
                     <UserControls:GRNControl x:Name="grnControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                </TabItem>
+                <TabItem Header="  GRN Store  ">
+                    <UserControls:GRNExpressView x:Name="grnExpressView" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 </TabItem>
             </TabControl>
         </Border>

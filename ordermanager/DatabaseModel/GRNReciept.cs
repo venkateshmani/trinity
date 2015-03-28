@@ -39,6 +39,7 @@ namespace ordermanager.DatabaseModel
         public string VechileNo { get; set; }
         public string OtherChargersName { get; set; }
         public Nullable<long> GRNIndex { get; set; }
+        public Nullable<decimal> PendingQuantity { get; set; }
     
         public virtual ICollection<CompactingJo> CompactingJoes { get; set; }
         public virtual ICollection<DyeingJO> DyeingJOes { get; set; }

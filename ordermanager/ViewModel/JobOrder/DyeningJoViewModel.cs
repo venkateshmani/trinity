@@ -85,7 +85,6 @@ namespace ordermanager.ViewModel.JobOrderControls
             parameters.OrderRef = JO.OrderRef;
             parameters.Date = JO.JODate.ToString("dd/MM/yyyy");
             parameters.Process = JO.Process;
-            parameters.PurchaseOrderNumber = JO.PurchaseOrderNumber;
             parameters.QuoteDate = JO.QuoteDate.ToString("dd/MM/yyyy");
             parameters.QuoteNo = JO.QuoteNo;
             parameters.SupplierInformation = Constants.GetSupplierInformation(JO.Supplier);

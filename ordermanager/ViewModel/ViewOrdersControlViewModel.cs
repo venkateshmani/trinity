@@ -13,22 +13,29 @@ namespace ordermanager.ViewModel
         ObservableCollection<Order> m_Orders;
         public ViewOrdersControlViewModel(bool showAllOrders)
         {
-            if (showAllOrders)
-                Orders = new ObservableCollection<Order>(DBResources.Instance.Context.Orders.ToList());
-            else
+            try
             {
-                UserRole currentUserRole = DBResources.Instance.CurrentUser.UserRole;
-                var orderStatusesOwnedByCurrentUser = from OrderStatus in DBResources.Instance.Context.OrderStatus
-                                                      where OrderStatus.UserRole.UserRoleID == currentUserRole.UserRoleID
-                                                      select OrderStatus.OrderStatusID;
-
-                m_Orders = new ObservableCollection<Order>();
-                foreach (Order order in DBResources.Instance.Context.Orders)
+                if (showAllOrders)
+                    Orders = new ObservableCollection<Order>(DBResources.Instance.Context.Orders.ToList());
+                else
                 {
-                    if(orderStatusesOwnedByCurrentUser.Contains(order.OrderStatu.OrderStatusID))
-                        m_Orders.Add(order);
+                    UserRole currentUserRole = DBResources.Instance.CurrentUser.UserRole;
+                    var orderStatusesOwnedByCurrentUser = from OrderStatus in DBResources.Instance.Context.OrderStatus
+                                                          where OrderStatus.UserRole.UserRoleID == currentUserRole.UserRoleID
+                                                          select OrderStatus.OrderStatusID;
+
+                    m_Orders = new ObservableCollection<Order>();
+                    foreach (Order order in DBResources.Instance.Context.Orders)
+                    {
+                        if (orderStatusesOwnedByCurrentUser.Contains(order.OrderStatu.OrderStatusID))
+                            m_Orders.Add(order);
+                    }
+
                 }
-                
+            }
+            catch (Exception ex)
+            {
+
             }
 
         }

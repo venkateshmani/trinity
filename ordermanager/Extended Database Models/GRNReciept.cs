@@ -110,6 +110,9 @@ namespace ordermanager.DatabaseModel
                     this.CompactingJoes.Count > 0 ||
                     this.QualityPassedQuantity == 0 || this.ReceiptStatu != null)
                 {
+                    if (this.ReceiptStatusID == 10)
+                        return "Sent to store";
+
                     return "Issued";
                 }
 
@@ -189,7 +192,22 @@ namespace ordermanager.DatabaseModel
             set
             {
                 this.RecievedInHand = value;
+                PendingQuantity = OrderedItem.OrderedQuantity -(AlreadyRecievedQuantity + value);
                 ValidateRecievedInHandQuantity();
+            }
+        }
+
+        public decimal PendingQuantityWrapper
+        {
+            get
+            {
+                if (PendingQuantity == null)
+                    PendingQuantity = 0;
+                return PendingQuantity.Value;
+            }
+            set
+            {
+                PendingQuantity = value;
             }
         }
 

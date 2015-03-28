@@ -1,5 +1,6 @@
 ﻿using ordermanager.DatabaseModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -70,16 +71,58 @@ namespace ordermanager.ViewModel
             set
             {
                 m_SelectedSupplier = value;
-
-                //Select the Job Orders
-                var activeJobOrders = from jobOrder in value.JobOrders
-                                      where jobOrder.IsIssued == false
-                                      select jobOrder;
-
-                JobOrders = new ObservableCollection<JobOrder>(activeJobOrders);
+                RefreshJobOrders();                
                 OnPropertyChanged("SelectedSupplier");
             }
         }
+
+
+        private void RefreshJobOrders()
+        {
+            if (this.Order == null || this.SelectedSupplier == null)
+                return;
+            //Select the Job Orders
+            var activeJobOrders = new ObservableCollection<JobOrder>();
+
+            foreach (var dyeingJo in Order.DyeingJOes)
+            {
+                if (dyeingJo.Supplier == this.SelectedSupplier && dyeingJo.JobOrder != null && !activeJobOrders.Contains(dyeingJo.JobOrder)
+                    && dyeingJo.JobOrder.IsIssued == false)
+                {
+                    activeJobOrders.Add(dyeingJo.JobOrder);
+                }
+            }
+
+            foreach (var knittingJo in Order.KnittingJOes)
+            {
+                if (knittingJo.Supplier == this.SelectedSupplier && knittingJo.JobOrder != null && !activeJobOrders.Contains(knittingJo.JobOrder)
+                    && knittingJo.JobOrder.IsIssued == false)
+                {
+                    activeJobOrders.Add(knittingJo.JobOrder);
+                }
+            }
+
+            foreach (var compactingJo in Order.CompactingJoes)
+            {
+                if (compactingJo.Supplier == this.SelectedSupplier && compactingJo.JobOrder != null && !activeJobOrders.Contains(compactingJo.JobOrder)
+                    && compactingJo.JobOrder.IsIssued == false)
+                {
+                    activeJobOrders.Add(compactingJo.JobOrder);
+                }
+            }
+
+            foreach (var jo in this.SelectedSupplier.JobOrders)
+            {
+                if (jo.GRNReciept != null && jo.GRNReciept.OrderedItem.PurchaseOrder.Order == this.Order && !activeJobOrders.Contains(jo) && jo.IsIssued == false)
+                {
+                    activeJobOrders.Add(jo);
+                }
+            }
+
+            JobOrders = activeJobOrders;
+        }
+
+       
 
         private ObservableCollection<JobOrder> m_JobOrders = null;
         public ObservableCollection<JobOrder> JobOrders
@@ -114,7 +157,6 @@ namespace ordermanager.ViewModel
                         stock.StockQuantity = jobOrder.JobQuantity;
                         stock.UnitsOfMeasurement = jobOrder.GRNReciept.OrderedItem.ProductMaterialItem.UnitsOfMeasurementWrapper;
                         jobOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.MaterialStocks.Add(stock);
-
                         jobOrder.GRNReciept.OrderedItem.ProductMaterialItem.SubMaterial.InStock += jobOrder.JobQuantity;
                     }
                     else

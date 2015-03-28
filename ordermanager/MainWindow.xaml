@@ -8,13 +8,15 @@
         ShowTitleBar="True"
         WindowState="Maximized"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        WindowStartupLocation="CenterScreen"
+                      WindowStartupLocation="CenterScreen"
+        xmlns:ReportViewers="clr-namespace:ordermanager.Views.ReportViewers"
         Height="588" Width="1108" 
         Icon="/Resources/Icons/OrderManagerIcon1.ico"      
         xmlns:my="clr-namespace:ordermanager.Views.CommonControls" 
         xmlns:my1="clr-namespace:ordermanager.Views.UserControls">
 
-    <Window.Resources>
+  
+  <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
@@ -103,6 +105,11 @@
             <TabItem x:Name="tabAssets" Header="  Assets  " Cursor="Hand">
                 <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
                     <my1:AssetsControl x:Name="assetsControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                </Border>
+            </TabItem>
+            <TabItem x:Name="tabReports" Header="  Reports  " Cursor="Hand">
+                <Border BorderThickness="0,1,0,0" BorderBrush="LightGray" Cursor="Arrow">
+                    <ReportViewers:ReportsManager VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 </Border>
             </TabItem>
         </TabControl>

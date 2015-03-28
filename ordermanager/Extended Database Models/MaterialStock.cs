@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ordermanager.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,15 @@ namespace ordermanager.DatabaseModel
                 OnPropertyChanged("IssuedQuantityWrapper");
                 OnPropertyChanged("BalanceString");
             }
+        }
+
+        public void AddInStockHistory(decimal quantity)
+        {
+            MaterialInStockHistory history = new MaterialInStockHistory();
+            history.Quantity = quantity;
+            history.TimeStamp = DBResources.Instance.GetServerTime();
+            history.TotalMaterialStockQuantity = Balance;
+            this.MaterialInStockHistories.Add(history);
         }
     }
 }

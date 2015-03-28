@@ -46,6 +46,7 @@
             <DataProviders:DataProvider x:Key="DataProvider" />
 
             <ContextMenu x:Key="issueToMenuItems">
+                <MenuItem Header="Send To Store" Click="MenuItem_Click_1"/>
                 <MenuItem Header="Knitting" Click="MenuItem_Click_1"/>
                 <MenuItem Header="Dyeing"  Click="MenuItem_Click_1" />
                 <MenuItem Header="Printing" Click="MenuItem_Click_1" />

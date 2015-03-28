@@ -25,7 +25,7 @@ namespace ordermanager.ViewModel.JobOrderControls
 
             JO.GRNReciept = reciept;
             JO.JobOrder = parentJo;
-            JO.JoNo = "C" + (DBResources.Instance.Context.DyeingJOes.Count() + 1).ToString();
+            JO.JoNo = "C" + (DBResources.Instance.Context.CompactingJoes.Count() + 1).ToString();
 
             JO.Add();
         }
@@ -87,7 +87,6 @@ namespace ordermanager.ViewModel.JobOrderControls
             parameters.OrderRef = JO.OrderRef;
             parameters.Date = JO.JODate.ToString("dd/MM/yyyy");
             parameters.Process = JO.Process;
-            parameters.PurchaseOrderNumber = JO.PurchaseOrderNumber;
             parameters.QuoteDate = JO.QuoteDate.ToString("dd/MM/yyyy");
             parameters.QuoteNo = JO.QuoteNo;
             parameters.SupplierInformation = Constants.GetSupplierInformation(JO.Supplier);

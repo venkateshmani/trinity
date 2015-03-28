@@ -45,7 +45,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
         public void CreateNewJo(Order order,decimal quantity,GRNReciept reciept, bool jobOrderIssued, JobOrder parentJo)
         {
             ViewModel = new KnittingJoViewModel(order, quantity, reciept, jobOrderIssued, parentJo);
-            budgetVsActualControl.Initialize(reciept.OrderedItem, parentJo);
+            //budgetVsActualControl.Initialize(reciept.OrderedItem, parentJo);
         }
 
         public void OpenExistingJo(KnittingJO jo)
@@ -229,7 +229,7 @@ namespace ordermanager.Views.UserControls.JobOrderControls
 
         public bool Discard()
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         #region Supplier Management
